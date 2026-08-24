@@ -1,0 +1,266 @@
+﻿{
+  "splits": {
+    "train": {
+      "records": 10684,
+      "scenes": 1479,
+      "groups": 786,
+      "queries_per_scene": {
+        "mean": 7.223799864773496,
+        "max": 66
+      },
+      "query_words": {
+        "mean": 11.2540247098465,
+        "p50": 12.0,
+        "p95": 13.0
+      },
+      "bbox_area": {
+        "p01": 0.00013744268120000026,
+        "p10": 0.00046295245360000037,
+        "p50": 0.0033189287040000025,
+        "p90": 0.036769793564799994
+      },
+      "boxes_under_0.1pct": 2387,
+      "boxes_under_1pct": 7950,
+      "duplicate_query_scenes": 0,
+      "duplicate_bbox_scenes": 2,
+      "comma_queries": 10684
+    },
+    "val": {
+      "records": 3229,
+      "scenes": 372,
+      "groups": 27,
+      "queries_per_scene": {
+        "mean": 8.68010752688172,
+        "max": 44
+      },
+      "query_words": {
+        "mean": 11.449365128522762,
+        "p50": 12.0,
+        "p95": 13.0
+      },
+      "bbox_area": {
+        "p01": 0.0001236370542400004,
+        "p10": 0.0004924214355999998,
+        "p50": 0.0024884643520000026,
+        "p90": 0.02638247719180004
+      },
+      "boxes_under_0.1pct": 777,
+      "boxes_under_1pct": 2561,
+      "duplicate_query_scenes": 0,
+      "duplicate_bbox_scenes": 0,
+      "comma_queries": 3229
+    }
+  },
+  "leakage": {
+    "stem_overlap": 0,
+    "group_overlap": 0,
+    "adjacent_numeric_cross_split": 0,
+    "adjacent_examples": [],
+    "dhash_distance_le_3_pairs": 41,
+    "dhash_examples": [
+      [
+        0,
+        "visible/000006_004_00000104.png",
+        "visible/003179.png"
+      ],
+      [
+        0,
+        "visible/shuming_1290_00000136.png",
+        "visible/001270.png"
+      ],
+      [
+        0,
+        "visible/shuming_1320_00000293.png",
+        "visible/001705.png"
+      ],
+      [
+        0,
+        "visible/shuming_1327_00000141.png",
+        "visible/001702.png"
+      ],
+      [
+        0,
+        "visible/shuming_1327_00000141.png",
+        "visible/001710.png"
+      ],
+      [
+        1,
+        "visible/shuming_1294_00000189.png",
+        "visible/001270.png"
+      ],
+      [
+        1,
+        "visible/shuming_1317_00000431.png",
+        "visible/001724.png"
+      ],
+      [
+        1,
+        "visible/shuming_1320_00000293.png",
+        "visible/001704.png"
+      ],
+      [
+        1,
+        "visible/shuming_1320_00000293.png",
+        "visible/001726.png"
+      ],
+      [
+        1,
+        "visible/shuming_1327_00000141.png",
+        "visible/001701.png"
+      ],
+      [
+        1,
+        "visible/shuming_1327_00000141.png",
+        "visible/001704.png"
+      ],
+      [
+        1,
+        "visible/shuming_1327_00000141.png",
+        "visible/001726.png"
+      ],
+      [
+        2,
+        "visible/000005_027_00000247.png",
+        "visible/003047.png"
+      ],
+      [
+        2,
+        "visible/000006_002_00000001.png",
+        "visible/003152.png"
+      ],
+      [
+        2,
+        "visible/000006_013_00000001.png",
+        "visible/003262.png"
+      ],
+      [
+        2,
+        "visible/shuming_1291_00000090.png",
+        "visible/001270.png"
+      ],
+      [
+        2,
+        "visible/shuming_1317_00000431.png",
+        "visible/001728.png"
+      ],
+      [
+        2,
+        "visible/shuming_1318_00000225.png",
+        "visible/001724.png"
+      ],
+      [
+        2,
+        "visible/shuming_1318_00000225.png",
+        "visible/001726.png"
+      ],
+      [
+        2,
+        "visible/shuming_1320_00000293.png",
+        "visible/001702.png"
+      ]
+    ]
+  },
+  "classes": {
+    "person": {
+      "source": 5499,
+      "included": 5389,
+      "excluded": 110,
+      "retained_fraction": 0.9799963629750864
+    },
+    "boat": {
+      "source": 135,
+      "included": 135,
+      "excluded": 0,
+      "retained_fraction": 1.0
+    },
+    "animal": {
+      "source": 3061,
+      "included": 3060,
+      "excluded": 1,
+      "retained_fraction": 0.999673309376021
+    },
+    "seat": {
+      "source": 621,
+      "included": 594,
+      "excluded": 27,
+      "retained_fraction": 0.9565217391304348
+    },
+    "sign": {
+      "source": 809,
+      "included": 776,
+      "excluded": 33,
+      "retained_fraction": 0.9592088998763906
+    },
+    "bicycle": {
+      "source": 666,
+      "included": 666,
+      "excluded": 0,
+      "retained_fraction": 1.0
+    },
+    "car": {
+      "source": 1571,
+      "included": 1495,
+      "excluded": 76,
+      "retained_fraction": 0.9516231699554424
+    },
+    "ball": {
+      "source": 89,
+      "included": 89,
+      "excluded": 0,
+      "retained_fraction": 1.0
+    },
+    "light": {
+      "source": 1455,
+      "included": 1389,
+      "excluded": 66,
+      "retained_fraction": 0.954639175257732
+    },
+    "garbage_can": {
+      "source": 282,
+      "included": 282,
+      "excluded": 0,
+      "retained_fraction": 1.0
+    },
+    "uav": {
+      "source": 204,
+      "included": 13,
+      "excluded": 191,
+      "retained_fraction": 0.06372549019607843
+    },
+    "tricycle": {
+      "source": 25,
+      "included": 25,
+      "excluded": 0,
+      "retained_fraction": 1.0
+    }
+  },
+  "paths": {
+    "missing": 0,
+    "dimension_mismatch_records": 0
+  },
+  "excluded_scenes": 149,
+  "alignment_proxy": {
+    "rgb_ir": {
+      "mean": 0.20021832658399424,
+      "p10": 0.08397058040333084,
+      "p50": 0.2050822061045776
+    },
+    "rgb_depth": {
+      "mean": 0.09660298751159524,
+      "p10": 0.00047212817010817135,
+      "p50": 0.09269929822311132
+    }
+  },
+  "depth_sample_300": {
+    "modes": {
+      "I;16": 300
+    },
+    "dtypes": {
+      "uint16": 300
+    },
+    "max_p50": 19999.0,
+    "max_p95": 19999.0,
+    "zero_fraction_mean": 0.2832293756430041,
+    "unique_p50": 16047.0
+  }
+}

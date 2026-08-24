@@ -1,0 +1,53 @@
+output_dir: runs/multimodal_rdt_deep_reviewed
+model:
+  backbone: /root/autodl-tmp/aic/huggingface/hub/models--Qwen--Qwen3-VL-2B-Instruct/snapshots/89644892e4d85e24eaac8bacfd4f463576704203
+  adapter_channels: 128
+  orthogonal_channels: 8
+  prompt_gate_init: -3.0
+  fusion_type: rdt_deep
+  modality_dropout: 0.1
+  fusion_residual_scale_init: 0.001
+  fusion_zero_init_prompt_restore: true
+  auxiliary_bbox_enabled: false
+  vision_lora_enabled: false
+  vision_lora_rank: 8
+  vision_lora_alpha: 16.0
+  vision_lora_dropout: 0.05
+  vision_lora_last_n_blocks: 4
+data:
+  train_manifest: ../city_detection_prepared/train/grounding_final_train.json
+  val_manifest: ../city_detection_prepared/train/grounding_final_val_reviewed.json
+  workers: 4
+  min_pixels: 200704
+  max_pixels: 802816
+  depth_scale: 1000.0
+  depth_clip: 20.0
+train:
+  epochs: 4
+  phase_a_epochs: 4
+  phase_b_epochs: 0
+  fusion_lr_a: 2.0e-05
+  fusion_lr_b: 1.0e-05
+  vision_lora_lr: 3.0e-06
+  batch_size: 2
+  grad_accumulation: 4
+  val_batch_size: 1
+  eval_subset_size: 512
+  eval_every_n_epochs: 1
+  max_new_tokens: 40
+  early_stopping_patience: 2
+  early_stopping_min_delta: 0.002
+  phase_b_warmup_steps: 0
+  auxiliary_gradient_diagnostics: false
+  early_probe_step: 0
+  early_probe_steps: []
+  stop_after_last_probe: false
+  early_probe_subset_size: 128
+  early_probe_abort_ratio: 0.0
+  weight_decay: 0.01
+  amp: true
+  seed: 2026
+  gradient_checkpointing: true
+  init_checkpoint: runs/multimodal_rdt_deep_reviewed/best_phase_a.pt
+  resume_epoch: 3
+  override_resume_learning_rates: true

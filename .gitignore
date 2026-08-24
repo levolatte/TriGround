@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+.conda-env/
+.deps/
+.deps311/
+runs/
+data/
+*.pt
+*.pth
+*.safetensors

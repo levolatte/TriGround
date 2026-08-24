@@ -1,0 +1,2 @@
+The following generation flags are not valid and may be ignored: ['temperature', 'top_p', 'top_k']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+{"epoch": 1, "phase": "A", "train_loss": 2.2503062353034813, "mean_iou": 0.34440943538466084, "acc_0.5": 0.3910431458219552, "acc_0.7": 0.24959038776624795, "l1_coordinate_error": 0.07789066014684236, "parse_rate": 1.0}

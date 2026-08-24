@@ -1,0 +1,10 @@
+Purpose: Independent Phase B comparison initialized from Phase A Epoch 3.
+Source checkpoint: runs/multimodal/last_phase_a.pt
+Source epoch: 3
+Source global_step: 2700
+Source SHA-256: d7668d5bb3ff5727b8393f96efdd981f5c16336e2fe5a0c01b0a9d9c7fc667b7
+
+Compatibility note:
+The existing training engine loads <output_dir>/best_phase_a.pt before Phase B.
+For this comparison directory only, best_phase_a.pt is a seed copy of the original
+last_phase_a.pt (Epoch 3). The original runs/multimodal directory is not modified.

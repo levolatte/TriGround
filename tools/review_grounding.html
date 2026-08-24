@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grounding 快速人工审核</title>
+  <style>
+    :root { color-scheme: dark; --bg:#0b1016; --panel:#121a23; --line:#263546; --text:#edf3fa; --muted:#8fa2b7; --accent:#55c2ff; --good:#49d17d; --warn:#ffc857; --bad:#ff667a; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font:14px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif; overflow:hidden; }
+    button,select,input,textarea { font:inherit; }
+    button { color:var(--text); background:#1a2734; border:1px solid var(--line); border-radius:8px; padding:7px 10px; cursor:pointer; }
+    button:hover { border-color:var(--accent); }
+    button.active { background:#17415a; border-color:var(--accent); }
+    header { height:58px; display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid var(--line); background:#0e151e; }
+    .brand { font-weight:700; font-size:16px; margin-right:8px; }
+    .grow { flex:1; }
+    .pill { padding:5px 9px; background:#182431; border-radius:999px; color:var(--muted); }
+    .layout { height:calc(100vh - 58px); display:grid; grid-template-columns:390px 1fr; }
+    aside { border-right:1px solid var(--line); display:flex; flex-direction:column; min-width:0; }
+    .scene-nav { padding:10px; display:flex; gap:7px; border-bottom:1px solid var(--line); }
+    .scene-nav input { width:76px; color:var(--text); background:#0d141d; border:1px solid var(--line); border-radius:7px; padding:7px; }
+    .filters { padding:8px 10px; display:grid; grid-template-columns:1fr 1fr; gap:7px; border-bottom:1px solid var(--line); }
+    select { color:var(--text); background:#0d141d; border:1px solid var(--line); border-radius:7px; padding:6px; }
+    #queries { overflow:auto; flex:1; }
+    .query { padding:10px; border-bottom:1px solid #1d2935; cursor:pointer; position:relative; }
+    .query:hover { background:#15202b; }
+    .query.active { background:#173044; box-shadow:inset 3px 0 var(--accent); }
+    .query.reviewed::after { content:"✓"; color:var(--good); position:absolute; right:10px; top:10px; font-weight:800; }
+    .query-title { padding-right:22px; font-weight:600; }
+    .meta { color:var(--muted); font-size:12px; margin-top:4px; display:flex; gap:7px; flex-wrap:wrap; }
+    main { min-width:0; display:grid; grid-template-rows:44px minmax(260px,1fr) auto; }
+    .toolbar { padding:6px 10px; display:flex; gap:6px; align-items:center; border-bottom:1px solid var(--line); }
+    .viewer { position:relative; min-height:0; background:#06090d; }
+    canvas { width:100%; height:100%; display:block; }
+    .legend { position:absolute; left:12px; bottom:10px; background:#06090dcc; border:1px solid var(--line); padding:6px 9px; border-radius:7px; font-size:12px; }
+    .legend span { margin-right:12px; }
+    .review { border-top:1px solid var(--line); background:var(--panel); padding:10px; }
+    .button-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:8px; }
+    .decision[data-value="valid"] { border-color:#287d4c; }
+    .decision[data-value="ambiguous"],.decision[data-value="tiny_unusable"] { border-color:#8d7229; }
+    .decision[data-value="wrong_bbox"],.decision[data-value="missing_object"],.decision[data-value="exclude"] { border-color:#8d3542; }
+    .selected { outline:2px solid var(--accent); background:#1c4056; }
+    .secondary-label { color:var(--muted); width:68px; padding-top:7px; }
+    textarea { width:100%; resize:none; height:42px; color:var(--text); background:#0c131b; border:1px solid var(--line); border-radius:7px; padding:7px; }
+    .query-edit { display:grid; grid-template-columns:68px 1fr auto auto; gap:7px; margin-bottom:8px; }
+    .query-edit input { min-width:0; color:var(--text); background:#0c131b; border:1px solid var(--line); border-radius:7px; padding:7px 9px; }
+    .status { min-width:100px; text-align:right; color:var(--muted); }
+    .shortcut { color:#a8bad0; font-size:11px; margin-left:4px; }
+    #toast { position:fixed; right:18px; top:70px; background:#173044; border:1px solid var(--accent); padding:9px 13px; border-radius:8px; opacity:0; pointer-events:none; transition:.2s; }
+    #toast.show { opacity:1; }
+    @media (max-width:900px) { .layout { grid-template-columns:310px 1fr; } .brand { display:none; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">Grounding 审核台</div>
+    <button id="prevScene">← 上一场景</button><button id="nextScene">下一场景 →</button>
+    <span class="pill" id="scenePosition">加载中…</span>
+    <span class="pill" id="progress"></span>
+    <div class="grow"></div>
+    <button id="acceptScene">整场未审设为有效 <span class="shortcut">Shift+A</span></button>
+    <a id="exportLink" href="/api/export" download="grounding_reviews.json"><button>导出JSON</button></a>
+  </header>
+  <div class="layout">
+    <aside>
+      <div class="scene-nav"><span style="padding-top:7px">跳至场景</span><input id="sceneJump" type="number" min="1"><button id="jumpButton">跳转</button></div>
+      <div class="filters">
+        <select id="sortMode"><option value="original">原始顺序</option><option value="risk">高风险优先</option><option value="unreviewed">未审核优先</option></select>
+        <select id="filterMode"><option value="all">全部场景</option><option value="unreviewed">含未审核</option><option value="flagged">含问题项</option><option value="errors">Qwen错误</option></select>
+      </div>
+      <div id="queries"></div>
+    </aside>
+    <main>
+      <div class="toolbar">
+        <button class="modality active" data-modality="visible">RGB <span class="shortcut">1</span></button>
+        <button class="modality" data-modality="infrared">红外 <span class="shortcut">2</span></button>
+        <button class="modality" data-modality="depth">深度 <span class="shortcut">3</span></button>
+        <span style="width:8px"></span>
+        <button id="toggleAll" class="active">全部GT框 <span class="shortcut">G</span></button>
+        <button id="togglePrediction">显示预测 <span class="shortcut">P</span></button>
+        <div class="grow"></div><div class="status" id="saveStatus">未修改</div>
+      </div>
+      <div class="viewer" id="viewer"><canvas id="canvas"></canvas><div class="legend"><span style="color:#54ff77">■ 当前GT</span><span style="color:#ffe05c">■ 其他GT</span><span style="color:#ff5268">■ Qwen预测</span></div></div>
+      <section class="review">
+        <div class="query-edit">
+          <span class="secondary-label">修改描述</span>
+          <input id="correctedQuery" type="text" placeholder="输入人工修正后的query；原始描述不会被覆盖">
+          <button id="saveQuery">保存修正 <span class="shortcut">E</span></button>
+          <button id="clearQuery">恢复原文</button>
+        </div>
+        <div class="button-row" id="decisions">
+          <span class="secondary-label">数据判断</span>
+          <button class="decision" data-value="valid">有效 <span class="shortcut">A</span></button>
+          <button class="decision" data-value="ambiguous">描述歧义 <span class="shortcut">Q</span></button>
+          <button class="decision" data-value="wrong_bbox">GT框错误 <span class="shortcut">B</span></button>
+          <button class="decision" data-value="missing_object">存在漏标 <span class="shortcut">M</span></button>
+          <button class="decision" data-value="tiny_unusable">不可辨认 <span class="shortcut">T</span></button>
+          <button class="decision" data-value="modality_misaligned">模态错位 <span class="shortcut">X</span></button>
+          <button class="decision" data-value="exclude">排除 <span class="shortcut">D</span></button>
+          <button class="decision" data-value="">清除判断 <span class="shortcut">C</span></button>
+        </div>
+        <div class="button-row" id="causes">
+          <span class="secondary-label">错误原因</span>
+          <button class="cause" data-value="wrong_instance">选错同类</button><button class="cause" data-value="ordinal_error">序数错误</button><button class="cause" data-value="direction_error">方向错误</button><button class="cause" data-value="boundary_error">边界误差</button><button class="cause" data-value="missed_object">漏检</button><button class="cause" data-value="small_object">小目标</button><button class="cause" data-value="data_ambiguous">数据歧义</button><button class="cause" data-value="modality_needed">需要辅助模态</button><button class="cause" data-value="modality_useless">辅助模态无信息</button>
+        </div>
+        <textarea id="note" placeholder="可选备注；失焦时自动保存"></textarea>
+      </section>
+    </main>
+  </div>
+  <div id="toast"></div>
+  <script>
+    const state={data:null,reviews:{},sceneIndex:0,sampleIndex:0,modality:'visible',showAll:true,showPrediction:false,image:null,filtered:[]};
+    const $=id=>document.getElementById(id);
+    const labels={valid:'有效',ambiguous:'歧义',wrong_bbox:'框错',missing_object:'漏标',tiny_unusable:'不可辨认',modality_misaligned:'模态错位',query_corrected:'描述已修正',exclude:'排除'};
+    async function boot(){const r=await fetch('/api/bootstrap');state.data=await r.json();state.reviews=state.data.review_state.reviews||{};applyFilter();render();}
+    function currentScene(){return state.filtered[state.sceneIndex];}
+    function currentSample(){return currentScene()?.samples[state.sampleIndex];}
+    function applyFilter(){
+      let scenes=[...state.data.scenes],filter=$('filterMode').value;
+      if(filter==='unreviewed')scenes=scenes.filter(s=>s.samples.some(q=>!state.reviews[q.id]?.decision));
+      if(filter==='flagged')scenes=scenes.filter(s=>s.samples.some(q=>state.reviews[q.id]?.decision&&!['valid'].includes(state.reviews[q.id].decision)));
+      if(filter==='errors')scenes=scenes.filter(s=>s.samples.some(q=>q.prediction_iou!==null&&q.prediction_iou<.5));
+      const sort=$('sortMode').value;
+      if(sort==='risk')scenes.sort((a,b)=>b.risk_score-a.risk_score);
+      if(sort==='unreviewed')scenes.sort((a,b)=>unreviewed(b)-unreviewed(a));
+      state.filtered=scenes;state.sceneIndex=Math.min(state.sceneIndex,Math.max(0,scenes.length-1));state.sampleIndex=0;
+    }
+    const unreviewed=s=>s.samples.filter(q=>!state.reviews[q.id]?.decision).length;
+    function render(){renderHeader();renderQueries();renderReview();loadImage();}
+    function renderHeader(){const s=currentScene(),reviewed=Object.values(state.reviews).filter(r=>r.decision).length;$('scenePosition').textContent=s?`场景 ${state.sceneIndex+1}/${state.filtered.length} · ${s.id}`:'没有符合条件的场景';$('progress').textContent=`已审 ${reviewed}/${state.data.sample_count}`;$('sceneJump').max=state.filtered.length;$('sceneJump').value=state.sceneIndex+1;}
+    function renderQueries(){const box=$('queries');box.replaceChildren();const scene=currentScene();if(!scene)return;scene.samples.forEach((q,i)=>{const review=state.reviews[q.id]||{},item=document.createElement('div');item.className='query'+(i===state.sampleIndex?' active':'')+(review.decision?' reviewed':'');const title=document.createElement('div');title.className='query-title';title.textContent=`${i+1}. ${review.corrected_query?'✎ '+review.corrected_query:q.query}`;const meta=document.createElement('div');meta.className='meta';const iou=q.prediction_iou===null?'无预测':`IoU ${q.prediction_iou.toFixed(3)}`;meta.textContent=`${q.class_name} · ${q.scale_bin||'-'} · ${q.query_type} · ${iou}${review.decision?' · '+labels[review.decision]:''}${review.corrected_query?' · 原文: '+q.query:''}`;item.append(title,meta);item.onclick=()=>{state.sampleIndex=i;render();};box.append(item);});}
+    function renderReview(){const r=state.reviews[currentSample()?.id]||{};document.querySelectorAll('.decision').forEach(b=>b.classList.toggle('selected',b.dataset.value===r.decision));document.querySelectorAll('.cause').forEach(b=>b.classList.toggle('selected',b.dataset.value===r.cause));$('correctedQuery').value=r.corrected_query||'';$('correctedQuery').placeholder=`原文：${currentSample()?.query||''}`;$('note').value=r.note||'';}
+    function loadImage(){const scene=currentScene();if(!scene)return;const img=new Image();img.onload=()=>{state.image=img;draw();};img.src='/image?path='+encodeURIComponent(scene[state.modality]);}
+    function draw(){const canvas=$('canvas'),viewer=$('viewer'),rect=viewer.getBoundingClientRect(),dpr=devicePixelRatio||1;canvas.width=Math.max(1,rect.width*dpr);canvas.height=Math.max(1,rect.height*dpr);const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,rect.width,rect.height);if(!state.image)return;const scale=Math.min(rect.width/state.image.naturalWidth,rect.height/state.image.naturalHeight),w=state.image.naturalWidth*scale,h=state.image.naturalHeight*scale,ox=(rect.width-w)/2,oy=(rect.height-h)/2;ctx.drawImage(state.image,ox,oy,w,h);const scene=currentScene(),current=currentSample();if(state.showAll)scene.samples.forEach((q,i)=>paintBox(ctx,q.bbox,i===state.sampleIndex?'#54ff77':'#ffe05c',i+1,ox,oy,w,h,i===state.sampleIndex?4:2));else paintBox(ctx,current.bbox,'#54ff77','GT',ox,oy,w,h,4);if(state.showPrediction&&current.prediction)paintBox(ctx,current.prediction,'#ff5268','P',ox,oy,w,h,4);}
+    function paintBox(ctx,b,color,label,ox,oy,w,h,line){const x=ox+b[0]*w,y=oy+b[1]*h,bw=(b[2]-b[0])*w,bh=(b[3]-b[1])*h;ctx.strokeStyle=color;ctx.lineWidth=line;ctx.strokeRect(x,y,bw,bh);ctx.font='bold 14px system-ui';const text=String(label),tw=ctx.measureText(text).width+8;ctx.fillStyle=color;ctx.fillRect(x,Math.max(oy,y-20),tw,20);ctx.fillStyle='#071018';ctx.fillText(text,x+4,Math.max(oy+15,y-5));}
+    async function save(patch,ids=[currentSample().id]){$('saveStatus').textContent='保存中…';const r=await fetch('/api/review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({sample_ids:ids,patch})}),payload=await r.json();if(!payload.ok){toast(payload.error);$('saveStatus').textContent='保存失败';return;}Object.assign(state.reviews,payload.updated);$('saveStatus').textContent='已自动保存';renderHeader();renderQueries();renderReview();}
+    function toast(text){const t=$('toast');t.textContent=text;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800);}
+    function moveScene(delta){state.sceneIndex=Math.max(0,Math.min(state.filtered.length-1,state.sceneIndex+delta));state.sampleIndex=0;render();}
+    function moveSample(delta){const scene=currentScene();let next=state.sampleIndex+delta;if(next>=scene.samples.length){moveScene(1);return;}if(next<0){if(state.sceneIndex>0){state.sceneIndex--;state.sampleIndex=currentScene().samples.length-1;render();}return;}state.sampleIndex=next;render();}
+    document.querySelectorAll('.decision').forEach(b=>b.onclick=()=>save({decision:b.dataset.value}));document.querySelectorAll('.cause').forEach(b=>b.onclick=()=>save({cause:b.classList.contains('selected')?null:b.dataset.value}));
+    document.querySelectorAll('.modality').forEach(b=>b.onclick=()=>{state.modality=b.dataset.modality;document.querySelectorAll('.modality').forEach(x=>x.classList.toggle('active',x===b));loadImage();});
+    $('prevScene').onclick=()=>moveScene(-1);$('nextScene').onclick=()=>moveScene(1);$('jumpButton').onclick=()=>{state.sceneIndex=Math.max(0,Math.min(state.filtered.length-1,Number($('sceneJump').value)-1));state.sampleIndex=0;render();};
+    $('toggleAll').onclick=()=>{state.showAll=!state.showAll;$('toggleAll').classList.toggle('active',state.showAll);draw();};$('togglePrediction').onclick=()=>{state.showPrediction=!state.showPrediction;$('togglePrediction').classList.toggle('active',state.showPrediction);draw();};
+    $('acceptScene').onclick=()=>{const ids=currentScene().samples.filter(q=>!state.reviews[q.id]?.decision).map(q=>q.id);if(ids.length)save({decision:'valid'},ids);else toast('当前场景已全部审核');};
+    $('saveQuery').onclick=()=>{const value=$('correctedQuery').value.trim(),original=currentSample().query;if(!value){toast('请先输入修正描述');return;}if(value===original){toast('修正描述与原文相同');return;}save({corrected_query:value,decision:'query_corrected'});};
+    $('clearQuery').onclick=()=>{const review=state.reviews[currentSample().id]||{},patch={corrected_query:null};if(review.decision==='query_corrected')patch.decision=null;save(patch);};
+    $('correctedQuery').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();$('saveQuery').click();}};
+    $('sortMode').onchange=$('filterMode').onchange=()=>{state.sceneIndex=0;applyFilter();render();};
+    $('note').onblur=()=>save({note:$('note').value});
+    addEventListener('resize',draw);addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(e.target.tagName))return;const key=e.key.toLowerCase(),decision={a:'valid',q:'ambiguous',b:'wrong_bbox',m:'missing_object',t:'tiny_unusable',x:'modality_misaligned',d:'exclude'}[key];if(e.shiftKey&&key==='a'){$('acceptScene').click();e.preventDefault();return;}if(decision){save({decision});moveSample(1);e.preventDefault();return;}if(key==='e'){$('correctedQuery').focus();e.preventDefault();}else if(key==='c'){save({decision:null});e.preventDefault();}else if(key==='1'||key==='2'||key==='3'){document.querySelectorAll('.modality')[Number(key)-1].click();}else if(key==='g')$('toggleAll').click();else if(key==='p')$('togglePrediction').click();else if(key==='j')moveSample(1);else if(key==='k')moveSample(-1);else if(key===' '||key==='n')moveScene(1);else if(key==='arrowleft')moveScene(-1);else if(key==='arrowright')moveScene(1);});
+    boot().catch(error=>{document.body.textContent='加载失败：'+error;});
+  </script>
+</body>
+</html>

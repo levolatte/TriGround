@@ -1,0 +1,10 @@
+numpy<3,>=1.26
+Pillow<12,>=10
+PyYAML<7,>=6
+sentencepiece<1,>=0.2
+torch>=2.1
+transformers<5,>=4.57.3
+
+[dev]
+pytest<9,>=8
+ruff<1,>=0.6

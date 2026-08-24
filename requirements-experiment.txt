@@ -1,0 +1,11 @@
+# Install the CUDA-matched torch/torchvision wheels first; see scripts/setup_gpu.sh.
+transformers==4.57.3
+accelerate==1.12.0
+numpy==1.26.4
+Pillow==11.3.0
+PyYAML==6.0.3
+safetensors==0.6.2
+sentencepiece==0.2.1
+pyarrow==21.0.0
+pytest==8.4.2
+ruff==0.14.10
