@@ -13,8 +13,8 @@ model:
   vision_lora_enabled: false
 data:
   stage: ir
-  train_manifest: ../data/rgbt_groundbench/subsets/train_50.jsonl
-  val_manifest: ../data/rgbt_groundbench/val.jsonl
+  train_manifest: /root/autodl-tmp/datasets/RGBT-Ground-Dataset/extracted/subsets/train_50.jsonl
+  val_manifest: /root/autodl-tmp/datasets/RGBT-Ground-Dataset/extracted/manifests/val.jsonl
   workers: 4
   min_pixels: 200704
   max_pixels: 802816
