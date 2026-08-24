@@ -147,21 +147,38 @@ def _parallel_backbone_vision_forward(
     fusion = fusion_ref() if fusion_ref is not None else None
     if fusion is None:
         raise RuntimeError("parallel-backbone fusion module is no longer available")
-    ir_patches, depth_patches = context
+    (
+        ir_patches,
+        depth_patches,
+        ir_query_tokens,
+        depth_query_tokens,
+        query_attention_mask,
+    ) = context
 
     rgb_tokens = vision.patch_embed(hidden_states)
-    ir_tokens = vision.patch_embed(
-        ir_patches.to(device=hidden_states.device, dtype=hidden_states.dtype)
+    ir_tokens = (
+        vision.patch_embed(
+            ir_patches.to(device=hidden_states.device, dtype=hidden_states.dtype)
+        )
+        if ir_patches is not None
+        else None
     )
-    depth_tokens = vision.patch_embed(
-        depth_patches.to(device=hidden_states.device, dtype=hidden_states.dtype)
+    depth_tokens = (
+        vision.patch_embed(
+            depth_patches.to(device=hidden_states.device, dtype=hidden_states.dtype)
+        )
+        if depth_patches is not None
+        else None
     )
-    if rgb_tokens.shape != ir_tokens.shape or rgb_tokens.shape != depth_tokens.shape:
-        raise ValueError("parallel Qwen vision streams produced different token shapes")
+    for name, tokens in (("IR", ir_tokens), ("depth", depth_tokens)):
+        if tokens is not None and rgb_tokens.shape != tokens.shape:
+            raise ValueError(f"parallel RGB/{name} streams produced different token shapes")
     position = vision.fast_pos_embed_interpolate(grid_thw)
     rgb_tokens = rgb_tokens + position
-    ir_tokens = ir_tokens + position
-    depth_tokens = depth_tokens + position
+    if ir_tokens is not None:
+        ir_tokens = ir_tokens + position
+    if depth_tokens is not None:
+        depth_tokens = depth_tokens + position
     patch_counts = _raw_patch_counts(grid_thw, rgb_tokens.shape[0])
 
     rotary_pos_emb = vision.rot_pos_emb(grid_thw)
@@ -182,10 +199,21 @@ def _parallel_backbone_vision_forward(
             **kwargs,
         }
         rgb_tokens = block(rgb_tokens, **block_kwargs)
-        ir_tokens = fusion.adapt_ir(layer_num, block(ir_tokens, **block_kwargs))
-        depth_tokens = fusion.adapt_depth(layer_num, block(depth_tokens, **block_kwargs))
+        if ir_tokens is not None:
+            ir_tokens = fusion.adapt_ir(layer_num, block(ir_tokens, **block_kwargs))
+        if depth_tokens is not None:
+            depth_tokens = fusion.adapt_depth(
+                layer_num, block(depth_tokens, **block_kwargs)
+            )
         rgb_tokens = fusion.fuse(
-            layer_num, rgb_tokens, ir_tokens, depth_tokens, patch_counts
+            layer_num,
+            rgb_tokens,
+            ir_tokens,
+            depth_tokens,
+            ir_query_tokens,
+            depth_query_tokens,
+            query_attention_mask,
+            patch_counts,
         )
         if layer_num in vision.deepstack_visual_indexes:
             merger_index = vision.deepstack_visual_indexes.index(layer_num)
@@ -276,6 +304,9 @@ class MultiModalGrounder(nn.Module):
         fusion_zero_init_prompt_restore: bool = False,
         parallel_fusion_stages: int = 4,
         parallel_adapter_scale_init: float = 0.01,
+        query_encoder_layers: int = 1,
+        query_attention_heads: int = 4,
+        query_dropout: float = 0.0,
         auxiliary_bbox_enabled: bool = False,
         auxiliary_bbox_l1_weight: float = 2.0,
         auxiliary_bbox_giou_weight: float = 1.0,
@@ -328,7 +359,11 @@ class MultiModalGrounder(nn.Module):
                 token_dim=token_dim,
                 num_layers=len(vision.blocks),
                 hidden_dim=adapter_channels,
+                language_dim=_language_hidden_size(backbone),
                 num_fusion_stages=parallel_fusion_stages,
+                query_encoder_layers=query_encoder_layers,
+                query_attention_heads=query_attention_heads,
+                query_dropout=query_dropout,
                 modality_dropout=modality_dropout,
                 adapter_scale_init=parallel_adapter_scale_init,
                 fusion_scale_init=fusion_residual_scale_init,
@@ -363,11 +398,25 @@ class MultiModalGrounder(nn.Module):
         for parameter in parameters:
             parameter.requires_grad = True
 
-    def set_phase_a_trainable(self) -> None:
+    def set_phase_a_trainable(
+        self, stage: str = "joint", freeze_parallel_adapters: bool = False
+    ) -> None:
+        if stage not in {"ir", "depth", "joint"}:
+            raise ValueError("stage must be 'ir', 'depth', or 'joint'")
         for parameter in self.parameters():
             parameter.requires_grad = False
-        for parameter in self.fusion.parameters():
-            parameter.requires_grad = True
+        if self.fusion_type == "parallel_backbone" and stage != "joint":
+            prefixes = (f"{stage}_adapters.", f"{stage}_query_encoder.")
+            for name, parameter in self.fusion.named_parameters():
+                if name.startswith(prefixes) or f".{stage}." in name:
+                    parameter.requires_grad = True
+        else:
+            for parameter in self.fusion.parameters():
+                parameter.requires_grad = True
+        if self.fusion_type == "parallel_backbone" and freeze_parallel_adapters:
+            for name, parameter in self.fusion.named_parameters():
+                if name.startswith(("ir_adapters.", "depth_adapters.")):
+                    parameter.requires_grad = False
         if self.bbox_head is not None:
             for parameter in self.bbox_head.parameters():
                 parameter.requires_grad = True
@@ -415,6 +464,8 @@ class MultiModalGrounder(nn.Module):
         depth_pixel_values: torch.Tensor | None,
         image_grid_thw: torch.Tensor,
         rgb_only: bool,
+        query_input_ids: torch.Tensor | None = None,
+        query_attention_mask: torch.Tensor | None = None,
     ):
         if self.fusion_type not in {
             "safe_post_embed",
@@ -425,12 +476,28 @@ class MultiModalGrounder(nn.Module):
             return
         if self.fusion_type == "parallel_backbone":
             vision = self._parallel_backbone_vision()
-            if ir_pixel_values is None or depth_pixel_values is None or vision is None:
-                raise ValueError("RGB, IR and depth are all required")
+            if ir_pixel_values is None and depth_pixel_values is None:
+                raise ValueError("at least one auxiliary modality is required")
+            if vision is None or query_input_ids is None or query_attention_mask is None:
+                raise ValueError("parallel fusion requires query tokens and a vision model")
+            embedding = self.backbone.get_input_embeddings()
+            query_embeddings = embedding(query_input_ids).detach()
+            ir_query, depth_query = self.fusion.encode_queries(
+                query_embeddings,
+                query_attention_mask,
+                use_ir=ir_pixel_values is not None,
+                use_depth=depth_pixel_values is not None,
+            )
             object.__setattr__(
                 vision,
                 "_parallel_backbone_context",
-                (ir_pixel_values, depth_pixel_values),
+                (
+                    ir_pixel_values,
+                    depth_pixel_values,
+                    ir_query,
+                    depth_query,
+                    query_attention_mask,
+                ),
             )
             try:
                 yield
@@ -465,11 +532,13 @@ class MultiModalGrounder(nn.Module):
     def _qwen_inputs(
         self,
         pixel_values,
-        ir_pixel_values,
-        depth_pixel_values,
         input_ids,
         attention_mask,
         image_grid_thw,
+        ir_pixel_values=None,
+        depth_pixel_values=None,
+        query_input_ids=None,
+        query_attention_mask=None,
         rgb_only=False,
     ) -> dict[str, torch.Tensor]:
         fused = self._fused_pixels(
@@ -538,6 +607,8 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("depth_pixel_values"),
             kwargs["image_grid_thw"],
             kwargs.get("rgb_only", False),
+            kwargs.get("query_input_ids"),
+            kwargs.get("query_attention_mask"),
         ):
             output = self.backbone(
                 **self._qwen_inputs(**kwargs),
@@ -590,6 +661,8 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("depth_pixel_values"),
             kwargs["image_grid_thw"],
             kwargs.get("rgb_only", False),
+            kwargs.get("query_input_ids"),
+            kwargs.get("query_attention_mask"),
         ):
             output = self.backbone(
                 **self._qwen_inputs(**kwargs),
@@ -612,6 +685,8 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("depth_pixel_values"),
             kwargs["image_grid_thw"],
             kwargs.get("rgb_only", False),
+            kwargs.get("query_input_ids"),
+            kwargs.get("query_attention_mask"),
         ):
             return self.backbone.generate(
                 **self._qwen_inputs(**kwargs), max_new_tokens=max_new_tokens, do_sample=False
@@ -644,6 +719,9 @@ def build_grounder(model_config, processor=None) -> MultiModalGrounder:
         fusion_zero_init_prompt_restore=model_config.fusion_zero_init_prompt_restore,
         parallel_fusion_stages=model_config.parallel_fusion_stages,
         parallel_adapter_scale_init=model_config.parallel_adapter_scale_init,
+        query_encoder_layers=model_config.query_encoder_layers,
+        query_attention_heads=model_config.query_attention_heads,
+        query_dropout=model_config.query_dropout,
         auxiliary_bbox_enabled=model_config.auxiliary_bbox_enabled,
         auxiliary_bbox_l1_weight=model_config.auxiliary_bbox_l1_weight,
         auxiliary_bbox_giou_weight=model_config.auxiliary_bbox_giou_weight,

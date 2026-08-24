@@ -1,5 +1,36 @@
 # RGB + IR + Depth Grounding
 
+## Query-aware staged training
+
+The parallel-backbone implementation supports three real input stages without
+fabricating a missing modality:
+
+- `stage: ir`: RGB + IR; only the IR adaptor, IR query encoder, and IR fusion path train.
+- `stage: depth`: RGB + depth; only the depth counterparts train.
+- `stage: joint`: RGB + IR + depth; both residual paths are calibrated together.
+
+Raw query tokens use the frozen Qwen word embedding table, followed by a small
+trainable query encoder. At a sparse vision boundary, RGB visual tokens attend
+to the query tokens. Independent token gates then add small IR and depth
+residuals to the unchanged RGB path. The default residual scale is `0.001`.
+
+Build deterministic nested subsets, optionally reserving whole scenes for
+validation:
+
+```bash
+python tools/build_grouped_subsets.py \
+  --manifest grounding_final_val_reviewed.json \
+  --output-dir reviewed_split \
+  --group-key scene_id \
+  --validation-fraction 0.2 \
+  --fractions 0.25 0.5 1.0
+```
+
+Run the stages with `configs/stage1a_ir.yaml`, `stage1b_depth.yaml`,
+`stage2_joint_calibration.yaml`, then `stage3_city_finetune.yaml`. Stage 2 loads
+the two independent Stage-1 checkpoints and freezes both modality adaptors.
+Joint evaluation reports RGB, RGB+IR, RGB+depth, and all three modalities.
+
 ## Fast manual review
 
 Double-click `start_reviewer.cmd`, or run:

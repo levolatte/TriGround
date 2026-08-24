@@ -361,19 +361,54 @@ class ModalityBackboneAdapter(nn.Module):
         return tokens + self.residual_scale.to(tokens.dtype) * residual.to(tokens.dtype)
 
 
-class TriModalStageFusion(nn.Module):
-    """Fuse aligned RGB/IR/depth tokens at one vision-stage boundary.
+class QueryTokenEncoder(nn.Module):
+    """Contextualize frozen Qwen word embeddings without a second LM pass."""
 
-    The low-rank token-wise gate is deliberately smaller than a full spatial
-    cross-attention decoder.  All three inputs have already traversed the same
-    frozen vision blocks, so this module only learns which modality residual
-    should amend each RGB token.
-    """
+    def __init__(
+        self,
+        input_dim: int,
+        hidden_dim: int,
+        num_layers: int,
+        num_heads: int,
+        dropout: float,
+    ) -> None:
+        super().__init__()
+        self.input_projection = nn.Sequential(
+            nn.LayerNorm(input_dim), nn.Linear(input_dim, hidden_dim)
+        )
+        layer = nn.TransformerEncoderLayer(
+            d_model=hidden_dim,
+            nhead=num_heads,
+            dim_feedforward=hidden_dim * 4,
+            dropout=dropout,
+            activation="gelu",
+            batch_first=True,
+            norm_first=True,
+        )
+        self.encoder = nn.TransformerEncoder(
+            layer, num_layers=num_layers, enable_nested_tensor=False
+        )
+        self.output_norm = nn.LayerNorm(hidden_dim)
+
+    def forward(
+        self, embeddings: torch.Tensor, attention_mask: torch.Tensor
+    ) -> torch.Tensor:
+        if embeddings.ndim != 3 or attention_mask.shape != embeddings.shape[:2]:
+            raise ValueError("query embeddings and attention mask shapes are incompatible")
+        work_dtype = self.input_projection[1].weight.dtype
+        tokens = self.input_projection(embeddings.to(work_dtype))
+        tokens = self.encoder(tokens, src_key_padding_mask=attention_mask.eq(0))
+        return self.output_norm(tokens)
+
+
+class ModalityStageFusion(nn.Module):
+    """Query-conditioned residual from one auxiliary modality into RGB."""
 
     def __init__(
         self,
         token_dim: int,
         hidden_dim: int,
+        query_attention_heads: int,
         modality_dropout: float,
         residual_scale_init: float,
         zero_init_restore: bool,
@@ -383,58 +418,129 @@ class TriModalStageFusion(nn.Module):
         self.rgb_projection = nn.Sequential(
             nn.LayerNorm(token_dim), nn.Linear(token_dim, hidden_dim), nn.GELU()
         )
-        self.ir_projection = nn.Sequential(
+        self.aux_projection = nn.Sequential(
             nn.LayerNorm(token_dim), nn.Linear(token_dim, hidden_dim), nn.GELU()
         )
-        self.depth_projection = nn.Sequential(
-            nn.LayerNorm(token_dim), nn.Linear(token_dim, hidden_dim), nn.GELU()
+        self.language_attention = nn.MultiheadAttention(
+            hidden_dim, query_attention_heads, batch_first=True
         )
-        self.gate = nn.Linear(hidden_dim * 3, 2)
+        self.gate = nn.Sequential(
+            nn.Linear(hidden_dim * 3, hidden_dim), nn.GELU(), nn.Linear(hidden_dim, 1)
+        )
         self.restore = nn.Linear(hidden_dim, token_dim)
         self.residual_scale = nn.Parameter(torch.tensor(residual_scale_init))
+        nn.init.constant_(self.gate[-1].bias, -2.0)
         nn.init.zeros_(self.restore.bias)
         if zero_init_restore:
             nn.init.zeros_(self.restore.weight)
 
-    @staticmethod
-    def _sample_mask(
-        patch_counts: list[int], probability: float, device: torch.device, dtype: torch.dtype
+    def _language_context(
+        self,
+        rgb: torch.Tensor,
+        query_tokens: torch.Tensor,
+        query_attention_mask: torch.Tensor,
+        patch_counts: list[int],
     ) -> torch.Tensor:
-        keep = torch.rand(len(patch_counts), 1, device=device) >= probability
-        repeats = torch.tensor(patch_counts, device=device)
-        return torch.repeat_interleave(keep, repeats, dim=0).to(dtype)
+        if query_tokens.shape[:2] != query_attention_mask.shape:
+            raise ValueError("query tokens and attention mask shapes differ")
+        if query_tokens.shape[0] != len(patch_counts):
+            raise ValueError("query batch size does not match image patch groups")
+        contexts = []
+        for index, rgb_chunk in enumerate(torch.split(rgb, patch_counts, dim=0)):
+            context, _ = self.language_attention(
+                rgb_chunk.unsqueeze(0),
+                query_tokens[index : index + 1],
+                query_tokens[index : index + 1],
+                key_padding_mask=query_attention_mask[index : index + 1].eq(0),
+                need_weights=False,
+            )
+            contexts.append(context.squeeze(0))
+        return torch.cat(contexts, dim=0)
 
     def forward(
         self,
         rgb_tokens: torch.Tensor,
-        ir_tokens: torch.Tensor,
-        depth_tokens: torch.Tensor,
+        auxiliary_tokens: torch.Tensor,
+        query_tokens: torch.Tensor,
+        query_attention_mask: torch.Tensor,
         patch_counts: list[int],
     ) -> torch.Tensor:
-        if rgb_tokens.shape != ir_tokens.shape or rgb_tokens.shape != depth_tokens.shape:
-            raise ValueError("parallel RGB/IR/depth token shapes must match")
+        if rgb_tokens.shape != auxiliary_tokens.shape:
+            raise ValueError("parallel RGB/auxiliary token shapes must match")
         if sum(patch_counts) != rgb_tokens.shape[0]:
             raise ValueError("patch counts do not match parallel vision tokens")
-        work_dtype = self.gate.weight.dtype
+        work_dtype = self.restore.weight.dtype
         rgb = self.rgb_projection(rgb_tokens.to(work_dtype))
-        infrared = self.ir_projection(ir_tokens.to(work_dtype))
-        depth = self.depth_projection(depth_tokens.to(work_dtype))
+        auxiliary = self.aux_projection(auxiliary_tokens.to(work_dtype))
         if self.training and self.modality_dropout:
-            infrared = infrared * self._sample_mask(
-                patch_counts, self.modality_dropout, infrared.device, infrared.dtype
-            )
-            depth = depth * self._sample_mask(
-                patch_counts, self.modality_dropout, depth.device, depth.dtype
-            )
-        weights = torch.softmax(self.gate(torch.cat((rgb, infrared, depth), dim=-1)), dim=-1)
-        auxiliary = weights[:, :1] * infrared + weights[:, 1:] * depth
-        # RGB conditions the gate but is not a value path.  Consequently the
-        # fusion cannot become a second RGB-only adapter while ignoring both
-        # auxiliary modalities.
-        residual = self.restore(F.gelu(auxiliary))
-        return rgb_tokens + self.residual_scale.to(rgb_tokens.dtype) * residual.to(
-            rgb_tokens.dtype
+            keep = torch.rand(len(patch_counts), 1, device=auxiliary.device)
+            keep = keep >= self.modality_dropout
+            repeats = torch.tensor(patch_counts, device=auxiliary.device)
+            auxiliary = auxiliary * torch.repeat_interleave(
+                keep, repeats, dim=0
+            ).to(auxiliary.dtype)
+        language = self._language_context(
+            rgb, query_tokens.to(work_dtype), query_attention_mask, patch_counts
         )
+        gate = torch.sigmoid(self.gate(torch.cat((rgb, auxiliary, language), dim=-1)))
+        residual = self.restore(F.gelu(auxiliary + language))
+        return self.residual_scale.to(rgb_tokens.dtype) * gate.to(
+            rgb_tokens.dtype
+        ) * residual.to(rgb_tokens.dtype)
+
+
+class QueryAwareStageFusion(nn.Module):
+    """Independent IR and depth residuals at one sparse fusion boundary."""
+
+    def __init__(
+        self,
+        token_dim: int,
+        hidden_dim: int,
+        query_attention_heads: int,
+        modality_dropout: float,
+        residual_scale_init: float,
+        zero_init_restore: bool,
+    ) -> None:
+        super().__init__()
+        arguments = (
+            token_dim,
+            hidden_dim,
+            query_attention_heads,
+            modality_dropout,
+            residual_scale_init,
+            zero_init_restore,
+        )
+        self.ir = ModalityStageFusion(*arguments)
+        self.depth = ModalityStageFusion(*arguments)
+
+    def forward(
+        self,
+        rgb_tokens: torch.Tensor,
+        ir_tokens: torch.Tensor | None,
+        depth_tokens: torch.Tensor | None,
+        ir_query_tokens: torch.Tensor | None,
+        depth_query_tokens: torch.Tensor | None,
+        query_attention_mask: torch.Tensor,
+        patch_counts: list[int],
+    ) -> torch.Tensor:
+        output = rgb_tokens
+        if ir_tokens is not None:
+            if ir_query_tokens is None:
+                raise ValueError("IR query tokens are required for IR fusion")
+            output = output + self.ir(
+                rgb_tokens, ir_tokens, ir_query_tokens, query_attention_mask, patch_counts
+            )
+        if depth_tokens is not None:
+            if depth_query_tokens is None:
+                raise ValueError("depth query tokens are required for depth fusion")
+            output = output + self.depth(
+                rgb_tokens,
+                depth_tokens,
+                depth_query_tokens,
+                query_attention_mask,
+                patch_counts,
+            )
+        return output
 
 
 class ParallelBackboneFusion(nn.Module):
@@ -445,7 +551,11 @@ class ParallelBackboneFusion(nn.Module):
         token_dim: int,
         num_layers: int,
         hidden_dim: int = 128,
+        language_dim: int = 2048,
         num_fusion_stages: int = 4,
+        query_encoder_layers: int = 1,
+        query_attention_heads: int = 4,
+        query_dropout: float = 0.0,
         modality_dropout: float = 0.1,
         adapter_scale_init: float = 0.01,
         fusion_scale_init: float = 0.001,
@@ -468,6 +578,15 @@ class ParallelBackboneFusion(nn.Module):
                 for _ in range(num_layers)
             ]
         )
+        query_arguments = (
+            language_dim,
+            hidden_dim,
+            query_encoder_layers,
+            query_attention_heads,
+            query_dropout,
+        )
+        self.ir_query_encoder = QueryTokenEncoder(*query_arguments)
+        self.depth_query_encoder = QueryTokenEncoder(*query_arguments)
         # Use approximately equally spaced stage ends and always include the
         # final vision block.  A set removes duplicate rounded positions.
         indices = {
@@ -477,9 +596,10 @@ class ParallelBackboneFusion(nn.Module):
         self.fusion_layer_indices = tuple(sorted(indices))
         self.stage_fusions = nn.ModuleDict(
             {
-                str(index): TriModalStageFusion(
+                str(index): QueryAwareStageFusion(
                     token_dim,
                     hidden_dim,
+                    query_attention_heads,
                     modality_dropout,
                     fusion_scale_init,
                     zero_init_restore,
@@ -494,15 +614,45 @@ class ParallelBackboneFusion(nn.Module):
     def adapt_depth(self, layer_index: int, tokens: torch.Tensor) -> torch.Tensor:
         return self.depth_adapters[layer_index](tokens)
 
+    def encode_queries(
+        self,
+        query_embeddings: torch.Tensor,
+        query_attention_mask: torch.Tensor,
+        use_ir: bool,
+        use_depth: bool,
+    ) -> tuple[torch.Tensor | None, torch.Tensor | None]:
+        ir = (
+            self.ir_query_encoder(query_embeddings, query_attention_mask)
+            if use_ir
+            else None
+        )
+        depth = (
+            self.depth_query_encoder(query_embeddings, query_attention_mask)
+            if use_depth
+            else None
+        )
+        return ir, depth
+
     def fuse(
         self,
         layer_index: int,
         rgb_tokens: torch.Tensor,
-        ir_tokens: torch.Tensor,
-        depth_tokens: torch.Tensor,
+        ir_tokens: torch.Tensor | None,
+        depth_tokens: torch.Tensor | None,
+        ir_query_tokens: torch.Tensor | None,
+        depth_query_tokens: torch.Tensor | None,
+        query_attention_mask: torch.Tensor,
         patch_counts: list[int],
     ) -> torch.Tensor:
         key = str(layer_index)
         if key not in self.stage_fusions:
             return rgb_tokens
-        return self.stage_fusions[key](rgb_tokens, ir_tokens, depth_tokens, patch_counts)
+        return self.stage_fusions[key](
+            rgb_tokens,
+            ir_tokens,
+            depth_tokens,
+            ir_query_tokens,
+            depth_query_tokens,
+            query_attention_mask,
+            patch_counts,
+        )

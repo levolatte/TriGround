@@ -12,8 +12,14 @@ def save_checkpoint(
 ) -> None:
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
+    stage = getattr(config, "stage", None)
+    parameters = {
+        name: parameter.detach().cpu()
+        for name, parameter in model.named_parameters()
+        if parameter.requires_grad or (stage == "joint" and name.startswith("fusion."))
+    }
     torch.save({
-        "model": {name: p.detach().cpu() for name, p in model.named_parameters() if p.requires_grad},
+        "model": parameters,
         "trainable_only": True,
         "optimizer": optimizer.state_dict(),
         "scheduler": scheduler.state_dict(),
@@ -28,7 +34,7 @@ def save_checkpoint(
 def load_model_checkpoint(path, model) -> dict:
     checkpoint = torch.load(path, map_location="cpu", weights_only=False)
     missing, unexpected = model.load_state_dict(checkpoint["model"], strict=False)
-    bad_missing = [name for name in missing if not name.startswith("backbone.")]
+    bad_missing = [] if checkpoint.get("trainable_only") else missing
     if bad_missing or unexpected:
         raise RuntimeError(f"incompatible checkpoint: missing={bad_missing}, unexpected={unexpected}")
     return checkpoint

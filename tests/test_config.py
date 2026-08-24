@@ -51,3 +51,17 @@ def test_parallel_backbone_probe_runs_adapter_only_with_four_fusion_stages():
     assert not config.model.vision_lora_enabled
     assert config.train.phase_a_epochs == config.train.epochs == 1
     assert config.train.early_probe_steps == [50, 100, 300]
+
+
+def test_new_stages_use_independent_auxiliary_paths_and_joint_checkpoint_merge():
+    root = Path(__file__).resolve().parents[1]
+    ir = load_config(root / "configs/stage1a_ir.yaml")
+    depth = load_config(root / "configs/stage1b_depth.yaml")
+    joint = load_config(root / "configs/stage2_joint_calibration.yaml")
+    stage3 = load_config(root / "configs/stage3_city_finetune.yaml")
+    assert ir.stage == "ir"
+    assert depth.stage == "depth"
+    assert joint.stage == stage3.stage == "joint"
+    assert joint.model.freeze_parallel_adapters
+    assert len(joint.train.initialization_checkpoints) == 2
+    assert "city_detection_prepared" in stage3.data.train_manifest

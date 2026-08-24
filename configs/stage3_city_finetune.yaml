@@ -1,0 +1,41 @@
+output_dir: runs/stage3_city_finetune
+model:
+  backbone: /root/autodl-tmp/aic/huggingface/hub/models--Qwen--Qwen3-VL-2B-Instruct/snapshots/89644892e4d85e24eaac8bacfd4f463576704203
+  adapter_channels: 128
+  fusion_type: parallel_backbone
+  modality_dropout: 0.1
+  fusion_residual_scale_init: 0.001
+  parallel_fusion_stages: 1
+  parallel_adapter_scale_init: 0.01
+  query_encoder_layers: 1
+  query_attention_heads: 4
+  freeze_parallel_adapters: false
+  auxiliary_bbox_enabled: false
+  vision_lora_enabled: false
+data:
+  stage: joint
+  train_manifest: ../city_detection_prepared/train/stage3_split/train_100.json
+  val_manifest: ../city_detection_prepared/train/stage3_split/val.json
+  workers: 4
+  min_pixels: 200704
+  max_pixels: 802816
+  depth_scale: 1000.0
+  depth_clip: 20.0
+train:
+  initialization_checkpoints:
+    - runs/stage2_joint_calibration/best_phase_a.pt
+  epochs: 3
+  phase_a_epochs: 3
+  phase_b_epochs: 0
+  fusion_lr_a: 5.0e-06
+  batch_size: 1
+  grad_accumulation: 8
+  val_batch_size: 1
+  eval_subset_size: 512
+  early_probe_steps: [50, 100, 300]
+  early_probe_subset_size: 128
+  max_new_tokens: 40
+  weight_decay: 0.01
+  amp: true
+  seed: 2026
+  gradient_checkpointing: true

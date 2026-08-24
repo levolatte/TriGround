@@ -26,14 +26,16 @@ def main() -> None:
     config_path = Path(args.config)
     config = load_config(config_path if config_path.is_absolute() else root / config_path)
     report = {
-        "architecture": "RGB + IR + Depth -> RDT fusion -> Qwen native bbox_2d",
+        "architecture": f"query-aware RGB + {config.stage} residual fusion -> Qwen bbox_2d",
         "fusion_type": config.model.fusion_type,
     }
     manifests = {}
     for split in ("train", "val"):
         manifest = Path(getattr(config.data, f"{split}_manifest"))
         manifest = manifest if manifest.is_absolute() else (root / manifest).resolve()
-        dataset = GroundingDataset(manifest, "joint", config.data.depth_scale, config.data.depth_clip)
+        dataset = GroundingDataset(
+            manifest, config.stage, config.data.depth_scale, config.data.depth_clip
+        )
         for index in range(min(len(dataset), args.max_samples)):
             dataset[index]
         report[split] = {"samples": len(dataset), "manifest": str(manifest)}
@@ -44,6 +46,10 @@ def main() -> None:
             max_pixels=config.data.max_pixels, local_files_only=True,
         )
         model = build_grounder(config.model, processor).to(args.device)
+        for value in config.train.initialization_checkpoints:
+            checkpoint = Path(value)
+            checkpoint = checkpoint if checkpoint.is_absolute() else root / checkpoint
+            load_model_checkpoint(checkpoint, model)
         if config.train.init_checkpoint:
             checkpoint = Path(config.train.init_checkpoint)
             checkpoint = checkpoint if checkpoint.is_absolute() else root / checkpoint
@@ -52,19 +58,29 @@ def main() -> None:
         if config.train.gradient_checkpointing:
             model.backbone.gradient_checkpointing_enable()
             model.backbone.enable_input_require_grads()
-        model.set_phase_a_trainable()
+        model.set_phase_a_trainable(
+            config.stage, freeze_parallel_adapters=config.model.freeze_parallel_adapters
+        )
         if config.train.phase_a_epochs == 0:
             model.enable_vision_lora()
         loader = DataLoader(
-            GroundingDataset(manifests["train"], "joint", config.data.depth_scale, config.data.depth_clip),
-            batch_size=config.train.batch_size, collate_fn=NativeGroundingCollator(processor, "joint"),
+            GroundingDataset(
+                manifests["train"], config.stage,
+                config.data.depth_scale, config.data.depth_clip,
+            ),
+            batch_size=config.train.batch_size,
+            collate_fn=NativeGroundingCollator(processor, config.stage),
         )
         batch = next(iter(loader))
         batch = {key: value.to(args.device) if torch.is_tensor(value) else value for key, value in batch.items()}
-        names = (
-            "pixel_values", "ir_pixel_values", "depth_pixel_values", "input_ids",
-            "attention_mask", "image_grid_thw", "labels", "bbox", "coordinate_mask",
-        )
+        names = [
+            "pixel_values", "input_ids", "attention_mask", "image_grid_thw",
+            "query_input_ids", "query_attention_mask", "labels", "bbox", "coordinate_mask",
+        ]
+        if config.stage in {"ir", "joint"}:
+            names.append("ir_pixel_values")
+        if config.stage in {"depth", "joint"}:
+            names.append("depth_pixel_values")
         loss = model(**{name: batch[name] for name in names})["loss"]
         if args.backward:
             loss.backward()

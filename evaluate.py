@@ -28,19 +28,36 @@ def main() -> None:
     model = build_grounder(config.model, processor).to(device)
     load_model_checkpoint(args.checkpoint, model)
     dataset = GroundingDataset(
-        config.data.val_manifest, stage="joint", depth_scale=config.data.depth_scale,
+        config.data.val_manifest, stage=config.stage, depth_scale=config.data.depth_scale,
         depth_clip=config.data.depth_clip,
     )
     loader = DataLoader(
         dataset, batch_size=config.train.batch_size, shuffle=False,
-        num_workers=config.data.workers, collate_fn=NativeGroundingCollator(processor, "joint"),
+        num_workers=config.data.workers,
+        collate_fn=NativeGroundingCollator(processor, config.stage),
     )
+    modes = {
+        "ir": {"rgb_ir": {"ir"}},
+        "depth": {"rgb_depth": {"depth"}},
+        "joint": {
+            "rgb_ir_depth": {"ir", "depth"},
+            "rgb_ir": {"ir"},
+            "rgb_depth": {"depth"},
+        },
+    }[config.stage]
     report = {
-        "joint": evaluate(model, loader, processor, device),
-        "rgb_baseline": evaluate(model, loader, processor, device, rgb_only=True),
+        name: evaluate(
+            model, loader, processor, device, config.train.max_new_tokens,
+            modalities=modalities,
+        )
+        for name, modalities in modes.items()
     }
-    report["joint_gain_over_rgb"] = {
-        key: report["joint"][key] - report["rgb_baseline"][key]
+    report["rgb_baseline"] = evaluate(
+        model, loader, processor, device, config.train.max_new_tokens, rgb_only=True
+    )
+    primary = next(iter(modes))
+    report[f"{primary}_gain_over_rgb"] = {
+        key: report[primary][key] - report["rgb_baseline"][key]
         for key in ("mean_iou", "acc_0.5", "acc_0.7")
     }
     print(json.dumps(report, ensure_ascii=False, indent=2))

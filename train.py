@@ -51,13 +51,19 @@ def main() -> None:
         config.model.backbone, min_pixels=config.data.min_pixels, max_pixels=config.data.max_pixels
     )
     model = build_grounder(config.model, processor)
+    for checkpoint in config.train.initialization_checkpoints:
+        load_model_checkpoint(checkpoint, model)
     if config.train.init_checkpoint:
         load_model_checkpoint(config.train.init_checkpoint, model)
     if config.train.gradient_checkpointing:
         model.backbone.gradient_checkpointing_enable()
         model.backbone.enable_input_require_grads()
-    common = dict(stage="joint", depth_scale=config.data.depth_scale, depth_clip=config.data.depth_clip)
-    collator = NativeGroundingCollator(processor, "joint")
+    common = dict(
+        stage=config.stage,
+        depth_scale=config.data.depth_scale,
+        depth_clip=config.data.depth_clip,
+    )
+    collator = NativeGroundingCollator(processor, config.stage)
     generator = torch.Generator().manual_seed(config.train.seed)
     train_loader = DataLoader(
         GroundingDataset(config.data.train_manifest, **common), batch_size=config.train.batch_size,

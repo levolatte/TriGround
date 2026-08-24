@@ -33,10 +33,11 @@ class GroundingDataset(Dataset):
     """Aligned RGB/IR/depth samples with English query and normalized xyxy bbox."""
 
     def __init__(self, manifest, stage="joint", depth_scale=1000.0, depth_clip=20.0, **_):
-        if stage != "joint":
-            raise ValueError("Only aligned RGB+IR+depth data is supported")
+        if stage not in {"ir", "depth", "joint"}:
+            raise ValueError("stage must be 'ir', 'depth', or 'joint'")
         self.manifest = Path(manifest)
         self.root = self.manifest.parent
+        self.stage = stage
         self.depth_scale = depth_scale
         self.depth_clip = depth_clip
         text = self.manifest.read_text(encoding="utf-8-sig")
@@ -64,12 +65,27 @@ class GroundingDataset(Dataset):
                 return str(record[name])
         raise KeyError(f"Missing modality field; accepted names: {names}")
 
+    @classmethod
+    def _auxiliary_field(cls, record, modality: str) -> str:
+        explicit = {
+            "ir": ("ir", "infrared", "thermal"),
+            "depth": ("depth",),
+        }[modality]
+        for name in explicit:
+            if record.get(name):
+                return str(record[name])
+        if str(record.get("aux_type", "")).lower() == modality and record.get("aux"):
+            return str(record["aux"])
+        raise KeyError(f"Missing {modality} modality field")
+
     def __getitem__(self, index):
         record = self.records[index]
         rgb = _open_image(self._path(self._field(record, "rgb", "visible")), "RGB")
-        infrared = _open_image(self._path(self._field(record, "ir", "infrared")), "L")
-        with Image.open(self._path(self._field(record, "depth"))) as depth_image:
-            depth_array = np.asarray(depth_image).copy()
+        record_stage = str(record.get("stage", self.stage)).lower()
+        if record_stage not in {self.stage, "joint"}:
+            raise ValueError(
+                f"sample stage {record_stage!r} is incompatible with dataset stage {self.stage!r}"
+            )
         bbox = torch.tensor(record["bbox"], dtype=torch.float32)
         if bbox.shape != (4,) or not torch.isfinite(bbox).all():
             raise ValueError("bbox must contain four finite values")
@@ -78,25 +94,38 @@ class GroundingDataset(Dataset):
         query = str(record.get("query", "")).strip()
         if not query:
             raise ValueError("query must not be empty")
-        return {
+        sample = {
             "rgb": rgb,
-            "ir": infrared.resize(rgb.size, Image.Resampling.BILINEAR).convert("RGB"),
-            "depth": encode_depth_image(depth_array, self.depth_scale, self.depth_clip).resize(
-                rgb.size, Image.Resampling.NEAREST
-            ),
             "query": query,
             "bbox": bbox,
             "sample_id": str(record.get("id", index)),
         }
+        if self.stage in {"ir", "joint"}:
+            infrared = _open_image(
+                self._path(self._auxiliary_field(record, "ir")), "L"
+            )
+            sample["ir"] = infrared.resize(
+                rgb.size, Image.Resampling.BILINEAR
+            ).convert("RGB")
+        if self.stage in {"depth", "joint"}:
+            with Image.open(
+                self._path(self._auxiliary_field(record, "depth"))
+            ) as depth_image:
+                depth_array = np.asarray(depth_image).copy()
+            sample["depth"] = encode_depth_image(
+                depth_array, self.depth_scale, self.depth_clip
+            ).resize(rgb.size, Image.Resampling.NEAREST)
+        return sample
 
 
 class NativeGroundingCollator:
     """Create Qwen causal-LM supervision for a bbox_2d JSON answer."""
 
     def __init__(self, processor, stage="joint"):
-        if stage != "joint":
-            raise ValueError("Only joint multimodal batches are supported")
+        if stage not in {"ir", "depth", "joint"}:
+            raise ValueError("stage must be 'ir', 'depth', or 'joint'")
         self.processor = processor
+        self.stage = stage
         self.processor.tokenizer.padding_side = "right"
 
     @staticmethod
@@ -153,6 +182,12 @@ class NativeGroundingCollator:
         images = [sample["rgb"] for sample in samples]
         encoded = self.processor(text=full, images=images, padding=True, return_tensors="pt")
         generated = self.processor(text=prompts, images=images, padding=True, return_tensors="pt")
+        query_encoded = self.processor.tokenizer(
+            [sample["query"] for sample in samples],
+            padding=True,
+            add_special_tokens=True,
+            return_tensors="pt",
+        )
         labels = encoded["input_ids"].clone()
         for index, length in enumerate(generated["attention_mask"].sum(1).tolist()):
             labels[index, :int(length)] = -100
@@ -169,10 +204,17 @@ class NativeGroundingCollator:
             "coordinate_mask": coordinate_mask,
             "generation_input_ids": generated["input_ids"],
             "generation_attention_mask": generated["attention_mask"],
+            "query_input_ids": query_encoded["input_ids"],
+            "query_attention_mask": query_encoded["attention_mask"],
             "bbox": torch.stack([sample["bbox"] for sample in samples]),
             "sample_id": [sample["sample_id"] for sample in samples],
         }
-        for name in ("ir", "depth"):
+        names = {
+            "ir": ("ir",),
+            "depth": ("depth",),
+            "joint": ("ir", "depth"),
+        }[self.stage]
+        for name in names:
             auxiliary = self.processor.image_processor(
                 images=[sample[name] for sample in samples], return_tensors="pt"
             )

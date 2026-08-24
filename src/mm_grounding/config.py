@@ -14,10 +14,14 @@ class ModelConfig:
     prompt_gate_init: float = -3.0
     fusion_type: str = "legacy_patch"
     modality_dropout: float = 0.1
-    fusion_residual_scale_init: float = 0.0
+    fusion_residual_scale_init: float = 0.001
     fusion_zero_init_prompt_restore: bool = False
-    parallel_fusion_stages: int = 4
+    parallel_fusion_stages: int = 1
     parallel_adapter_scale_init: float = 0.01
+    query_encoder_layers: int = 1
+    query_attention_heads: int = 4
+    query_dropout: float = 0.0
+    freeze_parallel_adapters: bool = False
     auxiliary_bbox_enabled: bool = False
     auxiliary_bbox_l1_weight: float = 2.0
     auxiliary_bbox_giou_weight: float = 1.0
@@ -30,6 +34,7 @@ class ModelConfig:
 
 @dataclass(frozen=True)
 class DataConfig:
+    stage: str = "joint"
     train_manifest: str = ""
     val_manifest: str = ""
     workers: int = 4
@@ -68,6 +73,7 @@ class TrainConfig:
     amp: bool = True
     seed: int = 2026
     gradient_checkpointing: bool = True
+    initialization_checkpoints: tuple[str, ...] = ()
     init_checkpoint: str | None = None
     resume_epoch: int = 0
     override_resume_learning_rates: bool = False
@@ -82,7 +88,7 @@ class ExperimentConfig:
 
     @property
     def stage(self) -> str:
-        return "joint"
+        return self.data.stage
 
     def validate(self) -> None:
         if self.model.fusion_type not in {
@@ -105,6 +111,14 @@ class ExperimentConfig:
             raise ValueError("parallel_fusion_stages must be positive")
         if self.model.parallel_adapter_scale_init <= 0:
             raise ValueError("parallel_adapter_scale_init must be positive")
+        if self.model.query_encoder_layers < 1:
+            raise ValueError("query_encoder_layers must be positive")
+        if self.model.query_attention_heads < 1:
+            raise ValueError("query_attention_heads must be positive")
+        if self.model.adapter_channels % self.model.query_attention_heads:
+            raise ValueError("adapter_channels must be divisible by query_attention_heads")
+        if not 0 <= self.model.query_dropout < 1:
+            raise ValueError("query_dropout must be in [0, 1)")
         if self.model.auxiliary_bbox_enabled and self.model.fusion_type != "safe_post_embed":
             raise ValueError("auxiliary bbox supervision requires safe_post_embed fusion")
         if (
@@ -114,6 +128,10 @@ class ExperimentConfig:
             raise ValueError("auxiliary bbox loss weights must be non-negative")
         if not 0 < self.data.min_pixels <= self.data.max_pixels:
             raise ValueError("invalid min_pixels/max_pixels")
+        if self.data.stage not in {"ir", "depth", "joint"}:
+            raise ValueError("data.stage must be 'ir', 'depth', or 'joint'")
+        if self.data.stage != "joint" and self.model.fusion_type != "parallel_backbone":
+            raise ValueError("single-auxiliary stages require parallel_backbone fusion")
         if self.data.depth_scale <= 0 or self.data.depth_clip <= 0:
             raise ValueError("depth_scale and depth_clip must be positive")
         if self.train.batch_size < 1 or self.train.grad_accumulation < 1 or self.train.val_batch_size < 1:
@@ -154,6 +172,10 @@ class ExperimentConfig:
             raise ValueError("phase_a_epochs + phase_b_epochs must equal epochs")
         if not 0 <= self.train.resume_epoch <= self.train.epochs:
             raise ValueError("resume_epoch must be within the configured training range")
+        if self.train.initialization_checkpoints and self.train.init_checkpoint:
+            raise ValueError(
+                "initialization_checkpoints cannot be combined with init_checkpoint resume"
+            )
         if self.train.phase_b_epochs and not self.model.vision_lora_enabled:
             raise ValueError("Phase B requires Vision LoRA")
 

@@ -31,20 +31,26 @@ def _training_inputs(batch):
     names = (
         "pixel_values", "ir_pixel_values", "depth_pixel_values", "input_ids",
         "attention_mask", "image_grid_thw", "labels", "bbox", "coordinate_mask",
+        "query_input_ids", "query_attention_mask",
     )
-    return {name: batch[name] for name in names}
+    return {name: batch[name] for name in names if name in batch}
 
 
-def _generation_inputs(batch, rgb_only=False):
-    return {
+def _generation_inputs(batch, rgb_only=False, modalities: set[str] | None = None):
+    output = {
         "pixel_values": batch["pixel_values"],
-        "ir_pixel_values": batch["ir_pixel_values"],
-        "depth_pixel_values": batch["depth_pixel_values"],
         "input_ids": batch["generation_input_ids"],
         "attention_mask": batch["generation_attention_mask"],
         "image_grid_thw": batch["image_grid_thw"],
+        "query_input_ids": batch["query_input_ids"],
+        "query_attention_mask": batch["query_attention_mask"],
         "rgb_only": rgb_only,
     }
+    for modality in ("ir", "depth"):
+        name = f"{modality}_pixel_values"
+        if name in batch and (modalities is None or modality in modalities):
+            output[name] = batch[name]
+    return output
 
 
 def parse_bbox(text: str) -> list[float] | None:
@@ -61,7 +67,15 @@ def parse_bbox(text: str) -> list[float] | None:
 
 
 @torch.no_grad()
-def evaluate(model, loader, processor, device: torch.device, max_new_tokens: int, rgb_only: bool = False):
+def evaluate(
+    model,
+    loader,
+    processor,
+    device: torch.device,
+    max_new_tokens: int,
+    rgb_only: bool = False,
+    modalities: set[str] | None = None,
+):
     model.eval()
     rows = []
     parsed = 0
@@ -76,7 +90,7 @@ def evaluate(model, loader, processor, device: torch.device, max_new_tokens: int
         batch = _move(batch, device)
         if model.auxiliary_bbox_enabled:
             auxiliary = model.predict_auxiliary_bbox(
-                **_generation_inputs(batch, rgb_only=rgb_only)
+                **_generation_inputs(batch, rgb_only=rgb_only, modalities=modalities)
             )
             auxiliary_rows.append(
                 (auxiliary.shape[0], grounding_metrics(auxiliary, batch["bbox"]))
@@ -85,7 +99,8 @@ def evaluate(model, loader, processor, device: torch.device, max_new_tokens: int
                 generalized_iou_aligned(auxiliary, batch["bbox"]).sum().item()
             )
         generated = model.generate(
-            **_generation_inputs(batch, rgb_only=rgb_only), max_new_tokens=max_new_tokens
+            **_generation_inputs(batch, rgb_only=rgb_only, modalities=modalities),
+            max_new_tokens=max_new_tokens,
         )
         prompt_length = batch["generation_input_ids"].shape[1]
         new_tokens = generated[:, prompt_length:]
@@ -438,7 +453,9 @@ def train(
     processor, config, device,
 ):
     model.to(device)
-    model.set_phase_a_trainable()
+    model.set_phase_a_trainable(
+        config.stage, freeze_parallel_adapters=config.model.freeze_parallel_adapters
+    )
     backbone_dtype = next(model.backbone.parameters()).dtype
     amp_dtype = backbone_dtype if backbone_dtype in (torch.float16, torch.bfloat16) else torch.float16
     # BF16 has FP32-like exponent range and must not use CUDA GradScaler; PyTorch

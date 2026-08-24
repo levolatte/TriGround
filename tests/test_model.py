@@ -109,8 +109,13 @@ class DummyAuxBackbone(DummyPostEmbedBackbone):
 class DummyDeepBackbone(DummyBackbone):
     def __init__(self):
         super().__init__()
+        self.config.text_config = SimpleNamespace(hidden_size=12)
+        self.token_embed = nn.Embedding(32, 12)
         self.model = nn.Module()
         self.model.visual = DummyDeepVision()
+
+    def get_input_embeddings(self):
+        return self.token_embed
 
     def forward(self, pixel_values, image_grid_thw, labels, **kwargs):
         tokens, _ = self.model.visual(pixel_values, grid_thw=image_grid_thw)
@@ -126,6 +131,8 @@ def _batch():
         "attention_mask": torch.ones(2, 3, dtype=torch.long),
         "image_grid_thw": torch.tensor([[1, 2, 2], [1, 2, 2]]),
         "labels": torch.ones(2, 3, dtype=torch.long),
+        "query_input_ids": torch.tensor([[1, 2, 0], [3, 4, 5]]),
+        "query_attention_mask": torch.tensor([[1, 1, 0], [1, 1, 1]]),
     }
 
 
@@ -214,7 +221,8 @@ def test_parallel_backbone_runs_three_streams_and_trains_adapters_and_fusion():
     assert model.fusion.ir_adapters[0].up.weight.grad is not None
     assert model.fusion.depth_adapters[0].up.weight.grad is not None
     for stage in model.fusion.stage_fusions.values():
-        assert stage.restore.weight.grad is not None
+        assert stage.ir.restore.weight.grad is not None
+        assert stage.depth.restore.weight.grad is not None
     trainable = {name for name, parameter in model.named_parameters() if parameter.requires_grad}
     assert trainable and all(name.startswith("fusion.") for name in trainable)
 
@@ -232,6 +240,45 @@ def test_parallel_backbone_rgb_only_uses_one_stream_and_clears_context():
     model(**_batch(), rgb_only=True)
     assert all(block.calls == 1 for block in model.backbone.model.visual.blocks)
     assert model._parallel_backbone_vision()._parallel_backbone_context is None
+
+
+def test_parallel_backbone_ir_stage_skips_depth_stream_and_parameters():
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        modality_dropout=0.0,
+        fusion_residual_scale_init=0.001,
+        parallel_fusion_stages=1,
+    )
+    model.set_phase_a_trainable("ir")
+    assert any(parameter.requires_grad for parameter in model.fusion.ir_adapters.parameters())
+    assert not any(parameter.requires_grad for parameter in model.fusion.depth_adapters.parameters())
+    assert any(parameter.requires_grad for parameter in model.fusion.ir_query_encoder.parameters())
+    assert not any(parameter.requires_grad for parameter in model.fusion.depth_query_encoder.parameters())
+    batch = _batch()
+    batch.pop("depth_pixel_values")
+    output = model(**batch)
+    assert all(block.calls == 2 for block in model.backbone.model.visual.blocks)
+    output["loss"].backward()
+    assert model.fusion.ir_adapters[0].up.weight.grad is not None
+    assert model.fusion.depth_adapters[0].up.weight.grad is None
+    stage = next(iter(model.fusion.stage_fusions.values()))
+    assert stage.ir.restore.weight.grad is not None
+    assert stage.depth.restore.weight.grad is None
+
+
+def test_joint_calibration_can_freeze_both_modality_adapters():
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        parallel_fusion_stages=1,
+    )
+    model.set_phase_a_trainable("joint", freeze_parallel_adapters=True)
+    assert not any(parameter.requires_grad for parameter in model.fusion.ir_adapters.parameters())
+    assert not any(parameter.requires_grad for parameter in model.fusion.depth_adapters.parameters())
+    assert any(parameter.requires_grad for parameter in model.fusion.stage_fusions.parameters())
 
 
 def test_auxiliary_bbox_uses_pre_answer_feature_and_has_legal_output():
