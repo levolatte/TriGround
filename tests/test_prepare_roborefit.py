@@ -3,6 +3,7 @@ import json
 from PIL import Image
 
 from tools.prepare_roborefit import convert_split
+from tools.build_grouped_subsets import record_group
 
 
 def test_convert_roborefit_normalizes_bbox_and_resolves_release_paths(tmp_path):
@@ -37,3 +38,8 @@ def test_convert_roborefit_normalizes_bbox_and_resolves_release_paths(tmp_path):
     assert (output.parent / row["depth"]).resolve() == split / "depth" / "0000000.png"
     assert report["samples"] == 1
     assert report["depth_max"] == 1200
+
+
+def test_grouped_subsets_default_to_visible_scene_path():
+    record = {"visible": "visible/scene_001.png"}
+    assert record_group("different-query-id", record, None) == record["visible"]

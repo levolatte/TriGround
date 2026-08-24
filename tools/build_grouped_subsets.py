@@ -25,7 +25,14 @@ def record_group(sample_id: str, record: dict, group_key: str | None) -> str:
         if record.get(group_key) is None:
             raise KeyError(f"sample {sample_id!r} has no {group_key!r} group field")
         return str(record[group_key])
-    for key in ("scene_id", "sequence_id", "video_id", "original_image_id"):
+    for key in (
+        "scene_id",
+        "sequence_id",
+        "video_id",
+        "original_image_id",
+        "rgb",
+        "visible",
+    ):
         if record.get(key) is not None:
             return str(record[key])
     return sample_id
