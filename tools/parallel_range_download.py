@@ -15,8 +15,10 @@ def _download_part(url: str, path: Path, start: int, end: int, retries: int) -> 
     path.unlink(missing_ok=True)
     subprocess.run(
         [
-            "curl", "--fail", "--location", "--retry", str(retries),
-            "--retry-delay", "3", "--range", f"{start}-{end}",
+            "curl", "--fail", "--location", "--http1.1",
+            "--retry", str(retries), "--retry-all-errors",
+            "--retry-delay", "3", "--connect-timeout", "30",
+            "--range", f"{start}-{end}",
             "--output", str(path), url,
         ],
         check=True,
