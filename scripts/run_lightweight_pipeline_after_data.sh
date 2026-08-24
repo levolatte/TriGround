@@ -32,6 +32,21 @@ grep -q 'evaluation_exit=0' logs/stage1a_ir_eval512.log || {
 }
 [[ -s runs/stage1a_ir_50/best_phase_a.pt ]]
 
+# A full Stage 1A evaluation is optional.  When it has been scheduled while
+# RoboRefIt downloads, do not let Stage 1B contend for the same GPU.
+if [[ -s logs/stage1a_ir_full_eval.pid ]]; then
+  full_eval_pid=$(cat logs/stage1a_ir_full_eval.pid)
+  while kill -0 "$full_eval_pid" 2>/dev/null; do
+    state=$(awk '{print $3}' "/proc/$full_eval_pid/stat" 2>/dev/null || true)
+    [[ "$state" == Z ]] && break
+    sleep 10
+  done
+  grep -q 'evaluation_exit=0' logs/stage1a_ir_full_eval.log || {
+    echo "Stage 1A full evaluation did not finish successfully" >&2
+    exit 1
+  }
+fi
+
 generated_config=configs/generated_stage1b_depth_light.yaml
 /root/miniconda3/bin/python - "$dataset/manifests/conversion_report.json" \
   configs/stage1b_depth_light.yaml "$generated_config" <<'PY'
