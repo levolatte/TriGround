@@ -437,9 +437,16 @@ def _run_phase(
             stale_evals += 1
         if phase_epoch == epochs or stale_evals >= config.train.early_stopping_patience:
             load_model_checkpoint(best_path, model)
-            full_metrics = evaluate(
-                model, full_val_loader, processor, device, config.train.max_new_tokens
-            )
+            # When the configured validation cap already contains the complete
+            # validation set (as in lightweight pipeline checks), reuse the
+            # metrics computed immediately above instead of generating every
+            # prediction twice.
+            if full_val_loader.dataset is val_loader.dataset:
+                full_metrics = metrics
+            else:
+                full_metrics = evaluate(
+                    model, full_val_loader, processor, device, config.train.max_new_tokens
+                )
             full_record = {"epoch": epoch, "phase": phase.upper(), "eval_scope": "full", "eval_samples": len(full_val_loader.dataset), **full_metrics}
             _write_metric(output_dir, full_record)
         if stale_evals >= config.train.early_stopping_patience:
