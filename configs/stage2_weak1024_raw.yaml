@@ -1,4 +1,4 @@
-output_dir: runs/stage1b_depth_50
+output_dir: runs/stage2_weak1024_raw
 model:
   backbone: Qwen/Qwen3-VL-2B-Instruct
   adapter_channels: 128
@@ -9,27 +9,30 @@ model:
   parallel_adapter_scale_init: 0.01
   query_encoder_layers: 1
   query_attention_heads: 4
+  freeze_parallel_adapters: true
   auxiliary_bbox_enabled: false
   vision_lora_enabled: false
 data:
-  stage: depth
-  train_manifest: data/RoboRefIt/manifests/formal_subsets/train_50.jsonl
-  val_manifest: data/RoboRefIt/manifests/testA.jsonl
+  stage: joint
+  train_manifest: ../city_detection_prepared/train/weak_subsets/weak_1024_raw.json
+  val_manifest: ../city_detection_prepared/train/reviewed_split/val.json
   workers: 4
   min_pixels: 200704
   max_pixels: 802816
   depth_scale: 1000.0
   depth_clip: 20.0
 train:
-  epochs: 3
-  phase_a_epochs: 3
+  initialization_checkpoints:
+    - runs/stage2_joint_calibration/best_phase_a.pt
+  epochs: 1
+  phase_a_epochs: 1
   phase_b_epochs: 0
-  fusion_lr_a: 3.0e-05
+  fusion_lr_a: 3.0e-06
   batch_size: 1
   grad_accumulation: 8
   val_batch_size: 1
   eval_subset_size: 512
-  early_probe_steps: [50, 100, 300]
+  early_probe_steps: [50, 100]
   early_probe_subset_size: 128
   max_new_tokens: 40
   weight_decay: 0.01

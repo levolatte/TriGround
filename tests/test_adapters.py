@@ -1,7 +1,12 @@
 import pytest
 import torch
 
-from mm_grounding.adapters import RDTDeepFusion, RDTStylePatchFusion, SafePostEmbedFusion
+from mm_grounding.adapters import (
+    JointQueryAwareStageFusion,
+    RDTDeepFusion,
+    RDTStylePatchFusion,
+    SafePostEmbedFusion,
+)
 
 
 def test_fusion_is_rgb_safe_at_initialization_and_learns():
@@ -119,3 +124,45 @@ def test_deep_prompts_are_rgb_safe_and_every_layer_receives_gradient():
     for block in module.prompt_blocks:
         assert block.prompt_restore.weight.grad is not None
         assert torch.count_nonzero(block.prompt_restore.weight.grad) > 0
+
+
+def test_joint_query_fusion_is_exactly_rgb_safe_and_learns_one_residual():
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=0.001,
+        zero_init_restore=True,
+    )
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    ir_query, depth_query = (torch.randn(2, 4, 8) for _ in range(2))
+    mask = torch.ones(2, 4, dtype=torch.long)
+    output = module(rgb, ir, depth, ir_query, depth_query, mask, [2, 3])
+    assert torch.equal(output, rgb)
+    output.sum().backward()
+    assert module.restore.weight.grad is not None
+    assert torch.count_nonzero(module.restore.weight.grad) > 0
+    # Zero initialization deliberately delays gradients to upstream fusion
+    # layers until the restore projection has moved away from zero.
+    assert module.modality_attention.in_proj_weight.grad is not None
+    assert torch.count_nonzero(module.modality_attention.in_proj_weight.grad) == 0
+
+
+def test_joint_query_fusion_supports_either_auxiliary_and_rgb_only():
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=0.001,
+        zero_init_restore=False,
+    )
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    query = torch.randn(2, 4, 8)
+    mask = torch.ones(2, 4, dtype=torch.long)
+    ir_output = module(rgb, ir, None, query, None, mask, [2, 3])
+    depth_output = module(rgb, None, depth, None, query, mask, [2, 3])
+    rgb_output = module(rgb, None, None, None, None, mask, [2, 3])
+    assert ir_output.shape == depth_output.shape == rgb.shape
+    assert torch.equal(rgb_output, rgb)

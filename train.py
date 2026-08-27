@@ -53,6 +53,8 @@ def main() -> None:
     model = build_grounder(config.model, processor)
     for checkpoint in config.train.initialization_checkpoints:
         load_model_checkpoint(checkpoint, model)
+    if config.train.warm_start_joint_fusion_from_legacy:
+        model.fusion.warm_start_joint_from_legacy()
     if config.train.init_checkpoint:
         load_model_checkpoint(config.train.init_checkpoint, model)
     if config.train.gradient_checkpointing:

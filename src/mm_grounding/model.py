@@ -304,6 +304,7 @@ class MultiModalGrounder(nn.Module):
         fusion_zero_init_prompt_restore: bool = False,
         parallel_fusion_stages: int = 4,
         parallel_adapter_scale_init: float = 0.01,
+        parallel_joint_fusion: bool = False,
         query_encoder_layers: int = 1,
         query_attention_heads: int = 4,
         query_dropout: float = 0.0,
@@ -368,6 +369,7 @@ class MultiModalGrounder(nn.Module):
                 adapter_scale_init=parallel_adapter_scale_init,
                 fusion_scale_init=fusion_residual_scale_init,
                 zero_init_restore=fusion_zero_init_prompt_restore,
+                use_joint_fusion=parallel_joint_fusion,
             )
             _install_parallel_backbone_forward(vision, self.fusion)
             object.__setattr__(
@@ -399,7 +401,10 @@ class MultiModalGrounder(nn.Module):
             parameter.requires_grad = True
 
     def set_phase_a_trainable(
-        self, stage: str = "joint", freeze_parallel_adapters: bool = False
+        self,
+        stage: str = "joint",
+        freeze_parallel_adapters: bool = False,
+        parallel_adapter_train_last_n: int = 0,
     ) -> None:
         if stage not in {"ir", "depth", "joint"}:
             raise ValueError("stage must be 'ir', 'depth', or 'joint'")
@@ -413,10 +418,25 @@ class MultiModalGrounder(nn.Module):
         else:
             for parameter in self.fusion.parameters():
                 parameter.requires_grad = True
+        if self.fusion_type == "parallel_backbone" and parallel_adapter_train_last_n:
+            modalities = ("ir", "depth") if stage == "joint" else (stage,)
+            for modality in modalities:
+                adapters = getattr(self.fusion, f"{modality}_adapters")
+                frozen_count = max(0, len(adapters) - parallel_adapter_train_last_n)
+                for adapter in adapters[:frozen_count]:
+                    for parameter in adapter.parameters():
+                        parameter.requires_grad = False
         if self.fusion_type == "parallel_backbone" and freeze_parallel_adapters:
             for name, parameter in self.fusion.named_parameters():
                 if name.startswith(("ir_adapters.", "depth_adapters.")):
                     parameter.requires_grad = False
+        if (
+            self.fusion_type == "parallel_backbone"
+            and self.fusion.use_joint_fusion
+            and stage == "joint"
+        ):
+            for parameter in self.fusion.stage_fusions.parameters():
+                parameter.requires_grad = False
         if self.bbox_head is not None:
             for parameter in self.bbox_head.parameters():
                 parameter.requires_grad = True
@@ -425,6 +445,15 @@ class MultiModalGrounder(nn.Module):
         parameters = list(self.fusion.parameters())
         if self.bbox_head is not None:
             parameters.extend(self.bbox_head.parameters())
+        return [parameter for parameter in parameters if parameter.requires_grad]
+
+    def parallel_adapter_parameters(self) -> list[nn.Parameter]:
+        if self.fusion_type != "parallel_backbone":
+            return []
+        parameters = [
+            *self.fusion.ir_adapters.parameters(),
+            *self.fusion.depth_adapters.parameters(),
+        ]
         return [parameter for parameter in parameters if parameter.requires_grad]
 
     def _post_embed_wrapper(self) -> _ContextualFusedPatchEmbed | None:
@@ -719,6 +748,7 @@ def build_grounder(model_config, processor=None) -> MultiModalGrounder:
         fusion_zero_init_prompt_restore=model_config.fusion_zero_init_prompt_restore,
         parallel_fusion_stages=model_config.parallel_fusion_stages,
         parallel_adapter_scale_init=model_config.parallel_adapter_scale_init,
+        parallel_joint_fusion=model_config.parallel_joint_fusion,
         query_encoder_layers=model_config.query_encoder_layers,
         query_attention_heads=model_config.query_attention_heads,
         query_dropout=model_config.query_dropout,

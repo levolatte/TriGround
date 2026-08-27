@@ -1,6 +1,6 @@
 output_dir: runs/multimodal_rdt_deep_reviewed
 model:
-  backbone: /root/autodl-tmp/aic/huggingface/hub/models--Qwen--Qwen3-VL-2B-Instruct/snapshots/89644892e4d85e24eaac8bacfd4f463576704203
+  backbone: Qwen/Qwen3-VL-2B-Instruct
   adapter_channels: 128
   orthogonal_channels: 8
   prompt_gate_init: -3.0

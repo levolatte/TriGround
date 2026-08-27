@@ -35,6 +35,8 @@ VALID_CAUSES = {
     "modality_needed",
     "modality_useless",
 }
+VALID_DESTINATIONS = {"test", "train_supplement", "hold"}
+VALID_MODALITY_NEEDS = {"rgb", "ir", "depth", "ir_depth", "uncertain"}
 
 
 def box_iou(prediction: object, target: object) -> float | None:
@@ -124,6 +126,7 @@ def build_dataset(manifest_path: Path, predictions_path: Path | None) -> dict:
                     "generation_cap_hit": prediction_row.get("generation_cap_hit"),
                     "same_class_count": same_class_count,
                     "risk_score": risk_score(sample, prediction_iou, same_class_count),
+                    "candidate_metadata": sample.get("candidate_metadata", {}),
                 }
             )
         scenes.append(
@@ -174,13 +177,22 @@ class ReviewStore:
         decision = patch.get("decision")
         cause = patch.get("cause")
         corrected_query = patch.get("corrected_query")
+        destination = patch.get("destination")
+        modality_need = patch.get("modality_need")
         if decision is not None and decision not in VALID_DECISIONS:
             raise ValueError(f"Unknown decision: {decision}")
         if cause is not None and cause not in VALID_CAUSES:
             raise ValueError(f"Unknown cause: {cause}")
         if corrected_query is not None and not isinstance(corrected_query, str):
             raise ValueError("corrected_query must be a string or null")
-        allowed = {"decision", "cause", "note", "corrected_query"}
+        if destination is not None and destination not in VALID_DESTINATIONS:
+            raise ValueError(f"Unknown destination: {destination}")
+        if modality_need is not None and modality_need not in VALID_MODALITY_NEEDS:
+            raise ValueError(f"Unknown modality_need: {modality_need}")
+        allowed = {
+            "decision", "cause", "note", "corrected_query",
+            "destination", "modality_need",
+        }
         clean_patch = {key: value for key, value in patch.items() if key in allowed}
         with self.lock:
             for sample_id in sample_ids:
@@ -283,6 +295,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--reviews", type=Path)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
+    parser.add_argument("--html", type=Path, help="Optional alternate reviewer HTML")
     parser.add_argument("--open", action="store_true", help="Open the reviewer in the default browser")
     return parser.parse_args()
 
@@ -301,7 +314,7 @@ def main() -> None:
         dataset=dataset,
         data_root=data_root,
         store=store,
-        html_path=Path(__file__).with_name("review_grounding.html"),
+        html_path=(args.html.resolve() if args.html else Path(__file__).with_name("review_grounding.html")),
     )
     url = f"http://{args.host}:{args.port}/"
     print(f"Reviewing {dataset['sample_count']} samples in {dataset['scene_count']} scenes")

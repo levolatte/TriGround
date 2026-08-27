@@ -50,6 +50,8 @@ def main() -> None:
             checkpoint = Path(value)
             checkpoint = checkpoint if checkpoint.is_absolute() else root / checkpoint
             load_model_checkpoint(checkpoint, model)
+        if config.train.warm_start_joint_fusion_from_legacy:
+            model.fusion.warm_start_joint_from_legacy()
         if config.train.init_checkpoint:
             checkpoint = Path(config.train.init_checkpoint)
             checkpoint = checkpoint if checkpoint.is_absolute() else root / checkpoint

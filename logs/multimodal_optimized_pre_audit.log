@@ -1,1 +1,0 @@
-{"epoch": 1, "phase": "A", "eval_scope": "resume_baseline_subset", "eval_samples": 512, "mean_iou": 0.2926637940816761, "acc_0.5": 0.31640625, "acc_0.7": 0.189453125, "l1_coordinate_error": 0.0826117765136587, "parse_rate": 1.0}

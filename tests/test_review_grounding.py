@@ -79,6 +79,21 @@ def test_review_store_merges_and_persists_updates(tmp_path: Path):
         loaded.update(["sample"], {"decision": "invented"})
 
 
+def test_review_store_accepts_candidate_destination_and_modality(tmp_path: Path):
+    store = ReviewStore(tmp_path / "reviews.json", "manifest-hash")
+    store.update(
+        ["sample"],
+        {"decision": "valid", "destination": "test", "modality_need": "ir_depth"},
+    )
+
+    assert store.data["reviews"]["sample"]["destination"] == "test"
+    assert store.data["reviews"]["sample"]["modality_need"] == "ir_depth"
+    with pytest.raises(ValueError, match="Unknown destination"):
+        store.update(["sample"], {"destination": "both"})
+    with pytest.raises(ValueError, match="Unknown modality_need"):
+        store.update(["sample"], {"modality_need": "thermal_depth_rgb"})
+
+
 def test_safe_image_path_rejects_traversal(tmp_path: Path):
     root = tmp_path / "data"
     root.mkdir()

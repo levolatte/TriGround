@@ -1,0 +1,44 @@
+output_dir: runs/triground_rdt_ws_v1_manual_ft1
+model:
+  backbone: Qwen/Qwen3-VL-2B-Instruct
+  adapter_channels: 128
+  orthogonal_channels: 8
+  prompt_gate_init: -3.0
+  fusion_type: rdt_deep
+  modality_dropout: 0.1
+  fusion_residual_scale_init: 0.001
+  fusion_zero_init_prompt_restore: true
+  auxiliary_bbox_enabled: false
+  vision_lora_enabled: false
+data:
+  stage: joint
+  train_manifest: ../city_detection_prepared/train/target_v2/manual_split/train_100.json
+  val_manifest: ../city_detection_prepared/train/target_v2/manual_split/val.json
+  workers: 4
+  min_pixels: 200704
+  max_pixels: 802816
+  depth_scale: 1000.0
+  depth_clip: 20.0
+train:
+  initialization_checkpoints:
+    - runs/multimodal_rdt_deep_reviewed/best_phase_a.pt
+  epochs: 1
+  phase_a_epochs: 1
+  phase_b_epochs: 0
+  fusion_lr_a: 3.0e-06
+  batch_size: 2
+  grad_accumulation: 4
+  val_batch_size: 1
+  eval_subset_size: 119
+  eval_every_n_epochs: 1
+  max_new_tokens: 40
+  early_stopping_patience: 2
+  early_stopping_min_delta: 0.0
+  early_probe_steps: []
+  early_probe_subset_size: 119
+  early_probe_abort_ratio: 0.0
+  weight_decay: 0.01
+  amp: true
+  seed: 2026
+  gradient_checkpointing: true
+

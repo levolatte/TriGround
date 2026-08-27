@@ -281,6 +281,76 @@ def test_joint_calibration_can_freeze_both_modality_adapters():
     assert any(parameter.requires_grad for parameter in model.fusion.stage_fusions.parameters())
 
 
+def test_joint_fusion_replaces_independent_injection_and_preserves_rgb_initially():
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        modality_dropout=0.0,
+        fusion_residual_scale_init=0.001,
+        fusion_zero_init_prompt_restore=True,
+        parallel_fusion_stages=1,
+        parallel_joint_fusion=True,
+    )
+    model.set_phase_a_trainable("joint", freeze_parallel_adapters=True)
+    assert not any(parameter.requires_grad for parameter in model.fusion.stage_fusions.parameters())
+    assert any(
+        parameter.requires_grad for parameter in model.fusion.joint_stage_fusions.parameters()
+    )
+    batch = _batch()
+    rgb = model(**batch, rgb_only=True)
+    joint = model(**batch)
+    assert torch.equal(joint["logits"], rgb["logits"])
+    joint["loss"].backward()
+    stage = next(iter(model.fusion.joint_stage_fusions.values()))
+    assert stage.restore.weight.grad is not None
+    assert torch.count_nonzero(stage.restore.weight.grad) > 0
+
+
+def test_joint_fusion_warm_start_reuses_alignment_but_not_legacy_restore():
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        fusion_zero_init_prompt_restore=True,
+        parallel_fusion_stages=1,
+        parallel_joint_fusion=True,
+    )
+    legacy = next(iter(model.fusion.stage_fusions.values()))
+    joint = next(iter(model.fusion.joint_stage_fusions.values()))
+    with torch.no_grad():
+        legacy.ir.aux_projection[1].weight.fill_(2.0)
+        legacy.depth.aux_projection[1].weight.fill_(3.0)
+        legacy.ir.rgb_projection[1].weight.fill_(4.0)
+        legacy.depth.rgb_projection[1].weight.fill_(6.0)
+        legacy.ir.language_attention.in_proj_weight.fill_(8.0)
+        legacy.depth.language_attention.in_proj_weight.fill_(12.0)
+        legacy.ir.restore.weight.fill_(9.0)
+    model.fusion.warm_start_joint_from_legacy()
+    assert torch.all(joint.ir_projection[1].weight == 2.0)
+    assert torch.all(joint.depth_projection[1].weight == 3.0)
+    assert torch.all(joint.rgb_projection[1].weight == 5.0)
+    assert torch.all(joint.language_attention.in_proj_weight == 10.0)
+    assert torch.count_nonzero(joint.restore.weight) == 0
+
+
+def test_parallel_backbone_can_train_only_last_ir_adapter():
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        parallel_fusion_stages=1,
+    )
+    model.set_phase_a_trainable("ir", parallel_adapter_train_last_n=1)
+    assert not any(parameter.requires_grad for parameter in model.fusion.ir_adapters[0].parameters())
+    assert any(parameter.requires_grad for parameter in model.fusion.ir_adapters[-1].parameters())
+    assert not any(parameter.requires_grad for parameter in model.fusion.depth_adapters.parameters())
+    assert any(parameter.requires_grad for parameter in model.fusion.ir_query_encoder.parameters())
+    stage = next(iter(model.fusion.stage_fusions.values()))
+    assert any(parameter.requires_grad for parameter in stage.ir.parameters())
+    assert not any(parameter.requires_grad for parameter in stage.depth.parameters())
+
+
 def test_auxiliary_bbox_uses_pre_answer_feature_and_has_legal_output():
     model = MultiModalGrounder(
         DummyAuxBackbone(),
