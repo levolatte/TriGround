@@ -3,10 +3,56 @@ import torch
 
 from mm_grounding.adapters import (
     JointQueryAwareStageFusion,
+    QueryTokenEncoder,
     RDTDeepFusion,
     RDTStylePatchFusion,
     SafePostEmbedFusion,
 )
+
+
+def test_query_position_encoding_breaks_order_invariance_without_new_parameters():
+    torch.manual_seed(2026)
+    unordered = QueryTokenEncoder(12, 8, 1, 2, 0.0, "none").eval()
+    positional = QueryTokenEncoder(12, 8, 1, 2, 0.0, "sinusoidal").eval()
+    positional.load_state_dict(unordered.state_dict())
+    embeddings = torch.randn(1, 4, 12)
+    mask = torch.ones(1, 4, dtype=torch.long)
+    permutation = torch.tensor([2, 0, 3, 1])
+    unordered_original = unordered(embeddings, mask)
+    unordered_permuted = unordered(embeddings[:, permutation], mask[:, permutation])
+    positional_original = positional(embeddings, mask)
+    positional_permuted = positional(
+        embeddings[:, permutation], mask[:, permutation]
+    )
+    assert torch.allclose(
+        unordered_permuted, unordered_original[:, permutation], atol=1e-5
+    )
+    assert not torch.allclose(
+        positional_permuted, positional_original[:, permutation], atol=1e-5
+    )
+    assert set(unordered.state_dict()) == set(positional.state_dict())
+
+
+def test_query_position_encoding_handles_padding_and_variable_lengths():
+    encoder = QueryTokenEncoder(12, 8, 1, 2, 0.0, "sinusoidal").eval()
+    output = encoder(
+        torch.randn(2, 5, 12),
+        torch.tensor([[1, 1, 0, 0, 0], [1, 1, 1, 1, 1]]),
+    )
+    assert output.shape == (2, 5, 8)
+    assert torch.isfinite(output).all()
+
+
+def test_query_position_encoding_preserves_bfloat16_output_dtype():
+    encoder = QueryTokenEncoder(12, 8, 1, 2, 0.0, "sinusoidal").to(
+        dtype=torch.bfloat16
+    ).eval()
+    output = encoder(
+        torch.randn(2, 5, 12, dtype=torch.bfloat16),
+        torch.tensor([[1, 1, 1, 0, 0], [1, 1, 1, 1, 1]]),
+    )
+    assert output.dtype == torch.bfloat16
+    assert torch.isfinite(output).all()
 
 
 def test_fusion_is_rgb_safe_at_initialization_and_learns():
@@ -166,3 +212,33 @@ def test_joint_query_fusion_supports_either_auxiliary_and_rgb_only():
     rgb_output = module(rgb, None, None, None, None, mask, [2, 3])
     assert ir_output.shape == depth_output.shape == rgb.shape
     assert torch.equal(rgb_output, rgb)
+
+
+def test_joint_query_fusion_scales_target_the_active_joint_path():
+    torch.manual_seed(2026)
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=0.5,
+        zero_init_restore=False,
+    ).eval()
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    ir_query, depth_query = (torch.randn(2, 4, 8) for _ in range(2))
+    mask = torch.ones(2, 4, dtype=torch.long)
+    arguments = (rgb, ir, depth, ir_query, depth_query, mask, [2, 3])
+    default = module(*arguments)
+    explicit_one = module(*arguments, ir_fusion_scale=1.0, depth_fusion_scale=1.0)
+    zero = module(*arguments, ir_fusion_scale=0.0, depth_fusion_scale=0.0)
+    depth_only_by_scale = module(
+        *arguments, ir_fusion_scale=0.0, depth_fusion_scale=1.0
+    )
+    depth_only_by_omission = module(
+        rgb, None, depth, None, depth_query, mask, [2, 3]
+    )
+    half = module(*arguments, ir_fusion_scale=0.5, depth_fusion_scale=1.0)
+    assert torch.equal(default, explicit_one)
+    assert torch.equal(zero, rgb)
+    assert torch.allclose(depth_only_by_scale, depth_only_by_omission, atol=1e-6)
+    assert not torch.allclose(half, default)

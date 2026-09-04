@@ -6,17 +6,20 @@ import shutil
 from pathlib import Path
 
 
-def best_epoch_score(path: Path) -> float:
-    scores = []
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
+
+
+def best_epoch_key(path: Path) -> tuple[float, ...]:
+    keys = []
     for line in path.read_text(encoding="utf-8").splitlines():
         record = json.loads(line)
         if record.get("event", "").startswith("early_probe"):
             continue
         if record.get("eval_scope") in {"subset", "full"}:
-            scores.append(float(record["mean_iou"]))
-    if not scores:
+            keys.append(tuple(float(record[name]) for name in SELECTION_ORDER))
+    if not keys:
         raise ValueError(f"no epoch evaluation score in {path}")
-    return max(scores)
+    return max(keys)
 
 
 def main() -> None:
@@ -27,22 +30,23 @@ def main() -> None:
     parser.add_argument("--candidate-checkpoint", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    reference_score = best_epoch_score(args.reference_metrics)
-    candidate_score = best_epoch_score(args.candidate_metrics)
-    if candidate_score > reference_score:
+    reference_key = best_epoch_key(args.reference_metrics)
+    candidate_key = best_epoch_key(args.candidate_metrics)
+    if candidate_key > reference_key:
         selected = args.candidate_checkpoint
-        selected_score = candidate_score
+        selected_key = candidate_key
         source = "extended"
     else:
         selected = args.reference_checkpoint
-        selected_score = reference_score
+        selected_key = reference_key
         source = "pre_extension"
     args.output.parent.mkdir(parents=True, exist_ok=True)
     shutil.copy2(selected, args.output)
     report = {
-        "reference_score": reference_score,
-        "candidate_score": candidate_score,
-        "selected_score": selected_score,
+        "selection_order": list(SELECTION_ORDER),
+        "reference_metrics": dict(zip(SELECTION_ORDER, reference_key)),
+        "candidate_metrics": dict(zip(SELECTION_ORDER, candidate_key)),
+        "selected_metrics": dict(zip(SELECTION_ORDER, selected_key)),
         "selected_source": source,
         "selected_checkpoint": str(selected),
         "output": str(args.output),

@@ -15,6 +15,70 @@ from mm_grounding.engine import evaluate
 from mm_grounding.model import build_grounder
 
 
+CLASS_FIELDS = ("class_name", "category", "category_name", "object_class")
+
+
+def _target_size(target: list[float]) -> tuple[float, str]:
+    area = max(target[2] - target[0], 0.0) * max(target[3] - target[1], 0.0)
+    if area < 0.01:
+        return area, "small"
+    if area < 0.05:
+        return area, "medium"
+    return area, "large"
+
+
+def _existing_query_type(record: dict):
+    if record.get("query_type") is not None:
+        return record["query_type"]
+    metadata = record.get("candidate_metadata")
+    if isinstance(metadata, dict):
+        return metadata.get("query_type")
+    return None
+
+
+def _scene_group(record: dict) -> tuple[str, str]:
+    for field in (
+        "scene_id",
+        "sequence_id",
+        "video_id",
+        "original_image_id",
+        "rgb",
+        "visible",
+    ):
+        if record.get(field) is not None:
+            return field, str(record[field])
+    return "id", str(record["id"])
+
+
+def _evidence_rows(
+    mode: str, result: dict, metadata_by_id: dict[str, dict]
+) -> list[dict]:
+    output = []
+    for row in result["rows"]:
+        record = metadata_by_id[row["id"]]
+        group_source, group = _scene_group(record)
+        target_area, target_size_bin = _target_size(row["target"])
+        target_class = next(
+            (record[field] for field in CLASS_FIELDS if record.get(field) is not None),
+            None,
+        )
+        query_type = _existing_query_type(record)
+        output.append(
+            {
+                "mode": mode,
+                **row,
+                "scene_group_source": group_source,
+                "scene_group": group,
+                "target_area": target_area,
+                "target_size_bin": target_size_bin,
+                **({"target_class": target_class} if target_class is not None else {}),
+                **({"scale_bin": record["scale_bin"]} if record.get("scale_bin") is not None else {}),
+                **({"query_type": query_type} if query_type is not None else {}),
+            }
+        )
+    return output
+
+
 def _stratified_subset(dataset, limit: int, seed: int):
     """Deterministic proportional sample across class and target scale."""
     if limit >= len(dataset):
@@ -61,6 +125,10 @@ def main() -> None:
         help="Optional validation manifest override for paired/gated evaluation",
     )
     parser.add_argument("--output", help="Optional path for the JSON evaluation report")
+    parser.add_argument(
+        "--rows-output",
+        help="Optional JSONL path for per-sample predictions and evidence metadata",
+    )
     parser.add_argument(
         "--rgb-only",
         action="store_true",
@@ -112,17 +180,32 @@ def main() -> None:
         # RGB+IR+Depth tuple and cannot perform auxiliary-modality ablations.
         modes = {"rgb_ir_depth": {"ir", "depth"}}
     report = {}
+    evidence_rows = []
+    metadata_by_id = {str(record["id"]): record for record in dataset.records}
     if not args.rgb_only:
-        report.update({
-            name: evaluate(
+        for name, modalities in modes.items():
+            result = evaluate(
                 model, loader, processor, device, config.train.max_new_tokens,
                 modalities=modalities,
+                return_rows=bool(args.rows_output),
             )
-            for name, modalities in modes.items()
-        })
-    report["rgb_baseline"] = evaluate(
-        model, loader, processor, device, config.train.max_new_tokens, rgb_only=True
+            report[name] = result["metrics"] if args.rows_output else result
+            if args.rows_output:
+                evidence_rows.extend(_evidence_rows(name, result, metadata_by_id))
+    rgb_result = evaluate(
+        model,
+        loader,
+        processor,
+        device,
+        config.train.max_new_tokens,
+        rgb_only=True,
+        return_rows=bool(args.rows_output),
     )
+    report["rgb_baseline"] = rgb_result["metrics"] if args.rows_output else rgb_result
+    if args.rows_output:
+        evidence_rows.extend(
+            _evidence_rows("rgb_baseline", rgb_result, metadata_by_id)
+        )
     if not args.rgb_only:
         primary = next(iter(modes))
         report[f"{primary}_gain_over_rgb"] = {
@@ -143,6 +226,15 @@ def main() -> None:
         output = Path(args.output)
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(report_text + "\n", encoding="utf-8")
+    if args.rows_output:
+        rows_output = Path(args.rows_output)
+        rows_output.parent.mkdir(parents=True, exist_ok=True)
+        rows_output.write_text(
+            "".join(
+                json.dumps(row, ensure_ascii=False) + "\n" for row in evidence_rows
+            ),
+            encoding="utf-8",
+        )
     print(report_text)
 
 

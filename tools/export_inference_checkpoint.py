@@ -34,6 +34,8 @@ def main() -> None:
         "config": checkpoint.get("config"),
         "epoch": checkpoint.get("epoch"),
         "score": checkpoint.get("score"),
+        "metrics": checkpoint.get("metrics"),
+        "selection_order": checkpoint.get("selection_order"),
         "global_step": checkpoint.get("global_step"),
         "artifact_metadata": {
             "name": args.name,

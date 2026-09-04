@@ -307,6 +307,33 @@ def test_joint_fusion_replaces_independent_injection_and_preserves_rgb_initially
     assert torch.count_nonzero(stage.restore.weight.grad) > 0
 
 
+def test_final_joint_model_applies_inference_scales_to_active_fusion():
+    torch.manual_seed(2026)
+    model = MultiModalGrounder(
+        DummyDeepBackbone(),
+        adapter_channels=8,
+        fusion_type="parallel_backbone",
+        modality_dropout=0.0,
+        fusion_residual_scale_init=0.5,
+        fusion_zero_init_prompt_restore=False,
+        parallel_fusion_stages=1,
+        parallel_joint_fusion=True,
+    ).eval()
+    batch = _batch()
+    default = model(**batch)["logits"]
+    explicit_one = model(
+        **batch, ir_fusion_scale=1.0, depth_fusion_scale=1.0
+    )["logits"]
+    zero = model(**batch, ir_fusion_scale=0.0, depth_fusion_scale=0.0)["logits"]
+    rgb = model(**batch, rgb_only=True)["logits"]
+    half = model(**batch, ir_fusion_scale=0.5, depth_fusion_scale=1.0)[
+        "logits"
+    ]
+    assert torch.equal(default, explicit_one)
+    assert torch.equal(zero, rgb)
+    assert not torch.allclose(half, default)
+
+
 def test_joint_fusion_warm_start_reuses_alignment_but_not_legacy_restore():
     model = MultiModalGrounder(
         DummyDeepBackbone(),

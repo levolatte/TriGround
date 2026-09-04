@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from pathlib import Path
 
 from mm_grounding.config import load_config
@@ -45,3 +46,23 @@ def test_parallel_release_route_is_staged_and_rgb_safe():
     assert fusion.train.initialization_checkpoints == [
         "runs/stage2_clean_after_weak1024/best_phase_a.pt"
     ]
+
+
+def test_query_position_ab_configs_have_exactly_one_experimental_variable():
+    control = asdict(
+        load_config(ROOT / "configs/stage2_joint_fusion_v3_control.yaml")
+    )
+    positional = asdict(
+        load_config(ROOT / "configs/stage2_joint_fusion_v3_positional.yaml")
+    )
+    assert control["model"]["query_position_encoding"] == "none"
+    assert positional["model"]["query_position_encoding"] == "sinusoidal"
+    assert control["train"]["seed"] == positional["train"]["seed"] == 2026
+    assert control["train"]["initialization_checkpoints"] == positional["train"][
+        "initialization_checkpoints"
+    ]
+    control.pop("output_dir")
+    positional.pop("output_dir")
+    control["model"].pop("query_position_encoding")
+    positional["model"].pop("query_position_encoding")
+    assert control == positional

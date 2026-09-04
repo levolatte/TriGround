@@ -7,6 +7,9 @@ from pathlib import Path
 import torch
 
 
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         print(f"usage: {sys.argv[0]} RUN_DIR", file=sys.stderr)
@@ -25,7 +28,10 @@ def main() -> int:
     epoch3 = [record for record in subset if record.get("epoch") == 3]
     if not epoch3:
         return 1
-    expected_best_epoch = max(subset, key=lambda record: record["mean_iou"])["epoch"]
+    expected_best_epoch = max(
+        subset,
+        key=lambda record: tuple(float(record[name]) for name in SELECTION_ORDER),
+    )["epoch"]
     try:
         last = torch.load(run_dir / "last_phase_a.pt", map_location="cpu", weights_only=False)
         best = torch.load(run_dir / "best_phase_a.pt", map_location="cpu", weights_only=False)
@@ -37,6 +43,7 @@ def main() -> int:
         "epoch3_mean_iou": epoch3[-1]["mean_iou"],
         "best_epoch": best.get("epoch"),
         "best_score": best.get("score"),
+        "selection_order": list(SELECTION_ORDER),
     }))
     return 0
 

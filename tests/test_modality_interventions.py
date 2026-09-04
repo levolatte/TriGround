@@ -1,11 +1,8 @@
 from __future__ import annotations
 
-import torch
-from torch import nn
-
 from tools.diagnose_modality_interventions import (
     MismatchedModalityDataset,
-    temporary_modality_scales,
+    mode_definitions,
 )
 
 
@@ -17,29 +14,6 @@ class TinyDataset:
         return {"rgb": index, "ir": f"ir-{index}", "depth": f"depth-{index}"}
 
 
-class Branch(nn.Module):
-    def __init__(self, value):
-        super().__init__()
-        self.residual_scale = nn.Parameter(torch.tensor(value))
-
-
-class Stage(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.ir, self.depth = Branch(2.0), Branch(3.0)
-
-
-class Fusion(nn.Module):
-    def __init__(self):
-        super().__init__()
-        self.stage_fusions = nn.ModuleDict({"0": Stage()})
-
-
-class Model:
-    fusion_type = "parallel_backbone"
-    fusion = Fusion()
-
-
 def test_mismatch_keeps_target_and_replaces_selected_auxiliary():
     dataset = MismatchedModalityDataset(TinyDataset(), {"ir"}, seed=2026)
     row = dataset[0]
@@ -48,10 +22,8 @@ def test_mismatch_keeps_target_and_replaces_selected_auxiliary():
     assert row["ir"] != "ir-0"
 
 
-def test_temporary_scales_are_applied_and_restored():
-    model = Model()
-    with temporary_modality_scales(model, 0.25, 0.5):
-        assert model.fusion.stage_fusions["0"].ir.residual_scale.item() == 0.5
-        assert model.fusion.stage_fusions["0"].depth.residual_scale.item() == 1.5
-    assert model.fusion.stage_fusions["0"].ir.residual_scale.item() == 2.0
-    assert model.fusion.stage_fusions["0"].depth.residual_scale.item() == 3.0
+def test_scale_modes_include_zero_half_and_full_joint_interventions():
+    modes = {mode["name"]: mode for mode in mode_definitions()}
+    assert modes["triple_ir_0_depth_0"]["ir_scale"] == 0.0
+    assert modes["triple_ir_0.5_depth_1"]["ir_scale"] == 0.5
+    assert modes["triple_ir_1_depth_1"]["depth_scale"] == 1.0

@@ -2,11 +2,17 @@ from __future__ import annotations
 
 import argparse
 import json
-import shutil
 from pathlib import Path
 
 
-METRICS = ("mean_iou", "acc_0.5", "acc_0.7", "l1_coordinate_error")
+METRICS = (
+    "mean_iou",
+    "acc_0.5",
+    "acc_0.7",
+    "l1_coordinate_error",
+    "parse_rate",
+)
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
 
 
 def load(path: str) -> dict:
@@ -22,6 +28,10 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--selected-output", type=Path)
     args = parser.parse_args()
+    if args.selected_output is not None:
+        parser.error(
+            "combined284 is diagnostic-only; --selected-output is disabled"
+        )
     rows = []
     for name, checkpoint, old_path, new_path in args.candidate:
         old = load(old_path)
@@ -53,16 +63,18 @@ def main() -> None:
             "rgb_baseline": rgb,
             "mean_iou_gain_over_rgb": combined["mean_iou"] - rgb["mean_iou"],
         })
-    rows.sort(key=lambda row: row["rgb_ir_depth"]["mean_iou"], reverse=True)
+    rows.sort(
+        key=lambda row: tuple(
+            row["rgb_ir_depth"][metric] for metric in SELECTION_ORDER
+        ),
+        reverse=True,
+    )
     report = {
-        "selection_metric": "combined284.rgb_ir_depth.mean_iou",
-        "selected": rows[0],
+        "purpose": "diagnostic_only",
+        "ranking_order": [f"combined284.rgb_ir_depth.{name}" for name in SELECTION_ORDER],
+        "top_diagnostic": rows[0],
         "ranking": rows,
     }
-    if args.selected_output is not None:
-        args.selected_output.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(rows[0]["checkpoint"], args.selected_output)
-        report["selected_output"] = str(args.selected_output)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"

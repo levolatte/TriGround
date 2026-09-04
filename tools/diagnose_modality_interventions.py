@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import json
 import random
-from contextlib import contextmanager
 from pathlib import Path
 
 import torch
@@ -16,6 +15,20 @@ from mm_grounding.config import load_config
 from mm_grounding.data import GroundingDataset, NativeGroundingCollator
 from mm_grounding.engine import _generation_inputs, _move, parse_bbox
 from mm_grounding.model import build_grounder
+
+
+def scene_group(record: dict) -> tuple[str, str]:
+    for field in (
+        "scene_id",
+        "sequence_id",
+        "video_id",
+        "original_image_id",
+        "rgb",
+        "visible",
+    ):
+        if record.get(field) is not None:
+            return field, str(record[field])
+    return "id", str(record["id"])
 
 
 class MismatchedModalityDataset(Dataset):
@@ -38,24 +51,6 @@ class MismatchedModalityDataset(Dataset):
         for modality in self.modalities:
             target[modality] = donor[modality]
         return target
-
-
-@contextmanager
-def temporary_modality_scales(model, ir_scale: float, depth_scale: float):
-    if model.fusion_type != "parallel_backbone":
-        raise ValueError("modality interventions require parallel_backbone fusion")
-    saved = []
-    for stage in model.fusion.stage_fusions.values():
-        for branch, scale in ((stage.ir, ir_scale), (stage.depth, depth_scale)):
-            saved.append((branch.residual_scale, branch.residual_scale.detach().clone()))
-            with torch.no_grad():
-                branch.residual_scale.mul_(scale)
-    try:
-        yield
-    finally:
-        with torch.no_grad():
-            for parameter, value in saved:
-                parameter.copy_(value)
 
 
 def mode_definitions() -> list[dict]:
@@ -99,42 +94,43 @@ def evaluate_rows(model, loader, processor, device, max_new_tokens, mode: dict) 
     cap_hits = 0
     eos = processor.tokenizer.eos_token_id
     eos_ids = set(eos if isinstance(eos, list) else [eos])
-    with temporary_modality_scales(model, mode["ir_scale"], mode["depth_scale"]):
-        for batch in loader:
-            batch = _move(batch, device)
-            generated = model.generate(
-                **_generation_inputs(
-                    batch,
-                    rgb_only=bool(mode.get("rgb_only")),
-                    modalities=set(mode["modalities"]),
-                ),
-                max_new_tokens=max_new_tokens,
+    for batch in loader:
+        batch = _move(batch, device)
+        generated = model.generate(
+            **_generation_inputs(
+                batch,
+                rgb_only=bool(mode.get("rgb_only")),
+                modalities=set(mode["modalities"]),
+                ir_fusion_scale=float(mode["ir_scale"]),
+                depth_fusion_scale=float(mode["depth_scale"]),
+            ),
+            max_new_tokens=max_new_tokens,
+        )
+        prompt_length = batch["generation_input_ids"].shape[1]
+        new_tokens = generated[:, prompt_length:]
+        answers = processor.batch_decode(new_tokens, skip_special_tokens=True)
+        for index, (sample_id, answer) in enumerate(zip(batch["sample_id"], answers)):
+            prediction = parse_bbox(answer)
+            predicted = torch.tensor(
+                prediction or [0.0, 0.0, 0.0, 0.0],
+                device=device,
+                dtype=batch["bbox"].dtype,
+            ).unsqueeze(0)
+            target = batch["bbox"][index : index + 1]
+            iou = float(box_iou_aligned(predicted, target).item())
+            capped = (
+                new_tokens.shape[1] >= max_new_tokens
+                and not any(int(token) in eos_ids for token in new_tokens[index])
             )
-            prompt_length = batch["generation_input_ids"].shape[1]
-            new_tokens = generated[:, prompt_length:]
-            answers = processor.batch_decode(new_tokens, skip_special_tokens=True)
-            for index, (sample_id, answer) in enumerate(zip(batch["sample_id"], answers)):
-                prediction = parse_bbox(answer)
-                predicted = torch.tensor(
-                    prediction or [0.0, 0.0, 0.0, 0.0],
-                    device=device,
-                    dtype=batch["bbox"].dtype,
-                ).unsqueeze(0)
-                target = batch["bbox"][index : index + 1]
-                iou = float(box_iou_aligned(predicted, target).item())
-                capped = (
-                    new_tokens.shape[1] >= max_new_tokens
-                    and not any(int(token) in eos_ids for token in new_tokens[index])
-                )
-                cap_hits += int(capped)
-                rows.append({
-                    "id": sample_id,
-                    "iou": iou,
-                    "gt": [float(value) for value in target[0].tolist()],
-                    "prediction": prediction,
-                    "parsed": prediction is not None,
-                    "generation_cap_hit": capped,
-                })
+            cap_hits += int(capped)
+            rows.append({
+                "id": sample_id,
+                "iou": iou,
+                "gt": [float(value) for value in target[0].tolist()],
+                "prediction": prediction,
+                "parsed": prediction is not None,
+                "generation_cap_hit": capped,
+            })
     count = max(len(rows), 1)
     parsed_rows = [row for row in rows if row["prediction"] is not None]
     l1 = sum(
@@ -198,6 +194,7 @@ def main() -> None:
         depth_scale=config.data.depth_scale,
         depth_clip=config.data.depth_clip,
     )
+    metadata_by_id = {str(record["id"]): record for record in base.records}
     indices = subset_indices(len(base), args.samples, args.seed)
     output = {
         "metadata": {
@@ -226,6 +223,10 @@ def main() -> None:
         result = evaluate_rows(
             model, loader, processor, device, config.train.max_new_tokens, mode
         )
+        for row in result["rows"]:
+            group_source, group = scene_group(metadata_by_id[str(row["id"])])
+            row["scene_group_source"] = group_source
+            row["scene_group"] = group
         output["modes"][mode["name"]] = {
             "definition": {
                 "rgb_only": bool(mode.get("rgb_only")),

@@ -28,10 +28,14 @@ def valid_box(value: object) -> bool:
     return 0.0 <= x1 < x2 <= 1.0 and 0.0 <= y1 < y2 <= 1.0
 
 
-def load_progress(path: Path, expected_ids: set[str]) -> dict[str, list[float]]:
+def load_progress(
+    path: Path, expected_ids: set[str]
+) -> tuple[dict[str, list[float]], set[str], int]:
     predictions: dict[str, list[float]] = {}
+    fallback_ids = set()
+    legacy_rows = 0
     if not path.exists():
-        return predictions
+        return predictions, fallback_ids, legacy_rows
     for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not line.strip():
             continue
@@ -45,7 +49,11 @@ def load_progress(path: Path, expected_ids: set[str]) -> dict[str, list[float]]:
         if not valid_box(box):
             raise ValueError(f"progress line {line_number} has invalid bbox")
         predictions[sample_id] = [float(item) for item in box]
-    return predictions
+        if "fallback" not in row:
+            legacy_rows += 1
+        elif row["fallback"]:
+            fallback_ids.add(sample_id)
+    return predictions, fallback_ids, legacy_rows
 
 
 def validate_submission(source: dict, submission: dict) -> None:
@@ -86,12 +94,21 @@ def main() -> None:
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     parser.add_argument("--workers", type=int)
     parser.add_argument("--max-new-tokens", type=int)
+    parser.add_argument(
+        "--expected-query-count",
+        type=int,
+        help="Fail unless the source contains exactly this many Query IDs.",
+    )
     parser.add_argument("--fallback-box", type=float, nargs=4, default=(0.0, 0.0, 1.0, 1.0))
     args = parser.parse_args()
 
     source = json.loads(args.queries.read_text(encoding="utf-8-sig"))
     if not isinstance(source, dict) or not source:
         raise ValueError("queries must be a non-empty object keyed by Query ID")
+    if args.expected_query_count is not None and len(source) != args.expected_query_count:
+        raise ValueError(
+            f"expected {args.expected_query_count} Query IDs, found {len(source)}"
+        )
     if not valid_box(list(args.fallback_box)):
         raise ValueError("fallback-box must be a valid normalized xyxy box")
 
@@ -121,7 +138,9 @@ def main() -> None:
     for record in dataset.records:
         record["bbox"] = [0.0, 0.0, 1.0, 1.0]
 
-    predictions = load_progress(args.progress, set(source))
+    predictions, fallback_ids, legacy_progress_rows = load_progress(
+        args.progress, set(source)
+    )
     remaining_indices = [
         index for index, record in enumerate(dataset.records) if record["id"] not in predictions
     ]
@@ -147,12 +166,24 @@ def main() -> None:
             )
             for sample_id, answer in zip(batch["sample_id"], answers):
                 box = parse_bbox(answer)
+                used_fallback = box is None
                 if box is None:
                     box = list(args.fallback_box)
                     fallback_count += 1
+                    fallback_ids.add(sample_id)
                 box = [float(item) for item in box]
                 predictions[sample_id] = box
-                progress.write(json.dumps({"id": sample_id, "bbox": box}) + "\n")
+                progress.write(
+                    json.dumps(
+                        {
+                            "id": sample_id,
+                            "bbox": box,
+                            "parsed": not used_fallback,
+                            "fallback": used_fallback,
+                        }
+                    )
+                    + "\n"
+                )
 
     missing = set(source) - set(predictions)
     if missing:
@@ -174,7 +205,10 @@ def main() -> None:
         "queries": len(submission),
         "new_predictions": len(remaining_indices),
         "resumed_predictions": len(submission) - len(remaining_indices),
+        "parse_failures_this_run": fallback_count,
         "fallback_predictions_this_run": fallback_count,
+        "fallback_predictions_total_known": len(fallback_ids),
+        "legacy_progress_rows_without_parse_status": legacy_progress_rows,
         "json": str(args.output_json.resolve()),
         "json_sha256": sha256(args.output_json),
         "zip": str(args.output_zip.resolve()),

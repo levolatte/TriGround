@@ -4,6 +4,9 @@ import json
 from pathlib import Path
 
 
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
+
+
 def main() -> None:
     for run in sorted(Path("runs").glob("multimodal*")):
         if not run.is_dir():
@@ -18,7 +21,11 @@ def main() -> None:
                     continue
                 if "mean_iou" in record:
                     records.append(record)
-        best = max(records, key=lambda row: row["mean_iou"], default=None)
+        best = max(
+            records,
+            key=lambda row: tuple(float(row[name]) for name in SELECTION_ORDER),
+            default=None,
+        )
         checkpoints = [
             {
                 "name": path.name,
@@ -29,6 +36,7 @@ def main() -> None:
         ]
         print(json.dumps({
             "run": str(run),
+            "selection_order": list(SELECTION_ORDER),
             "records": len(records),
             "best_metric": best,
             "last_metric": records[-1] if records else None,

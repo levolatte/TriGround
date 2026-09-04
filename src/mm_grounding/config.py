@@ -23,6 +23,7 @@ class ModelConfig:
     query_encoder_layers: int = 1
     query_attention_heads: int = 4
     query_dropout: float = 0.0
+    query_position_encoding: str = "none"
     freeze_parallel_adapters: bool = False
     auxiliary_bbox_enabled: bool = False
     auxiliary_bbox_l1_weight: float = 2.0
@@ -128,6 +129,10 @@ class ExperimentConfig:
             raise ValueError("adapter_channels must be divisible by query_attention_heads")
         if not 0 <= self.model.query_dropout < 1:
             raise ValueError("query_dropout must be in [0, 1)")
+        if self.model.query_position_encoding not in {"none", "sinusoidal"}:
+            raise ValueError(
+                "query_position_encoding must be 'none' or 'sinusoidal'"
+            )
         if self.model.auxiliary_bbox_enabled and self.model.fusion_type != "safe_post_embed":
             raise ValueError("auxiliary bbox supervision requires safe_post_embed fusion")
         if (

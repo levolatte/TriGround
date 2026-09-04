@@ -1,0 +1,45 @@
+output_dir: runs/stage2_joint_fusion_v3_positional
+model:
+  backbone: Qwen/Qwen3-VL-2B-Instruct
+  adapter_channels: 128
+  fusion_type: parallel_backbone
+  modality_dropout: 0.2
+  fusion_residual_scale_init: 0.001
+  fusion_zero_init_prompt_restore: true
+  parallel_fusion_stages: 1
+  parallel_adapter_scale_init: 0.01
+  parallel_joint_fusion: true
+  query_encoder_layers: 1
+  query_attention_heads: 4
+  query_position_encoding: sinusoidal
+  freeze_parallel_adapters: true
+  auxiliary_bbox_enabled: false
+  vision_lora_enabled: false
+data:
+  stage: joint
+  train_manifest: ../city_detection_prepared/train/reviewed_split/train_100.json
+  val_manifest: ../city_detection_prepared/train/reviewed_split/val.json
+  workers: 4
+  min_pixels: 200704
+  max_pixels: 802816
+  depth_scale: 1000.0
+  depth_clip: 20.0
+train:
+  initialization_checkpoints:
+    - runs/stage2_query_position_ab/shared_init.pt
+  epochs: 2
+  phase_a_epochs: 2
+  phase_b_epochs: 0
+  fusion_lr_a: 1.0e-05
+  batch_size: 1
+  grad_accumulation: 8
+  val_batch_size: 1
+  eval_subset_size: 512
+  early_stopping_min_delta: 0.0
+  early_probe_steps: [25]
+  early_probe_subset_size: 128
+  max_new_tokens: 40
+  weight_decay: 0.01
+  amp: true
+  seed: 2026
+  gradient_checkpointing: true

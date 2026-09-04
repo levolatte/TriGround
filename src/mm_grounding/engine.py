@@ -11,8 +11,35 @@ import numpy as np
 import torch
 
 from .checkpoint import load_model_checkpoint, load_training_checkpoint, save_checkpoint
-from .boxes import generalized_iou_aligned
+from .boxes import box_iou_aligned, generalized_iou_aligned
 from .metrics import grounding_metrics, merge_metric_sums
+
+
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
+MEAN_IOU_SELECTION_ORDER = ("mean_iou", "acc_0.5", "acc_0.7", "parse_rate")
+
+
+def selection_key(
+    metrics: dict[str, float], order: tuple[str, ...] = SELECTION_ORDER
+) -> tuple[float, ...]:
+    return tuple(float(metrics[name]) for name in order)
+
+
+def selection_improved(
+    candidate: tuple[float, ...],
+    best: tuple[float, ...] | None,
+) -> bool:
+    if best is None:
+        return True
+    return candidate > best
+
+
+def checkpoint_names(phase: str) -> tuple[str, str, str]:
+    if phase == "a":
+        return "best_phase_a.pt", "best_mean_iou_phase_a.pt", "last_phase_a.pt"
+    if phase == "b":
+        return "best.pt", "best_mean_iou.pt", "last.pt"
+    raise ValueError("phase must be 'a' or 'b'")
 
 
 def seed_everything(seed: int) -> None:
@@ -36,7 +63,13 @@ def _training_inputs(batch):
     return {name: batch[name] for name in names if name in batch}
 
 
-def _generation_inputs(batch, rgb_only=False, modalities: set[str] | None = None):
+def _generation_inputs(
+    batch,
+    rgb_only=False,
+    modalities: set[str] | None = None,
+    ir_fusion_scale: float = 1.0,
+    depth_fusion_scale: float = 1.0,
+):
     output = {
         "pixel_values": batch["pixel_values"],
         "input_ids": batch["generation_input_ids"],
@@ -45,6 +78,8 @@ def _generation_inputs(batch, rgb_only=False, modalities: set[str] | None = None
         "query_input_ids": batch["query_input_ids"],
         "query_attention_mask": batch["query_attention_mask"],
         "rgb_only": rgb_only,
+        "ir_fusion_scale": ir_fusion_scale,
+        "depth_fusion_scale": depth_fusion_scale,
     }
     for modality in ("ir", "depth"):
         name = f"{modality}_pixel_values"
@@ -75,6 +110,9 @@ def evaluate(
     max_new_tokens: int,
     rgb_only: bool = False,
     modalities: set[str] | None = None,
+    ir_fusion_scale: float = 1.0,
+    depth_fusion_scale: float = 1.0,
+    return_rows: bool = False,
 ):
     model.eval()
     rows = []
@@ -84,13 +122,20 @@ def evaluate(
     cap_parse_failures = 0
     auxiliary_rows = []
     auxiliary_giou_sum = 0.0
+    detail_rows = []
     eos_ids = processor.tokenizer.eos_token_id
     eos_ids = set(eos_ids if isinstance(eos_ids, list) else [eos_ids])
     for batch in loader:
         batch = _move(batch, device)
         if model.auxiliary_bbox_enabled:
             auxiliary = model.predict_auxiliary_bbox(
-                **_generation_inputs(batch, rgb_only=rgb_only, modalities=modalities)
+                **_generation_inputs(
+                    batch,
+                    rgb_only=rgb_only,
+                    modalities=modalities,
+                    ir_fusion_scale=ir_fusion_scale,
+                    depth_fusion_scale=depth_fusion_scale,
+                )
             )
             auxiliary_rows.append(
                 (auxiliary.shape[0], grounding_metrics(auxiliary, batch["bbox"]))
@@ -99,7 +144,13 @@ def evaluate(
                 generalized_iou_aligned(auxiliary, batch["bbox"]).sum().item()
             )
         generated = model.generate(
-            **_generation_inputs(batch, rgb_only=rgb_only, modalities=modalities),
+            **_generation_inputs(
+                batch,
+                rgb_only=rgb_only,
+                modalities=modalities,
+                ir_fusion_scale=ir_fusion_scale,
+                depth_fusion_scale=depth_fusion_scale,
+            ),
             max_new_tokens=max_new_tokens,
         )
         prompt_length = batch["generation_input_ids"].shape[1]
@@ -112,15 +163,31 @@ def evaluate(
         cap_hits += sum(capped)
         answers = processor.batch_decode(new_tokens, skip_special_tokens=True)
         predictions = []
+        parsed_predictions = []
         for answer, hit_cap in zip(answers, capped):
             box = parse_bbox(answer)
             parsed += box is not None
             cap_parse_failures += hit_cap and box is None
+            parsed_predictions.append(box)
             predictions.append(box or [0.0, 0.0, 0.0, 0.0])
         predicted = torch.tensor(predictions, device=device, dtype=batch["bbox"].dtype)
         size = predicted.shape[0]
         total += size
         rows.append((size, grounding_metrics(predicted, batch["bbox"])))
+        if return_rows:
+            ious = box_iou_aligned(predicted, batch["bbox"])
+            for index, sample_id in enumerate(batch["sample_id"]):
+                detail_rows.append(
+                    {
+                        "id": str(sample_id),
+                        "prediction": parsed_predictions[index],
+                        "target": [float(value) for value in batch["bbox"][index].tolist()],
+                        "iou": float(ious[index].item()),
+                        "parsed": parsed_predictions[index] is not None,
+                        "generation_cap_hit": bool(capped[index]),
+                        "answer": answers[index],
+                    }
+                )
     metrics = merge_metric_sums(rows)
     metrics["parse_rate"] = parsed / max(total, 1)
     metrics["generation_cap_hit_rate"] = cap_hits / max(total, 1)
@@ -129,6 +196,8 @@ def evaluate(
         auxiliary_metrics = merge_metric_sums(auxiliary_rows)
         metrics.update({f"aux_{name}": value for name, value in auxiliary_metrics.items()})
         metrics["aux_mean_giou"] = auxiliary_giou_sum / max(total, 1)
+    if return_rows:
+        return {"metrics": metrics, "rows": detail_rows}
     return metrics
 
 
@@ -299,12 +368,14 @@ def _run_phase(
             "learning_rates_overridden": config.train.override_resume_learning_rates,
             **checkpoint["restored"],
         }), flush=True)
-    best_score = -1.0
-    best_name = "best_phase_a.pt" if phase == "a" else "best.pt"
+    best_key = None
+    best_mean_iou_key = None
+    best_name, best_mean_iou_name, last_name = checkpoint_names(phase)
     best_path = output_dir / best_name
     if start_phase_epoch > 1 and best_path.exists():
         baseline = evaluate(model, val_loader, processor, device, config.train.max_new_tokens)
-        best_score = baseline["mean_iou"]
+        best_key = selection_key(baseline)
+        best_mean_iou_key = selection_key(baseline, MEAN_IOU_SELECTION_ORDER)
         print(json.dumps({
             "epoch": offset + start_phase_epoch - 1, "phase": phase.upper(),
             "eval_scope": "resume_baseline_subset", "eval_samples": len(val_loader.dataset),
@@ -320,7 +391,7 @@ def _run_phase(
             model, probe_val_loader, processor, device,
             config.train.max_new_tokens, rgb_only=True,
         )
-        probe_rgb_score = baseline["mean_iou"]
+        probe_rgb_score = baseline["acc_0.5"]
         _write_metric(output_dir, {
             "event": "early_probe_rgb_baseline", "phase": phase.upper(),
             "global_step": global_step, "eval_scope": "early_probe_rgb",
@@ -384,14 +455,16 @@ def _run_phase(
                         model, probe_val_loader, processor, device,
                         config.train.max_new_tokens,
                     )
-                    ratio = probe_metrics["mean_iou"] / max(probe_rgb_score or 0.0, 1e-12)
+                    ratio = probe_metrics["acc_0.5"] / max(
+                        probe_rgb_score or 0.0, 1e-12
+                    )
                     probe_record = {
                         "event": "early_probe", "epoch": offset + phase_epoch,
                         "phase": phase.upper(), "global_step": global_step,
                         "eval_scope": "early_probe",
                         "eval_samples": len(probe_val_loader.dataset),
-                        "rgb_mean_iou": probe_rgb_score,
-                        "mean_iou_ratio_to_rgb": ratio,
+                        "rgb_acc_0.5": probe_rgb_score,
+                        "acc_0.5_ratio_to_rgb": ratio,
                         "train_loss_so_far": running["loss"] / step,
                         **probe_metrics,
                     }
@@ -399,7 +472,7 @@ def _run_phase(
                     save_checkpoint(
                         output_dir / f"probe_phase_{phase}_step_{global_step:04d}.pt",
                         model, optimizer, scheduler, scaler, config,
-                        offset + phase_epoch, probe_metrics["mean_iou"], global_step,
+                        offset + phase_epoch, probe_metrics, global_step, SELECTION_ORDER,
                     )
                     if (
                         config.train.early_probe_abort_ratio
@@ -408,7 +481,7 @@ def _run_phase(
                     ):
                         print(json.dumps({
                             "event": "early_probe_abort", "global_step": global_step,
-                            "mean_iou_ratio_to_rgb": ratio,
+                            "acc_0.5_ratio_to_rgb": ratio,
                             "threshold": config.train.early_probe_abort_ratio,
                             "abort_from_step": config.train.early_probe_abort_from_step,
                         }), flush=True)
@@ -448,32 +521,40 @@ def _run_phase(
         metrics = evaluate(model, val_loader, processor, device, config.train.max_new_tokens)
         record = {"epoch": epoch, "phase": phase.upper(), "eval_scope": "subset", "eval_samples": len(val_loader.dataset), **training_metrics, **metrics}
         _write_metric(output_dir, record)
-        last_name = "last_phase_a.pt" if phase == "a" else "last.pt"
         save_checkpoint(
             output_dir / last_name, model, optimizer, scheduler, scaler, config,
-            epoch, metrics["mean_iou"], global_step,
+            epoch, metrics, global_step, SELECTION_ORDER,
         )
-        if metrics["mean_iou"] > best_score + config.train.early_stopping_min_delta:
-            best_score = metrics["mean_iou"]
+        candidate_key = selection_key(metrics)
+        if selection_improved(candidate_key, best_key):
+            best_key = candidate_key
             stale_evals = 0
             save_checkpoint(
                 output_dir / best_name, model, optimizer, scheduler, scaler, config,
-                epoch, best_score, global_step,
+                epoch, metrics, global_step, SELECTION_ORDER,
             )
         else:
             stale_evals += 1
+        candidate_mean_iou_key = selection_key(metrics, MEAN_IOU_SELECTION_ORDER)
+        if selection_improved(candidate_mean_iou_key, best_mean_iou_key):
+            best_mean_iou_key = candidate_mean_iou_key
+            save_checkpoint(
+                output_dir / best_mean_iou_name,
+                model,
+                optimizer,
+                scheduler,
+                scaler,
+                config,
+                epoch,
+                metrics,
+                global_step,
+                MEAN_IOU_SELECTION_ORDER,
+            )
         if phase_epoch == epochs or stale_evals >= config.train.early_stopping_patience:
             load_model_checkpoint(best_path, model)
-            # When the configured validation cap already contains the complete
-            # validation set (as in lightweight pipeline checks), reuse the
-            # metrics computed immediately above instead of generating every
-            # prediction twice.
-            if full_val_loader.dataset is val_loader.dataset:
-                full_metrics = metrics
-            else:
-                full_metrics = evaluate(
-                    model, full_val_loader, processor, device, config.train.max_new_tokens
-                )
+            full_metrics = evaluate(
+                model, full_val_loader, processor, device, config.train.max_new_tokens
+            )
             full_record = {"epoch": epoch, "phase": phase.upper(), "eval_scope": "full", "eval_samples": len(full_val_loader.dataset), **full_metrics}
             _write_metric(output_dir, full_record)
         if stale_evals >= config.train.early_stopping_patience:
