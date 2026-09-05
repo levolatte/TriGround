@@ -79,6 +79,60 @@ def mode_definitions() -> list[dict]:
     ]
 
 
+def query_mode_definitions() -> list[dict]:
+    common = {
+        "modalities": {"ir", "depth"},
+        "ir_scale": 1.0,
+        "depth_scale": 1.0,
+    }
+    return [
+        {"name": "query_correct", **common, "query_scale": 1.0},
+        {"name": "query_zero", **common, "query_scale": 0.0},
+        {
+            "name": "query_shuffled",
+            **common,
+            "query_scale": 1.0,
+            "query_mismatch": True,
+        },
+    ]
+
+
+def mismatched_queries(records: list[dict], seed: int) -> dict[str, str]:
+    """Assign a different-scene, different-text fusion query when possible."""
+    if len(records) < 2:
+        raise ValueError("query mismatch requires at least two validation samples")
+    order = list(range(len(records)))
+    random.Random(seed).shuffle(order)
+    output = {}
+    for position, index in enumerate(order):
+        target = records[index]
+        target_scene = scene_group(target)[1]
+        candidates = [
+            records[order[(position + offset) % len(order)]]
+            for offset in range(1, len(order))
+        ]
+        donor = next(
+            (
+                candidate
+                for candidate in candidates
+                if candidate["query"] != target["query"]
+                and scene_group(candidate)[1] != target_scene
+            ),
+            None,
+        )
+        if donor is None:
+            donor = next(
+                (
+                    candidate
+                    for candidate in candidates
+                    if candidate["query"] != target["query"]
+                ),
+                candidates[0],
+            )
+        output[str(target["id"])] = str(donor["query"])
+    return output
+
+
 def subset_indices(length: int, limit: int | None, seed: int) -> list[int]:
     if limit is None or limit >= length:
         return list(range(length))
@@ -88,13 +142,31 @@ def subset_indices(length: int, limit: int | None, seed: int) -> list[int]:
 
 
 @torch.no_grad()
-def evaluate_rows(model, loader, processor, device, max_new_tokens, mode: dict) -> dict:
+def evaluate_rows(
+    model,
+    loader,
+    processor,
+    device,
+    max_new_tokens,
+    mode: dict,
+    query_overrides: dict[str, str] | None = None,
+) -> dict:
     model.eval()
     rows = []
     cap_hits = 0
     eos = processor.tokenizer.eos_token_id
     eos_ids = set(eos if isinstance(eos, list) else [eos])
     for batch in loader:
+        if query_overrides is not None:
+            fusion_queries = [query_overrides[str(value)] for value in batch["sample_id"]]
+            encoded_queries = processor.tokenizer(
+                fusion_queries,
+                padding=True,
+                add_special_tokens=True,
+                return_tensors="pt",
+            )
+            batch["query_input_ids"] = encoded_queries["input_ids"]
+            batch["query_attention_mask"] = encoded_queries["attention_mask"]
         batch = _move(batch, device)
         generated = model.generate(
             **_generation_inputs(
@@ -103,6 +175,7 @@ def evaluate_rows(model, loader, processor, device, max_new_tokens, mode: dict) 
                 modalities=set(mode["modalities"]),
                 ir_fusion_scale=float(mode["ir_scale"]),
                 depth_fusion_scale=float(mode["depth_scale"]),
+                query_fusion_scale=float(mode.get("query_scale", 1.0)),
             ),
             max_new_tokens=max_new_tokens,
         )
@@ -158,12 +231,29 @@ def paired_summary(modes: dict[str, dict], baseline: str = "rgb") -> dict:
         if name == baseline:
             continue
         deltas = [row["iou"] - base[row["id"]] for row in result["rows"]]
+        incorrect_to_correct = sum(
+            base[row["id"]] < 0.5 and row["iou"] >= 0.5
+            for row in result["rows"]
+        )
+        correct_to_incorrect = sum(
+            base[row["id"]] >= 0.5 and row["iou"] < 0.5
+            for row in result["rows"]
+        )
+        mean_iou_delta = sum(deltas) / max(len(deltas), 1)
         report[name] = {
-            "mean_iou_delta_vs_rgb": sum(deltas) / max(len(deltas), 1),
+            "mean_iou_delta": mean_iou_delta,
+            "acc_0.5_delta": (
+                result["metrics"]["acc_0.5"]
+                - modes[baseline]["metrics"]["acc_0.5"]
+            ),
+            "incorrect_to_correct": incorrect_to_correct,
+            "correct_to_incorrect": correct_to_incorrect,
             "improved_samples": sum(delta > 1e-6 for delta in deltas),
             "degraded_samples": sum(delta < -1e-6 for delta in deltas),
             "unchanged_samples": sum(abs(delta) <= 1e-6 for delta in deltas),
         }
+        if baseline == "rgb":
+            report[name]["mean_iou_delta_vs_rgb"] = mean_iou_delta
     return report
 
 
@@ -173,12 +263,20 @@ def main() -> None:
     parser.add_argument("--checkpoint", action="append", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--samples", type=int)
+    parser.add_argument(
+        "--family",
+        choices=("modality", "query", "all"),
+        default="modality",
+        help="Run modality scaling/mismatch, query interventions, or both.",
+    )
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--device", default="cuda" if torch.cuda.is_available() else "cpu")
     args = parser.parse_args()
     config = load_config(args.config)
     if config.stage != "joint":
         raise ValueError("diagnostic config must use joint stage")
+    if config.model.fusion_type != "parallel_backbone":
+        raise ValueError("query interventions require parallel_backbone fusion")
     device = torch.device(args.device)
     processor = AutoProcessor.from_pretrained(
         config.model.backbone,
@@ -203,11 +301,22 @@ def main() -> None:
             "manifest": config.data.val_manifest,
             "samples": len(indices),
             "seed": args.seed,
+            "family": args.family,
         },
         "modes": {},
     }
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    for mode in mode_definitions():
+    modes = []
+    if args.family in {"modality", "all"}:
+        modes.extend(mode_definitions())
+    if args.family in {"query", "all"}:
+        modes.extend(query_mode_definitions())
+    query_donors = (
+        mismatched_queries(base.records, args.seed + 31)
+        if args.family in {"query", "all"}
+        else None
+    )
+    for mode in modes:
         dataset: Dataset = base
         mismatch = set(mode.get("mismatch", set()))
         if mismatch:
@@ -221,12 +330,26 @@ def main() -> None:
             collate_fn=NativeGroundingCollator(processor, "joint"),
         )
         result = evaluate_rows(
-            model, loader, processor, device, config.train.max_new_tokens, mode
+            model,
+            loader,
+            processor,
+            device,
+            config.train.max_new_tokens,
+            mode,
+            query_donors if mode.get("query_mismatch") else None,
         )
         for row in result["rows"]:
-            group_source, group = scene_group(metadata_by_id[str(row["id"])])
+            record = metadata_by_id[str(row["id"])]
+            group_source, group = scene_group(record)
             row["scene_group_source"] = group_source
             row["scene_group"] = group
+            row["main_query"] = str(record["query"])
+            if mode.get("query_mismatch"):
+                row["fusion_query"] = query_donors[str(row["id"])]
+            elif mode.get("query_scale", 1.0) == 0:
+                row["fusion_query"] = None
+            else:
+                row["fusion_query"] = str(record["query"])
         output["modes"][mode["name"]] = {
             "definition": {
                 "rgb_only": bool(mode.get("rgb_only")),
@@ -234,10 +357,17 @@ def main() -> None:
                 "mismatch": sorted(mismatch),
                 "ir_scale": mode["ir_scale"],
                 "depth_scale": mode["depth_scale"],
+                "query_scale": mode.get("query_scale", 1.0),
+                "query_mismatch": bool(mode.get("query_mismatch")),
             },
             **result,
         }
-        output["paired_vs_rgb"] = paired_summary(output["modes"])
+        if "rgb" in output["modes"]:
+            output["paired_vs_rgb"] = paired_summary(output["modes"])
+        if "query_correct" in output["modes"]:
+            output["paired_vs_query_correct"] = paired_summary(
+                output["modes"], baseline="query_correct"
+            )
         args.output.write_text(
             json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
         )

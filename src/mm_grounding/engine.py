@@ -69,6 +69,7 @@ def _generation_inputs(
     modalities: set[str] | None = None,
     ir_fusion_scale: float = 1.0,
     depth_fusion_scale: float = 1.0,
+    query_fusion_scale: float = 1.0,
 ):
     output = {
         "pixel_values": batch["pixel_values"],
@@ -80,6 +81,7 @@ def _generation_inputs(
         "rgb_only": rgb_only,
         "ir_fusion_scale": ir_fusion_scale,
         "depth_fusion_scale": depth_fusion_scale,
+        "query_fusion_scale": query_fusion_scale,
     }
     for modality in ("ir", "depth"):
         name = f"{modality}_pixel_values"
@@ -112,6 +114,7 @@ def evaluate(
     modalities: set[str] | None = None,
     ir_fusion_scale: float = 1.0,
     depth_fusion_scale: float = 1.0,
+    query_fusion_scale: float = 1.0,
     return_rows: bool = False,
 ):
     model.eval()
@@ -135,6 +138,7 @@ def evaluate(
                     modalities=modalities,
                     ir_fusion_scale=ir_fusion_scale,
                     depth_fusion_scale=depth_fusion_scale,
+                    query_fusion_scale=query_fusion_scale,
                 )
             )
             auxiliary_rows.append(
@@ -150,6 +154,7 @@ def evaluate(
                 modalities=modalities,
                 ir_fusion_scale=ir_fusion_scale,
                 depth_fusion_scale=depth_fusion_scale,
+                query_fusion_scale=query_fusion_scale,
             ),
             max_new_tokens=max_new_tokens,
         )

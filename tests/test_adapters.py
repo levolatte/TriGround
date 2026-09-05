@@ -238,7 +238,20 @@ def test_joint_query_fusion_scales_target_the_active_joint_path():
         rgb, None, depth, None, depth_query, mask, [2, 3]
     )
     half = module(*arguments, ir_fusion_scale=0.5, depth_fusion_scale=1.0)
+    query_zero = module(*arguments, query_fusion_scale=0.0)
+    changed_queries = (
+        rgb,
+        ir,
+        depth,
+        ir_query + 100.0,
+        depth_query - 100.0,
+        mask,
+        [2, 3],
+    )
+    changed_query_zero = module(*changed_queries, query_fusion_scale=0.0)
     assert torch.equal(default, explicit_one)
     assert torch.equal(zero, rgb)
     assert torch.allclose(depth_only_by_scale, depth_only_by_omission, atol=1e-6)
     assert not torch.allclose(half, default)
+    assert torch.equal(query_zero, changed_query_zero)
+    assert not torch.allclose(default, query_zero)

@@ -155,6 +155,7 @@ def _parallel_backbone_vision_forward(
         query_attention_mask,
         ir_fusion_scale,
         depth_fusion_scale,
+        query_fusion_scale,
     ) = context
 
     rgb_tokens = vision.patch_embed(hidden_states)
@@ -218,6 +219,7 @@ def _parallel_backbone_vision_forward(
             patch_counts,
             ir_fusion_scale,
             depth_fusion_scale,
+            query_fusion_scale,
         )
         if layer_num in vision.deepstack_visual_indexes:
             merger_index = vision.deepstack_visual_indexes.index(layer_num)
@@ -503,6 +505,7 @@ class MultiModalGrounder(nn.Module):
         query_attention_mask: torch.Tensor | None = None,
         ir_fusion_scale: float = 1.0,
         depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
     ):
         if self.fusion_type not in {
             "safe_post_embed",
@@ -512,19 +515,25 @@ class MultiModalGrounder(nn.Module):
             yield
             return
         if self.fusion_type == "parallel_backbone":
+            if query_fusion_scale < 0:
+                raise ValueError("query fusion scale must be non-negative")
             vision = self._parallel_backbone_vision()
             if ir_pixel_values is None and depth_pixel_values is None:
                 raise ValueError("at least one auxiliary modality is required")
             if vision is None or query_input_ids is None or query_attention_mask is None:
                 raise ValueError("parallel fusion requires query tokens and a vision model")
-            embedding = self.backbone.get_input_embeddings()
-            query_embeddings = embedding(query_input_ids).detach()
-            ir_query, depth_query = self.fusion.encode_queries(
-                query_embeddings,
-                query_attention_mask,
-                use_ir=ir_pixel_values is not None,
-                use_depth=depth_pixel_values is not None,
-            )
+            if query_fusion_scale > 0:
+                embedding = self.backbone.get_input_embeddings()
+                query_embeddings = embedding(query_input_ids).detach()
+                ir_query, depth_query = self.fusion.encode_queries(
+                    query_embeddings,
+                    query_attention_mask,
+                    use_ir=ir_pixel_values is not None,
+                    use_depth=depth_pixel_values is not None,
+                )
+            else:
+                ir_query = None
+                depth_query = None
             object.__setattr__(
                 vision,
                 "_parallel_backbone_context",
@@ -536,6 +545,7 @@ class MultiModalGrounder(nn.Module):
                     query_attention_mask,
                     ir_fusion_scale,
                     depth_fusion_scale,
+                    query_fusion_scale,
                 ),
             )
             try:
@@ -640,6 +650,7 @@ class MultiModalGrounder(nn.Module):
         geometry_gradient_scale: float = 1.0,
         ir_fusion_scale: float = 1.0,
         depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
         **kwargs,
     ) -> dict[str, torch.Tensor]:
         with self._fusion_context(
@@ -652,6 +663,7 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("query_attention_mask"),
             ir_fusion_scale,
             depth_fusion_scale,
+            query_fusion_scale,
         ):
             output = self.backbone(
                 **self._qwen_inputs(**kwargs),
@@ -699,6 +711,7 @@ class MultiModalGrounder(nn.Module):
         self,
         ir_fusion_scale: float = 1.0,
         depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
         **kwargs,
     ) -> torch.Tensor:
         if self.bbox_head is None:
@@ -713,6 +726,7 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("query_attention_mask"),
             ir_fusion_scale,
             depth_fusion_scale,
+            query_fusion_scale,
         ):
             output = self.backbone(
                 **self._qwen_inputs(**kwargs),
@@ -733,6 +747,7 @@ class MultiModalGrounder(nn.Module):
         max_new_tokens: int = 96,
         ir_fusion_scale: float = 1.0,
         depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
         **kwargs,
     ) -> torch.Tensor:
         with self._fusion_context(
@@ -745,6 +760,7 @@ class MultiModalGrounder(nn.Module):
             kwargs.get("query_attention_mask"),
             ir_fusion_scale,
             depth_fusion_scale,
+            query_fusion_scale,
         ):
             return self.backbone.generate(
                 **self._qwen_inputs(**kwargs), max_new_tokens=max_new_tokens, do_sample=False
