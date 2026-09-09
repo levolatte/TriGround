@@ -261,6 +261,25 @@ def test_parallel_fusion_runs_before_each_deepstack_extraction():
     assert events == ["fusion-0", "deepstack-0", "fusion-1", "deepstack-1"]
 
 
+def test_parallel_fusion_can_require_native_deepstack_coverage():
+    backbone = DummyDeepBackbone()
+    backbone.model.visual.deepstack_visual_indexes = [0]
+    backbone.model.visual.deepstack_merger_list = nn.ModuleList([DummyMerger()])
+    try:
+        MultiModalGrounder(
+            backbone,
+            adapter_channels=8,
+            fusion_type="parallel_backbone",
+            parallel_fusion_stages=1,
+            parallel_fusion_layer_indices=(1,),
+            parallel_fusion_align_deepstack=True,
+        )
+    except ValueError as error:
+        assert "do not cover native DeepStack" in str(error)
+    else:
+        raise AssertionError("missing a native DeepStack fusion layer must fail")
+
+
 def test_parallel_backbone_rgb_only_uses_one_stream_and_clears_context():
     model = MultiModalGrounder(
         DummyDeepBackbone(),

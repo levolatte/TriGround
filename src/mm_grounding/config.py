@@ -24,6 +24,7 @@ class ModelConfig:
     fusion_zero_init_prompt_restore: bool = False
     parallel_fusion_stages: int = 1
     parallel_fusion_layer_indices: tuple[int, ...] = ()
+    parallel_fusion_align_deepstack: bool = False
     parallel_adapter_scale_init: float = 0.01
     parallel_joint_fusion: bool = False
     parallel_adapter_train_last_n: int = 0
@@ -127,6 +128,10 @@ class ExperimentConfig:
         if tuple(sorted(set(fusion_indices))) != fusion_indices:
             raise ValueError(
                 "parallel_fusion_layer_indices must be sorted and contain no duplicates"
+            )
+        if self.model.parallel_fusion_align_deepstack and not fusion_indices:
+            raise ValueError(
+                "parallel_fusion_align_deepstack requires explicit fusion layer indices"
             )
         if self.model.fusion_dim is not None and self.model.fusion_dim < 1:
             raise ValueError("fusion_dim must be positive")

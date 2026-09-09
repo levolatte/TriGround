@@ -14,6 +14,7 @@ model:
   fusion_zero_init_prompt_restore: true
   parallel_fusion_stages: 4
   parallel_fusion_layer_indices: [8, 16, 24, 26]
+  parallel_fusion_align_deepstack: true
   parallel_adapter_scale_init: 1.0
   parallel_joint_fusion: true
   query_encoder_layers: 1

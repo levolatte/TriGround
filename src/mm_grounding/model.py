@@ -304,6 +304,7 @@ class MultiModalGrounder(nn.Module):
         fusion_zero_init_prompt_restore: bool = False,
         parallel_fusion_stages: int = 4,
         parallel_fusion_layer_indices: tuple[int, ...] = (),
+        parallel_fusion_align_deepstack: bool = False,
         parallel_adapter_scale_init: float = 0.01,
         parallel_joint_fusion: bool = False,
         fusion_dim: int | None = None,
@@ -381,6 +382,18 @@ class MultiModalGrounder(nn.Module):
                 zero_init_restore=fusion_zero_init_prompt_restore,
                 use_joint_fusion=parallel_joint_fusion,
             )
+            if parallel_fusion_align_deepstack:
+                required = {
+                    *getattr(vision, "deepstack_visual_indexes", ()),
+                    len(vision.blocks) - 1,
+                }
+                configured = set(self.fusion.fusion_layer_indices)
+                if not required.issubset(configured):
+                    raise ValueError(
+                        "configured fusion layers do not cover native DeepStack and final "
+                        f"vision layers: configured={sorted(configured)}, "
+                        f"required={sorted(required)}"
+                    )
             _install_parallel_backbone_forward(vision, self.fusion)
             object.__setattr__(
                 self, "_parallel_backbone_vision_ref", weakref.ref(vision)
@@ -763,6 +776,7 @@ def build_grounder(model_config, processor=None) -> MultiModalGrounder:
         fusion_zero_init_prompt_restore=model_config.fusion_zero_init_prompt_restore,
         parallel_fusion_stages=model_config.parallel_fusion_stages,
         parallel_fusion_layer_indices=model_config.parallel_fusion_layer_indices,
+        parallel_fusion_align_deepstack=model_config.parallel_fusion_align_deepstack,
         parallel_adapter_scale_init=model_config.parallel_adapter_scale_init,
         parallel_joint_fusion=model_config.parallel_joint_fusion,
         fusion_dim=model_config.fusion_dim,

@@ -85,6 +85,7 @@ def test_qwen8b_recommended_configs_align_fusion_with_deepstack_and_disable_lora
         assert config.model.query_dim == 128
         assert config.model.query_attention_heads == 4
         assert config.model.parallel_fusion_layer_indices == [8, 16, 24, 26]
+        assert config.model.parallel_fusion_align_deepstack
         assert not config.model.vision_lora_enabled
         assert config.train.phase_b_epochs == 0
     assert not configs[0].model.parallel_joint_fusion
