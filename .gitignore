@@ -8,6 +8,11 @@ __pycache__/
 .deps311/
 runs/
 data/
+logs/
+outputs/
+*.log
+slurm-*.out
+slurm-*.err
 *.pt
 *.pth
 *.safetensors

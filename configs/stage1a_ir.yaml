@@ -1,6 +1,6 @@
 output_dir: runs/stage1a_ir_50
 model:
-  backbone: /root/autodl-tmp/aic/huggingface/hub/models--Qwen--Qwen3-VL-2B-Instruct/snapshots/89644892e4d85e24eaac8bacfd4f463576704203
+  backbone: Qwen/Qwen3-VL-2B-Instruct
   adapter_channels: 128
   fusion_type: parallel_backbone
   modality_dropout: 0.1
@@ -13,8 +13,8 @@ model:
   vision_lora_enabled: false
 data:
   stage: ir
-  train_manifest: /root/autodl-tmp/datasets/RGBT-Ground-Dataset/extracted/subsets/train_50.jsonl
-  val_manifest: /root/autodl-tmp/datasets/RGBT-Ground-Dataset/extracted/manifests/val.jsonl
+  train_manifest: data/RGBT-Ground-Dataset/extracted/subsets/train_50.jsonl
+  val_manifest: data/RGBT-Ground-Dataset/extracted/manifests/val.jsonl
   workers: 4
   min_pixels: 200704
   max_pixels: 802816

@@ -371,8 +371,12 @@ class QueryTokenEncoder(nn.Module):
         num_layers: int,
         num_heads: int,
         dropout: float,
+        position_encoding: str = "none",
     ) -> None:
         super().__init__()
+        if position_encoding not in {"none", "sinusoidal"}:
+            raise ValueError("position_encoding must be 'none' or 'sinusoidal'")
+        self.position_encoding = position_encoding
         self.input_projection = nn.Sequential(
             nn.LayerNorm(input_dim), nn.Linear(input_dim, hidden_dim)
         )
@@ -390,6 +394,21 @@ class QueryTokenEncoder(nn.Module):
         )
         self.output_norm = nn.LayerNorm(hidden_dim)
 
+    @staticmethod
+    def _sinusoidal_positions(
+        length: int, width: int, device: torch.device, dtype: torch.dtype
+    ) -> torch.Tensor:
+        positions = torch.arange(length, device=device, dtype=torch.float32).unsqueeze(1)
+        frequencies = torch.exp(
+            torch.arange(0, width, 2, device=device, dtype=torch.float32)
+            * (-torch.log(torch.tensor(10000.0, device=device)) / width)
+        )
+        angles = positions * frequencies.unsqueeze(0)
+        encoding = torch.zeros(length, width, device=device, dtype=torch.float32)
+        encoding[:, 0::2] = torch.sin(angles)
+        encoding[:, 1::2] = torch.cos(angles[:, : encoding[:, 1::2].shape[1]])
+        return encoding.to(dtype)
+
     def forward(
         self, embeddings: torch.Tensor, attention_mask: torch.Tensor
     ) -> torch.Tensor:
@@ -397,6 +416,13 @@ class QueryTokenEncoder(nn.Module):
             raise ValueError("query embeddings and attention mask shapes are incompatible")
         work_dtype = self.input_projection[1].weight.dtype
         tokens = self.input_projection(embeddings.to(work_dtype))
+        if self.position_encoding == "sinusoidal":
+            positions = self._sinusoidal_positions(
+                tokens.shape[1], tokens.shape[2], tokens.device, tokens.dtype
+            )
+            tokens = tokens + positions.unsqueeze(0) * attention_mask.unsqueeze(-1).to(
+                tokens.dtype
+            )
         tokens = self.encoder(tokens, src_key_padding_mask=attention_mask.eq(0))
         return self.output_norm(tokens)
 
@@ -464,10 +490,13 @@ class ModalityStageFusion(nn.Module):
         self,
         rgb_tokens: torch.Tensor,
         auxiliary_tokens: torch.Tensor,
-        query_tokens: torch.Tensor,
+        query_tokens: torch.Tensor | None,
         query_attention_mask: torch.Tensor,
         patch_counts: list[int],
+        query_fusion_scale: float = 1.0,
     ) -> torch.Tensor:
+        if query_fusion_scale < 0:
+            raise ValueError("query fusion scale must be non-negative")
         if rgb_tokens.shape != auxiliary_tokens.shape:
             raise ValueError("parallel RGB/auxiliary token shapes must match")
         if sum(patch_counts) != rgb_tokens.shape[0]:
@@ -484,9 +513,14 @@ class ModalityStageFusion(nn.Module):
             repeats = torch.tensor(patch_counts, device=auxiliary.device)
             token_available = torch.repeat_interleave(keep, repeats, dim=0)
             auxiliary = auxiliary * token_available.to(auxiliary.dtype)
-        language = self._language_context(
-            rgb, query_tokens.to(work_dtype), query_attention_mask, patch_counts
-        )
+        if query_fusion_scale > 0:
+            if query_tokens is None:
+                raise ValueError("query tokens are required when query fusion is enabled")
+            language = query_fusion_scale * self._language_context(
+                rgb, query_tokens.to(work_dtype), query_attention_mask, patch_counts
+            )
+        else:
+            language = torch.zeros_like(rgb)
         gate = torch.sigmoid(self.gate(torch.cat((rgb, auxiliary, language), dim=-1)))
         residual = self.restore(F.gelu(auxiliary + language))
         return (
@@ -532,23 +566,34 @@ class QueryAwareStageFusion(nn.Module):
         depth_query_tokens: torch.Tensor | None,
         query_attention_mask: torch.Tensor,
         patch_counts: list[int],
+        ir_fusion_scale: float = 1.0,
+        depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
     ) -> torch.Tensor:
+        if ir_fusion_scale < 0 or depth_fusion_scale < 0 or query_fusion_scale < 0:
+            raise ValueError("fusion scales must be non-negative")
         output = rgb_tokens
-        if ir_tokens is not None:
-            if ir_query_tokens is None:
+        if ir_tokens is not None and ir_fusion_scale > 0:
+            if query_fusion_scale > 0 and ir_query_tokens is None:
                 raise ValueError("IR query tokens are required for IR fusion")
-            output = output + self.ir(
-                rgb_tokens, ir_tokens, ir_query_tokens, query_attention_mask, patch_counts
+            output = output + ir_fusion_scale * self.ir(
+                rgb_tokens,
+                ir_tokens,
+                ir_query_tokens,
+                query_attention_mask,
+                patch_counts,
+                query_fusion_scale,
             )
-        if depth_tokens is not None:
-            if depth_query_tokens is None:
+        if depth_tokens is not None and depth_fusion_scale > 0:
+            if query_fusion_scale > 0 and depth_query_tokens is None:
                 raise ValueError("depth query tokens are required for depth fusion")
-            output = output + self.depth(
+            output = output + depth_fusion_scale * self.depth(
                 rgb_tokens,
                 depth_tokens,
                 depth_query_tokens,
                 query_attention_mask,
                 patch_counts,
+                query_fusion_scale,
             )
         return output
 
@@ -657,14 +702,19 @@ class JointQueryAwareStageFusion(nn.Module):
         patch_counts: list[int],
         ir_available: torch.Tensor,
         depth_available: torch.Tensor,
+        ir_fusion_scale: float,
+        depth_fusion_scale: float,
+        query_fusion_scale: float,
     ) -> torch.Tensor:
+        if query_fusion_scale == 0:
+            return torch.zeros_like(rgb)
         contexts = []
         for index, rgb_chunk in enumerate(torch.split(rgb, patch_counts, dim=0)):
             queries = []
             if ir_query_tokens is not None and ir_available[index]:
-                queries.append(ir_query_tokens[index])
+                queries.append(ir_fusion_scale * ir_query_tokens[index])
             if depth_query_tokens is not None and depth_available[index]:
-                queries.append(depth_query_tokens[index])
+                queries.append(depth_fusion_scale * depth_query_tokens[index])
             if queries:
                 query = torch.stack(queries).mean(dim=0, keepdim=True)
             else:
@@ -681,7 +731,7 @@ class JointQueryAwareStageFusion(nn.Module):
                 key_padding_mask=query_attention_mask[index : index + 1].eq(0),
                 need_weights=False,
             )
-            contexts.append(context.squeeze(0))
+            contexts.append(query_fusion_scale * context.squeeze(0))
         return torch.cat(contexts, dim=0)
 
     def forward(
@@ -693,7 +743,12 @@ class JointQueryAwareStageFusion(nn.Module):
         depth_query_tokens: torch.Tensor | None,
         query_attention_mask: torch.Tensor,
         patch_counts: list[int],
+        ir_fusion_scale: float = 1.0,
+        depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
     ) -> torch.Tensor:
+        if ir_fusion_scale < 0 or depth_fusion_scale < 0 or query_fusion_scale < 0:
+            raise ValueError("fusion scales must be non-negative")
         if ir_tokens is None and depth_tokens is None:
             return rgb_tokens
         if sum(patch_counts) != rgb_tokens.shape[0]:
@@ -701,17 +756,29 @@ class JointQueryAwareStageFusion(nn.Module):
         for name, tokens in (("IR", ir_tokens), ("depth", depth_tokens)):
             if tokens is not None and tokens.shape != rgb_tokens.shape:
                 raise ValueError(f"{name} and RGB token shapes must match")
-        if ir_tokens is not None and ir_query_tokens is None:
+        if (
+            query_fusion_scale > 0
+            and ir_tokens is not None
+            and ir_fusion_scale > 0
+            and ir_query_tokens is None
+        ):
             raise ValueError("IR query tokens are required for IR fusion")
-        if depth_tokens is not None and depth_query_tokens is None:
+        if (
+            depth_tokens is not None
+            and depth_fusion_scale > 0
+            and query_fusion_scale > 0
+            and depth_query_tokens is None
+        ):
             raise ValueError("depth query tokens are required for depth fusion")
 
         work_dtype = self.restore.weight.dtype
         rgb = self.rgb_projection(rgb_tokens.to(work_dtype))
         batch_size = len(patch_counts)
-        ir_available = self._availability(ir_tokens is not None, batch_size, rgb.device)
+        ir_available = self._availability(
+            ir_tokens is not None and ir_fusion_scale > 0, batch_size, rgb.device
+        )
         depth_available = self._availability(
-            depth_tokens is not None, batch_size, rgb.device
+            depth_tokens is not None and depth_fusion_scale > 0, batch_size, rgb.device
         )
         ir_token_available = self._repeat_samples(ir_available, patch_counts)
         depth_token_available = self._repeat_samples(depth_available, patch_counts)
@@ -719,16 +786,20 @@ class JointQueryAwareStageFusion(nn.Module):
 
         ir = (
             self.ir_projection(ir_tokens.to(work_dtype))
-            if ir_tokens is not None
+            if ir_tokens is not None and ir_fusion_scale > 0
             else torch.zeros_like(rgb)
         )
         depth = (
             self.depth_projection(depth_tokens.to(work_dtype))
-            if depth_tokens is not None
+            if depth_tokens is not None and depth_fusion_scale > 0
             else torch.zeros_like(rgb)
         )
-        ir = ir * ir_token_available.unsqueeze(-1).to(ir.dtype)
-        depth = depth * depth_token_available.unsqueeze(-1).to(depth.dtype)
+        ir = ir * ir_fusion_scale * ir_token_available.unsqueeze(-1).to(ir.dtype)
+        depth = (
+            depth
+            * depth_fusion_scale
+            * depth_token_available.unsqueeze(-1).to(depth.dtype)
+        )
         language = self._query_context(
             rgb,
             ir_query_tokens,
@@ -737,6 +808,9 @@ class JointQueryAwareStageFusion(nn.Module):
             patch_counts,
             ir_available,
             depth_available,
+            ir_fusion_scale,
+            depth_fusion_scale,
+            query_fusion_scale,
         )
 
         modalities = torch.stack((rgb, ir, depth, language), dim=1)
@@ -757,9 +831,15 @@ class JointQueryAwareStageFusion(nn.Module):
 
         agreements = torch.cat(
             (
-                self._cosine(rgb, ir) * ir_token_available.unsqueeze(-1),
-                self._cosine(rgb, depth) * depth_token_available.unsqueeze(-1),
+                self._cosine(rgb, ir)
+                * ir_fusion_scale
+                * ir_token_available.unsqueeze(-1),
+                self._cosine(rgb, depth)
+                * depth_fusion_scale
+                * depth_token_available.unsqueeze(-1),
                 self._cosine(ir, depth)
+                * ir_fusion_scale
+                * depth_fusion_scale
                 * (ir_token_available & depth_token_available).unsqueeze(-1),
             ),
             dim=-1,
@@ -803,6 +883,7 @@ class ParallelBackboneFusion(nn.Module):
         query_encoder_layers: int = 1,
         query_attention_heads: int = 4,
         query_dropout: float = 0.0,
+        query_position_encoding: str = "none",
         modality_dropout: float = 0.1,
         adapter_scale_init: float = 0.01,
         fusion_scale_init: float = 0.001,
@@ -836,6 +917,7 @@ class ParallelBackboneFusion(nn.Module):
             query_encoder_layers,
             query_attention_heads,
             query_dropout,
+            query_position_encoding,
         )
         self.ir_query_encoder = QueryTokenEncoder(*query_arguments)
         self.depth_query_encoder = QueryTokenEncoder(*query_arguments)
@@ -964,6 +1046,9 @@ class ParallelBackboneFusion(nn.Module):
         depth_query_tokens: torch.Tensor | None,
         query_attention_mask: torch.Tensor,
         patch_counts: list[int],
+        ir_fusion_scale: float = 1.0,
+        depth_fusion_scale: float = 1.0,
+        query_fusion_scale: float = 1.0,
     ) -> torch.Tensor:
         key = str(layer_index)
         if key not in self.stage_fusions:
@@ -977,4 +1062,7 @@ class ParallelBackboneFusion(nn.Module):
             depth_query_tokens,
             query_attention_mask,
             patch_counts,
+            ir_fusion_scale,
+            depth_fusion_scale,
+            query_fusion_scale,
         )

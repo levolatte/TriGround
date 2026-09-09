@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 from collections import Counter
 from pathlib import Path
@@ -63,6 +64,7 @@ def convert_split(
     split: str,
     output: Path,
     audit_depth_images: int = 100,
+    clip_bboxes: bool = False,
 ) -> dict:
     annotation = _find_annotation(dataset_root, split)
     payload = json.loads(annotation.read_text(encoding="utf-8-sig"))
@@ -73,6 +75,9 @@ def convert_split(
     records = []
     image_sizes: dict[Path, tuple[int, int]] = {}
     depth_audit: dict[Path, tuple[str, str, int, int]] = {}
+    clipped_boxes = 0
+    max_bbox_clip_pixels = 0.0
+    bbox_clip_examples = []
     for index, row in enumerate(payload):
         if not isinstance(row, dict):
             raise ValueError(f"invalid annotation row {split}:{index}")
@@ -82,16 +87,47 @@ def convert_split(
             with Image.open(rgb) as image:
                 image_sizes[rgb] = image.size
         width, height = image_sizes[rgb]
-        x1, y1, x2, y2 = (float(value) for value in row["bbox"])
+        original_box = tuple(float(value) for value in row["bbox"])
+        if len(original_box) != 4 or not all(math.isfinite(value) for value in original_box):
+            raise ValueError(f"invalid bbox values {split}:{index}: {row['bbox']}")
+        x1, y1, x2, y2 = original_box
         if not (
             width > 0
             and height > 0
             and 0 <= x1 < x2 <= width
             and 0 <= y1 < y2 <= height
         ):
-            raise ValueError(
-                f"invalid pixel xyxy bbox {split}:{index}: {row['bbox']} for {width}x{height}"
+            if not clip_bboxes:
+                raise ValueError(
+                    f"invalid pixel xyxy bbox {split}:{index}: {row['bbox']} for {width}x{height}"
+                )
+            clipped_box = (
+                min(max(x1, 0.0), float(width)),
+                min(max(y1, 0.0), float(height)),
+                min(max(x2, 0.0), float(width)),
+                min(max(y2, 0.0), float(height)),
             )
+            x1, y1, x2, y2 = clipped_box
+            if not (0 <= x1 < x2 <= width and 0 <= y1 < y2 <= height):
+                raise ValueError(
+                    f"bbox remains invalid after clipping {split}:{index}: "
+                    f"{row['bbox']} -> {list(clipped_box)} for {width}x{height}"
+                )
+            correction = max(
+                abs(before - after)
+                for before, after in zip(original_box, clipped_box, strict=True)
+            )
+            clipped_boxes += 1
+            max_bbox_clip_pixels = max(max_bbox_clip_pixels, correction)
+            if len(bbox_clip_examples) < 20:
+                bbox_clip_examples.append(
+                    {
+                        "index": index,
+                        "original": list(original_box),
+                        "clipped": list(clipped_box),
+                        "image_size": [width, height],
+                    }
+                )
         query = str(row.get("text", "")).strip()
         if not query:
             raise ValueError(f"empty referring expression {split}:{index}")
@@ -141,6 +177,9 @@ def convert_split(
         "depth_dtypes": dict(Counter(value[1] for value in depth_audit.values())),
         "depth_min": min((value[2] for value in depth_audit.values()), default=None),
         "depth_max": max((value[3] for value in depth_audit.values()), default=None),
+        "bbox_clipped": clipped_boxes,
+        "max_bbox_clip_pixels": max_bbox_clip_pixels,
+        "bbox_clip_examples": bbox_clip_examples,
     }
 
 
@@ -151,16 +190,29 @@ def main() -> None:
     parser.add_argument("--dataset-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--audit-depth-images", type=int, default=100)
+    parser.add_argument(
+        "--clip-bboxes",
+        action="store_true",
+        help="Clip edge-overflowing boxes to image bounds and report every repair",
+    )
+    parser.add_argument(
+        "--splits",
+        nargs="+",
+        choices=tuple(ANNOTATION_NAMES),
+        default=tuple(ANNOTATION_NAMES),
+        help="Dataset splits to convert (default: train testA testB)",
+    )
     args = parser.parse_args()
     if args.audit_depth_images < 0:
         parser.error("--audit-depth-images must be non-negative")
     report = {}
-    for split in ("train", "testA", "testB"):
+    for split in args.splits:
         report[split] = convert_split(
             args.dataset_root.resolve(),
             split,
             (args.output_dir / f"{split}.jsonl").resolve(),
             audit_depth_images=args.audit_depth_images,
+            clip_bboxes=args.clip_bboxes,
         )
     report_path = args.output_dir / "conversion_report.json"
     report_path.write_text(

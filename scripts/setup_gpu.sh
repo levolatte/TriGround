@@ -18,4 +18,4 @@ python -m pip check
 python -m compileall -q src tools train.py evaluate.py
 
 echo "Environment installed. Run the real-model check with:"
-echo "python tools/preflight.py --config configs/multimodal.yaml --device cuda --backward"
+echo "bash scripts/run_qwen3_vl_8b_preflight.sh"

@@ -1,6 +1,7 @@
 output_dir: runs/stage2_joint_fusion_target_v2_manual_extend2
 model:
-  backbone: /root/autodl-tmp/aic/huggingface/hub/models--Qwen--Qwen3-VL-2B-Instruct/snapshots/89644892e4d85e24eaac8bacfd4f463576704203
+  backbone: Qwen/Qwen3-VL-2B-Instruct
+  backbone_revision: 89644892e4d85e24eaac8bacfd4f463576704203
   adapter_channels: 128
   fusion_type: parallel_backbone
   modality_dropout: 0.2

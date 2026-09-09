@@ -18,8 +18,16 @@ def _package_version(name: str) -> str | None:
 
 
 def save_checkpoint(
-    path, model, optimizer, scheduler, scaler, config, epoch: int, score: float,
+    path,
+    model,
+    optimizer,
+    scheduler,
+    scaler,
+    config,
+    epoch: int,
+    metrics: dict[str, float],
     global_step: int,
+    selection_order: tuple[str, ...],
 ) -> None:
     output = Path(path)
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -54,7 +62,9 @@ def save_checkpoint(
         "global_step": global_step,
         "config": asdict(config),
         "epoch": epoch,
-        "score": score,
+        "score": float(metrics["acc_0.5"]),
+        "metrics": {name: float(value) for name, value in metrics.items()},
+        "selection_order": list(selection_order),
     }, output)
 
 

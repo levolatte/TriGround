@@ -68,6 +68,7 @@ def main() -> None:
         default=0,
         help="run complete AdamW steps; use 2 to verify delayed zero-init gradients",
     )
+    parser.add_argument("--expected-val-samples", type=int)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     config_path = Path(args.config)
@@ -88,8 +89,22 @@ def main() -> None:
         for index in range(min(len(dataset), args.max_samples)):
             dataset[index]
         report[split] = {"samples": len(dataset), "manifest": str(manifest)}
+        if (
+            split == "val"
+            and args.expected_val_samples is not None
+            and len(dataset) != args.expected_val_samples
+        ):
+            raise ValueError(
+                f"expected {args.expected_val_samples} validation samples, "
+                f"found {len(dataset)}"
+            )
         manifests[split] = manifest
     if not args.offline:
+        # Gradient reachability needs both modalities on every diagnostic step.
+        # This process never saves weights; train.py still uses the source dropout.
+        report["training_modality_dropout"] = config.model.modality_dropout
+        config.model.modality_dropout = 0.0
+        report["preflight_modality_dropout"] = 0.0
         processor = AutoProcessor.from_pretrained(
             config.model.backbone,
             revision=config.model.backbone_revision,
@@ -135,9 +150,19 @@ def main() -> None:
         )
         batch = _to_device(batch, args.device)
         inputs = _model_inputs(batch, config.stage)
-        optimizer = _optimizer(model, config, "a") if args.optimizer_steps else None
+        needs_two_step_check = (
+            (args.backward or args.optimizer_steps >= 2)
+            and config.model.fusion_type == "parallel_backbone"
+            and config.model.parallel_joint_fusion
+        )
+        run_steps = args.optimizer_steps or (2 if needs_two_step_check else 1)
+        optimizer_phase = "b" if config.train.phase_a_epochs == 0 else "a"
+        optimizer = (
+            _optimizer(model, config, optimizer_phase)
+            if args.optimizer_steps or needs_two_step_check
+            else None
+        )
         gradient_reports = []
-        run_steps = args.optimizer_steps or 1
         if torch.cuda.is_available() and str(args.device).startswith("cuda"):
             torch.cuda.reset_peak_memory_stats(args.device)
             torch.cuda.synchronize(args.device)
@@ -157,11 +182,24 @@ def main() -> None:
                     gradient is not None and bool(torch.count_nonzero(gradient))
                     for gradient in fusion_gradients
                 )
+                nonfinite = sum(
+                    gradient is not None and not bool(torch.isfinite(gradient).all())
+                    for gradient in fusion_gradients
+                )
                 gradient_reports.append(
-                    {"step": step + 1, "present": present, "nonzero": nonzero}
+                    {
+                        "step": step + 1,
+                        "present": present,
+                        "nonzero": nonzero,
+                        "nonfinite": nonfinite,
+                    }
                 )
                 if not present:
                     raise RuntimeError("Qwen bbox loss did not reach multimodal fusion")
+                if nonfinite:
+                    raise RuntimeError(
+                        f"multimodal fusion received {nonfinite} non-finite gradients"
+                    )
                 frozen_with_grad = [
                     name
                     for name, parameter in model.backbone.named_parameters()
@@ -170,6 +208,54 @@ def main() -> None:
                 if frozen_with_grad:
                     raise RuntimeError(
                         f"frozen backbone parameters received gradients: {frozen_with_grad[:5]}"
+                    )
+                if config.train.phase_a_epochs == 0:
+                    lora_gradients = [
+                        parameter.grad for parameter in model.vision_lora_parameters()
+                    ]
+                    if not any(gradient is not None for gradient in lora_gradients):
+                        raise RuntimeError("Qwen bbox loss did not reach Vision LoRA")
+                    if any(
+                        gradient is not None and not bool(torch.isfinite(gradient).all())
+                        for gradient in lora_gradients
+                    ):
+                        raise RuntimeError("Vision LoRA received non-finite gradients")
+                if step == 1 and needs_two_step_check:
+                    query_parameters = [
+                        *model.fusion.ir_query_encoder.parameters(),
+                        *model.fusion.depth_query_encoder.parameters(),
+                    ]
+                    joint_parameters = list(model.fusion.joint_stage_fusions.parameters())
+                    adapter_parameters = [
+                        *model.fusion.ir_adapters.parameters(),
+                        *model.fusion.depth_adapters.parameters(),
+                    ]
+                    query_nonzero = sum(
+                        parameter.grad is not None
+                        and bool(torch.isfinite(parameter.grad).all())
+                        and bool(torch.count_nonzero(parameter.grad))
+                        for parameter in query_parameters
+                    )
+                    joint_nonzero = sum(
+                        parameter.grad is not None
+                        and bool(torch.isfinite(parameter.grad).all())
+                        and bool(torch.count_nonzero(parameter.grad))
+                        for parameter in joint_parameters
+                    )
+                    if query_nonzero == 0 or joint_nonzero == 0:
+                        raise RuntimeError(
+                            "two-step preflight did not produce finite nonzero gradients "
+                            "for query encoder and joint fusion"
+                        )
+                    if config.model.freeze_parallel_adapters and any(
+                        parameter.grad is not None for parameter in adapter_parameters
+                    ):
+                        raise RuntimeError("frozen parallel adapters received gradients")
+                    gradient_reports[-1].update(
+                        {
+                            "query_nonzero": query_nonzero,
+                            "joint_nonzero": joint_nonzero,
+                        }
                     )
                 if optimizer is not None:
                     optimizer.step()
@@ -204,7 +290,9 @@ def main() -> None:
             "fusion_layer_indices": actual_fusion,
             "scanned_samples": min(len(train_dataset), args.max_samples),
             "selected_visual_tokens": visual_tokens,
-            "optimizer_steps": args.optimizer_steps,
+            "optimizer_steps": run_steps if optimizer is not None else 0,
+            "requested_optimizer_steps": args.optimizer_steps,
+            "optimizer_phase": optimizer_phase if optimizer is not None else None,
             "gradient_reports": gradient_reports,
             "elapsed_seconds": round(elapsed, 3),
             "peak_memory_allocated_gib": (

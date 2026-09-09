@@ -10,6 +10,15 @@ from mm_grounding.checkpoint import (
 )
 
 
+METRICS = {
+    "acc_0.5": 0.5,
+    "mean_iou": 0.6,
+    "acc_0.7": 0.4,
+    "parse_rate": 1.0,
+}
+SELECTION_ORDER = ("acc_0.5", "mean_iou", "acc_0.7", "parse_rate")
+
+
 class TinyModel(nn.Module):
     def __init__(self):
         super().__init__()
@@ -40,8 +49,9 @@ def test_checkpoint_omits_frozen_backbone_and_restores_trainable_weights(tmp_pat
         scaler,
         TinyConfig(),
         epoch=1,
-        score=0.5,
+        metrics=METRICS,
         global_step=10,
+        selection_order=SELECTION_ORDER,
     )
 
     payload = torch.load(path, weights_only=False)
@@ -50,6 +60,9 @@ def test_checkpoint_omits_frozen_backbone_and_restores_trainable_weights(tmp_pat
     assert payload["saved_parameter_names"] == ["fusion.bias", "fusion.weight"]
     assert payload["trainable_parameter_names"] == ["fusion.bias", "fusion.weight"]
     assert set(payload["model"]) == {"fusion.weight", "fusion.bias"}
+    assert payload["score"] == METRICS["acc_0.5"]
+    assert payload["metrics"] == METRICS
+    assert payload["selection_order"] == list(SELECTION_ORDER)
 
     target = TinyModel()
     load_model_checkpoint(path, target)
@@ -73,8 +86,9 @@ def test_joint_checkpoint_keeps_initialized_fusion_even_when_frozen(tmp_path):
         scaler,
         TinyConfig(stage="joint"),
         epoch=1,
-        score=0.5,
+        metrics=METRICS,
         global_step=10,
+        selection_order=SELECTION_ORDER,
     )
 
     payload = torch.load(path, weights_only=False)
