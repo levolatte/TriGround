@@ -1,4 +1,4 @@
-output_dir: runs/qwen3_vl_8b_e_stage2_joint
+output_dir: runs/qwen3_vl_8b_e_stage2_clean
 model:
   backbone: Qwen/Qwen3-VL-8B-Instruct
   backbone_revision: main
@@ -33,12 +33,11 @@ data:
   depth_clip: 20.0
 train:
   initialization_checkpoints:
-    - runs/qwen3_vl_8b_e_stage1a_ir/best_phase_a.pt
-    - runs/qwen3_vl_8b_e_stage1b_depth/best_phase_a.pt
+    - runs/qwen3_vl_8b_e_stage2_weak/best_phase_a.pt
   epochs: 1
   phase_a_epochs: 1
   phase_b_epochs: 0
-  fusion_lr_a: 1.0e-05
+  fusion_lr_a: 3.0e-06
   batch_size: 1
   grad_accumulation: 16
   val_batch_size: 1

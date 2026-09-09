@@ -1,4 +1,4 @@
-output_dir: runs/qwen3_vl_8b_e_stage2_joint
+output_dir: runs/qwen3_vl_8b_e_stage2_weak
 model:
   backbone: Qwen/Qwen3-VL-8B-Instruct
   backbone_revision: main
@@ -24,7 +24,7 @@ model:
   vision_lora_enabled: false
 data:
   stage: joint
-  train_manifest: ../city_detection_prepared/train/target_v2/manual_split/train_100.json
+  train_manifest: ../city_detection_prepared/train/target_v2/train_weak_scene_safe.json
   val_manifest: ../city_detection_prepared/train/target_v2/manual_split/val.json
   workers: 4
   min_pixels: 200704
@@ -33,8 +33,7 @@ data:
   depth_clip: 20.0
 train:
   initialization_checkpoints:
-    - runs/qwen3_vl_8b_e_stage1a_ir/best_phase_a.pt
-    - runs/qwen3_vl_8b_e_stage1b_depth/best_phase_a.pt
+    - runs/qwen3_vl_8b_e_stage2_joint/best_phase_a.pt
   epochs: 1
   phase_a_epochs: 1
   phase_b_epochs: 0
