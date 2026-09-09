@@ -58,3 +58,13 @@ state.
 Before a full run on an L40, execute a complete optimizer step using a sample
 at the configured maximum visual-token budget and record peak allocated and
 reserved GPU memory, token count, and step time.
+
+After the model is available in the local Hugging Face cache, run:
+
+```bash
+scripts/run_qwen3_vl_8b_preflight.sh
+```
+
+The preflight scans 64 training samples, selects the one with the largest
+processed visual-token count, and runs two AdamW steps. The second step verifies
+that gradients pass beyond the zero-initialized restore projections.
