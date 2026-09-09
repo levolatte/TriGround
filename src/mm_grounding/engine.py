@@ -134,7 +134,25 @@ def evaluate(
 
 def _optimizer(model, config, phase: str):
     if phase == "a":
-        groups = [{"params": model.task_parameters(), "lr": config.train.fusion_lr_a}]
+        adapter_parameters = (
+            model.parallel_adapter_parameters()
+            if config.train.parallel_adapter_lr is not None
+            else []
+        )
+        adapter_ids = {id(parameter) for parameter in adapter_parameters}
+        fusion_parameters = [
+            parameter
+            for parameter in model.task_parameters()
+            if id(parameter) not in adapter_ids
+        ]
+        groups = [{"params": fusion_parameters, "lr": config.train.fusion_lr_a}]
+        if adapter_parameters:
+            groups.append(
+                {
+                    "params": adapter_parameters,
+                    "lr": config.train.parallel_adapter_lr,
+                }
+            )
     else:
         groups = [
             {"params": model.task_parameters(), "lr": config.train.fusion_lr_b},
@@ -259,7 +277,14 @@ def _run_phase(
         resumed_learning_rates = [group["lr"] for group in optimizer.param_groups]
         if config.train.override_resume_learning_rates:
             configured_learning_rates = (
-                [config.train.fusion_lr_a]
+                [
+                    config.train.fusion_lr_a,
+                    *(
+                        [config.train.parallel_adapter_lr]
+                        if config.train.parallel_adapter_lr is not None
+                        else []
+                    ),
+                ]
                 if phase == "a"
                 else [config.train.fusion_lr_b, config.train.vision_lora_lr]
             )
@@ -378,12 +403,14 @@ def _run_phase(
                     )
                     if (
                         config.train.early_probe_abort_ratio
+                        and global_step >= config.train.early_probe_abort_from_step
                         and ratio < config.train.early_probe_abort_ratio
                     ):
                         print(json.dumps({
                             "event": "early_probe_abort", "global_step": global_step,
                             "mean_iou_ratio_to_rgb": ratio,
                             "threshold": config.train.early_probe_abort_ratio,
+                            "abort_from_step": config.train.early_probe_abort_from_step,
                         }), flush=True)
                         return False
                     if config.train.stop_after_last_probe and global_step == probe_steps[-1]:
@@ -461,7 +488,44 @@ def train(
 ):
     model.to(device)
     model.set_phase_a_trainable(
-        config.stage, freeze_parallel_adapters=config.model.freeze_parallel_adapters
+        config.stage,
+        freeze_parallel_adapters=config.model.freeze_parallel_adapters,
+        parallel_adapter_train_last_n=config.model.parallel_adapter_train_last_n,
+    )
+    modules = {
+        "model": model,
+        "backbone": model.backbone,
+        "fusion": model.fusion,
+    }
+    if model.fusion_type == "parallel_backbone":
+        modules.update(
+            {
+                "ir_adapters": model.fusion.ir_adapters,
+                "depth_adapters": model.fusion.depth_adapters,
+                "query_encoders": torch.nn.ModuleList(
+                    [model.fusion.ir_query_encoder, model.fusion.depth_query_encoder]
+                ),
+                "active_stage_fusions": (
+                    model.fusion.joint_stage_fusions
+                    if model.fusion.use_joint_fusion
+                    else model.fusion.stage_fusions
+                ),
+            }
+        )
+    parameter_report = {
+        name: {
+            "total": sum(parameter.numel() for parameter in module.parameters()),
+            "trainable": sum(
+                parameter.numel() for parameter in module.parameters() if parameter.requires_grad
+            ),
+        }
+        for name, module in modules.items()
+    }
+    print(
+        json.dumps(
+            {"event": "parameter_report", "modules": parameter_report}, ensure_ascii=False
+        ),
+        flush=True,
     )
     backbone_dtype = next(model.backbone.parameters()).dtype
     amp_dtype = backbone_dtype if backbone_dtype in (torch.float16, torch.bfloat16) else torch.float16

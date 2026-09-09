@@ -1,7 +1,13 @@
 import pytest
 import torch
 
-from mm_grounding.adapters import RDTDeepFusion, RDTStylePatchFusion, SafePostEmbedFusion
+from mm_grounding.adapters import (
+    JointQueryAwareStageFusion,
+    ParallelBackboneFusion,
+    RDTDeepFusion,
+    RDTStylePatchFusion,
+    SafePostEmbedFusion,
+)
 
 
 def test_fusion_is_rgb_safe_at_initialization_and_learns():
@@ -119,3 +125,114 @@ def test_deep_prompts_are_rgb_safe_and_every_layer_receives_gradient():
     for block in module.prompt_blocks:
         assert block.prompt_restore.weight.grad is not None
         assert torch.count_nonzero(block.prompt_restore.weight.grad) > 0
+
+
+def test_joint_query_fusion_is_exactly_rgb_safe_and_learns_one_residual():
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=0.001,
+        zero_init_restore=True,
+    )
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    ir_query, depth_query = (torch.randn(2, 4, 8) for _ in range(2))
+    mask = torch.ones(2, 4, dtype=torch.long)
+    output = module(rgb, ir, depth, ir_query, depth_query, mask, [2, 3])
+    assert torch.equal(output, rgb)
+    output.sum().backward()
+    assert module.restore.weight.grad is not None
+    assert torch.count_nonzero(module.restore.weight.grad) > 0
+    # Zero initialization deliberately delays gradients to upstream fusion
+    # layers until the restore projection has moved away from zero.
+    assert module.modality_attention.in_proj_weight.grad is not None
+    assert torch.count_nonzero(module.modality_attention.in_proj_weight.grad) == 0
+
+
+def test_joint_query_fusion_supports_either_auxiliary_and_rgb_only():
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=0.001,
+        zero_init_restore=False,
+    )
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    query = torch.randn(2, 4, 8)
+    mask = torch.ones(2, 4, dtype=torch.long)
+    ir_output = module(rgb, ir, None, query, None, mask, [2, 3])
+    depth_output = module(rgb, None, depth, None, query, mask, [2, 3])
+    rgb_output = module(rgb, None, None, None, None, mask, [2, 3])
+    assert ir_output.shape == depth_output.shape == rgb.shape
+    assert torch.equal(rgb_output, rgb)
+
+
+def test_independent_modality_dropout_disables_the_complete_residual(monkeypatch):
+    from mm_grounding.adapters import ModalityStageFusion
+
+    module = ModalityStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_attention_heads=2,
+        modality_dropout=0.5,
+        residual_scale_init=1.0,
+        zero_init_restore=False,
+    )
+    monkeypatch.setattr(torch, "rand", lambda *args, **kwargs: torch.zeros(*args, **kwargs))
+    residual = module(
+        torch.randn(5, 16),
+        torch.randn(5, 16),
+        torch.randn(2, 4, 8),
+        torch.ones(2, 4, dtype=torch.long),
+        [2, 3],
+    )
+    assert torch.count_nonzero(residual) == 0
+
+
+def test_parallel_fusion_supports_explicit_deepstack_layers_and_independent_widths():
+    module = ParallelBackboneFusion(
+        token_dim=16,
+        num_layers=27,
+        hidden_dim=6,
+        fusion_dim=8,
+        fusion_mixer_dim=20,
+        query_dim=4,
+        language_dim=12,
+        num_fusion_stages=4,
+        fusion_layer_indices=(8, 16, 24, 26),
+        fusion_attention_heads=2,
+        query_attention_heads=1,
+        use_joint_fusion=True,
+    )
+    assert module.fusion_layer_indices == (8, 16, 24, 26)
+    assert module.ir_adapters[0].down.out_features == 6
+    assert module.ir_query_encoder.output_norm.normalized_shape == (4,)
+    stage = module.joint_stage_fusions["8"]
+    assert stage.rgb_projection[1].out_features == 8
+    assert stage.language_attention.kdim == 4
+    assert stage.joint_mixer[0].out_features == 20
+
+
+def test_zero_initialized_joint_fusion_reaches_upstream_after_first_update():
+    module = JointQueryAwareStageFusion(
+        token_dim=16,
+        hidden_dim=8,
+        query_dim=4,
+        mixer_dim=20,
+        query_attention_heads=2,
+        modality_dropout=0.0,
+        residual_scale_init=1.0,
+        zero_init_restore=True,
+    )
+    optimizer = torch.optim.SGD(module.parameters(), lr=0.1)
+    rgb, ir, depth = (torch.randn(5, 16) for _ in range(3))
+    ir_query, depth_query = (torch.randn(2, 4, 4) for _ in range(2))
+    mask = torch.ones(2, 4, dtype=torch.long)
+    module(rgb, ir, depth, ir_query, depth_query, mask, [2, 3]).sum().backward()
+    assert torch.count_nonzero(module.joint_mixer[0].weight.grad) == 0
+    optimizer.step()
+    optimizer.zero_grad()
+    module(rgb, ir, depth, ir_query, depth_query, mask, [2, 3]).sum().backward()
+    assert torch.count_nonzero(module.joint_mixer[0].weight.grad) > 0

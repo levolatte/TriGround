@@ -6,7 +6,7 @@ import torch
 from torch.utils.data import DataLoader, Subset
 from transformers import AutoProcessor
 
-from mm_grounding.checkpoint import load_model_checkpoint
+from mm_grounding.checkpoint import load_initialization_checkpoints, load_model_checkpoint
 from mm_grounding.config import load_config
 from mm_grounding.data import GroundingDataset, NativeGroundingCollator
 from mm_grounding.engine import seed_everything, train
@@ -48,11 +48,16 @@ def main() -> None:
     if torch.cuda.is_available():
         torch.set_float32_matmul_precision("high")
     processor = AutoProcessor.from_pretrained(
-        config.model.backbone, min_pixels=config.data.min_pixels, max_pixels=config.data.max_pixels
+        config.model.backbone,
+        revision=config.model.backbone_revision,
+        min_pixels=config.data.min_pixels,
+        max_pixels=config.data.max_pixels,
     )
     model = build_grounder(config.model, processor)
-    for checkpoint in config.train.initialization_checkpoints:
-        load_model_checkpoint(checkpoint, model)
+    if config.train.initialization_checkpoints:
+        load_initialization_checkpoints(config.train.initialization_checkpoints, model)
+    if config.train.warm_start_joint_fusion_from_legacy:
+        model.fusion.warm_start_joint_from_legacy()
     if config.train.init_checkpoint:
         load_model_checkpoint(config.train.init_checkpoint, model)
     if config.train.gradient_checkpointing:

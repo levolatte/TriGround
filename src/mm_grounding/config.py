@@ -9,7 +9,13 @@ import yaml
 @dataclass(frozen=True)
 class ModelConfig:
     backbone: str = "Qwen/Qwen3-VL-2B-Instruct"
+    backbone_revision: str | None = None
+    dtype: str = "auto"
     adapter_channels: int = 128
+    fusion_dim: int | None = None
+    fusion_attention_heads: int | None = None
+    fusion_mixer_dim: int | None = None
+    query_dim: int = 128
     orthogonal_channels: int = 8
     prompt_gate_init: float = -3.0
     fusion_type: str = "legacy_patch"
@@ -17,7 +23,10 @@ class ModelConfig:
     fusion_residual_scale_init: float = 0.001
     fusion_zero_init_prompt_restore: bool = False
     parallel_fusion_stages: int = 1
+    parallel_fusion_layer_indices: tuple[int, ...] = ()
     parallel_adapter_scale_init: float = 0.01
+    parallel_joint_fusion: bool = False
+    parallel_adapter_train_last_n: int = 0
     query_encoder_layers: int = 1
     query_attention_heads: int = 4
     query_dropout: float = 0.0
@@ -25,7 +34,7 @@ class ModelConfig:
     auxiliary_bbox_enabled: bool = False
     auxiliary_bbox_l1_weight: float = 2.0
     auxiliary_bbox_giou_weight: float = 1.0
-    vision_lora_enabled: bool = True
+    vision_lora_enabled: bool = False
     vision_lora_rank: int = 8
     vision_lora_alpha: float = 16.0
     vision_lora_dropout: float = 0.05
@@ -66,7 +75,9 @@ class TrainConfig:
     stop_after_last_probe: bool = False
     early_probe_subset_size: int = 128
     early_probe_abort_ratio: float = 0.0
+    early_probe_abort_from_step: int = 0
     fusion_lr_a: float = 1e-4
+    parallel_adapter_lr: float | None = None
     fusion_lr_b: float = 3e-5
     vision_lora_lr: float = 1e-5
     weight_decay: float = 0.01
@@ -74,6 +85,7 @@ class TrainConfig:
     seed: int = 2026
     gradient_checkpointing: bool = True
     initialization_checkpoints: tuple[str, ...] = ()
+    warm_start_joint_fusion_from_legacy: bool = False
     init_checkpoint: str | None = None
     resume_epoch: int = 0
     override_resume_learning_rates: bool = False
@@ -109,14 +121,39 @@ class ExperimentConfig:
             raise ValueError(f"{self.model.fusion_type} keeps the Qwen vision backbone frozen")
         if self.model.parallel_fusion_stages < 1:
             raise ValueError("parallel_fusion_stages must be positive")
+        fusion_indices = tuple(self.model.parallel_fusion_layer_indices)
+        if any(index < 0 for index in fusion_indices):
+            raise ValueError("parallel_fusion_layer_indices must be non-negative")
+        if tuple(sorted(set(fusion_indices))) != fusion_indices:
+            raise ValueError(
+                "parallel_fusion_layer_indices must be sorted and contain no duplicates"
+            )
+        if self.model.fusion_dim is not None and self.model.fusion_dim < 1:
+            raise ValueError("fusion_dim must be positive")
+        if self.model.fusion_mixer_dim is not None and self.model.fusion_mixer_dim < 1:
+            raise ValueError("fusion_mixer_dim must be positive")
+        if self.model.query_dim < 1:
+            raise ValueError("query_dim must be positive")
+        if self.model.parallel_adapter_train_last_n < 0:
+            raise ValueError("parallel_adapter_train_last_n must be non-negative")
         if self.model.parallel_adapter_scale_init <= 0:
             raise ValueError("parallel_adapter_scale_init must be positive")
+        if self.model.parallel_joint_fusion and self.data.stage != "joint":
+            raise ValueError("parallel_joint_fusion requires joint-stage data")
         if self.model.query_encoder_layers < 1:
             raise ValueError("query_encoder_layers must be positive")
         if self.model.query_attention_heads < 1:
             raise ValueError("query_attention_heads must be positive")
-        if self.model.adapter_channels % self.model.query_attention_heads:
-            raise ValueError("adapter_channels must be divisible by query_attention_heads")
+        fusion_dim = self.model.fusion_dim or self.model.adapter_channels
+        fusion_heads = self.model.fusion_attention_heads or self.model.query_attention_heads
+        if fusion_heads < 1:
+            raise ValueError("fusion_attention_heads must be positive")
+        if fusion_dim % fusion_heads:
+            raise ValueError("fusion_dim must be divisible by fusion_attention_heads")
+        if self.model.query_dim % self.model.query_attention_heads:
+            raise ValueError("query_dim must be divisible by query_attention_heads")
+        if self.model.dtype not in {"auto", "bfloat16", "float16", "float32"}:
+            raise ValueError("dtype must be auto, bfloat16, float16, or float32")
         if not 0 <= self.model.query_dropout < 1:
             raise ValueError("query_dropout must be in [0, 1)")
         if self.model.auxiliary_bbox_enabled and self.model.fusion_type != "safe_post_embed":
@@ -164,8 +201,19 @@ class ExperimentConfig:
             raise ValueError("stop_after_last_probe requires an early probe step")
         if not 0 <= self.train.early_probe_abort_ratio <= 1:
             raise ValueError("early_probe_abort_ratio must be in [0, 1]")
+        if self.train.early_probe_abort_from_step < 0:
+            raise ValueError("early_probe_abort_from_step must be non-negative")
         if self.train.phase_a_epochs < 0 or self.train.phase_b_epochs < 0:
             raise ValueError("invalid Phase A/B epochs")
+        if self.train.parallel_adapter_lr is not None and (
+            self.train.parallel_adapter_lr <= 0
+            or self.model.fusion_type != "parallel_backbone"
+            or self.model.parallel_adapter_train_last_n < 1
+        ):
+            raise ValueError(
+                "parallel_adapter_lr requires a positive value and trainable "
+                "parallel adapter layers"
+            )
         if self.train.phase_a_epochs == 0 and self.train.phase_b_epochs == 0:
             raise ValueError("at least one training phase is required")
         if self.train.phase_a_epochs + self.train.phase_b_epochs != self.train.epochs:
@@ -175,6 +223,13 @@ class ExperimentConfig:
         if self.train.initialization_checkpoints and self.train.init_checkpoint:
             raise ValueError(
                 "initialization_checkpoints cannot be combined with init_checkpoint resume"
+            )
+        if self.train.warm_start_joint_fusion_from_legacy and not (
+            self.model.parallel_joint_fusion and self.train.initialization_checkpoints
+        ):
+            raise ValueError(
+                "joint fusion warm start requires parallel_joint_fusion and an "
+                "initialization checkpoint"
             )
         if self.train.phase_b_epochs and not self.model.vision_lora_enabled:
             raise ValueError("Phase B requires Vision LoRA")
