@@ -37,14 +37,17 @@ def test_formal_configs_keep_hyperparameters_and_isolate_checkpoint_chain(tmp_pa
         assert config["train"]["epochs"] == previous["train"]["epochs"]
         assert config["train"]["grad_accumulation"] == 16
         assert config["model"]["parallel_fusion_layer_indices"] == [8, 16, 24, 26]
-        assert config["output_dir"] == str(run / stage)
+        assert not Path(config["output_dir"]).is_absolute()
+        assert Path(config["output_dir"]).resolve() == run / stage
+        assert all(not Path(config["data"][key]).is_absolute()
+                   for key in ("train_manifest", "val_manifest"))
         assert config["data"]["max_pixels"] == previous["data"]["max_pixels"]
         assert (source / f"qwen3_vl_8b_{stage}.yaml").read_bytes() == original[stage]
-    assert configs["stage2_joint"]["train"]["initialization_checkpoints"] == [
-        str(run / stage / "best_phase_a.pt") for stage in STAGES[:2]
+    assert [Path(p).resolve() for p in configs["stage2_joint"]["train"]["initialization_checkpoints"]] == [
+        run / stage / "best_phase_a.pt" for stage in STAGES[:2]
     ]
-    assert configs["stage2_clean"]["train"]["initialization_checkpoints"] == [
-        str(run / "stage2_weak/best_phase_a.pt")
+    assert [Path(p).resolve() for p in configs["stage2_clean"]["train"]["initialization_checkpoints"]] == [
+        run / "stage2_weak/best_phase_a.pt"
     ]
 
 

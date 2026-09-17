@@ -12,7 +12,7 @@
 set -euo pipefail
 cd "${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}"
 source scripts/slurm_env.sh
-run_dir="${RUN_ROOT:-$PWD/runs/slurm-smoke-${SLURM_JOB_ID:?submit with sbatch}}"
+run_dir="${RUN_ROOT:-runs/smoke-${SLURM_JOB_ID:-$(date +%Y%m%d-%H%M%S)}}"
 [[ "$run_dir" = /* ]] || run_dir="$PWD/$run_dir"
 "$python_bin" tools/prepare_slurm_run.py --config-dir "${CONFIG_DIR:-configs}" --run-dir "$run_dir" --smoke
 mkdir -p "$run_dir/logs"

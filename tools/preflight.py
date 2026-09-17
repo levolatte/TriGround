@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import replace
 import json
 import time
 from pathlib import Path
@@ -103,7 +104,7 @@ def main() -> None:
         # Gradient reachability needs both modalities on every diagnostic step.
         # This process never saves weights; train.py still uses the source dropout.
         report["training_modality_dropout"] = config.model.modality_dropout
-        config.model.modality_dropout = 0.0
+        config = replace(config, model=replace(config.model, modality_dropout=0.0))
         report["preflight_modality_dropout"] = 0.0
         processor = AutoProcessor.from_pretrained(
             config.model.backbone,
@@ -138,6 +139,10 @@ def main() -> None:
         )
         if config.train.phase_a_epochs == 0:
             model.enable_vision_lora()
+        # from_pretrained leaves the backbone in eval mode. Checkpointing is
+        # active only in training mode, which must match the real train loop.
+        model.train()
+        model.backbone.config.use_cache = False
         train_dataset = GroundingDataset(
             manifests["train"],
             config.stage,
@@ -170,6 +175,8 @@ def main() -> None:
         loss = None
         for step in range(run_steps):
             loss = model(**inputs)["loss"]
+            if not bool(torch.isfinite(loss)):
+                raise RuntimeError(f"non-finite preflight loss at step {step + 1}")
             if args.backward or args.optimizer_steps:
                 loss.backward()
                 fusion_gradients = [
@@ -280,6 +287,7 @@ def main() -> None:
         cuda_active = torch.cuda.is_available() and str(args.device).startswith("cuda")
         report["real_model"] = {
             "loss": float(loss.detach()),
+            "backbone_training": model.backbone.training,
             "gpu": torch.cuda.get_device_name(args.device) if cuda_active else None,
             "batch_size": config.train.batch_size,
             "joint_from_start": config.train.phase_a_epochs == 0,

@@ -32,7 +32,7 @@ def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=N
     for stage in STAGES:
         source = config_dir / f"qwen3_vl_8b_{stage}.yaml"
         raw = yaml.safe_load(source.read_text(encoding="utf-8"))
-        raw["output_dir"] = str(run_dir / stage)
+        raw["output_dir"] = os.path.relpath(run_dir / stage)
         if overrides.get("BACKBONE"):
             raw["model"]["backbone"] = overrides["BACKBONE"]
         data = raw["data"]
@@ -52,11 +52,11 @@ def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=N
             )
             data["val_manifest"] = str(root / "manual_split/val.json")
         for key in ("train_manifest", "val_manifest"):
-            data[key] = str(Path(data[key]).resolve())
+            data[key] = os.path.relpath(Path(data[key]).resolve())
             if not Path(data[key]).is_file():
                 raise FileNotFoundError(f"{stage}: {key} does not exist: {data[key]}")
         raw["train"]["initialization_checkpoints"] = [] if smoke else [
-            str(run_dir / parent / "best_phase_a.pt") for parent in DEPENDENCIES[stage]
+            os.path.relpath(run_dir / parent / "best_phase_a.pt") for parent in DEPENDENCIES[stage]
         ]
         # These configs describe fresh jobs, never implicit training resumes.
         raw["train"]["init_checkpoint"] = None
