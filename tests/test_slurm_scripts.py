@@ -63,12 +63,15 @@ def run_script(tmp_path, kind, **extra_env):
     )
     gpu = bin_dir / "nvidia-smi"
     gpu.write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8", newline="\n")
+    backbone = tmp_path / "Qwen3-VL-8B-Instruct"
+    backbone.mkdir()
+    (backbone / "config.json").write_text("{}", encoding="utf-8")
     wrapper.chmod(0o755)
     gpu.chmod(0o755)
     log = tmp_path / "calls.jsonl"
     env = dict(os.environ, REPO_DIR=bash_path(ROOT), PYTHON=bash_path(wrapper),
                RUN_ROOT=bash_path(tmp_path / "run with spaces"), CALL_LOG=str(log),
-               SLURM_JOB_ID="123", **extra_env)
+               SLURM_JOB_ID="123", BACKBONE=bash_path(backbone), **extra_env)
     # Set PATH in Bash so Git Bash and Unix both see the fake GPU command.
     command = 'export PATH="$1:$PATH"; bash "$2"'
     result = subprocess.run(
@@ -78,6 +81,15 @@ def run_script(tmp_path, kind, **extra_env):
     )
     calls = [json.loads(line) for line in log.read_text(encoding="utf-8").splitlines()]
     return result, calls
+
+
+@pytest.mark.parametrize("kind", ["smoke", "formal"])
+def test_slurm_requests_one_24gb_class_gpu(kind):
+    text = (ROOT / f"scripts/qwen3_vl_8b_{kind}.slurm").read_text(encoding="utf-8")
+    assert "#SBATCH --gres=gpu:1" in text
+    assert "#SBATCH --cpus-per-task=8" in text
+    assert "#SBATCH --mem=64G" in text
+    assert "scripts/slurm_env.sh" in text
 
 
 def test_smoke_runs_three_two_step_checks_and_generation(tmp_path):
@@ -115,4 +127,4 @@ def test_failed_training_stops_pipeline_through_tee(tmp_path):
 def test_smoke_rejects_unparseable_generation(tmp_path):
     result, _ = run_script(tmp_path, "smoke", FAIL_PARSE="1")
     assert result.returncode != 0
-    assert "No generated bbox parsed successfully" in result.stderr
+    assert "Not every generated bbox parsed successfully" in result.stderr

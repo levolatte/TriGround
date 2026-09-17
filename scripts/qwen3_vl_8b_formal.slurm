@@ -12,7 +12,7 @@
 set -euo pipefail
 cd "${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}"
 source scripts/slurm_env.sh
-run_dir="${RUN_ROOT:-$PWD/runs/slurm-formal-${SLURM_JOB_ID:?submit with sbatch}}"
+run_dir="${RUN_ROOT:-runs/formal-${SLURM_JOB_ID:-$(date +%Y%m%d-%H%M%S)}}"
 [[ "$run_dir" = /* ]] || run_dir="$PWD/$run_dir"
 "$python_bin" tools/prepare_slurm_run.py --config-dir "${CONFIG_DIR:-configs}" --run-dir "$run_dir"
 mkdir -p "$run_dir/logs"
@@ -45,4 +45,6 @@ eval_manifest="$("$python_bin" -c 'import json,sys; print(json.load(open(sys.arg
     --manifest "$eval_manifest" \
     --output "$run_dir/final_evaluation.json" --rows-output "$run_dir/final_evaluation.jsonl" \
     |& tee "$run_dir/logs/final_evaluation.log"
+test -s "$run_dir/native_rgb.json"
+test -s "$run_dir/final_evaluation.json"
 printf 'Five-stage training and full evaluation completed: %s\n' "$run_dir"

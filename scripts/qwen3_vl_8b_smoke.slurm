@@ -42,7 +42,7 @@ import json, sys
 with open(sys.argv[1], encoding="utf-8") as handle:
     report = json.load(handle)
 for mode in ("rgb_baseline", "rgb_ir", "rgb_depth", "rgb_ir_depth"):
-    if report[mode]["parse_rate"] <= 0:
-        raise RuntimeError(f"No generated bbox parsed successfully in {mode}")
+    if report[mode]["parse_rate"] != 1.0:
+        raise RuntimeError(f"Not every generated bbox parsed successfully in {mode}")
 PY
 printf 'Smoke checks completed: %s\n' "$run_dir"
