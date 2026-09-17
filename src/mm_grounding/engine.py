@@ -54,6 +54,16 @@ def _move(batch, device):
     return {key: value.to(device) if torch.is_tensor(value) else value for key, value in batch.items()}
 
 
+def _accumulation_group_size(step: int, total_steps: int, accumulation: int) -> int:
+    """Return the actual number of micro-batches in the current update group."""
+    if not 1 <= step <= total_steps or accumulation < 1:
+        raise ValueError("invalid gradient accumulation position")
+    remainder = total_steps % accumulation
+    if remainder and step > total_steps - remainder:
+        return remainder
+    return accumulation
+
+
 def _training_inputs(batch):
     names = (
         "pixel_values", "ir_pixel_values", "depth_pixel_values", "input_ids",
@@ -420,7 +430,10 @@ def _run_phase(
                     **_training_inputs(batch), geometry_gradient_scale=geometry_scale
                 )
                 loss = output["loss"]
-                scaled_loss = loss / config.train.grad_accumulation
+                group_size = _accumulation_group_size(
+                    step, len(train_loader), config.train.grad_accumulation
+                )
+                scaled_loss = loss / group_size
             if (
                 config.train.auxiliary_gradient_diagnostics
                 and config.model.auxiliary_bbox_enabled

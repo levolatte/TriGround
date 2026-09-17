@@ -92,6 +92,37 @@ def test_slurm_requests_one_24gb_class_gpu(kind):
     assert "scripts/slurm_env.sh" in text
 
 
+def test_slurm_environment_allows_source_archive_without_git(tmp_path):
+    archive = tmp_path / "source archive"
+    scripts = archive / "scripts"
+    scripts.mkdir(parents=True)
+    shutil.copyfile(ROOT / "scripts/slurm_env.sh", scripts / "slurm_env.sh")
+    bin_dir = tmp_path / "bin"
+    bin_dir.mkdir()
+    fake_python = bin_dir / "python"
+    fake_python.write_text("#!/usr/bin/env bash\ncat >/dev/null\n", encoding="utf-8", newline="\n")
+    fake_nvidia = bin_dir / "nvidia-smi"
+    fake_nvidia.write_text("#!/usr/bin/env bash\nexit 0\n", encoding="utf-8", newline="\n")
+    fake_python.chmod(0o755)
+    fake_nvidia.chmod(0o755)
+    backbone = tmp_path / "Qwen3-VL-8B-Instruct"
+    backbone.mkdir()
+    (backbone / "config.json").write_text("{}", encoding="utf-8")
+    env = dict(
+        os.environ,
+        BACKBONE=bash_path(backbone),
+        PYTHON=bash_path(fake_python),
+        GIT_CEILING_DIRECTORIES=bash_path(tmp_path),
+    )
+    result = subprocess.run(
+        [BASH, "-c", 'cd "$1"; export PATH="$2:$PATH"; source scripts/slurm_env.sh',
+         "test", bash_path(archive), bash_path(bin_dir)],
+        env=env, capture_output=True, text=True, encoding="utf-8", timeout=30,
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    assert "GitCommit=unavailable" in result.stdout
+
+
 def test_smoke_runs_three_two_step_checks_and_generation(tmp_path):
     result, calls = run_script(tmp_path, "smoke")
     assert result.returncode == 0, result.stdout + result.stderr

@@ -87,3 +87,23 @@ def test_depth_stage_loads_depth_without_fake_ir(tmp_path):
     sample = GroundingDataset(manifest, stage="depth")[0]
     assert set(sample) == {"rgb", "depth", "query", "bbox", "sample_id"}
     assert sample["depth"].mode == "RGB"
+
+
+def test_relative_images_are_resolved_from_manifest_directory(tmp_path, monkeypatch):
+    dataset_dir = tmp_path / "dataset"
+    dataset_dir.mkdir()
+    Image.new("RGB", (8, 6), "white").save(dataset_dir / "rgb.png")
+    Image.new("L", (8, 6), 127).save(dataset_dir / "ir.png")
+    manifest = dataset_dir / "manifest.json"
+    manifest.write_text(
+        json.dumps({"sample": {
+            "rgb": "rgb.png", "ir": "ir.png", "query": "object",
+            "bbox": [0.1, 0.2, 0.7, 0.8],
+        }}),
+        encoding="utf-8",
+    )
+    elsewhere = tmp_path / "elsewhere"
+    elsewhere.mkdir()
+    monkeypatch.chdir(elsewhere)
+    sample = GroundingDataset(manifest, stage="ir")[0]
+    assert sample["rgb"].size == sample["ir"].size == (8, 6)

@@ -21,6 +21,15 @@ DEPENDENCIES = {
 }
 
 
+def runtime_path(path: Path) -> str:
+    """Prefer a cwd-relative runtime path, falling back across Windows drives."""
+    path = path.resolve()
+    try:
+        return os.path.relpath(path)
+    except ValueError:
+        return str(path)
+
+
 def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=None):
     overrides = overrides or {}
     run_dir = run_dir.resolve()
@@ -32,7 +41,7 @@ def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=N
     for stage in STAGES:
         source = config_dir / f"qwen3_vl_8b_{stage}.yaml"
         raw = yaml.safe_load(source.read_text(encoding="utf-8"))
-        raw["output_dir"] = os.path.relpath(run_dir / stage)
+        raw["output_dir"] = runtime_path(run_dir / stage)
         if overrides.get("BACKBONE"):
             raw["model"]["backbone"] = overrides["BACKBONE"]
         data = raw["data"]
@@ -52,11 +61,11 @@ def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=N
             )
             data["val_manifest"] = str(root / "manual_split/val.json")
         for key in ("train_manifest", "val_manifest"):
-            data[key] = os.path.relpath(Path(data[key]).resolve())
+            data[key] = runtime_path(Path(data[key]))
             if not Path(data[key]).is_file():
                 raise FileNotFoundError(f"{stage}: {key} does not exist: {data[key]}")
         raw["train"]["initialization_checkpoints"] = [] if smoke else [
-            os.path.relpath(run_dir / parent / "best_phase_a.pt") for parent in DEPENDENCIES[stage]
+            runtime_path(run_dir / parent / "best_phase_a.pt") for parent in DEPENDENCIES[stage]
         ]
         # These configs describe fresh jobs, never implicit training resumes.
         raw["train"]["init_checkpoint"] = None

@@ -24,7 +24,11 @@ fi
 
 printf 'Job=%s Host=%s Repository=%s Python=%s Backbone=%s\n' \
   "${SLURM_JOB_ID:-local}" "$(hostname)" "$PWD" "$python_bin" "$BACKBONE"
-git rev-parse HEAD
+if git_commit="$(git rev-parse HEAD 2>/dev/null)"; then
+  printf 'GitCommit=%s\n' "$git_commit"
+else
+  printf 'GitCommit=unavailable (source archive without .git)\n'
+fi
 nvidia-smi
 "$python_bin" - <<'PY'
 import os, torch, transformers
