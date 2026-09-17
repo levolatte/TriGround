@@ -1,6 +1,6 @@
 # TriGround：RGB–红外–深度三模态视觉指代定位
 
-当前 `main` 同时保留已发布的 2B 基线与新的 8B/DeepStack 实验实现。8B 五阶段配置见 [升级说明](QWEN3_VL_8B_UPGRADE.md)，集群冒烟测试与完整训练评估见 [Slurm 操作说明](SLURM.md)。下面的比赛分数仍是历史 2B 路线结果，不代表新 8B 实验成绩。
+本仓库同时保留已发布的 2B 基线与新的 8B/DeepStack 实验实现；当前推荐复现实验是 Qwen3-VL-8B 五阶段流程。8B 配置见 [升级说明](QWEN3_VL_8B_UPGRADE.md)，集群冒烟测试与完整训练评估见 [Slurm 操作说明](SLURM.md)。下面的比赛分数仍是历史 2B 路线结果，不代表新 8B 实验成绩。
 
 TriGround 基于 `Qwen3-VL-2B-Instruct`，面向 RGB（可见光）、IR（红外）和 Depth（深度）三模态视觉指代定位任务。模型接收对齐的三模态图像和文本查询，输出查询目标在可见光图像中的归一化边界框 `[x1, y1, x2, y2]`。
 
@@ -63,7 +63,52 @@ Windows 下使用以下命令激活环境：
 .venv\Scripts\activate
 ```
 
-请另外下载 `Qwen/Qwen3-VL-2B-Instruct`，或者在配置文件的 `model.backbone` 中填写已有的本地模型路径。
+当前 8B 流程需要另外下载 `Qwen/Qwen3-VL-8B-Instruct`；历史 2B 配置才使用 `Qwen/Qwen3-VL-2B-Instruct`。模型权重不包含在本仓库中。
+
+## 复现实验前提与数据放置
+
+**只克隆本仓库不能直接开始训练。** 仓库已经包含模型实现、五阶段配置、训练/评估工具、数据重叠审计和 Slurm 脚本，不依赖其他未公开的项目代码；但以下大文件和运行环境必须由实验者另行准备：
+
+- `Qwen/Qwen3-VL-8B-Instruct` 的完整权重和配置；
+- RGBT-Ground-Dataset、RoboRefIt 和项目目标域 `city_detection_prepared` 数据；
+- 与集群驱动匹配的 Python、PyTorch/CUDA 依赖；
+- 支持 BF16 且显存不少于 23,000 MiB 的 CUDA GPU（推荐 L40 48 GB）。
+
+仓库的 `.gitignore` 会排除数据、Qwen 权重、训练 checkpoint 和 `runs/`，所以它们不会随 `git clone` 获得。使用默认 8B 配置和 Slurm 脚本时，推荐把外部资源放在仓库同级：
+
+```text
+experiment-root/
+├── TriGround/                         # 本仓库；名称可不同
+├── models/
+│   └── Qwen3-VL-8B-Instruct/          # 必须含 config.json 和完整权重
+├── datasets/
+│   ├── RGBT-Ground-Dataset/
+│   │   └── extracted/
+│   │       ├── subsets/train_50.jsonl
+│   │       └── manifests/val.jsonl
+│   └── RoboRefIt/
+│       └── manifests/
+│           ├── formal_subsets/train_50.jsonl
+│           └── testA.jsonl
+└── city_detection_prepared/
+    └── train/target_v2/
+        ├── manual_split/train_100.json
+        ├── manual_split/val.json
+        └── train_weak_scene_safe.json
+```
+
+每份 manifest 中还必须包含可读取的 RGB/IR/Depth 图片路径。相对图片路径以 **manifest 所在目录** 为基准；若 manifest 保存的是绝对路径，则该路径必须在计算节点上同样有效。
+
+不采用上述默认布局时，无需修改仓库中的 YAML，可在提交 Slurm 作业前覆盖位置：
+
+```bash
+export BACKBONE=/shared/models/Qwen3-VL-8B-Instruct
+export RGBT_ROOT=/shared/datasets/RGBT-Ground-Dataset
+export ROBOREFIT_ROOT=/shared/datasets/RoboRefIt
+export CITY_ROOT=/shared/datasets/city_detection_prepared
+```
+
+完成上述准备后，先运行 `sbatch scripts/qwen3_vl_8b_smoke.slurm`；冒烟任务成功后再运行 `sbatch scripts/qwen3_vl_8b_formal.slurm`。完整环境变量、集群参数和产物说明见 [SLURM.md](SLURM.md)。
 
 ## 数据格式
 

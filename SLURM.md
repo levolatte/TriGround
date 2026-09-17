@@ -2,6 +2,8 @@
 
 本流程针对 `QWEN3_VL_8B_UPGRADE.md` 中的 E 配置：冻结 8B 主干、BF16、四个 DeepStack/末层融合边界、单卡执行。集群须提供可运行该配置的 GPU，目标是 L40 48 GB；实际峰值以冒烟结果为准。
 
+仓库本身包含完整的训练、评估和作业编排代码，但不包含训练数据、Qwen3-VL-8B 权重或 CUDA 运行环境。仅执行 `git clone` 不足以开始实验；必须按下文放置外部资源。
+
 ## 两个入口
 
 | 文件 | 工作内容 | 默认资源 |
@@ -13,19 +15,34 @@
 
 ## 1. 环境与数据准备
 
-在登录/下载节点进入 **TriGround 仓库根目录，即本项目的 `code/`**。激活已有 CUDA 环境，或在允许安装的节点运行 `bash scripts/setup_gpu.sh`。后者创建 `.venv`，安装 CUDA 12.8 的 PyTorch 2.8.0 和固定实验依赖；集群 CUDA/驱动要求不同时，应使用对应的 PyTorch 环境。
+在登录/下载节点进入 **TriGround 仓库根目录**。激活已有 CUDA 环境，或在允许安装的节点运行 `bash scripts/setup_gpu.sh`。后者创建 `.venv`，安装 CUDA 12.8 的 PyTorch 2.8.0 和固定实验依赖；集群 CUDA/驱动要求不同时，应使用对应的 PyTorch 环境。
+
+默认配置约定仓库、模型和数据按以下方式存放。`TriGround/` 可以换成其他仓库目录名，但各外部目录与仓库的相对关系需要保持不变：
+
+```text
+experiment-root/
+├── TriGround/
+├── models/Qwen3-VL-8B-Instruct/
+├── datasets/RGBT-Ground-Dataset/
+├── datasets/RoboRefIt/
+└── city_detection_prepared/
+```
 
 ```bash
-cd /your/path/AIC/code
+cd /your/path/experiment-root/TriGround
 source .venv/bin/activate
 export PYTHON="$PWD/.venv/bin/python"
 
-# 可改为集群共享盘；下载节点与计算节点必须能访问同一缓存。
+# 方案 A：提前下载到共享 Hugging Face 缓存，计算节点离线读取。
 export HF_HOME=/your/shared/cache/huggingface
 python tools/download_model.py --repo-id Qwen/Qwen3-VL-8B-Instruct \
   --cache-dir "$HF_HOME/hub"
+export BACKBONE=Qwen/Qwen3-VL-8B-Instruct
 
-# 按集群实际存放位置设置；目录结构见下表。
+# 方案 B：若已整理成完整本地模型目录，直接指定该目录。
+# export BACKBONE=/your/shared/models/Qwen3-VL-8B-Instruct
+
+# 数据不在默认同级目录时，按集群实际位置覆盖；结构见下表。
 export RGBT_ROOT=/your/shared/datasets/RGBT-Ground-Dataset
 export ROBOREFIT_ROOT=/your/shared/datasets/RoboRefIt
 export CITY_ROOT=/your/shared/datasets/city_detection_prepared
@@ -37,20 +54,20 @@ export CITY_ROOT=/your/shared/datasets/city_detection_prepared
 | `ROBOREFIT_ROOT` | `manifests/formal_subsets/train_50.jsonl`、`manifests/testA.jsonl` |
 | `CITY_ROOT` | `train/target_v2/manual_split/train_100.json`、`manual_split/val.json`、`train_weak_scene_safe.json`，后三者均相对 `train/target_v2/` |
 
-清单内的图片路径也必须在计算节点有效；仅更改清单根目录不能修复其中旧机器的绝对图片路径。未设置变量时沿用源 YAML 路径，其中 Stage1 默认路径仍是队友的 `/root/autodl-tmp/...`。
+清单内的图片路径也必须在计算节点有效。相对图片路径以清单文件所在目录为基准；仅更改清单根目录不能修复其中旧机器的绝对图片路径。未设置数据变量时使用源 YAML 的默认相对路径：`../datasets/RGBT-Ground-Dataset`、`../datasets/RoboRefIt` 和 `../city_detection_prepared`。
 
 可选变量：
 
-- `BACKBONE`：已有本地完整模型目录；不设置时使用源配置的 Hugging Face ID 和缓存。
+- `BACKBONE`：完整本地模型目录，或已经下载进 `HF_HOME` 的 Hugging Face ID。Slurm 默认值为 `../models/Qwen3-VL-8B-Instruct`，并在启动 GPU 工作前检查本地目录中的 `config.json`。
 - `CONFIG_DIR`：自定义的五份 8B YAML 所在目录，默认 `configs`。文件名需保持 `qwen3_vl_8b_<stage>.yaml`。
 - `EVAL_MANIFEST`：训练结束后评估的**带标签独立保留集**。默认使用最终配置的 119 条复核验证集，此时报告只是验证成绩，不称作独立测试成绩。若使用独立 284 条清单，须显式设置此变量，脚本不猜测文件路径。
 - `RUN_ROOT`：本次新实验目录，必须尚不存在；默认 `runs/slurm-smoke-<jobid>` 或 `runs/slurm-formal-<jobid>`。使用依赖作业时不要给两个作业设置相同目录。
-- `REPO_DIR`：计算节点上的仓库根目录；默认 Slurm 提交工作目录。跨目录提交时必须使用 `sbatch --chdir=/your/path/AIC/code` 或设置 `REPO_DIR`。
+- `REPO_DIR`：计算节点上的仓库根目录；默认 Slurm 提交工作目录。跨目录提交时必须使用 `sbatch --chdir=/your/path/experiment-root/TriGround` 或设置 `REPO_DIR`。
 - `SMOKE_SCAN_SAMPLES`：冒烟扫描的训练样本数，默认 64。
 
 ## 2. 提交冒烟及正式任务
 
-从 `code/` 提交，替换集群分区；若需要账户，在两个命令中都加 `--account=账户名`。若集群规定 GPU 类型资源，例如 `gpu:l40:1`，用管理员公布的类型覆盖默认 `--gres=gpu:1`。
+从仓库根目录提交，替换集群分区；若需要账户，在两个命令中都加 `--account=账户名`。若集群规定 GPU 类型资源，例如 `gpu:l40:1`，用管理员公布的类型覆盖默认 `--gres=gpu:1`。
 
 ```bash
 export GPU_PARTITION=YOUR_GPU_PARTITION
