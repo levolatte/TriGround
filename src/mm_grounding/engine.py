@@ -4,6 +4,7 @@ import json
 import math
 import random
 import re
+import time
 from collections import defaultdict
 from pathlib import Path
 
@@ -62,6 +63,76 @@ def _accumulation_group_size(step: int, total_steps: int, accumulation: int) -> 
     if remainder and step > total_steps - remainder:
         return remainder
     return accumulation
+
+
+def _assert_finite_loss(output, *, phase: str, epoch: int, step: int) -> None:
+    loss = output["loss"]
+    if not torch.isfinite(loss.detach()).all():
+        raise FloatingPointError(
+            f"non-finite loss at phase={phase.upper()} epoch={epoch} microbatch={step}"
+        )
+
+
+def _check_optimizer_gradients(optimizer, *, phase: str, epoch: int, step: int) -> list[int]:
+    """Fail on non-finite gradients and report groups with no gradient.
+
+    Some parallel adapters are zero-initialized, so a missing gradient on an
+    individual parameter is expected during early updates.  The group-level
+    report keeps that case visible while only failing when every optimized
+    group is disconnected from the loss.
+    """
+    missing_groups = []
+    present_groups = 0
+    for group_index, group in enumerate(optimizer.param_groups):
+        group_has_gradient = False
+        for parameter in group["params"]:
+            gradient = parameter.grad
+            if gradient is None:
+                continue
+            group_has_gradient = True
+            if not torch.isfinite(gradient.detach()).all():
+                raise FloatingPointError(
+                    "non-finite gradient at "
+                    f"phase={phase.upper()} epoch={epoch} microbatch={step} "
+                    f"optimizer_group={group_index}"
+                )
+        if group_has_gradient:
+            present_groups += 1
+        else:
+            missing_groups.append(group_index)
+    if not present_groups:
+        raise FloatingPointError(
+            f"no optimized parameter group received a gradient at phase={phase.upper()} "
+            f"epoch={epoch} microbatch={step}"
+        )
+    return missing_groups
+
+
+def _batch_sample_count(batch, fallback: int) -> int:
+    input_ids = batch.get("input_ids")
+    if torch.is_tensor(input_ids) and input_ids.ndim:
+        return int(input_ids.shape[0])
+    return fallback
+
+
+def _progress_record(device, *, global_step: int, elapsed_samples: int, elapsed_seconds: float,
+                     missing_gradient_groups: list[int]) -> dict:
+    record = {
+        "event": "train_progress",
+        "global_step": global_step,
+        "elapsed_samples": elapsed_samples,
+        "elapsed_seconds": elapsed_seconds,
+        "samples_per_second": elapsed_samples / max(elapsed_seconds, 1e-9),
+        "missing_gradient_groups": missing_gradient_groups,
+    }
+    if device.type == "cuda":
+        record.update(
+            {
+                "cuda_max_memory_allocated_bytes": torch.cuda.max_memory_allocated(device),
+                "cuda_max_memory_reserved_bytes": torch.cuda.max_memory_reserved(device),
+            }
+        )
+    return record
 
 
 def _training_inputs(batch):
@@ -353,6 +424,12 @@ def _run_phase(
     output_dir = Path(config.output_dir)
     updates_per_epoch = (len(train_loader) + config.train.grad_accumulation - 1) // config.train.grad_accumulation
     global_step = (start_phase_epoch - 1) * updates_per_epoch
+    phase_started = time.perf_counter()
+    elapsed_samples = 0
+    updates_since_log = 0
+    log_every_updates = getattr(config.train, "log_every_updates", 20)
+    if device.type == "cuda":
+        torch.cuda.reset_peak_memory_stats(device)
     if resume_checkpoint:
         checkpoint = load_training_checkpoint(
             resume_checkpoint, model, optimizer, scheduler, scaler
@@ -420,6 +497,7 @@ def _run_phase(
         running = defaultdict(float)
         for step, batch in enumerate(train_loader, 1):
             batch = _move(batch, device)
+            elapsed_samples += _batch_sample_count(batch, config.train.batch_size)
             geometry_scale = _geometry_gradient_scale(config, phase, global_step)
             with torch.autocast(
                 device_type=device.type,
@@ -430,6 +508,12 @@ def _run_phase(
                     **_training_inputs(batch), geometry_gradient_scale=geometry_scale
                 )
                 loss = output["loss"]
+                _assert_finite_loss(
+                    output,
+                    phase=phase,
+                    epoch=offset + phase_epoch,
+                    step=step,
+                )
                 group_size = _accumulation_group_size(
                     step, len(train_loader), config.train.grad_accumulation
                 )
@@ -458,11 +542,48 @@ def _run_phase(
                 if name in output:
                     running[name] += float(output[name].detach())
             running["geometry_gradient_scale"] += geometry_scale
+            # The vocabulary logits are large. Release the previous batch's
+            # output before constructing the next forward, including within
+            # an accumulation group; gradients remain on the parameters.
+            del output, loss, scaled_loss
             if step % config.train.grad_accumulation == 0 or step == len(train_loader):
+                if scaler.is_enabled():
+                    scaler.unscale_(optimizer)
+                missing_gradient_groups = _check_optimizer_gradients(
+                    optimizer,
+                    phase=phase,
+                    epoch=offset + phase_epoch,
+                    step=step,
+                )
+                previous_scale = scaler.get_scale() if scaler.is_enabled() else None
                 scaler.step(optimizer)
                 scaler.update()
+                if (
+                    previous_scale is not None
+                    and scaler.get_scale() < previous_scale
+                ):
+                    raise FloatingPointError(
+                        f"GradScaler skipped an update at phase={phase.upper()} "
+                        f"epoch={offset + phase_epoch} microbatch={step}"
+                    )
                 scheduler.step()
                 global_step += 1
+                updates_since_log += 1
+                if (
+                    updates_since_log == 1
+                    or updates_since_log % log_every_updates == 0
+                    or step == len(train_loader)
+                ):
+                    _write_metric(
+                        output_dir,
+                        _progress_record(
+                            device,
+                            global_step=global_step,
+                            elapsed_samples=elapsed_samples,
+                            elapsed_seconds=time.perf_counter() - phase_started,
+                            missing_gradient_groups=missing_gradient_groups,
+                        ),
+                    )
                 optimizer.zero_grad(set_to_none=True)
                 if (
                     initial_phase
@@ -542,6 +663,7 @@ def _run_phase(
         save_checkpoint(
             output_dir / last_name, model, optimizer, scheduler, scaler, config,
             epoch, metrics, global_step, SELECTION_ORDER,
+            compact=False,
         )
         candidate_key = selection_key(metrics)
         if selection_improved(candidate_key, best_key):
@@ -550,24 +672,39 @@ def _run_phase(
             save_checkpoint(
                 output_dir / best_name, model, optimizer, scheduler, scaler, config,
                 epoch, metrics, global_step, SELECTION_ORDER,
+                compact=config.train.compact_checkpoints,
             )
         else:
             stale_evals += 1
         candidate_mean_iou_key = selection_key(metrics, MEAN_IOU_SELECTION_ORDER)
         if selection_improved(candidate_mean_iou_key, best_mean_iou_key):
             best_mean_iou_key = candidate_mean_iou_key
-            save_checkpoint(
-                output_dir / best_mean_iou_name,
-                model,
-                optimizer,
-                scheduler,
-                scaler,
-                config,
-                epoch,
-                metrics,
-                global_step,
-                MEAN_IOU_SELECTION_ORDER,
-            )
+            if config.train.compact_checkpoints:
+                _write_metric(
+                    output_dir,
+                    {
+                        "event": "best_mean_iou",
+                        "epoch": epoch,
+                        "phase": phase.upper(),
+                        "eval_scope": "subset_selection",
+                        "selection_order": list(MEAN_IOU_SELECTION_ORDER),
+                        **metrics,
+                    },
+                )
+            else:
+                save_checkpoint(
+                    output_dir / best_mean_iou_name,
+                    model,
+                    optimizer,
+                    scheduler,
+                    scaler,
+                    config,
+                    epoch,
+                    metrics,
+                    global_step,
+                    MEAN_IOU_SELECTION_ORDER,
+                    compact=False,
+                )
         if phase_epoch == epochs or stale_evals >= config.train.early_stopping_patience:
             load_model_checkpoint(best_path, model)
             full_metrics = evaluate(

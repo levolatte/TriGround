@@ -91,6 +91,11 @@ class TrainConfig:
     init_checkpoint: str | None = None
     resume_epoch: int = 0
     override_resume_learning_rates: bool = False
+    log_every_updates: int = 20
+    # Keep ``last`` resumable while allowing metric-selected checkpoints to
+    # omit optimizer state.  The default preserves the legacy checkpoint
+    # format and save behavior.
+    compact_checkpoints: bool = False
 
 
 @dataclass(frozen=True)
@@ -183,6 +188,8 @@ class ExperimentConfig:
             raise ValueError("depth_scale and depth_clip must be positive")
         if self.train.batch_size < 1 or self.train.grad_accumulation < 1 or self.train.val_batch_size < 1:
             raise ValueError("batch sizes must be positive")
+        if self.train.log_every_updates < 1:
+            raise ValueError("log_every_updates must be positive")
         if self.train.eval_subset_size < 1 or self.train.eval_every_n_epochs < 1:
             raise ValueError("evaluation settings must be positive")
         if self.train.max_new_tokens < 16:
