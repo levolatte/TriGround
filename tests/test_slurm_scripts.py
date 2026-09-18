@@ -148,6 +148,19 @@ def test_formal_orders_five_stages_then_full_evaluation(tmp_path):
     assert "--checkpoint" in work[-1]
 
 
+def test_formal_reuses_completed_ir_checkpoint(tmp_path):
+    checkpoint = tmp_path / "completed ir.pt"
+    checkpoint.write_text("checkpoint", encoding="utf-8")
+    result, calls = run_script(tmp_path, "formal", IR_CHECKPOINT=bash_path(checkpoint))
+    assert result.returncode == 0, result.stdout + result.stderr
+    trains = [call for call in calls if call[0] == "train.py"]
+    assert [Path(call[call.index("--config") + 1]).stem for call in trains] == [
+        "qwen3_vl_8b_" + stage for stage in
+        ("stage1b_depth", "stage2_joint", "stage2_weak", "stage2_clean")
+    ]
+    assert "Reusing completed stage1a_ir checkpoint" in result.stdout
+
+
 def test_failed_training_stops_pipeline_through_tee(tmp_path):
     result, calls = run_script(tmp_path, "formal", FAIL_STAGE="stage2_joint")
     assert result.returncode == 23

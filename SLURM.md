@@ -62,6 +62,8 @@ export CITY_ROOT=/your/shared/datasets/city_detection_prepared
 - `CONFIG_DIR`：自定义的五份 8B YAML 所在目录，默认 `configs`。文件名需保持 `qwen3_vl_8b_<stage>.yaml`。
 - `EVAL_MANIFEST`：训练结束后评估的**带标签独立保留集**。默认使用最终配置的 119 条复核验证集，此时报告只是验证成绩，不称作独立测试成绩。若使用独立 284 条清单，须显式设置此变量，脚本不猜测文件路径。
 - `RUN_ROOT`：本次新实验目录，必须尚不存在；默认 `runs/slurm-smoke-<jobid>` 或 `runs/slurm-formal-<jobid>`。使用依赖作业时不要给两个作业设置相同目录。
+- `IR_CHECKPOINT`：可选的已完成 Stage1A `best_phase_a.pt`。正式脚本验证文件存在后跳过 IR 训练，并让 Joint 阶段直接加载该权重。
+- `DEPTH_CHECKPOINT`：可选的已完成 Stage1B `best_phase_a.pt`。正式脚本验证文件存在后跳过 Depth 训练，并让 Joint 阶段直接加载该权重。
 - `REPO_DIR`：计算节点上的仓库根目录；默认 Slurm 提交工作目录。跨目录提交时必须使用 `sbatch --chdir=/your/path/experiment-root/TriGround` 或设置 `REPO_DIR`。
 - `SMOKE_SCAN_SAMPLES`：冒烟扫描的训练样本数，默认 64。
 
@@ -79,6 +81,15 @@ sbatch --partition="$GPU_PARTITION" \
   --dependency="afterok:${smoke_job%%;*}" \
   scripts/qwen3_vl_8b_formal.slurm
 ```
+
+复用已经完成的 IR 第一轮时，为新任务保留新的 `RUN_ROOT`，只需把现有权重作为输入：
+
+```bash
+export IR_CHECKPOINT=/path/to/completed-run/stage1a_ir/best_phase_a.pt
+sbatch --partition="$GPU_PARTITION" scripts/qwen3_vl_8b_formal.slurm
+```
+
+此时任务从 Depth 开始；Joint 阶段加载该 IR 权重和本次新训练的 Depth 权重。若同时提供 `DEPTH_CHECKPOINT`，任务将从 Joint 开始。
 
 默认 72 小时只是资源申请值，不是已测得的耗时保证；需按集群时限和冒烟表现调整 `--time`。若暂时只想检查环境，只提交第一条。脚本不设置 `CUDA_VISIBLE_DEVICES`，使用 Slurm 分配的设备。
 

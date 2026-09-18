@@ -148,7 +148,7 @@ sbatch scripts/qwen3_vl_8b_smoke.slurm
 sbatch scripts/qwen3_vl_8b_formal.slurm
 ```
 
-正式任务按 `stage1a_ir → stage1b_depth → stage2_joint → stage2_weak → stage2_clean` 顺序运行。推荐使用 [SLURM.md](SLURM.md) 中的 `afterok` 提交方式，确保冒烟成功后才启动正式任务。
+正式任务按 `stage1a_ir → stage1b_depth → stage2_joint → stage2_weak → stage2_clean` 顺序运行，五个阶段当前均训练 1 epoch。推荐使用 [SLURM.md](SLURM.md) 中的 `afterok` 提交方式，确保冒烟成功后才启动正式任务。若已有完成的 Stage 1 权重，可在提交正式任务前设置 `IR_CHECKPOINT` 和/或 `DEPTH_CHECKPOINT`；脚本会跳过对应阶段，并让 `stage2_joint` 直接加载这些权重。
 
 以下两节记录的是历史 2B 路线，不是当前 8B 五阶段流程。
 

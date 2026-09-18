@@ -62,6 +62,27 @@ def test_smoke_has_no_trained_checkpoint_dependency_and_uses_max_budget(tmp_path
         assert config["model"]["modality_dropout"] == 0
 
 
+def test_formal_can_reuse_completed_stage1_checkpoints(tmp_path):
+    overrides = make_data_roots(tmp_path)
+    ir = tmp_path / "completed ir.pt"
+    depth = tmp_path / "completed depth.pt"
+    ir.write_text("ir", encoding="utf-8")
+    depth.write_text("depth", encoding="utf-8")
+    overrides.update({"IR_CHECKPOINT": str(ir), "DEPTH_CHECKPOINT": str(depth)})
+    configs = prepare_configs(Path(__file__).resolve().parents[1] / "configs",
+                              tmp_path / "reuse", overrides=overrides)
+    assert [Path(path).resolve() for path in
+            configs["stage2_joint"]["train"]["initialization_checkpoints"]] == [ir, depth]
+
+
+def test_missing_external_checkpoint_stops_before_gpu_work(tmp_path):
+    overrides = make_data_roots(tmp_path)
+    overrides["IR_CHECKPOINT"] = str(tmp_path / "missing.pt")
+    with pytest.raises(FileNotFoundError, match="IR_CHECKPOINT"):
+        prepare_configs(Path(__file__).resolve().parents[1] / "configs",
+                        tmp_path / "missing-checkpoint", overrides=overrides)
+
+
 def test_existing_run_is_not_overwritten(tmp_path):
     with pytest.raises(FileExistsError):
         prepare_configs(Path("configs"), tmp_path)

@@ -17,8 +17,17 @@ run_dir="${RUN_ROOT:-runs/formal-${SLURM_JOB_ID:-$(date +%Y%m%d-%H%M%S)}}"
 "$python_bin" tools/prepare_slurm_run.py --config-dir "${CONFIG_DIR:-configs}" --run-dir "$run_dir"
 mkdir -p "$run_dir/logs"
 
-# Sequential single-GPU execution. Each stage loads only this run's predecessors.
+# Sequential single-GPU execution. Stage 1 can reuse explicitly supplied checkpoints;
+# otherwise each stage loads this run's predecessors.
 for stage in stage1a_ir stage1b_depth stage2_joint stage2_weak stage2_clean; do
+    external_checkpoint=""
+    if [[ "$stage" == stage1a_ir ]]; then external_checkpoint="${IR_CHECKPOINT:-}"; fi
+    if [[ "$stage" == stage1b_depth ]]; then external_checkpoint="${DEPTH_CHECKPOINT:-}"; fi
+    if [[ -n "$external_checkpoint" ]]; then
+        test -s "$external_checkpoint"
+        printf 'Reusing completed %s checkpoint: %s\n' "$stage" "$external_checkpoint"
+        continue
+    fi
     config="$run_dir/configs/qwen3_vl_8b_${stage}.yaml"
     extra=()
     if [[ "$stage" == stage2_* ]]; then extra=(--expected-val-samples 119); fi

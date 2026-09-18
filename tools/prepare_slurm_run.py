@@ -19,6 +19,10 @@ DEPENDENCIES = {
     "stage2_joint": ("stage1a_ir", "stage1b_depth"),
     "stage2_weak": ("stage2_joint",), "stage2_clean": ("stage2_weak",),
 }
+EXTERNAL_CHECKPOINTS = {
+    "stage1a_ir": "IR_CHECKPOINT",
+    "stage1b_depth": "DEPTH_CHECKPOINT",
+}
 
 
 def runtime_path(path: Path) -> str:
@@ -28,6 +32,15 @@ def runtime_path(path: Path) -> str:
         return os.path.relpath(path)
     except ValueError:
         return str(path)
+
+
+def dependency_checkpoint(stage: str, run_dir: Path, overrides: dict) -> str:
+    variable = EXTERNAL_CHECKPOINTS.get(stage)
+    supplied = overrides.get(variable) if variable else None
+    path = Path(supplied).resolve() if supplied else run_dir / stage / "best_phase_a.pt"
+    if supplied and not path.is_file():
+        raise FileNotFoundError(f"{variable} does not exist: {path}")
+    return runtime_path(path)
 
 
 def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=None):
@@ -65,7 +78,7 @@ def prepare_configs(config_dir: Path, run_dir: Path, *, smoke=False, overrides=N
             if not Path(data[key]).is_file():
                 raise FileNotFoundError(f"{stage}: {key} does not exist: {data[key]}")
         raw["train"]["initialization_checkpoints"] = [] if smoke else [
-            runtime_path(run_dir / parent / "best_phase_a.pt") for parent in DEPENDENCIES[stage]
+            dependency_checkpoint(parent, run_dir, overrides) for parent in DEPENDENCIES[stage]
         ]
         # These configs describe fresh jobs, never implicit training resumes.
         raw["train"]["init_checkpoint"] = None
@@ -115,6 +128,10 @@ def main():
     audit_splits(configs, args.run_dir, eval_manifest)
     plan = {
         "smoke": args.smoke, "stages": list(STAGES),
+        "external_checkpoints": {
+            variable: str(Path(os.environ[variable]).resolve())
+            for variable in EXTERNAL_CHECKPOINTS.values() if os.environ.get(variable)
+        },
         "eval_manifest": str(eval_manifest) if eval_manifest else configs["stage2_clean"]["data"]["val_manifest"],
         "eval_scope": "explicit_manifest" if eval_manifest else "reviewed_validation",
         "source_config_dir": str(args.config_dir.resolve()),

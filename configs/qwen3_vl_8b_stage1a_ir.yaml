@@ -29,8 +29,8 @@ data:
   min_pixels: 200704
   max_pixels: 802816
 train:
-  epochs: 3
-  phase_a_epochs: 3
+  epochs: 1
+  phase_a_epochs: 1
   phase_b_epochs: 0
   fusion_lr_a: 3.0e-05
   batch_size: 1
