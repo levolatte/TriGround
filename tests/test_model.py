@@ -201,6 +201,107 @@ def test_rdt_deep_updates_every_layer_and_preserves_rgb_at_initialization():
         assert torch.count_nonzero(block.prompt_restore.weight.grad) > 0
 
 
+def test_rdt_shared_aux_embedding_receives_both_modalities_without_updating_rgb():
+    torch.manual_seed(2026)
+    model = MultiModalGrounder(
+        DummyDeepBackbone(), adapter_channels=8, orthogonal_channels=4,
+        fusion_type="rdt_deep", rdt_shared_aux_patch_embed=True,
+        modality_dropout=0.0, fusion_residual_scale_init=0.001,
+        fusion_zero_init_prompt_restore=True,
+    )
+    model.set_phase_a_trainable()
+    shared = model.fusion.shared_aux_patch_embed
+    rgb = model.backbone.model.visual.patch_embed
+    assert shared is not rgb
+    assert shared.proj.weight.data_ptr() != rgb.proj.weight.data_ptr()
+    assert torch.equal(shared.proj.weight, rgb.proj.weight)
+    assert shared.proj.weight.requires_grad and not rgb.proj.weight.requires_grad
+    assert not hasattr(model.fusion, "depth_encoder")
+    assert not hasattr(model.fusion, "thermal_encoder")
+    original_rgb = rgb.proj.weight.detach().clone()
+    batch = _batch()
+    calls = []
+    handle = shared.register_forward_hook(lambda _module, args, _output: calls.append(args[0]))
+    optimizer = torch.optim.AdamW(model.fusion.parameters(), lr=1e-3)
+    for step in range(2):
+        optimizer.zero_grad()
+        result = model(**batch)
+        if step == 0:
+            assert torch.equal(result["logits"], model(**batch, rgb_only=True)["logits"])
+        result["loss"].backward()
+        if step == 1:
+            assert torch.count_nonzero(shared.proj.weight.grad) > 0
+        optimizer.step()
+    handle.remove()
+    assert len(calls) == 4
+    assert torch.equal(calls[0], batch["depth_pixel_values"])
+    assert torch.equal(calls[1], batch["ir_pixel_values"])
+    assert torch.equal(rgb.proj.weight, original_rgb)
+    assert not torch.equal(shared.proj.weight, original_rgb)
+    # Mixed dtypes match a BF16 backbone with FP32 fusion projections.
+    shared.to(torch.bfloat16)
+    thermal = batch["ir_pixel_values"].clone().requires_grad_()
+    depth = batch["depth_pixel_values"].clone().requires_grad_()
+    model.fusion.initial_prompt(thermal, depth, [2, 2]).square().mean().backward()
+    assert torch.count_nonzero(thermal.grad) > 0
+    assert torch.count_nonzero(depth.grad) > 0
+    assert torch.isfinite(shared.proj.weight.grad).all()
+
+
+def test_shared_rdt_with_native_qwen_vision_bf16_and_deepstack():
+    from transformers.models.qwen3_vl.configuration_qwen3_vl import Qwen3VLVisionConfig
+    from transformers.models.qwen3_vl.modeling_qwen3_vl import Qwen3VLVisionModel
+
+    torch.manual_seed(2026)
+    config = Qwen3VLVisionConfig(
+        depth=3, hidden_size=32, intermediate_size=64, num_heads=4,
+        patch_size=2, temporal_patch_size=2, spatial_merge_size=2,
+        out_hidden_size=32, num_position_embeddings=16,
+        deepstack_visual_indexes=[0, 1, 2],
+    )
+    config._attn_implementation = "eager"
+    backbone = DummyDeepBackbone()
+    backbone.model.visual = Qwen3VLVisionModel(config).to(torch.bfloat16)
+    model = MultiModalGrounder(
+        backbone, adapter_channels=8, orthogonal_channels=4,
+        fusion_type="rdt_deep", rdt_shared_aux_patch_embed=True,
+        modality_dropout=0.0, fusion_residual_scale_init=0.001,
+        fusion_zero_init_prompt_restore=True,
+    )
+    model.set_phase_a_trainable()
+    vision = backbone.model.visual
+    shared = model.fusion.shared_aux_patch_embed
+    assert next(shared.parameters()).dtype == torch.float32
+    assert next(vision.patch_embed.parameters()).dtype == torch.bfloat16
+    assert all(p.dtype == torch.float32 for p in model.fusion.parameters())
+    patches = torch.randn(16, 24)
+    grid = torch.tensor([[1, 4, 4]])
+    thermal, depth = torch.randn_like(patches), torch.randn_like(patches)
+    optimizer = torch.optim.AdamW(model.fusion.parameters(), lr=4e-5)
+    original_shared = shared.proj.weight.detach().clone()
+    with torch.no_grad(), torch.autocast("cpu", dtype=torch.bfloat16):
+        baseline, baseline_stacks = vision(patches, grid)
+    vision.gradient_checkpointing_enable()
+    for step in range(2):
+        optimizer.zero_grad()
+        with model._fusion_context(patches, thermal, depth, grid, False):
+            with torch.autocast("cpu", dtype=torch.bfloat16):
+                output, stacks = vision(patches, grid)
+                loss = output.float().square().mean()
+                loss = loss + sum(x.float().square().mean() for x in stacks)
+        assert len(stacks) == 3
+        if step == 0:
+            assert torch.equal(output, baseline)
+            assert all(torch.equal(x, y) for x, y in zip(stacks, baseline_stacks))
+        loss.backward()
+        assert all(p.grad is None for p in vision.parameters())
+        if step == 1:
+            assert torch.isfinite(shared.proj.weight.grad).all()
+            assert torch.count_nonzero(shared.proj.weight.grad) > 0
+        optimizer.step()
+    assert not torch.equal(shared.proj.weight, original_shared)
+
+
 def test_parallel_backbone_runs_three_streams_and_trains_adapters_and_fusion():
     model = MultiModalGrounder(
         DummyDeepBackbone(),

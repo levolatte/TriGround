@@ -142,6 +142,14 @@ def test_target_v2_unfreeze_uses_manual_data_and_separate_adapter_lr():
     assert "weak" not in config.data.train_manifest
 
 
+def test_rdt_8b_shares_aux_embedding_and_historical_config_keeps_its_layout():
+    current = load_config(ROOT / "configs/qwen3_vl_8b_rdt_qwen_city.yaml")
+    historical = load_config(ROOT / "configs/triground_rdt_ws_v1_manual_ft1.yaml")
+    assert current.model.fusion_type == "rdt_deep"
+    assert current.model.rdt_shared_aux_patch_embed
+    assert not historical.model.rdt_shared_aux_patch_embed
+
+
 def test_query_position_ab_configs_have_exactly_one_experimental_variable():
     control = asdict(
         load_config(ROOT / "configs/stage2_joint_fusion_v3_control.yaml")

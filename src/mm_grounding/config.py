@@ -19,6 +19,7 @@ class ModelConfig:
     orthogonal_channels: int = 8
     prompt_gate_init: float = -3.0
     fusion_type: str = "legacy_patch"
+    rdt_shared_aux_patch_embed: bool = False
     modality_dropout: float = 0.1
     fusion_residual_scale_init: float = 0.001
     fusion_zero_init_prompt_restore: bool = False
@@ -115,6 +116,8 @@ class ExperimentConfig:
                 "fusion_type must be 'legacy_patch', 'safe_post_embed', 'rdt_deep', "
                 "or 'parallel_backbone'"
             )
+        if self.model.rdt_shared_aux_patch_embed and self.model.fusion_type != "rdt_deep":
+            raise ValueError("rdt_shared_aux_patch_embed requires rdt_deep fusion")
         if not 0 <= self.model.modality_dropout < 1:
             raise ValueError("modality_dropout must be in [0, 1)")
         if self.model.fusion_residual_scale_init < 0:

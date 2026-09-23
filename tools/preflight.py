@@ -168,17 +168,30 @@ def main() -> None:
             else None
         )
         gradient_reports = []
+        device_type = torch.device(args.device).type
+        backbone_dtype = next(model.backbone.parameters()).dtype
+        amp_dtype = (
+            backbone_dtype if backbone_dtype in (torch.float16, torch.bfloat16)
+            else torch.float16
+        )
+        amp_enabled = config.train.amp and device_type == "cuda"
+        scaler = torch.amp.GradScaler(
+            "cuda", enabled=amp_enabled and amp_dtype == torch.float16
+        )
         if torch.cuda.is_available() and str(args.device).startswith("cuda"):
             torch.cuda.reset_peak_memory_stats(args.device)
             torch.cuda.synchronize(args.device)
         started = time.perf_counter()
         loss = None
         for step in range(run_steps):
-            loss = model(**inputs)["loss"]
+            with torch.autocast(device_type, enabled=amp_enabled, dtype=amp_dtype):
+                loss = model(**inputs)["loss"]
             if not bool(torch.isfinite(loss)):
                 raise RuntimeError(f"non-finite preflight loss at step {step + 1}")
             if args.backward or args.optimizer_steps:
-                loss.backward()
+                scaler.scale(loss).backward()
+                if optimizer is not None:
+                    scaler.unscale_(optimizer)
                 fusion_gradients = [
                     parameter.grad
                     for parameter in model.fusion.parameters()
@@ -264,8 +277,34 @@ def main() -> None:
                             "joint_nonzero": joint_nonzero,
                         }
                     )
+                if config.model.rdt_shared_aux_patch_embed and step >= 1:
+                    shared_parameters = list(model.fusion.shared_aux_patch_embed.parameters())
+                    shared_nonzero = sum(
+                        p.grad is not None and bool(torch.count_nonzero(p.grad))
+                        for p in shared_parameters
+                    )
+                    gradient_reports[-1]["shared_aux_nonzero"] = shared_nonzero
+                    if not shared_nonzero:
+                        raise RuntimeError("Qwen loss did not reach shared auxiliary patch embedding")
+                    if any(p.dtype != torch.float32 for p in shared_parameters):
+                        raise RuntimeError("shared auxiliary trainable parameters must stay FP32")
                 if optimizer is not None:
-                    optimizer.step()
+                    shared_before = (
+                        [p.detach().clone() for p in model.fusion.shared_aux_patch_embed.parameters()]
+                        if config.model.rdt_shared_aux_patch_embed else None
+                    )
+                    scaler.step(optimizer)
+                    scaler.update()
+                    if shared_before is not None:
+                        shared_parameters = list(model.fusion.shared_aux_patch_embed.parameters())
+                        changed = sum(
+                            int(torch.count_nonzero(p.detach() != before))
+                            for p, before in zip(shared_parameters, shared_before)
+                        )
+                        total = sum(p.numel() for p in shared_parameters)
+                        gradient_reports[-1]["shared_aux_updated_fraction"] = changed / total
+                        if step >= 1 and not changed:
+                            raise RuntimeError("shared auxiliary embedding received no parameter update")
                     optimizer.zero_grad(set_to_none=True)
         if torch.cuda.is_available() and str(args.device).startswith("cuda"):
             torch.cuda.synchronize(args.device)
@@ -286,6 +325,8 @@ def main() -> None:
                 )
         cuda_active = torch.cuda.is_available() and str(args.device).startswith("cuda")
         report["real_model"] = {
+            "amp_enabled": amp_enabled,
+            "amp_dtype": str(amp_dtype),
             "loss": float(loss.detach()),
             "backbone_training": model.backbone.training,
             "gpu": torch.cuda.get_device_name(args.device) if cuda_active else None,

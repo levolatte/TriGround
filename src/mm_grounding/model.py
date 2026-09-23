@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
+from copy import deepcopy
 from types import MethodType
 import weakref
 
@@ -324,6 +325,7 @@ class MultiModalGrounder(nn.Module):
         auxiliary_bbox_enabled: bool = False,
         auxiliary_bbox_l1_weight: float = 2.0,
         auxiliary_bbox_giou_weight: float = 1.0,
+        rdt_shared_aux_patch_embed: bool = False,
     ) -> None:
         super().__init__()
         self.backbone = backbone
@@ -363,6 +365,10 @@ class MultiModalGrounder(nn.Module):
                 modality_dropout,
                 fusion_residual_scale_init,
                 fusion_zero_init_prompt_restore,
+                shared_aux_patch_embed=(
+                    # Keep optimizer updates in FP32 even with a BF16 backbone.
+                    deepcopy(vision.patch_embed).float() if rdt_shared_aux_patch_embed else None
+                ),
             )
             _install_rdt_deep_prompt_forward(vision, self.fusion)
             object.__setattr__(self, "_deep_prompt_vision_ref", weakref.ref(vision))
@@ -835,4 +841,5 @@ def build_grounder(model_config, processor=None) -> MultiModalGrounder:
         auxiliary_bbox_enabled=model_config.auxiliary_bbox_enabled,
         auxiliary_bbox_l1_weight=model_config.auxiliary_bbox_l1_weight,
         auxiliary_bbox_giou_weight=model_config.auxiliary_bbox_giou_weight,
+        rdt_shared_aux_patch_embed=model_config.rdt_shared_aux_patch_embed,
     )

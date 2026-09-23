@@ -238,7 +238,12 @@ class RDTRecurrentPromptBlock(nn.Module):
 
 
 class RDTDeepFusion(nn.Module):
-    """Depth/TIR fusion followed by the paper's recurrent RGB prompt updates."""
+    """RDTTrack-inspired Qwen adaptation, not an exact reference implementation.
+
+    Uses vector-projection subtraction, configurable auxiliary embedding, and
+    nonlinear, scaled recurrent prompts. See the paper audit in
+    QWEN3_VL_8B_UPGRADE.md for differences from the authors' operators.
+    """
 
     def __init__(
         self,
@@ -250,6 +255,7 @@ class RDTDeepFusion(nn.Module):
         modality_dropout: float = 0.1,
         residual_scale_init: float = 0.0,
         zero_init_prompt_restore: bool = False,
+        shared_aux_patch_embed: nn.Module | None = None,
     ) -> None:
         super().__init__()
         if num_layers < 1:
@@ -259,14 +265,21 @@ class RDTDeepFusion(nn.Module):
         self.raw_patch_dim = raw_patch_dim
         self.token_dim = token_dim
         self.modality_dropout = modality_dropout
-        self.depth_encoder = nn.Sequential(
-            nn.LayerNorm(raw_patch_dim), nn.Linear(raw_patch_dim, hidden_dim), nn.GELU()
-        )
-        self.thermal_encoder = nn.Sequential(
-            nn.LayerNorm(raw_patch_dim), nn.Linear(raw_patch_dim, hidden_dim), nn.GELU()
-        )
-        self.depth_projection = nn.Linear(hidden_dim, orthogonal_dim)
-        self.thermal_projection = nn.Linear(hidden_dim, orthogonal_dim)
+        self.shared_aux_patch_embed = shared_aux_patch_embed
+        if shared_aux_patch_embed is None:
+            # Preserve the historical independent-encoder checkpoint layout.
+            self.depth_encoder = nn.Sequential(
+                nn.LayerNorm(raw_patch_dim), nn.Linear(raw_patch_dim, hidden_dim), nn.GELU()
+            )
+            self.thermal_encoder = nn.Sequential(
+                nn.LayerNorm(raw_patch_dim), nn.Linear(raw_patch_dim, hidden_dim), nn.GELU()
+            )
+            auxiliary_dim = hidden_dim
+        else:
+            self.shared_aux_norm = nn.LayerNorm(token_dim)
+            auxiliary_dim = token_dim
+        self.depth_projection = nn.Linear(auxiliary_dim, orthogonal_dim)
+        self.thermal_projection = nn.Linear(auxiliary_dim, orthogonal_dim)
         self.aux_restore = nn.Sequential(
             nn.Linear(orthogonal_dim * 2, hidden_dim), nn.GELU()
         )
@@ -301,9 +314,20 @@ class RDTDeepFusion(nn.Module):
         if thermal_patches.ndim != 2 or thermal_patches.shape[-1] != self.raw_patch_dim:
             raise ValueError(f"expected auxiliary patches [N, {self.raw_patch_dim}]")
         self._check_patch_counts(patch_counts, thermal_patches.shape[0])
-        work_dtype = self.depth_encoder[1].weight.dtype
-        depth = self.depth_projection(self.depth_encoder(depth_patches.to(work_dtype)))
-        thermal = self.thermal_projection(self.thermal_encoder(thermal_patches.to(work_dtype)))
+        if self.shared_aux_patch_embed is None:
+            work_dtype = self.depth_encoder[1].weight.dtype
+            depth = self.depth_projection(self.depth_encoder(depth_patches.to(work_dtype)))
+            thermal = self.thermal_projection(self.thermal_encoder(thermal_patches.to(work_dtype)))
+        else:
+            embed_dtype = next(self.shared_aux_patch_embed.parameters()).dtype
+            work_dtype = self.depth_projection.weight.dtype
+            depth_tokens = self.shared_aux_patch_embed(depth_patches.to(embed_dtype))
+            thermal_tokens = self.shared_aux_patch_embed(thermal_patches.to(embed_dtype))
+            expected = (depth_patches.shape[0], self.token_dim)
+            if depth_tokens.shape != expected or thermal_tokens.shape != expected:
+                raise ValueError(f"shared auxiliary patch embed must produce {expected}")
+            depth = self.depth_projection(self.shared_aux_norm(depth_tokens.to(work_dtype)))
+            thermal = self.thermal_projection(self.shared_aux_norm(thermal_tokens.to(work_dtype)))
         if self.training and self.modality_dropout:
             repeats = torch.tensor(patch_counts, device=depth.device)
             depth_keep = torch.rand(len(patch_counts), 1, device=depth.device)
