@@ -1,10 +1,18 @@
 # TriGround Handoff
 
+## 2026-09-23 共享辅助 embedding 分支入口清理
+
+- 当前分支：`qwen3-vl-8b-rdt-shared-aux`。统一入口为 `scripts/qwen3_vl_8b_rdt_qwen_city.slurm`。
+- `PREFLIGHT_ONLY=1` 仅运行数据审计和两步 GPU 预检；默认模式预检成功后训练并验证。
+- 原五阶段训练、冒烟和旧预检启动脚本已从本分支删除，在 `qwen3-vl-8b` 分支保留。
+- 本次 53 项 CPU/脚本测试通过；完整 8B 新结构 CUDA 预检尚待实验机器执行。
+- 下方 Slurm 入口与运行记录属于历史分支，当前运行请以 `SLURM.md` 为准。
+
 ## 2026-09-09 分支合并与 Slurm 流程
 
 - 将 `main@770928e` 的 8B/DeepStack 与 `public-v1@e3e5ede` 的 Query 因果诊断、ACC 选模和逐样本评估合并。下方 Query A/B 状态是历史记录，尚无新实验成绩。
 - 保留显式融合层 `[8,16,24,26]`、分离的 adaptor/fusion/query 维度、零初始化、稀疏初始化碰撞检测、checkpoint 格式与运行环境信息；同时保留位置编码与三种尺度干预。
-- 新入口：`scripts/qwen3_vl_8b_smoke.slurm`、`scripts/qwen3_vl_8b_formal.slurm`。正式任务是五阶段训练后全量评估，操作说明见 `SLURM.md`。
+- 历史分支入口：旧冒烟与五阶段正式训练脚本，现仅保留在 `qwen3-vl-8b` 分支。
 - 冒烟使用独立临时配置，无需前序权重，覆盖 IR/Depth/Joint 两步优化与四模式生成解析。正式配置保留训练参数，前序权重全部指向本次运行目录。
 - `tools/prepare_slurm_run.py` 负责路径配置、运行隔离和已有数据重叠审计；`scripts/slurm_env.sh` 使用已经激活的 Python 与共享模型缓存。
 - 集群分区、账户、真实路径通过命令参数/环境变量提供；本地没有 Slurm/L40，未提交 GPU 作业。真实 GPU 预检与模型成绩仍须集群运行。

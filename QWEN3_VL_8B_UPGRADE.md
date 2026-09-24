@@ -1,5 +1,10 @@
 # Qwen3-VL-8B TriGround upgrade
 
+Current branch: `qwen3-vl-8b-rdt-shared-aux`. Use the shared-embedding City
+experiment below and the sole launcher described in [SLURM.md](SLURM.md).
+The E configuration and staged run order in the first sections are historical
+context for the original `qwen3-vl-8b` branch.
+
 The recommended path keeps the Qwen language and vision backbones frozen and
 does not inject or train Vision LoRA. It uses the native Qwen3-VL-8B vision
 configuration and reads all backbone dimensions at runtime.
@@ -81,10 +86,11 @@ reserved GPU memory, token count, and step time.
 After the model is available in the local Hugging Face cache, run:
 
 ```bash
-scripts/run_qwen3_vl_8b_preflight.sh
+PREFLIGHT_ONLY=1 bash scripts/qwen3_vl_8b_rdt_qwen_city.slurm
 ```
 
-The preflight scans 64 training samples, selects the one with the largest
+This command checks the current shared-embedding City experiment and exits
+without starting full training. The preflight scans 64 training samples, selects the one with the largest
 processed visual-token count, and runs two AdamW steps. The second step verifies
 that gradients pass beyond the zero-initialized restore projections.
 
@@ -222,3 +228,32 @@ validation data and preserve the held-out test set for the final evaluation.
 Compare IoU/Acc@0.5 and parsing validity on the same queries, particularly the
 manually reviewed validation set; generated labels alone are insufficient to
 claim equivalent benefits to the paper. No full training was run in this audit.
+
+### Shared-embedding GPU verification (2026-09-23)
+
+The previously pending two-step CUDA check has now passed on an RTX 4090
+(24 GB). Tested local source was loaded from a temporary ZIP ahead of cloud
+modules, preserving the cloud worktree's unrelated uncommitted changes.
+The source ZIP was removed after testing; SHA256 provenance and reports remain
+under the existing cloud `runs/diagnostics/rdt_shared_*` paths. Cloud Git remains
+at `85cda24` on `qwen3-vl-8b`; it is not a synchronized checkout of the new branch.
+
+- BF16 autocast, FP32 trainable auxiliary embedding, 27 prompt layers, width
+  1152, DeepStack at 8/16/24; 64-sample scan selected 3108 visual tokens.
+- Two optimizer steps passed. Step two: all 338 fusion parameter tensors had
+  finite nonzero gradients; both shared patch-embedding parameter tensors had
+  nonzero gradients and actual updates. The reported changed-element fraction
+  was 1.0 (this includes AdamW weight decay, so gradients are checked separately).
+- Peak allocated GPU memory: 20.59 GiB; reserved: 21.23 GiB. Timed two-step
+  section: 1.885 seconds, excluding model loading/data preparation. This is not
+  an end-to-end training throughput estimate or a full-dataset memory bound.
+- Eight validation records, each generated through RGB and three-modal paths:
+  all 16 boxes parsed, no generation cap hits. Outputs/metrics matched at zero
+  initialization, as expected; these are execution checks, not trained results.
+- Zero ID/image-path/sequence overlaps for train vs generated validation,
+  train vs manual validation (119), and train+generated validation vs held-out
+  test (284). This is manifest-based auditing, not image-content deduplication.
+
+No full training or long-run stability test was performed. GPU processes were
+finished and memory released after verification. Full training on another
+machine should retain the launcher's automatic preflight.

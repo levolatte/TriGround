@@ -112,7 +112,7 @@ export ROBOREFIT_ROOT=/shared/datasets/RoboRefIt
 export CITY_ROOT=/shared/datasets/city_detection_prepared
 ```
 
-完成上述准备后，先运行 `sbatch scripts/qwen3_vl_8b_smoke.slurm`；冒烟任务成功后再运行 `sbatch scripts/qwen3_vl_8b_formal.slurm`。完整环境变量、集群参数和产物说明见 [SLURM.md](SLURM.md)。
+当前共享辅助 embedding 分支统一使用 `scripts/qwen3_vl_8b_rdt_qwen_city.slurm`，设置 `PREFLIGHT_ONLY=1` 可仅做预检。启动方式和所需 City 数据见 [SLURM.md](SLURM.md)。
 
 ## 数据格式
 
@@ -139,18 +139,19 @@ export CITY_ROOT=/shared/datasets/city_detection_prepared
 
 ## 训练
 
-### 当前推荐：Qwen3-VL-8B 五阶段流程
+### 当前分支：Qwen3-VL-8B 共享辅助 embedding
 
-准备好前述外部资源后，先提交冒烟任务，再提交正式训练；两份脚本会生成本次运行专用配置，不修改仓库中的源 YAML：
+准备好 8B 权重及 City 三模态新数据后，在仓库根目录运行：
 
 ```bash
-sbatch scripts/qwen3_vl_8b_smoke.slurm
-sbatch scripts/qwen3_vl_8b_formal.slurm
+PREFLIGHT_ONLY=1 sbatch scripts/qwen3_vl_8b_rdt_qwen_city.slurm
+# 查看预检结果后，启动正式训练：
+PREFLIGHT_ONLY=0 sbatch scripts/qwen3_vl_8b_rdt_qwen_city.slurm
 ```
 
-正式任务按 `stage1a_ir → stage1b_depth → stage2_joint → stage2_weak → stage2_clean` 顺序运行，五个阶段当前均训练 1 epoch。推荐使用 [SLURM.md](SLURM.md) 中的 `afterok` 提交方式，确保冒烟成功后才启动正式任务。若已有完成的 Stage 1 权重，可在提交正式任务前设置 `IR_CHECKPOINT` 和/或 `DEPTH_CHECKPOINT`；脚本会跳过对应阶段，并让 `stage2_joint` 直接加载这些权重。
+无 Slurm 时把 `sbatch` 换成 `bash`。正式任务先执行两步预检，再训练 2 epoch 并验证。仅预检模式不会启动完整训练。环境变量与产物说明见 [SLURM.md](SLURM.md)。旧五阶段启动脚本保留在 `qwen3-vl-8b` 分支。
 
-以下两节记录的是历史 2B 路线，不是当前 8B 五阶段流程。
+以下两节记录的是历史 2B 路线。
 
 ### 历史 2B 方案一：弱监督早期融合
 

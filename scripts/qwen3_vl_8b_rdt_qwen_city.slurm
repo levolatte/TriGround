@@ -10,6 +10,10 @@
 #SBATCH --error=slurm-%x-%j.err
 
 set -euo pipefail
+case "${PREFLIGHT_ONLY:-0}" in
+    0|1) ;;
+    *) echo "PREFLIGHT_ONLY must be 0 or 1" >&2; exit 2 ;;
+esac
 cd "${REPO_DIR:-${SLURM_SUBMIT_DIR:-$PWD}}"
 source scripts/slurm_env.sh
 
@@ -64,6 +68,10 @@ fi
     --max-samples "${SMOKE_SCAN_SAMPLES:-64}" --optimizer-steps 2 \
     --expected-val-samples 412 \
     |& tee "$run_dir/preflight.log"
+if [[ "${PREFLIGHT_ONLY:-0}" == 1 ]]; then
+    printf '8B RDT preflight completed; training was not started: %s\n' "$run_dir"
+    exit 0
+fi
 "$python_bin" train.py --config "$config" --device cuda |& tee "$run_dir/train.log"
 "$python_bin" evaluate.py --config "$config" --device cuda \
     --checkpoint "$run_dir/best_phase_a.pt" \
