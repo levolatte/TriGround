@@ -240,7 +240,7 @@ def run_diagnostics(
     probe = FusionProbe(model)
     losses = _Summary()
     parameter_before = {
-        name: parameter.detach().clone()
+        name: parameter.detach().to(device="cpu", copy=True)
         for name, parameter in model.named_parameters()
         if parameter.requires_grad
     }
@@ -253,12 +253,13 @@ def run_diagnostics(
                 }
                 output = model(**_training_inputs(batch))
                 losses.add(float(output["loss"]))
+                del output, batch
     finally:
         probe.close()
     changed_parameters = [
         name
         for name, parameter in model.named_parameters()
-        if name in parameter_before and not torch.equal(parameter.detach(), parameter_before[name])
+        if name in parameter_before and not torch.equal(parameter.detach().cpu(), parameter_before[name])
     ]
     if changed_parameters:
         raise RuntimeError("diagnostic hooks changed model parameters: " + ", ".join(changed_parameters[:5]))

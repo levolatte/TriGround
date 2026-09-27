@@ -1,0 +1,34 @@
+{
+  "schema_version": "aux-selection-v1",
+  "stage": "select-refine",
+  "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+  "adapter": "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/train16.jsonl",
+  "min_pixels": 200704,
+  "max_pixels": 602112,
+  "max_new_tokens": 128,
+  "model_dtype": "bfloat16",
+  "attention_implementation": "sdpa",
+  "peft_autocast_adapter_dtype": false,
+  "tf32": false,
+  "matmul_precision": "highest",
+  "do_sample": false,
+  "evidence": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16_attempt2/evidence.jsonl",
+  "query_info": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16_attempt2/query/query_info.jsonl",
+  "condition": "trimodal",
+  "limit": 0,
+  "prompt_version": "frozen-C-select-refine-v1",
+  "candidate_pool": "fixed_with_rgb_and_ir_sources",
+  "candidate_prompt_fields": [
+    "id",
+    "bbox",
+    "target_or_reference_role"
+  ],
+  "candidate_hidden_metadata": [
+    "is_baseline",
+    "sources",
+    "mask_path"
+  ],
+  "depth_prompt_policy": "trimodal_only_explicit_camera_near_far_reliable_stats",
+  "rgb_evidence_note": "candidate pool stays fixed and includes IR-sourced candidates"
+}

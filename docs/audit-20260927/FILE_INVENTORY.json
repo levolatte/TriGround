@@ -1,0 +1,2137 @@
+{
+  "files": [
+    {
+      "source": "docs/research/2026-08-11-contest-understanding.md",
+      "repository_path": "docs/audit-20260927/research/2026-08-11-contest-understanding.md",
+      "bytes": 18428
+    },
+    {
+      "source": "docs/research/2026-08-14-zjq-cloud-inference.md",
+      "repository_path": "docs/audit-20260927/research/2026-08-14-zjq-cloud-inference.md",
+      "bytes": 1752
+    },
+    {
+      "source": "docs/research/2026-08-28-triground-beginner-guide.md",
+      "repository_path": "docs/audit-20260927/research/2026-08-28-triground-beginner-guide.md",
+      "bytes": 31995
+    },
+    {
+      "source": "docs/research/2026-08-28-triground-repository-analysis.md",
+      "repository_path": "docs/audit-20260927/research/2026-08-28-triground-repository-analysis.md",
+      "bytes": 24517
+    },
+    {
+      "source": "docs/research/2026-09-05-gpt-pro-triground-audit-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-05-gpt-pro-triground-audit-review.md",
+      "bytes": 22561
+    },
+    {
+      "source": "docs/research/2026-09-08-contest-and-current-code-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-08-contest-and-current-code-review.md",
+      "bytes": 33244
+    },
+    {
+      "source": "docs/research/2026-09-09-branch-merge-and-slurm.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-09-branch-merge-and-slurm.md",
+      "bytes": 6432
+    },
+    {
+      "source": "docs/research/2026-09-11-architecture-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-11-architecture-audit.md",
+      "bytes": 23338
+    },
+    {
+      "source": "docs/research/2026-09-11-multimodal-literature.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-11-multimodal-literature.md",
+      "bytes": 20056
+    },
+    {
+      "source": "docs/research/2026-09-11-pipeline-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-11-pipeline-audit.md",
+      "bytes": 16575
+    },
+    {
+      "source": "docs/research/2026-09-11-triground-architecture-and-improvement-roadmap.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-11-triground-architecture-and-improvement-roadmap.md",
+      "bytes": 34666
+    },
+    {
+      "source": "docs/research/2026-09-18-8b-trimodal-experiment.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-18-8b-trimodal-experiment.md",
+      "bytes": 23164
+    },
+    {
+      "source": "docs/research/2026-09-18-contest-task-crosscheck.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-18-contest-task-crosscheck.md",
+      "bytes": 3260
+    },
+    {
+      "source": "docs/research/2026-09-18-target-v2-labels.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-18-target-v2-labels.md",
+      "bytes": 2903
+    },
+    {
+      "source": "docs/research/2026-09-19-gpt-pro-audit-brief.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-19-gpt-pro-audit-brief.md",
+      "bytes": 25549
+    },
+    {
+      "source": "docs/research/2026-09-19-gpt-pro-audit-prompt.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-19-gpt-pro-audit-prompt.md",
+      "bytes": 30029
+    },
+    {
+      "source": "docs/research/2026-09-19-public-teams-fusion-sources.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-19-public-teams-fusion-sources.md",
+      "bytes": 8366
+    },
+    {
+      "source": "docs/research/2026-09-19-structural-grounding-sources.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-19-structural-grounding-sources.md",
+      "bytes": 9310
+    },
+    {
+      "source": "docs/research/2026-09-19-structural-optimization-roadmap.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-19-structural-optimization-roadmap.md",
+      "bytes": 8440
+    },
+    {
+      "source": "docs/research/2026-09-22-4090d-preparation.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-4090d-preparation.md",
+      "bytes": 14771
+    },
+    {
+      "source": "docs/research/2026-09-22-current-repo-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-current-repo-audit.md",
+      "bytes": 20781
+    },
+    {
+      "source": "docs/research/2026-09-22-egm-retirement.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-egm-retirement.md",
+      "bytes": 2927
+    },
+    {
+      "source": "docs/research/2026-09-22-expert-models-source-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-expert-models-source-audit.md",
+      "bytes": 15629
+    },
+    {
+      "source": "docs/research/2026-09-22-native-qwen3vl-lora-preparation.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-native-qwen3vl-lora-preparation.md",
+      "bytes": 12940
+    },
+    {
+      "source": "docs/research/2026-09-22-native-reranker-source-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-native-reranker-source-audit.md",
+      "bytes": 22010
+    },
+    {
+      "source": "docs/research/2026-09-22-rematch-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-rematch-execution.md",
+      "bytes": 22005
+    },
+    {
+      "source": "docs/research/2026-09-22-rematch-reconstruction-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-22-rematch-reconstruction-review.md",
+      "bytes": 24269
+    },
+    {
+      "source": "docs/research/2026-09-23-trimodal-zero-gain-diagnosis.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-23-trimodal-zero-gain-diagnosis.md",
+      "bytes": 2510
+    },
+    {
+      "source": "docs/research/2026-09-24-5090-environment.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-5090-environment.md",
+      "bytes": 1690
+    },
+    {
+      "source": "docs/research/2026-09-24-locateanything-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-locateanything-execution.md",
+      "bytes": 10514
+    },
+    {
+      "source": "docs/research/2026-09-24-locateanything-results.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-locateanything-results.md",
+      "bytes": 5946
+    },
+    {
+      "source": "docs/research/2026-09-24-locateanything-retirement.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-locateanything-retirement.md",
+      "bytes": 1148
+    },
+    {
+      "source": "docs/research/2026-09-24-m2-rematch-submission.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-m2-rematch-submission.md",
+      "bytes": 8398
+    },
+    {
+      "source": "docs/research/2026-09-24-modality-intervention-conclusions.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-modality-intervention-conclusions.md",
+      "bytes": 7149
+    },
+    {
+      "source": "docs/research/2026-09-24-modality-intervention-experiment.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-modality-intervention-experiment.md",
+      "bytes": 12950
+    },
+    {
+      "source": "docs/research/2026-09-24-rematch-test-upload.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-24-rematch-test-upload.md",
+      "bytes": 1144
+    },
+    {
+      "source": "docs/research/2026-09-25-annotation-workflow-speedup.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-annotation-workflow-speedup.md",
+      "bytes": 5319
+    },
+    {
+      "source": "docs/research/2026-09-25-c-rematch-submission.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-c-rematch-submission.md",
+      "bytes": 7741
+    },
+    {
+      "source": "docs/research/2026-09-25-data-acquisition-status.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-data-acquisition-status.md",
+      "bytes": 22808
+    },
+    {
+      "source": "docs/research/2026-09-25-external-dataset-landscape.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-external-dataset-landscape.md",
+      "bytes": 23414
+    },
+    {
+      "source": "docs/research/2026-09-25-multimodal-method-landscape.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-multimodal-method-landscape.md",
+      "bytes": 21595
+    },
+    {
+      "source": "docs/research/2026-09-25-multimodal-object-data-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-multimodal-object-data-execution.md",
+      "bytes": 58606
+    },
+    {
+      "source": "docs/research/2026-09-25-next-stage-priority.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-next-stage-priority.md",
+      "bytes": 5259
+    },
+    {
+      "source": "docs/research/2026-09-25-rgbdt-annotation-workflow.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-rgbdt-annotation-workflow.md",
+      "bytes": 5423
+    },
+    {
+      "source": "docs/research/2026-09-25-rgbdt-depth-source-evidence.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-rgbdt-depth-source-evidence.md",
+      "bytes": 7698
+    },
+    {
+      "source": "docs/research/2026-09-25-rgbdt-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-rgbdt-execution.md",
+      "bytes": 63759
+    },
+    {
+      "source": "docs/research/2026-09-25-rgbdt-mirror-followup.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-rgbdt-mirror-followup.md",
+      "bytes": 15567
+    },
+    {
+      "source": "docs/research/2026-09-25-rgbdt-source-switch.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-rgbdt-source-switch.md",
+      "bytes": 4276
+    },
+    {
+      "source": "docs/research/2026-09-25-roborefit-depth-encoding.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-roborefit-depth-encoding.md",
+      "bytes": 5021
+    },
+    {
+      "source": "docs/research/2026-09-25-training-data-deep-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-training-data-deep-audit.md",
+      "bytes": 14182
+    },
+    {
+      "source": "docs/research/2026-09-25-trimodal-data-and-next-route-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-trimodal-data-and-next-route-review.md",
+      "bytes": 22695
+    },
+    {
+      "source": "docs/research/2026-09-25-workflow-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-25-workflow-review.md",
+      "bytes": 2776
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-code-root-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-code-root-audit.md",
+      "bytes": 10559
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-data-root-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-data-root-audit.md",
+      "bytes": 10183
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-outcome-root-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-outcome-root-audit.md",
+      "bytes": 11542
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-pilot-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-pilot-execution.md",
+      "bytes": 12615
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-pilot-runner.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-pilot-runner.md",
+      "bytes": 3220
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-root-cause-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-root-cause-audit.md",
+      "bytes": 17551
+    },
+    {
+      "source": "docs/research/2026-09-26-gu-root-cause-literature.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-gu-root-cause-literature.md",
+      "bytes": 8522
+    },
+    {
+      "source": "docs/research/2026-09-26-human-review-depth-and-errors.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-human-review-depth-and-errors.md",
+      "bytes": 8393
+    },
+    {
+      "source": "docs/research/2026-09-26-object-evidence-trial200.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-26-object-evidence-trial200.md",
+      "bytes": 3713
+    },
+    {
+      "source": "docs/research/2026-09-27-aux-selection-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-aux-selection-execution.md",
+      "bytes": 10194
+    },
+    {
+      "source": "docs/research/2026-09-27-aux-selection-method.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-aux-selection-method.md",
+      "bytes": 5620
+    },
+    {
+      "source": "docs/research/2026-09-27-aux-selection-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-aux-selection-review.md",
+      "bytes": 11484
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-deep-root-cause.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-deep-root-cause.md",
+      "bytes": 16062
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-diagnosis-conclusion.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-diagnosis-conclusion.md",
+      "bytes": 648
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-diagnosis-execution.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-diagnosis-execution.md",
+      "bytes": 20218
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-diagnosis-review.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-diagnosis-review.md",
+      "bytes": 4003
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-execution-reaudit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-execution-reaudit.md",
+      "bytes": 8287
+    },
+    {
+      "source": "docs/research/2026-09-27-gu-geometric-shortcut-audit.md",
+      "repository_path": "docs/audit-20260927/research/2026-09-27-gu-geometric-shortcut-audit.md",
+      "bytes": 9159
+    },
+    {
+      "source": "code/.work/build_rgbt_batch001.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/build_rgbt_batch001.py",
+      "bytes": 13634
+    },
+    {
+      "source": "code/.work/make_city_batch002_part01.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch002_part01.py",
+      "bytes": 5574
+    },
+    {
+      "source": "code/.work/make_city_batch002_part02.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch002_part02.py",
+      "bytes": 4862
+    },
+    {
+      "source": "code/.work/make_city_batch002_part03.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch002_part03.py",
+      "bytes": 4820
+    },
+    {
+      "source": "code/.work/make_city_batch002_part04.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch002_part04.py",
+      "bytes": 4930
+    },
+    {
+      "source": "code/.work/make_city_batch002_part05.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch002_part05.py",
+      "bytes": 4684
+    },
+    {
+      "source": "code/.work/make_city_batch004_part01.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch004_part01.py",
+      "bytes": 4393
+    },
+    {
+      "source": "code/.work/make_city_batch004_part02.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch004_part02.py",
+      "bytes": 4943
+    },
+    {
+      "source": "code/.work/make_city_batch004_part03.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch004_part03.py",
+      "bytes": 5088
+    },
+    {
+      "source": "code/.work/make_city_batch004_part04.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch004_part04.py",
+      "bytes": 4949
+    },
+    {
+      "source": "code/.work/make_city_batch004_part05.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_city_batch004_part05.py",
+      "bytes": 4513
+    },
+    {
+      "source": "code/.work/make_natural100_acceptance.py",
+      "repository_path": "docs/audit-20260927/annotation_builders/make_natural100_acceptance.py",
+      "bytes": 12735
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/CONCLUSIONS.md",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/CONCLUSIONS.md",
+      "bytes": 10401
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/README.md",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/README.md",
+      "bytes": 1299
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/SOURCE_VERSIONS.md",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/SOURCE_VERSIONS.md",
+      "bytes": 821
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/failure_review.md",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/failure_review.md",
+      "bytes": 7200
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/failure_review.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/failure_review.jsonl",
+      "bytes": 17266
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/delivery_validation.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/delivery_validation.json",
+      "bytes": 816
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/execution_window.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/execution_window.json",
+      "bytes": 229
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/configuration_frozen.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/configuration_frozen.json",
+      "bytes": 465
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/gpu_queue_complete.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/gpu_queue_complete.json",
+      "bytes": 301
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/numeric_id_interface_repair.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/numeric_id_interface_repair.json",
+      "bytes": 388
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/stage_status.tsv",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/stage_status.tsv",
+      "bytes": 1603
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/smoke_completed.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/smoke_completed.json",
+      "bytes": 219
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/preflight_checked.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/preflight_checked.json",
+      "bytes": 693
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/c_baseline.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/c_baseline.jsonl",
+      "bytes": 29904
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/c_report_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/c_report_predictions.jsonl",
+      "bytes": 58194
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/city412.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/city412.jsonl",
+      "bytes": 217425
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/city412_baseline_prompts.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/city412_baseline_prompts.json",
+      "bytes": 185262
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/city96.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/city96.jsonl",
+      "bytes": 51077
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/city96_baseline_prompts.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/city96_baseline_prompts.json",
+      "bytes": 43226
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/env8.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/env8.jsonl",
+      "bytes": 4499
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/env8_baseline_prompts.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/env8_baseline_prompts.json",
+      "bytes": 3728
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/env8_expected.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/env8_expected.json",
+      "bytes": 6585
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/fixed16_review.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/fixed16_review.jsonl",
+      "bytes": 29610
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/manifest_inventory.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/manifest_inventory.json",
+      "bytes": 4699
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+      "bytes": 201276
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/scoring/city96_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/scoring/city96_gt.json",
+      "bytes": 47051
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/train16.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/train16.jsonl",
+      "bytes": 8419
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/manifests/train16_baseline_prompts.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/train16_baseline_prompts.json",
+      "bytes": 7192
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/report412/gate.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/report412/gate.json",
+      "bytes": 151
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/report412/manual_review_queue.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/report412/manual_review_queue.jsonl",
+      "bytes": 803
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/report412/RESULTS.md",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/report412/RESULTS.md",
+      "bytes": 1211
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/report412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/report412/summary.json",
+      "bytes": 49478
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/audit_aux_selection_outputs.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/audit_aux_selection_outputs.py",
+      "bytes": 7298
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/border_crop_policy_audit.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/border_crop_policy_audit.json",
+      "bytes": 16564
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/depth_queries.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/depth_queries.jsonl",
+      "bytes": 10725
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/per_query.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/per_query.jsonl",
+      "bytes": 187745
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/refinements.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/refinements.jsonl",
+      "bytes": 85124
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/summary.json",
+      "bytes": 1363
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/output_audit/train16_posthoc_rounded_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/output_audit/train16_posthoc_rounded_gt.json",
+      "bytes": 5103
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/aux_selection_evidence.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/aux_selection_evidence.py",
+      "bytes": 32349
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/predict_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/predict_aux_selection.py",
+      "bytes": 58388
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/prepare_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/prepare_aux_selection.py",
+      "bytes": 6033
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/render_aux_selection_atlas.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/render_aux_selection_atlas.py",
+      "bytes": 6823
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/report_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/report_aux_selection.py",
+      "bytes": 9764
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_final/run_aux_selection_queue.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_final/run_aux_selection_queue.py",
+      "bytes": 9511
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_corrections_not_evaluated/predict_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_corrections_not_evaluated/predict_aux_selection.py",
+      "bytes": 58473
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_corrections_not_evaluated/test_predict_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_corrections_not_evaluated/test_predict_aux_selection.py",
+      "bytes": 10668
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/aux_selection_evidence.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/aux_selection_evidence.py",
+      "bytes": 31864
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/predict_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/predict_aux_selection.py",
+      "bytes": 58253
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/prepare_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/prepare_aux_selection.py",
+      "bytes": 6033
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/render_aux_selection_atlas.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/render_aux_selection_atlas.py",
+      "bytes": 6823
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/report_aux_selection.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/report_aux_selection.py",
+      "bytes": 9764
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_snapshot/run_aux_selection_queue.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_snapshot/run_aux_selection_queue.py",
+      "bytes": 9511
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_patches/aux_selection_evidence_empty_decode.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_patches/aux_selection_evidence_empty_decode.py",
+      "bytes": 32349
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_patches/predict_aux_selection_numeric_id.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_patches/predict_aux_selection_numeric_id.py",
+      "bytes": 58388
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/code_patches/repair_aux_numeric_ids.py",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/code_patches/repair_aux_numeric_ids.py",
+      "bytes": 4657
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/city412_candidates.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/city412_candidates.json",
+      "bytes": 1104
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/city412_depth.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/city412_depth.json",
+      "bytes": 833
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/city412_parse.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/city412_parse.json",
+      "bytes": 825
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/city412_select_refine.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/city412_select_refine.json",
+      "bytes": 1131
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/env8.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/env8.json",
+      "bytes": 940
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/report412.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/report412.json",
+      "bytes": 1115
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_attempt2_candidates.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_attempt2_candidates.json",
+      "bytes": 1137
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_attempt2_depth.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_attempt2_depth.json",
+      "bytes": 870
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_attempt2_parse.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_attempt2_parse.json",
+      "bytes": 851
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_attempt2_select_refine.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_attempt2_select_refine.json",
+      "bytes": 1175
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_baseline.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_baseline.json",
+      "bytes": 981
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_candidates.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_candidates.json",
+      "bytes": 1101
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_depth.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_depth.json",
+      "bytes": 832
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/train16_parse.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/train16_parse.json",
+      "bytes": 824
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/completed_stages/verify_env8.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/completed_stages/verify_env8.json",
+      "bytes": 614
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/evidence.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/evidence.jsonl",
+      "bytes": 4464116
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/candidates.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/candidates.jsonl",
+      "bytes": 1273560
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/query/query_info.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/query/query_info.jsonl",
+      "bytes": 972780
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/query/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/query/run_config.json",
+      "bytes": 766
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/query/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/query/summary.json",
+      "bytes": 1164
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal/final_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal/final_predictions.jsonl",
+      "bytes": 1063237
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal/run_config.json",
+      "bytes": 1318
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal/selected_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal/selected_predictions.jsonl",
+      "bytes": 743455
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal/summary.json",
+      "bytes": 2044
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/final_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/final_predictions.jsonl",
+      "bytes": 1061184
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/run_config.json",
+      "bytes": 1318
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/selected_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/selected_predictions.jsonl",
+      "bytes": 742946
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/city412/trimodal_before_numeric_id_fix/summary.json",
+      "bytes": 1726
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16_attempt2/trimodal/final_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16_attempt2/trimodal/final_predictions.jsonl",
+      "bytes": 41290
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16_attempt2/trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16_attempt2/trimodal/run_config.json",
+      "bytes": 1336
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16_attempt2/trimodal/selected_predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16_attempt2/trimodal/selected_predictions.jsonl",
+      "bytes": 27846
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16_attempt2/trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16_attempt2/trimodal/summary.json",
+      "bytes": 1753
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16/baseline/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16/baseline/predictions.jsonl",
+      "bytes": 14444
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16/baseline/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16/baseline/run_config.json",
+      "bytes": 916
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/train16/baseline/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/train16/baseline/summary.json",
+      "bytes": 1318
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/env8/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/env8/predictions.jsonl",
+      "bytes": 7438
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/env8/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/env8/run_config.json",
+      "bytes": 898
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/env8/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/env8/summary.json",
+      "bytes": 1287
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/atlas/case_rows.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/atlas/case_rows.jsonl",
+      "bytes": 46558
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/atlas/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/atlas/summary.json",
+      "bytes": 121
+    },
+    {
+      "source": "results/aux_selection_refine_20260927/atlas/depth_condition_changed_review.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/aux_selection_refine_20260927/atlas/depth_condition_changed_review.jsonl",
+      "bytes": 0
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/RESULTS.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/RESULTS.md",
+      "bytes": 9927
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/delivery_validation.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/delivery_validation.json",
+      "bytes": 318
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/analyze_full412_geometry.py",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/analyze_full412_geometry.py",
+      "bytes": 3286
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/full412_geometry.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/full412_geometry.json",
+      "bytes": 14277
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/geometry.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/geometry.json",
+      "bytes": 13753
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/geometry_audit.py",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/geometry_audit.py",
+      "bytes": 10809
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/geometry_rows.csv",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/geometry_rows.csv",
+      "bytes": 64199
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/gt_quantization_oracle.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/gt_quantization_oracle.json",
+      "bytes": 1091
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/root_cause/ustar_depth_input_flips.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/root_cause/ustar_depth_input_flips.json",
+      "bytes": 1271
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/source_snapshot/city_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/source_snapshot/city_gt.json",
+      "bytes": 201276
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/source_snapshot/city_train.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/source_snapshot/city_train.json",
+      "bytes": 3162502
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/source_snapshot/city_val.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/source_snapshot/city_val.json",
+      "bytes": 351362
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping.jsonl",
+      "bytes": 62160
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping_metadata.jsonl",
+      "bytes": 40484
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/b_query_mapping_provenance.json",
+      "bytes": 254
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_gt.json",
+      "bytes": 61283
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_gt_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_gt_provenance.json",
+      "bytes": 259
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb.json",
+      "bytes": 61829
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth.json",
+      "bytes": 89881
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth_metadata.jsonl",
+      "bytes": 30397
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_depth_provenance.json",
+      "bytes": 1371
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir.json",
+      "bytes": 76057
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir_metadata.jsonl",
+      "bytes": 29917
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_ir_provenance.json",
+      "bytes": 1374
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_metadata.jsonl",
+      "bytes": 28765
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_rgb_provenance.json",
+      "bytes": 1358
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal.json",
+      "bytes": 100173
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal_metadata.jsonl",
+      "bytes": 31549
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/city96_trimodal_provenance.json",
+      "bytes": 1387
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/env8.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/env8.json",
+      "bytes": 7052
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/env8_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/env8_metadata.jsonl",
+      "bytes": 2251
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/env8_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/env8_provenance.json",
+      "bytes": 1269
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83.json",
+      "bytes": 94229
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_gt.json",
+      "bytes": 90677
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_metadata.jsonl",
+      "bytes": 51464
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_canonical_aux83_provenance.json",
+      "bytes": 1198
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181.json",
+      "bytes": 180846
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_gt.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_gt.json",
+      "bytes": 200849
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_metadata.jsonl",
+      "bytes": 107082
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/fit_legacy181_provenance.json",
+      "bytes": 1193
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16.json",
+      "bytes": 17373
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16_metadata.jsonl",
+      "bytes": 0
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure16_provenance.json",
+      "bytes": 1063
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city.json",
+      "bytes": 2012
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city_metadata.jsonl",
+      "bytes": 577
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/pressure2city_provenance.json",
+      "bytes": 1041
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2.json",
+      "bytes": 2012
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2_metadata.jsonl",
+      "bytes": 577
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/reload2_provenance.json",
+      "bytes": 1048
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/summary.json",
+      "bytes": 5803
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b.json",
+      "bytes": 1605468
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b_metadata.jsonl",
+      "bytes": 932805
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_b_provenance.json",
+      "bytes": 1555
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar.json",
+      "bytes": 1635574
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar_metadata.jsonl",
+      "bytes": 795751
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_gstar_provenance.json",
+      "bytes": 1474
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar.json",
+      "bytes": 1636326
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar_metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar_metadata.jsonl",
+      "bytes": 797251
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar_provenance.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/train_ustar_provenance.json",
+      "bytes": 1575
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/source/pending_candidates.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/source/pending_candidates.jsonl",
+      "bytes": 466882
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/source/reviewed_evidence.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/source/reviewed_evidence.jsonl",
+      "bytes": 439627
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_city412/report.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_city412/report.md",
+      "bytes": 13072
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.csv",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.csv",
+      "bytes": 1992
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.json",
+      "bytes": 417335
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_pre/report.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_pre/report.md",
+      "bytes": 1366
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_pre/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_pre/summary.json",
+      "bytes": 122028
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_final/report.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_final/report.md",
+      "bytes": 1856
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_final/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_final/summary.json",
+      "bytes": 215206
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b/native_train_config.json",
+      "bytes": 1397
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b/consumed_samples.jsonl",
+      "bytes": 36800
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b/trainer_state.json",
+      "bytes": 4840
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b/adapter_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b/adapter_config.json",
+      "bytes": 1125
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b_city412/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b_city412/predictions.jsonl",
+      "bytes": 540464
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b_city412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b_city412/summary.json",
+      "bytes": 1614
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/b_city412/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/b_city412/run_config.json",
+      "bytes": 736
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/predictions.jsonl",
+      "bytes": 91565
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/summary.json",
+      "bytes": 1593
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb/run_config.json",
+      "bytes": 738
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119264
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/summary.json",
+      "bytes": 1604
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_depth/run_config.json",
+      "bytes": 744
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105410
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/summary.json",
+      "bytes": 1615
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_rgb_ir/run_config.json",
+      "bytes": 741
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/predictions.jsonl",
+      "bytes": 130231
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/summary.json",
+      "bytes": 1629
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/c_city96_trimodal/run_config.json",
+      "bytes": 743
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar/native_train_config.json",
+      "bytes": 1405
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar/consumed_samples.jsonl",
+      "bytes": 36800
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar/trainer_state.json",
+      "bytes": 4842
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar/adapter_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar/adapter_config.json",
+      "bytes": 1125
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/predictions.jsonl",
+      "bytes": 540452
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/summary.json",
+      "bytes": 1620
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city412/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/predictions.jsonl",
+      "bytes": 91544
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/summary.json",
+      "bytes": 1600
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119244
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/summary.json",
+      "bytes": 1634
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_depth/run_config.json",
+      "bytes": 743
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105409
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/summary.json",
+      "bytes": 1618
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_rgb_ir/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/predictions.jsonl",
+      "bytes": 130169
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/summary.json",
+      "bytes": 1630
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_city96_trimodal/run_config.json",
+      "bytes": 742
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/predictions.jsonl",
+      "bytes": 124460
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/summary.json",
+      "bytes": 1664
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_canonical_aux83/run_config.json",
+      "bytes": 759
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/predictions.jsonl",
+      "bytes": 250042
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/summary.json",
+      "bytes": 1646
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/gstar_fit_legacy181/run_config.json",
+      "bytes": 747
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/predictions.jsonl",
+      "bytes": 91545
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/summary.json",
+      "bytes": 1607
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb/run_config.json",
+      "bytes": 734
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119227
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/summary.json",
+      "bytes": 1604
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_depth/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105407
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/summary.json",
+      "bytes": 1614
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_rgb_ir/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/predictions.jsonl",
+      "bytes": 130164
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/summary.json",
+      "bytes": 1629
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_city96_trimodal/run_config.json",
+      "bytes": 739
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/predictions.jsonl",
+      "bytes": 124441
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/summary.json",
+      "bytes": 1661
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_canonical_aux83/run_config.json",
+      "bytes": 756
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/predictions.jsonl",
+      "bytes": 250044
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/summary.json",
+      "bytes": 1642
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/g_old_fit_legacy181/run_config.json",
+      "bytes": 744
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/predictions.jsonl",
+      "bytes": 91561
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/summary.json",
+      "bytes": 1596
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb/run_config.json",
+      "bytes": 724
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119222
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/summary.json",
+      "bytes": 1597
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_depth/run_config.json",
+      "bytes": 730
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105402
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/summary.json",
+      "bytes": 1600
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_rgb_ir/run_config.json",
+      "bytes": 727
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/predictions.jsonl",
+      "bytes": 130195
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/summary.json",
+      "bytes": 1614
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_city96_trimodal/run_config.json",
+      "bytes": 729
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_env8/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_env8/predictions.jsonl",
+      "bytes": 10734
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_env8/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_env8/summary.json",
+      "bytes": 1539
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_env8/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_env8/run_config.json",
+      "bytes": 714
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/predictions.jsonl",
+      "bytes": 124429
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/summary.json",
+      "bytes": 1647
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_canonical_aux83/run_config.json",
+      "bytes": 746
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/predictions.jsonl",
+      "bytes": 250032
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/summary.json",
+      "bytes": 1631
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/m2_fit_legacy181/run_config.json",
+      "bytes": 734
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/manifests/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/manifests/summary.json",
+      "bytes": 5803
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight/native_train_config.json",
+      "bytes": 1402
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight/consumed_samples.jsonl",
+      "bytes": 544
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight/trainer_state.json",
+      "bytes": 1587
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight/adapter_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight/adapter_config.json",
+      "bytes": 1125
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/predictions.jsonl",
+      "bytes": 2633
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/summary.json",
+      "bytes": 1502
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_1/run_config.json",
+      "bytes": 656
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/predictions.jsonl",
+      "bytes": 2632
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/summary.json",
+      "bytes": 1503
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/preflight_reload_2/run_config.json",
+      "bytes": 656
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_city412/summary.json",
+      "bytes": 417335
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_city412_diagnostic/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_city412_diagnostic/summary.json",
+      "bytes": 20140
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_final/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_final/summary.json",
+      "bytes": 215206
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/report_pre/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/report_pre/summary.json",
+      "bytes": 122028
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar/native_train_config.json",
+      "bytes": 1405
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar/consumed_samples.jsonl",
+      "bytes": 36800
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar/trainer_state.json",
+      "bytes": 4842
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar/adapter_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar/adapter_config.json",
+      "bytes": 1125
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/predictions.jsonl",
+      "bytes": 540464
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/summary.json",
+      "bytes": 1622
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city412/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/predictions.jsonl",
+      "bytes": 91537
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/summary.json",
+      "bytes": 1612
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119228
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/summary.json",
+      "bytes": 1623
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_depth/run_config.json",
+      "bytes": 743
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105403
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/summary.json",
+      "bytes": 1606
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_rgb_ir/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/predictions.jsonl",
+      "bytes": 130170
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/summary.json",
+      "bytes": 1630
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_city96_trimodal/run_config.json",
+      "bytes": 742
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/predictions.jsonl",
+      "bytes": 124443
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/summary.json",
+      "bytes": 1663
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_canonical_aux83/run_config.json",
+      "bytes": 759
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/predictions.jsonl",
+      "bytes": 250044
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/summary.json",
+      "bytes": 1645
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/ustar_fit_legacy181/run_config.json",
+      "bytes": 747
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/predictions.jsonl",
+      "bytes": 91542
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/summary.json",
+      "bytes": 1595
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb/run_config.json",
+      "bytes": 734
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/predictions.jsonl",
+      "bytes": 119255
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/summary.json",
+      "bytes": 1607
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_depth/run_config.json",
+      "bytes": 740
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/predictions.jsonl",
+      "bytes": 105406
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/summary.json",
+      "bytes": 1625
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_rgb_ir/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/predictions.jsonl",
+      "bytes": 130173
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/summary.json",
+      "bytes": 1629
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_city96_trimodal/run_config.json",
+      "bytes": 739
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/predictions.jsonl",
+      "bytes": 124437
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/summary.json",
+      "bytes": 1662
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_canonical_aux83/run_config.json",
+      "bytes": 756
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/predictions.jsonl",
+      "bytes": 250029
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/summary.json",
+      "bytes": 1641
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/cloud_snapshot/u_old_fit_legacy181/run_config.json",
+      "bytes": 744
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/atlas_final200/failure_review.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/atlas_final200/failure_review.md",
+      "bytes": 8311
+    },
+    {
+      "source": "results/gu_diagnosis_20260927/atlas_final200/failure_review.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_diagnosis_20260927/atlas_final200/failure_review.jsonl",
+      "bytes": 37399
+    },
+    {
+      "source": "results/gu_pilot_20260926/RESULTS.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/RESULTS.md",
+      "bytes": 4534
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/g_train.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/g_train.json",
+      "bytes": 1703576
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/metadata.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/metadata.jsonl",
+      "bytes": 616809
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/paired_schedule.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/paired_schedule.jsonl",
+      "bytes": 487392
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/pressure16.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/pressure16.json",
+      "bytes": 15479
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/pressure2city.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/pressure2city.json",
+      "bytes": 2118
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/summary.json",
+      "bytes": 2323
+    },
+    {
+      "source": "results/gu_pilot_20260926/manifests/seed2026/u_train.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/manifests/seed2026/u_train.json",
+      "bytes": 1654186
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/report_2026/report.md",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/report_2026/report.md",
+      "bytes": 9734
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/report_2026/summary.csv",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/report_2026/summary.csv",
+      "bytes": 1773
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/report_2026/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/report_2026/summary.json",
+      "bytes": 388593
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city100/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city100/predictions.jsonl",
+      "bytes": 540503
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city100/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city100/summary.json",
+      "bytes": 1615
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city100/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city100/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city200/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city200/predictions.jsonl",
+      "bytes": 540498
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city200/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city200/summary.json",
+      "bytes": 1615
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026_city200/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026_city200/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city100/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city100/predictions.jsonl",
+      "bytes": 540503
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city100/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city100/summary.json",
+      "bytes": 1616
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city100/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city100/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city200/predictions.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city200/predictions.jsonl",
+      "bytes": 540508
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city200/summary.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city200/summary.json",
+      "bytes": 1613
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026_city200/run_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026_city200/run_config.json",
+      "bytes": 737
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026/native_train_config.json",
+      "bytes": 1403
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026/consumed_samples.jsonl",
+      "bytes": 36800
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/g_2026/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/g_2026/trainer_state.json",
+      "bytes": 4838
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026/native_train_config.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026/native_train_config.json",
+      "bytes": 1403
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026/consumed_samples.jsonl",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026/consumed_samples.jsonl",
+      "bytes": 36800
+    },
+    {
+      "source": "results/gu_pilot_20260926/final_cloud_snapshot/u_2026/trainer_state.json",
+      "repository_path": "docs/audit-20260927/evidence/gu_pilot_20260926/u_2026/trainer_state.json",
+      "bytes": 4826
+    },
+    {
+      "source": "results/same_day_multimodal_pilot_20260926/released/metadata.jsonl",
+      "repository_path": "docs/audit-20260927/datasets/released181/metadata.jsonl",
+      "bytes": 60378
+    },
+    {
+      "source": "results/same_day_multimodal_pilot_20260926/released/native_sft.jsonl",
+      "repository_path": "docs/audit-20260927/datasets/released181/native_sft.jsonl",
+      "bytes": 154297
+    },
+    {
+      "source": "results/same_day_multimodal_pilot_20260926/released/summary.json",
+      "repository_path": "docs/audit-20260927/datasets/released181/summary.json",
+      "bytes": 67
+    },
+    {
+      "source": "results/multimodal_data_20260925/human_acceptance/human_results/correspondence100_seed2026_human_decisions_2026-09-26.csv",
+      "repository_path": "docs/audit-20260927/datasets/human_decisions/correspondence100_seed2026_human_decisions_2026-09-26.csv",
+      "bytes": 39658
+    },
+    {
+      "source": "results/multimodal_data_20260925/human_acceptance/human_results/natural100_seed2026_human_decisions_2026-09-26.csv",
+      "repository_path": "docs/audit-20260927/datasets/human_decisions/natural100_seed2026_human_decisions_2026-09-26.csv",
+      "bytes": 18205
+    },
+    {
+      "source": "results/multimodal_data_20260925/merged_20260926_trial200_final/summary.json",
+      "repository_path": "docs/audit-20260927/datasets/rgbdt_trial200/summary.json",
+      "bytes": 483
+    },
+    {
+      "source": "results/multimodal_data_20260925/merged_20260926_trial200_final/reviewed_evidence.jsonl",
+      "repository_path": "docs/audit-20260927/datasets/rgbdt_trial200/reviewed_evidence.jsonl",
+      "bytes": 439627
+    }
+  ],
+  "file_count": 426,
+  "total_bytes": 42680354,
+  "excluded": "Original dataset images, models, tokenizers, caches, archives, credentials, AGENTS.md. Local absolute paths in records are historical provenance, not bundled assets."
+}

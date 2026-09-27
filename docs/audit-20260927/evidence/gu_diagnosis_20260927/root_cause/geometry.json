@@ -1,0 +1,378 @@
+{
+  "definition": "All boxes are original normalized floating-point xyxy. IoU is intersection/union. RGB GT copy is a geometric reference, not a model result; RGB prediction transfer reuses each model's separately prompted same-query RGB output, not an actual auxiliary output.",
+  "sources": {
+    "raw_candidates": "cloud_snapshot/source/pending_candidates.jsonl",
+    "accepted_gt": "cloud_snapshot/manifests/fit_legacy181_gt.json",
+    "manifest": "cloud_snapshot/manifests/fit_legacy181.json",
+    "metadata": "cloud_snapshot/manifests/fit_legacy181_metadata.jsonl",
+    "predictions": {
+      "m2": "cloud_snapshot/m2_fit_legacy181/predictions.jsonl",
+      "gstar": "cloud_snapshot/gstar_fit_legacy181/predictions.jsonl",
+      "ustar": "cloud_snapshot/ustar_fit_legacy181/predictions.jsonl"
+    },
+    "train_metadata": [
+      "cloud_snapshot/manifests/train_b_metadata.jsonl",
+      "cloud_snapshot/manifests/train_gstar_metadata.jsonl",
+      "cloud_snapshot/manifests/train_ustar_metadata.jsonl"
+    ]
+  },
+  "counts": {
+    "accepted_tasks": 181,
+    "unique_sources_and_queries": 98,
+    "accepted_by_modality": {
+      "rgb": 98,
+      "infrared": 58,
+      "depth": 25
+    },
+    "new_presentations": 400,
+    "new_presentations_by_modality": {
+      "rgb": 217,
+      "infrared": 128,
+      "depth": 55
+    }
+  },
+  "groups": {
+    "all": {
+      "rgb_gt_copy_geometric_reference": {
+        "n": 83,
+        "mean_iou": 0.790716297094845,
+        "median_iou": 0.8121617667128588,
+        "min_iou": 0.3961944548364298,
+        "hits_0_5": 81,
+        "acc_0_5": 0.9759036144578314,
+        "hits_0_7": 65,
+        "acc_0_7": 0.7831325301204819
+      },
+      "rgb_gt_max_abs_coord_shift_median": 0.013333333333333308,
+      "models": {
+        "m2": {
+          "rgb_prediction_transfer": {
+            "n": 83,
+            "mean_iou": 0.7382776797711624,
+            "median_iou": 0.8223577046586313,
+            "min_iou": 0.0,
+            "hits_0_5": 74,
+            "acc_0_5": 0.891566265060241,
+            "hits_0_7": 60,
+            "acc_0_7": 0.7228915662650602
+          },
+          "actual_aux_output": {
+            "n": 83,
+            "mean_iou": 0.7454407661920306,
+            "median_iou": 0.8136524326661407,
+            "min_iou": 0.0,
+            "hits_0_5": 75,
+            "acc_0_5": 0.9036144578313253,
+            "hits_0_7": 61,
+            "acc_0_7": 0.7349397590361446
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.00716308642086814,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 2,
+            "both_hits_0_5": 73,
+            "both_misses_0_5": 7,
+            "transferred_only_hits_0_7": 1,
+            "actual_only_hits_0_7": 2
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9906542056074765,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "gstar": {
+          "rgb_prediction_transfer": {
+            "n": 83,
+            "mean_iou": 0.7394659023218552,
+            "median_iou": 0.7987527608159023,
+            "min_iou": 0.0,
+            "hits_0_5": 75,
+            "acc_0_5": 0.9036144578313253,
+            "hits_0_7": 61,
+            "acc_0_7": 0.7349397590361446
+          },
+          "actual_aux_output": {
+            "n": 83,
+            "mean_iou": 0.7672644554390295,
+            "median_iou": 0.8205896634000412,
+            "min_iou": 0.0,
+            "hits_0_5": 77,
+            "acc_0_5": 0.927710843373494,
+            "hits_0_7": 61,
+            "acc_0_7": 0.7349397590361446
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.0277985531171744,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 3,
+            "both_hits_0_5": 74,
+            "both_misses_0_5": 5,
+            "transferred_only_hits_0_7": 3,
+            "actual_only_hits_0_7": 3
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9878983397592259,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "ustar": {
+          "rgb_prediction_transfer": {
+            "n": 83,
+            "mean_iou": 0.7442672231299595,
+            "median_iou": 0.8046661111772414,
+            "min_iou": 0.0,
+            "hits_0_5": 75,
+            "acc_0_5": 0.9036144578313253,
+            "hits_0_7": 61,
+            "acc_0_7": 0.7349397590361446
+          },
+          "actual_aux_output": {
+            "n": 83,
+            "mean_iou": 0.7754125626577658,
+            "median_iou": 0.822053872053872,
+            "min_iou": 0.0,
+            "hits_0_5": 78,
+            "acc_0_5": 0.9397590361445783,
+            "hits_0_7": 63,
+            "acc_0_7": 0.7590361445783133
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.031145339527806282,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 4,
+            "both_hits_0_5": 74,
+            "both_misses_0_5": 4,
+            "transferred_only_hits_0_7": 2,
+            "actual_only_hits_0_7": 4
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9896969471055277,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        }
+      }
+    },
+    "infrared": {
+      "rgb_gt_copy_geometric_reference": {
+        "n": 58,
+        "mean_iou": 0.8027398539595819,
+        "median_iou": 0.8211721152106974,
+        "min_iou": 0.3961944548364298,
+        "hits_0_5": 57,
+        "acc_0_5": 0.9827586206896551,
+        "hits_0_7": 47,
+        "acc_0_7": 0.8103448275862069
+      },
+      "rgb_gt_max_abs_coord_shift_median": 0.012407407407407423,
+      "models": {
+        "m2": {
+          "rgb_prediction_transfer": {
+            "n": 58,
+            "mean_iou": 0.7529348402909078,
+            "median_iou": 0.8276820107635809,
+            "min_iou": 0.0,
+            "hits_0_5": 52,
+            "acc_0_5": 0.896551724137931,
+            "hits_0_7": 43,
+            "acc_0_7": 0.7413793103448276
+          },
+          "actual_aux_output": {
+            "n": 58,
+            "mean_iou": 0.7643037197290541,
+            "median_iou": 0.831531374515909,
+            "min_iou": 0.0,
+            "hits_0_5": 53,
+            "acc_0_5": 0.9137931034482759,
+            "hits_0_7": 44,
+            "acc_0_7": 0.7586206896551724
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.011368879438146243,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 2,
+            "both_hits_0_5": 51,
+            "both_misses_0_5": 4,
+            "transferred_only_hits_0_7": 1,
+            "actual_only_hits_0_7": 2
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9898348813209492,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "gstar": {
+          "rgb_prediction_transfer": {
+            "n": 58,
+            "mean_iou": 0.7537970547900954,
+            "median_iou": 0.8120999257631396,
+            "min_iou": 0.0,
+            "hits_0_5": 53,
+            "acc_0_5": 0.9137931034482759,
+            "hits_0_7": 44,
+            "acc_0_7": 0.7586206896551724
+          },
+          "actual_aux_output": {
+            "n": 58,
+            "mean_iou": 0.7834278305711171,
+            "median_iou": 0.8318149723566471,
+            "min_iou": 0.0,
+            "hits_0_5": 54,
+            "acc_0_5": 0.9310344827586207,
+            "hits_0_7": 44,
+            "acc_0_7": 0.7586206896551724
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.029630775781021683,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 2,
+            "both_hits_0_5": 52,
+            "both_misses_0_5": 3,
+            "transferred_only_hits_0_7": 2,
+            "actual_only_hits_0_7": 2
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9876024201951311,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "ustar": {
+          "rgb_prediction_transfer": {
+            "n": 58,
+            "mean_iou": 0.7610215845732053,
+            "median_iou": 0.8281744576990079,
+            "min_iou": 0.0,
+            "hits_0_5": 53,
+            "acc_0_5": 0.9137931034482759,
+            "hits_0_7": 43,
+            "acc_0_7": 0.7413793103448276
+          },
+          "actual_aux_output": {
+            "n": 58,
+            "mean_iou": 0.7936704060087341,
+            "median_iou": 0.832998262348299,
+            "min_iou": 0.0,
+            "hits_0_5": 55,
+            "acc_0_5": 0.9482758620689655,
+            "hits_0_7": 45,
+            "acc_0_7": 0.7758620689655172
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.03264882143552876,
+            "transferred_only_hits_0_5": 1,
+            "actual_only_hits_0_5": 3,
+            "both_hits_0_5": 52,
+            "both_misses_0_5": 2,
+            "transferred_only_hits_0_7": 1,
+            "actual_only_hits_0_7": 3
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9861625023841313,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        }
+      }
+    },
+    "depth": {
+      "rgb_gt_copy_geometric_reference": {
+        "n": 25,
+        "mean_iou": 0.7628216451686551,
+        "median_iou": 0.7612055088014251,
+        "min_iou": 0.4407124544190071,
+        "hits_0_5": 24,
+        "acc_0_5": 0.96,
+        "hits_0_7": 18,
+        "acc_0_7": 0.72
+      },
+      "rgb_gt_max_abs_coord_shift_median": 0.01518518518518519,
+      "models": {
+        "m2": {
+          "rgb_prediction_transfer": {
+            "n": 25,
+            "mean_iou": 0.704273067365353,
+            "median_iou": 0.7810034967878341,
+            "min_iou": 0.0,
+            "hits_0_5": 22,
+            "acc_0_5": 0.88,
+            "hits_0_7": 17,
+            "acc_0_7": 0.68
+          },
+          "actual_aux_output": {
+            "n": 25,
+            "mean_iou": 0.7016787139861359,
+            "median_iou": 0.7750956204564453,
+            "min_iou": 0.0,
+            "hits_0_5": 22,
+            "acc_0_5": 0.88,
+            "hits_0_7": 17,
+            "acc_0_7": 0.68
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": 0.0025943533792170603,
+            "transferred_only_hits_0_5": 0,
+            "actual_only_hits_0_5": 0,
+            "both_hits_0_5": 22,
+            "both_misses_0_5": 3,
+            "transferred_only_hits_0_7": 0,
+            "actual_only_hits_0_7": 0
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.992307692307692,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "gstar": {
+          "rgb_prediction_transfer": {
+            "n": 25,
+            "mean_iou": 0.7062176285955378,
+            "median_iou": 0.7622638773068421,
+            "min_iou": 0.0,
+            "hits_0_5": 22,
+            "acc_0_5": 0.88,
+            "hits_0_7": 17,
+            "acc_0_7": 0.68
+          },
+          "actual_aux_output": {
+            "n": 25,
+            "mean_iou": 0.7297654251325866,
+            "median_iou": 0.7726319712994452,
+            "min_iou": 0.0,
+            "hits_0_5": 23,
+            "acc_0_5": 0.92,
+            "hits_0_7": 17,
+            "acc_0_7": 0.68
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.023547796537048703,
+            "transferred_only_hits_0_5": 0,
+            "actual_only_hits_0_5": 1,
+            "both_hits_0_5": 22,
+            "both_misses_0_5": 2,
+            "transferred_only_hits_0_7": 1,
+            "actual_only_hits_0_7": 1
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9885057471264367,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        },
+        "ustar": {
+          "rgb_prediction_transfer": {
+            "n": 25,
+            "mean_iou": 0.7053971045816293,
+            "median_iou": 0.7652887339628217,
+            "min_iou": 0.0,
+            "hits_0_5": 22,
+            "acc_0_5": 0.88,
+            "hits_0_7": 18,
+            "acc_0_7": 0.72
+          },
+          "actual_aux_output": {
+            "n": 25,
+            "mean_iou": 0.7330543660835194,
+            "median_iou": 0.7792207792207791,
+            "min_iou": 0.0,
+            "hits_0_5": 23,
+            "acc_0_5": 0.92,
+            "hits_0_7": 18,
+            "acc_0_7": 0.72
+          },
+          "paired_transfer_vs_actual": {
+            "transferred_minus_actual_mean_iou": -0.027657261501890126,
+            "transferred_only_hits_0_5": 0,
+            "actual_only_hits_0_5": 1,
+            "both_hits_0_5": 22,
+            "both_misses_0_5": 2,
+            "transferred_only_hits_0_7": 1,
+            "actual_only_hits_0_7": 1
+          },
+          "rgb_prediction_vs_aux_prediction_median_iou": 0.9913793103448276,
+          "rgb_prediction_vs_aux_prediction_median_max_abs_coord_shift": 0.0010000000000000009
+        }
+      }
+    }
+  }
+}

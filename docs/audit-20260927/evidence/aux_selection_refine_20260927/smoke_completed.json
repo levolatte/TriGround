@@ -1,0 +1,8 @@
+{
+  "finished": "2026-09-27 17:14:50",
+  "environment8_exact": true,
+  "training_samples": 16,
+  "smoke_output": "train16_attempt2",
+  "gt_used_for_inference": false,
+  "awaits_interface_inspection_before_full": true
+}

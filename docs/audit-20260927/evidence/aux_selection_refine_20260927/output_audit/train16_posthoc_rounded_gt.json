@@ -1,0 +1,149 @@
+{
+  "ground_truth_note": "Rounded training answer, not original floating GT. Posthoc audit of smoke quality, not generalization.",
+  "records": [
+    {
+      "id": "city_shuming_204_00000268_002",
+      "query": "The man sitting on the chair wearing a grey shirt",
+      "refine": "refined",
+      "baseline_iou": 0.9583550622066602,
+      "selected_iou": 0.788536826019671,
+      "final_iou": 0.08902878373270914,
+      "refine_raw": "{\"bbox_2d\":[149,355,252,621]}"
+    },
+    {
+      "id": "city_002084_002",
+      "query": "The ceiling light below the top-left one",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.8596614950634697,
+      "selected_iou": 0.8596614950634697,
+      "final_iou": 0.8596614950634697,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_001459_007",
+      "query": "The ceiling light panel on the far left",
+      "refine": "skipped_scope_policy",
+      "baseline_iou": 0.8877088173470514,
+      "selected_iou": 0.8877088173470514,
+      "final_iou": 0.8877088173470514,
+      "refine_raw": null
+    },
+    {
+      "id": "city_000711_010",
+      "query": "The small dark bin on the stone wall ledge",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.0,
+      "selected_iou": 0.0,
+      "final_iou": 0.0,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_shuming_814_00000194_001",
+      "query": "The back of the overhead sign on the left",
+      "refine": "skipped_scope_policy",
+      "baseline_iou": 0.9462324876940551,
+      "selected_iou": 0.9462324876940551,
+      "final_iou": 0.9462324876940551,
+      "refine_raw": null
+    },
+    {
+      "id": "city_hehe_86_00000253_003",
+      "query": "The black swan in the upper right background",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.0,
+      "selected_iou": 0.0,
+      "final_iou": 0.0,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_hehe_232_000002_043_00000181_006",
+      "query": "The large yellow warning sign in the foreground",
+      "refine": "refined",
+      "baseline_iou": 0.7447469274481304,
+      "selected_iou": 0.8882279821989322,
+      "final_iou": 0.25314697613813075,
+      "refine_raw": "{\"bbox_2d\":[491,666,694,979]}"
+    },
+    {
+      "id": "city_hehe_244_000002_047_00000062_005",
+      "query": "The large no honking sign on the white pole",
+      "refine": "skipped_candidate_box_large_enough",
+      "baseline_iou": 0.885369855196519,
+      "selected_iou": 0.885369855196519,
+      "final_iou": 0.885369855196519,
+      "refine_raw": null
+    },
+    {
+      "id": "city_002016_002",
+      "query": "The ceiling light below the leftmost one",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.7319743935309975,
+      "selected_iou": 0.7319743935309975,
+      "final_iou": 0.7319743935309975,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_001694_005",
+      "query": "The ceiling light in the top middle row on the left",
+      "refine": "refined",
+      "baseline_iou": 0.9257280256478762,
+      "selected_iou": 0.0,
+      "final_iou": 0.0,
+      "refine_raw": "{\"bbox_2d\":[253,141,337,194]}"
+    },
+    {
+      "id": "city_001240_004",
+      "query": "The ceiling light above the person's head",
+      "refine": "refined",
+      "baseline_iou": 0.8845305221868105,
+      "selected_iou": 0.5358747117445963,
+      "final_iou": 0.0,
+      "refine_raw": "{\"bbox_2d\":[543,111,641,179]}"
+    },
+    {
+      "id": "city_002844_004",
+      "query": "The person in dark clothing standing between the tree and the red-coated person",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.7686274509803916,
+      "selected_iou": 0.7686274509803916,
+      "final_iou": 0.7686274509803916,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_hehe_195_000002_030_00000057_005",
+      "query": "The white car on the far left behind the barrier",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.6296596434359804,
+      "selected_iou": 0.6296596434359804,
+      "final_iou": 0.6296596434359804,
+      "refine_raw": "KEEP"
+    },
+    {
+      "id": "city_hehe_65_00000229_001",
+      "query": "The silver sedan parked on the left",
+      "refine": "skipped_candidate_box_large_enough",
+      "baseline_iou": 0.8152671057446033,
+      "selected_iou": 0.8152671057446033,
+      "final_iou": 0.8152671057446033,
+      "refine_raw": null
+    },
+    {
+      "id": "city_shuming_985_00000020_004",
+      "query": "The white bird on the far right edge",
+      "refine": "refined",
+      "baseline_iou": 0.8214285714285712,
+      "selected_iou": 0.8214285714285712,
+      "final_iou": 0.009265689300411611,
+      "refine_raw": "{\"bbox_2d\":[970,444,994,484]}"
+    },
+    {
+      "id": "city_002068_009",
+      "query": "The small device on the floor left of the person",
+      "refine": "explicit_keep",
+      "baseline_iou": 0.5838690824079485,
+      "selected_iou": 0.5838690824079485,
+      "final_iou": 0.5838690824079485,
+      "refine_raw": "KEEP"
+    }
+  ]
+}

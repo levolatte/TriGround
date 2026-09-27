@@ -1,0 +1,25 @@
+{
+  "stage": "report412",
+  "started_epoch": 1790502453.9160192,
+  "finished_epoch": 1790502459.006535,
+  "elapsed_seconds": 5.090516805648804,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "-m",
+    "tools.report_aux_selection",
+    "main",
+    "--gt",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+    "--c",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/c_report_predictions.jsonl",
+    "--selected",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/trimodal/selected_predictions.jsonl",
+    "--final",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/trimodal/final_predictions.jsonl",
+    "--evidence",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/evidence.jsonl",
+    "--output-dir",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/report412"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/report412.log"
+}

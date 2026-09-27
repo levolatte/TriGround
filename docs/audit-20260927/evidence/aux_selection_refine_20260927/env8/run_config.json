@@ -1,0 +1,24 @@
+{
+  "schema_version": "aux-baseline-v1",
+  "stage": "baseline",
+  "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+  "adapter": "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/env8.jsonl",
+  "prompts": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/env8_baseline_prompts.json",
+  "output": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/env8/predictions.jsonl",
+  "limit": 0,
+  "min_pixels": 200704,
+  "max_pixels": 602112,
+  "max_new_tokens": 128,
+  "model_dtype": "bfloat16",
+  "attention_implementation": "sdpa",
+  "peft_autocast_adapter_dtype": false,
+  "tf32": false,
+  "matmul_precision": "highest",
+  "do_sample": false,
+  "image_order": [
+    "rgb",
+    "ir",
+    "depth_visual"
+  ]
+}

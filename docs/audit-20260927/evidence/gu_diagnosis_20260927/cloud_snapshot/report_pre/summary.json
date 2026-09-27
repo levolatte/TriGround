@@ -1,0 +1,3174 @@
+{
+  "fit_legacy181": {
+    "outputs": 181,
+    "unique_queries": 98,
+    "by_target_modality": {
+      "depth": {
+        "outputs": 25,
+        "unique_queries": 25
+      },
+      "infrared": {
+        "outputs": 58,
+        "unique_queries": 58
+      },
+      "rgb": {
+        "outputs": 98,
+        "unique_queries": 98
+      }
+    },
+    "models": {
+      "m2": {
+        "all": {
+          "samples": 181,
+          "parsed": 181,
+          "parse_rate": 1.0,
+          "mean_iou": 0.7899824775355748,
+          "acc_0.5": 0.9226519337016574,
+          "acc_0.7": 0.8342541436464088,
+          "hits_0.5": 167,
+          "hits_0.7": 151
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7016787139861358,
+            "acc_0.5": 0.88,
+            "acc_0.7": 0.68,
+            "hits_0.5": 22,
+            "hits_0.7": 17
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7643037197290542,
+            "acc_0.5": 0.9137931034482759,
+            "acc_0.7": 0.7586206896551724,
+            "hits_0.5": 53,
+            "hits_0.7": 44
+          },
+          "rgb": {
+            "samples": 98,
+            "parsed": 98,
+            "parse_rate": 1.0,
+            "mean_iou": 0.8277065800000054,
+            "acc_0.5": 0.9387755102040817,
+            "acc_0.7": 0.9183673469387755,
+            "hits_0.5": 92,
+            "hits_0.7": 90
+          }
+        },
+        "query_macro_acc_0.5": 0.9336734693877551
+      },
+      "g_old": {
+        "all": {
+          "samples": 181,
+          "parsed": 181,
+          "parse_rate": 1.0,
+          "mean_iou": 0.8152140568730225,
+          "acc_0.5": 0.9392265193370166,
+          "acc_0.7": 0.8397790055248618,
+          "hits_0.5": 170,
+          "hits_0.7": 152
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.731067669485989,
+            "acc_0.5": 0.92,
+            "acc_0.7": 0.68,
+            "hits_0.5": 23,
+            "hits_0.7": 17
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7900226772529624,
+            "acc_0.5": 0.9482758620689655,
+            "acc_0.7": 0.7586206896551724,
+            "hits_0.5": 55,
+            "hits_0.7": 44
+          },
+          "rgb": {
+            "samples": 98,
+            "parsed": 98,
+            "parse_rate": 1.0,
+            "mean_iou": 0.8515891558795463,
+            "acc_0.5": 0.9387755102040817,
+            "acc_0.7": 0.9285714285714286,
+            "hits_0.5": 92,
+            "hits_0.7": 91
+          }
+        },
+        "query_macro_acc_0.5": 0.9455782312925171
+      },
+      "u_old": {
+        "all": {
+          "samples": 181,
+          "parsed": 181,
+          "parse_rate": 1.0,
+          "mean_iou": 0.8114532847721956,
+          "acc_0.5": 0.9392265193370166,
+          "acc_0.7": 0.850828729281768,
+          "hits_0.5": 170,
+          "hits_0.7": 154
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7358243863370236,
+            "acc_0.5": 0.92,
+            "acc_0.7": 0.72,
+            "hits_0.5": 23,
+            "hits_0.7": 18
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7937669380927503,
+            "acc_0.5": 0.9482758620689655,
+            "acc_0.7": 0.7758620689655172,
+            "hits_0.5": 55,
+            "hits_0.7": 45
+          },
+          "rgb": {
+            "samples": 98,
+            "parsed": 98,
+            "parse_rate": 1.0,
+            "mean_iou": 0.8412138007751253,
+            "acc_0.5": 0.9387755102040817,
+            "acc_0.7": 0.9285714285714286,
+            "hits_0.5": 92,
+            "hits_0.7": 91
+          }
+        },
+        "query_macro_acc_0.5": 0.9455782312925171
+      }
+    },
+    "pairs": [
+      {
+        "left": "m2_fit_legacy181",
+        "right": "g_old_fit_legacy181",
+        "samples": 181,
+        "delta": {
+          "mean_iou": 0.025231579337447685,
+          "acc_0.5": 0.016574585635359185,
+          "acc_0.7": 0.0055248618784530246
+        },
+        "wrong_to_right": {
+          "ids": [
+            "rgbdt500_005_00000198::q01::infrared",
+            "rgbdt500_005_00000198::q01::depth",
+            "rgbdt500_027_00000301::q01::infrared"
+          ],
+          "image_count": 2,
+          "image_groups": [
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+            ],
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+            ]
+          ]
+        },
+        "right_to_wrong": {
+          "ids": [],
+          "image_count": 0,
+          "image_groups": []
+        },
+        "image_group_bootstrap": {
+          "replicates": 10000,
+          "seed": 2026,
+          "image_groups": 98,
+          "mean_iou_delta_95ci": [
+            0.009347403620717714,
+            0.04891265379870582
+          ],
+          "acc_0.5_delta_95ci": [
+            0.0,
+            0.04395604395604391
+          ],
+          "acc_0.7_delta_95ci": [
+            -0.023391812865497075,
+            0.0393258426966292
+          ]
+        }
+      },
+      {
+        "left": "m2_fit_legacy181",
+        "right": "u_old_fit_legacy181",
+        "samples": 181,
+        "delta": {
+          "mean_iou": 0.02147080723662076,
+          "acc_0.5": 0.016574585635359185,
+          "acc_0.7": 0.016574585635359185
+        },
+        "wrong_to_right": {
+          "ids": [
+            "rgbdt500_005_00000198::q01::infrared",
+            "rgbdt500_005_00000198::q01::depth",
+            "rgbdt500_027_00000301::q01::infrared"
+          ],
+          "image_count": 2,
+          "image_groups": [
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+            ],
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+            ]
+          ]
+        },
+        "right_to_wrong": {
+          "ids": [],
+          "image_count": 0,
+          "image_groups": []
+        },
+        "image_group_bootstrap": {
+          "replicates": 10000,
+          "seed": 2026,
+          "image_groups": 98,
+          "mean_iou_delta_95ci": [
+            0.00551358541045395,
+            0.04532992588833824
+          ],
+          "acc_0.5_delta_95ci": [
+            0.0,
+            0.04395604395604391
+          ],
+          "acc_0.7_delta_95ci": [
+            -0.005883223111729984,
+            0.0478723404255319
+          ]
+        }
+      }
+    ]
+  },
+  "fit_canonical_aux83": {
+    "outputs": 83,
+    "unique_queries": 70,
+    "by_target_modality": {
+      "depth": {
+        "outputs": 25,
+        "unique_queries": 25
+      },
+      "infrared": {
+        "outputs": 58,
+        "unique_queries": 58
+      }
+    },
+    "models": {
+      "m2": {
+        "all": {
+          "samples": 83,
+          "parsed": 83,
+          "parse_rate": 1.0,
+          "mean_iou": 0.7459176772213328,
+          "acc_0.5": 0.9036144578313253,
+          "acc_0.7": 0.7469879518072289,
+          "hits_0.5": 75,
+          "hits_0.7": 62
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7022313836012701,
+            "acc_0.5": 0.88,
+            "acc_0.7": 0.68,
+            "hits_0.5": 22,
+            "hits_0.7": 17
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7647479761954978,
+            "acc_0.5": 0.9137931034482759,
+            "acc_0.7": 0.7758620689655172,
+            "hits_0.5": 53,
+            "hits_0.7": 45
+          }
+        },
+        "query_macro_acc_0.5": 0.9142857142857143
+      },
+      "g_old": {
+        "all": {
+          "samples": 83,
+          "parsed": 83,
+          "parse_rate": 1.0,
+          "mean_iou": 0.772272436329062,
+          "acc_0.5": 0.9397590361445783,
+          "acc_0.7": 0.7469879518072289,
+          "hits_0.5": 78,
+          "hits_0.7": 62
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.730595913126194,
+            "acc_0.5": 0.92,
+            "acc_0.7": 0.68,
+            "hits_0.5": 23,
+            "hits_0.7": 17
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7902364549509878,
+            "acc_0.5": 0.9482758620689655,
+            "acc_0.7": 0.7758620689655172,
+            "hits_0.5": 55,
+            "hits_0.7": 45
+          }
+        },
+        "query_macro_acc_0.5": 0.9428571428571428
+      },
+      "u_old": {
+        "all": {
+          "samples": 83,
+          "parsed": 83,
+          "parse_rate": 1.0,
+          "mean_iou": 0.7444926249579192,
+          "acc_0.5": 0.9036144578313253,
+          "acc_0.7": 0.7349397590361446,
+          "hits_0.5": 75,
+          "hits_0.7": 61
+        },
+        "by_target_modality": {
+          "depth": {
+            "samples": 25,
+            "parsed": 25,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6982213065034376,
+            "acc_0.5": 0.88,
+            "acc_0.7": 0.68,
+            "hits_0.5": 22,
+            "hits_0.7": 17
+          },
+          "infrared": {
+            "samples": 58,
+            "parsed": 58,
+            "parse_rate": 1.0,
+            "mean_iou": 0.764437158774506,
+            "acc_0.5": 0.9137931034482759,
+            "acc_0.7": 0.7586206896551724,
+            "hits_0.5": 53,
+            "hits_0.7": 44
+          }
+        },
+        "query_macro_acc_0.5": 0.9142857142857143
+      }
+    },
+    "pairs": [
+      {
+        "left": "m2_fit_canonical_aux83",
+        "right": "g_old_fit_canonical_aux83",
+        "samples": 83,
+        "delta": {
+          "mean_iou": 0.02635475910772911,
+          "acc_0.5": 0.03614457831325302,
+          "acc_0.7": 0.0
+        },
+        "wrong_to_right": {
+          "ids": [
+            "rgbdt500_005_00000198::q01::infrared",
+            "rgbdt500_005_00000198::q01::depth",
+            "rgbdt500_027_00000301::q01::infrared"
+          ],
+          "image_count": 2,
+          "image_groups": [
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+            ],
+            [
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+              "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+            ]
+          ]
+        },
+        "right_to_wrong": {
+          "ids": [],
+          "image_count": 0,
+          "image_groups": []
+        },
+        "image_group_bootstrap": {
+          "replicates": 10000,
+          "seed": 2026,
+          "image_groups": 70,
+          "mean_iou_delta_95ci": [
+            -0.008938959649440317,
+            0.07881603121717203
+          ],
+          "acc_0.5_delta_95ci": [
+            0.0,
+            0.09523809523809523
+          ],
+          "acc_0.7_delta_95ci": [
+            -0.06329113924050633,
+            0.0714285714285714
+          ]
+        }
+      },
+      {
+        "left": "m2_fit_canonical_aux83",
+        "right": "u_old_fit_canonical_aux83",
+        "samples": 83,
+        "delta": {
+          "mean_iou": -0.0014250522634136065,
+          "acc_0.5": 0.0,
+          "acc_0.7": -0.012048192771084265
+        },
+        "wrong_to_right": {
+          "ids": [],
+          "image_count": 0,
+          "image_groups": []
+        },
+        "right_to_wrong": {
+          "ids": [],
+          "image_count": 0,
+          "image_groups": []
+        },
+        "image_group_bootstrap": {
+          "replicates": 10000,
+          "seed": 2026,
+          "image_groups": 70,
+          "mean_iou_delta_95ci": [
+            -0.0049225150432087835,
+            0.002213033192752861
+          ],
+          "acc_0.5_delta_95ci": [
+            0.0,
+            0.0
+          ],
+          "acc_0.7_delta_95ci": [
+            -0.038461538461538436,
+            0.0
+          ]
+        }
+      }
+    ]
+  },
+  "prompt_sensitivity_on_same_83_ids": {
+    "m2": {
+      "left": "m2_fit_legacy181",
+      "right": "m2_fit_canonical_aux83",
+      "samples": 83,
+      "delta": {
+        "mean_iou": 0.0004769110293022516,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.012048192771084265
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 70,
+        "mean_iou_delta_95ci": [
+          -0.002768623774664941,
+          0.003739604198110996
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.03797468354430378
+        ]
+      },
+      "by_target_modality": {
+        "depth": {
+          "left": "m2_fit_legacy181",
+          "right": "m2_fit_canonical_aux83",
+          "samples": 25,
+          "delta": {
+            "mean_iou": 0.000552669615134338,
+            "acc_0.5": 0.0,
+            "acc_0.7": 0.0
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 25,
+            "mean_iou_delta_95ci": [
+              -0.00395041103122263,
+              0.004683824885318786
+            ],
+            "acc_0.5_delta_95ci": [
+              0.0,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "infrared": {
+          "left": "m2_fit_legacy181",
+          "right": "m2_fit_canonical_aux83",
+          "samples": 58,
+          "delta": {
+            "mean_iou": 0.0004442564664436377,
+            "acc_0.5": 0.0,
+            "acc_0.7": 0.017241379310344862
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 58,
+            "mean_iou_delta_95ci": [
+              -0.0036277240260022075,
+              0.00455001430891343
+            ],
+            "acc_0.5_delta_95ci": [
+              0.0,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.051724137931034475
+            ]
+          }
+        }
+      }
+    },
+    "g_old": {
+      "left": "g_old_fit_legacy181",
+      "right": "g_old_fit_canonical_aux83",
+      "samples": 83,
+      "delta": {
+        "mean_iou": 7.291536031295287e-06,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.012048192771084265
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 70,
+        "mean_iou_delta_95ci": [
+          -0.0029940730566128003,
+          0.003141483224780841
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.03797468354430378
+        ]
+      },
+      "by_target_modality": {
+        "depth": {
+          "left": "g_old_fit_legacy181",
+          "right": "g_old_fit_canonical_aux83",
+          "samples": 25,
+          "delta": {
+            "mean_iou": -0.00047175635979501696,
+            "acc_0.5": 0.0,
+            "acc_0.7": 0.0
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 25,
+            "mean_iou_delta_95ci": [
+              -0.003103497365583682,
+              0.0022523731821034753
+            ],
+            "acc_0.5_delta_95ci": [
+              0.0,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "infrared": {
+          "left": "g_old_fit_legacy181",
+          "right": "g_old_fit_canonical_aux83",
+          "samples": 58,
+          "delta": {
+            "mean_iou": 0.00021377769802544133,
+            "acc_0.5": 0.0,
+            "acc_0.7": 0.017241379310344862
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 58,
+            "mean_iou_delta_95ci": [
+              -0.004030590259003227,
+              0.004483787149894288
+            ],
+            "acc_0.5_delta_95ci": [
+              0.0,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.051724137931034475
+            ]
+          }
+        }
+      }
+    },
+    "u_old": {
+      "left": "u_old_fit_legacy181",
+      "right": "u_old_fit_canonical_aux83",
+      "samples": 83,
+      "delta": {
+        "mean_iou": -0.031821737304792985,
+        "acc_0.5": -0.03614457831325302,
+        "acc_0.7": -0.02409638554216864
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "rgbdt500_005_00000198::q01::infrared",
+          "rgbdt500_005_00000198::q01::depth",
+          "rgbdt500_027_00000301::q01::infrared"
+        ],
+        "image_count": 2,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+            "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+            "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+            "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+            "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 70,
+        "mean_iou_delta_95ci": [
+          -0.08360323248311197,
+          0.0016220165820188144
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.09523809523809523,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.08536585365853655,
+          0.025000000000000022
+        ]
+      },
+      "by_target_modality": {
+        "depth": {
+          "left": "u_old_fit_legacy181",
+          "right": "u_old_fit_canonical_aux83",
+          "samples": 25,
+          "delta": {
+            "mean_iou": -0.03760307983358602,
+            "acc_0.5": -0.040000000000000036,
+            "acc_0.7": -0.039999999999999925
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [
+              "rgbdt500_005_00000198::q01::depth"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+                "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 25,
+            "mean_iou_delta_95ci": [
+              -0.10919715507434895,
+              -0.000573645212066333
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.12,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.12,
+              0.0
+            ]
+          }
+        },
+        "infrared": {
+          "left": "u_old_fit_legacy181",
+          "right": "u_old_fit_canonical_aux83",
+          "samples": 58,
+          "delta": {
+            "mean_iou": -0.02932977931824432,
+            "acc_0.5": -0.03448275862068961,
+            "acc_0.7": -0.017241379310344862
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [
+              "rgbdt500_005_00000198::q01::infrared",
+              "rgbdt500_027_00000301::q01::infrared"
+            ],
+            "image_count": 2,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+                "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+                "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+                "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 58,
+            "mean_iou_delta_95ci": [
+              -0.07711769624574175,
+              0.0030730430628671183
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.0862068965517242,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.06896551724137934,
+              0.034482758620689724
+            ]
+          }
+        }
+      }
+    }
+  },
+  "city96": {
+    "samples": 96,
+    "models": {
+      "m2": {
+        "metrics": {
+          "rgb": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6509960520936596,
+            "acc_0.5": 0.7395833333333334,
+            "acc_0.7": 0.5729166666666666,
+            "hits_0.5": 71,
+            "hits_0.7": 55
+          },
+          "rgb_ir": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6687260625993218,
+            "acc_0.5": 0.7395833333333334,
+            "acc_0.7": 0.6041666666666666,
+            "hits_0.5": 71,
+            "hits_0.7": 58
+          },
+          "rgb_depth": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6784026625478851,
+            "acc_0.5": 0.7604166666666666,
+            "acc_0.7": 0.59375,
+            "hits_0.5": 73,
+            "hits_0.7": 57
+          },
+          "trimodal": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6538040238951699,
+            "acc_0.5": 0.7291666666666666,
+            "acc_0.7": 0.5729166666666666,
+            "hits_0.5": 70,
+            "hits_0.7": 55
+          }
+        },
+        "input_gain_vs_rgb": {
+          "rgb_ir": {
+            "left": "m2_city96_rgb",
+            "right": "m2_city96_rgb_ir",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.01773001050566214,
+              "acc_0.5": 0.0,
+              "acc_0.7": 0.03125
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002",
+                "city_000081_001",
+                "city_000021_004_00000065_005"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.011913127518064634,
+                0.04821183711163794
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.05154639175257736,
+                0.050000000000000044
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.010638297872340496,
+                0.0786516853932584
+              ]
+            }
+          },
+          "rgb_depth": {
+            "left": "m2_city96_rgb",
+            "right": "m2_city96_rgb_depth",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.027406610454225433,
+              "acc_0.5": 0.02083333333333326,
+              "acc_0.7": 0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_000006_011_00000307_006",
+                "city_000011_002_00000085_004",
+                "city_001897_001"
+              ],
+              "image_count": 4,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_000019_038_00000205_010",
+                "city_001029_002"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                0.0041029372874508505,
+                0.05620930315875388
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.030303030303030276,
+                0.07142857142857151
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.03296703296703296,
+                0.07954545454545459
+              ]
+            }
+          },
+          "trimodal": {
+            "left": "m2_city96_rgb",
+            "right": "m2_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.0028079718015102673,
+              "acc_0.5": -0.01041666666666674,
+              "acc_0.7": 0.0
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002",
+                "city_000081_001",
+                "city_000021_004_00000065_005"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.02451092834309365,
+                0.028917219065803697
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.05555555555555558,
+                0.032258064516129004
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.04166666666666674,
+                0.04167763157894728
+              ]
+            }
+          }
+        },
+        "incremental_auxiliary_gain": {
+          "depth_given_ir": {
+            "left": "m2_city96_rgb_ir",
+            "right": "m2_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.014922038704151874,
+              "acc_0.5": -0.01041666666666674,
+              "acc_0.7": -0.03125
+            },
+            "wrong_to_right": {
+              "ids": [],
+              "image_count": 0,
+              "image_groups": []
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005"
+              ],
+              "image_count": 1,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.03652615370282538,
+                -0.0007859370488923742
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.032258064516129004,
+                0.0
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.07070707070707072,
+                0.0
+              ]
+            }
+          },
+          "ir_given_depth": {
+            "left": "m2_city96_rgb_depth",
+            "right": "m2_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.024598638652715166,
+              "acc_0.5": -0.03125,
+              "acc_0.7": -0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_000019_038_00000205_010",
+                "city_001782_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_000006_011_00000307_006",
+                "city_000081_001",
+                "city_000021_004_00000065_005",
+                "city_000011_002_00000085_004"
+              ],
+              "image_count": 5,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.057039591445418446,
+                0.0006027832656128809
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.08653846153846156,
+                0.02083333333333337
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.07291666666666674,
+                0.030303030303030276
+              ]
+            }
+          }
+        }
+      },
+      "c": {
+        "metrics": {
+          "rgb": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6559492143122984,
+            "acc_0.5": 0.75,
+            "acc_0.7": 0.5729166666666666,
+            "hits_0.5": 72,
+            "hits_0.7": 55
+          },
+          "rgb_ir": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6769300240911984,
+            "acc_0.5": 0.7604166666666666,
+            "acc_0.7": 0.6041666666666666,
+            "hits_0.5": 73,
+            "hits_0.7": 58
+          },
+          "rgb_depth": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6692733636006305,
+            "acc_0.5": 0.7291666666666666,
+            "acc_0.7": 0.625,
+            "hits_0.5": 70,
+            "hits_0.7": 60
+          },
+          "trimodal": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6808614875224016,
+            "acc_0.5": 0.7604166666666666,
+            "acc_0.7": 0.6041666666666666,
+            "hits_0.5": 73,
+            "hits_0.7": 58
+          }
+        },
+        "input_gain_vs_rgb": {
+          "rgb_ir": {
+            "left": "c_city96_rgb",
+            "right": "c_city96_rgb_ir",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.020980809778900045,
+              "acc_0.5": 0.01041666666666663,
+              "acc_0.7": 0.03125
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_000012_022_00000090_002",
+                "city_000081_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.006040542971047491,
+                0.050973632718547365
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.03296703296703296,
+                0.056609133790737474
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.020618556701030855,
+                0.08602150537634412
+              ]
+            }
+          },
+          "rgb_depth": {
+            "left": "c_city96_rgb",
+            "right": "c_city96_rgb_depth",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.013324149288332143,
+              "acc_0.5": -0.02083333333333337,
+              "acc_0.7": 0.05208333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_002509_001",
+                "city_000012_022_00000090_002",
+                "city_001029_002",
+                "city_000081_001"
+              ],
+              "image_count": 4,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.016339245324330436,
+                0.04529069791999026
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.07291666666666674,
+                0.030007575757575674
+              ],
+              "acc_0.7_delta_95ci": [
+                0.0,
+                0.10752688172043012
+              ]
+            }
+          },
+          "trimodal": {
+            "left": "c_city96_rgb",
+            "right": "c_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.024912273210103253,
+              "acc_0.5": 0.01041666666666663,
+              "acc_0.7": 0.03125
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002",
+                "city_000081_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                0.0008186589262207111,
+                0.053514890706850886
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.032608695652173836,
+                0.05494505494505497
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.010526315789473717,
+                0.07777777777777778
+              ]
+            }
+          }
+        },
+        "incremental_auxiliary_gain": {
+          "depth_given_ir": {
+            "left": "c_city96_rgb_ir",
+            "right": "c_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.003931463431203208,
+              "acc_0.5": 0.0,
+              "acc_0.7": 0.0
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_000012_022_00000090_002"
+              ],
+              "image_count": 1,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002"
+              ],
+              "image_count": 1,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.01049168828744188,
+                0.022017354915229968
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.03125,
+                0.03125
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.03157894736842104,
+                0.030303030303030276
+              ]
+            }
+          },
+          "ir_given_depth": {
+            "left": "c_city96_rgb_depth",
+            "right": "c_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.01158812392177111,
+              "acc_0.5": 0.03125,
+              "acc_0.7": -0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_002509_001",
+                "city_000012_022_00000090_002",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [],
+              "image_count": 0,
+              "image_groups": []
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                0.0007870327756113599,
+                0.02884781174286631
+              ],
+              "acc_0.5_delta_95ci": [
+                0.0,
+                0.07070707070707072
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.06451612903225812,
+                0.020005050505050446
+              ]
+            }
+          }
+        }
+      },
+      "g_old": {
+        "metrics": {
+          "rgb": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6397291735460527,
+            "acc_0.5": 0.7395833333333334,
+            "acc_0.7": 0.5416666666666666,
+            "hits_0.5": 71,
+            "hits_0.7": 52
+          },
+          "rgb_ir": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6529944535845064,
+            "acc_0.5": 0.7291666666666666,
+            "acc_0.7": 0.5520833333333334,
+            "hits_0.5": 70,
+            "hits_0.7": 53
+          },
+          "rgb_depth": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.655298747701197,
+            "acc_0.5": 0.7291666666666666,
+            "acc_0.7": 0.5625,
+            "hits_0.5": 70,
+            "hits_0.7": 54
+          },
+          "trimodal": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6523733570884145,
+            "acc_0.5": 0.7291666666666666,
+            "acc_0.7": 0.5416666666666666,
+            "hits_0.5": 70,
+            "hits_0.7": 52
+          }
+        },
+        "input_gain_vs_rgb": {
+          "rgb_ir": {
+            "left": "g_old_city96_rgb",
+            "right": "g_old_city96_rgb_ir",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.01326528003845362,
+              "acc_0.5": -0.01041666666666674,
+              "acc_0.7": 0.01041666666666674
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000019_038_00000205_010",
+                "city_000081_001",
+                "city_000021_004_00000065_005"
+              ],
+              "image_count": 4,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.01545989719224591,
+                0.042971704857912844
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.06451612903225812,
+                0.04210526315789476
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.021739130434782594,
+                0.0444444444444444
+              ]
+            }
+          },
+          "rgb_depth": {
+            "left": "g_old_city96_rgb",
+            "right": "g_old_city96_rgb_depth",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.015569574155144261,
+              "acc_0.5": -0.01041666666666674,
+              "acc_0.7": 0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_000011_002_00000085_004",
+                "city_001897_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000019_038_00000205_010",
+                "city_000081_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.00010481640355798618,
+                0.03644162678467603
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.05494505494505486,
+                0.03260869565217395
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.02020202020202022,
+                0.06382978723404259
+              ]
+            }
+          },
+          "trimodal": {
+            "left": "g_old_city96_rgb",
+            "right": "g_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.012644183542361742,
+              "acc_0.5": -0.01041666666666674,
+              "acc_0.7": 0.0
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_000019_038_00000205_010",
+                "city_000006_011_00000307_006",
+                "city_000021_004_00000065_005"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.016949323981867798,
+                0.04160688485634267
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.05882352941176461,
+                0.032608695652173836
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.03125,
+                0.030303030303030276
+              ]
+            }
+          }
+        },
+        "incremental_auxiliary_gain": {
+          "depth_given_ir": {
+            "left": "g_old_city96_rgb_ir",
+            "right": "g_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.0006210964960918774,
+              "acc_0.5": 0.0,
+              "acc_0.7": -0.01041666666666674
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000081_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_000006_011_00000307_006",
+                "city_001782_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.01220063453849395,
+                0.007711603588288642
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.04123711340206182,
+                0.04210526315789476
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.03296703296703296,
+                0.0
+              ]
+            }
+          },
+          "ir_given_depth": {
+            "left": "g_old_city96_rgb_depth",
+            "right": "g_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.002925390612782519,
+              "acc_0.5": 0.0,
+              "acc_0.7": -0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_hehe_224_000002_041_00000197_005",
+                "city_000081_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_000006_011_00000307_006",
+                "city_000021_004_00000065_005",
+                "city_000011_002_00000085_004"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.03416119396773185,
+                0.02396645365522616
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.05154639175257725,
+                0.05102040816326525
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.07291666666666674,
+                0.029126213592232997
+              ]
+            }
+          }
+        }
+      },
+      "u_old": {
+        "metrics": {
+          "rgb": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6472561074779505,
+            "acc_0.5": 0.7395833333333334,
+            "acc_0.7": 0.5625,
+            "hits_0.5": 71,
+            "hits_0.7": 54
+          },
+          "rgb_ir": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6646732147074175,
+            "acc_0.5": 0.7604166666666666,
+            "acc_0.7": 0.5729166666666666,
+            "hits_0.5": 73,
+            "hits_0.7": 55
+          },
+          "rgb_depth": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6729254455918946,
+            "acc_0.5": 0.75,
+            "acc_0.7": 0.6041666666666666,
+            "hits_0.5": 72,
+            "hits_0.7": 58
+          },
+          "trimodal": {
+            "samples": 96,
+            "parsed": 96,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6554286384449176,
+            "acc_0.5": 0.7083333333333334,
+            "acc_0.7": 0.5833333333333334,
+            "hits_0.5": 68,
+            "hits_0.7": 56
+          }
+        },
+        "input_gain_vs_rgb": {
+          "rgb_ir": {
+            "left": "u_old_city96_rgb",
+            "right": "u_old_city96_rgb_ir",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.017417107229466988,
+              "acc_0.5": 0.02083333333333326,
+              "acc_0.7": 0.01041666666666663
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001",
+                "city_001782_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002"
+              ],
+              "image_count": 1,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.003515848042479924,
+                0.04399596089080025
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.02020202020202022,
+                0.0625
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.021739130434782594,
+                0.04763049450549428
+              ]
+            }
+          },
+          "rgb_depth": {
+            "left": "u_old_city96_rgb",
+            "right": "u_old_city96_rgb_depth",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.025669338113944118,
+              "acc_0.5": 0.01041666666666663,
+              "acc_0.7": 0.04166666666666663
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_000011_002_00000085_004",
+                "city_001897_001"
+              ],
+              "image_count": 3,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_001029_002",
+                "city_000081_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                0.003259903228252959,
+                0.053641587952517715
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.032608695652173836,
+                0.05494505494505497
+              ],
+              "acc_0.7_delta_95ci": [
+                0.0,
+                0.09375
+              ]
+            }
+          },
+          "trimodal": {
+            "left": "u_old_city96_rgb",
+            "right": "u_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": 0.008172530966967129,
+              "acc_0.5": -0.03125,
+              "acc_0.7": 0.02083333333333337
+            },
+            "wrong_to_right": {
+              "ids": [
+                "city_hehe_224_000002_041_00000197_005",
+                "city_001897_001"
+              ],
+              "image_count": 2,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+                ]
+              ]
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000006_011_00000307_006",
+                "city_001029_002",
+                "city_000081_001",
+                "city_000021_004_00000065_005"
+              ],
+              "image_count": 5,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.022026072490825263,
+                0.03873264500042168
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.08602150537634412,
+                0.02083333333333337
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.020618556701030966,
+                0.061855670103092786
+              ]
+            }
+          }
+        },
+        "incremental_auxiliary_gain": {
+          "depth_given_ir": {
+            "left": "u_old_city96_rgb_ir",
+            "right": "u_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.00924457626249986,
+              "acc_0.5": -0.05208333333333326,
+              "acc_0.7": 0.01041666666666674
+            },
+            "wrong_to_right": {
+              "ids": [],
+              "image_count": 0,
+              "image_groups": []
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000006_011_00000307_006",
+                "city_000081_001",
+                "city_000021_004_00000065_005",
+                "city_001782_001"
+              ],
+              "image_count": 5,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.029454527783700484,
+                0.003174532542091529
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.098903818953324,
+                -0.010752688172043001
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.0219780219780219,
+                0.04396825396825385
+              ]
+            }
+          },
+          "ir_given_depth": {
+            "left": "u_old_city96_rgb_depth",
+            "right": "u_old_city96_trimodal",
+            "samples": 96,
+            "delta": {
+              "mean_iou": -0.01749680714697699,
+              "acc_0.5": -0.04166666666666663,
+              "acc_0.7": -0.02083333333333326
+            },
+            "wrong_to_right": {
+              "ids": [],
+              "image_count": 0,
+              "image_groups": []
+            },
+            "right_to_wrong": {
+              "ids": [
+                "city_shuming_1062_00000100_005",
+                "city_000006_011_00000307_006",
+                "city_000021_004_00000065_005",
+                "city_000011_002_00000085_004"
+              ],
+              "image_count": 4,
+              "image_groups": [
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+                ],
+                [
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                  "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+                ]
+              ]
+            },
+            "image_group_bootstrap": {
+              "replicates": 10000,
+              "seed": 2026,
+              "image_groups": 78,
+              "mean_iou_delta_95ci": [
+                -0.045280027247999635,
+                0.0020453906897886657
+              ],
+              "acc_0.5_delta_95ci": [
+                -0.08510638297872342,
+                -0.010000000000000009
+              ],
+              "acc_0.7_delta_95ci": [
+                -0.06382978723404253,
+                0.02020202020202022
+              ]
+            }
+          }
+        }
+      }
+    },
+    "same_input_model_pairs": {
+      "rgb": [
+        {
+          "left": "m2_city96_rgb",
+          "right": "c_city96_rgb",
+          "samples": 96,
+          "delta": {
+            "mean_iou": 0.004953162218638729,
+            "acc_0.5": 0.01041666666666663,
+            "acc_0.7": 0.0
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_002509_001",
+              "city_000012_022_00000090_002"
+            ],
+            "image_count": 2,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.004942912125268104,
+              0.021772404145708205
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.021276595744680882,
+              0.05102040816326525
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb",
+          "right": "g_old_city96_rgb",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.011266878547606884,
+            "acc_0.5": 0.0,
+            "acc_0.7": -0.03125
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_000006_011_00000307_006"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_001029_002"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.02026337048737921,
+              -0.00018614695938338582
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.03125,
+              0.030612244897959107
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.07692307692307687,
+              0.010638297872340385
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb",
+          "right": "u_old_city96_rgb",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.0037399446157091454,
+            "acc_0.5": 0.0,
+            "acc_0.7": -0.01041666666666663
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_000006_011_00000307_006"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.01164072211525955,
+              0.006810120587314344
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.030303030303030276,
+              0.030927835051546393
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.04395604395604402,
+              0.0219780219780219
+            ]
+          }
+        }
+      ],
+      "rgb_ir": [
+        {
+          "left": "m2_city96_rgb_ir",
+          "right": "c_city96_rgb_ir",
+          "samples": 96,
+          "delta": {
+            "mean_iou": 0.008203961491876632,
+            "acc_0.5": 0.02083333333333326,
+            "acc_0.7": 0.0
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_002509_001",
+              "city_001029_002",
+              "city_000021_004_00000065_005"
+            ],
+            "image_count": 3,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.003825171739409633,
+              0.028305169268309244
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.019999999999999907,
+              0.06451612903225812
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.0505050505050505,
+              0.05154639175257736
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb_ir",
+          "right": "g_old_city96_rgb_ir",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.015731609014815406,
+            "acc_0.5": -0.01041666666666674,
+            "acc_0.7": -0.05208333333333326
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_000006_011_00000307_006"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_shuming_1062_00000100_005",
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 2,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.02279742148400537,
+              -0.008648284231589715
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.04444444444444451,
+              0.021505376344086002
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.09900990099009899,
+              -0.010752688172043001
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb_ir",
+          "right": "u_old_city96_rgb_ir",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.004052847891904299,
+            "acc_0.5": 0.02083333333333326,
+            "acc_0.7": -0.03125
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_000006_011_00000307_006",
+              "city_000081_001",
+              "city_000021_004_00000065_005"
+            ],
+            "image_count": 3,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.017413661099160222,
+              0.016607655622312156
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.01999999999999991,
+              0.06451612903225801
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.07767259978425034,
+              0.010752688172043001
+            ]
+          }
+        }
+      ],
+      "rgb_depth": [
+        {
+          "left": "m2_city96_rgb_depth",
+          "right": "c_city96_rgb_depth",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.00912929894725456,
+            "acc_0.5": -0.03125,
+            "acc_0.7": 0.03125
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000006_011_00000307_006",
+              "city_000081_001",
+              "city_000011_002_00000085_004"
+            ],
+            "image_count": 3,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.02964353409541075,
+              0.0032369469548508695
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.07001470588235299,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.010638297872340385,
+              0.07843688037012556
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb_depth",
+          "right": "g_old_city96_rgb_depth",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.023103914846688056,
+            "acc_0.5": -0.03125,
+            "acc_0.7": -0.03125
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_shuming_1062_00000100_005",
+              "city_hehe_224_000002_041_00000197_005",
+              "city_000081_001"
+            ],
+            "image_count": 3,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.0430158162926757,
+              -0.009488048347412984
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.0714285714285714,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.07694174757281558,
+              0.010752688172043001
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_rgb_depth",
+          "right": "u_old_city96_rgb_depth",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.0054772169559904604,
+            "acc_0.5": -0.01041666666666663,
+            "acc_0.7": 0.01041666666666663
+          },
+          "wrong_to_right": {
+            "ids": [],
+            "image_count": 0,
+            "image_groups": []
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000081_001"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.009793734396245595,
+              -0.0011135407955587874
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.03296703296703296,
+              0.0
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.021282315259666004,
+              0.04444444444444451
+            ]
+          }
+        }
+      ],
+      "trimodal": [
+        {
+          "left": "m2_city96_trimodal",
+          "right": "c_city96_trimodal",
+          "samples": 96,
+          "delta": {
+            "mean_iou": 0.027057463627231715,
+            "acc_0.5": 0.03125,
+            "acc_0.7": 0.03125
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_002509_001",
+              "city_hehe_224_000002_041_00000197_005",
+              "city_000012_022_00000090_002",
+              "city_000021_004_00000065_005"
+            ],
+            "image_count": 4,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              0.003961136156362225,
+              0.056723222362086316
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.01041666666666674,
+              0.07999999999999996
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.010752688172043001,
+              0.07766990291262132
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_trimodal",
+          "right": "g_old_city96_trimodal",
+          "samples": 96,
+          "delta": {
+            "mean_iou": -0.0014306668067554096,
+            "acc_0.5": 0.0,
+            "acc_0.7": -0.03125
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_hehe_224_000002_041_00000197_005",
+              "city_000081_001"
+            ],
+            "image_count": 2,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_000019_038_00000205_010",
+              "city_001782_001"
+            ],
+            "image_count": 2,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.014837064235731137,
+              0.018660019922666832
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.04123711340206182,
+              0.042105263157894646
+            ],
+            "acc_0.7_delta_95ci": [
+              -0.07954545454545459,
+              0.010416666666666685
+            ]
+          }
+        },
+        {
+          "left": "m2_city96_trimodal",
+          "right": "u_old_city96_trimodal",
+          "samples": 96,
+          "delta": {
+            "mean_iou": 0.001624614549747716,
+            "acc_0.5": -0.02083333333333326,
+            "acc_0.7": 0.01041666666666674
+          },
+          "wrong_to_right": {
+            "ids": [
+              "city_hehe_224_000002_041_00000197_005"
+            ],
+            "image_count": 1,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+              ]
+            ]
+          },
+          "right_to_wrong": {
+            "ids": [
+              "city_shuming_1062_00000100_005",
+              "city_000019_038_00000205_010",
+              "city_001782_001"
+            ],
+            "image_count": 3,
+            "image_groups": [
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+              ],
+              [
+                "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+                "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+              ]
+            ]
+          },
+          "image_group_bootstrap": {
+            "replicates": 10000,
+            "seed": 2026,
+            "image_groups": 78,
+            "mean_iou_delta_95ci": [
+              -0.01101438723163942,
+              0.021996972963576764
+            ],
+            "acc_0.5_delta_95ci": [
+              -0.06315789473684208,
+              0.019806930693069248
+            ],
+            "acc_0.7_delta_95ci": [
+              0.0,
+              0.032258064516129004
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

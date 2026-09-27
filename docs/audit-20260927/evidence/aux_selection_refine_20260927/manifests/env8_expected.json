@@ -1,0 +1,218 @@
+{
+  "city_000004_012_00000001_001": {
+    "prediction": [
+      0.476,
+      0.599,
+      0.568,
+      0.921
+    ],
+    "raw_text": "{\"bbox_2d\":[476,599,568,921]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the plaid jacket walking on the path\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_012_00000001_002": {
+    "prediction": [
+      0.527,
+      0.644,
+      0.576,
+      0.916
+    ],
+    "raw_text": "{\"bbox_2d\":[527,644,576,916]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the pink jacket walking beside the plaid jacket person\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_012_00000001_003": {
+    "prediction": [
+      0.019,
+      0.688,
+      0.034,
+      0.764
+    ],
+    "raw_text": "{\"bbox_2d\":[19,688,34,764]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost person in the dark coat on the far left sidewalk\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_012_00000001_004": {
+    "prediction": [
+      0.051,
+      0.688,
+      0.071,
+      0.764
+    ],
+    "raw_text": "{\"bbox_2d\":[51,688,71,764]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person with the yellow backpack on the far left sidewalk\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_012_00000001_005": {
+    "prediction": [
+      0.069,
+      0.686,
+      0.086,
+      0.768
+    ],
+    "raw_text": "{\"bbox_2d\":[69,686,86,768]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost person in the dark coat among the group on the far left\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_012_00000001_006": {
+    "prediction": [
+      0.41,
+      0.356,
+      0.478,
+      0.492
+    ],
+    "raw_text": "{\"bbox_2d\":[410,356,478,492]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue pedestrian crossing sign on the white pole\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_018_00000341_001": {
+    "prediction": [
+      0.469,
+      0.412,
+      0.585,
+      0.552
+    ],
+    "raw_text": "{\"bbox_2d\":[469,412,585,552]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The warning sign in the foreground near the water\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  },
+  "city_000004_018_00000341_002": {
+    "prediction": [
+      0.227,
+      0.139,
+      0.236,
+      0.166
+    ],
+    "raw_text": "{\"bbox_2d\":[227,139,236,166]}",
+    "image_grid_thw": [
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ],
+      [
+        1,
+        36,
+        64
+      ]
+    ],
+    "prompt": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue sign on the far left of the bridge\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+  }
+}

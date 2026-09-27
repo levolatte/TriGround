@@ -1,0 +1,1442 @@
+{
+  "city_000808_001": {
+    "visible": "../visible/000808.png",
+    "infrared": "../infrared/000808.png",
+    "depth": "../depth/000808.png",
+    "query": "The white bird swimming in the green pond",
+    "bbox": [
+      0.611979,
+      0.447222,
+      0.695833,
+      0.52963
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000140_002": {
+    "visible": "../visible/000140.png",
+    "infrared": "../infrared/000140.png",
+    "depth": "../depth/000140.png",
+    "query": "The small dark garbage can on the distant path",
+    "bbox": [
+      0.370312,
+      0.310185,
+      0.382292,
+      0.336111
+    ],
+    "class_name": "garbage can",
+    "original_query": "The rightmost garbage can, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1337_00000068_001": {
+    "visible": "../visible/shuming_1337_00000068.png",
+    "infrared": "../infrared/shuming_1337_00000068.png",
+    "depth": "../depth/shuming_1337_00000068.png",
+    "query": "The man in the white shirt holding two paddles",
+    "bbox": [
+      0.295833,
+      0.060186,
+      0.565625,
+      1.0
+    ],
+    "class_name": "person",
+    "original_query": "The person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_783_00000248_002": {
+    "visible": "../visible/shuming_783_00000248.png",
+    "infrared": "../infrared/shuming_783_00000248.png",
+    "depth": "../depth/shuming_783_00000248.png",
+    "query": "The person in the white shirt standing by the cart",
+    "bbox": [
+      0.557813,
+      0.436111,
+      0.592187,
+      0.625
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001798_002": {
+    "visible": "../visible/001798.png",
+    "infrared": "../infrared/001798.png",
+    "depth": "../depth/001798.png",
+    "query": "The lion lying on the right side of the platform",
+    "bbox": [
+      0.536979,
+      0.523148,
+      0.614583,
+      0.571296
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002145_001": {
+    "visible": "../visible/002145.png",
+    "infrared": "../infrared/002145.png",
+    "depth": "../depth/002145.png",
+    "query": "The brown horse with a saddle",
+    "bbox": [
+      0.217708,
+      0.457408,
+      0.386458,
+      0.70463
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_230_000002_043_00000061_001": {
+    "visible": "../visible/hehe_230_000002_043_00000061.png",
+    "infrared": "../infrared/hehe_230_000002_043_00000061.png",
+    "depth": "../depth/hehe_230_000002_043_00000061.png",
+    "query": "The tall yellow sign in the foreground",
+    "bbox": [
+      0.37448,
+      0.331482,
+      0.422396,
+      0.753704
+    ],
+    "class_name": "sign",
+    "original_query": "The rightmost sign, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_215_00000189_004": {
+    "visible": "../visible/shuming_215_00000189.png",
+    "infrared": "../infrared/shuming_215_00000189.png",
+    "depth": "../depth/shuming_215_00000189.png",
+    "query": "The blue plastic seat back visible above the chair stack",
+    "bbox": [
+      0.505729,
+      0.459259,
+      0.669271,
+      0.599074
+    ],
+    "class_name": "seat",
+    "original_query": "The 4th seat from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001685_005": {
+    "visible": "../visible/001685.png",
+    "infrared": "../infrared/001685.png",
+    "depth": "../depth/001685.png",
+    "query": "The ceiling light to the right of the man",
+    "bbox": [
+      0.550521,
+      0.127778,
+      0.636979,
+      0.2
+    ],
+    "class_name": "street light",
+    "original_query": "The 4th street light from the left, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000014_052_suppl_00000164_003": {
+    "visible": "../visible/000014_052_suppl_00000164.png",
+    "infrared": "../infrared/000014_052_suppl_00000164.png",
+    "depth": "../depth/000014_052_suppl_00000164.png",
+    "query": "The person standing next to the other pedestrian on the path",
+    "bbox": [
+      0.214062,
+      0.371297,
+      0.229687,
+      0.439815
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_910_00000290_003": {
+    "visible": "../visible/shuming_910_00000290.png",
+    "infrared": "../infrared/shuming_910_00000290.png",
+    "depth": "../depth/shuming_910_00000290.png",
+    "query": "The white chair with a grey cushion in the left foreground",
+    "bbox": [
+      0.103646,
+      0.474074,
+      0.366146,
+      1.0
+    ],
+    "class_name": "seat",
+    "original_query": "The 2nd seat from the left, in the lower-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000013_016_suppl_00000381_001": {
+    "visible": "../visible/000013_016_suppl_00000381.png",
+    "infrared": "../infrared/000013_016_suppl_00000381.png",
+    "depth": "../depth/000013_016_suppl_00000381.png",
+    "query": "The grey bird on the right near the tree",
+    "bbox": [
+      0.651042,
+      0.308333,
+      0.751563,
+      0.485185
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002842_005": {
+    "visible": "../visible/002842.png",
+    "infrared": "../infrared/002842.png",
+    "depth": "../depth/002842.png",
+    "query": "The small distant figure partially hidden by the tree",
+    "bbox": [
+      0.418229,
+      0.144444,
+      0.436979,
+      0.202778
+    ],
+    "class_name": "person",
+    "original_query": "The leftmost person, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_783_00000248_001": {
+    "visible": "../visible/shuming_783_00000248.png",
+    "infrared": "../infrared/shuming_783_00000248.png",
+    "depth": "../depth/shuming_783_00000248.png",
+    "query": "The person in the black shirt under the tent",
+    "bbox": [
+      0.514583,
+      0.42037,
+      0.553125,
+      0.533334
+    ],
+    "class_name": "person",
+    "original_query": "The leftmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_003692_001": {
+    "visible": "../visible/003692.png",
+    "infrared": "../infrared/003692.png",
+    "depth": "../depth/003692.png",
+    "query": "The animal on the high metal platform",
+    "bbox": [
+      0.283333,
+      0.016667,
+      0.313021,
+      0.062037
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000014_025_suppl_00000308_004": {
+    "visible": "../visible/000014_025_suppl_00000308.png",
+    "infrared": "../infrared/000014_025_suppl_00000308.png",
+    "depth": "../depth/000014_025_suppl_00000308.png",
+    "query": "The person sitting under the red umbrella on the right",
+    "bbox": [
+      0.792708,
+      0.190741,
+      0.817708,
+      0.230555
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, in the upper-right part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000019_005_00000001_001": {
+    "visible": "../visible/000019_005_00000001.png",
+    "infrared": "../infrared/000019_005_00000001.png",
+    "depth": "../depth/000019_005_00000001.png",
+    "query": "The zebra standing in the open dirt area",
+    "bbox": [
+      0.469791,
+      0.577778,
+      0.578125,
+      0.714815
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001029_002": {
+    "visible": "../visible/001029.png",
+    "infrared": "../infrared/001029.png",
+    "depth": "../depth/001029.png",
+    "query": "The lower light reflection in the left window",
+    "bbox": [
+      0.118229,
+      0.275,
+      0.161979,
+      0.310186
+    ],
+    "class_name": "street light",
+    "original_query": "The 3rd street light from the left, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000007_011_00000501_003": {
+    "visible": "../visible/000007_011_00000501.png",
+    "infrared": "../infrared/000007_011_00000501.png",
+    "depth": "../depth/000007_011_00000501.png",
+    "query": "The tall street light rising above the white truck",
+    "bbox": [
+      0.414062,
+      0.149074,
+      0.504687,
+      0.601852
+    ],
+    "class_name": "street light",
+    "original_query": "The rightmost street light, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000019_038_00000205_003": {
+    "visible": "../visible/000019_038_00000205.png",
+    "infrared": "../infrared/000019_038_00000205.png",
+    "depth": "../depth/000019_038_00000205.png",
+    "query": "The person in the white shirt on the far left of the group",
+    "bbox": [
+      0.804167,
+      0.283334,
+      0.819792,
+      0.351852
+    ],
+    "class_name": "sign",
+    "original_query": "The leftmost sign, in the upper-right part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000014_025_suppl_00000308_001": {
+    "visible": "../visible/000014_025_suppl_00000308.png",
+    "infrared": "../infrared/000014_025_suppl_00000308.png",
+    "depth": "../depth/000014_025_suppl_00000308.png",
+    "query": "The leftmost white A-frame sign with a QR code",
+    "bbox": [
+      0.352083,
+      0.342593,
+      0.445833,
+      0.552778
+    ],
+    "class_name": "sign",
+    "original_query": "The leftmost sign, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000012_022_00000090_002": {
+    "visible": "../visible/000012_022_00000090.png",
+    "infrared": "../infrared/000012_022_00000090.png",
+    "depth": "../depth/000012_022_00000090.png",
+    "query": "The small object in the bushes on the left",
+    "bbox": [
+      0.474479,
+      0.626852,
+      0.504167,
+      0.663888
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000023_001_00000001_003": {
+    "visible": "../visible/000023_001_00000001.png",
+    "infrared": "../infrared/000023_001_00000001.png",
+    "depth": "../depth/000023_001_00000001.png",
+    "query": "The solitary zebra on the right side under the shelter",
+    "bbox": [
+      0.482291,
+      0.547222,
+      0.541667,
+      0.696296
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_224_000002_041_00000197_009": {
+    "visible": "../visible/hehe_224_000002_041_00000197.png",
+    "infrared": "../infrared/hehe_224_000002_041_00000197.png",
+    "depth": "../depth/hehe_224_000002_041_00000197.png",
+    "query": "The silver car behind the white car",
+    "bbox": [
+      0.268229,
+      0.85463,
+      0.288541,
+      0.948148
+    ],
+    "class_name": "garbage can",
+    "original_query": "The person, to the right of the nearby garbage can",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_67_00000001_002": {
+    "visible": "../visible/shuming_67_00000001.png",
+    "infrared": "../infrared/shuming_67_00000001.png",
+    "depth": "../depth/shuming_67_00000001.png",
+    "query": "The scooter parked on the far left edge",
+    "bbox": [
+      0.0,
+      0.188889,
+      0.041667,
+      0.259259
+    ],
+    "class_name": "bicycle",
+    "original_query": "The leftmost bicycle, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_924_00000267_002": {
+    "visible": "../visible/shuming_924_00000267.png",
+    "infrared": "../infrared/shuming_924_00000267.png",
+    "depth": "../depth/shuming_924_00000267.png",
+    "query": "The person with pink hair kneeling on the white cloth",
+    "bbox": [
+      0.542188,
+      0.127777,
+      0.739062,
+      0.668519
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1062_00000100_005": {
+    "visible": "../visible/shuming_1062_00000100.png",
+    "infrared": "../infrared/shuming_1062_00000100.png",
+    "depth": "../depth/shuming_1062_00000100.png",
+    "query": "The rhino lying down on the right side of the pair",
+    "bbox": [
+      0.724479,
+      0.532407,
+      0.781771,
+      0.614815
+    ],
+    "class_name": "animal",
+    "original_query": "The 5th animal from the left, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000206_003": {
+    "visible": "../visible/000206.png",
+    "infrared": "../infrared/000206.png",
+    "depth": "../depth/000206.png",
+    "query": "The person on the right in the glass reflection",
+    "bbox": [
+      0.183334,
+      0.512037,
+      0.215104,
+      0.662963
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000006_011_00000307_006": {
+    "visible": "../visible/000006_011_00000307.png",
+    "infrared": "../infrared/000006_011_00000307.png",
+    "depth": "../depth/000006_011_00000307.png",
+    "query": "The person walking behind the fence in the center-right",
+    "bbox": [
+      0.645833,
+      0.348148,
+      0.657813,
+      0.369444
+    ],
+    "class_name": "person",
+    "original_query": "The 2nd person from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_989_00000171_004": {
+    "visible": "../visible/shuming_989_00000171.png",
+    "infrared": "../infrared/shuming_989_00000171.png",
+    "depth": "../depth/shuming_989_00000171.png",
+    "query": "The white swan to the right of the boat",
+    "bbox": [
+      0.682292,
+      0.632408,
+      0.717188,
+      0.680556
+    ],
+    "class_name": "animal",
+    "original_query": "The 4th animal from the left, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000013_055_00000241_001": {
+    "visible": "../visible/000013_055_00000241.png",
+    "infrared": "../infrared/000013_055_00000241.png",
+    "depth": "../depth/000013_055_00000241.png",
+    "query": "The dark brown bear near the building",
+    "bbox": [
+      0.466146,
+      0.523148,
+      0.485938,
+      0.582408
+    ],
+    "class_name": "animal",
+    "original_query": "The 2nd animal from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_178_000002_025_00000079_006": {
+    "visible": "../visible/hehe_178_000002_025_00000079.png",
+    "infrared": "../infrared/hehe_178_000002_025_00000079.png",
+    "depth": "../depth/hehe_178_000002_025_00000079.png",
+    "query": "The parked scooter on the left sidewalk",
+    "bbox": [
+      0.471875,
+      0.484259,
+      0.494271,
+      0.563889
+    ],
+    "class_name": "bicycle",
+    "original_query": "The leftmost bicycle, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000016_036_suppl_00000363_001": {
+    "visible": "../visible/000016_036_suppl_00000363.png",
+    "infrared": "../infrared/000016_036_suppl_00000363.png",
+    "depth": "../depth/000016_036_suppl_00000363.png",
+    "query": "The brown bear walking on the dirt path",
+    "bbox": [
+      0.261458,
+      0.566667,
+      0.311458,
+      0.693519
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_208_00000285_005": {
+    "visible": "../visible/shuming_208_00000285.png",
+    "infrared": "../infrared/shuming_208_00000285.png",
+    "depth": "../depth/shuming_208_00000285.png",
+    "query": "The green chair under the person at the table",
+    "bbox": [
+      0.475,
+      0.617592,
+      0.557812,
+      0.779629
+    ],
+    "class_name": "person",
+    "original_query": "The seat, below the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_000016_033_00000208_001": {
+    "visible": "../visible/000016_033_00000208.png",
+    "infrared": "../infrared/000016_033_00000208.png",
+    "depth": "../depth/000016_033_00000208.png",
+    "query": "The brown animal in the foreground enclosure",
+    "bbox": [
+      0.443229,
+      0.835186,
+      0.578646,
+      1.0
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, in the lower part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002509_001": {
+    "visible": "../visible/002509.png",
+    "infrared": "../infrared/002509.png",
+    "depth": "../depth/002509.png",
+    "query": "The red garbage can on the far left",
+    "bbox": [
+      0.061979,
+      0.018519,
+      0.105729,
+      0.087963
+    ],
+    "class_name": "street light",
+    "original_query": "The garbage can, to the left of the nearby street light",
+    "review_decision": "query_corrected"
+  },
+  "city_001685_004": {
+    "visible": "../visible/001685.png",
+    "infrared": "../infrared/001685.png",
+    "depth": "../depth/001685.png",
+    "query": "The ceiling light above the man's head",
+    "bbox": [
+      0.194271,
+      0.113889,
+      0.281771,
+      0.186111
+    ],
+    "class_name": "street light",
+    "original_query": "The 3rd street light from the left, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_003663_001": {
+    "visible": "../visible/003663.png",
+    "infrared": "../infrared/003663.png",
+    "depth": "../depth/003663.png",
+    "query": "The rhinoceros on the left facing right",
+    "bbox": [
+      0.25052,
+      0.351852,
+      0.378646,
+      0.50463
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1118_00000222_001": {
+    "visible": "../visible/shuming_1118_00000222.png",
+    "infrared": "../infrared/shuming_1118_00000222.png",
+    "depth": "../depth/shuming_1118_00000222.png",
+    "query": "The white tiger resting on the rock platform",
+    "bbox": [
+      0.648958,
+      0.353703,
+      0.759895,
+      0.413889
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001782_001": {
+    "visible": "../visible/001782.png",
+    "infrared": "../infrared/001782.png",
+    "depth": "../depth/001782.png",
+    "query": "The middle lion resting under the shelter",
+    "bbox": [
+      0.611458,
+      0.442592,
+      0.65625,
+      0.501852
+    ],
+    "class_name": "animal",
+    "original_query": "The 2nd animal from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000013_055_00000241_005": {
+    "visible": "../visible/000013_055_00000241.png",
+    "infrared": "../infrared/000013_055_00000241.png",
+    "depth": "../depth/000013_055_00000241.png",
+    "query": "The animal standing under the shelter on the left",
+    "bbox": [
+      0.082292,
+      0.294444,
+      0.10625,
+      0.35
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000006_011_00000307_007": {
+    "visible": "../visible/000006_011_00000307.png",
+    "infrared": "../infrared/000006_011_00000307.png",
+    "depth": "../depth/000006_011_00000307.png",
+    "query": "The person walking behind the fence in the center-left",
+    "bbox": [
+      0.525521,
+      0.35,
+      0.536459,
+      0.371296
+    ],
+    "class_name": "person",
+    "original_query": "The leftmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1225_00000044_001": {
+    "visible": "../visible/shuming_1225_00000044.png",
+    "infrared": "../infrared/shuming_1225_00000044.png",
+    "depth": "../depth/shuming_1225_00000044.png",
+    "query": "The person in the white shirt holding a blue toy",
+    "bbox": [
+      0.341146,
+      0.132408,
+      0.551042,
+      1.0
+    ],
+    "class_name": "person",
+    "original_query": "The person, to the right of the nearby seat",
+    "review_decision": "query_corrected"
+  },
+  "city_000019_038_00000205_010": {
+    "visible": "../visible/000019_038_00000205.png",
+    "infrared": "../infrared/000019_038_00000205.png",
+    "depth": "../depth/000019_038_00000205.png",
+    "query": "The person in the white shirt holding a phone near the right edge",
+    "bbox": [
+      0.927604,
+      0.22963,
+      0.965104,
+      0.578704
+    ],
+    "class_name": "person",
+    "original_query": "The 5th person from the left, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_186_000002_028_00000050_001": {
+    "visible": "../visible/hehe_186_000002_028_00000050.png",
+    "infrared": "../infrared/hehe_186_000002_028_00000050.png",
+    "depth": "../depth/hehe_186_000002_028_00000050.png",
+    "query": "The blue garbage can against the wall",
+    "bbox": [
+      0.436458,
+      0.412038,
+      0.553646,
+      0.674075
+    ],
+    "class_name": "garbage can",
+    "original_query": "The garbage can, below the nearby sign",
+    "review_decision": "query_corrected"
+  },
+  "city_000190_002": {
+    "visible": "../visible/000190.png",
+    "infrared": "../infrared/000190.png",
+    "depth": "../depth/000190.png",
+    "query": "The person standing under the street light in the center",
+    "bbox": [
+      0.516146,
+      0.608333,
+      0.535416,
+      0.67037
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002940_003": {
+    "visible": "../visible/002940.png",
+    "infrared": "../infrared/002940.png",
+    "depth": "../depth/002940.png",
+    "query": "The rightmost person in dark clothing",
+    "bbox": [
+      0.646354,
+      0.252777,
+      0.666146,
+      0.337963
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1198_00000108_001": {
+    "visible": "../visible/shuming_1198_00000108.png",
+    "infrared": "../infrared/shuming_1198_00000108.png",
+    "depth": "../depth/shuming_1198_00000108.png",
+    "query": "The white office chair on the left",
+    "bbox": [
+      0.027084,
+      0.475,
+      0.188542,
+      0.710186
+    ],
+    "class_name": "person",
+    "original_query": "The seat, to the left of the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_002037_009": {
+    "visible": "../visible/002037.png",
+    "infrared": "../infrared/002037.png",
+    "depth": "../depth/002037.png",
+    "query": "The leftmost toy car in the row behind the person",
+    "bbox": [
+      0.407292,
+      0.612037,
+      0.453646,
+      0.657407
+    ],
+    "class_name": "car",
+    "original_query": "The 2nd car from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1290_00000136_002": {
+    "visible": "../visible/shuming_1290_00000136.png",
+    "infrared": "../infrared/shuming_1290_00000136.png",
+    "depth": "../depth/shuming_1290_00000136.png",
+    "query": "The black and white office chair on the left",
+    "bbox": [
+      0.107813,
+      0.510185,
+      0.251041,
+      0.735185
+    ],
+    "class_name": "person",
+    "original_query": "The seat, to the left of the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1132_00000385_003": {
+    "visible": "../visible/shuming_1132_00000385.png",
+    "infrared": "../infrared/shuming_1132_00000385.png",
+    "depth": "../depth/shuming_1132_00000385.png",
+    "query": "The person in dark clothing standing near the tree trunk",
+    "bbox": [
+      0.154167,
+      0.012037,
+      0.177083,
+      0.087963
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_254_000002_049_00000071_001": {
+    "visible": "../visible/hehe_254_000002_049_00000071.png",
+    "infrared": "../infrared/hehe_254_000002_049_00000071.png",
+    "depth": "../depth/hehe_254_000002_049_00000071.png",
+    "query": "The black garbage can on the far right",
+    "bbox": [
+      0.944271,
+      0.477778,
+      0.992187,
+      0.590741
+    ],
+    "class_name": "garbage can",
+    "original_query": "The garbage can, to the right of the nearby bicycle",
+    "review_decision": "query_corrected"
+  },
+  "city_000004_018_00000341_001": {
+    "visible": "../visible/000004_018_00000341.png",
+    "infrared": "../infrared/000004_018_00000341.png",
+    "depth": "../depth/000004_018_00000341.png",
+    "query": "The warning sign in the foreground near the water",
+    "bbox": [
+      0.46875,
+      0.408334,
+      0.5875,
+      0.551852
+    ],
+    "class_name": "sign",
+    "original_query": "The rightmost sign, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_298_000002_074_00000223_004": {
+    "visible": "../visible/hehe_298_000002_074_00000223.png",
+    "infrared": "../infrared/hehe_298_000002_074_00000223.png",
+    "depth": "../depth/hehe_298_000002_074_00000223.png",
+    "query": "The street light pole to the left of the central tree",
+    "bbox": [
+      0.318229,
+      0.527778,
+      0.357813,
+      0.643518
+    ],
+    "class_name": "street light",
+    "original_query": "The leftmost street light, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000696_010": {
+    "visible": "../visible/000696.png",
+    "infrared": "../infrared/000696.png",
+    "depth": "../depth/000696.png",
+    "query": "The yellow triangular warning sign on the right pole",
+    "bbox": [
+      0.822917,
+      0.451852,
+      0.840625,
+      0.482408
+    ],
+    "class_name": "sign",
+    "original_query": "The rightmost sign, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1190_00000268_002": {
+    "visible": "../visible/shuming_1190_00000268.png",
+    "infrared": "../infrared/shuming_1190_00000268.png",
+    "depth": "../depth/shuming_1190_00000268.png",
+    "query": "The deer with antlers standing in the background",
+    "bbox": [
+      0.419791,
+      0.299999,
+      0.480729,
+      0.488889
+    ],
+    "class_name": "animal",
+    "original_query": "The 2nd animal from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001785_003": {
+    "visible": "../visible/001785.png",
+    "infrared": "../infrared/001785.png",
+    "depth": "../depth/001785.png",
+    "query": "The rightmost lion resting on the concrete ledge",
+    "bbox": [
+      0.642708,
+      0.583333,
+      0.702604,
+      0.655555
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1225_00000044_002": {
+    "visible": "../visible/shuming_1225_00000044.png",
+    "infrared": "../infrared/shuming_1225_00000044.png",
+    "depth": "../depth/shuming_1225_00000044.png",
+    "query": "The white office chair on the far left",
+    "bbox": [
+      0.0,
+      0.562963,
+      0.142188,
+      0.805555
+    ],
+    "class_name": "person",
+    "original_query": "The seat, to the left of the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_000011_012_00000280_002": {
+    "visible": "../visible/000011_012_00000280.png",
+    "infrared": "../infrared/000011_012_00000280.png",
+    "depth": "../depth/000011_012_00000280.png",
+    "query": "The person in the black hoodie on the far right",
+    "bbox": [
+      0.857812,
+      0.507407,
+      1.0,
+      0.982407
+    ],
+    "class_name": "person",
+    "original_query": "The person, to the right of the nearby seat",
+    "review_decision": "query_corrected"
+  },
+  "city_000081_001": {
+    "visible": "../visible/000081.png",
+    "infrared": "../infrared/000081.png",
+    "depth": "../depth/000081.png",
+    "query": "The person on the left side of the distant small boat",
+    "bbox": [
+      0.522917,
+      0.337963,
+      0.530209,
+      0.351851
+    ],
+    "class_name": "person",
+    "original_query": "The leftmost person, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001782_002": {
+    "visible": "../visible/001782.png",
+    "infrared": "../infrared/001782.png",
+    "depth": "../depth/001782.png",
+    "query": "The rightmost lion lying on the concrete platform",
+    "bbox": [
+      0.644791,
+      0.452778,
+      0.711979,
+      0.52037
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1251_00000203_002": {
+    "visible": "../visible/shuming_1251_00000203.png",
+    "infrared": "../infrared/shuming_1251_00000203.png",
+    "depth": "../depth/shuming_1251_00000203.png",
+    "query": "The white office chair on the far left",
+    "bbox": [
+      0.0,
+      0.562963,
+      0.140625,
+      0.806481
+    ],
+    "class_name": "person",
+    "original_query": "The seat, to the left of the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_000066_004": {
+    "visible": "../visible/000066.png",
+    "infrared": "../infrared/000066.png",
+    "depth": "../depth/000066.png",
+    "query": "The green and white kayak hull in the foreground",
+    "bbox": [
+      0.526563,
+      0.508333,
+      0.581771,
+      0.540741
+    ],
+    "class_name": "boat",
+    "original_query": "The rightmost boat, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_1258_00000407_002": {
+    "visible": "../visible/shuming_1258_00000407.png",
+    "infrared": "../infrared/shuming_1258_00000407.png",
+    "depth": "../depth/shuming_1258_00000407.png",
+    "query": "The man in a white shirt holding a keyboard",
+    "bbox": [
+      0.544272,
+      0.131481,
+      0.773958,
+      0.930555
+    ],
+    "class_name": "person",
+    "original_query": "The person, to the right of the nearby seat",
+    "review_decision": "query_corrected"
+  },
+  "city_002037_004": {
+    "visible": "../visible/002037.png",
+    "infrared": "../infrared/002037.png",
+    "depth": "../depth/002037.png",
+    "query": "The ceiling light panel below the top left one",
+    "bbox": [
+      0.138542,
+      0.092592,
+      0.226042,
+      0.152778
+    ],
+    "class_name": "street light",
+    "original_query": "The 2nd street light from the left, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000021_004_00000065_005": {
+    "visible": "../visible/000021_004_00000065.png",
+    "infrared": "../infrared/000021_004_00000065.png",
+    "depth": "../depth/000021_004_00000065.png",
+    "query": "The tall dark street light pole on the left",
+    "bbox": [
+      0.110937,
+      0.343518,
+      0.139063,
+      0.594444
+    ],
+    "class_name": "street light",
+    "original_query": "The street light, above the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_254_000002_049_00000071_007": {
+    "visible": "../visible/hehe_254_000002_049_00000071.png",
+    "infrared": "../infrared/hehe_254_000002_049_00000071.png",
+    "depth": "../depth/hehe_254_000002_049_00000071.png",
+    "query": "The bicycle on the right of the parked pair",
+    "bbox": [
+      0.83073,
+      0.443518,
+      0.877605,
+      0.549074
+    ],
+    "class_name": "bicycle",
+    "original_query": "The rightmost bicycle, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001897_001": {
+    "visible": "../visible/001897.png",
+    "infrared": "../infrared/001897.png",
+    "depth": "../depth/001897.png",
+    "query": "The leftmost ceiling light panel",
+    "bbox": [
+      0.0,
+      0.114815,
+      0.0625,
+      0.161111
+    ],
+    "class_name": "street light",
+    "original_query": "The leftmost street light, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000919_001": {
+    "visible": "../visible/000919.png",
+    "infrared": "../infrared/000919.png",
+    "depth": "../depth/000919.png",
+    "query": "The blue and yellow parrot on the branch",
+    "bbox": [
+      0.728645,
+      0.378704,
+      0.809375,
+      0.603704
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000011_027_00000001_001": {
+    "visible": "../visible/000011_027_00000001.png",
+    "infrared": "../infrared/000011_027_00000001.png",
+    "depth": "../depth/000011_027_00000001.png",
+    "query": "The blue plastic stool partially behind the front one",
+    "bbox": [
+      0.329167,
+      0.524074,
+      0.420833,
+      1.0
+    ],
+    "class_name": "seat",
+    "original_query": "The leftmost seat, in the lower part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000693_003": {
+    "visible": "../visible/000693.png",
+    "infrared": "../infrared/000693.png",
+    "depth": "../depth/000693.png",
+    "query": "The white car in the distance behind the fence",
+    "bbox": [
+      0.616146,
+      0.52963,
+      0.666146,
+      0.577778
+    ],
+    "class_name": "car",
+    "original_query": "The rightmost car, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002576_002": {
+    "visible": "../visible/002576.png",
+    "infrared": "../infrared/002576.png",
+    "depth": "../depth/002576.png",
+    "query": "The person in white on the bridge near the center",
+    "bbox": [
+      0.430729,
+      0.193518,
+      0.436459,
+      0.22963
+    ],
+    "class_name": "person",
+    "original_query": "The leftmost person, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001798_001": {
+    "visible": "../visible/001798.png",
+    "infrared": "../infrared/001798.png",
+    "depth": "../depth/001798.png",
+    "query": "The lion lying on the left side of the platform",
+    "bbox": [
+      0.45625,
+      0.499074,
+      0.535938,
+      0.576852
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000605_002": {
+    "visible": "../visible/000605.png",
+    "infrared": "../infrared/000605.png",
+    "depth": "../depth/000605.png",
+    "query": "The camel head visible on the far right edge",
+    "bbox": [
+      0.883854,
+      0.49537,
+      1.0,
+      1.0
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, in the lower-right part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_52_00000107_002": {
+    "visible": "../visible/hehe_52_00000107.png",
+    "infrared": "../infrared/hehe_52_00000107.png",
+    "depth": "../depth/hehe_52_00000107.png",
+    "query": "The dark bird swimming behind the first one",
+    "bbox": [
+      0.592708,
+      0.498148,
+      0.6125,
+      0.525926
+    ],
+    "class_name": "animal",
+    "original_query": "The 2nd animal from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000019_005_00000001_002": {
+    "visible": "../visible/000019_005_00000001.png",
+    "infrared": "../infrared/000019_005_00000001.png",
+    "depth": "../depth/000019_005_00000001.png",
+    "query": "The zebra under the shelter on the left",
+    "bbox": [
+      0.067187,
+      0.468518,
+      0.164583,
+      0.57037
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, on the left side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000008_042_00000273_002": {
+    "visible": "../visible/000008_042_00000273.png",
+    "infrared": "../infrared/000008_042_00000273.png",
+    "depth": "../depth/000008_042_00000273.png",
+    "query": "The orange tiger behind the white one",
+    "bbox": [
+      0.441667,
+      0.310186,
+      0.476563,
+      0.375926
+    ],
+    "class_name": "animal",
+    "original_query": "The rightmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_728_00000270_001": {
+    "visible": "../visible/shuming_728_00000270.png",
+    "infrared": "../infrared/shuming_728_00000270.png",
+    "depth": "../depth/shuming_728_00000270.png",
+    "query": "The white paddleboard with blue stars in the foreground",
+    "bbox": [
+      0.469791,
+      0.387037,
+      0.997916,
+      0.535185
+    ],
+    "class_name": "boat",
+    "original_query": "The rightmost boat, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000011_002_00000085_004": {
+    "visible": "../visible/000011_002_00000085.png",
+    "infrared": "../infrared/000011_002_00000085.png",
+    "depth": "../depth/000011_002_00000085.png",
+    "query": "The dark car at the far right edge",
+    "bbox": [
+      0.922917,
+      0.046296,
+      0.976563,
+      0.092593
+    ],
+    "class_name": "car",
+    "original_query": "The 2nd car from the left, in the upper-right part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001229_006": {
+    "visible": "../visible/001229.png",
+    "infrared": "../infrared/001229.png",
+    "depth": "../depth/001229.png",
+    "query": "The man in a white shirt bending over a robot",
+    "bbox": [
+      0.365625,
+      0.430555,
+      0.469791,
+      0.760185
+    ],
+    "class_name": "person",
+    "original_query": "The person, above the nearby car",
+    "review_decision": "query_corrected"
+  },
+  "city_000004_012_00000001_005": {
+    "visible": "../visible/000004_012_00000001.png",
+    "infrared": "../infrared/000004_012_00000001.png",
+    "depth": "../depth/000004_012_00000001.png",
+    "query": "The rightmost person in the dark coat among the group on the far left",
+    "bbox": [
+      0.072396,
+      0.684259,
+      0.0875,
+      0.762037
+    ],
+    "class_name": "person",
+    "original_query": "The 3rd person from the left, in the lower-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_hehe_224_000002_041_00000197_005": {
+    "visible": "../visible/hehe_224_000002_041_00000197.png",
+    "infrared": "../infrared/hehe_224_000002_041_00000197.png",
+    "depth": "../depth/hehe_224_000002_041_00000197.png",
+    "query": "The gray garbage can on the left",
+    "bbox": [
+      0.041667,
+      0.925,
+      0.134375,
+      1.0
+    ],
+    "class_name": "garbage can",
+    "original_query": "The leftmost garbage can, in the lower-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000032_028_00000009_008": {
+    "visible": "../visible/000032_028_00000009.png",
+    "infrared": "../infrared/000032_028_00000009.png",
+    "depth": "../depth/000032_028_00000009.png",
+    "query": "The blue bicycle being ridden in the foreground",
+    "bbox": [
+      0.032292,
+      0.407407,
+      0.176563,
+      0.705555
+    ],
+    "class_name": "bicycle",
+    "original_query": "The bicycle, below the nearby person",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_39_00000018_001": {
+    "visible": "../visible/shuming_39_00000018.png",
+    "infrared": "../infrared/shuming_39_00000018.png",
+    "depth": "../depth/shuming_39_00000018.png",
+    "query": "The illuminated ceiling spotlight in the center",
+    "bbox": [
+      0.444792,
+      0.345371,
+      0.522396,
+      0.502777
+    ],
+    "class_name": "street light",
+    "original_query": "The 2nd street light from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000206_004": {
+    "visible": "../visible/000206.png",
+    "infrared": "../infrared/000206.png",
+    "depth": "../depth/000206.png",
+    "query": "The black scooter parked on the right",
+    "bbox": [
+      0.767709,
+      0.356482,
+      0.873437,
+      0.576852
+    ],
+    "class_name": "bicycle",
+    "original_query": "The bicycle, to the right of the nearby sign",
+    "review_decision": "query_corrected"
+  },
+  "city_001229_002": {
+    "visible": "../visible/001229.png",
+    "infrared": "../infrared/001229.png",
+    "depth": "../depth/001229.png",
+    "query": "The top-left ceiling light panel",
+    "bbox": [
+      0.1375,
+      0.0,
+      0.273958,
+      0.066667
+    ],
+    "class_name": "street light",
+    "original_query": "The 2nd street light from the left, in the upper-left part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001785_001": {
+    "visible": "../visible/001785.png",
+    "infrared": "../infrared/001785.png",
+    "depth": "../depth/001785.png",
+    "query": "The leftmost lion sitting on the grass",
+    "bbox": [
+      0.556771,
+      0.575,
+      0.595833,
+      0.649074
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_shuming_215_00000189_003": {
+    "visible": "../visible/shuming_215_00000189.png",
+    "infrared": "../infrared/shuming_215_00000189.png",
+    "depth": "../depth/shuming_215_00000189.png",
+    "query": "The stack of chairs with a grey bag hanging on it",
+    "bbox": [
+      0.317709,
+      0.461112,
+      0.435417,
+      0.851853
+    ],
+    "class_name": "seat",
+    "original_query": "The 2nd seat from the left, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001879_005": {
+    "visible": "../visible/001879.png",
+    "infrared": "../infrared/001879.png",
+    "depth": "../depth/001879.png",
+    "query": "The ceiling light second from the right",
+    "bbox": [
+      0.547917,
+      0.125,
+      0.634375,
+      0.171296
+    ],
+    "class_name": "street light",
+    "original_query": "The 4th street light from the left, in the upper part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_003595_001": {
+    "visible": "../visible/003595.png",
+    "infrared": "../infrared/003595.png",
+    "depth": "../depth/003595.png",
+    "query": "The right end of the wooden bench",
+    "bbox": [
+      0.917462,
+      0.576765,
+      0.999529,
+      0.681949
+    ],
+    "class_name": "seat",
+    "original_query": "The rightmost seat, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000422_001": {
+    "visible": "../visible/000422.png",
+    "infrared": "../infrared/000422.png",
+    "depth": "../depth/000422.png",
+    "query": "The black bear standing on the rock",
+    "bbox": [
+      0.4,
+      0.516667,
+      0.561979,
+      0.887037
+    ],
+    "class_name": "animal",
+    "original_query": "The animal, in the lower part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000605_001": {
+    "visible": "../visible/000605.png",
+    "infrared": "../infrared/000605.png",
+    "depth": "../depth/000605.png",
+    "query": "The camel standing behind the wooden fence on the left",
+    "bbox": [
+      0.280729,
+      0.350926,
+      0.460417,
+      0.85
+    ],
+    "class_name": "animal",
+    "original_query": "The leftmost animal, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_001927_012": {
+    "visible": "../visible/001927.png",
+    "infrared": "../infrared/001927.png",
+    "depth": "../depth/001927.png",
+    "query": "The rightmost robot chassis in the background row",
+    "bbox": [
+      0.489063,
+      0.648148,
+      0.530729,
+      0.699074
+    ],
+    "class_name": "car",
+    "original_query": "The 6th car from the left, in the lower part of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000020_018_00000093_002": {
+    "visible": "../visible/000020_018_00000093.png",
+    "infrared": "../infrared/000020_018_00000093.png",
+    "depth": "../depth/000020_018_00000093.png",
+    "query": "The person in the red shirt on the right",
+    "bbox": [
+      0.71302,
+      0.609259,
+      0.73125,
+      0.684259
+    ],
+    "class_name": "person",
+    "original_query": "The rightmost person, on the right side of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_000014_011_00000060_001": {
+    "visible": "../visible/000014_011_00000060.png",
+    "infrared": "../infrared/000014_011_00000060.png",
+    "depth": "../depth/000014_011_00000060.png",
+    "query": "The black cylindrical street light near the wooden deck",
+    "bbox": [
+      0.503125,
+      0.282407,
+      0.538021,
+      0.499074
+    ],
+    "class_name": "street light",
+    "original_query": "The street light, near the center of the image",
+    "review_decision": "query_corrected"
+  },
+  "city_002022_006": {
+    "visible": "../visible/002022.png",
+    "infrared": "../infrared/002022.png",
+    "depth": "../depth/002022.png",
+    "query": "The ceiling light below the rightmost one",
+    "bbox": [
+      0.66875,
+      0.171296,
+      0.74323,
+      0.23426
+    ],
+    "class_name": "street light",
+    "original_query": "The 5th street light from the left, in the upper-right part of the image",
+    "review_decision": "query_corrected"
+  }
+}

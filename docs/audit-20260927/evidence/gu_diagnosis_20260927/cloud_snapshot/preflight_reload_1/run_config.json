@@ -1,0 +1,17 @@
+{
+  "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+  "adapter": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/preflight/checkpoint-2",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/manifests/pressure2city.json",
+  "target_manifest": null,
+  "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+  "min_pixels": 200704,
+  "max_pixels": 602112,
+  "max_new_tokens": 128,
+  "limit": 0,
+  "prompt_style": "manifest_conversations",
+  "prompt": "manifest_conversations",
+  "tf32": false,
+  "allow_tf32": false,
+  "matmul_precision": "highest",
+  "torch_float32_matmul_precision": "highest"
+}

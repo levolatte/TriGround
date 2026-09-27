@@ -1,0 +1,23 @@
+{
+  "stage": "train16_attempt2_depth",
+  "started_epoch": 1790500425.5063913,
+  "finished_epoch": 1790500455.6066513,
+  "elapsed_seconds": 30.100260734558105,
+  "command": [
+    "/root/autodl-tmp/rematch_20260922/.venvs/aux_selection/bin/python",
+    "-m",
+    "tools.aux_selection_evidence",
+    "depth",
+    "--candidates",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16_attempt2/candidates.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922",
+    "--output",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16_attempt2/evidence.jsonl",
+    "--model",
+    "/root/autodl-tmp/rematch_20260922/models/sam2.1-hiera-tiny",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/train16_attempt2_depth.log"
+}

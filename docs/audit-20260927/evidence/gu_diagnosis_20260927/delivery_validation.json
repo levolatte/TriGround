@@ -1,0 +1,9 @@
+{
+  "prediction_sets": 37,
+  "prediction_rows": 4860,
+  "all_expected_counts_and_unique_ids": true,
+  "queue_complete": "2026-09-27T06:01:22+08:00",
+  "atlas_cases": 28,
+  "missing_images": 0,
+  "scope": "Does not include preflight extra predictions; counts are repeated conditions, not independent queries."
+}

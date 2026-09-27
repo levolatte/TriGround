@@ -1,0 +1,37 @@
+{
+  "queries": 412,
+  "refined_numeric_boxes": 104,
+  "mapping_max_error": 0.0,
+  "counts": {
+    "queries_with_overlapping_target_boxes_ge05": 255,
+    "refinement_regressions": 53,
+    "refinement_regressions_raw_global_would_hit": 25,
+    "selection_regressions": 29,
+    "selection_regressions_c_selected_overlap_lt05": 23,
+    "selection_regressions_c_selected_overlap_ge05": 6,
+    "refinement_regressions_raw_global_would_not_hit": 28,
+    "refinement_corrections": 1
+  },
+  "camera_depth_query_count": 43,
+  "camera_queries_with_numeric_table": 35,
+  "camera_queries_with_supported_pair": 19,
+  "camera_query_scores": {
+    "c_hit": 32,
+    "selected_hit": 33,
+    "full_hit": 27
+  },
+  "generation_cap_hits": 0,
+  "generation_seconds_from_final_records": 309.1486361026764,
+  "newly_covered_c_errors": 47,
+  "also_covered_by_retained_rgb_detection": 47,
+  "numeric_id_repair_changed_ids": [
+    "city_000011_027_00000001_001",
+    "city_001685_006",
+    "city_002940_001"
+  ],
+  "unchanged_ids": 409,
+  "crop_policy_difference_count": 42,
+  "crop_policy_boundary_difference_count": 41,
+  "crop_policy_differing_refinement_regressions": 11,
+  "diagnostic_limit": "Raw output reinterpreted as global uses GT after scoring, is not a deployable rule or a new method score; overlap does not prove same-instance identity."
+}

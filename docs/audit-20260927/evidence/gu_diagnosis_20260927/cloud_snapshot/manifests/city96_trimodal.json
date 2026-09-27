@@ -1,0 +1,1922 @@
+[
+  {
+    "id": "city_000422_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000422.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000422.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000422.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The black bear standing on the rock\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[400,517,562,887]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1132_00000385_003",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1132_00000385.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1132_00000385.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1132_00000385.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in dark clothing standing near the tree trunk\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[154,12,177,88]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002509_001",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002509.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002509.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002509.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The red garbage can on the far left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[62,19,106,88]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_783_00000248_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_783_00000248.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_783_00000248.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_783_00000248.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the black shirt under the tent\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[515,420,553,533]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000011_027_00000001_001",
+    "split": "val",
+    "class_name": "seat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_027_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_027_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_027_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue plastic stool partially behind the front one\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[329,524,421,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002145_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002145.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002145.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002145.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The brown horse with a saddle\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[218,457,386,705]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002022_006",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002022.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002022.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002022.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The ceiling light below the rightmost one\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[669,171,743,234]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000014_011_00000060_001",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000014_011_00000060.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000014_011_00000060.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000014_011_00000060.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The black cylindrical street light near the wooden deck\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[503,282,538,499]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_230_000002_043_00000061_001",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_230_000002_043_00000061.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_230_000002_043_00000061.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_230_000002_043_00000061.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The tall yellow sign in the foreground\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[374,331,422,754]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002842_005",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002842.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002842.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002842.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The small distant figure partially hidden by the tree\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[418,144,437,203]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1198_00000108_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1198_00000108.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1198_00000108.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1198_00000108.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white office chair on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[27,475,189,710]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1062_00000100_005",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1062_00000100.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1062_00000100.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1062_00000100.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rhino lying down on the right side of the pair\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[724,532,782,615]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_224_000002_041_00000197_005",
+    "split": "val",
+    "class_name": "garbage can",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The gray garbage can on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[42,925,134,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_910_00000290_003",
+    "split": "val",
+    "class_name": "seat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_910_00000290.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_910_00000290.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_910_00000290.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white chair with a grey cushion in the left foreground\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[104,474,366,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000206_003",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000206.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000206.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000206.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person on the right in the glass reflection\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[183,512,215,663]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_215_00000189_004",
+    "split": "val",
+    "class_name": "seat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_215_00000189.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_215_00000189.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_215_00000189.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue plastic seat back visible above the chair stack\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[506,459,669,599]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002576_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002576.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002576.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002576.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in white on the bridge near the center\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[431,194,436,230]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000012_022_00000090_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000012_022_00000090.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000012_022_00000090.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000012_022_00000090.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The small object in the bushes on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[474,627,504,664]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002940_003",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002940.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002940.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002940.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost person in dark clothing\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[646,253,666,338]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1118_00000222_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1118_00000222.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1118_00000222.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1118_00000222.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white tiger resting on the rock platform\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[649,354,760,414]}"
+      }
+    ]
+  },
+  {
+    "id": "city_003692_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/003692.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/003692.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/003692.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The animal on the high metal platform\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[283,17,313,62]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001927_012",
+    "split": "val",
+    "class_name": "car",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001927.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001927.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001927.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost robot chassis in the background row\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[489,648,531,699]}"
+      }
+    ]
+  },
+  {
+    "id": "city_003663_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/003663.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/003663.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/003663.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rhinoceros on the left facing right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[251,352,379,505]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1290_00000136_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1290_00000136.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1290_00000136.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1290_00000136.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The black and white office chair on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[108,510,251,735]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000007_011_00000501_003",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000007_011_00000501.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000007_011_00000501.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000007_011_00000501.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The tall street light rising above the white truck\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[414,149,505,602]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_989_00000171_004",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_989_00000171.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_989_00000171.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_989_00000171.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white swan to the right of the boat\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[682,632,717,681]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000019_038_00000205_010",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the white shirt holding a phone near the right edge\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[928,230,965,579]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001798_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001798.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001798.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001798.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The lion lying on the left side of the platform\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[456,499,536,577]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000014_025_suppl_00000308_004",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000014_025_suppl_00000308.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000014_025_suppl_00000308.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000014_025_suppl_00000308.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person sitting under the red umbrella on the right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[793,191,818,231]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000006_011_00000307_006",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person walking behind the fence in the center-right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[646,348,658,369]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_52_00000107_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_52_00000107.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_52_00000107.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_52_00000107.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The dark bird swimming behind the first one\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[593,498,613,526]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001785_003",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001785.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001785.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001785.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost lion resting on the concrete ledge\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[643,583,703,656]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001029_002",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001029.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001029.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001029.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The lower light reflection in the left window\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[118,275,162,310]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000081_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000081.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000081.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000081.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person on the left side of the distant small boat\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[523,338,530,352]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_018_00000341_001",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000004_018_00000341.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000004_018_00000341.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000004_018_00000341.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The warning sign in the foreground near the water\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[469,408,588,552]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000021_004_00000065_005",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000021_004_00000065.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000021_004_00000065.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000021_004_00000065.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The tall dark street light pole on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[111,344,139,594]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000013_016_suppl_00000381_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000013_016_suppl_00000381.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000013_016_suppl_00000381.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000013_016_suppl_00000381.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The grey bird on the right near the tree\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[651,308,752,485]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000693_003",
+    "split": "val",
+    "class_name": "car",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000693.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000693.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000693.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white car in the distance behind the fence\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[616,530,666,578]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001879_005",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001879.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001879.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001879.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The ceiling light second from the right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[548,125,634,171]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000020_018_00000093_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000020_018_00000093.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000020_018_00000093.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000020_018_00000093.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the red shirt on the right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[713,609,731,684]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001229_002",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001229.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001229.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001229.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The top-left ceiling light panel\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[138,0,274,67]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001685_004",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001685.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001685.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001685.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The ceiling light above the man's head\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[194,114,282,186]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000011_002_00000085_004",
+    "split": "val",
+    "class_name": "car",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_002_00000085.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_002_00000085.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_002_00000085.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The dark car at the far right edge\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[923,46,977,93]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000032_028_00000009_008",
+    "split": "val",
+    "class_name": "bicycle",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000032_028_00000009.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000032_028_00000009.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000032_028_00000009.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue bicycle being ridden in the foreground\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[32,407,177,706]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000008_042_00000273_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000008_042_00000273.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000008_042_00000273.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000008_042_00000273.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The orange tiger behind the white one\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[442,310,477,376]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_924_00000267_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_924_00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_924_00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_924_00000267.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person with pink hair kneeling on the white cloth\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[542,128,739,669]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000919_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000919.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000919.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000919.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue and yellow parrot on the branch\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[729,379,809,604]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000140_002",
+    "split": "val",
+    "class_name": "garbage can",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000140.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000140.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000140.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The small dark garbage can on the distant path\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[370,310,382,336]}"
+      }
+    ]
+  },
+  {
+    "id": "city_003595_001",
+    "split": "val",
+    "class_name": "seat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/003595.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/003595.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/003595.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The right end of the wooden bench\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[917,577,1000,682]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000066_004",
+    "split": "val",
+    "class_name": "boat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000066.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000066.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000066.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The green and white kayak hull in the foreground\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[527,508,582,541]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000019_005_00000001_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_005_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_005_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_005_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The zebra under the shelter on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[67,469,165,570]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000190_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000190.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000190.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000190.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person standing under the street light in the center\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[516,608,535,670]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_728_00000270_001",
+    "split": "val",
+    "class_name": "boat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_728_00000270.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_728_00000270.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_728_00000270.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white paddleboard with blue stars in the foreground\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[470,387,998,535]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000023_001_00000001_003",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000023_001_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000023_001_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000023_001_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The solitary zebra on the right side under the shelter\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[482,547,542,696]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1337_00000068_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1337_00000068.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1337_00000068.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1337_00000068.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The man in the white shirt holding two paddles\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[296,60,566,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000808_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000808.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000808.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000808.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white bird swimming in the green pond\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[612,447,696,530]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002037_009",
+    "split": "val",
+    "class_name": "car",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002037.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002037.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002037.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost toy car in the row behind the person\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[407,612,454,657]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_298_000002_074_00000223_004",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_298_000002_074_00000223.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_298_000002_074_00000223.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_298_000002_074_00000223.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The street light pole to the left of the central tree\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[318,528,358,644]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_208_00000285_005",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_208_00000285.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_208_00000285.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_208_00000285.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The green chair under the person at the table\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[475,618,558,780]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1258_00000407_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1258_00000407.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1258_00000407.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1258_00000407.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The man in a white shirt holding a keyboard\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[544,131,774,931]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_67_00000001_002",
+    "split": "val",
+    "class_name": "bicycle",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_67_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_67_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_67_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The scooter parked on the far left edge\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[0,189,42,259]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000011_012_00000280_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000011_012_00000280.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000011_012_00000280.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000011_012_00000280.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the black hoodie on the far right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[858,507,1000,982]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_178_000002_025_00000079_006",
+    "split": "val",
+    "class_name": "bicycle",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_178_000002_025_00000079.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_178_000002_025_00000079.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_178_000002_025_00000079.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The parked scooter on the left sidewalk\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[472,484,494,564]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001782_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost lion lying on the concrete platform\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[645,453,712,520]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000016_033_00000208_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000016_033_00000208.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000016_033_00000208.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000016_033_00000208.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The brown animal in the foreground enclosure\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[443,835,579,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000013_055_00000241_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000013_055_00000241.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000013_055_00000241.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000013_055_00000241.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The dark brown bear near the building\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[466,523,486,582]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_005",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000004_012_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000004_012_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost person in the dark coat among the group on the far left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[72,684,88,762]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000696_010",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000696.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000696.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000696.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The yellow triangular warning sign on the right pole\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[823,452,841,482]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_254_000002_049_00000071_007",
+    "split": "val",
+    "class_name": "bicycle",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_254_000002_049_00000071.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_254_000002_049_00000071.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_254_000002_049_00000071.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The bicycle on the right of the parked pair\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[831,444,878,549]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1190_00000268_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1190_00000268.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1190_00000268.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1190_00000268.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The deer with antlers standing in the background\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[420,300,481,489]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_186_000002_028_00000050_001",
+    "split": "val",
+    "class_name": "garbage can",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_186_000002_028_00000050.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_186_000002_028_00000050.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_186_000002_028_00000050.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue garbage can against the wall\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[436,412,554,674]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_39_00000018_001",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_39_00000018.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_39_00000018.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_39_00000018.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The illuminated ceiling spotlight in the center\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[445,345,522,503]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000605_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000605.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000605.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000605.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The camel head visible on the far right edge\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[884,495,1000,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000014_052_suppl_00000164_003",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000014_052_suppl_00000164.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000014_052_suppl_00000164.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000014_052_suppl_00000164.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person standing next to the other pedestrian on the path\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[214,371,230,440]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1251_00000203_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1251_00000203.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1251_00000203.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1251_00000203.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white office chair on the far left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[0,563,141,806]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1225_00000044_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1225_00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1225_00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1225_00000044.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The white office chair on the far left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[0,563,142,806]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001897_001",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001897.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001897.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001897.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost ceiling light panel\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[0,115,63,161]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000016_036_suppl_00000363_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000016_036_suppl_00000363.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000016_036_suppl_00000363.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000016_036_suppl_00000363.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The brown bear walking on the dirt path\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[261,567,311,694]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_783_00000248_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_783_00000248.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_783_00000248.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_783_00000248.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the white shirt standing by the cart\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[558,436,592,625]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000206_004",
+    "split": "val",
+    "class_name": "bicycle",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000206.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000206.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000206.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The black scooter parked on the right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[768,356,873,577]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000014_025_suppl_00000308_001",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000014_025_suppl_00000308.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000014_025_suppl_00000308.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000014_025_suppl_00000308.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost white A-frame sign with a QR code\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[352,343,446,553]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000019_005_00000001_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_005_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_005_00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_005_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The zebra standing in the open dirt area\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[470,578,578,715]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000013_055_00000241_005",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000013_055_00000241.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000013_055_00000241.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000013_055_00000241.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The animal standing under the shelter on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[82,294,106,350]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_1225_00000044_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_1225_00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_1225_00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_1225_00000044.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the white shirt holding a blue toy\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[341,132,551,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001229_006",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001229.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001229.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001229.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The man in a white shirt bending over a robot\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[366,431,470,760]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001685_005",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001685.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001685.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001685.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The ceiling light to the right of the man\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[551,128,637,200]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000605_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000605.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000605.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000605.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The camel standing behind the wooden fence on the left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[281,351,460,850]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001785_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001785.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001785.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001785.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost lion sitting on the grass\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[557,575,596,649]}"
+      }
+    ]
+  },
+  {
+    "id": "city_002037_004",
+    "split": "val",
+    "class_name": "street light",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/002037.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/002037.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/002037.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The ceiling light panel below the top left one\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[139,93,226,153]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000006_011_00000307_007",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000006_011_00000307.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000006_011_00000307.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000006_011_00000307.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person walking behind the fence in the center-left\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[526,350,536,371]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001798_002",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001798.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001798.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001798.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The lion lying on the right side of the platform\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[537,523,615,571]}"
+      }
+    ]
+  },
+  {
+    "id": "city_001782_001",
+    "split": "val",
+    "class_name": "animal",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001782.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001782.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001782.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The middle lion resting under the shelter\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[611,443,656,502]}"
+      }
+    ]
+  },
+  {
+    "id": "city_shuming_215_00000189_003",
+    "split": "val",
+    "class_name": "seat",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/shuming_215_00000189.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/shuming_215_00000189.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/shuming_215_00000189.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The stack of chairs with a grey bag hanging on it\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[318,461,435,852]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_254_000002_049_00000071_001",
+    "split": "val",
+    "class_name": "garbage can",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_254_000002_049_00000071.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_254_000002_049_00000071.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_254_000002_049_00000071.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The black garbage can on the far right\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[944,478,992,591]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000019_038_00000205_003",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000019_038_00000205.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000019_038_00000205.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000019_038_00000205.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the white shirt on the far left of the group\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[804,283,820,352]}"
+      }
+    ]
+  },
+  {
+    "id": "city_hehe_224_000002_041_00000197_009",
+    "split": "val",
+    "class_name": "garbage can",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/hehe_224_000002_041_00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/hehe_224_000002_041_00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/hehe_224_000002_041_00000197.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The silver car behind the white car\nReturn the box in the RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[268,855,289,948]}"
+      }
+    ]
+  }
+]

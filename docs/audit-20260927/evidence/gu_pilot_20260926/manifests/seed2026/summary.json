@@ -1,0 +1,78 @@
+{
+  "seed": 2026,
+  "steps": 200,
+  "presentations_per_batch": 8,
+  "micro_batch_size": 1,
+  "gradient_accumulation_steps": 8,
+  "presentations": 1600,
+  "unique_released_tasks": 181,
+  "city_presentations": 1200,
+  "new_presentations": 400,
+  "new_presentations_by_output_modality": {
+    "depth": 55,
+    "infrared": 128,
+    "rgb": 217
+  },
+  "expected": {
+    "presentations": 1600,
+    "city_presentations": 1200,
+    "new_presentations": 400,
+    "new_presentations_by_output_modality": {
+      "rgb": 217,
+      "infrared": 128,
+      "depth": 55
+    }
+  },
+  "g_auxiliary_rows_using_rgb_supervision": 183,
+  "city_unique_image_groups": 681,
+  "city_group_source": "first image path after --city-root resolution",
+  "released_image_paths_preserved": true,
+  "pressure16": {
+    "rows": 16,
+    "representatives": 8,
+    "repeats_per_representative": 2,
+    "first_two_sources": [
+      "city",
+      "city"
+    ],
+    "source_task_ids": [
+      "city_000020_002_00000123_002",
+      "city_001764_001",
+      "rgbdt500_217_00000238::q01::rgb",
+      "rgbdt500_344_00000042::q01::rgb",
+      "rgbdt500_156_00000312::q01::infrared",
+      "rgbdt500_023_00000001::q01::infrared",
+      "rgbdt500_255_00000304::q01::depth",
+      "rgbdt500_275_00000133::q01::depth"
+    ],
+    "source_counts": {
+      "city": 2,
+      "rgbdt": 6
+    },
+    "output_modality_counts": {
+      "rgb": 4,
+      "infrared": 2,
+      "depth": 2
+    },
+    "new_task_output_modality_counts": {
+      "rgb": 2,
+      "infrared": 2,
+      "depth": 2
+    }
+  },
+  "pressure2city": {
+    "rows": 2,
+    "ids": [
+      "gu_pressure_000001",
+      "gu_pressure_000002"
+    ]
+  },
+  "outputs": {
+    "g_train": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\g_train.json",
+    "u_train": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\u_train.json",
+    "metadata": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\metadata.jsonl",
+    "paired_schedule": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\paired_schedule.jsonl",
+    "pressure16": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\pressure16.json",
+    "pressure2city": "F:\\AIC\\results\\gu_pilot_20260926\\manifests\\seed2026\\pressure2city.json"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "condition": "same two rows used for the reload comparison",
+  "source": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/manifests/seed2026/pressure2city.json",
+  "inputs": {
+    "old_root": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926",
+    "released_jsonl": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_cloud.jsonl",
+    "released_metadata": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_metadata.jsonl",
+    "released_candidates": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/source/pending_candidates.jsonl",
+    "city_native": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_train.json",
+    "city_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+    "city_val": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_val.json",
+    "city_gt": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen_generation_val.json",
+    "seed": 2026
+  }
+}

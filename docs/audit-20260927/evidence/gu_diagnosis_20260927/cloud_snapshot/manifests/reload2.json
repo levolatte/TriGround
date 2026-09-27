@@ -1,0 +1,42 @@
+[
+  {
+    "id": "gu_pressure_000001",
+    "split": "train",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/000020_002_00000123.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/000020_002_00000123.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/000020_002_00000123.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in a white shirt with a backpack standing behind the bicycle\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[337,112,377,321]}"
+      }
+    ]
+  },
+  {
+    "id": "gu_pressure_000002",
+    "split": "train",
+    "class_name": "person",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/city/train/visible/001764.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/infrared/001764.png",
+      "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/depth_rgb/001764.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The orange ball floating above the paddle\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[340,305,366,362]}"
+      }
+    ]
+  }
+]

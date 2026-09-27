@@ -1,0 +1,803 @@
+{
+  "interpretation": "Measured v1 shifts border windows; approved centered clipping differs. No GT used to choose rectangles. Corrected CPU code not GPU-evaluated.",
+  "affected": [
+    {
+      "id": "city_000004_012_00000001_002",
+      "actual_crop": [
+        947,
+        489,
+        1179,
+        1080
+      ],
+      "centered_clipped_crop": [
+        947,
+        547,
+        1179,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8161420885283323,
+      "full_iou": 0.08762201589510642
+    },
+    {
+      "id": "city_000004_012_00000001_003",
+      "actual_crop": [
+        0,
+        701,
+        231,
+        867
+      ],
+      "centered_clipped_crop": [
+        0,
+        701,
+        167,
+        867
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.6928615727001226,
+      "full_iou": 0.6928615727001226
+    },
+    {
+      "id": "city_000004_018_00000341_001",
+      "actual_crop": [
+        783,
+        160,
+        1244,
+        1080
+      ],
+      "centered_clipped_crop": [
+        783,
+        205,
+        1244,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.3341012227124432,
+      "full_iou": 0.12416924425949201
+    },
+    {
+      "id": "city_000007_011_00000501_003",
+      "actual_crop": [
+        719,
+        0,
+        1007,
+        968
+      ],
+      "centered_clipped_crop": [
+        719,
+        0,
+        1007,
+        889
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.7739451969314691,
+      "full_iou": 0.13135241984227733
+    },
+    {
+      "id": "city_000008_042_00000273_003",
+      "actual_crop": [
+        0,
+        0,
+        1314,
+        1080
+      ],
+      "centered_clipped_crop": [
+        0,
+        0,
+        986,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.47178730075000264,
+      "full_iou": 0.4993753182741466
+    },
+    {
+      "id": "city_000011_002_00000085_003",
+      "actual_crop": [
+        1689,
+        9,
+        1920,
+        140
+      ],
+      "centered_clipped_crop": [
+        1705,
+        9,
+        1920,
+        140
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.3390295188140842,
+      "full_iou": 0.06977712581350487
+    },
+    {
+      "id": "city_000011_002_00000085_004",
+      "actual_crop": [
+        1689,
+        18,
+        1920,
+        149
+      ],
+      "centered_clipped_crop": [
+        1782,
+        18,
+        1920,
+        149
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.0,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_000012_022_00000090_002",
+      "actual_crop": [
+        0,
+        581,
+        231,
+        714
+      ],
+      "centered_clipped_crop": [
+        0,
+        581,
+        191,
+        714
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.0,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_000019_038_00000205_001",
+      "actual_crop": [
+        587,
+        199,
+        1357,
+        1080
+      ],
+      "centered_clipped_crop": [
+        587,
+        253,
+        1357,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.1600442740878639,
+      "full_iou": 0.8574493267158156
+    },
+    {
+      "id": "city_000019_038_00000205_009",
+      "actual_crop": [
+        1689,
+        61,
+        1920,
+        786
+      ],
+      "centered_clipped_crop": [
+        1723,
+        61,
+        1920,
+        786
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.05839366158512749,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_000019_038_00000205_010",
+      "actual_crop": [
+        1689,
+        41,
+        1920,
+        744
+      ],
+      "centered_clipped_crop": [
+        1770,
+        41,
+        1920,
+        744
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.0044677473699538065,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_000019_038_00000205_011",
+      "actual_crop": [
+        1689,
+        61,
+        1920,
+        788
+      ],
+      "centered_clipped_crop": [
+        1723,
+        61,
+        1920,
+        788
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.3588160577438972,
+      "full_iou": 0.029098668294196082
+    },
+    {
+      "id": "city_000020_018_00000093_005",
+      "actual_crop": [
+        1689,
+        155,
+        1920,
+        965
+      ],
+      "centered_clipped_crop": [
+        1755,
+        155,
+        1920,
+        965
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.8488559728189332,
+      "full_iou": 0.8488559728189332
+    },
+    {
+      "id": "city_000021_004_00000065_004",
+      "actual_crop": [
+        0,
+        569,
+        231,
+        699
+      ],
+      "centered_clipped_crop": [
+        0,
+        569,
+        178,
+        699
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.7743458831404929,
+      "full_iou": 0.7743458831404929
+    },
+    {
+      "id": "city_000422_001",
+      "actual_crop": [
+        630,
+        265,
+        1182,
+        1080
+      ],
+      "centered_clipped_crop": [
+        630,
+        403,
+        1182,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.6925410625472164,
+      "full_iou": 0.9101545739515308
+    },
+    {
+      "id": "city_000605_001",
+      "actual_crop": [
+        363,
+        0,
+        1062,
+        1080
+      ],
+      "centered_clipped_crop": [
+        363,
+        19,
+        1062,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.7552450441105085,
+      "full_iou": 0.3565141207826943
+    },
+    {
+      "id": "city_000693_001",
+      "actual_crop": [
+        0,
+        570,
+        255,
+        1024
+      ],
+      "centered_clipped_crop": [
+        0,
+        570,
+        192,
+        1024
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8799820532015893,
+      "full_iou": 0.03847343557250595
+    },
+    {
+      "id": "city_000696_001",
+      "actual_crop": [
+        0,
+        642,
+        937,
+        1080
+      ],
+      "centered_clipped_crop": [
+        0,
+        670,
+        773,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.617341744448239,
+      "full_iou": 0.04688957735124602
+    },
+    {
+      "id": "city_001229_004",
+      "actual_crop": [
+        1068,
+        0,
+        1447,
+        130
+      ],
+      "centered_clipped_crop": [
+        1068,
+        0,
+        1447,
+        123
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.0,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_001685_003",
+      "actual_crop": [
+        201,
+        0,
+        593,
+        130
+      ],
+      "centered_clipped_crop": [
+        201,
+        0,
+        593,
+        109
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.5736593360431209,
+      "full_iou": 0.008554714510316672
+    },
+    {
+      "id": "city_001879_012",
+      "actual_crop": [
+        471,
+        653,
+        702,
+        783
+      ],
+      "centered_clipped_crop": [
+        471,
+        653,
+        702,
+        784
+      ],
+      "crosses_edge": false,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.7592908349961417,
+      "full_iou": 0.7592908349961417
+    },
+    {
+      "id": "city_001897_008",
+      "actual_crop": [
+        0,
+        684,
+        231,
+        815
+      ],
+      "centered_clipped_crop": [
+        0,
+        684,
+        169,
+        815
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.44118556565832884,
+      "full_iou": 0.44118556565832884
+    },
+    {
+      "id": "city_003595_003",
+      "actual_crop": [
+        1689,
+        491,
+        1920,
+        686
+      ],
+      "centered_clipped_crop": [
+        1707,
+        491,
+        1920,
+        686
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.6792789839393782,
+      "full_iou": 0.6792789839393782
+    },
+    {
+      "id": "city_003692_001",
+      "actual_crop": [
+        450,
+        0,
+        681,
+        130
+      ],
+      "centered_clipped_crop": [
+        450,
+        0,
+        681,
+        107
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.7002872582321855,
+      "full_iou": 0.05502123075644707
+    },
+    {
+      "id": "city_003692_002",
+      "actual_crop": [
+        0,
+        835,
+        231,
+        975
+      ],
+      "centered_clipped_crop": [
+        0,
+        835,
+        230,
+        975
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.7211260181384718,
+      "full_iou": 0.7211260181384718
+    },
+    {
+      "id": "city_hehe_178_000002_025_00000079_003",
+      "actual_crop": [
+        1386,
+        221,
+        1920,
+        1080
+      ],
+      "centered_clipped_crop": [
+        1516,
+        430,
+        1920,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8227990879297075,
+      "full_iou": 0.005127993763388637
+    },
+    {
+      "id": "city_hehe_178_000002_025_00000079_009",
+      "actual_crop": [
+        1689,
+        387,
+        1920,
+        597
+      ],
+      "centered_clipped_crop": [
+        1702,
+        387,
+        1920,
+        597
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.46810968089018,
+      "full_iou": 0.46810968089018
+    },
+    {
+      "id": "city_hehe_224_000002_041_00000197_003",
+      "actual_crop": [
+        246,
+        837,
+        478,
+        1080
+      ],
+      "centered_clipped_crop": [
+        246,
+        897,
+        478,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.0,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_hehe_224_000002_041_00000197_004",
+      "actual_crop": [
+        0,
+        895,
+        498,
+        1080
+      ],
+      "centered_clipped_crop": [
+        0,
+        941,
+        374,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.8328948120853762,
+      "full_iou": 0.8328948120853762
+    },
+    {
+      "id": "city_hehe_254_000002_049_00000071_001",
+      "actual_crop": [
+        1689,
+        456,
+        1920,
+        673
+      ],
+      "centered_clipped_crop": [
+        1743,
+        456,
+        1920,
+        673
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.7451169319555617,
+      "full_iou": 0.7451169319555617
+    },
+    {
+      "id": "city_hehe_298_000002_074_00000223_002",
+      "actual_crop": [
+        363,
+        818,
+        595,
+        1080
+      ],
+      "centered_clipped_crop": [
+        363,
+        883,
+        595,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8358680463205489,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_shuming_1062_00000100_006",
+      "actual_crop": [
+        1689,
+        557,
+        1920,
+        742
+      ],
+      "centered_clipped_crop": [
+        1774,
+        557,
+        1920,
+        742
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.6630036507465288,
+      "full_iou": 0.6630036507465288
+    },
+    {
+      "id": "city_shuming_1132_00000385_004",
+      "actual_crop": [
+        65,
+        0,
+        296,
+        253
+      ],
+      "centered_clipped_crop": [
+        65,
+        0,
+        296,
+        234
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.3631112569740727,
+      "full_iou": 0.0
+    },
+    {
+      "id": "city_shuming_1225_00000044_002",
+      "actual_crop": [
+        0,
+        474,
+        452,
+        1005
+      ],
+      "centered_clipped_crop": [
+        0,
+        474,
+        344,
+        1005
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8189988117208561,
+      "full_iou": 0.08533749048593488
+    },
+    {
+      "id": "city_shuming_208_00000285_001",
+      "actual_crop": [
+        0,
+        590,
+        231,
+        876
+      ],
+      "centered_clipped_crop": [
+        0,
+        590,
+        183,
+        876
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.8029362076427475,
+      "full_iou": 0.8029362076427475
+    },
+    {
+      "id": "city_shuming_208_00000285_004",
+      "actual_crop": [
+        821,
+        354,
+        1097,
+        1080
+      ],
+      "centered_clipped_crop": [
+        821,
+        375,
+        1097,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.48855110491289994,
+      "full_iou": 0.0423486609634064
+    },
+    {
+      "id": "city_shuming_215_00000189_006",
+      "actual_crop": [
+        1301,
+        264,
+        1813,
+        1080
+      ],
+      "centered_clipped_crop": [
+        1301,
+        293,
+        1813,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.05901020340841077,
+      "full_iou": 0.05901020340841077
+    },
+    {
+      "id": "city_shuming_215_00000189_008",
+      "actual_crop": [
+        1532,
+        268,
+        1920,
+        1080
+      ],
+      "centered_clipped_crop": [
+        1627,
+        349,
+        1920,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.709004406015863,
+      "full_iou": 0.709004406015863
+    },
+    {
+      "id": "city_shuming_67_00000001_002",
+      "actual_crop": [
+        0,
+        174,
+        231,
+        315
+      ],
+      "centered_clipped_crop": [
+        0,
+        174,
+        144,
+        315
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.6428824510856236,
+      "full_iou": 0.6428824510856236
+    },
+    {
+      "id": "city_shuming_67_00000001_003",
+      "actual_crop": [
+        0,
+        154,
+        231,
+        285
+      ],
+      "centered_clipped_crop": [
+        0,
+        154,
+        218,
+        285
+      ],
+      "crosses_edge": true,
+      "refine_status": "explicit_keep",
+      "selected_iou": 0.9076062003363261,
+      "full_iou": 0.9076062003363261
+    },
+    {
+      "id": "city_shuming_728_00000270_005",
+      "actual_crop": [
+        717,
+        0,
+        1207,
+        573
+      ],
+      "centered_clipped_crop": [
+        717,
+        0,
+        1207,
+        490
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8912780873501959,
+      "full_iou": 0.1462952493741768
+    },
+    {
+      "id": "city_shuming_924_00000267_001",
+      "actual_crop": [
+        0,
+        0,
+        1484,
+        1080
+      ],
+      "centered_clipped_crop": [
+        0,
+        0,
+        1335,
+        1080
+      ],
+      "crosses_edge": true,
+      "refine_status": "refined",
+      "selected_iou": 0.8440625186194554,
+      "full_iou": 0.7340534689013124
+    }
+  ]
+}

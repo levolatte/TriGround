@@ -1,0 +1,13 @@
+{
+  "ids": [
+    "city_000011_027_00000001_001",
+    "city_001685_006",
+    "city_002940_001"
+  ],
+  "corrected_before_scoring": true,
+  "selection_regenerated": false,
+  "gt_read": false,
+  "other_query_records_unchanged": 409,
+  "elapsed_seconds": 15.856456995010376,
+  "meaning": "Only valid integer IDs are accepted, exactly as required by the method; reference IDs remain errors."
+}

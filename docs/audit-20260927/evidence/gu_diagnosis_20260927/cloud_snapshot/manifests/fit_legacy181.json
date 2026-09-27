@@ -1,0 +1,3260 @@
+[
+  {
+    "id": "rgbdt500_005_00000198::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the person in dark clothing standing beside an upright skateboard on the plaza?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[358,223,448,554]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_005_00000198::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person in dark clothing standing beside an upright skateboard on the plaza?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[355,225,455,560]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_005_00000198::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/color/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/005/infrared/00000198.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000000.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person in dark clothing standing beside an upright skateboard on the plaza?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[358,222,458,560]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_006_00000129::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/006/color/00000129.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/006/infrared/00000129.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large person standing on the right side of the image.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[792,228,951,758]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_013_00000160::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/013/color/00000160.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/013/infrared/00000160.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000002.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The red dustpan and broom being used together by the cleaner in gray.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[515,448,607,659]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_014_00000152::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/color/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/infrared/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000003.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the person bending over next to the riverside railing?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[230,508,278,660]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_014_00000152::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/color/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/infrared/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000003.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person bending over next to the riverside railing?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[224,495,286,669]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_014_00000152::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/color/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/014/infrared/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000003.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person bending over next to the riverside railing?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[225,506,281,674]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_016_00000007::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/016/color/00000007.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/016/infrared/00000007.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000004.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Find the blue street sign above the roadway in front of the apartment buildings.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[424,505,517,569]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_017_00000199::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/017/color/00000199.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/017/infrared/00000199.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000005.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the red long-eared cartoon figure visible above the gray wall?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[605,210,705,395]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_018_00000064::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/018/color/00000064.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/018/infrared/00000064.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000006.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the red cartoon mascot statue with large round ears and crossed eyes, standing beside the dark display screen?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[364,475,491,892]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_020_00000129::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/020/color/00000129.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/020/infrared/00000129.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000007.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the small dark object projecting from the building’s outer edge against the sky.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[490,690,545,738]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_023_00000001::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/023/color/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/023/infrared/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000008.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The quadcopter drone hovering in the open sky.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[335,544,398,627]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_023_00000001::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/023/color/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/023/infrared/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000008.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The quadcopter drone hovering in the open sky.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[330,540,405,635]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_024_00000303::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/024/color/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/024/infrared/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000009.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which small flying device is near the curved streetlight?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[225,444,319,522]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_024_00000303::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/024/color/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/024/infrared/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000009.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which small flying device is near the curved streetlight?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[225,444,321,524]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_027_00000301::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large shaggy animal standing beside the railing?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[534,447,902,918]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_027_00000301::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/color/00000301.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/027/infrared/00000301.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000010.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large shaggy animal standing beside the railing?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[526,443,911,928]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_032_00000191::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/color/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/infrared/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000011.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the person standing beside the pair of waste-sorting bins?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[478,215,545,477]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_032_00000191::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/color/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/infrared/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000011.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person standing beside the pair of waste-sorting bins?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[469,207,550,472]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_032_00000191::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/color/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/032/infrared/00000191.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000011.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person standing beside the pair of waste-sorting bins?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[471,211,557,490]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_042_00000175::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/042/color/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/042/infrared/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000012.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the bear walking beside the enclosure fence?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[409,535,517,654]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_043_00000175::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/043/color/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/043/infrared/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000013.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the dark brown bear walking across the grass in the enclosure?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[471,359,733,739]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_043_00000175::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/043/color/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/043/infrared/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000013.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the dark brown bear walking across the grass in the enclosure?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[480,360,740,730]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_045_00000109::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/045/color/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/045/infrared/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000014.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large long-legged bird standing in the near foreground by the pond?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[312,669,355,998]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_045_00000109::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/045/color/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/045/infrared/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000014.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large long-legged bird standing in the near foreground by the pond?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[300,650,370,998]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_048_00000109::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/048/color/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/048/infrared/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000015.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the elephant on the left side of the scene?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[120,431,339,801]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_048_00000109::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/048/color/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/048/infrared/00000109.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000015.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the elephant on the left side of the scene?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[112,421,342,798]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_056_00000227::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/056/color/00000227.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/056/infrared/00000227.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000016.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large bird standing low in the vegetation?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[391,532,497,715]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_056_00000227::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/056/color/00000227.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/056/infrared/00000227.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000016.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large bird standing low in the vegetation?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[386,431,506,720]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_062_00000175::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/062/color/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/062/infrared/00000175.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000017.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large animal standing beside the fence.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[417,395,702,755]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_064_00000334::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/064/color/00000334.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/064/infrared/00000334.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000018.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large shaggy animal feeding beside the fence?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[559,457,748,682]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_072_00000064::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/072/color/00000064.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/072/infrared/00000064.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000019.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the covered boat carrying passengers on the lake?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[455,528,582,658]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_076_00000093::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/076/color/00000093.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/076/infrared/00000093.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000020.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the white animal facing away behind the nearer white animal?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[389,598,442,850]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_076_00000093::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/076/color/00000093.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/076/infrared/00000093.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000020.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the white animal facing away behind the nearer white animal?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[383,585,449,855]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_078_00000176::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/color/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/infrared/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000021.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large shaggy horned animal close in the foreground?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[280,418,553,997]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_078_00000176::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/color/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/infrared/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000021.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large shaggy horned animal close in the foreground?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[292,430,565,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_078_00000176::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/color/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/078/infrared/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000021.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large shaggy horned animal close in the foreground?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[303,411,606,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_079_00000148::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/color/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/infrared/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000022.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the shaggy horned animal standing on the paved terrace.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[408,418,534,684]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_079_00000148::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/color/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/infrared/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000022.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the shaggy horned animal standing on the paved terrace.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[420,442,532,683]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_079_00000148::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/color/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/079/infrared/00000148.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000022.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the shaggy horned animal standing on the paved terrace.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[432,455,535,681]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_083_00000299::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/083/color/00000299.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/083/infrared/00000299.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000023.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The upright fire hydrant standing near the center of the paved walkway.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[433,481,484,663]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_083_00000299::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/083/color/00000299.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/083/infrared/00000299.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000023.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The upright fire hydrant standing near the center of the paved walkway.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[427,478,494,665]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_089_00000203::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/089/color/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/089/infrared/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000024.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the dark bear-shaped figure in the foreground, to the left of the larger brown figure?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[415,672,594,869]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_090_00000122::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/090/color/00000122.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/090/infrared/00000122.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000025.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the parrot perched upright on the lower foreground branch.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[458,608,507,869]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_092_00000127::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/092/color/00000127.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/092/infrared/00000127.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000026.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large bird perched on the branch on the right.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[695,456,782,656]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_092_00000127::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/092/color/00000127.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/092/infrared/00000127.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000026.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large bird perched on the branch on the right.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[700,445,782,670]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_093_00000114::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/color/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/infrared/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000027.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large white swan gliding alone on the pond?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[420,626,577,759]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_093_00000114::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/color/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/infrared/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000027.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large white swan gliding alone on the pond?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[420,630,580,770]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_093_00000114::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/color/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/093/infrared/00000114.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000027.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large white swan gliding alone on the pond?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[418,640,579,766]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_096_00000213::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/096/color/00000213.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/096/infrared/00000213.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000028.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The zebra standing beneath the shelter near the middle of the image.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[543,444,645,603]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_096_00000213::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/096/color/00000213.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/096/infrared/00000213.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000028.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The zebra standing beneath the shelter near the middle of the image.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[557,455,667,611]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_097_00000201::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/097/color/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/097/infrared/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000029.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large animal in the foreground.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[423,574,544,769]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_097_00000201::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/097/color/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/097/infrared/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000029.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large animal in the foreground.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[414,578,558,742]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_098_00000303::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/098/color/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/098/infrared/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000030.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the striped vendor cart standing in the park?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[409,430,683,931]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_098_00000303::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/098/color/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/098/infrared/00000303.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000030.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the striped vendor cart standing in the park?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[394,405,682,938]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_099_00000276::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/color/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/infrared/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000031.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The covered pedal boat carrying passengers on the left side of the lake.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[104,603,391,864]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_099_00000276::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/color/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/infrared/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000031.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The covered pedal boat carrying passengers on the left side of the lake.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[98,595,399,861]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_099_00000276::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/color/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/099/infrared/00000276.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000031.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The covered pedal boat carrying passengers on the left side of the lake.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[108,606,395,851]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_101_00000267::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/101/color/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/101/infrared/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000032.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which rectangular monitoring cabinet is mounted on the large white pole?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[467,410,569,664]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_101_00000267::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/101/color/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/101/infrared/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000032.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which rectangular monitoring cabinet is mounted on the large white pole?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[461,407,578,674]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_107_00000163::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/107/color/00000163.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/107/infrared/00000163.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000033.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the man standing by the water beneath the elevated walkway.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[534,568,559,753]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_110_00000078::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/110/color/00000078.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/110/infrared/00000078.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000034.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the person sitting on the bank beside the water?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[329,309,391,480]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_110_00000078::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/110/color/00000078.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/110/infrared/00000078.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000034.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the person sitting on the bank beside the water?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[321,310,395,530]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_111_00000142::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/111/color/00000142.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/111/infrared/00000142.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000035.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the person sitting beside the blue sign at the edge of the path.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[383,657,437,798]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_111_00000142::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/111/color/00000142.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/111/infrared/00000142.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000035.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the person sitting beside the blue sign at the edge of the path.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[398,667,442,802]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_114_00000159::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/114/color/00000159.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/114/infrared/00000159.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000036.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the pedestrian by the railing who stands to the left of the other two people on the walkway?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[648,415,694,614]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_114_00000159::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/114/color/00000159.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/114/infrared/00000159.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000036.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the pedestrian by the railing who stands to the left of the other two people on the walkway?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[642,420,699,628]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_118_00000077::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/color/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/infrared/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000037.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the spotted deer standing beside the railing on the right side of the enclosure?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[702,288,843,569]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_118_00000077::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/color/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/infrared/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000037.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the spotted deer standing beside the railing on the right side of the enclosure?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[700,280,850,570]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_118_00000077::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/color/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/118/infrared/00000077.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000037.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the spotted deer standing beside the railing on the right side of the enclosure?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[700,290,850,580]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_119_00000202::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/119/color/00000202.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/119/infrared/00000202.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000038.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large deer standing on the left in the foreground.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[157,427,327,765]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_119_00000202::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/119/color/00000202.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/119/infrared/00000202.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000038.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large deer standing on the left in the foreground.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[151,407,316,774]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_131_00000139::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/131/color/00000139.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/131/infrared/00000139.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000039.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the covered passenger boat carrying people on the pond?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[566,391,654,494]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_135_00000197::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/135/color/00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/135/infrared/00000197.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000040.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large long-necked bird gliding on the pond in front of the clustered birds?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[333,706,460,809]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_135_00000197::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/135/color/00000197.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/135/infrared/00000197.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000040.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large long-necked bird gliding on the pond in front of the clustered birds?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[333,720,490,810]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_145_00000001::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/145/color/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/145/infrared/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000041.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The flamingo at the far right with its neck lowered.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[906,468,988,584]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_154_00000237::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/154/color/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/154/infrared/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000042.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the peacock walking on the grass beside the stepping stones?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[243,398,587,719]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_154_00000237::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/154/color/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/154/infrared/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000042.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the peacock walking on the grass beside the stepping stones?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[242,405,588,722]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_156_00000312::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/156/color/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/156/infrared/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000043.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The antlered deer facing the camera in the middle of the courtyard.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[657,362,726,716]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_156_00000312::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/156/color/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/156/infrared/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000043.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The antlered deer facing the camera in the middle of the courtyard.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[646,365,727,652]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_158_00000237::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/158/color/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/158/infrared/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000044.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which animal stands in front of the metal railing?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[481,516,692,820]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_158_00000237::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/158/color/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/158/infrared/00000237.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000044.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which animal stands in front of the metal railing?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[479,519,695,825]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_159_00000186::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/159/color/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/159/infrared/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000045.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The shaggy yak lowering its head on the paved area.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[251,494,397,827]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_159_00000186::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/159/color/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/159/infrared/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000045.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The shaggy yak lowering its head on the paved area.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[244,493,406,835]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_211_00000184::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/211/color/00000184.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/211/infrared/00000184.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000046.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The leftmost of the three large birds standing by the back fence.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[192,475,246,542]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_211_00000184::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/211/color/00000184.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/211/infrared/00000184.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000046.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The leftmost of the three large birds standing by the back fence.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[188,469,247,541]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_214_00000186::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/214/color/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/214/infrared/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000047.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the saddled horse standing beside the wall?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[167,426,342,675]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_214_00000186::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/214/color/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/214/infrared/00000186.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000047.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the saddled horse standing beside the wall?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[172,414,350,684]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_215_00000137::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/215/color/00000137.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/215/infrared/00000137.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000048.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The horse standing beside the wooden wall.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[360,344,506,602]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_215_00000137::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/215/color/00000137.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/215/infrared/00000137.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000048.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The horse standing beside the wooden wall.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[390,375,512,620]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_216_00000044::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/216/color/00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/216/infrared/00000044.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000049.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large bird in the foreground walking across the grass.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[777,595,830,673]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_216_00000044::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/216/color/00000044.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/216/infrared/00000044.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000049.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large bird in the foreground walking across the grass.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[790,600,839,688]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_217_00000238::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/217/color/00000238.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/217/infrared/00000238.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000050.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Find the tall frame with several horizontal bars near the center-right of the scene.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[482,533,696,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_217_00000238::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/217/color/00000238.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/217/infrared/00000238.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000050.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Find the tall frame with several horizontal bars near the center-right of the scene.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[495,552,695,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_219_00000220::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/219/color/00000220.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/219/infrared/00000220.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000051.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the upright climbing frame with parallel bars on the right side of the scene.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[625,423,849,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_219_00000220::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/219/color/00000220.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/219/infrared/00000220.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000051.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the upright climbing frame with parallel bars on the right side of the scene.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[627,425,846,1000]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_222_00000192::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/color/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/infrared/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000052.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the dark animal sitting on the grass inside the enclosure?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[374,469,457,637]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_222_00000192::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/color/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/infrared/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000052.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the dark animal sitting on the grass inside the enclosure?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[370,460,470,660]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_222_00000192::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/color/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/222/infrared/00000192.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000052.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the dark animal sitting on the grass inside the enclosure?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[370,450,470,670]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_224_00000236::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/224/color/00000236.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/224/infrared/00000236.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000053.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the seated bear beside the pond edge?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[360,397,462,609]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_224_00000236::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/224/color/00000236.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/224/infrared/00000236.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000053.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the seated bear beside the pond edge?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[365,384,472,635]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_225_00000176::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/225/color/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/225/infrared/00000176.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000054.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The small deer standing near the center of the enclosure behind the other animals.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[468,488,506,587]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_240_00000001::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/240/color/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/240/infrared/00000001.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000055.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the monkey sitting among the rocks?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[179,246,219,317]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_241_00000278::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/241/color/00000278.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/241/infrared/00000278.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000056.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the upright bollard beside the grassy verge.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[675,371,699,482]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_241_00000278::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/241/color/00000278.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/241/infrared/00000278.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000056.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the upright bollard beside the grassy verge.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[675,371,698,481]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_246_00000272::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/246/color/00000272.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/246/infrared/00000272.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000057.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the tall utility cabinet beside the curb?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[314,173,516,685]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_246_00000272::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/246/color/00000272.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/246/infrared/00000272.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000057.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the tall utility cabinet beside the curb?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[317,173,515,692]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_255_00000304::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/255/color/00000304.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/255/infrared/00000304.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000058.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the round 20 speed limit sign beneath the trees?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[366,146,488,365]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_255_00000304::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/255/color/00000304.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/255/infrared/00000304.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000058.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the round 20 speed limit sign beneath the trees?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[360,160,480,380]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_259_00000203::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/259/color/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/259/infrared/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000059.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which large rounded boulder sits on the right side of the frame?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[564,266,873,649]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_259_00000203::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/259/color/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/259/infrared/00000203.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000059.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which large rounded boulder sits on the right side of the frame?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[573,257,882,662]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_262_00000258::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/262/color/00000258.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/262/infrared/00000258.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000060.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large rounded stone lying on the ground?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[372,397,623,657]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_265_00000168::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/265/color/00000168.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/265/infrared/00000168.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000061.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large foreground boulder beside the curved path, in front of the other rocks?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[489,265,681,533]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_265_00000168::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/265/color/00000168.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/265/infrared/00000168.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000061.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large foreground boulder beside the curved path, in front of the other rocks?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[488,263,685,540]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_268_00000105::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/color/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/infrared/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000062.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the foreground runner at the left side of the pack?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[247,486,343,824]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_268_00000105::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/color/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/infrared/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000062.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the foreground runner at the left side of the pack?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[240,475,337,844]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_268_00000105::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/color/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/268/infrared/00000105.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000062.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the foreground runner at the left side of the pack?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[235,481,334,842]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_269_00000103::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/color/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/infrared/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000063.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large foreground runner near the center of the roadway?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[450,424,571,843]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_269_00000103::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/color/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/infrared/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000063.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large foreground runner near the center of the roadway?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[451,417,576,855]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_269_00000103::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/color/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/269/infrared/00000103.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000063.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large foreground runner near the center of the roadway?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[458,431,573,849]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_271_00000039::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/271/color/00000039.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/271/infrared/00000039.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000064.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The runner in the middle of the three closely grouped foreground runners.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[471,439,513,677]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_271_00000039::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/271/color/00000039.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/271/infrared/00000039.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000064.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The runner in the middle of the three closely grouped foreground runners.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[478,450,514,680]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_275_00000133::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/275/color/00000133.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/275/infrared/00000133.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000065.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The person walking on the right among the two central pedestrians.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[586,296,673,550]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_275_00000133::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/275/color/00000133.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/275/infrared/00000133.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000065.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The person walking on the right among the two central pedestrians.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[588,294,676,559]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_282_00000371::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/282/color/00000371.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/282/infrared/00000371.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000066.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the shorter child standing beside a taller adult?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[415,391,483,678]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_282_00000371::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/282/color/00000371.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/282/infrared/00000371.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000066.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the shorter child standing beside a taller adult?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[434,356,497,708]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_288_00000125::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/288/color/00000125.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/288/infrared/00000125.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000067.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the small animal standing in the grass?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[413,240,431,290]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_288_00000125::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/288/color/00000125.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/288/infrared/00000125.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000067.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the small animal standing in the grass?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[411,244,434,294]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_289_00000329::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/289/color/00000329.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/289/infrared/00000329.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000068.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which person is seated near the left side of the frame?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[59,0,156,457]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_294_00000245::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/294/color/00000245.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/294/infrared/00000245.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000069.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The upright hydrant in front of the low hedge.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[281,315,362,561]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_301_00000201::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/301/color/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/301/infrared/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000070.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the person in a brown coat walking at the left edge of the group.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[511,469,550,656]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_301_00000201::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/301/color/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/301/infrared/00000201.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000070.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Locate the person in a brown coat walking at the left edge of the group.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[518,482,550,638]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_307_00000179::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/307/color/00000179.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/307/infrared/00000179.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000071.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which person walks to the right of the two people climbing the stone steps?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[611,90,775,833]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_307_00000179::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/307/color/00000179.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/307/infrared/00000179.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000071.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which person walks to the right of the two people climbing the stone steps?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[622,94,792,856]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_308_00000151::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/308/color/00000151.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/308/infrared/00000151.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000072.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The round hanging fixture beneath the roof structure.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[250,334,397,561]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_310_00000337::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/310/color/00000337.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/310/infrared/00000337.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000073.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the umbrella canopy over the outdoor seating area?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[377,399,691,495]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_310_00000337::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/310/color/00000337.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/310/infrared/00000337.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000073.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the umbrella canopy over the outdoor seating area?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[369,389,707,516]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_321_00000079::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/321/color/00000079.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/321/infrared/00000079.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000074.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the white cockatoo perched inside the enclosure?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[202,127,277,490]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_321_00000079::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/321/color/00000079.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/321/infrared/00000079.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000074.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the white cockatoo perched inside the enclosure?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[209,130,293,491]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_323_00000118::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/323/color/00000118.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/323/infrared/00000118.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000075.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The bird perched on the branch just right of the center.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[681,294,739,625]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_330_00000099::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/330/color/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/330/infrared/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000076.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the black swan swimming in the lower part of the pond?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[301,484,511,720]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_330_00000099::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/330/color/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/330/infrared/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000076.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the black swan swimming in the lower part of the pond?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[302,493,526,728]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_341_00000099::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/341/color/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/341/infrared/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000077.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the pedestrian walking along the sidewalk beside the trees?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[533,530,568,745]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_341_00000099::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/341/color/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/341/infrared/00000099.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000077.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the pedestrian walking along the sidewalk beside the trees?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[531,526,573,750]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_344_00000042::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/344/color/00000042.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/344/infrared/00000042.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000078.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the white delivery truck stopped along the roadside?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[595,469,688,616]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_344_00000042::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/344/color/00000042.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/344/infrared/00000042.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000078.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the white delivery truck stopped along the roadside?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[592,468,694,631]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_346_00000131::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/346/color/00000131.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/346/infrared/00000131.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000079.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which group of animals is gathered beside the brick path in front of the wooden railing?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[377,357,534,560]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_348_00000247::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/348/color/00000247.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/348/infrared/00000247.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000080.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Locate the bear crouched beside the curved stone path in the enclosure.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[477,562,526,655]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_350_00000595::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/350/color/00000595.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/350/infrared/00000595.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000081.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The tiger walking across the grassy slope.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[443,397,498,471]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_353_00000566::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/color/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/infrared/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000082.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the two-humped camel standing behind the fence near the center-right?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[642,444,803,724]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_353_00000566::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/color/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/infrared/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000082.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the two-humped camel standing behind the fence near the center-right?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[635,426,807,731]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_353_00000566::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/color/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/353/infrared/00000566.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000082.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the two-humped camel standing behind the fence near the center-right?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[646,417,802,722]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_355_00000254::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/355/color/00000254.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/355/infrared/00000254.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000083.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which animal stands near the center of the brick courtyard?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[616,256,712,586]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_355_00000254::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/355/color/00000254.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/355/infrared/00000254.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000083.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Which animal stands near the center of the brick courtyard?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[615,260,716,585]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_364_00000322::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/364/color/00000322.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/364/infrared/00000322.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000084.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large stag with branching antlers standing in front of the circular planter.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[121,238,583,997]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_364_00000322::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/364/color/00000322.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/364/infrared/00000322.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000084.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large stag with branching antlers standing in front of the circular planter.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[118,232,588,999]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_365_00000312::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/color/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/infrared/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000085.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the larger antlered deer standing in the foreground on the left?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[339,281,572,815]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_365_00000312::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/color/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/infrared/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000085.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the larger antlered deer standing in the foreground on the left?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[352,231,589,833]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_365_00000312::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/color/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/365/infrared/00000312.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000085.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the larger antlered deer standing in the foreground on the left?\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[343,232,581,828]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_366_00000002::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/366/color/00000002.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/366/infrared/00000002.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000086.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The small monkey on the upper walkway above the concrete wall.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[430,343,462,372]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_366_00000002::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/366/color/00000002.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/366/infrared/00000002.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000086.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The small monkey on the upper walkway above the concrete wall.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[425,331,469,385]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_369_00000009::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/369/color/00000009.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/369/infrared/00000009.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000087.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The small animal on the pavement near the middle of the frame.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[336,618,402,724]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_370_00000080::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/370/color/00000080.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/370/infrared/00000080.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000088.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The small animal walking alone across the paved ground.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[381,192,406,272]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_370_00000080::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/370/color/00000080.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/370/infrared/00000080.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000088.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The small animal walking alone across the paved ground.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[378,190,412,281]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_372_00000091::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/372/color/00000091.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/372/infrared/00000091.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000089.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The monkey perched partway down the slanted metal slide.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[503,508,534,578]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_372_00000091::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/372/color/00000091.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/372/infrared/00000091.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000089.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The monkey perched partway down the slanted metal slide.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[497,499,542,579]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_379_00000267::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/379/color/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/379/infrared/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000090.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The large deer in the foreground with its head lowered toward the path.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[462,567,619,885]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_379_00000267::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/379/color/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_pilot_v1/pilot/379/infrared/00000267.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000090.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The large deer in the foreground with its head lowered toward the path.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[458,550,627,889]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_382_00000074::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/382/color/00000074.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/382/infrared/00000074.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000091.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The tiger walking behind the wire fence.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[727,556,793,744]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_382_00000074::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/382/color/00000074.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/382/infrared/00000074.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000091.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The tiger walking behind the wire fence.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[721,548,803,758]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_385_00000104::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/385/color/00000104.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/385/infrared/00000104.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000092.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the tiger standing beside the rocks at the enclosure wall?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[359,476,486,598]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_385_00000104::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/385/color/00000104.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/385/infrared/00000104.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000092.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the tiger standing beside the rocks at the enclosure wall?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[365,480,495,620]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_388_00000347::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/388/color/00000347.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/388/infrared/00000347.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000093.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the large horned animal in the foreground on the paved path?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[499,239,618,492]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_388_00000347::q01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/388/color/00000347.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/388/infrared/00000347.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000093.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: Where is the large horned animal in the foreground on the paved path?\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[488,218,625,505]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_391_00000108::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/391/color/00000108.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/391/infrared/00000108.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000094.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the small animal sitting upright on the bare ground?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[96,339,127,389]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_392_00000067::rgbdt500_392_00000067_objectq01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/392/color/00000067.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/392/infrared/00000067.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000095.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The deer standing sideways under the shelter, with its head facing right.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[252,516,395,730]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_392_00000067::rgbdt500_392_00000067_objectq01::infrared",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/392/color/00000067.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/supplement_object_trial_v2/pilot/392/infrared/00000067.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000095.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The deer standing sideways under the shelter, with its head facing right.\nReturn its box in the infrared image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[254,514,403,738]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_398_00000123::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/398/color/00000123.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/398/infrared/00000123.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000096.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: The person standing just to the right of the taller foreground person.\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[273,431,308,644]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_398_00000123::q01::depth",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/398/color/00000123.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/398/infrared/00000123.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000096.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nViews are in this order: rgb, infrared, depth. Locate the target described by: The person standing just to the right of the taller foreground person.\nReturn its box in the depth image, using 0-1000 xyxy coordinates as {\"bbox_2d\":[x1,y1,x2,y2]}."
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[286,441,320,655]}"
+      }
+    ]
+  },
+  {
+    "id": "rgbdt500_400_00000152::q01::rgb",
+    "image": [
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/400/color/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/data/external/RGBDT500/pilot/400/infrared/00000152.png",
+      "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/assets/depth_rgb/000097.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Where is the shorter child standing beside the taller adult near the blue tent?\nReturn the box in RGB image coordinates. Return only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[324,390,369,524]}"
+      }
+    ]
+  }
+]

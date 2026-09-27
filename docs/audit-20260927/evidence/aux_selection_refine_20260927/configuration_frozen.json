@@ -1,0 +1,21 @@
+{
+  "frozen_at": "2026-09-27 17:16:25",
+  "query_prompt": "query-parse-v2",
+  "smoke_attempt": 2,
+  "preflight_parse": "16/16",
+  "env8_exact": true,
+  "input_previews_inspected": 3,
+  "new_weights_trained": false,
+  "dino_box_threshold": 0.25,
+  "dino_text_threshold": 0.25,
+  "target_cap": 8,
+  "reference_cap": 4,
+  "reference_rgb_ir_top_k": 2,
+  "dedup_iou": 0.9,
+  "seed": 2026,
+  "formal_pixels": [
+    200704,
+    602112
+  ],
+  "deadline_epoch": 1790527249
+}

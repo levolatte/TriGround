@@ -1,0 +1,23 @@
+{
+  "stage": "train16_attempt2_parse",
+  "started_epoch": 1790500387.2603045,
+  "finished_epoch": 1790500414.3986835,
+  "elapsed_seconds": 27.1383798122406,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "-m",
+    "tools.predict_aux_selection",
+    "parse-query",
+    "--manifest",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/train16.jsonl",
+    "--output-dir",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16_attempt2/query",
+    "--model",
+    "/root/rematch_models/Qwen3-VL-8B-Instruct",
+    "--adapter",
+    "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/train16_attempt2_parse.log"
+}

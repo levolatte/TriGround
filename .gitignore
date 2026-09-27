@@ -16,3 +16,5 @@ slurm-*.err
 *.pt
 *.pth
 *.safetensors
+.work/
+AGENTS.md

@@ -1,0 +1,23 @@
+{
+  "seed": 2026,
+  "old_order_source": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/manifests/seed2026/metadata.jsonl",
+  "old_city_rows_copied_verbatim": 1200,
+  "new_slots": 400,
+  "released_query_count": 98,
+  "frequency_source": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/manifests/seed2026/metadata.jsonl",
+  "raw_gt_source": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/source/pending_candidates.jsonl",
+  "prompt_version": "gu_diag_v1",
+  "inputs": {
+    "old_root": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926",
+    "released_jsonl": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_cloud.jsonl",
+    "released_metadata": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_metadata.jsonl",
+    "released_candidates": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/source/pending_candidates.jsonl",
+    "city_native": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_train.json",
+    "city_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+    "city_val": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_val.json",
+    "city_gt": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen_generation_val.json",
+    "seed": 2026
+  },
+  "condition": "B: replace old new slots with unseen City Queries",
+  "query_mapping": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/manifests/b_query_mapping.jsonl"
+}

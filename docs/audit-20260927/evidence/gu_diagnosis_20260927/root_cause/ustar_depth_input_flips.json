@@ -1,0 +1,59 @@
+[
+  {
+    "id": "city_shuming_1062_00000100_005",
+    "rgbir_bbox": [
+      0.731,
+      0.548,
+      0.77,
+      0.616
+    ],
+    "rgbir_iou_recomputed": 0.5465687136508423,
+    "trimodal_bbox": [
+      0.734,
+      0.55,
+      0.77,
+      0.614
+    ],
+    "trimodal_iou_recomputed": 0.48799920819417336,
+    "mutual_bbox_iou": 0.8687782805429863,
+    "max_coordinate_shift_normalized": 0.0030000000000000027
+  },
+  {
+    "id": "city_000006_011_00000307_006",
+    "rgbir_bbox": [
+      0.644,
+      0.351,
+      0.658,
+      0.38
+    ],
+    "rgbir_iou_recomputed": 0.5019893360464854,
+    "trimodal_bbox": [
+      0.644,
+      0.351,
+      0.659,
+      0.381
+    ],
+    "trimodal_iou_recomputed": 0.4563696787570962,
+    "mutual_bbox_iou": 0.9022222222222221,
+    "max_coordinate_shift_normalized": 0.0010000000000000009
+  },
+  {
+    "id": "city_000081_001",
+    "rgbir_bbox": [
+      0.523,
+      0.333,
+      0.53,
+      0.356
+    ],
+    "rgbir_iou_recomputed": 0.5889904920106268,
+    "trimodal_bbox": [
+      0.524,
+      0.333,
+      0.531,
+      0.356
+    ],
+    "trimodal_iou_recomputed": 0.48983326038050845,
+    "mutual_bbox_iou": 0.75,
+    "max_coordinate_shift_normalized": 0.0010000000000000009
+  }
+]

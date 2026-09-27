@@ -1,0 +1,17 @@
+{
+  "stage": "verify_env8",
+  "started_epoch": 1790499947.740152,
+  "finished_epoch": 1790499947.804667,
+  "elapsed_seconds": 0.06451559066772461,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "-m",
+    "tools.prepare_aux_selection",
+    "verify-env",
+    "--expected",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/env8_expected.json",
+    "--actual",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/env8/predictions.jsonl"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/verify_env8.log"
+}

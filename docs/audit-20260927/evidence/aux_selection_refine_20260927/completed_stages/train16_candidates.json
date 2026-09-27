@@ -1,0 +1,27 @@
+{
+  "stage": "train16_candidates",
+  "started_epoch": 1790500017.1507823,
+  "finished_epoch": 1790500028.945658,
+  "elapsed_seconds": 11.794876098632812,
+  "command": [
+    "/root/autodl-tmp/rematch_20260922/.venvs/aux_selection/bin/python",
+    "-m",
+    "tools.aux_selection_evidence",
+    "candidates",
+    "--manifest",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/train16.jsonl",
+    "--baseline",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16/c_baseline.jsonl",
+    "--query-info",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16/query/query_info.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922",
+    "--output",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16/candidates.jsonl",
+    "--model",
+    "/root/autodl-tmp/rematch_20260922/models/grounding-dino-tiny",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/train16_candidates.log"
+}

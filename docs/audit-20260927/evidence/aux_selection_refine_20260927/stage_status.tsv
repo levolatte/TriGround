@@ -1,0 +1,33 @@
+2026-09-27 17:05:20	env8	start
+2026-09-27 17:05:47	env8	complete	27.508
+2026-09-27 17:05:47	verify_env8	start
+2026-09-27 17:05:47	verify_env8	complete	0.065
+2026-09-27 17:05:47	train16_baseline	start
+2026-09-27 17:06:25	train16_baseline	complete	37.252
+2026-09-27 17:06:25	train16_parse	start
+2026-09-27 17:06:57	train16_parse	complete	32.091
+2026-09-27 17:06:57	train16_candidates	start
+2026-09-27 17:07:08	train16_candidates	complete	11.795
+2026-09-27 17:07:08	train16_depth	start
+2026-09-27 17:07:42	train16_depth	complete	33.363
+2026-09-27 17:07:42	train16_select_refine	start
+2026-09-27 17:13:07	train16_attempt2_parse	start
+2026-09-27 17:13:34	train16_attempt2_parse	complete	27.138
+2026-09-27 17:13:34	train16_attempt2_candidates	start
+2026-09-27 17:13:45	train16_attempt2_candidates	complete	11.106
+2026-09-27 17:13:45	train16_attempt2_depth	start
+2026-09-27 17:14:15	train16_attempt2_depth	complete	30.100
+2026-09-27 17:14:15	train16_attempt2_select_refine	start
+2026-09-27 17:14:50	train16_attempt2_select_refine	complete	35.061
+2026-09-27 17:16:25	city412_parse	start
+2026-09-27 17:21:17	city412_parse	complete	292.232
+2026-09-27 17:21:17	city412_candidates	start
+2026-09-27 17:21:29	city412_candidates	failed	1
+2026-09-27 17:25:02	city412_candidates	start
+2026-09-27 17:27:14	city412_candidates	complete	132.159
+2026-09-27 17:27:14	city412_depth	start
+2026-09-27 17:37:22	city412_depth	complete	607.849
+2026-09-27 17:37:22	city412_select_refine	start
+2026-09-27 17:47:33	city412_select_refine	complete	611.533
+2026-09-27 17:47:33	report412	start
+2026-09-27 17:47:39	report412	complete	5.091

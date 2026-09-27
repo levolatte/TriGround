@@ -1,0 +1,27 @@
+{
+  "stage": "city412_candidates",
+  "started_epoch": 1790501102.3731387,
+  "finished_epoch": 1790501234.5318172,
+  "elapsed_seconds": 132.15867924690247,
+  "command": [
+    "/root/autodl-tmp/rematch_20260922/.venvs/aux_selection/bin/python",
+    "-m",
+    "tools.aux_selection_evidence",
+    "candidates",
+    "--manifest",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/city412.jsonl",
+    "--baseline",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/c_baseline.jsonl",
+    "--query-info",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/query/query_info.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922",
+    "--output",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/candidates.jsonl",
+    "--model",
+    "/root/autodl-tmp/rematch_20260922/models/grounding-dino-tiny",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/city412_candidates.log"
+}

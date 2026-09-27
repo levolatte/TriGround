@@ -1,0 +1,6 @@
+{
+  "source": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen_generation_val.json",
+  "selection_seed": 2026,
+  "id_source": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_val.json",
+  "count": 96
+}

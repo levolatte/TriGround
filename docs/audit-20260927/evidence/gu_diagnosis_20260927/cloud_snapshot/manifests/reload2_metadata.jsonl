@@ -1,0 +1,2 @@
+{"id": "gu_pressure_000001", "source": "city", "source_task_id": "city_000020_002_00000123_002", "source_id": "city_000020_002_00000123_002", "query_key": "city_000020_002_00000123_002", "query": "The person in a white shirt with a backpack standing behind the bicycle", "target_modality": "rgb", "output_modality": "rgb"}
+{"id": "gu_pressure_000002", "source": "city", "source_task_id": "city_001764_001", "source_id": "city_001764_001", "query_key": "city_001764_001", "query": "The orange ball floating above the paddle", "target_modality": "rgb", "output_modality": "rgb"}

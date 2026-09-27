@@ -1,0 +1,162 @@
+[
+  {
+    "id": "city_000004_012_00000001_001",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the plaid jacket walking on the path\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[476,595,538,918]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_002",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person in the pink jacket walking beside the plaid jacket person\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[538,629,575,914]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_003",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The leftmost person in the dark coat on the far left sidewalk\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[19,684,39,763]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_004",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The person with the yellow backpack on the far left sidewalk\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[49,683,67,760]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_005",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The rightmost person in the dark coat among the group on the far left\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[72,684,88,762]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_012_00000001_006",
+    "split": "val",
+    "class_name": "person",
+    "image": [
+      "visible/000004_012_00000001.png",
+      "infrared/000004_012_00000001.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_012_00000001.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue pedestrian crossing sign on the white pole\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[410,354,476,492]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_018_00000341_001",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "visible/000004_018_00000341.png",
+      "infrared/000004_018_00000341.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_018_00000341.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The warning sign in the foreground near the water\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[469,408,588,552]}"
+      }
+    ]
+  },
+  {
+    "id": "city_000004_018_00000341_002",
+    "split": "val",
+    "class_name": "sign",
+    "image": [
+      "visible/000004_018_00000341.png",
+      "infrared/000004_018_00000341.png",
+      "target_v2/qwen3vl_native_sft/depth_rgb/000004_018_00000341.png"
+    ],
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: The blue sign on the far left of the bridge\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}"
+      },
+      {
+        "from": "gpt",
+        "value": "{\"bbox_2d\":[228,138,239,164]}"
+      }
+    ]
+  }
+]

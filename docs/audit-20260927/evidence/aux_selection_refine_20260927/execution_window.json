@@ -1,0 +1,8 @@
+{
+  "start_local": "2026-09-27T16:40:49+08:00",
+  "start_epoch": 1790498449,
+  "deadline_epoch": 1790527249,
+  "deadline_local": "2026-09-28T00:40:49+08:00",
+  "budget_seconds": 28800,
+  "includes_implementation": true
+}

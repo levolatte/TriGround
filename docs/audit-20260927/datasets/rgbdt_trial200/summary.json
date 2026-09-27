@@ -1,0 +1,26 @@
+{
+  "cases": 319,
+  "reviewed": 319,
+  "blind_passed": 252,
+  "human_approved": 0,
+  "groups": 200,
+  "objects": 209,
+  "natural_queries": 138,
+  "groups_with_aux_boxes": 131,
+  "pending": 0,
+  "needs_review": 67,
+  "by_modality": {
+    "rgb": {
+      "blind_passed": 121,
+      "needs_review": 17
+    },
+    "infrared": {
+      "blind_passed": 92,
+      "needs_review": 25
+    },
+    "depth": {
+      "blind_passed": 39,
+      "needs_review": 25
+    }
+  }
+}

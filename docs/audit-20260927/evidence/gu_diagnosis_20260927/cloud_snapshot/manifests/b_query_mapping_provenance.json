@@ -1,0 +1,7 @@
+{
+  "source": "released source Queries and full City training native manifest",
+  "selection_seed": 2026,
+  "exclusions": "old 1200 City IDs, old City Query text, and identical released Query text",
+  "balance_group": "first image path",
+  "count": 98
+}

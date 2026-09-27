@@ -1,0 +1,17 @@
+{
+  "condition": "canonical shared auxiliary prompt",
+  "prompt_version": "gu_diag_v1",
+  "raw_gt_file": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/manifests/fit_canonical_aux83_gt.json",
+  "raw_gt_source": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/source/pending_candidates.jsonl",
+  "inputs": {
+    "old_root": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926",
+    "released_jsonl": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_cloud.jsonl",
+    "released_metadata": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/released_metadata.jsonl",
+    "released_candidates": "/root/autodl-tmp/rematch_20260922/results/gu_diagnosis_20260927/source/pending_candidates.jsonl",
+    "city_native": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_train.json",
+    "city_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+    "city_val": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen3vl_native_sft/trimodal_val.json",
+    "city_gt": "/root/autodl-tmp/rematch_20260922/data/city/train/target_v2/qwen_generation_val.json",
+    "seed": 2026
+  }
+}

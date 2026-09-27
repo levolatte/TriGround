@@ -1,0 +1,46 @@
+{
+  "samples": 16,
+  "parse": 16,
+  "query_scopes": {
+    "single": 14,
+    "part": 2
+  },
+  "selection_kinds": {
+    "candidate": 8,
+    "keep": 6,
+    "scope_policy_keep": 2
+  },
+  "refine_statuses": {
+    "refined": 5,
+    "explicit_keep": 7,
+    "skipped_scope_policy": 2,
+    "skipped_candidate_box_large_enough": 2
+  },
+  "candidate_counts": [
+    3,
+    7,
+    1,
+    4,
+    1,
+    8,
+    3,
+    9,
+    8,
+    8,
+    10,
+    11,
+    7,
+    5,
+    8,
+    8
+  ],
+  "depth_states": {
+    "reliable": 62,
+    "unreliable": 37,
+    "skipped_scope": 2
+  },
+  "max_selection_input_tokens": 2184,
+  "max_refine_input_tokens": 1083,
+  "image_count_check": true,
+  "no_generation_cap_hit": true
+}

@@ -1,0 +1,25 @@
+{
+  "stage": "train16_baseline",
+  "started_epoch": 1790499947.8053286,
+  "finished_epoch": 1790499985.0569923,
+  "elapsed_seconds": 37.25166392326355,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "-m",
+    "tools.predict_aux_selection",
+    "baseline",
+    "--manifest",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/train16.jsonl",
+    "--prompts",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/train16_baseline_prompts.json",
+    "--output",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/train16/baseline/predictions.jsonl",
+    "--model",
+    "/root/rematch_models/Qwen3-VL-8B-Instruct",
+    "--adapter",
+    "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/train16_baseline.log"
+}

@@ -1,0 +1,8 @@
+﻿kind,name,status,partial,paired_eligible,gate_eligible,samples,manifest_samples,missing_samples,mean_iou,acc_0.5,acc_0.7,parse_rate,recall@1,recall@4,recall@8,recall@all,cover_samples,new_cover_samples_vs_best,new_cover_image_count_vs_best,new_cover_samples_vs_best_primary,new_cover_image_count_vs_best_primary,B,C,required_selection_rate,metadata_path
+run,M2,complete,False,True,True,412,412,0,0.5983321237383764,0.691747572815534,0.5194174757281553,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/baseline_m2/summary.json
+run,C,complete,False,True,True,412,412,0,0.6136284094129535,0.7087378640776699,0.5436893203883495,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_step1500/summary.json
+run,G100,complete,False,True,True,412,412,0,0.5953082325528162,0.6893203883495146,0.5048543689320388,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/g_2026_city100/summary.json
+run,G200,complete,False,True,True,412,412,0,0.5944091406721451,0.6990291262135923,0.49271844660194175,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/g_2026_city200/summary.json
+run,U100,complete,False,True,True,412,412,0,0.5968195619999433,0.6868932038834952,0.5024271844660194,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/u_2026_city100/summary.json
+run,U200,complete,False,True,True,412,412,0,0.5962089723715746,0.6868932038834952,0.49029126213592233,1.0,,,,,,,,,,,,,/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/u_2026_city200/summary.json
+candidate_union,M2+C+G100+G200+U100+U200,complete_runs_only,,,,,,,,,,,0.691747572815534,0.7184466019417476,0.7184466019417476,0.7184466019417476,296,4,4,4,4,292,296,1.0135135135135136,

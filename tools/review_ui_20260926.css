@@ -1,0 +1,60 @@
+:root{color-scheme:light;--ink:#18252c;--muted:#5a6b72;--line:#d9e2e5;--accent:#176b62;--soft:#eef6f3;--warn:#a66317}
+*{box-sizing:border-box}
+body{margin:0!important;background:#f4f6f5!important;color:var(--ink)!important;font:16px/1.5 "Segoe UI","Microsoft YaHei",system-ui,sans-serif!important}
+body>header,body>nav{display:none!important}
+body>.review-item,body>.sample{display:none!important}
+body>.review-item.current,body>.sample.current{display:block!important;max-width:1300px;margin:20px auto 56px!important;padding:26px!important;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 4px 22px #1a302a0b}
+#reviewAppHeader{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:12px max(18px,calc((100vw - 1300px)/2));box-shadow:0 2px 12px #1a302a0a}
+#reviewAppHeader .topline{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+#reviewAppHeader .back{color:var(--accent);text-decoration:none;font-size:14px}
+#reviewAppHeader h1{font-size:20px;line-height:1.25;margin:0;flex:1;min-width:210px}
+#reviewAppHeader .progress{font-weight:700;font-size:15px;white-space:nowrap}
+#reviewAppHeader .bar{height:5px;border-radius:9px;background:#e5eeea;margin:10px 0 12px;overflow:hidden}
+#reviewAppHeader .bar>span{display:block;height:100%;background:var(--accent);width:0}
+#reviewAppHeader .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#reviewAppHeader button,#reviewAppHeader .buttonlike,.review-controls button,.lightbox button{font:inherit;cursor:pointer;border:1px solid #cbd9d5;background:#fff;color:var(--ink);padding:9px 13px;border-radius:8px}
+#reviewAppHeader button:hover,.review-controls button:hover{border-color:var(--accent);background:var(--soft)}
+#reviewAppHeader button:disabled{opacity:.45;cursor:default}
+#reviewAppHeader .primary{background:var(--accent);border-color:var(--accent);color:#fff}
+#reviewAppHeader .primary:hover{background:#12564e;color:#fff}
+#reviewAppHeader .spacer{flex:1}
+#reviewAppHeader label{display:flex;align-items:center;gap:6px;margin:0;font-size:14px;white-space:nowrap}
+#reviewAppHeader input[type=number]{width:64px;min-width:0;padding:7px;border:1px solid var(--line);border-radius:7px;font:inherit}
+#reviewAppHeader .statusline{font-size:13px;color:var(--muted);padding-top:8px;min-height:28px}
+#reviewAppHeader .statusline.error{color:#a12e27;font-weight:700}
+.review-item h2,.sample h2{font-size:16px;color:var(--muted);margin:0 0 12px;font-weight:500}
+.review-item h2 small{font-size:14px}
+.review-prompt{font-size:clamp(24px,3vw,34px);line-height:1.36;letter-spacing:.01em;font-weight:700;max-width:1100px;margin:8px 0 6px}
+.review-prompt-label{color:var(--accent);font-size:14px;font-weight:700;margin-top:12px}
+.review-prompt.missing{font-size:24px;font-weight:600}
+.review-hint{color:var(--muted);font-size:14px;margin:4px 0 14px}
+.review-hint.missing{color:var(--warn)}
+.review-english{margin:0 0 20px;color:var(--muted);font-size:14px}
+.review-english summary{cursor:pointer;color:#386a65}
+.review-english p{margin:7px 0 0;font-size:16px;color:var(--ink)}
+.review-item>.query,.review-item>table,.sample>p,.sample>label{display:none!important}
+.views{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important;margin:16px 0 24px}
+.views figure{min-width:0;margin:0!important}
+.views figcaption{font-size:16px;color:var(--ink);font-weight:700;margin:0 0 7px!important}
+.views a{display:block;cursor:zoom-in;background:#e9eeec;border:1px solid var(--line);border-radius:9px;overflow:hidden}
+.views img{display:block;width:100%!important;height:auto!important;max-height:560px;object-fit:contain;border:0!important;background:#e9eeec}
+.views code{font-size:11px;color:var(--muted);overflow-wrap:anywhere}
+.sample .views code{display:none}
+.review-controls{border-top:1px solid var(--line);padding-top:20px}
+.review-controls .question{font-weight:700;margin:0 0 10px}
+.review-controls .choices{display:flex;gap:10px;flex-wrap:wrap}
+.review-controls .choices button{font-size:16px;font-weight:700;padding:12px 18px}
+.review-controls .choices button.selected{background:var(--accent);border-color:var(--accent);color:white}
+.review-controls .choices button.clear{font-size:14px;font-weight:400;color:var(--muted)}
+.review-controls .note-label{display:block;color:var(--muted);font-size:14px;margin:18px 0 6px}
+.review-controls textarea{display:block;width:100%;min-height:72px;max-width:100%;resize:vertical;font:inherit;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff;color:var(--ink)}
+.review-controls textarea:focus,#reviewAppHeader input:focus{outline:2px solid #80ada5;outline-offset:1px}
+.review-controls .shortcut{color:var(--muted);font-size:12px;margin-top:8px}
+.lightbox{position:fixed;inset:0;background:#101a19ed;z-index:30;display:flex;align-items:center;justify-content:center;padding:20px}
+.lightbox[hidden]{display:none!important}
+.lightbox .inner{width:min(96vw,1600px);height:min(94vh,1100px);display:flex;flex-direction:column;gap:9px}
+.lightbox .head{display:flex;gap:10px;align-items:center;color:#fff}
+.lightbox .head span{flex:1;font-size:16px;font-weight:700}
+.lightbox .head a{color:#c5e7df}
+.lightbox img{display:block;min-height:0;flex:1;width:100%;height:100%;object-fit:contain;background:#0a1110}
+@media(max-width:760px){#reviewAppHeader{position:static}.views{grid-template-columns:1fr!important}body>.review-item.current,body>.sample.current{margin:10px!important;padding:17px!important}.review-controls .choices button{flex:1 1 42%}}

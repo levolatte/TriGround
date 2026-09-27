@@ -1,0 +1,23 @@
+{
+  "stage": "city412_depth",
+  "started_epoch": 1790501234.5326633,
+  "finished_epoch": 1790501842.3821268,
+  "elapsed_seconds": 607.8494639396667,
+  "command": [
+    "/root/autodl-tmp/rematch_20260922/.venvs/aux_selection/bin/python",
+    "-m",
+    "tools.aux_selection_evidence",
+    "depth",
+    "--candidates",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/candidates.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922",
+    "--output",
+    "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/city412/evidence.jsonl",
+    "--model",
+    "/root/autodl-tmp/rematch_20260922/models/sam2.1-hiera-tiny",
+    "--deadline-epoch",
+    "1790527249"
+  ],
+  "log": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/logs/city412_depth.log"
+}

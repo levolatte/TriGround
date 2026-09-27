@@ -1,0 +1,45 @@
+{
+  "launcher": "run_qwen3vl_native_lora.sh",
+  "attention_implementation": "sdpa",
+  "dataset_name": "city_native_trimodal_train",
+  "annotation_path": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/manifests/seed2026/g_train.json",
+  "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+  "model_path": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+  "output_dir": "/root/autodl-tmp/rematch_20260922/results/gu_pilot_20260926/g_2026",
+  "min_pixels": 200704,
+  "max_pixels": 602112,
+  "model_max_length": 4096,
+  "seed": "2026",
+  "epochs": "1",
+  "learning_rate": "5e-6",
+  "max_steps": "200",
+  "init_adapter": "/root/autodl-tmp/rematch_20260922/results/first_batch/m2/checkpoint-928",
+  "save_strategy": "steps",
+  "save_steps": 100,
+  "stop_after_step": 100,
+  "preserve_manifest_order": true,
+  "dataloader_num_workers": 0,
+  "save_total_limit": 2,
+  "audit_sample_count": 1,
+  "optimizer": {
+    "name": "adamw_torch_fused",
+    "beta1": 0.9,
+    "beta2": 0.999,
+    "epsilon": 1e-08,
+    "weight_decay": 0.0,
+    "lr_scheduler_type": "linear",
+    "warmup_steps": 0,
+    "max_grad_norm": 1.0
+  },
+  "numerics": {
+    "tf32": false,
+    "float32_matmul_precision": "highest",
+    "cudnn_allow_tf32": false,
+    "logging_nan_inf_filter": false
+  },
+  "resume": {
+    "requested": null,
+    "policy": "fresh_stage_from_adapter"
+  },
+  "fail_fast_dataset_getitem": true
+}

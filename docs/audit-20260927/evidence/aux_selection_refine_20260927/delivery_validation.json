@@ -1,0 +1,20 @@
+{
+  "validated_unique_rows": {
+    "manifests/city412.jsonl": 412,
+    "city412/query/query_info.jsonl": 412,
+    "city412/candidates.jsonl": 412,
+    "city412/evidence.jsonl": 412,
+    "city412/trimodal/selected_predictions.jsonl": 412,
+    "city412/trimodal/final_predictions.jsonl": 412
+  },
+  "inference_gt_fields_absent": true,
+  "prediction_bbox_finite_and_valid": true,
+  "atlas_asset_references_verified": 1266,
+  "saved_mask_references_present": 2443,
+  "fixed_visual_review_cases": 12,
+  "training_performed": false,
+  "diagnostic96_run": false,
+  "official_submission_generated": false,
+  "source_versions_note": "Measured v1 in code_final; centered clipping CPU-only correction in code_corrections_not_evaluated, no score for correction.",
+  "independent_visual_review_completed": 12
+}
