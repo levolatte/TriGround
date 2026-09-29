@@ -1,0 +1,31 @@
+{
+  "A": {
+    "consumed": 4800,
+    "matches_frozen_manifest": true,
+    "counts": {
+      "old_city": 4800
+    }
+  },
+  "B": {
+    "consumed": 4800,
+    "matches_frozen_manifest": true,
+    "counts": {
+      "old_city": 2944,
+      "robo_competition": 448,
+      "depth_relation": 448,
+      "ir_complement": 480,
+      "reliability": 480
+    }
+  },
+  "V": {
+    "consumed": 4800,
+    "matches_frozen_manifest": true,
+    "counts": {
+      "old_city": 2944,
+      "robo_competition": 448,
+      "depth_relation": 448,
+      "ir_complement": 480,
+      "reliability": 480
+    }
+  }
+}

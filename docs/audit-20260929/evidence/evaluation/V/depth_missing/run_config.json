@@ -1,0 +1,17 @@
+{
+  "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+  "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/V/main/checkpoint-600",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/depth_missing.json",
+  "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+  "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+  "min_pixels": 200704,
+  "max_pixels": 602112,
+  "max_new_tokens": 128,
+  "limit": 0,
+  "prompt_style": "manifest_conversations",
+  "prompt": "manifest_conversations",
+  "tf32": false,
+  "allow_tf32": false,
+  "matmul_precision": "highest",
+  "torch_float32_matmul_precision": "highest"
+}

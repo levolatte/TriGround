@@ -1,0 +1,416 @@
+[
+  {
+    "spec_id": "stairs_three_layers",
+    "scene_id": "city:000005_029_00000191",
+    "split": "train",
+    "scope_description": "白连帽衫粉裤者、持瓶黑外套者、左侧深色夹克者三人。",
+    "pair_required": false,
+    "tasks": [
+      {
+        "key": "stairs_middle_coat",
+        "query": "Among the three people on the foreground steps, locate the one at the middle distance from the camera.",
+        "query_zh": "前景台阶上的三个人中，找出距相机远近居中的那个人。",
+        "target_id": "city_000005_029_00000191_002",
+        "relation": {
+          "kind": "middle",
+          "competitors": [
+            "city_000005_029_00000191_001",
+            "city_000005_029_00000191_003"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000005_029_00000191_001": [
+        0.56,
+        0.48,
+        0.6,
+        0.62
+      ],
+      "city_000005_029_00000191_002": [
+        0.32,
+        0.16,
+        0.37,
+        0.3
+      ],
+      "city_000005_029_00000191_003": [
+        0.17,
+        0.14,
+        0.21,
+        0.28
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：三人的实心衣物区域可分别辨认，主体深度层次稳定；持瓶黑外套者处于另两人中间。RGB透视可能可解，需用Depth置空对照检验真实互补。"
+    }
+  },
+  {
+    "spec_id": "stairs_reference_pair",
+    "scene_id": "city:000005_029_00000191",
+    "split": "train",
+    "scope_description": "台阶上方左侧深色上衣者与下方白连帽衫粉裤者，以中间持瓶黑外套者作参照。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "stairs_than_coat_near",
+        "query": "Among the three people on the foreground steps, locate the person closer to the camera than the person holding a bottle behind their back.",
+        "query_zh": "前景台阶上的三人中，找出比把瓶子拿在背后的那个人离相机更近的人。",
+        "target_id": "city_000005_029_00000191_001",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_000005_029_00000191_003"
+          ],
+          "reference_id": "city_000005_029_00000191_002"
+        }
+      },
+      {
+        "key": "stairs_than_coat_far",
+        "query": "Among the three people on the foreground steps, locate the person farther from the camera than the person holding a bottle behind their back.",
+        "query_zh": "前景台阶上的三人中，找出比把瓶子拿在背后的那个人离相机更远的人。",
+        "target_id": "city_000005_029_00000191_003",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_000005_029_00000191_001"
+          ],
+          "reference_id": "city_000005_029_00000191_002"
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000005_029_00000191_001": [
+        0.56,
+        0.48,
+        0.6,
+        0.62
+      ],
+      "city_000005_029_00000191_002": [
+        0.32,
+        0.16,
+        0.37,
+        0.3
+      ],
+      "city_000005_029_00000191_003": [
+        0.17,
+        0.14,
+        0.21,
+        0.28
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：白帽衫下部、持瓶者外套、左侧者外套各有独立主体区；深度由近至远是白帽衫、持瓶者、左侧者。三人沿台阶分布，RGB大小/台阶位置可形成捷径，关系仍需在指定集合内判断。"
+    }
+  },
+  {
+    "spec_id": "promenade_three_layers",
+    "scene_id": "city:000014_037_00000271",
+    "split": "train",
+    "scope_description": "白T恤男子、背白袋的蓝衣者、轮椅旁深色衣者三人。",
+    "pair_required": false,
+    "tasks": [
+      {
+        "key": "promenade_middle_blue",
+        "query": "Among the dark-clothed person beside the wheelchair, the man in a white T-shirt on the left, and the blue-shirted person carrying a white bag, who is at the middle distance from the camera?",
+        "query_zh": "轮椅旁深色衣者、左侧白T恤男子、背白袋的蓝衣者三人中，谁距相机的深度居中？",
+        "target_id": "city_000014_037_00000271_003",
+        "relation": {
+          "kind": "middle",
+          "competitors": [
+            "city_000014_037_00000271_001",
+            "city_000014_037_00000271_002"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000014_037_00000271_001": [
+        0.09,
+        0.25,
+        0.18,
+        0.42
+      ],
+      "city_000014_037_00000271_002": [
+        0.39,
+        0.36,
+        0.43,
+        0.5
+      ],
+      "city_000014_037_00000271_003": [
+        0.57,
+        0.39,
+        0.62,
+        0.56
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：三人主体清楚，取证矩形均在衣物内部，原始深度排序为白T恤男子、背袋者、轮椅旁人物。RGB人像大小差异也明显，本题用于三对象层次监督，互补性待实验。"
+    }
+  },
+  {
+    "spec_id": "promenade_reference_pair",
+    "scene_id": "city:000014_037_00000271",
+    "split": "train",
+    "scope_description": "近处左侧白T恤男子与轮椅旁深色衣者，以背白袋的蓝衣者作中层参照。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "promenade_than_blue_near",
+        "query": "Of the dark-clothed person beside the wheelchair and the man in a white T-shirt on the left, who is closer to the camera than the blue-shirted person carrying a white bag?",
+        "query_zh": "轮椅旁的深色衣者与左侧白T恤男子中，谁比背白袋的蓝衣者离相机更近？",
+        "target_id": "city_000014_037_00000271_001",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_000014_037_00000271_002"
+          ],
+          "reference_id": "city_000014_037_00000271_003"
+        }
+      },
+      {
+        "key": "promenade_than_blue_far",
+        "query": "Of the dark-clothed person beside the wheelchair and the man in a white T-shirt on the left, who is farther from the camera than the blue-shirted person carrying a white bag?",
+        "query_zh": "轮椅旁的深色衣者与左侧白T恤男子中，谁比背白袋的蓝衣者离相机更远？",
+        "target_id": "city_000014_037_00000271_002",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_000014_037_00000271_001"
+          ],
+          "reference_id": "city_000014_037_00000271_003"
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000014_037_00000271_001": [
+        0.09,
+        0.25,
+        0.18,
+        0.42
+      ],
+      "city_000014_037_00000271_002": [
+        0.39,
+        0.36,
+        0.43,
+        0.5
+      ],
+      "city_000014_037_00000271_003": [
+        0.57,
+        0.39,
+        0.62,
+        0.56
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：白T恤背部、轮椅旁人物躯干、背袋者上身各有主体深度；参照者深度处于另两人之间。白T恤男子尺寸最大，RGB可推近；不宣称Depth是唯一依据。"
+    }
+  },
+  {
+    "spec_id": "shuming78_central_pair",
+    "scene_id": "city:shuming_78_00000046",
+    "split": "train",
+    "scope_description": "踏板车后方可见的白色小汽车与其右侧深灰色SUV。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "shuming78_central_near",
+        "query": "Of the white hatchback partly visible behind the scooters and the dark SUV to its right, which is closer to the camera?",
+        "query_zh": "踏板车后方部分可见的白色小汽车和它右侧的深灰色SUV中，哪辆离相机更近？",
+        "target_id": "city_shuming_78_00000046_003",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_shuming_78_00000046_004"
+          ]
+        }
+      },
+      {
+        "key": "shuming78_central_far",
+        "query": "Of the white hatchback partly visible behind the scooters and the dark SUV to its right, which is farther from the camera?",
+        "query_zh": "踏板车后方部分可见的白色小汽车和它右侧的深灰色SUV中，哪辆离相机更远？",
+        "target_id": "city_shuming_78_00000046_004",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_shuming_78_00000046_003"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_shuming_78_00000046_003": [
+        0.33,
+        0.33,
+        0.39,
+        0.37
+      ],
+      "city_shuming_78_00000046_004": [
+        0.62,
+        0.305,
+        0.69,
+        0.36
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB及模型灰度Depth：白车被踏板车与立式标牌局部遮挡，证据区收紧在仍可见的白色车盖，深度有效率约0.84；SUV取侧门，轮廓和灰度连续。白车与SUV颜色和透视可能构成RGB线索，不能称Depth必需。"
+    }
+  },
+  {
+    "spec_id": "shuming78_silver_pair",
+    "scene_id": "city:shuming_78_00000046",
+    "split": "train",
+    "scope_description": "画面左侧相邻的银色轿车和银色厢车。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "shuming78_silver_near",
+        "query": "Of the two silver vehicles on the left, the car and the van, which is closer to the camera?",
+        "query_zh": "左侧的两辆银色车——轿车和厢车——中，哪辆离相机更近？",
+        "target_id": "city_shuming_78_00000046_001",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_shuming_78_00000046_002"
+          ]
+        }
+      },
+      {
+        "key": "shuming78_silver_far",
+        "query": "Of the two silver vehicles on the left, the car and the van, which is farther from the camera?",
+        "query_zh": "左侧的两辆银色车——轿车和厢车——中，哪辆离相机更远？",
+        "target_id": "city_shuming_78_00000046_002",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_shuming_78_00000046_001"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_shuming_78_00000046_001": [
+        0.045,
+        0.4,
+        0.11,
+        0.51
+      ],
+      "city_shuming_78_00000046_002": [
+        0.24,
+        0.22,
+        0.31,
+        0.25
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB及模型灰度Depth：左侧银色轿车的车门区域有连续深度；后方银色厢车只取车身上沿的有效小矩形，避开前车遮挡与深度空洞。透视、遮挡让RGB也能解题，不主张互补收益。"
+    }
+  },
+  {
+    "spec_id": "cargo_tricycles_pair",
+    "scene_id": "city:000002_082_00000121",
+    "split": "train",
+    "scope_description": "左侧蓝色大型货运三轮车与右侧绿色货运三轮车。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "cargo_blue_near",
+        "query": "Of the blue cargo tricycle on the left and the green cargo tricycle on the right, which is closer to the camera?",
+        "query_zh": "左侧蓝色货运三轮车与右侧绿色货运三轮车中，哪辆离相机更近？",
+        "target_id": "city_000002_082_00000121_004",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_000002_082_00000121_005"
+          ]
+        }
+      },
+      {
+        "key": "cargo_green_far",
+        "query": "Of the blue cargo tricycle on the left and the green cargo tricycle on the right, which is farther from the camera?",
+        "query_zh": "左侧蓝色货运三轮车与右侧绿色货运三轮车中，哪辆离相机更远？",
+        "target_id": "city_000002_082_00000121_005",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_000002_082_00000121_004"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000002_082_00000121_004": [
+        0.1,
+        0.61,
+        0.2,
+        0.7
+      ],
+      "city_000002_082_00000121_005": [
+        0.58,
+        0.48,
+        0.69,
+        0.57
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：手选蓝色、绿色货箱侧板的实心区域，深度轮廓清楚，避开中间自行车及地面。蓝车明显更大且遮挡在前，RGB有强透视捷径；保留为可核验的空间关系题而非Depth互补证明。"
+    }
+  },
+  {
+    "spec_id": "red_car_silver_van_pair",
+    "scene_id": "city:000003_023_00000089",
+    "split": "train",
+    "scope_description": "画面左侧红色轿车与中央银色厢车；不纳入厢车后的黑车。",
+    "pair_required": true,
+    "tasks": [
+      {
+        "key": "red_car_near",
+        "query": "Of the red car on the left and the large silver van in the center, which is closer to the camera?",
+        "query_zh": "左侧红色轿车与中央大型银色厢车中，哪辆离相机更近？",
+        "target_id": "city_000003_023_00000089_002",
+        "relation": {
+          "kind": "nearer",
+          "competitors": [
+            "city_000003_023_00000089_001"
+          ]
+        }
+      },
+      {
+        "key": "silver_van_far",
+        "query": "Of the red car on the left and the large silver van in the center, which is farther from the camera?",
+        "query_zh": "左侧红色轿车与中央大型银色厢车中，哪辆离相机更远？",
+        "target_id": "city_000003_023_00000089_001",
+        "relation": {
+          "kind": "farther",
+          "competitors": [
+            "city_000003_023_00000089_002"
+          ]
+        }
+      }
+    ],
+    "evidence_regions": {
+      "city_000003_023_00000089_001": [
+        0.38,
+        0.32,
+        0.57,
+        0.45
+      ],
+      "city_000003_023_00000089_002": [
+        0.04,
+        0.37,
+        0.16,
+        0.48
+      ]
+    },
+    "visual_review": {
+      "checked_by": "agent",
+      "notes": "已看RGB与模型灰度Depth：红车车头与银色厢车侧门均有可见主体及有效深度，侧门取区避开车窗/车轮。厢车后黑车的模型深度大面积暗缺，故原草案三层与黑车比较均剔除。红车与厢车外观、遮挡关系也给RGB线索。"
+    }
+  }
+]

@@ -1,0 +1,52 @@
+{"event": "adapter_initialized", "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "scope": "language", "source": "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500", "step": 0}
+{"audit": {"learning_rates": [5e-06], "moment_states": 0, "parameters": 288}, "event": "optimizer_created", "groups": [{"lr": 5e-06, "name": "language", "tensors": 288}], "scope": "language", "step": 0}
+{"event": "pre_first_step", "gradient_tensors": 288, "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "optimizer": {"learning_rates": [5e-06], "moment_states": 0, "parameters": 288}, "probes": {"language": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight"}, "step": 0}
+{"event": "post_first_step", "optimizer": {"learning_rates": [5e-06], "moment_states": 288, "parameters": 288}, "step": 1, "updates": {"language": {"A": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_A.default.weight", "B": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight", "BA_update_norm": 0.0010640391472706188, "B_update_norm": 0.0018015704117715359}}}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.866666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 16}
+{"event": "adapter_initialized", "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "scope": "language", "source": null, "step": 0}
+{"audit": {"learning_rates": [5e-06], "moment_states": 0, "parameters": 288}, "event": "optimizer_created", "groups": [{"lr": 5e-06, "name": "language", "tensors": 288}], "scope": "language", "step": 0}
+{"adapter_tensors": 288, "event": "resume_restored", "optimizer": {"learning_rates": [4.866666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 16}
+{"event": "pre_first_step", "gradient_tensors": 288, "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "optimizer": {"learning_rates": [4.866666666666667e-06], "moment_states": 288, "parameters": 288}, "probes": {"language": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight"}, "step": 16}
+{"event": "post_first_step", "optimizer": {"learning_rates": [4.866666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 17, "updates": {"language": {"A": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_A.default.weight", "B": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight", "BA_update_norm": 0.00025436010111840523, "B_update_norm": 0.00043194874888285995}}}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.7333333333333335e-06], "moment_states": 288, "parameters": 288}, "step": 32}
+{"event": "adapter_initialized", "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "scope": "language", "source": null, "step": 0}
+{"audit": {"learning_rates": [5e-06], "moment_states": 0, "parameters": 288}, "event": "optimizer_created", "groups": [{"lr": 5e-06, "name": "language", "tensors": 288}], "scope": "language", "step": 0}
+{"adapter_tensors": 288, "event": "resume_restored", "optimizer": {"learning_rates": [4.7333333333333335e-06], "moment_states": 288, "parameters": 288}, "step": 32}
+{"event": "pre_first_step", "gradient_tensors": 288, "modules": {"dtype": "float32", "modules": 144, "tensors": 288}, "optimizer": {"learning_rates": [4.7333333333333335e-06], "moment_states": 288, "parameters": 288}, "probes": {"language": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight"}, "step": 32}
+{"event": "post_first_step", "optimizer": {"learning_rates": [4.7333333333333335e-06], "moment_states": 288, "parameters": 288}, "step": 33, "updates": {"language": {"A": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_A.default.weight", "B": "base_model.model.model.language_model.layers.0.self_attn.q_proj.lora_B.default.weight", "BA_update_norm": 0.0003101553653817374, "B_update_norm": 0.0005258244927972555}}}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.600000000000001e-06], "moment_states": 288, "parameters": 288}, "step": 48}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.4666666666666665e-06], "moment_states": 288, "parameters": 288}, "step": 64}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.333333333333334e-06], "moment_states": 288, "parameters": 288}, "step": 80}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.2000000000000004e-06], "moment_states": 288, "parameters": 288}, "step": 96}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.066666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 112}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.9333333333333335e-06], "moment_states": 288, "parameters": 288}, "step": 128}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.8000000000000005e-06], "moment_states": 288, "parameters": 288}, "step": 144}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.6666666666666666e-06], "moment_states": 288, "parameters": 288}, "step": 160}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.5333333333333335e-06], "moment_states": 288, "parameters": 288}, "step": 176}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.4000000000000005e-06], "moment_states": 288, "parameters": 288}, "step": 192}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.266666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 208}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.133333333333334e-06], "moment_states": 288, "parameters": 288}, "step": 224}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3e-06], "moment_states": 288, "parameters": 288}, "step": 240}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.866666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 256}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.7333333333333336e-06], "moment_states": 288, "parameters": 288}, "step": 272}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.6e-06], "moment_states": 288, "parameters": 288}, "step": 288}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.466666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 304}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.3333333333333336e-06], "moment_states": 288, "parameters": 288}, "step": 320}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.2e-06], "moment_states": 288, "parameters": 288}, "step": 336}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.0666666666666666e-06], "moment_states": 288, "parameters": 288}, "step": 352}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.9333333333333336e-06], "moment_states": 288, "parameters": 288}, "step": 368}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.8000000000000001e-06], "moment_states": 288, "parameters": 288}, "step": 384}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.6666666666666667e-06], "moment_states": 288, "parameters": 288}, "step": 400}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.5333333333333334e-06], "moment_states": 288, "parameters": 288}, "step": 416}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.4000000000000001e-06], "moment_states": 288, "parameters": 288}, "step": 432}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.2666666666666669e-06], "moment_states": 288, "parameters": 288}, "step": 448}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.1333333333333334e-06], "moment_states": 288, "parameters": 288}, "step": 464}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [1.0000000000000002e-06], "moment_states": 288, "parameters": 288}, "step": 480}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [8.666666666666668e-07], "moment_states": 288, "parameters": 288}, "step": 496}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [7.333333333333334e-07], "moment_states": 288, "parameters": 288}, "step": 512}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [6.000000000000001e-07], "moment_states": 288, "parameters": 288}, "step": 528}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [4.666666666666667e-07], "moment_states": 288, "parameters": 288}, "step": 544}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [3.3333333333333335e-07], "moment_states": 288, "parameters": 288}, "step": 560}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [2.0000000000000002e-07], "moment_states": 288, "parameters": 288}, "step": 576}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [6.666666666666668e-08], "moment_states": 288, "parameters": 288}, "step": 592}
+{"adapter_tensors": 288, "event": "checkpoint_saved", "optimizer": {"learning_rates": [0.0], "moment_states": 288, "parameters": 288}, "step": 600}

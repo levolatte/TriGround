@@ -13,6 +13,9 @@ MAX_STEPS="${MAX_STEPS:--1}"
 SEED="${SEED:-2026}"
 EPOCHS="${EPOCHS:-2}"
 LEARNING_RATE="${LEARNING_RATE:-1e-5}"
+VISUAL_LORA_LR="${VISUAL_LORA_LR:-2e-5}"
+LORA_SCOPE="${LORA_SCOPE:-language}"
+INIT_ONLY="${INIT_ONLY:-0}"
 INIT_ADAPTER="${INIT_ADAPTER:-}"
 RESUME_FROM_CHECKPOINT="${RESUME_FROM_CHECKPOINT:-}"
 SAVE_STEPS="${SAVE_STEPS:-}"
@@ -20,6 +23,19 @@ STOP_AFTER_STEP="${STOP_AFTER_STEP:-}"
 PRESERVE_MANIFEST_ORDER="${PRESERVE_MANIFEST_ORDER:-0}"
 SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-2}"
 AUDIT_SAMPLE_COUNT="${AUDIT_SAMPLE_COUNT:-1}"
+CODE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+if [[ "${LORA_SCOPE}" != "language" && "${LORA_SCOPE}" != "language_merger" ]]; then
+  echo "LORA_SCOPE must be language or language_merger" >&2
+  exit 2
+fi
+if [[ "${INIT_ONLY}" != "0" && "${INIT_ONLY}" != "1" ]]; then
+  echo "INIT_ONLY must be 0 or 1" >&2
+  exit 2
+fi
+if [[ "${INIT_ONLY}" == "1" && -n "${RESUME_FROM_CHECKPOINT}" ]]; then
+  echo "INIT_ONLY cannot resume an optimizer checkpoint" >&2
+  exit 2
+fi
 if [[ "${PRESERVE_MANIFEST_ORDER}" != "0" && "${PRESERVE_MANIFEST_ORDER}" != "1" ]]; then
   echo "PRESERVE_MANIFEST_ORDER must be 0 or 1" >&2
   exit 2
@@ -68,6 +84,7 @@ ANNOTATION_PATH="${ANNOTATION_PATH:-${DEFAULT_ANNOTATION_PATH}}"
 
 test -f "${ANNOTATION_PATH}"
 test -f "${QWEN_FINETUNE_DIR}/qwenvl/train/train_qwen.py"
+test -f "${CODE_ROOT}/tools/native_lora_training.py"
 
 export CITY_DATA_ROOT="${DATA_ROOT}"
 export CITY_ANNOTATION_PATH="${ANNOTATION_PATH}"
@@ -79,6 +96,10 @@ export CITY_MODEL_PATH="${MODEL_PATH}"
 export CITY_SEED="${SEED}"
 export CITY_EPOCHS="${EPOCHS}"
 export CITY_LEARNING_RATE="${LEARNING_RATE}"
+export CITY_VISUAL_LORA_LR="${VISUAL_LORA_LR}"
+export CITY_LORA_SCOPE="${LORA_SCOPE}"
+export CITY_INIT_ONLY="${INIT_ONLY}"
+export CITY_CODE_ROOT="${CODE_ROOT}"
 export CITY_MAX_STEPS="${MAX_STEPS}"
 export CITY_OUTPUT_DIR="${OUTPUT_DIR}"
 export CITY_INIT_ADAPTER="${INIT_ADAPTER}"
@@ -118,6 +139,7 @@ args=(
   --num_train_epochs "${EPOCHS}"
   --seed "${SEED}"
   --data_seed "${SEED}"
+  --full_determinism True
   --bf16
   --tf32 False
   --gradient_checkpointing True
@@ -148,9 +170,9 @@ fi
 
 # The official entry point hard-codes flash_attention_2 in __main__ and exposes no
 # attention CLI flag. Importing the same train() function lets this single-process
-# launch select SDPA explicitly. The PEFT hook only audits the model returned by the
-# official get_peft_model; it does not alter the model, dataset, loss, or Trainer.
-python - "${args[@]}" <<'PY'
+# launch select SDPA explicitly. The PEFT and Trainer hooks add the audited
+# composite adapter and its two explicit optimizer groups when requested.
+"${PYTHON_EXECUTABLE:-python}" - "${args[@]}" <<'PY'
 import math
 import os
 import shutil
@@ -162,6 +184,8 @@ from pathlib import Path
 import torch
 
 qwen_root = Path.cwd()
+sys.path.insert(0, str(Path(os.environ["CITY_CODE_ROOT"]) / "tools"))
+import native_lora_training as native_lora
 sys.path.insert(0, str(qwen_root))
 sys.path.insert(0, str(qwen_root / "qwenvl" / "train"))
 
@@ -203,6 +227,11 @@ init_adapter = os.environ["CITY_INIT_ADAPTER"]
 resume_from_checkpoint = os.environ["CITY_RESUME_FROM_CHECKPOINT"]
 save_steps = os.environ["CITY_SAVE_STEPS"]
 stop_after_step = os.environ["CITY_STOP_AFTER_STEP"]
+lora_scope = os.environ["CITY_LORA_SCOPE"]
+visual_lora_lr = float(os.environ["CITY_VISUAL_LORA_LR"])
+init_only = os.environ["CITY_INIT_ONLY"] == "1"
+if visual_lora_lr <= 0:
+    raise ValueError("VISUAL_LORA_LR must be positive")
 preserve_manifest_order = os.environ["CITY_PRESERVE_MANIFEST_ORDER"] == "1"
 save_total_limit = int(os.environ["CITY_SAVE_TOTAL_LIMIT"])
 config_path = output_dir / "native_train_config.json"
@@ -237,6 +266,14 @@ resolved_config = {
     "seed": os.environ.get("CITY_SEED", ""),
     "epochs": os.environ.get("CITY_EPOCHS", ""),
     "learning_rate": os.environ.get("CITY_LEARNING_RATE", ""),
+    "lora": {
+        "scope": lora_scope,
+        "target_modules": sorted(native_lora.expected_modules(lora_scope)),
+        "dropout": 0.05,
+        "language": {"rank": 32, "alpha": 64, "dtype": "float32"},
+        "visual": {"rank": 8, "alpha": 16, "modules": 8, "dtype": "float32"}
+        if lora_scope == "language_merger" else None,
+    },
     "max_steps": os.environ.get("CITY_MAX_STEPS", "-1"),
     "init_adapter": stage_init_adapter or None,
     "save_strategy": "steps" if save_steps else "epoch",
@@ -252,15 +289,21 @@ resolved_config = {
         "beta2": 0.999,
         "epsilon": 1e-8,
         "weight_decay": 0.0,
+        "language_lr": float(os.environ["CITY_LEARNING_RATE"]),
+        "visual_lr": visual_lora_lr if lora_scope == "language_merger" else None,
         "lr_scheduler_type": "linear",
         "warmup_steps": 0,
         "max_grad_norm": 1.0,
     },
     "numerics": {
+        "frozen_base_dtype": "bfloat16",
+        "trainable_gradient_dtype": "float32",
+        "adam_moments_dtype": "float32",
         "tf32": False,
         "float32_matmul_precision": "highest",
         "cudnn_allow_tf32": False,
         "logging_nan_inf_filter": False,
+        "full_determinism": True,
     },
     "resume": {
         "requested": resume_from_checkpoint or None,
@@ -286,6 +329,7 @@ comparison_keys = (
     "seed",
     "epochs",
     "learning_rate",
+    "lora",
     "max_steps",
     "preserve_manifest_order",
     "dataloader_num_workers",
@@ -323,6 +367,27 @@ if not config_path.is_file():
 
 original_get_peft_model = peft.get_peft_model
 targets = ("q_proj", "k_proj", "v_proj", "o_proj")
+trace_path = output_dir / "native_lora_audit.jsonl"
+
+
+def record_lora_audit(event, **details):
+    row = {"event": event, **details}
+    with trace_path.open("a", encoding="utf-8") as stream:
+        stream.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
+    print("=== LoRA audit " + json.dumps(row, ensure_ascii=False, sort_keys=True) + " ===")
+
+
+def check_adapter_checkpoint(model, checkpoint):
+    saved = peft.load_peft_weights(str(checkpoint), device="cpu")
+    loaded = peft.get_peft_model_state_dict(model)
+    if set(saved) != set(loaded):
+        raise RuntimeError(f"adapter checkpoint keys differ: {checkpoint}")
+    changed = [key for key, value in saved.items()
+               if value.dtype != torch.float32
+               or not torch.equal(value, loaded[key].detach().cpu())]
+    if changed:
+        raise RuntimeError(f"adapter checkpoint values/dtype differ: {checkpoint}: {changed[:5]}")
+    return len(saved)
 
 
 class FiniteTrainingCallback(transformers.TrainerCallback):
@@ -346,6 +411,22 @@ class FiniteTrainingCallback(transformers.TrainerCallback):
             for target in targets
         }
         self._gradient_checks = 0
+        self._first_step_probes = None
+
+    def _probe(self, group):
+        candidates = [
+            (name, parameter) for name, parameter in self._trainable_parameters
+            if (".language_model." if group == "language" else ".visual.") in name
+            and ".lora_B." in name and parameter.grad is not None
+            and bool(torch.count_nonzero(parameter.grad).item())
+        ]
+        if not candidates:
+            raise RuntimeError(f"first optimizer step has no nonzero {group} LoRA B gradient")
+        b_name, b_parameter = candidates[0]
+        a_name = b_name.replace(".lora_B.", ".lora_A.")
+        parameters = dict(self._trainable_parameters)
+        a_parameter = parameters[a_name]
+        return a_name, a_parameter, b_name, b_parameter, a_parameter.detach().float().cpu().clone(), b_parameter.detach().float().cpu().clone()
 
     def on_log(self, args, state, control, logs=None, **kwargs):
         if logs and "loss" in logs and logs["loss"] is not None:
@@ -357,11 +438,29 @@ class FiniteTrainingCallback(transformers.TrainerCallback):
     def on_pre_optimizer_step(self, args, state, control, **kwargs):
         for name, parameter in self._trainable_parameters:
             gradient = parameter.grad
+            if gradient is not None and gradient.dtype != torch.float32:
+                raise RuntimeError(f"LoRA gradient must be float32: {name}: {gradient.dtype}")
             if gradient is not None and not bool(torch.isfinite(gradient).all().item()):
                 raise FloatingPointError(
                     f"non-finite gradient in trainable parameter {name} at step {state.global_step}"
                 )
         if self._gradient_checks == 0:
+            model = kwargs["model"]
+            optimizer = kwargs["optimizer"]
+            expected_count = 304 if lora_scope == "language_merger" else 288
+            module_audit = native_lora.audit_lora_model(model, lora_scope)
+            optimizer_audit = native_lora.assert_fp32_optimizer(
+                optimizer, model, require_state=bool(resume_from_checkpoint)
+            )
+            if module_audit["tensors"] != expected_count:
+                raise RuntimeError(f"LoRA count differs at first optimizer step: {module_audit}")
+            if resume_from_checkpoint:
+                checkpoint = Path(resume_from_checkpoint).expanduser()
+                checkpoint_count = check_adapter_checkpoint(model, checkpoint)
+                native_lora.compare_optimizer_checkpoint(optimizer, checkpoint)
+                record_lora_audit("resume_restored", step=state.global_step,
+                                  adapter_tensors=checkpoint_count,
+                                  optimizer=optimizer_audit)
             missing_targets = [
                 target
                 for target, parameters in self._audited_targets.items()
@@ -376,15 +475,54 @@ class FiniteTrainingCallback(transformers.TrainerCallback):
                 parameter.grad is not None
                 for _, parameter in self._trainable_parameters
             )
+            disconnected = [name for name, parameter in self._trainable_parameters
+                            if parameter.grad is None]
+            if disconnected:
+                raise RuntimeError(f"trainable LoRA tensors disconnected from loss: {disconnected[:8]}")
             print(
                 "=== first optimizer gradient audit: "
                 f"{non_none}/{len(self._trainable_parameters)} trainable tensors have gradients; "
                 "zero-valued lora_A gradients are allowed ==="
             )
+            self._first_step_probes = {group: self._probe(group) for group in
+                                       (["language", "visual"] if lora_scope == "language_merger"
+                                        else ["language"])}
+            record_lora_audit("pre_first_step", step=state.global_step,
+                              modules=module_audit, optimizer=optimizer_audit,
+                              gradient_tensors=non_none,
+                              probes={group: probe[2] for group, probe in self._first_step_probes.items()})
         self._gradient_checks += 1
         return control
 
+    def on_optimizer_step(self, args, state, control, **kwargs):
+        if self._first_step_probes is None:
+            return control
+        updates = {}
+        for group, (a_name, a, b_name, b, old_a, old_b) in self._first_step_probes.items():
+            new_a = a.detach().float().cpu()
+            new_b = b.detach().float().cpu()
+            b_change = float(torch.linalg.vector_norm(new_b - old_b))
+            ba_change = native_lora.low_rank_delta_norm(old_a, old_b, new_a, new_b)
+            if b_change <= 0 or ba_change <= 0:
+                raise RuntimeError(f"first {group} LoRA B/BA did not update: B={b_change}, BA={ba_change}")
+            updates[group] = {"A": a_name, "B": b_name,
+                              "B_update_norm": b_change, "BA_update_norm": ba_change}
+        optimizer_audit = native_lora.assert_fp32_optimizer(
+            kwargs["optimizer"], kwargs["model"], require_state=True
+        )
+        record_lora_audit("post_first_step", step=state.global_step + 1,
+                          updates=updates, optimizer=optimizer_audit)
+        self._first_step_probes = None
+        return control
+
     def on_save(self, args, state, control, **kwargs):
+        checkpoint = output_dir / f"checkpoint-{state.global_step}"
+        count = check_adapter_checkpoint(kwargs["model"], checkpoint)
+        optimizer_audit = native_lora.assert_fp32_optimizer(
+            kwargs["optimizer"], kwargs["model"], require_state=True
+        )
+        record_lora_audit("checkpoint_saved", step=state.global_step,
+                          adapter_tensors=count, optimizer=optimizer_audit)
         free_bytes = shutil.disk_usage(output_dir).free
         free_gib = free_bytes / (1024**3)
         print(f"=== checkpoint disk audit: free_gib={free_gib:.3f} output_dir={output_dir} ===")
@@ -397,76 +535,25 @@ class FiniteTrainingCallback(transformers.TrainerCallback):
 
 
 def audited_get_peft_model(*args, **kwargs):
-    if init_adapter:
-        adapter_path = Path(init_adapter).expanduser()
-        if not adapter_path.is_dir():
-            raise FileNotFoundError(f"INIT_ADAPTER is not a directory: {adapter_path}")
-        expected = args[1] if len(args) > 1 else kwargs["peft_config"]
-        saved = peft.PeftConfig.from_pretrained(str(adapter_path), local_files_only=True)
-        fields = ("r", "lora_alpha", "lora_dropout", "bias", "task_type")
-        mismatch = {
-            field: (getattr(saved, field), getattr(expected, field))
-            for field in fields
-            if getattr(saved, field) != getattr(expected, field)
-        }
-        if set(saved.target_modules) != set(expected.target_modules):
-            mismatch["target_modules"] = (saved.target_modules, expected.target_modules)
-        if mismatch:
-            raise RuntimeError(f"INIT_ADAPTER LoRA config differs from training config: {mismatch}")
-        model = peft.PeftModel.from_pretrained(
-            args[0],
-            str(adapter_path),
-            is_trainable=True,
-            autocast_adapter_dtype=False,
-            local_files_only=True,
-        )
-        saved_weights = peft.load_peft_weights(str(adapter_path), device="cpu")
-        loaded_weights = peft.get_peft_model_state_dict(model)
-        if saved_weights.keys() != loaded_weights.keys():
-            raise RuntimeError(
-                "INIT_ADAPTER tensor keys differ after loading: "
-                f"missing={sorted(saved_weights.keys() - loaded_weights.keys())[:5]}, "
-                f"unexpected={sorted(loaded_weights.keys() - saved_weights.keys())[:5]}"
-            )
-        mismatched_weights = [
-            name
-            for name, value in saved_weights.items()
-            if not torch.equal(value.to(dtype=loaded_weights[name].dtype), loaded_weights[name].detach().cpu())
-        ]
-        if mismatched_weights:
-            raise RuntimeError(f"INIT_ADAPTER tensors differ after loading: {mismatched_weights[:5]}")
-        print(
-            f"=== initialized and verified {len(saved_weights)} trainable LoRA tensors from "
-            f"{adapter_path}; fresh optimizer and scheduler ==="
-        )
-    else:
-        # Full-state resume lets Trainer restore the checkpoint weights and
-        # optimizer. Recreate the LoRA tensors in the same dtype as a stage
-        # initialized with INIT_ADAPTER, rather than PEFT's default fp32 cast.
-        if resume_from_checkpoint and stage_init_adapter:
-            model = original_get_peft_model(*args, autocast_adapter_dtype=False, **kwargs)
-        else:
-            model = original_get_peft_model(*args, **kwargs)
-    trainable = [name for name, parameter in model.named_parameters() if parameter.requires_grad]
-    unexpected = [
-        name
-        for name in trainable
-        if "language_model" not in name
-        or not any(f".{target}.lora_" in name for target in targets)
-    ]
-    seen_targets = {
-        target for target in targets if any(f".{target}.lora_" in name for name in trainable)
-    }
-    if not trainable or unexpected or seen_targets != set(targets):
-        raise RuntimeError(
-            "LoRA audit failed: "
-            f"trainable={len(trainable)}, unexpected={unexpected[:10]}, "
-            f"seen_targets={sorted(seen_targets)}"
-        )
-    print("=== audited trainable parameters (language q/k/v/o LoRA only) ===")
-    for name in trainable:
-        print(name)
+    if kwargs:
+        raise RuntimeError(f"unexpected get_peft_model keyword arguments: {sorted(kwargs)}")
+    torch.manual_seed(int(os.environ["CITY_SEED"]))
+    model = native_lora.initialize_lora(
+        args[0], args[1], scope=lora_scope,
+        init_adapter=init_adapter if not resume_from_checkpoint else "",
+        peft=peft, get_peft_model=original_get_peft_model,
+    )
+    module_audit = native_lora.audit_lora_model(model, lora_scope)
+    record_lora_audit("adapter_initialized", step=0, modules=module_audit,
+                      source=init_adapter or None, scope=lora_scope)
     model.print_trainable_parameters()
+    if init_only:
+        if (output_dir / "adapter_config.json").exists():
+            raise RuntimeError(f"INIT_ONLY output already contains an adapter: {output_dir}")
+        model.save_pretrained(str(output_dir), safe_serialization=True)
+        count = check_adapter_checkpoint(model, output_dir)
+        record_lora_audit("init_only_saved", step=0, adapter_tensors=count)
+        raise SystemExit(0)
     return model
 
 
@@ -486,6 +573,24 @@ def audited_trainer_init(self, *args, **kwargs):
 
 
 transformers.Trainer.__init__ = audited_trainer_init
+
+def audited_create_optimizer(self):
+    if self.optimizer is None:
+        groups = native_lora.optimizer_parameter_groups(
+            self.model, scope=lora_scope,
+            language_lr=float(os.environ["CITY_LEARNING_RATE"]),
+            visual_lr=visual_lora_lr,
+        )
+        optimizer_cls, optimizer_kwargs = transformers.Trainer.get_optimizer_cls_and_kwargs(self.args)
+        self.optimizer = optimizer_cls(groups, **optimizer_kwargs)
+        audit = native_lora.assert_fp32_optimizer(self.optimizer, self.model, require_state=False)
+        record_lora_audit("optimizer_created", step=0, scope=lora_scope,
+                          groups=[{"name": group["group_name"], "tensors": len(group["params"]),
+                                   "lr": group["lr"]} for group in groups], audit=audit)
+    return self.optimizer
+
+
+transformers.Trainer.create_optimizer = audited_create_optimizer
 
 if preserve_manifest_order:
     from torch.utils.data import SequentialSampler

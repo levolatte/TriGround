@@ -17,4 +17,6 @@ slurm-*.err
 *.pth
 *.safetensors
 .work/
+.playwright-cli/
+output/playwright/
 AGENTS.md

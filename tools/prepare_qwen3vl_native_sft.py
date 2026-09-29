@@ -91,12 +91,30 @@ def _trimodal_prompt(query: str) -> str:
     )
 
 
-def native_prompt(query: str, modalities: tuple[str, ...], depth_policy: str = "millimeter") -> str:
+def native_prompt(
+    query: str,
+    modalities: tuple[str, ...],
+    depth_policy: str = "millimeter",
+    missing_modalities: tuple[str, ...] = (),
+) -> str:
     """Prompt a real combination of views; keep the original City prompts unchanged."""
+    if len(set(missing_modalities)) != len(missing_modalities) or any(
+        modality == "rgb" or modality not in modalities for modality in missing_modalities
+    ):
+        raise ValueError(f"missing modalities must be unique auxiliary views: {missing_modalities}")
     if modalities == ("rgb",):
         return _rgb_prompt(query)
     if modalities == ("rgb", "infrared", "depth") and depth_policy == "millimeter":
-        return _trimodal_prompt(query)
+        prompt = _trimodal_prompt(query)
+        if not missing_modalities:
+            return prompt
+        unavailable = ", ".join(missing_modalities)
+        return prompt.replace(
+            " Locate the object described by this query: ",
+            f" The {unavailable} view(s) are unavailable and shown as all-black placeholders; "
+            "ignore them as scene evidence. Locate the object described by this query: ",
+            1,
+        )
     descriptions = {"rgb": "RGB", "infrared": "infrared", "depth": "depth"}
     if not modalities or modalities[0] != "rgb" or len(set(modalities)) != len(modalities):
         raise ValueError(f"unsupported view order: {modalities}")
@@ -115,11 +133,20 @@ def native_prompt(query: str, modalities: tuple[str, ...], depth_policy: str = "
         )
     elif "depth" in modalities and depth_policy != "visual":
         raise ValueError(f"unsupported depth policy: {depth_policy}")
-    return (
+    prompt = (
         f"{images}\nThese are views of the same scene in this order: {names}."
         f"{guidance} Locate the object described by this query: {query}\n"
         "Return only JSON in this exact form with coordinates normalized to 0-1000: "
         '{"bbox_2d":[x1,y1,x2,y2]}'
+    )
+    if not missing_modalities:
+        return prompt
+    unavailable = ", ".join(missing_modalities)
+    return prompt.replace(
+        " Locate the object described by this query: ",
+        f" The {unavailable} view(s) are unavailable and shown as all-black placeholders; "
+        "ignore them as scene evidence. Locate the object described by this query: ",
+        1,
     )
 
 

@@ -1,0 +1,17 @@
+{
+  "A": {
+    "samples": 4800,
+    "matches_manifest": true,
+    "resume_report_status": "pass"
+  },
+  "B": {
+    "samples": 4800,
+    "matches_manifest": true,
+    "resume_report_status": "pass"
+  },
+  "V": {
+    "samples": 4800,
+    "matches_manifest": true,
+    "resume_report_status": "pass"
+  }
+}

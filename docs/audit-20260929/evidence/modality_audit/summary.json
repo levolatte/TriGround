@@ -1,0 +1,453 @@
+{
+  "metric": "ACC@0.5: independently recomputed normalized xyxy IoU >= 0.5",
+  "gt_manifest": "F:\\AIC\\results\\triground_abv_execution_20260928\\deployment_600_seed2026\\manifests\\diagnostics\\gt_manifest.json",
+  "prediction_files": {
+    "A:normal": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\A\\normal\\predictions.jsonl",
+    "A:ir_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\A\\ir_missing\\predictions.jsonl",
+    "A:depth_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\A\\depth_missing\\predictions.jsonl",
+    "A:both_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\A\\both_missing\\predictions.jsonl",
+    "B:normal": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\B\\normal\\predictions.jsonl",
+    "B:ir_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\B\\ir_missing\\predictions.jsonl",
+    "B:depth_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\B\\depth_missing\\predictions.jsonl",
+    "B:both_missing": "F:\\AIC\\results\\triground_abv_execution_20260928\\verification\\AB_analysis\\evaluation\\B\\both_missing\\predictions.jsonl"
+  },
+  "adapters": {
+    "A": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/A/main/checkpoint-600",
+    "B": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/B/main/checkpoint-600"
+  },
+  "class_counts": {
+    "depth": 6,
+    "ir": 32,
+    "rgb_sufficient": 32
+  },
+  "normal_A_to_B": {
+    "all": {
+      "samples": 70,
+      "left_hits": 57,
+      "right_hits": 54,
+      "rescued": 0,
+      "harmed": 3,
+      "net": -3,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:robo:0004596:diag_aux",
+        "abv:diag:robo:0007227:diag_aux",
+        "abv:diag:robo:0007353:diag_aux"
+      ],
+      "prediction_changed": 65,
+      "mean_iou": {
+        "A": 0.7120805154023451,
+        "B": 0.6768734272103378
+      },
+      "scene_groups": 46,
+      "rescued_scene_groups": 0
+    },
+    "depth": {
+      "samples": 6,
+      "left_hits": 6,
+      "right_hits": 6,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "prediction_changed": 3,
+      "mean_iou": {
+        "A": 0.8857315404996497,
+        "B": 0.8825818309413629
+      },
+      "scene_groups": 3,
+      "rescued_scene_groups": 0
+    },
+    "ir": {
+      "samples": 32,
+      "left_hits": 26,
+      "right_hits": 26,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "prediction_changed": 31,
+      "mean_iou": {
+        "A": 0.6719002437454337,
+        "B": 0.6757698040679312
+      },
+      "scene_groups": 11,
+      "rescued_scene_groups": 0
+    },
+    "rgb_sufficient": {
+      "samples": 32,
+      "left_hits": 25,
+      "right_hits": 22,
+      "rescued": 0,
+      "harmed": 3,
+      "net": -3,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:robo:0004596:diag_aux",
+        "abv:diag:robo:0007227:diag_aux",
+        "abv:diag:robo:0007353:diag_aux"
+      ],
+      "prediction_changed": 31,
+      "mean_iou": {
+        "A": 0.7197012198535119,
+        "B": 0.6394067246531773
+      },
+      "scene_groups": 32,
+      "rescued_scene_groups": 0
+    }
+  },
+  "same_checkpoint_normal_minus_missing": {
+    "ir_missing": {
+      "applied": 38,
+      "not_applied": 32,
+      "actual_missing_counts": {
+        "infrared": 38
+      },
+      "by_class": {
+        "depth": {
+          "A": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "actual_missing": [
+            "infrared"
+          ],
+          "scene_groups": 3,
+          "B_minus_A_net": 0
+        },
+        "ir": {
+          "A": {
+            "samples": 32,
+            "left_hits": 26,
+            "right_hits": 26,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 32,
+            "left_hits": 26,
+            "right_hits": 26,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "actual_missing": [
+            "infrared"
+          ],
+          "scene_groups": 11,
+          "B_minus_A_net": 0
+        }
+      },
+      "unapplied_checks": {
+        "A": {
+          "samples": 32,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        },
+        "B": {
+          "samples": 32,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        }
+      },
+      "A": {
+        "samples": 38,
+        "left_hits": 32,
+        "right_hits": 32,
+        "rescued": 0,
+        "harmed": 0,
+        "net": 0,
+        "rescued_ids": [],
+        "harmed_ids": [],
+        "prediction_changed": 29,
+        "mean_iou_normal_minus_missing": -0.0021053112052117585
+      },
+      "B": {
+        "samples": 38,
+        "left_hits": 32,
+        "right_hits": 32,
+        "rescued": 0,
+        "harmed": 0,
+        "net": 0,
+        "rescued_ids": [],
+        "harmed_ids": [],
+        "prediction_changed": 29,
+        "mean_iou_normal_minus_missing": -0.0003049330187727749
+      },
+      "B_minus_A_net": 0
+    },
+    "depth_missing": {
+      "applied": 38,
+      "not_applied": 32,
+      "actual_missing_counts": {
+        "depth": 38
+      },
+      "by_class": {
+        "depth": {
+          "A": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "actual_missing": [
+            "depth"
+          ],
+          "scene_groups": 3,
+          "B_minus_A_net": 0
+        },
+        "rgb_sufficient": {
+          "A": {
+            "samples": 32,
+            "left_hits": 24,
+            "right_hits": 25,
+            "rescued": 1,
+            "harmed": 0,
+            "net": 1,
+            "rescued_ids": [
+              "abv:diag:robo:0004596:diag_aux"
+            ],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 32,
+            "left_hits": 24,
+            "right_hits": 22,
+            "rescued": 0,
+            "harmed": 2,
+            "net": -2,
+            "rescued_ids": [],
+            "harmed_ids": [
+              "abv:diag:robo:0007227:diag_aux",
+              "abv:diag:robo:0007353:diag_aux"
+            ]
+          },
+          "actual_missing": [
+            "depth"
+          ],
+          "scene_groups": 32,
+          "B_minus_A_net": -3
+        }
+      },
+      "unapplied_checks": {
+        "A": {
+          "samples": 32,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        },
+        "B": {
+          "samples": 32,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        }
+      },
+      "A": {
+        "samples": 38,
+        "left_hits": 30,
+        "right_hits": 31,
+        "rescued": 1,
+        "harmed": 0,
+        "net": 1,
+        "rescued_ids": [
+          "abv:diag:robo:0004596:diag_aux"
+        ],
+        "harmed_ids": [],
+        "prediction_changed": 26,
+        "mean_iou_normal_minus_missing": 0.030483663675688794
+      },
+      "B": {
+        "samples": 38,
+        "left_hits": 30,
+        "right_hits": 28,
+        "rescued": 0,
+        "harmed": 2,
+        "net": -2,
+        "rescued_ids": [],
+        "harmed_ids": [
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "prediction_changed": 31,
+        "mean_iou_normal_minus_missing": -0.05058924795394587
+      },
+      "B_minus_A_net": -3
+    },
+    "both_missing": {
+      "applied": 70,
+      "not_applied": 0,
+      "actual_missing_counts": {
+        "infrared+depth": 6,
+        "infrared": 32,
+        "depth": 32
+      },
+      "by_class": {
+        "depth": {
+          "A": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 6,
+            "left_hits": 6,
+            "right_hits": 6,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "actual_missing": [
+            "infrared+depth"
+          ],
+          "scene_groups": 3,
+          "B_minus_A_net": 0
+        },
+        "ir": {
+          "A": {
+            "samples": 32,
+            "left_hits": 26,
+            "right_hits": 26,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 32,
+            "left_hits": 26,
+            "right_hits": 26,
+            "rescued": 0,
+            "harmed": 0,
+            "net": 0,
+            "rescued_ids": [],
+            "harmed_ids": []
+          },
+          "actual_missing": [
+            "infrared"
+          ],
+          "scene_groups": 11,
+          "B_minus_A_net": 0
+        },
+        "rgb_sufficient": {
+          "A": {
+            "samples": 32,
+            "left_hits": 24,
+            "right_hits": 25,
+            "rescued": 1,
+            "harmed": 0,
+            "net": 1,
+            "rescued_ids": [
+              "abv:diag:robo:0004596:diag_aux"
+            ],
+            "harmed_ids": []
+          },
+          "B": {
+            "samples": 32,
+            "left_hits": 24,
+            "right_hits": 22,
+            "rescued": 0,
+            "harmed": 2,
+            "net": -2,
+            "rescued_ids": [],
+            "harmed_ids": [
+              "abv:diag:robo:0007227:diag_aux",
+              "abv:diag:robo:0007353:diag_aux"
+            ]
+          },
+          "actual_missing": [
+            "depth"
+          ],
+          "scene_groups": 32,
+          "B_minus_A_net": -3
+        }
+      },
+      "unapplied_checks": {
+        "A": {
+          "samples": 0,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        },
+        "B": {
+          "samples": 0,
+          "prediction_changed": 0,
+          "hit_changed": 0
+        }
+      },
+      "A": {
+        "samples": 70,
+        "left_hits": 56,
+        "right_hits": 57,
+        "rescued": 1,
+        "harmed": 0,
+        "net": 1,
+        "rescued_ids": [
+          "abv:diag:robo:0004596:diag_aux"
+        ],
+        "harmed_ids": [],
+        "prediction_changed": 53,
+        "mean_iou_normal_minus_missing": 0.015295566810849823
+      },
+      "B": {
+        "samples": 70,
+        "left_hits": 56,
+        "right_hits": 54,
+        "rescued": 0,
+        "harmed": 2,
+        "net": -2,
+        "rescued_ids": [],
+        "harmed_ids": [
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "prediction_changed": 59,
+        "mean_iou_normal_minus_missing": -0.0275565890129831
+      },
+      "B_minus_A_net": -3
+    }
+  },
+  "caveat": "Paired 70-item diagnostic; depth n=6 is case-level only. Missing-input effect alone is not proof of useful modality reasoning."
+}

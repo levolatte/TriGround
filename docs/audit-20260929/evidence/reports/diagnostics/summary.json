@@ -1,0 +1,2657 @@
+{
+  "manifest_samples": 70,
+  "image_groups": 67,
+  "known_reuse_samples": 0,
+  "other_samples": 70,
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 2026
+  },
+  "runs": {
+    "C0": {
+      "status": "complete",
+      "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/C0/normal/predictions.jsonl",
+      "observed": 70,
+      "denominator": 70,
+      "manifest_samples": 70,
+      "missing_ids": [],
+      "invalid_predictions": {},
+      "ranking_eligible": true,
+      "metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "preview_metrics": null,
+      "hits_0.5": 57,
+      "hits_0.7": 48,
+      "shared47": {
+        "samples": 0,
+        "hits_0.5": 0,
+        "hits_0.7": 0,
+        "metrics": null
+      },
+      "other365": {
+        "samples": 70,
+        "hits_0.5": 57,
+        "hits_0.7": 48,
+        "metrics": {
+          "samples": 70,
+          "parsed": 70,
+          "parse_rate": 1.0,
+          "mean_iou": 0.7172809835587184,
+          "acc_0.5": 0.8142857142857143,
+          "acc_0.7": 0.6857142857142857
+        }
+      },
+      "metadata": {
+        "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/C0/normal/summary.json",
+        "data": {
+          "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+          "adapter": "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+          "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+          "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+          "min_pixels": 200704,
+          "max_pixels": 602112,
+          "max_new_tokens": 128,
+          "limit": 0,
+          "prompt_style": "manifest_conversations",
+          "prompt": "manifest_conversations",
+          "tf32": false,
+          "allow_tf32": false,
+          "matmul_precision": "highest",
+          "torch_float32_matmul_precision": "highest",
+          "manifest_samples": 70,
+          "target_source": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "target_source_kind": "target_manifest_bbox",
+          "samples": 70,
+          "parsed": 70,
+          "parse_failures": 0,
+          "parse_rate": 1.0,
+          "hits": 57,
+          "mean_iou": 0.717280924320221,
+          "acc_0.5": 0.8142856955528259,
+          "acc_0.7": 0.6857143044471741,
+          "l1_coordinate_error": 0.02633875049650669,
+          "total_generated_tokens": 1605,
+          "mean_generated_tokens": 22.928571428571427,
+          "total_generation_seconds": 59.15956937521696,
+          "mean_generation_seconds": 0.8451367053602423,
+          "median_generation_seconds": 0.8075153827667236,
+          "generation_cap_hits": 0,
+          "gpu_peak_allocated_bytes": 18235166208,
+          "gpu_peak_reserved_bytes": 18379440128,
+          "predictions": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/C0/normal/predictions.jsonl"
+        }
+      },
+      "run_config": {
+        "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+        "adapter": "/root/autodl-tmp/rematch_20260922/results/next_stage_20260925/c_phase2/checkpoint-500",
+        "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+        "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+        "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+        "min_pixels": 200704,
+        "max_pixels": 602112,
+        "max_new_tokens": 128,
+        "limit": 0,
+        "prompt_style": "manifest_conversations",
+        "prompt": "manifest_conversations",
+        "tf32": false,
+        "allow_tf32": false,
+        "matmul_precision": "highest",
+        "torch_float32_matmul_precision": "highest"
+      }
+    },
+    "A": {
+      "status": "complete",
+      "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/A/normal/predictions.jsonl",
+      "observed": 70,
+      "denominator": 70,
+      "manifest_samples": 70,
+      "missing_ids": [],
+      "invalid_predictions": {},
+      "ranking_eligible": true,
+      "metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "preview_metrics": null,
+      "hits_0.5": 57,
+      "hits_0.7": 48,
+      "shared47": {
+        "samples": 0,
+        "hits_0.5": 0,
+        "hits_0.7": 0,
+        "metrics": null
+      },
+      "other365": {
+        "samples": 70,
+        "hits_0.5": 57,
+        "hits_0.7": 48,
+        "metrics": {
+          "samples": 70,
+          "parsed": 70,
+          "parse_rate": 1.0,
+          "mean_iou": 0.7120805154023451,
+          "acc_0.5": 0.8142857142857143,
+          "acc_0.7": 0.6857142857142857
+        }
+      },
+      "metadata": {
+        "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/A/normal/summary.json",
+        "data": {
+          "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+          "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/A/main/checkpoint-600",
+          "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+          "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+          "min_pixels": 200704,
+          "max_pixels": 602112,
+          "max_new_tokens": 128,
+          "limit": 0,
+          "prompt_style": "manifest_conversations",
+          "prompt": "manifest_conversations",
+          "tf32": false,
+          "allow_tf32": false,
+          "matmul_precision": "highest",
+          "torch_float32_matmul_precision": "highest",
+          "manifest_samples": 70,
+          "target_source": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "target_source_kind": "target_manifest_bbox",
+          "samples": 70,
+          "parsed": 70,
+          "parse_failures": 0,
+          "parse_rate": 1.0,
+          "hits": 57,
+          "mean_iou": 0.7120804786682129,
+          "acc_0.5": 0.8142856955528259,
+          "acc_0.7": 0.6857143044471741,
+          "l1_coordinate_error": 0.026632199063897133,
+          "total_generated_tokens": 1605,
+          "mean_generated_tokens": 22.928571428571427,
+          "total_generation_seconds": 60.44746991991997,
+          "mean_generation_seconds": 0.8635352845702853,
+          "median_generation_seconds": 0.8253585398197174,
+          "generation_cap_hits": 0,
+          "gpu_peak_allocated_bytes": 18235166208,
+          "gpu_peak_reserved_bytes": 18433966080,
+          "predictions": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/A/normal/predictions.jsonl"
+        }
+      },
+      "run_config": {
+        "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+        "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/A/main/checkpoint-600",
+        "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+        "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+        "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+        "min_pixels": 200704,
+        "max_pixels": 602112,
+        "max_new_tokens": 128,
+        "limit": 0,
+        "prompt_style": "manifest_conversations",
+        "prompt": "manifest_conversations",
+        "tf32": false,
+        "allow_tf32": false,
+        "matmul_precision": "highest",
+        "torch_float32_matmul_precision": "highest"
+      }
+    },
+    "B": {
+      "status": "complete",
+      "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/B/normal/predictions.jsonl",
+      "observed": 70,
+      "denominator": 70,
+      "manifest_samples": 70,
+      "missing_ids": [],
+      "invalid_predictions": {},
+      "ranking_eligible": true,
+      "metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "preview_metrics": null,
+      "hits_0.5": 54,
+      "hits_0.7": 45,
+      "shared47": {
+        "samples": 0,
+        "hits_0.5": 0,
+        "hits_0.7": 0,
+        "metrics": null
+      },
+      "other365": {
+        "samples": 70,
+        "hits_0.5": 54,
+        "hits_0.7": 45,
+        "metrics": {
+          "samples": 70,
+          "parsed": 70,
+          "parse_rate": 1.0,
+          "mean_iou": 0.6768734272103378,
+          "acc_0.5": 0.7714285714285715,
+          "acc_0.7": 0.6428571428571429
+        }
+      },
+      "metadata": {
+        "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/B/normal/summary.json",
+        "data": {
+          "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+          "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/B/main/checkpoint-600",
+          "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+          "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+          "min_pixels": 200704,
+          "max_pixels": 602112,
+          "max_new_tokens": 128,
+          "limit": 0,
+          "prompt_style": "manifest_conversations",
+          "prompt": "manifest_conversations",
+          "tf32": false,
+          "allow_tf32": false,
+          "matmul_precision": "highest",
+          "torch_float32_matmul_precision": "highest",
+          "manifest_samples": 70,
+          "target_source": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "target_source_kind": "target_manifest_bbox",
+          "samples": 70,
+          "parsed": 70,
+          "parse_failures": 0,
+          "parse_rate": 1.0,
+          "hits": 54,
+          "mean_iou": 0.6768734455108643,
+          "acc_0.5": 0.7714285850524902,
+          "acc_0.7": 0.6428571343421936,
+          "l1_coordinate_error": 0.03532528504729271,
+          "total_generated_tokens": 1605,
+          "mean_generated_tokens": 22.928571428571427,
+          "total_generation_seconds": 59.822241127491,
+          "mean_generation_seconds": 0.8546034446784428,
+          "median_generation_seconds": 0.8132532760500908,
+          "generation_cap_hits": 0,
+          "gpu_peak_allocated_bytes": 18235166208,
+          "gpu_peak_reserved_bytes": 18433966080,
+          "predictions": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/B/normal/predictions.jsonl"
+        }
+      },
+      "run_config": {
+        "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+        "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/B/main/checkpoint-600",
+        "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+        "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+        "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+        "min_pixels": 200704,
+        "max_pixels": 602112,
+        "max_new_tokens": 128,
+        "limit": 0,
+        "prompt_style": "manifest_conversations",
+        "prompt": "manifest_conversations",
+        "tf32": false,
+        "allow_tf32": false,
+        "matmul_precision": "highest",
+        "torch_float32_matmul_precision": "highest"
+      }
+    },
+    "V": {
+      "status": "complete",
+      "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/V/normal/predictions.jsonl",
+      "observed": 70,
+      "denominator": 70,
+      "manifest_samples": 70,
+      "missing_ids": [],
+      "invalid_predictions": {},
+      "ranking_eligible": true,
+      "metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "preview_metrics": null,
+      "hits_0.5": 54,
+      "hits_0.7": 46,
+      "shared47": {
+        "samples": 0,
+        "hits_0.5": 0,
+        "hits_0.7": 0,
+        "metrics": null
+      },
+      "other365": {
+        "samples": 70,
+        "hits_0.5": 54,
+        "hits_0.7": 46,
+        "metrics": {
+          "samples": 70,
+          "parsed": 70,
+          "parse_rate": 1.0,
+          "mean_iou": 0.6791622726800773,
+          "acc_0.5": 0.7714285714285715,
+          "acc_0.7": 0.6571428571428571
+        }
+      },
+      "metadata": {
+        "path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/V/normal/summary.json",
+        "data": {
+          "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+          "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/V/main/checkpoint-600",
+          "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+          "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+          "min_pixels": 200704,
+          "max_pixels": 602112,
+          "max_new_tokens": 128,
+          "limit": 0,
+          "prompt_style": "manifest_conversations",
+          "prompt": "manifest_conversations",
+          "tf32": false,
+          "allow_tf32": false,
+          "matmul_precision": "highest",
+          "torch_float32_matmul_precision": "highest",
+          "manifest_samples": 70,
+          "target_source": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+          "target_source_kind": "target_manifest_bbox",
+          "samples": 70,
+          "parsed": 70,
+          "parse_failures": 0,
+          "parse_rate": 1.0,
+          "hits": 54,
+          "mean_iou": 0.6791622042655945,
+          "acc_0.5": 0.7714285850524902,
+          "acc_0.7": 0.6571428775787354,
+          "l1_coordinate_error": 0.03530430421233177,
+          "total_generated_tokens": 1605,
+          "mean_generated_tokens": 22.928571428571427,
+          "total_generation_seconds": 59.031801268458366,
+          "mean_generation_seconds": 0.8433114466922623,
+          "median_generation_seconds": 0.8022612556815147,
+          "generation_cap_hits": 0,
+          "gpu_peak_allocated_bytes": 18238204416,
+          "gpu_peak_reserved_bytes": 18469617664,
+          "predictions": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/evaluation/V/normal/predictions.jsonl"
+        }
+      },
+      "run_config": {
+        "model": "/root/rematch_models/Qwen3-VL-8B-Instruct",
+        "adapter": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/V/main/checkpoint-600",
+        "manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/normal.json",
+        "target_manifest": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json",
+        "data_root": "/root/autodl-tmp/rematch_20260922/data/city/train",
+        "min_pixels": 200704,
+        "max_pixels": 602112,
+        "max_new_tokens": 128,
+        "limit": 0,
+        "prompt_style": "manifest_conversations",
+        "prompt": "manifest_conversations",
+        "tf32": false,
+        "allow_tf32": false,
+        "matmul_precision": "highest",
+        "torch_float32_matmul_precision": "highest"
+      }
+    }
+  },
+  "ranking": [
+    "C0",
+    "A",
+    "V",
+    "B"
+  ],
+  "ranking_order": [
+    "ACC@0.5",
+    "mIoU",
+    "ACC@0.7"
+  ],
+  "gates_vs_C0": {
+    "A": {
+      "status": "complete",
+      "rescued": 0,
+      "harmed": 0,
+      "net_hits": 0,
+      "rescued_image_groups": 0,
+      "candidate": false,
+      "interpretation": "paired descriptive comparison; not causal modality attribution"
+    },
+    "B": {
+      "status": "complete",
+      "rescued": 0,
+      "harmed": 3,
+      "net_hits": -3,
+      "rescued_image_groups": 0,
+      "candidate": false,
+      "interpretation": "paired descriptive comparison; not causal modality attribution"
+    },
+    "V": {
+      "status": "complete",
+      "rescued": 0,
+      "harmed": 3,
+      "net_hits": -3,
+      "rescued_image_groups": 0,
+      "candidate": false,
+      "interpretation": "paired descriptive comparison; not causal modality attribution"
+    }
+  },
+  "pairs": {
+    "C0_to_A": {
+      "left": "C0",
+      "right": "A",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": -0.005200468156373317,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.011082898613096573,
+          -0.0009682568024698452
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.010311733338405318,
+          -0.0008830247350370752
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "C0_to_B": {
+      "left": "C0",
+      "right": "B",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "delta": {
+        "mean_iou": -0.04040755634838056,
+        "acc_0.5": -0.042857142857142816,
+        "acc_0.7": -0.042857142857142816
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux",
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 3,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.09149095379561273,
+          -7.711824425311035e-05
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.0941698770254737,
+          -0.00030080887238066246
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:045",
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "C0_to_V": {
+      "left": "C0",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": -0.03811871087864105,
+        "acc_0.5": -0.042857142857142816,
+        "acc_0.7": -0.02857142857142858
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux",
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 3,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.08956253884449866,
+          0.0020161882905926523
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.08695652173913038,
+          0.028169014084507005
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.09243943506859942,
+          0.0019916306923950695
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.09090909090909094,
+          0.025000000000000022
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:045",
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "A_to_B": {
+      "left": "A",
+      "right": "B",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "delta": {
+        "mean_iou": -0.03520708819200724,
+        "acc_0.5": -0.042857142857142816,
+        "acc_0.7": -0.042857142857142816
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux",
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 3,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.08623043796566732,
+          0.004746336971168114
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.08851105932092447,
+          0.00428101209296116
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:045",
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "A_to_V": {
+      "left": "A",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": -0.03291824272226773,
+        "acc_0.5": -0.042857142857142816,
+        "acc_0.7": -0.02857142857142858
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux",
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 3,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.08344597011602223,
+          0.006742947834816296
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.09859154929577463,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.08695652173913038,
+          0.028169014084507005
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.08678940944363084,
+          0.006653683465046595
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.10127040909924782,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.09090909090909094,
+          0.025000000000000022
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:045",
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "B_to_V": {
+      "left": "B",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": 0.002288845469739509,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.014285714285714235
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.0014387269621053578,
+          0.006822507045668376
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.044117647058823595
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.0007077436096329714,
+          0.00503808019885301
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.045454545454545525
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "C0_ir_missing_to_normal": {
+      "left": "C0:ir_missing",
+      "right": "C0",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7150655841871891,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": 0.0022153993715292586,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.0044013785814015155,
+          0.009192981936313193
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.042857142857142816,
+          0.04225352112676062
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.00488916814122643,
+          0.009016744456428645
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.04054054054054057,
+          0.04054054054054057
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "C0_depth_missing_to_normal": {
+      "left": "C0:depth_missing",
+      "right": "C0",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.713641785752218,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": 0.0036391978065003494,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          0.0011436773568295284,
+          0.006499755673162358
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          0.0011379773275239369,
+          0.0069214542101167795
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "C0_both_missing_to_normal": {
+      "left": "C0:both_missing",
+      "right": "C0",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7113116184567414,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7172809835587184,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": 0.005969365101976987,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.0012351309965662385,
+          0.013345488849128194
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.042857142857142816,
+          0.04225352112676062
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.0015681410484797514,
+          0.013255704278091768
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.04054054054054057,
+          0.04054054054054057
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "A_ir_missing_to_normal": {
+      "left": "A:ir_missing",
+      "right": "A",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7132233986280314,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6714285714285714
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": -0.001142883225686342,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.014285714285714346
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.006816545147354536,
+          0.003940069957571721
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.044117647058823595
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.00718627886863444,
+          0.004519663131884919
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.04546760710553802
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "A_depth_missing_to_normal": {
+      "left": "A:depth_missing",
+      "right": "A",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6955322408355425,
+        "acc_0.5": 0.8,
+        "acc_0.7": 0.6714285714285714
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": 0.016548274566802523,
+        "acc_0.5": 0.014285714285714235,
+        "acc_0.7": 0.014285714285714346
+      },
+      "wrong_to_right": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux"
+        ],
+        "image_count": 1,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ]
+        ]
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          0.0011494380380815572,
+          0.0462372694677183
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.044117647058823484
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.044117647058823595
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          0.0011655800142751915,
+          0.05022328598938627
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.048790483806477304
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.048790483806477304
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [
+          "robo:045"
+        ],
+        "harmed_scenes": []
+      }
+    },
+    "A_both_missing_to_normal": {
+      "left": "A:both_missing",
+      "right": "A",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6967849485914952,
+        "acc_0.5": 0.8,
+        "acc_0.7": 0.6571428571428571
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7120805154023451,
+        "acc_0.5": 0.8142857142857143,
+        "acc_0.7": 0.6857142857142857
+      },
+      "delta": {
+        "mean_iou": 0.01529556681084987,
+        "acc_0.5": 0.014285714285714235,
+        "acc_0.7": 0.02857142857142858
+      },
+      "wrong_to_right": {
+        "ids": [
+          "abv:diag:robo:0004596:diag_aux"
+        ],
+        "image_count": 1,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000508.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000509.png"
+          ]
+        ]
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.0030470906641467815,
+          0.04701938748936339
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.044117647058823484
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.07246376811594202
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.0030854754924658106,
+          0.049970576424239625
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.048790483806477304
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.07352941176470584
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [
+          "robo:045"
+        ],
+        "harmed_scenes": []
+      }
+    },
+    "B_ir_missing_to_normal": {
+      "left": "B:ir_missing",
+      "right": "B",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6770389622776716,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "delta": {
+        "mean_iou": -0.00016553506733374412,
+        "acc_0.5": 0.0,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.004248448943512778,
+          0.003870080702184732
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.042857142857142816,
+          0.04225352112676062
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.004403604261328675,
+          0.0038506549407163284
+        ],
+        "acc_0.5_delta_95ci": [
+          0.0,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.04054054054054057,
+          0.04054054054054057
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": []
+      }
+    },
+    "B_depth_missing_to_normal": {
+      "left": "B:depth_missing",
+      "right": "B",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7043361618139085,
+        "acc_0.5": 0.8,
+        "acc_0.7": 0.6714285714285714
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "delta": {
+        "mean_iou": -0.027462734603570627,
+        "acc_0.5": -0.02857142857142858,
+        "acc_0.7": -0.02857142857142847
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 2,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.06762964910814813,
+          2.9160335797171782e-05
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07246376811594202,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.07246376811594202,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.07013495828631144,
+          -3.232176298837717e-05
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07462686567164178,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.07462686567164178,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "B_both_missing_to_normal": {
+      "left": "B:both_missing",
+      "right": "B",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.7044300162233209,
+        "acc_0.5": 0.8,
+        "acc_0.7": 0.6714285714285714
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6768734272103378,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6428571428571429
+      },
+      "delta": {
+        "mean_iou": -0.02755658901298308,
+        "acc_0.5": -0.02857142857142858,
+        "acc_0.7": -0.02857142857142847
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0007227:diag_aux",
+          "abv:diag:robo:0007353:diag_aux"
+        ],
+        "image_count": 2,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000536.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000537.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.06847756127750924,
+          0.0010042467379399109
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07246376811594202,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.08695652173913049,
+          0.028169014084507005
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.07085087974759274,
+          0.0008939653398346834
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07462686567164178,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.08823529411764708,
+          0.02666666666666662
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:072",
+          "robo:073"
+        ]
+      }
+    },
+    "V_ir_missing_to_normal": {
+      "left": "V:ir_missing",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6841884847093314,
+        "acc_0.5": 0.7857142857142857,
+        "acc_0.7": 0.6428571428571429
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": -0.005026212029254018,
+        "acc_0.5": -0.014285714285714235,
+        "acc_0.7": 0.014285714285714235
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:rgbt_m3fd_train_000698:diag_ir"
+        ],
+        "image_count": 1,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000450.png",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000451.png",
+            ""
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.0231477492303011,
+          0.0074024112733242844
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.044117647058823484,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.044117647058823595
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.022649621934043313,
+          0.007361396558705387
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.044134108867427614,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          0.0,
+          0.045467607105538016
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "m3fd:038"
+        ]
+      }
+    },
+    "V_depth_missing_to_normal": {
+      "left": "V:depth_missing",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6939711862216628,
+        "acc_0.5": 0.7857142857142857,
+        "acc_0.7": 0.6714285714285714
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": -0.014808913541585422,
+        "acc_0.5": -0.014285714285714235,
+        "acc_0.7": -0.014285714285714235
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:robo:0007227:diag_aux"
+        ],
+        "image_count": 1,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.043588748075538634,
+          0.0004471586740758641
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.044117647058823484,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.044117647058823595,
+          0.0
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.047006863969476245,
+          0.00039780905581060413
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.048387096774193505,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.048387096774193505,
+          0.0
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "robo:072"
+        ]
+      }
+    },
+    "V_both_missing_to_normal": {
+      "left": "V:both_missing",
+      "right": "V",
+      "samples": 70,
+      "left_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6992256032358435,
+        "acc_0.5": 0.8,
+        "acc_0.7": 0.6571428571428571
+      },
+      "right_metrics": {
+        "samples": 70,
+        "parsed": 70,
+        "parse_rate": 1.0,
+        "mean_iou": 0.6791622726800773,
+        "acc_0.5": 0.7714285714285715,
+        "acc_0.7": 0.6571428571428571
+      },
+      "delta": {
+        "mean_iou": -0.020063330555766146,
+        "acc_0.5": -0.02857142857142858,
+        "acc_0.7": 0.0
+      },
+      "wrong_to_right": {
+        "ids": [],
+        "image_count": 0,
+        "image_groups": []
+      },
+      "right_to_wrong": {
+        "ids": [
+          "abv:diag:rgbt_m3fd_train_000698:diag_ir",
+          "abv:diag:robo:0007227:diag_aux"
+        ],
+        "image_count": 2,
+        "image_groups": [
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000450.png",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000451.png",
+            ""
+          ],
+          [
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000534.png",
+            "",
+            "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/assets/asset_000535.png"
+          ]
+        ]
+      },
+      "image_group_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "image_groups": 67,
+        "mean_iou_delta_95ci": [
+          -0.055308904569756505,
+          0.0040789997318590385
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07246376811594202,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.042857142857142816,
+          0.042857142857142816
+        ]
+      },
+      "scene_cluster_bootstrap": {
+        "replicates": 10000,
+        "seed": 2026,
+        "mean_iou_delta_95ci": [
+          -0.055989351434856637,
+          0.0041269230753402586
+        ],
+        "acc_0.5_delta_95ci": [
+          -0.07142857142857151,
+          0.0
+        ],
+        "acc_0.7_delta_95ci": [
+          -0.04477611940298498,
+          0.041095890410958846
+        ],
+        "scene_groups": 46
+      },
+      "scene_flips": {
+        "rescued_scenes": [],
+        "harmed_scenes": [
+          "m3fd:038",
+          "robo:072"
+        ]
+      }
+    }
+  },
+  "modal_utility": {
+    "C0:ir_missing": {
+      "status": "complete",
+      "arm": "C0",
+      "condition": "ir_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 25,
+          "full_input_hits": 25,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "C0:depth_missing": {
+      "status": "complete",
+      "arm": "C0",
+      "condition": "depth_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 25,
+          "full_input_hits": 25,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "C0:both_missing": {
+      "status": "complete",
+      "arm": "C0",
+      "condition": "both_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 25,
+          "full_input_hits": 25,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "A:ir_missing": {
+      "status": "complete",
+      "arm": "A",
+      "condition": "ir_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 25,
+          "full_input_hits": 25,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "A:depth_missing": {
+      "status": "complete",
+      "arm": "A",
+      "condition": "depth_missing",
+      "samples": 70,
+      "rescued": 1,
+      "harmed": 0,
+      "net": 1,
+      "rescued_ids": [
+        "abv:diag:robo:0004596:diag_aux"
+      ],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 24,
+          "full_input_hits": 25,
+          "rescued_ids": [
+            "abv:diag:robo:0004596:diag_aux"
+          ],
+          "harmed_ids": [],
+          "rescued": 1,
+          "harmed": 0,
+          "net": 1
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "A:both_missing": {
+      "status": "complete",
+      "arm": "A",
+      "condition": "both_missing",
+      "samples": 70,
+      "rescued": 1,
+      "harmed": 0,
+      "net": 1,
+      "rescued_ids": [
+        "abv:diag:robo:0004596:diag_aux"
+      ],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 24,
+          "full_input_hits": 25,
+          "rescued_ids": [
+            "abv:diag:robo:0004596:diag_aux"
+          ],
+          "harmed_ids": [],
+          "rescued": 1,
+          "harmed": 0,
+          "net": 1
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "B:ir_missing": {
+      "status": "complete",
+      "arm": "B",
+      "condition": "ir_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 0,
+      "net": 0,
+      "rescued_ids": [],
+      "harmed_ids": [],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 22,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "B:depth_missing": {
+      "status": "complete",
+      "arm": "B",
+      "condition": "depth_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 2,
+      "net": -2,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:robo:0007227:diag_aux",
+        "abv:diag:robo:0007353:diag_aux"
+      ],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 24,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:robo:0007227:diag_aux",
+            "abv:diag:robo:0007353:diag_aux"
+          ],
+          "rescued": 0,
+          "harmed": 2,
+          "net": -2
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "B:both_missing": {
+      "status": "complete",
+      "arm": "B",
+      "condition": "both_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 2,
+      "net": -2,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:robo:0007227:diag_aux",
+        "abv:diag:robo:0007353:diag_aux"
+      ],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 24,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:robo:0007227:diag_aux",
+            "abv:diag:robo:0007353:diag_aux"
+          ],
+          "rescued": 0,
+          "harmed": 2,
+          "net": -2
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "V:ir_missing": {
+      "status": "complete",
+      "arm": "V",
+      "condition": "ir_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 1,
+      "net": -1,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:rgbt_m3fd_train_000698:diag_ir"
+      ],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 27,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:rgbt_m3fd_train_000698:diag_ir"
+          ],
+          "rescued": 0,
+          "harmed": 1,
+          "net": -1
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 22,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "V:depth_missing": {
+      "status": "complete",
+      "arm": "V",
+      "condition": "depth_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 1,
+      "net": -1,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:robo:0007227:diag_aux"
+      ],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 26,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [],
+          "rescued": 0,
+          "harmed": 0,
+          "net": 0
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 23,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:robo:0007227:diag_aux"
+          ],
+          "rescued": 0,
+          "harmed": 1,
+          "net": -1
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    },
+    "V:both_missing": {
+      "status": "complete",
+      "arm": "V",
+      "condition": "both_missing",
+      "samples": 70,
+      "rescued": 0,
+      "harmed": 2,
+      "net": -2,
+      "rescued_ids": [],
+      "harmed_ids": [
+        "abv:diag:rgbt_m3fd_train_000698:diag_ir",
+        "abv:diag:robo:0007227:diag_aux"
+      ],
+      "class_slices": {
+        "depth": {
+          "samples": 6,
+          "status": "insufficient_n_no_class_conclusion"
+        },
+        "ir": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 27,
+          "full_input_hits": 26,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:rgbt_m3fd_train_000698:diag_ir"
+          ],
+          "rescued": 0,
+          "harmed": 1,
+          "net": -1
+        },
+        "rgb_sufficient": {
+          "samples": 32,
+          "status": "descriptive_only",
+          "missing_input_hits": 23,
+          "full_input_hits": 22,
+          "rescued_ids": [],
+          "harmed_ids": [
+            "abv:diag:robo:0007227:diag_aux"
+          ],
+          "rescued": 0,
+          "harmed": 1,
+          "net": -1
+        }
+      },
+      "interpretation": "same-checkpoint full-input minus missing-modality intervention"
+    }
+  },
+  "modal_utility_delta_vs_A": {
+    "B:ir_missing": {
+      "net_delta": 0,
+      "rescued_delta": 0,
+      "harmed_delta": 0,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    },
+    "B:depth_missing": {
+      "net_delta": -3,
+      "rescued_delta": -1,
+      "harmed_delta": 2,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    },
+    "B:both_missing": {
+      "net_delta": -3,
+      "rescued_delta": -1,
+      "harmed_delta": 2,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    },
+    "V:ir_missing": {
+      "net_delta": -1,
+      "rescued_delta": 0,
+      "harmed_delta": 1,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    },
+    "V:depth_missing": {
+      "net_delta": -2,
+      "rescued_delta": -1,
+      "harmed_delta": 1,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    },
+    "V:both_missing": {
+      "net_delta": -3,
+      "rescued_delta": -1,
+      "harmed_delta": 2,
+      "interpretation": "descriptive difference in same-checkpoint modality input effect"
+    }
+  },
+  "class_slices": {
+    "depth": {
+      "samples": 6,
+      "interpretation": "insufficient_n_no_class_conclusion",
+      "runs": {
+        "C0": null,
+        "A": null,
+        "B": null,
+        "V": null
+      }
+    },
+    "ir": {
+      "samples": 32,
+      "interpretation": "descriptive_only",
+      "runs": {
+        "C0": {
+          "samples": 32,
+          "hits_0.5": 26,
+          "hits_0.7": 17,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6796612885654626,
+            "acc_0.5": 0.8125,
+            "acc_0.7": 0.53125
+          }
+        },
+        "A": {
+          "samples": 32,
+          "hits_0.5": 26,
+          "hits_0.7": 17,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6719002437454337,
+            "acc_0.5": 0.8125,
+            "acc_0.7": 0.53125
+          }
+        },
+        "B": {
+          "samples": 32,
+          "hits_0.5": 26,
+          "hits_0.7": 17,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6757698040679312,
+            "acc_0.5": 0.8125,
+            "acc_0.7": 0.53125
+          }
+        },
+        "V": {
+          "samples": 32,
+          "hits_0.5": 26,
+          "hits_0.7": 18,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6807058660229498,
+            "acc_0.5": 0.8125,
+            "acc_0.7": 0.5625
+          }
+        }
+      }
+    },
+    "rgb_sufficient": {
+      "samples": 32,
+      "interpretation": "descriptive_only",
+      "runs": {
+        "C0": {
+          "samples": 32,
+          "hits_0.5": 25,
+          "hits_0.7": 25,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7231078507522131,
+            "acc_0.5": 0.78125,
+            "acc_0.7": 0.78125
+          }
+        },
+        "A": {
+          "samples": 32,
+          "hits_0.5": 25,
+          "hits_0.7": 25,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.7197012198535118,
+            "acc_0.5": 0.78125,
+            "acc_0.7": 0.78125
+          }
+        },
+        "B": {
+          "samples": 32,
+          "hits_0.5": 22,
+          "hits_0.7": 22,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.6394067246531773,
+            "acc_0.5": 0.6875,
+            "acc_0.7": 0.6875
+          }
+        },
+        "V": {
+          "samples": 32,
+          "hits_0.5": 22,
+          "hits_0.7": 22,
+          "metrics": {
+            "samples": 32,
+            "parsed": 32,
+            "parse_rate": 1.0,
+            "mean_iou": 0.639588834980708,
+            "acc_0.5": 0.6875,
+            "acc_0.7": 0.6875
+          }
+        }
+      }
+    }
+  },
+  "scene_clusters": 46,
+  "limitations": [
+    "Only complete single-file runs enter ranking, pairs, or gates.",
+    "Partial metrics use observed rows as preview denominator and are not comparable scores.",
+    "Known reuse 47/365 is a location-sequence partition, not certified scene independence.",
+    "Ability class slices below 16 samples receive no class-level conclusion; individual scene clusters are never screened by this threshold.",
+    "Prediction source is fully checked only when each run has a matching run_config.json and summary.json."
+  ],
+  "ground_truth_path": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/deployment_600_seed2026/manifests/diagnostics/gt_manifest.json"
+}

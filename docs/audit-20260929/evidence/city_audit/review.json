@@ -1,0 +1,15 @@
+[
+  {"id":"city_000012_022_00000090_001","reason":"same_object_bad_box","note":"RGB中三框聚在右侧灌木同一暗目标；B框比GT小且右移，目标细节暗，按框位置仅能判断边界偏差。"},
+  {"id":"city_000012_022_00000090_002","reason":"wrong_object","note":"GT/A框在画面中部灌木的小物体，B框跳到画面最左侧的另一丛灌木；相对GT明显换目标。"},
+  {"id":"city_000081_006","reason":"same_object_bad_box","note":"三框都围住远岸同一艘小船，B框的边缘位置略偏，IoU从0.594687降至0.482763。"},
+  {"id":"city_000190_005","reason":"unknown","note":"本地未找到原RGB，B的0.498298只是阈值边缘；无图不能判定是否换对象。"},
+  {"id":"city_001229_004","reason":"wrong_object","note":"A与GT围住较下方的右侧顶灯，B围住其上方另一盏顶灯；Query只说right side，两灯均位于右侧，存在指代歧义。"},
+  {"id":"city_001897_008","reason":"same_object_bad_box","note":"GT/A指向最左侧地面黄色小物体；B仍覆盖该物体，但框向右扩张并包含旁边地面。"},
+  {"id":"city_001897_013","reason":"same_object_bad_box","note":"三框仍在背景排最左侧玩具车，B框收窄偏左，未见换到另一辆车。"},
+  {"id":"city_001927_011","reason":"wrong_object","note":"GT/A位于人右侧背景排的一台底盘，B跳到人左侧另一台底盘；相对GT明显换对象。"},
+  {"id":"city_002022_004","reason":"wrong_object","note":"A框住上方顶灯，B改为下方对应GT的顶灯；B救回的是目标选择。"},
+  {"id":"city_002509_001","reason":"same_object_bad_box","note":"A/B仍框在左远处同一组红色垃圾桶位置，框范围小幅变化导致0.516591→0.493812；原图中相邻红桶增加指代歧义。"},
+  {"id":"city_hehe_224_000002_041_00000197_005","reason":"wrong_object","note":"A框在骑车人处，B框在左下角GT灰色垃圾桶，B救回目标对象。"},
+  {"id":"city_hehe_230_000002_043_00000061_013","reason":"wrong_object","note":"A框在候车牌附近，B框在GT所标的自行车旁人物；B救回目标对象。"},
+  {"id":"city_shuming_215_00000189_004","reason":"same_object_bad_box","note":"1000像素RGB预览显示GT/A围住椅子堆上方蓝色椅背，B只框其顶部窄条；同物但框高度过小。"}
+]

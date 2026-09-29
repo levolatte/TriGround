@@ -1,0 +1,503 @@
+{
+  "limit_seconds": 43200,
+  "spent_seconds": 23674.615233182907,
+  "stages": [
+    {
+      "name": "C_query_wording28",
+      "status": "complete",
+      "elapsed_seconds": 48.122304916381836,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_query_wording_20260928/logs/C_query_wording28.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_query_wording_20260928"
+    },
+    {
+      "name": "A_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.534935235977173,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "B_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.486905813217163,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/B_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "V_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.636271476745605,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/V_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "C0_env8",
+      "status": "complete",
+      "elapsed_seconds": 24.06738519668579,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/C0_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_env8",
+      "status": "complete",
+      "elapsed_seconds": 24.11944055557251,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "B_env8",
+      "status": "complete",
+      "elapsed_seconds": 24.11939239501953,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/B_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "V_env8",
+      "status": "complete",
+      "elapsed_seconds": 24.121448278427124,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/V_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_continuous_32",
+      "status": "complete",
+      "elapsed_seconds": 351.12569093704224,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_continuous_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_main_16",
+      "status": "complete",
+      "elapsed_seconds": 189.90861296653748,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_main_16.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_main_32",
+      "status": "complete",
+      "elapsed_seconds": 192.22571682929993,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_main_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_compare_resume",
+      "status": "failed",
+      "elapsed_seconds": 2.352722644805908,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_compare_resume.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_compare_resume",
+      "status": "failed",
+      "elapsed_seconds": 3.60697865486145,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600/logs/A_compare_resume.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600"
+    },
+    {
+      "name": "A_first_1",
+      "status": "complete",
+      "elapsed_seconds": 34.694823265075684,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/determinism_probe/logs/A_first_1.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/determinism_probe"
+    },
+    {
+      "name": "A_second_1",
+      "status": "complete",
+      "elapsed_seconds": 35.48661255836487,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/determinism_probe/logs/A_second_1.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/determinism_probe"
+    },
+    {
+      "name": "A_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.536768436431885,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.53611707687378,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_initial_init",
+      "status": "complete",
+      "elapsed_seconds": 9.538052797317505,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_initial_init.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_env8",
+      "status": "complete",
+      "elapsed_seconds": 23.821993589401245,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_env8",
+      "status": "complete",
+      "elapsed_seconds": 24.12191367149353,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_env8",
+      "status": "complete",
+      "elapsed_seconds": 23.97246217727661,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_env8",
+      "status": "complete",
+      "elapsed_seconds": 23.921953916549683,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_env8.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_continuous_32",
+      "status": "complete",
+      "elapsed_seconds": 362.28683614730835,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_continuous_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_main_16",
+      "status": "complete",
+      "elapsed_seconds": 193.63713788986206,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_main_16.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_main_32",
+      "status": "complete",
+      "elapsed_seconds": 193.42250323295593,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_main_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_compare_resume",
+      "status": "complete",
+      "elapsed_seconds": 3.738922595977783,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_compare_resume.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_continuous_32",
+      "status": "complete",
+      "elapsed_seconds": 330.53062748908997,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_continuous_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_main_16",
+      "status": "complete",
+      "elapsed_seconds": 182.39837074279785,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_main_16.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_main_32",
+      "status": "complete",
+      "elapsed_seconds": 173.45014238357544,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_main_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_compare_resume",
+      "status": "complete",
+      "elapsed_seconds": 4.19607949256897,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_compare_resume.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_continuous_32",
+      "status": "complete",
+      "elapsed_seconds": 333.8876392841339,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_continuous_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_main_16",
+      "status": "complete",
+      "elapsed_seconds": 183.98756313323975,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_main_16.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_main_32",
+      "status": "complete",
+      "elapsed_seconds": 175.8127510547638,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_main_32.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_compare_resume",
+      "status": "complete",
+      "elapsed_seconds": 3.980015754699707,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_compare_resume.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_main_final",
+      "status": "paused_by_user",
+      "elapsed_seconds": 1113.2567958831787,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_main_final.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic",
+      "reason": "User requested immediate pause for machine cloning. Verified latest complete A checkpoint is128; B/V32. Do not count as automatic retry."
+    },
+    {
+      "name": "A_main_final",
+      "status": "complete",
+      "elapsed_seconds": 5101.327272891998,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_main_final.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_main_final",
+      "status": "complete",
+      "elapsed_seconds": 5425.029520273209,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_main_final.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_main_final",
+      "status": "complete",
+      "elapsed_seconds": 5469.037646770477,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_main_final.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_city412",
+      "status": "complete",
+      "elapsed_seconds": 521.2228956222534,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_city412.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_diagnostic_normal",
+      "status": "complete",
+      "elapsed_seconds": 76.65204191207886,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_diagnostic_normal.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_diagnostic_ir_missing",
+      "status": "complete",
+      "elapsed_seconds": 77.59999299049377,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_diagnostic_ir_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_diagnostic_depth_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.25839519500732,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_diagnostic_depth_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "C0_diagnostic_both_missing",
+      "status": "complete",
+      "elapsed_seconds": 77.0434832572937,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/C0_diagnostic_both_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_city412",
+      "status": "complete",
+      "elapsed_seconds": 527.4767069816589,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_city412.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_diagnostic_normal",
+      "status": "complete",
+      "elapsed_seconds": 77.90287804603577,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_diagnostic_normal.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_diagnostic_ir_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.89525747299194,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_diagnostic_ir_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_diagnostic_depth_missing",
+      "status": "complete",
+      "elapsed_seconds": 78.12977170944214,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_diagnostic_depth_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "A_diagnostic_both_missing",
+      "status": "complete",
+      "elapsed_seconds": 77.12987661361694,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/A_diagnostic_both_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_city412",
+      "status": "complete",
+      "elapsed_seconds": 527.5206351280212,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_city412.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_diagnostic_normal",
+      "status": "complete",
+      "elapsed_seconds": 77.43890023231506,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_diagnostic_normal.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_diagnostic_ir_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.94570088386536,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_diagnostic_ir_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_diagnostic_depth_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.83680725097656,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_diagnostic_depth_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "B_diagnostic_both_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.53247427940369,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/B_diagnostic_both_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_city412",
+      "status": "complete",
+      "elapsed_seconds": 526.0424675941467,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_city412.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_diagnostic_normal",
+      "status": "complete",
+      "elapsed_seconds": 76.6896002292633,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_diagnostic_normal.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_diagnostic_ir_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.49008202552795,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_diagnostic_ir_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_diagnostic_depth_missing",
+      "status": "complete",
+      "elapsed_seconds": 76.7885229587555,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_diagnostic_depth_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "V_diagnostic_both_missing",
+      "status": "complete",
+      "elapsed_seconds": 77.85513353347778,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/V_diagnostic_both_missing.log",
+      "gpu": true,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "report_city412",
+      "status": "complete",
+      "elapsed_seconds": 9.23354172706604,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/report_city412.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "atlas_city412",
+      "status": "complete",
+      "elapsed_seconds": 9.85402512550354,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/atlas_city412.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "report_diagnostics",
+      "status": "complete",
+      "elapsed_seconds": 16.03767728805542,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/report_diagnostics.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    },
+    {
+      "name": "atlas_diagnostics",
+      "status": "complete",
+      "elapsed_seconds": 1.0549721717834473,
+      "log": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/logs/atlas_diagnostics.log",
+      "gpu": false,
+      "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic"
+    }
+  ]
+}

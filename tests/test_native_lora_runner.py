@@ -28,7 +28,14 @@ def test_native_launcher_keeps_bounded_training_contract():
     assert 'INIT_ADAPTER="${INIT_ADAPTER:-}"' in text
     assert 'SAVE_STEPS="${SAVE_STEPS:-}"' in text
     assert 'STOP_AFTER_STEP="${STOP_AFTER_STEP:-}"' in text
-    assert "autocast_adapter_dtype=False" in text
+    assert 'LORA_SCOPE="${LORA_SCOPE:-language}"' in text
+    assert 'VISUAL_LORA_LR="${VISUAL_LORA_LR:-2e-5}"' in text
+    assert 'INIT_ONLY="${INIT_ONLY:-0}"' in text
+    assert 'import native_lora_training as native_lora' in text
+    assert 'native_lora.initialize_lora(' in text
+    assert 'native_lora.optimizer_parameter_groups(' in text
+    assert 'native_lora.compare_optimizer_checkpoint(' in text
+    assert 'model.save_pretrained(str(output_dir), safe_serialization=True)' in text
     assert '"trainer_state.json", "optimizer.pt", "scheduler.pt"' in text
     assert "--optim adamw_torch_fused" in text
     assert "--adam_beta1 0.9" in text
@@ -39,6 +46,8 @@ def test_native_launcher_keeps_bounded_training_contract():
     assert "--warmup_steps 0" in text
     assert "--max_grad_norm 1.0" in text
     assert "--tf32 False" in text
+    assert "--full_determinism True" in text
+    assert '"full_determinism": True' in text
     assert "--logging_nan_inf_filter False" in text
     assert 'torch.set_float32_matmul_precision("highest")' in text
     assert "torch.backends.cuda.matmul.allow_tf32 = False" in text
@@ -152,93 +161,6 @@ def _inline_function(name: str, scope: dict):
     return scope[name]
 
 
-def test_initial_adapter_is_loaded_trainable_without_creating_a_new_lora(tmp_path):
-    called = []
-
-    class FakeTensor:
-        dtype = "bf16"
-
-        def __init__(self, value):
-            self.value = value
-
-        def to(self, *, dtype):
-            assert dtype == self.dtype
-            return self
-
-        def detach(self):
-            return self
-
-        def cpu(self):
-            return self
-
-    config = SimpleNamespace(
-        r=32, lora_alpha=64, lora_dropout=0.05, bias="none",
-        task_type="CAUSAL_LM", target_modules={"q_proj", "k_proj", "v_proj", "o_proj"},
-    )
-    params = [
-        (f"base_model.model.language_model.layers.0.self_attn.{target}.lora_A.default.weight",
-         SimpleNamespace(requires_grad=True))
-        for target in config.target_modules
-    ]
-    model = SimpleNamespace(
-        named_parameters=lambda: params,
-        print_trainable_parameters=lambda: None,
-    )
-
-    def load_adapter(base, path, **kwargs):
-        called.append((base, path, kwargs))
-        return model
-
-    peft = SimpleNamespace(
-        PeftConfig=SimpleNamespace(from_pretrained=lambda path, **kw: config),
-        PeftModel=SimpleNamespace(from_pretrained=load_adapter),
-        load_peft_weights=lambda path, **kw: {"lora_A.weight": FakeTensor(7)},
-        get_peft_model_state_dict=lambda loaded_model: {"lora_A.weight": FakeTensor(7)},
-    )
-    scope = dict(
-        init_adapter=str(tmp_path), Path=Path, peft=peft,
-        torch=SimpleNamespace(equal=lambda a, b: a.value == b.value),
-        original_get_peft_model=lambda *args, **kwargs: pytest.fail("new LoRA must not be created"),
-        targets=("q_proj", "k_proj", "v_proj", "o_proj"),
-    )
-    hook = _inline_function("audited_get_peft_model", scope)
-    base = object()
-    assert hook(base, config) is model
-    assert called == [(
-        base, str(tmp_path),
-        dict(is_trainable=True, autocast_adapter_dtype=False, local_files_only=True),
-    )]
-
-
-def test_resume_of_initialized_stage_recreates_lora_without_dtype_upcast():
-    calls = []
-    params = [
-        (f"base_model.model.language_model.layers.0.self_attn.{target}.lora_A.default.weight",
-         SimpleNamespace(requires_grad=True))
-        for target in ("q_proj", "k_proj", "v_proj", "o_proj")
-    ]
-    model = SimpleNamespace(
-        named_parameters=lambda: params,
-        print_trainable_parameters=lambda: None,
-    )
-
-    def make_lora(*args, **kwargs):
-        calls.append((args, kwargs))
-        return model
-
-    scope = dict(
-        init_adapter="",
-        resume_from_checkpoint="stage/checkpoint-500",
-        stage_init_adapter="m2/checkpoint-928",
-        original_get_peft_model=make_lora,
-        targets=("q_proj", "k_proj", "v_proj", "o_proj"),
-    )
-    hook = _inline_function("audited_get_peft_model", scope)
-    base, config = object(), object()
-    assert hook(base, config) is model
-    assert calls == [((base, config), {"autocast_adapter_dtype": False})]
-
-
 def test_resume_requires_optimizer_scheduler_and_rng_state(tmp_path):
     checkpoint = tmp_path / "checkpoint-500"
     checkpoint.mkdir()
@@ -257,18 +179,10 @@ def test_resume_requires_optimizer_scheduler_and_rng_state(tmp_path):
     assert called == [((), {"resume_from_checkpoint": str(checkpoint)})]
 
 
-def test_planned_pause_occurs_after_step_checkpoint_is_saved(tmp_path):
-    scope = dict(
-        transformers=SimpleNamespace(TrainerCallback=object),
-        targets=("q_proj", "k_proj", "v_proj", "o_proj"),
-        shutil=SimpleNamespace(disk_usage=lambda path: SimpleNamespace(free=5 * 1024**3)),
-        output_dir=tmp_path,
-        stop_after_step="500",
-    )
-    callback_class = _inline_function("FiniteTrainingCallback", scope)
-    callback = callback_class(SimpleNamespace(named_parameters=lambda: []))
-    control = SimpleNamespace(should_training_stop=False)
-    callback.on_save(None, SimpleNamespace(global_step=499), control)
-    assert not control.should_training_stop
-    callback.on_save(None, SimpleNamespace(global_step=500), control)
-    assert control.should_training_stop
+def test_invalid_lora_scope_is_rejected_before_python(tmp_path):
+    env = dict(os.environ, LORA_SCOPE="everything", QWEN_FINETUNE_DIR="unused",
+               DATA_ROOT="unused", MODEL_PATH="unused")
+    result = subprocess.run([BASH, _bash_path(SCRIPT)], env=env,
+                            capture_output=True, text=True)
+    assert result.returncode == 2
+    assert "LORA_SCOPE must be language or language_merger" in result.stderr

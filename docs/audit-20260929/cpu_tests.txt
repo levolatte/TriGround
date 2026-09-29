@@ -1,0 +1,4 @@
+Command: python -m pytest tests\test_compare_lora_resume.py tests\test_depth_relation_sampling.py tests\test_depth_relation_tasks.py tests\test_depth_review_revision.py tests\test_export_triground_abv.py tests\test_merge_triground_reviews.py tests\test_native_lora_runner.py tests\test_native_lora_training.py tests\test_prepare_review_repairs.py tests\test_prepare_triground_abv_data.py tests\test_prepare_triground_abv_shuffle.py tests\test_render_triground_abv_atlas.py tests\test_report_query_wording.py tests\test_report_triground_abv.py tests\test_run_triground_abv.py -q
+.............................................s.......................... [ 87%]
+..........                                                               [100%]
+81 passed, 1 skipped in 23.17s

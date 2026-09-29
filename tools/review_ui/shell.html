@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>A/B/V 候选审核</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><strong>A/B/V 候选审核</strong><span id="progress-text">载入中…</span></div>
+    <div class="top-actions">
+      <span id="save-status" role="status" aria-live="polite">正在载入</span>
+      <button id="export-csv" type="button" class="button export">导出 CSV</button>
+      <details class="more-menu"><summary class="button">更多</summary><div class="more-panel">
+        <button id="export-json" type="button">导出备份</button>
+        <button id="import-button" type="button">导入备份</button>
+        <input id="import-json" type="file" accept=".json,application/json" hidden>
+      </div></details>
+    </div>
+  </header>
+  <div id="feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+  <div class="workspace">
+    <aside class="sidebar" aria-label="题组导航">
+      <div class="filters">
+        <label class="sr-only" for="search">搜索题号或中英文 Query</label>
+        <input id="search" type="search" placeholder="搜索题号／中英文 Query">
+        <div class="filter-row">
+          <label class="sr-only" for="filter-category">类别</label><select id="filter-category"><option value="">全部类别</option></select>
+          <label class="sr-only" for="filter-status">状态</label><select id="filter-status"><option value="">全部状态</option><option value="pending">待看</option><option value="approve">已保留</option><option value="reject">含剔除</option></select>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div id="progress-fill"></div></div>
+        <div class="queue-head"><span id="list-count">0 组</span><button id="next-incomplete" type="button">下一道待看 →</button></div>
+      </div>
+      <nav id="bundle-list" class="bundle-list" aria-label="题组列表"></nav>
+    </aside>
+    <main class="review-main" id="main-content">
+      <div class="review-header">
+        <div><div class="review-location" id="bundle-position">—</div><h1 id="bundle-title">请选择题组</h1><p id="bundle-meta"></p></div>
+        <div class="nav-buttons"><button id="previous-task" type="button" class="button">← 上一题</button><button id="next-task" type="button" class="button">下一题 →</button></div>
+      </div>
+      <div id="task-tabs" class="task-tabs" role="tablist" aria-label="本组 Query"></div>
+      <section class="query-card" aria-label="当前 Query">
+        <div class="query-row"><span class="query-label">当前题目</span><p id="proposed-query-zh" lang="zh-CN"></p></div>
+        <div class="query-row"><span class="query-label">对应英文</span><p id="proposed-query" lang="en"></p></div>
+      </section>
+      <section id="repair-card" class="repair-card" aria-label="本次修正" hidden>
+        <p><strong>上次反馈：</strong><span id="repair-feedback"></span></p>
+        <p><strong>本次修正：</strong><span id="repair-change"></span> <button id="previous-box" type="button" class="button" hidden>查看原框</button></p>
+      </section>
+      <div class="media-toolbar"><strong>核对图片与目标框</strong><label class="switch"><input id="show-box" type="checkbox" checked>显示目标框</label><span>点击图片放大</span></div>
+      <section id="media-area" class="media-area" aria-label="审核图片"></section>
+      <details id="optional-details" class="optional-details"><summary>可选：模态判断、英文修订与备注</summary>
+        <div class="detail-content">
+          <div class="optional-fields">
+            <label>辅助模态是否有帮助<select id="modality-judgment"><option value="">未判断</option><option value="helpful">确有帮助</option><option value="rgb_sufficient">RGB 已足够</option><option value="unsure">不确定</option></select></label>
+            <label>修订英文 Query<textarea id="approved-query" rows="2" placeholder="留空则使用当前英文原文"></textarea></label>
+            <label>备注<textarea id="note" rows="2" placeholder="可记下剔除原因或目视证据"></textarea></label>
+          </div>
+          <details class="source-info"><summary>查看原数据标注（仅供溯源）</summary><p>审核上方当前题目是否与红框相符。以下是这个框在原数据里的描述，不是另一道待审题。</p><p><strong>原数据描述（英文）</strong><span id="original-query"></span></p><p><strong>原数据描述（中文）</strong><span id="original-query-zh"></span></p><p id="source-meta"></p></details>
+        </div>
+      </details>
+    </main>
+  </div>
+  <div class="decision-bar" role="group" aria-label="审核决定">
+    <span id="decision-state" class="decision-state">待看</span>
+    <button id="approve" type="button" class="decision-button approve">保留 <kbd>1</kbd></button>
+    <button id="reject" type="button" class="decision-button reject">剔除 <kbd>2</kbd></button>
+    <button id="skip" type="button" class="decision-button skip">跳过 <kbd>3</kbd></button>
+    <button id="clear-decision" type="button" class="clear-decision" hidden>撤回决定</button>
+  </div>
+  <dialog id="image-dialog" aria-label="放大查看图片"><div class="dialog-head"><strong id="dialog-title">放大查看</strong><div class="zoom-buttons"><button type="button" class="button" data-zoom="fit">适应</button><button type="button" class="button" data-zoom="100">100%</button><button type="button" class="button" data-zoom="200">200%</button><button id="close-dialog" type="button" class="button">关闭 ×</button></div></div><div id="zoom-stage" class="zoom-stage"><img id="dialog-image" alt="放大查看的图片"></div></dialog>
+  <script id="review-data" type="application/json">__REVIEW_DATA__</script>
+  <script src="review.js" defer></script>
+</body>
+</html>
