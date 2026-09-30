@@ -1,0 +1,1634 @@
+{
+  "gt": "/root/autodl-tmp/rematch_20260922/results/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/visual_agent/capability_rebuild_20260929/data/city412.jsonl",
+  "denominator": 412,
+  "image_groups": 78,
+  "split_counts": {
+    "all": 412,
+    "known_reused": 47,
+    "other_not_independent_test": 365
+  },
+  "runs": {
+    "C": {
+      "all": {
+        "n": 412,
+        "hits_0.5": 292,
+        "acc_0.5": 0.7087378640776699,
+        "hits_0.7": 224,
+        "acc_0.7": 0.5436893203883495,
+        "mean_iou": 0.6136284094129535,
+        "valid_final_bbox": 412,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 412
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 412
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 412,
+            "hits_0.5": 292,
+            "acc_0.5": 0.7087378640776699,
+            "mean_iou": 0.6136284094129535
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 412
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      },
+      "known_reused": {
+        "n": 47,
+        "hits_0.5": 28,
+        "acc_0.5": 0.5957446808510638,
+        "hits_0.7": 22,
+        "acc_0.7": 0.46808510638297873,
+        "mean_iou": 0.5388847835973744,
+        "valid_final_bbox": 47,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 47
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 47
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 47,
+            "hits_0.5": 28,
+            "acc_0.5": 0.5957446808510638,
+            "mean_iou": 0.5388847835973744
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 47
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      },
+      "other_not_independent_test": {
+        "n": 365,
+        "hits_0.5": 264,
+        "acc_0.5": 0.7232876712328767,
+        "hits_0.7": 202,
+        "acc_0.7": 0.5534246575342465,
+        "mean_iou": 0.6232529310933157,
+        "valid_final_bbox": 365,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 365
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 365
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 365,
+            "hits_0.5": 264,
+            "acc_0.5": 0.7232876712328767,
+            "mean_iou": 0.6232529310933157
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 365
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      }
+    },
+    "untrained": {
+      "all": {
+        "n": 412,
+        "hits_0.5": 217,
+        "acc_0.5": 0.5266990291262136,
+        "hits_0.7": 172,
+        "acc_0.7": 0.4174757281553398,
+        "mean_iou": 0.4680909603470956,
+        "valid_final_bbox": 394,
+        "invalid_final_bbox": 18,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "FINISHED": 394,
+          "INVALID_MODEL_OUTPUT": 3,
+          "INVALID_FINAL_ACTION": 8,
+          "ERROR": 7
+        },
+        "tool_status_counts": {
+          "OK": 1184,
+          "UNKNOWN": 9,
+          "ERROR": 48,
+          "EMPTY": 5
+        },
+        "finish_source_counts": {
+          "candidate": 392,
+          "no_legal_final": 18,
+          "predicted_bbox": 2
+        },
+        "finish_source_scores": {
+          "candidate": {
+            "n": 392,
+            "hits_0.5": 217,
+            "acc_0.5": 0.5535714285714286,
+            "mean_iou": 0.4918003531246243
+          },
+          "no_legal_final": {
+            "n": 18,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.0
+          },
+          "predicted_bbox": {
+            "n": 2,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.03386861907531814
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 339,
+            "hits_0.5": 217,
+            "acc_0.5": 0.640117994100295,
+            "mean_iou": 0.5505618871531875
+          },
+          "uncovered": {
+            "n": 73,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.08510953312428472
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 1,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 1,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 412,
+        "cost_total": {
+          "model_calls": 1246,
+          "input_tokens": 4996744,
+          "input_text_tokens": 2619694,
+          "visual_tokens": 2377050,
+          "output_tokens": 82807,
+          "tool_calls": 829,
+          "search_calls": 87,
+          "model_seconds": 3143.1687261536717,
+          "tool_seconds": 437.6375766545534,
+          "preprocess_seconds": 381.6683331206441,
+          "preparation_seconds": 44.974649138748646,
+          "elapsed_seconds": 4019.9771076887846,
+          "depth_cache_hits": 8,
+          "depth_generated": 41,
+          "dino_calls": 52,
+          "sam_loads": 4,
+          "dino_loads": 4,
+          "depth_cached_seconds": 0.00011026859283447266,
+          "depth_generated_seconds": 57.946101151406765,
+          "loads_seconds": 2.9359740763902664,
+          "invalid_actions": 23,
+          "legal_finish": 394
+        },
+        "cost_mean_per_query": {
+          "model_calls": 3.0242718446601944,
+          "input_tokens": 12128.019417475729,
+          "input_text_tokens": 6358.480582524272,
+          "visual_tokens": 5769.538834951456,
+          "output_tokens": 200.9878640776699,
+          "tool_calls": 2.012135922330097,
+          "search_calls": 0.2111650485436893,
+          "model_seconds": 7.629050306198232,
+          "tool_seconds": 1.062227127802314,
+          "preprocess_seconds": 0.9263794493219517,
+          "preparation_seconds": 0.10916176975424428,
+          "elapsed_seconds": 9.757225989535884,
+          "depth_cache_hits": 0.019417475728155338,
+          "depth_generated": 0.09951456310679611,
+          "dino_calls": 0.1262135922330097,
+          "sam_loads": 0.009708737864077669,
+          "dino_loads": 0.009708737864077669,
+          "depth_cached_seconds": 2.6764221561765205e-07,
+          "depth_generated_seconds": 0.14064587658108438,
+          "loads_seconds": 0.007126150670850161,
+          "invalid_actions": 0.055825242718446605,
+          "legal_finish": 0.9563106796116505
+        },
+        "peak_memory_bytes": 19467604480,
+        "initial_hits_0.5": 292,
+        "initial_coverage_hits_0.5": 339,
+        "initial_uncovered": 73,
+        "final_coverage_hits_0.5": 340,
+        "final_uncovered": 72,
+        "newly_covered_by_search": 1,
+        "covered_but_final_wrong": 123
+      },
+      "known_reused": {
+        "n": 47,
+        "hits_0.5": 20,
+        "acc_0.5": 0.425531914893617,
+        "hits_0.7": 16,
+        "acc_0.7": 0.3404255319148936,
+        "mean_iou": 0.4059742885163201,
+        "valid_final_bbox": 47,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "FINISHED": 47
+        },
+        "tool_status_counts": {
+          "OK": 150,
+          "ERROR": 1,
+          "UNKNOWN": 3
+        },
+        "finish_source_counts": {
+          "candidate": 47
+        },
+        "finish_source_scores": {
+          "candidate": {
+            "n": 47,
+            "hits_0.5": 20,
+            "acc_0.5": 0.425531914893617,
+            "mean_iou": 0.4059742885163201
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 42,
+            "hits_0.5": 20,
+            "acc_0.5": 0.47619047619047616,
+            "mean_iou": 0.450055705233921
+          },
+          "uncovered": {
+            "n": 5,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.035690388088472615
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 47,
+        "cost_total": {
+          "model_calls": 154,
+          "input_tokens": 626624,
+          "input_text_tokens": 330280,
+          "visual_tokens": 296344,
+          "output_tokens": 10033,
+          "tool_calls": 107,
+          "search_calls": 4,
+          "model_seconds": 383.7282134667039,
+          "tool_seconds": 49.43993749469519,
+          "preprocess_seconds": 48.696195274591446,
+          "preparation_seconds": 5.18875140696764,
+          "elapsed_seconds": 488.5465194582939,
+          "depth_cache_hits": 2,
+          "depth_generated": 9,
+          "dino_calls": 4,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 2.2448599338531494e-05,
+          "depth_generated_seconds": 12.724169462919235,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 47
+        },
+        "cost_mean_per_query": {
+          "model_calls": 3.276595744680851,
+          "input_tokens": 13332.425531914894,
+          "input_text_tokens": 7027.234042553191,
+          "visual_tokens": 6305.191489361702,
+          "output_tokens": 213.46808510638297,
+          "tool_calls": 2.276595744680851,
+          "search_calls": 0.0851063829787234,
+          "model_seconds": 8.164430073759657,
+          "tool_seconds": 1.0519135637169188,
+          "preprocess_seconds": 1.0360892611615202,
+          "preparation_seconds": 0.11039896610569447,
+          "elapsed_seconds": 10.394606796984977,
+          "depth_cache_hits": 0.0425531914893617,
+          "depth_generated": 0.19148936170212766,
+          "dino_calls": 0.0851063829787234,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 4.776297731602445e-07,
+          "depth_generated_seconds": 0.27072700984934545,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 19175188992,
+        "initial_hits_0.5": 28,
+        "initial_coverage_hits_0.5": 42,
+        "initial_uncovered": 5,
+        "final_coverage_hits_0.5": 42,
+        "final_uncovered": 5,
+        "newly_covered_by_search": 0,
+        "covered_but_final_wrong": 22
+      },
+      "other_not_independent_test": {
+        "n": 365,
+        "hits_0.5": 197,
+        "acc_0.5": 0.5397260273972603,
+        "hits_0.7": 156,
+        "acc_0.7": 0.4273972602739726,
+        "mean_iou": 0.4760895454869488,
+        "valid_final_bbox": 347,
+        "invalid_final_bbox": 18,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "FINISHED": 347,
+          "INVALID_MODEL_OUTPUT": 3,
+          "INVALID_FINAL_ACTION": 8,
+          "ERROR": 7
+        },
+        "tool_status_counts": {
+          "OK": 1034,
+          "UNKNOWN": 6,
+          "ERROR": 47,
+          "EMPTY": 5
+        },
+        "finish_source_counts": {
+          "candidate": 345,
+          "no_legal_final": 18,
+          "predicted_bbox": 2
+        },
+        "finish_source_scores": {
+          "candidate": {
+            "n": 345,
+            "hits_0.5": 197,
+            "acc_0.5": 0.5710144927536231,
+            "mean_iou": 0.5034925996074947
+          },
+          "no_legal_final": {
+            "n": 18,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.0
+          },
+          "predicted_bbox": {
+            "n": 2,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.03386861907531814
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 297,
+            "hits_0.5": 197,
+            "acc_0.5": 0.6632996632996633,
+            "mean_iou": 0.5647748825761142
+          },
+          "uncovered": {
+            "n": 68,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.08874329378868266
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 1,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 1,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 365,
+        "cost_total": {
+          "model_calls": 1092,
+          "input_tokens": 4370120,
+          "input_text_tokens": 2289414,
+          "visual_tokens": 2080706,
+          "output_tokens": 72774,
+          "tool_calls": 722,
+          "search_calls": 83,
+          "model_seconds": 2759.440512686968,
+          "tool_seconds": 388.1976391598582,
+          "preprocess_seconds": 332.97213784605265,
+          "preparation_seconds": 39.785897731781006,
+          "elapsed_seconds": 3531.4305882304907,
+          "depth_cache_hits": 6,
+          "depth_generated": 32,
+          "dino_calls": 48,
+          "sam_loads": 4,
+          "dino_loads": 4,
+          "depth_cached_seconds": 8.781999349594116e-05,
+          "depth_generated_seconds": 45.22193168848753,
+          "loads_seconds": 2.9359740763902664,
+          "invalid_actions": 23,
+          "legal_finish": 347
+        },
+        "cost_mean_per_query": {
+          "model_calls": 2.9917808219178084,
+          "input_tokens": 11972.931506849314,
+          "input_text_tokens": 6272.367123287671,
+          "visual_tokens": 5700.564383561644,
+          "output_tokens": 199.38082191780822,
+          "tool_calls": 1.978082191780822,
+          "search_calls": 0.2273972602739726,
+          "model_seconds": 7.560110993662926,
+          "tool_seconds": 1.0635551757804336,
+          "preprocess_seconds": 0.9122524324549388,
+          "preparation_seconds": 0.10900245953912605,
+          "elapsed_seconds": 9.675152296521892,
+          "depth_cache_hits": 0.01643835616438356,
+          "depth_generated": 0.08767123287671233,
+          "dino_calls": 0.13150684931506848,
+          "sam_loads": 0.010958904109589041,
+          "dino_loads": 0.010958904109589041,
+          "depth_cached_seconds": 2.406027219066881e-07,
+          "depth_generated_seconds": 0.12389570325613022,
+          "loads_seconds": 0.008043764592850045,
+          "invalid_actions": 0.06301369863013699,
+          "legal_finish": 0.9506849315068493
+        },
+        "peak_memory_bytes": 19467604480,
+        "initial_hits_0.5": 264,
+        "initial_coverage_hits_0.5": 297,
+        "initial_uncovered": 68,
+        "final_coverage_hits_0.5": 298,
+        "final_uncovered": 67,
+        "newly_covered_by_search": 1,
+        "covered_but_final_wrong": 101
+      }
+    }
+  },
+  "run_sources": {
+    "C": "../../implementation_20260928/manifests/city412_c_baseline.jsonl",
+    "untrained": "../untrained_city412/predictions.jsonl"
+  },
+  "pairs": {
+    "untrained-minus-C": {
+      "all": {
+        "n": 412,
+        "image_groups": 78,
+        "corrected_ids": [
+          "city_000006_011_00000307_007",
+          "city_000007_011_00000501_003",
+          "city_000008_042_00000273_001",
+          "city_000019_038_00000205_010",
+          "city_000693_012",
+          "city_000696_001",
+          "city_001685_009",
+          "city_002509_002",
+          "city_002576_010",
+          "city_hehe_230_000002_043_00000061_007",
+          "city_hehe_230_000002_043_00000061_015"
+        ],
+        "damaged_ids": [
+          "city_000004_012_00000001_001",
+          "city_000004_018_00000341_005",
+          "city_000006_011_00000307_004",
+          "city_000007_011_00000501_004",
+          "city_000013_055_00000241_001",
+          "city_000013_055_00000241_003",
+          "city_000013_055_00000241_005",
+          "city_000014_052_suppl_00000164_001",
+          "city_000014_052_suppl_00000164_003",
+          "city_000016_036_suppl_00000363_001",
+          "city_000019_005_00000001_002",
+          "city_000019_038_00000205_011",
+          "city_000020_018_00000093_001",
+          "city_000023_001_00000001_001",
+          "city_000032_028_00000009_002",
+          "city_000066_002",
+          "city_000081_002",
+          "city_000081_003",
+          "city_000081_006",
+          "city_000140_003",
+          "city_000190_002",
+          "city_000190_005",
+          "city_000206_002",
+          "city_000605_001",
+          "city_000693_001",
+          "city_000693_010",
+          "city_000696_003",
+          "city_000696_004",
+          "city_000696_005",
+          "city_001229_003",
+          "city_001229_005",
+          "city_001229_013",
+          "city_001685_004",
+          "city_001685_005",
+          "city_001879_002",
+          "city_001879_004",
+          "city_001879_005",
+          "city_001879_006",
+          "city_001879_012",
+          "city_001897_005",
+          "city_001897_007",
+          "city_001927_002",
+          "city_001927_003",
+          "city_001927_008",
+          "city_001927_012",
+          "city_002022_002",
+          "city_002022_003",
+          "city_002022_011",
+          "city_002037_004",
+          "city_002037_006",
+          "city_002037_009",
+          "city_002576_012",
+          "city_002842_004",
+          "city_003595_004",
+          "city_003595_005",
+          "city_hehe_178_000002_025_00000079_003",
+          "city_hehe_178_000002_025_00000079_008",
+          "city_hehe_224_000002_041_00000197_004",
+          "city_hehe_230_000002_043_00000061_002",
+          "city_hehe_230_000002_043_00000061_003",
+          "city_hehe_230_000002_043_00000061_011",
+          "city_hehe_254_000002_049_00000071_003",
+          "city_hehe_254_000002_049_00000071_005",
+          "city_hehe_298_000002_074_00000223_003",
+          "city_hehe_298_000002_074_00000223_004",
+          "city_hehe_52_00000107_002",
+          "city_shuming_1062_00000100_002",
+          "city_shuming_1062_00000100_003",
+          "city_shuming_1062_00000100_004",
+          "city_shuming_1062_00000100_005",
+          "city_shuming_1132_00000385_005",
+          "city_shuming_1190_00000268_002",
+          "city_shuming_1190_00000268_003",
+          "city_shuming_208_00000285_003",
+          "city_shuming_215_00000189_002",
+          "city_shuming_215_00000189_008",
+          "city_shuming_39_00000018_002",
+          "city_shuming_39_00000018_003",
+          "city_shuming_67_00000001_002",
+          "city_shuming_783_00000248_002",
+          "city_shuming_910_00000290_001",
+          "city_shuming_910_00000290_004",
+          "city_shuming_910_00000290_006",
+          "city_shuming_989_00000171_002",
+          "city_shuming_989_00000171_004",
+          "city_shuming_989_00000171_008"
+        ],
+        "corrected": 11,
+        "damaged": 86,
+        "net_hits_0.5": -75,
+        "delta": {
+          "acc_0.5": -0.1820388349514563,
+          "acc_0.7": -0.1262135922330097,
+          "mean_iou": -0.14553744906585797
+        },
+        "representative_corrections": [
+          {
+            "id": "city_000693_012",
+            "query": "The tall curved street light pole in the center",
+            "before_iou": 0.0,
+            "after_iou": 0.9418287434745212,
+            "before_bbox": [
+              0.564,
+              0.259,
+              0.634,
+              0.579
+            ],
+            "after_bbox": [
+              0.3623832702636719,
+              0.04324117236667209,
+              0.43883784612019855,
+              0.6611269915545428
+            ],
+            "gt_bbox": [
+              0.364063,
+              0.050001,
+              0.436979,
+              0.660185
+            ]
+          },
+          {
+            "id": "city_hehe_230_000002_043_00000061_015",
+            "query": "The bicycle parked on the sidewalk",
+            "before_iou": 0.0,
+            "after_iou": 0.7967320190586379,
+            "before_bbox": [
+              0.311,
+              0.599,
+              0.326,
+              0.634
+            ],
+            "after_bbox": [
+              0.28346048990885414,
+              0.5919996473524306,
+              0.2969755490620931,
+              0.6234213369864005
+            ],
+            "gt_bbox": [
+              0.281771,
+              0.591666,
+              0.298437,
+              0.623148
+            ]
+          },
+          {
+            "id": "city_hehe_230_000002_043_00000061_007",
+            "query": "The street light to the right of the yellow sign",
+            "before_iou": 0.0,
+            "after_iou": 0.7813792938599068,
+            "before_bbox": [
+              0.368,
+              0.429,
+              0.382,
+              0.444
+            ],
+            "after_bbox": [
+              0.4183726946512858,
+              0.47846900092230904,
+              0.45115299224853517,
+              0.5771668045609085
+            ],
+            "gt_bbox": [
+              0.4125,
+              0.477778,
+              0.452084,
+              0.571296
+            ]
+          },
+          {
+            "id": "city_000007_011_00000501_003",
+            "query": "The tall street light rising above the white truck",
+            "before_iou": 0.12699684180316534,
+            "after_iou": 0.7739451969314691,
+            "before_bbox": [
+              0.412,
+              0.154,
+              0.482,
+              0.231
+            ],
+            "after_bbox": [
+              0.4118721644083659,
+              0.15048491866500288,
+              0.48664236068725586,
+              0.5984929967809607
+            ],
+            "gt_bbox": [
+              0.414062,
+              0.149074,
+              0.504687,
+              0.601852
+            ]
+          },
+          {
+            "id": "city_002509_002",
+            "query": "The dark garbage can near the white flowers",
+            "before_iou": 0.0,
+            "after_iou": 0.6463445500462764,
+            "before_bbox": [
+              0.07,
+              0.044,
+              0.099,
+              0.094
+            ],
+            "after_bbox": [
+              0.5823965708414713,
+              0.10558523248743128,
+              0.5998320897420247,
+              0.18371161001699943
+            ],
+            "gt_bbox": [
+              0.579687,
+              0.103704,
+              0.605729,
+              0.182408
+            ]
+          }
+        ],
+        "representative_damages": [
+          {
+            "id": "city_shuming_215_00000189_002",
+            "query": "The single white chair on the far left",
+            "before_iou": 0.9793991381648246,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.191,
+              0.564,
+              0.31,
+              0.831
+            ],
+            "after_bbox": [
+              0.864414660135905,
+              0.5134953251591435,
+              0.9997331619262695,
+              0.9060362639250579
+            ],
+            "gt_bbox": [
+              0.191146,
+              0.56574,
+              0.310938,
+              0.832407
+            ]
+          },
+          {
+            "id": "city_hehe_230_000002_043_00000061_003",
+            "query": "The large double-headed street light on the left",
+            "before_iou": 0.9598468388793414,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.004,
+              0.086,
+              0.15,
+              0.55
+            ],
+            "after_bbox": [
+              0.259615691502889,
+              0.3285329465512876,
+              0.3358915646870931,
+              0.49583073368778935
+            ],
+            "gt_bbox": [
+              0.003646,
+              0.076852,
+              0.148959,
+              0.544444
+            ]
+          },
+          {
+            "id": "city_shuming_1190_00000268_002",
+            "query": "The deer with antlers standing in the background",
+            "before_iou": 0.9556509801899633,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.419,
+              0.299,
+              0.48,
+              0.486
+            ],
+            "after_bbox": [
+              0.722666613260905,
+              0.3872486820927373,
+              0.8039882024129231,
+              0.6154120551215277
+            ],
+            "gt_bbox": [
+              0.419791,
+              0.299999,
+              0.480729,
+              0.488889
+            ]
+          },
+          {
+            "id": "city_001879_004",
+            "query": "The top-right ceiling light panel",
+            "before_iou": 0.947165981166343,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.603,
+              0.029,
+              0.707,
+              0.083
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.603645,
+              0.02963,
+              0.707812,
+              0.081482
+            ]
+          },
+          {
+            "id": "city_shuming_910_00000290_006",
+            "query": "The white chair with a grey cushion in the right foreground",
+            "before_iou": 0.9320430920046836,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.614,
+              0.479,
+              0.753,
+              0.931
+            ],
+            "after_bbox": [
+              0.10449817975362143,
+              0.47389413339120373,
+              0.3736743927001953,
+              0.9987938774956597
+            ],
+            "gt_bbox": [
+              0.619271,
+              0.475926,
+              0.751563,
+              0.937963
+            ]
+          }
+        ],
+        "group_bootstrap": {
+          "seed": 2026,
+          "replicates": 10000,
+          "delta_95ci": {
+            "acc_0.5": [
+              -0.2238373861257285,
+              -0.14022818105771914
+            ],
+            "acc_0.7": [
+              -0.165374677002584,
+              -0.0881719182695906
+            ],
+            "mean_iou": [
+              -0.1769939766282457,
+              -0.11434632047616637
+            ]
+          }
+        }
+      },
+      "known_reused": {
+        "n": 47,
+        "image_groups": 7,
+        "corrected_ids": [
+          "city_hehe_230_000002_043_00000061_007",
+          "city_hehe_230_000002_043_00000061_015"
+        ],
+        "damaged_ids": [
+          "city_000014_052_suppl_00000164_001",
+          "city_000014_052_suppl_00000164_003",
+          "city_hehe_178_000002_025_00000079_003",
+          "city_hehe_178_000002_025_00000079_008",
+          "city_hehe_224_000002_041_00000197_004",
+          "city_hehe_230_000002_043_00000061_002",
+          "city_hehe_230_000002_043_00000061_003",
+          "city_hehe_230_000002_043_00000061_011",
+          "city_hehe_298_000002_074_00000223_003",
+          "city_hehe_298_000002_074_00000223_004"
+        ],
+        "corrected": 2,
+        "damaged": 10,
+        "net_hits_0.5": -8,
+        "delta": {
+          "acc_0.5": -0.1702127659574468,
+          "acc_0.7": -0.1276595744680851,
+          "mean_iou": -0.1329104950810543
+        },
+        "representative_corrections": [
+          {
+            "id": "city_hehe_230_000002_043_00000061_015",
+            "query": "The bicycle parked on the sidewalk",
+            "before_iou": 0.0,
+            "after_iou": 0.7967320190586379,
+            "before_bbox": [
+              0.311,
+              0.599,
+              0.326,
+              0.634
+            ],
+            "after_bbox": [
+              0.28346048990885414,
+              0.5919996473524306,
+              0.2969755490620931,
+              0.6234213369864005
+            ],
+            "gt_bbox": [
+              0.281771,
+              0.591666,
+              0.298437,
+              0.623148
+            ]
+          },
+          {
+            "id": "city_hehe_230_000002_043_00000061_007",
+            "query": "The street light to the right of the yellow sign",
+            "before_iou": 0.0,
+            "after_iou": 0.7813792938599068,
+            "before_bbox": [
+              0.368,
+              0.429,
+              0.382,
+              0.444
+            ],
+            "after_bbox": [
+              0.4183726946512858,
+              0.47846900092230904,
+              0.45115299224853517,
+              0.5771668045609085
+            ],
+            "gt_bbox": [
+              0.4125,
+              0.477778,
+              0.452084,
+              0.571296
+            ]
+          }
+        ],
+        "representative_damages": [
+          {
+            "id": "city_hehe_230_000002_043_00000061_003",
+            "query": "The large double-headed street light on the left",
+            "before_iou": 0.9598468388793414,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.004,
+              0.086,
+              0.15,
+              0.55
+            ],
+            "after_bbox": [
+              0.259615691502889,
+              0.3285329465512876,
+              0.3358915646870931,
+              0.49583073368778935
+            ],
+            "gt_bbox": [
+              0.003646,
+              0.076852,
+              0.148959,
+              0.544444
+            ]
+          },
+          {
+            "id": "city_hehe_230_000002_043_00000061_011",
+            "query": "The white car parked near the bus stop",
+            "before_iou": 0.7434484616044909,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.251,
+              0.566,
+              0.29,
+              0.606
+            ],
+            "after_bbox": [
+              0.13801410992940266,
+              0.547810533311632,
+              0.21097272237141926,
+              0.6133058336046007
+            ],
+            "gt_bbox": [
+              0.25,
+              0.562037,
+              0.29427,
+              0.602777
+            ]
+          },
+          {
+            "id": "city_hehe_298_000002_074_00000223_003",
+            "query": "The street light pole behind the central tree",
+            "before_iou": 0.7614800269476668,
+            "after_iou": 0.05367249009805314,
+            "before_bbox": [
+              0.444,
+              0.394,
+              0.506,
+              0.6
+            ],
+            "after_bbox": [
+              0.3162375450134277,
+              0.10923200536657263,
+              0.5928967157999675,
+              0.8350059226707176
+            ],
+            "gt_bbox": [
+              0.448437,
+              0.402778,
+              0.509375,
+              0.57963
+            ]
+          },
+          {
+            "id": "city_hehe_178_000002_025_00000079_008",
+            "query": "The small red sign on the distant pole",
+            "before_iou": 0.6965873110196866,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.69,
+              0.434,
+              0.709,
+              0.481
+            ],
+            "after_bbox": [
+              0.9088483174641927,
+              0.40580630832248266,
+              0.9562040964762369,
+              0.49789293077256946
+            ],
+            "gt_bbox": [
+              0.685417,
+              0.42963,
+              0.709375,
+              0.478704
+            ]
+          },
+          {
+            "id": "city_hehe_298_000002_074_00000223_004",
+            "query": "The street light pole to the left of the central tree",
+            "before_iou": 0.7184719514563656,
+            "after_iou": 0.022816904700584215,
+            "before_bbox": [
+              0.323,
+              0.526,
+              0.356,
+              0.664
+            ],
+            "after_bbox": [
+              0.3162375450134277,
+              0.10923200536657263,
+              0.5928967157999675,
+              0.8350059226707176
+            ],
+            "gt_bbox": [
+              0.318229,
+              0.527778,
+              0.357813,
+              0.643518
+            ]
+          }
+        ],
+        "group_bootstrap": {
+          "seed": 2026,
+          "replicates": 10000,
+          "delta_95ci": {
+            "acc_0.5": [
+              -0.3125,
+              -0.08333333333333333
+            ],
+            "acc_0.7": [
+              -0.29411764705882354,
+              -0.03389830508474576
+            ],
+            "mean_iou": [
+              -0.23850730024888145,
+              -0.0716017898527481
+            ]
+          }
+        }
+      },
+      "other_not_independent_test": {
+        "n": 365,
+        "image_groups": 71,
+        "corrected_ids": [
+          "city_000006_011_00000307_007",
+          "city_000007_011_00000501_003",
+          "city_000008_042_00000273_001",
+          "city_000019_038_00000205_010",
+          "city_000693_012",
+          "city_000696_001",
+          "city_001685_009",
+          "city_002509_002",
+          "city_002576_010"
+        ],
+        "damaged_ids": [
+          "city_000004_012_00000001_001",
+          "city_000004_018_00000341_005",
+          "city_000006_011_00000307_004",
+          "city_000007_011_00000501_004",
+          "city_000013_055_00000241_001",
+          "city_000013_055_00000241_003",
+          "city_000013_055_00000241_005",
+          "city_000016_036_suppl_00000363_001",
+          "city_000019_005_00000001_002",
+          "city_000019_038_00000205_011",
+          "city_000020_018_00000093_001",
+          "city_000023_001_00000001_001",
+          "city_000032_028_00000009_002",
+          "city_000066_002",
+          "city_000081_002",
+          "city_000081_003",
+          "city_000081_006",
+          "city_000140_003",
+          "city_000190_002",
+          "city_000190_005",
+          "city_000206_002",
+          "city_000605_001",
+          "city_000693_001",
+          "city_000693_010",
+          "city_000696_003",
+          "city_000696_004",
+          "city_000696_005",
+          "city_001229_003",
+          "city_001229_005",
+          "city_001229_013",
+          "city_001685_004",
+          "city_001685_005",
+          "city_001879_002",
+          "city_001879_004",
+          "city_001879_005",
+          "city_001879_006",
+          "city_001879_012",
+          "city_001897_005",
+          "city_001897_007",
+          "city_001927_002",
+          "city_001927_003",
+          "city_001927_008",
+          "city_001927_012",
+          "city_002022_002",
+          "city_002022_003",
+          "city_002022_011",
+          "city_002037_004",
+          "city_002037_006",
+          "city_002037_009",
+          "city_002576_012",
+          "city_002842_004",
+          "city_003595_004",
+          "city_003595_005",
+          "city_hehe_254_000002_049_00000071_003",
+          "city_hehe_254_000002_049_00000071_005",
+          "city_hehe_52_00000107_002",
+          "city_shuming_1062_00000100_002",
+          "city_shuming_1062_00000100_003",
+          "city_shuming_1062_00000100_004",
+          "city_shuming_1062_00000100_005",
+          "city_shuming_1132_00000385_005",
+          "city_shuming_1190_00000268_002",
+          "city_shuming_1190_00000268_003",
+          "city_shuming_208_00000285_003",
+          "city_shuming_215_00000189_002",
+          "city_shuming_215_00000189_008",
+          "city_shuming_39_00000018_002",
+          "city_shuming_39_00000018_003",
+          "city_shuming_67_00000001_002",
+          "city_shuming_783_00000248_002",
+          "city_shuming_910_00000290_001",
+          "city_shuming_910_00000290_004",
+          "city_shuming_910_00000290_006",
+          "city_shuming_989_00000171_002",
+          "city_shuming_989_00000171_004",
+          "city_shuming_989_00000171_008"
+        ],
+        "corrected": 9,
+        "damaged": 76,
+        "net_hits_0.5": -67,
+        "delta": {
+          "acc_0.5": -0.18356164383561643,
+          "acc_0.7": -0.12602739726027398,
+          "mean_iou": -0.14716338560636694
+        },
+        "representative_corrections": [
+          {
+            "id": "city_000693_012",
+            "query": "The tall curved street light pole in the center",
+            "before_iou": 0.0,
+            "after_iou": 0.9418287434745212,
+            "before_bbox": [
+              0.564,
+              0.259,
+              0.634,
+              0.579
+            ],
+            "after_bbox": [
+              0.3623832702636719,
+              0.04324117236667209,
+              0.43883784612019855,
+              0.6611269915545428
+            ],
+            "gt_bbox": [
+              0.364063,
+              0.050001,
+              0.436979,
+              0.660185
+            ]
+          },
+          {
+            "id": "city_000007_011_00000501_003",
+            "query": "The tall street light rising above the white truck",
+            "before_iou": 0.12699684180316534,
+            "after_iou": 0.7739451969314691,
+            "before_bbox": [
+              0.412,
+              0.154,
+              0.482,
+              0.231
+            ],
+            "after_bbox": [
+              0.4118721644083659,
+              0.15048491866500288,
+              0.48664236068725586,
+              0.5984929967809607
+            ],
+            "gt_bbox": [
+              0.414062,
+              0.149074,
+              0.504687,
+              0.601852
+            ]
+          },
+          {
+            "id": "city_002509_002",
+            "query": "The dark garbage can near the white flowers",
+            "before_iou": 0.0,
+            "after_iou": 0.6463445500462764,
+            "before_bbox": [
+              0.07,
+              0.044,
+              0.099,
+              0.094
+            ],
+            "after_bbox": [
+              0.5823965708414713,
+              0.10558523248743128,
+              0.5998320897420247,
+              0.18371161001699943
+            ],
+            "gt_bbox": [
+              0.579687,
+              0.103704,
+              0.605729,
+              0.182408
+            ]
+          },
+          {
+            "id": "city_000696_001",
+            "query": "The black car parked on the far left",
+            "before_iou": 0.07854577312239659,
+            "after_iou": 0.617341744448239,
+            "before_bbox": [
+              0.0,
+              0.754,
+              0.044,
+              0.884
+            ],
+            "after_bbox": [
+              0.03647127946217855,
+              0.7225508513274016,
+              0.28035189310709635,
+              0.9252235695167824
+            ],
+            "gt_bbox": [
+              0.0,
+              0.669445,
+              0.297916,
+              0.913889
+            ]
+          },
+          {
+            "id": "city_000006_011_00000307_007",
+            "query": "The person walking behind the fence in the center-left",
+            "before_iou": 0.0,
+            "after_iou": 0.5140493679988247,
+            "before_bbox": [
+              0.383,
+              0.356,
+              0.394,
+              0.391
+            ],
+            "after_bbox": [
+              0.5262121518452962,
+              0.35579263192635996,
+              0.5354183197021485,
+              0.37615316885489003
+            ],
+            "gt_bbox": [
+              0.525521,
+              0.35,
+              0.536459,
+              0.371296
+            ]
+          }
+        ],
+        "representative_damages": [
+          {
+            "id": "city_shuming_215_00000189_002",
+            "query": "The single white chair on the far left",
+            "before_iou": 0.9793991381648246,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.191,
+              0.564,
+              0.31,
+              0.831
+            ],
+            "after_bbox": [
+              0.864414660135905,
+              0.5134953251591435,
+              0.9997331619262695,
+              0.9060362639250579
+            ],
+            "gt_bbox": [
+              0.191146,
+              0.56574,
+              0.310938,
+              0.832407
+            ]
+          },
+          {
+            "id": "city_shuming_1190_00000268_002",
+            "query": "The deer with antlers standing in the background",
+            "before_iou": 0.9556509801899633,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.419,
+              0.299,
+              0.48,
+              0.486
+            ],
+            "after_bbox": [
+              0.722666613260905,
+              0.3872486820927373,
+              0.8039882024129231,
+              0.6154120551215277
+            ],
+            "gt_bbox": [
+              0.419791,
+              0.299999,
+              0.480729,
+              0.488889
+            ]
+          },
+          {
+            "id": "city_001879_004",
+            "query": "The top-right ceiling light panel",
+            "before_iou": 0.947165981166343,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.603,
+              0.029,
+              0.707,
+              0.083
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.603645,
+              0.02963,
+              0.707812,
+              0.081482
+            ]
+          },
+          {
+            "id": "city_shuming_910_00000290_006",
+            "query": "The white chair with a grey cushion in the right foreground",
+            "before_iou": 0.9320430920046836,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.614,
+              0.479,
+              0.753,
+              0.931
+            ],
+            "after_bbox": [
+              0.10449817975362143,
+              0.47389413339120373,
+              0.3736743927001953,
+              0.9987938774956597
+            ],
+            "gt_bbox": [
+              0.619271,
+              0.475926,
+              0.751563,
+              0.937963
+            ]
+          },
+          {
+            "id": "city_002022_011",
+            "query": "The toy car to the left of the man's legs",
+            "before_iou": 0.926872672048674,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.367,
+              0.706,
+              0.412,
+              0.748
+            ],
+            "after_bbox": [
+              0.0008056387305259705,
+              0.5620919686776621,
+              0.142500638961792,
+              0.8054336547851563
+            ],
+            "gt_bbox": [
+              0.36875,
+              0.706482,
+              0.41198,
+              0.749074
+            ]
+          }
+        ],
+        "group_bootstrap": {
+          "seed": 2026,
+          "replicates": 10000,
+          "delta_95ci": {
+            "acc_0.5": [
+              -0.22817198476217104,
+              -0.13968073593073596
+            ],
+            "acc_0.7": [
+              -0.16622725033571994,
+              -0.08504253445540114
+            ],
+            "mean_iou": [
+              -0.18065101741720727,
+              -0.1134782850642937
+            ]
+          }
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "All missing or illegal final boxes have IoU zero in the fixed denominator.",
+    "Known reused and other subsets are both development data; other is not certified independent.",
+    "Only matched weights, inputs and budgets isolate the corresponding training or tool change.",
+    "Cost differences remain possible across paired mechanisms."
+  ]
+}

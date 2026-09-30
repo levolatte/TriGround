@@ -1,0 +1,220 @@
+{
+  "gt": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\data\\dev40_gt.json",
+  "manifest": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\data\\dev40_manifest.jsonl",
+  "denominator": 40,
+  "image_groups": 40,
+  "split_counts": {
+    "all": 40,
+    "other_not_independent_test": 40
+  },
+  "runs": {
+    "C": {
+      "all": {
+        "n": 40,
+        "hits_0.5": 29,
+        "acc_0.5": 0.725,
+        "hits_0.7": 26,
+        "acc_0.7": 0.65,
+        "mean_iou": 0.6323112685492226,
+        "valid_final_bbox": 40,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 40
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 40
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 40,
+            "hits_0.5": 29,
+            "acc_0.5": 0.725,
+            "mean_iou": 0.6323112685492226
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 40
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      },
+      "other_not_independent_test": {
+        "n": 40,
+        "hits_0.5": 29,
+        "acc_0.5": 0.725,
+        "hits_0.7": 26,
+        "acc_0.7": 0.65,
+        "mean_iou": 0.6323112685492226,
+        "valid_final_bbox": 40,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 40
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 40
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 40,
+            "hits_0.5": 29,
+            "acc_0.5": 0.725,
+            "mean_iou": 0.6323112685492226
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 40
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      }
+    }
+  },
+  "run_sources": {
+    "C": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\score_inputs_dev40_reference\\C.jsonl"
+  },
+  "pairs": {},
+  "interpretation": [
+    "All missing or illegal final boxes have IoU zero in the fixed denominator.",
+    "Known reused and other subsets are both development data; other is not certified independent.",
+    "Only matched weights, inputs and budgets isolate the corresponding training or tool change.",
+    "Cost differences remain possible across paired mechanisms."
+  ]
+}

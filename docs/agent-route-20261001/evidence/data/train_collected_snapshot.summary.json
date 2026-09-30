@@ -1,0 +1,284 @@
+{
+  "total_rows": 1064,
+  "teacher_rows": 314,
+  "teacher_action_counts": {
+    "depth": 49,
+    "finish": 113,
+    "inspect": 108,
+    "search": 44
+  },
+  "teacher_action_counts_by_trajectory": {
+    "frozen_seed_teacher": {
+      "depth": 6,
+      "finish": 34,
+      "inspect": 43,
+      "search": 3
+    },
+    "new_real_teacher_trajectory": {
+      "depth": 43,
+      "finish": 79,
+      "inspect": 65,
+      "search": 41
+    }
+  },
+  "rows_with_supported_note": 310,
+  "teacher_note_coverage": 0.9872611464968153,
+  "teacher_rows_by_dataset_source": {
+    "city": 226,
+    "rgbt_groundbench_flir": 32,
+    "rgbt_groundbench_m3fd": 13,
+    "rgbt_groundbench_mfad": 33,
+    "roborefit": 10
+  },
+  "all_rows_by_dataset_source": {
+    "city": 368,
+    "rgbdt500": 40,
+    "rgbt_groundbench_flir": 174,
+    "rgbt_groundbench_m3fd": 155,
+    "rgbt_groundbench_mfad": 175,
+    "roborefit": 152
+  },
+  "unique_image_groups": 832,
+  "unique_samples": 877,
+  "groups_by_source": {
+    "city": 193,
+    "rgbdt500": 40,
+    "rgbt_groundbench_flir": 151,
+    "rgbt_groundbench_m3fd": 144,
+    "rgbt_groundbench_mfad": 157,
+    "roborefit": 147
+  },
+  "teacher_actual_evidence_coverage": {
+    "candidate_search": {
+      "decision_rows": 57,
+      "samples": 22
+    },
+    "depth_measurement": {
+      "decision_rows": 81,
+      "samples": 48
+    },
+    "tool:finish": {
+      "decision_rows": 5,
+      "samples": 1
+    },
+    "visual_inspection": {
+      "decision_rows": 128,
+      "samples": 68
+    }
+  },
+  "teacher_tool_observation_messages": 393,
+  "observed_tool_image_modalities": {
+    "depth": 3,
+    "ir": 23,
+    "rgb": 139
+  },
+  "frozen_holdout_groups": 120,
+  "output_rows_in_holdout_groups": 0,
+  "merge": {
+    "complete_samples_seen": 129,
+    "incomplete_samples_seen": 5,
+    "samples_excluded_holdout": 0,
+    "samples_without_decisions": 22,
+    "duplicate_decisions": 0,
+    "new_teacher_samples": 112,
+    "new_teacher_rows": 228,
+    "replaced_seed_teacher_rows": 29,
+    "seed_rows": 865,
+    "seed_teacher_rows": 115,
+    "seed_nonteacher_rows_retained": 750
+  },
+  "target_4200_rows": "not asserted; this summary reports only rows actually merged",
+  "snapshot_status": "expanding_collection_snapshot_not_final",
+  "selection_path": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\data\\train_collected_snapshot.selection.json",
+  "selection_counts": {
+    "episode_trajectories_seen": 139,
+    "unique_samples_seen": 134,
+    "selected_trajectories": 134,
+    "selected_complete_trajectories": 129,
+    "selected_partial_trajectories": 5,
+    "selected_trajectories_with_qualified_steps": 112,
+    "partial_finish_reviews_not_trainable": 0,
+    "excluded_trajectories": 5,
+    "selected_by_source": {
+      "collection_recovery": 38,
+      "collection_missing": 6,
+      "collection": 37,
+      "collection_additional": 52,
+      "fresh": 1
+    },
+    "excluded_by_reason": {
+      "duplicate_sample_lower_rank_than_collection_recovery": 4,
+      "duplicate_sample_lower_rank_than_collection": 1
+    }
+  },
+  "source_inputs": {
+    "collection_recovery": {
+      "episode_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_recovery\\episodes",
+      "review_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_recovery\\reviews",
+      "episode_files": 38,
+      "review_files": [
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_recovery\\reviews\\recovery.jsonl"
+      ],
+      "review_rows": 74
+    },
+    "collection_missing": {
+      "episode_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_missing\\episodes",
+      "review_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_missing\\reviews",
+      "episode_files": 6,
+      "review_files": [
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_missing\\reviews\\recovery.jsonl"
+      ],
+      "review_rows": 21
+    },
+    "collection": {
+      "episode_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection\\episodes",
+      "review_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection\\reviews",
+      "episode_files": 38,
+      "review_files": [
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection\\reviews\\binding.jsonl",
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection\\reviews\\finish_sufficiency_review.jsonl",
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection\\reviews\\recovery.jsonl"
+      ],
+      "review_rows": 95
+    },
+    "collection_additional": {
+      "episode_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_additional\\episodes",
+      "review_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_additional\\reviews",
+      "episode_files": 52,
+      "review_files": [
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_additional\\reviews\\binding.jsonl",
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_additional\\reviews\\finish_sufficiency_review.jsonl",
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\collection_additional\\reviews\\initial_open_choice.jsonl"
+      ],
+      "review_rows": 91
+    },
+    "fresh": {
+      "episode_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\fresh",
+      "review_root": "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\fresh_reviews.jsonl",
+      "episode_files": 5,
+      "review_files": [
+        "F:\\AIC\\results\\visual_agent\\evidence_decision_20260930\\teachers\\fresh_reviews.jsonl"
+      ],
+      "review_rows": 12
+    }
+  },
+  "collector_summaries_by_source": {
+    "collection_recovery": {
+      "episodes": 38,
+      "complete_episodes": 37,
+      "scored_episodes": 38,
+      "episodes_final_iou_ge_0_5": 13,
+      "raw_steps": 74,
+      "review_rows": 74,
+      "excluded_review_rows": 0,
+      "excluded_review_reasons": {},
+      "supervised_decisions": 50,
+      "supervised_actions": {
+        "finish": 13,
+        "search": 13,
+        "inspect": 24
+      },
+      "mean_final_iou_diagnostic": 0.3411036349233491,
+      "note": "Every decision requires an explicit use_action=true step review and a protocol-valid original action. Unsupported notes are removed from target_action. Final actions additionally require offline IoU>=0.5; final correctness never filters earlier evidence actions or changes recorded actions."
+    },
+    "collection_missing": {
+      "episodes": 6,
+      "complete_episodes": 4,
+      "scored_episodes": 6,
+      "episodes_final_iou_ge_0_5": 0,
+      "raw_steps": 21,
+      "review_rows": 21,
+      "excluded_review_rows": 0,
+      "excluded_review_reasons": {},
+      "supervised_decisions": 15,
+      "supervised_actions": {
+        "search": 8,
+        "inspect": 7
+      },
+      "mean_final_iou_diagnostic": 0.0,
+      "note": "Every decision requires an explicit use_action=true step review and a protocol-valid original action. Unsupported notes are removed from target_action. Final actions additionally require offline IoU>=0.5; final correctness never filters earlier evidence actions or changes recorded actions."
+    },
+    "collection": {
+      "episodes": 37,
+      "complete_episodes": 37,
+      "scored_episodes": 37,
+      "episodes_final_iou_ge_0_5": 34,
+      "raw_steps": 93,
+      "review_rows": 93,
+      "excluded_review_rows": 0,
+      "excluded_review_reasons": {},
+      "supervised_decisions": 89,
+      "supervised_actions": {
+        "search": 12,
+        "inspect": 5,
+        "finish": 33,
+        "depth": 39
+      },
+      "mean_final_iou_diagnostic": 0.8243970707821341,
+      "note": "Every decision requires an explicit use_action=true step review and a protocol-valid original action. Unsupported notes are removed from target_action. Final actions additionally require offline IoU>=0.5; final correctness never filters earlier evidence actions or changes recorded actions."
+    },
+    "collection_additional": {
+      "episodes": 52,
+      "complete_episodes": 50,
+      "scored_episodes": 52,
+      "episodes_final_iou_ge_0_5": 33,
+      "raw_steps": 91,
+      "review_rows": 91,
+      "excluded_review_rows": 0,
+      "excluded_review_reasons": {},
+      "supervised_decisions": 73,
+      "supervised_actions": {
+        "finish": 32,
+        "inspect": 29,
+        "depth": 4,
+        "search": 8
+      },
+      "mean_final_iou_diagnostic": 0.5793913630402584,
+      "note": "Every decision requires an explicit use_action=true step review and a protocol-valid original action. Unsupported notes are removed from target_action. Final actions additionally require offline IoU>=0.5; final correctness never filters earlier evidence actions or changes recorded actions."
+    },
+    "fresh": {
+      "episodes": 1,
+      "complete_episodes": 1,
+      "scored_episodes": 1,
+      "episodes_final_iou_ge_0_5": 1,
+      "raw_steps": 1,
+      "review_rows": 1,
+      "excluded_review_rows": 0,
+      "excluded_review_reasons": {},
+      "supervised_decisions": 1,
+      "supervised_actions": {
+        "finish": 1
+      },
+      "mean_final_iou_diagnostic": 0.8842168088104779,
+      "note": "Every decision requires an explicit use_action=true step review and a protocol-valid original action. Unsupported notes are removed from target_action. Final actions additionally require offline IoU>=0.5; final correctness never filters earlier evidence actions or changes recorded actions."
+    }
+  },
+  "seed_nonteacher_rows_retained_exactly": 750,
+  "seed_new_teacher_sample_overlap": 0,
+  "new_teacher_rows_by_trajectory_completion": {
+    "complete": 215,
+    "partial": 13
+  },
+  "new_teacher_actions_by_trajectory_completion": {
+    "complete": {
+      "depth": 42,
+      "finish": 79,
+      "inspect": 55,
+      "search": 39
+    },
+    "partial": {
+      "depth": 1,
+      "inspect": 10,
+      "search": 2
+    }
+  },
+  "new_teacher_image_path_audit": {
+    "rows_with_images": 228,
+    "image_parts": 1148,
+    "empty_paths": 0,
+    "path_prefix_counts": {
+      "/root/autodl-tmp/rematch_20260922": 1148
+    },
+    "note": "Paths are preserved from the source traces; remote file existence is checked on the collection host."
+  }
+}

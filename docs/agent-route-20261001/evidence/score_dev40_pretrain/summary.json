@@ -1,0 +1,872 @@
+{
+  "gt": "/root/autodl-tmp/rematch_20260922/results/visual_agent/evidence_decision_20260930/data/dev40_gt.json",
+  "manifest": "/root/autodl-tmp/rematch_20260922/results/visual_agent/evidence_decision_20260930/data/dev40_manifest.jsonl",
+  "denominator": 40,
+  "image_groups": 40,
+  "split_counts": {
+    "all": 40,
+    "other_not_independent_test": 40
+  },
+  "runs": {
+    "C": {
+      "all": {
+        "n": 40,
+        "hits_0.5": 29,
+        "acc_0.5": 0.725,
+        "hits_0.7": 26,
+        "acc_0.7": 0.65,
+        "mean_iou": 0.6323112685492226,
+        "valid_final_bbox": 40,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 40
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 40
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 40,
+            "hits_0.5": 29,
+            "acc_0.5": 0.725,
+            "mean_iou": 0.6323112685492226
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 40
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      },
+      "other_not_independent_test": {
+        "n": 40,
+        "hits_0.5": 29,
+        "acc_0.5": 0.725,
+        "hits_0.7": 26,
+        "acc_0.7": 0.65,
+        "mean_iou": 0.6323112685492226,
+        "valid_final_bbox": 40,
+        "invalid_final_bbox": 0,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "baseline": 40
+        },
+        "tool_status_counts": {},
+        "finish_source_counts": {
+          "baseline": 40
+        },
+        "finish_source_scores": {
+          "baseline": {
+            "n": 40,
+            "hits_0.5": 29,
+            "acc_0.5": 0.725,
+            "mean_iou": 0.6323112685492226
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          },
+          "uncovered": {
+            "n": 0,
+            "hits_0.5": 0,
+            "acc_0.5": null,
+            "mean_iou": null
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 0,
+        "cost_total": {
+          "model_calls": 0,
+          "input_tokens": 0,
+          "input_text_tokens": 0,
+          "visual_tokens": 0,
+          "output_tokens": 0,
+          "tool_calls": 0,
+          "search_calls": 0,
+          "model_seconds": 0,
+          "tool_seconds": 0,
+          "preprocess_seconds": 0,
+          "preparation_seconds": 0,
+          "elapsed_seconds": 0,
+          "depth_cache_hits": 0,
+          "depth_generated": 0,
+          "dino_calls": 0,
+          "sam_loads": 0,
+          "dino_loads": 0,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 0,
+          "loads_seconds": 0,
+          "invalid_actions": 0,
+          "legal_finish": 40
+        },
+        "cost_mean_per_query": {
+          "model_calls": 0.0,
+          "input_tokens": 0.0,
+          "input_text_tokens": 0.0,
+          "visual_tokens": 0.0,
+          "output_tokens": 0.0,
+          "tool_calls": 0.0,
+          "search_calls": 0.0,
+          "model_seconds": 0.0,
+          "tool_seconds": 0.0,
+          "preprocess_seconds": 0.0,
+          "preparation_seconds": 0.0,
+          "elapsed_seconds": 0.0,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.0,
+          "dino_calls": 0.0,
+          "sam_loads": 0.0,
+          "dino_loads": 0.0,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.0,
+          "loads_seconds": 0.0,
+          "invalid_actions": 0.0,
+          "legal_finish": 1.0
+        },
+        "peak_memory_bytes": 0
+      }
+    },
+    "untrained": {
+      "all": {
+        "n": 40,
+        "hits_0.5": 24,
+        "acc_0.5": 0.6,
+        "hits_0.7": 21,
+        "acc_0.7": 0.525,
+        "mean_iou": 0.5287328276184469,
+        "valid_final_bbox": 37,
+        "invalid_final_bbox": 3,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "FINISHED": 37,
+          "INVALID_FINAL_ACTION": 2,
+          "ERROR": 1
+        },
+        "tool_status_counts": {
+          "OK": 145,
+          "ERROR": 7,
+          "UNKNOWN": 2
+        },
+        "finish_source_counts": {
+          "candidate": 37,
+          "no_legal_final": 3
+        },
+        "finish_source_scores": {
+          "candidate": {
+            "n": 37,
+            "hits_0.5": 24,
+            "acc_0.5": 0.6486486486486487,
+            "mean_iou": 0.5716030568848074
+          },
+          "no_legal_final": {
+            "n": 3,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.0
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 36,
+            "hits_0.5": 24,
+            "acc_0.5": 0.6666666666666666,
+            "mean_iou": 0.5768410046953711
+          },
+          "uncovered": {
+            "n": 4,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.09575923392612858
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 40,
+        "cost_total": {
+          "model_calls": 154,
+          "input_tokens": 589378,
+          "input_text_tokens": 340787,
+          "visual_tokens": 248591,
+          "output_tokens": 10333,
+          "tool_calls": 111,
+          "search_calls": 12,
+          "model_seconds": 390.05090295523405,
+          "tool_seconds": 80.11587132513523,
+          "preprocess_seconds": 26.548630937933922,
+          "preparation_seconds": 2.7685862481594086,
+          "elapsed_seconds": 500.8504264205694,
+          "depth_cache_hits": 0,
+          "depth_generated": 1,
+          "dino_calls": 13,
+          "sam_loads": 0,
+          "dino_loads": 1,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 1.4769990965723991,
+          "loads_seconds": 0.4614608362317085,
+          "invalid_actions": 6,
+          "legal_finish": 37
+        },
+        "cost_mean_per_query": {
+          "model_calls": 3.85,
+          "input_tokens": 14734.45,
+          "input_text_tokens": 8519.675,
+          "visual_tokens": 6214.775,
+          "output_tokens": 258.325,
+          "tool_calls": 2.775,
+          "search_calls": 0.3,
+          "model_seconds": 9.75127257388085,
+          "tool_seconds": 2.0028967831283806,
+          "preprocess_seconds": 0.6637157734483481,
+          "preparation_seconds": 0.06921465620398522,
+          "elapsed_seconds": 12.521260660514235,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.025,
+          "dino_calls": 0.325,
+          "sam_loads": 0.0,
+          "dino_loads": 0.025,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.03692497741430998,
+          "loads_seconds": 0.011536520905792713,
+          "invalid_actions": 0.15,
+          "legal_finish": 0.925
+        },
+        "peak_memory_bytes": 19111504384,
+        "initial_hits_0.5": 29,
+        "initial_coverage_hits_0.5": 36,
+        "initial_uncovered": 4,
+        "final_coverage_hits_0.5": 36,
+        "final_uncovered": 4,
+        "newly_covered_by_search": 0,
+        "covered_but_final_wrong": 12
+      },
+      "other_not_independent_test": {
+        "n": 40,
+        "hits_0.5": 24,
+        "acc_0.5": 0.6,
+        "hits_0.7": 21,
+        "acc_0.7": 0.525,
+        "mean_iou": 0.5287328276184469,
+        "valid_final_bbox": 37,
+        "invalid_final_bbox": 3,
+        "keep_count": 0,
+        "keep_hits_0.5": 0,
+        "final_status_counts": {
+          "FINISHED": 37,
+          "INVALID_FINAL_ACTION": 2,
+          "ERROR": 1
+        },
+        "tool_status_counts": {
+          "OK": 145,
+          "ERROR": 7,
+          "UNKNOWN": 2
+        },
+        "finish_source_counts": {
+          "candidate": 37,
+          "no_legal_final": 3
+        },
+        "finish_source_scores": {
+          "candidate": {
+            "n": 37,
+            "hits_0.5": 24,
+            "acc_0.5": 0.6486486486486487,
+            "mean_iou": 0.5716030568848074
+          },
+          "no_legal_final": {
+            "n": 3,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.0
+          }
+        },
+        "initial_pool_strata": {
+          "covered": {
+            "n": 36,
+            "hits_0.5": 24,
+            "acc_0.5": 0.6666666666666666,
+            "mean_iou": 0.5768410046953711
+          },
+          "uncovered": {
+            "n": 4,
+            "hits_0.5": 0,
+            "acc_0.5": 0.0,
+            "mean_iou": 0.09575923392612858
+          }
+        },
+        "search_and_bbox_coverage": {
+          "newly_covered_by_search": 0,
+          "predicted_bbox_hits_on_initially_uncovered": 0,
+          "predicted_bbox_unique_rescues_without_final_candidate_coverage": 0,
+          "predicted_bbox_outputs_on_initially_covered": 0,
+          "predicted_bbox_hits_on_initially_covered": 0
+        },
+        "cost_observed_queries": 40,
+        "cost_total": {
+          "model_calls": 154,
+          "input_tokens": 589378,
+          "input_text_tokens": 340787,
+          "visual_tokens": 248591,
+          "output_tokens": 10333,
+          "tool_calls": 111,
+          "search_calls": 12,
+          "model_seconds": 390.05090295523405,
+          "tool_seconds": 80.11587132513523,
+          "preprocess_seconds": 26.548630937933922,
+          "preparation_seconds": 2.7685862481594086,
+          "elapsed_seconds": 500.8504264205694,
+          "depth_cache_hits": 0,
+          "depth_generated": 1,
+          "dino_calls": 13,
+          "sam_loads": 0,
+          "dino_loads": 1,
+          "depth_cached_seconds": 0,
+          "depth_generated_seconds": 1.4769990965723991,
+          "loads_seconds": 0.4614608362317085,
+          "invalid_actions": 6,
+          "legal_finish": 37
+        },
+        "cost_mean_per_query": {
+          "model_calls": 3.85,
+          "input_tokens": 14734.45,
+          "input_text_tokens": 8519.675,
+          "visual_tokens": 6214.775,
+          "output_tokens": 258.325,
+          "tool_calls": 2.775,
+          "search_calls": 0.3,
+          "model_seconds": 9.75127257388085,
+          "tool_seconds": 2.0028967831283806,
+          "preprocess_seconds": 0.6637157734483481,
+          "preparation_seconds": 0.06921465620398522,
+          "elapsed_seconds": 12.521260660514235,
+          "depth_cache_hits": 0.0,
+          "depth_generated": 0.025,
+          "dino_calls": 0.325,
+          "sam_loads": 0.0,
+          "dino_loads": 0.025,
+          "depth_cached_seconds": 0.0,
+          "depth_generated_seconds": 0.03692497741430998,
+          "loads_seconds": 0.011536520905792713,
+          "invalid_actions": 0.15,
+          "legal_finish": 0.925
+        },
+        "peak_memory_bytes": 19111504384,
+        "initial_hits_0.5": 29,
+        "initial_coverage_hits_0.5": 36,
+        "initial_uncovered": 4,
+        "final_coverage_hits_0.5": 36,
+        "final_uncovered": 4,
+        "newly_covered_by_search": 0,
+        "covered_but_final_wrong": 12
+      }
+    }
+  },
+  "run_sources": {
+    "C": "/root/autodl-tmp/rematch_20260922/results/visual_agent/evidence_decision_20260930/score_inputs_dev40_pretrain/C.jsonl",
+    "untrained": "/root/autodl-tmp/rematch_20260922/results/visual_agent/evidence_decision_20260930/score_inputs_dev40_pretrain/untrained.jsonl"
+  },
+  "pairs": {
+    "untrained-minus-C": {
+      "all": {
+        "n": 40,
+        "image_groups": 40,
+        "corrected_ids": [
+          "rgbt_flir_train_006869",
+          "rgbt_flir_train_001350"
+        ],
+        "damaged_ids": [
+          "city_000008_033_00000001_004",
+          "roborefit_train_000160",
+          "rgbt_flir_train_003845",
+          "rgbt_m3fd_train_002294",
+          "rgbt_flir_train_006282",
+          "roborefit_train_000985",
+          "roborefit_train_000297"
+        ],
+        "corrected": 2,
+        "damaged": 7,
+        "net_hits_0.5": -5,
+        "delta": {
+          "acc_0.5": -0.125,
+          "acc_0.7": -0.125,
+          "mean_iou": -0.10357844093077566
+        },
+        "representative_corrections": [
+          {
+            "id": "rgbt_flir_train_001350",
+            "query": "A dark-colored sedan with a yellow taxi roof sign is stopped at an intersection.",
+            "before_iou": 0.050577422522555,
+            "after_iou": 0.9372392057993554,
+            "before_bbox": [
+              0.0,
+              0.359,
+              0.2,
+              0.411
+            ],
+            "after_bbox": [
+              0.0010270476341247559,
+              0.37586596608161926,
+              0.37286624908447263,
+              0.6249306201934814
+            ],
+            "gt_bbox": [
+              0.0,
+              0.38671875,
+              0.3796875,
+              0.625
+            ]
+          },
+          {
+            "id": "rgbt_flir_train_006869",
+            "query": "Person in light clothing walking near parked cars.",
+            "before_iou": 0.0,
+            "after_iou": 0.5826763009658242,
+            "before_bbox": [
+              0.191,
+              0.479,
+              0.216,
+              0.544
+            ],
+            "after_bbox": [
+              0.29390807151794435,
+              0.46774524450302124,
+              0.32405405044555663,
+              0.5541234612464905
+            ],
+            "gt_bbox": [
+              0.29375,
+              0.44921875,
+              0.315625,
+              0.54882812
+            ]
+          }
+        ],
+        "representative_damages": [
+          {
+            "id": "roborefit_train_000985",
+            "query": "I need to grasp the vitamins in purple bottle on the right",
+            "before_iou": 0.9444167638780744,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.629,
+              0.202,
+              0.794,
+              0.424
+            ],
+            "after_bbox": [
+              0.5003190748393536,
+              0.0005167871713638306,
+              0.6087529182434082,
+              0.2545427640279134
+            ],
+            "gt_bbox": [
+              0.6296875,
+              0.19791667,
+              0.7890625,
+              0.42291667
+            ]
+          },
+          {
+            "id": "roborefit_train_000160",
+            "query": "please fetch me the glue stick on the right",
+            "before_iou": 0.9323223055750436,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.599,
+              0.419,
+              0.643,
+              0.523
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.5984375,
+              0.42083333,
+              0.6421875,
+              0.52083333
+            ]
+          },
+          {
+            "id": "roborefit_train_000297",
+            "query": "give me the orange on the left",
+            "before_iou": 0.8888835139318879,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.353,
+              0.584,
+              0.421,
+              0.679
+            ],
+            "after_bbox": [
+              0.4764113426208496,
+              0.7196844100952149,
+              0.5589288711547852,
+              0.8291416803995768
+            ],
+            "gt_bbox": [
+              0.353125,
+              0.5875,
+              0.41875,
+              0.675
+            ]
+          },
+          {
+            "id": "rgbt_flir_train_006282",
+            "query": "A white sedan is positioned on the left side of the road, facing forward with its side profile visible.",
+            "before_iou": 0.8552618092516645,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.0,
+              0.421,
+              0.183,
+              0.744
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.0,
+              0.41992188,
+              0.19375,
+              0.71289062
+            ]
+          },
+          {
+            "id": "rgbt_m3fd_train_002294",
+            "query": "Person in dark clothing stands near others on a grassy slope.",
+            "before_iou": 0.8282222004794286,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.236,
+              0.464,
+              0.254,
+              0.513
+            ],
+            "after_bbox": [
+              0.2836984097957611,
+              0.46919552485148114,
+              0.3071136772632599,
+              0.5155830383300781
+            ],
+            "gt_bbox": [
+              0.234375,
+              0.46484375,
+              0.25292969,
+              0.51171875
+            ]
+          }
+        ],
+        "group_bootstrap": {
+          "seed": 2026,
+          "replicates": 10000,
+          "delta_95ci": {
+            "acc_0.5": [
+              -0.275,
+              0.025
+            ],
+            "acc_0.7": [
+              -0.25,
+              0.0
+            ],
+            "mean_iou": [
+              -0.22630599815201263,
+              0.00887941625908572
+            ]
+          }
+        }
+      },
+      "other_not_independent_test": {
+        "n": 40,
+        "image_groups": 40,
+        "corrected_ids": [
+          "rgbt_flir_train_006869",
+          "rgbt_flir_train_001350"
+        ],
+        "damaged_ids": [
+          "city_000008_033_00000001_004",
+          "roborefit_train_000160",
+          "rgbt_flir_train_003845",
+          "rgbt_m3fd_train_002294",
+          "rgbt_flir_train_006282",
+          "roborefit_train_000985",
+          "roborefit_train_000297"
+        ],
+        "corrected": 2,
+        "damaged": 7,
+        "net_hits_0.5": -5,
+        "delta": {
+          "acc_0.5": -0.125,
+          "acc_0.7": -0.125,
+          "mean_iou": -0.10357844093077566
+        },
+        "representative_corrections": [
+          {
+            "id": "rgbt_flir_train_001350",
+            "query": "A dark-colored sedan with a yellow taxi roof sign is stopped at an intersection.",
+            "before_iou": 0.050577422522555,
+            "after_iou": 0.9372392057993554,
+            "before_bbox": [
+              0.0,
+              0.359,
+              0.2,
+              0.411
+            ],
+            "after_bbox": [
+              0.0010270476341247559,
+              0.37586596608161926,
+              0.37286624908447263,
+              0.6249306201934814
+            ],
+            "gt_bbox": [
+              0.0,
+              0.38671875,
+              0.3796875,
+              0.625
+            ]
+          },
+          {
+            "id": "rgbt_flir_train_006869",
+            "query": "Person in light clothing walking near parked cars.",
+            "before_iou": 0.0,
+            "after_iou": 0.5826763009658242,
+            "before_bbox": [
+              0.191,
+              0.479,
+              0.216,
+              0.544
+            ],
+            "after_bbox": [
+              0.29390807151794435,
+              0.46774524450302124,
+              0.32405405044555663,
+              0.5541234612464905
+            ],
+            "gt_bbox": [
+              0.29375,
+              0.44921875,
+              0.315625,
+              0.54882812
+            ]
+          }
+        ],
+        "representative_damages": [
+          {
+            "id": "roborefit_train_000985",
+            "query": "I need to grasp the vitamins in purple bottle on the right",
+            "before_iou": 0.9444167638780744,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.629,
+              0.202,
+              0.794,
+              0.424
+            ],
+            "after_bbox": [
+              0.5003190748393536,
+              0.0005167871713638306,
+              0.6087529182434082,
+              0.2545427640279134
+            ],
+            "gt_bbox": [
+              0.6296875,
+              0.19791667,
+              0.7890625,
+              0.42291667
+            ]
+          },
+          {
+            "id": "roborefit_train_000160",
+            "query": "please fetch me the glue stick on the right",
+            "before_iou": 0.9323223055750436,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.599,
+              0.419,
+              0.643,
+              0.523
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.5984375,
+              0.42083333,
+              0.6421875,
+              0.52083333
+            ]
+          },
+          {
+            "id": "roborefit_train_000297",
+            "query": "give me the orange on the left",
+            "before_iou": 0.8888835139318879,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.353,
+              0.584,
+              0.421,
+              0.679
+            ],
+            "after_bbox": [
+              0.4764113426208496,
+              0.7196844100952149,
+              0.5589288711547852,
+              0.8291416803995768
+            ],
+            "gt_bbox": [
+              0.353125,
+              0.5875,
+              0.41875,
+              0.675
+            ]
+          },
+          {
+            "id": "rgbt_flir_train_006282",
+            "query": "A white sedan is positioned on the left side of the road, facing forward with its side profile visible.",
+            "before_iou": 0.8552618092516645,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.0,
+              0.421,
+              0.183,
+              0.744
+            ],
+            "after_bbox": null,
+            "gt_bbox": [
+              0.0,
+              0.41992188,
+              0.19375,
+              0.71289062
+            ]
+          },
+          {
+            "id": "rgbt_m3fd_train_002294",
+            "query": "Person in dark clothing stands near others on a grassy slope.",
+            "before_iou": 0.8282222004794286,
+            "after_iou": 0.0,
+            "before_bbox": [
+              0.236,
+              0.464,
+              0.254,
+              0.513
+            ],
+            "after_bbox": [
+              0.2836984097957611,
+              0.46919552485148114,
+              0.3071136772632599,
+              0.5155830383300781
+            ],
+            "gt_bbox": [
+              0.234375,
+              0.46484375,
+              0.25292969,
+              0.51171875
+            ]
+          }
+        ],
+        "group_bootstrap": {
+          "seed": 2026,
+          "replicates": 10000,
+          "delta_95ci": {
+            "acc_0.5": [
+              -0.275,
+              0.025
+            ],
+            "acc_0.7": [
+              -0.25,
+              0.0
+            ],
+            "mean_iou": [
+              -0.22630599815201263,
+              0.00887941625908572
+            ]
+          }
+        }
+      }
+    }
+  },
+  "interpretation": [
+    "All missing or illegal final boxes have IoU zero in the fixed denominator.",
+    "Known reused and other subsets are both development data; other is not certified independent.",
+    "Only matched weights, inputs and budgets isolate the corresponding training or tool change.",
+    "Cost differences remain possible across paired mechanisms."
+  ]
+}
