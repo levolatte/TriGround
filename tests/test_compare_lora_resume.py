@@ -74,6 +74,45 @@ def test_exact_resume_passes_with_state_and_sample_trace(tmp_path):
     assert result["rng_state32"]["files"]["rng_state.pth"]["cuda"] is True
 
 
+def test_four_step_resume_with_ten_microbatches(tmp_path):
+    continuous = tmp_path / "continuous"
+    resumed = tmp_path / "resumed"
+    ids = [f"sample-{i}" for i in range(40)]
+    paths = (
+        _checkpoint(continuous, 2, 0.0, 0.0),
+        _checkpoint(continuous, 4, 0.0001, 0.001, samples=ids),
+        _checkpoint(resumed, 2, 0.0, 0.0),
+        _checkpoint(resumed, 4, 0.0001, 0.001, samples=ids),
+    )
+    result = compare(*paths, expected_groups=1, microbatches_per_step=10,
+                     split_step=2, final_step=4)
+    assert result["status"] == "pass"
+    assert result["sample_trace"]["entries"] == 40
+    assert (result["split_step"], result["final_step"]) == (2, 4)
+
+
+def test_four_step_cli_aliases(tmp_path, monkeypatch):
+    continuous = tmp_path / "continuous"
+    resumed = tmp_path / "resumed"
+    ids = [str(i) for i in range(40)]
+    paths = (
+        _checkpoint(continuous, 2, 0.0, 0.0),
+        _checkpoint(continuous, 4, 0.0001, 0.001, samples=ids),
+        _checkpoint(resumed, 2, 0.0, 0.0),
+        _checkpoint(resumed, 4, 0.0001, 0.001, samples=ids),
+    )
+    output = tmp_path / "comparison.json"
+    monkeypatch.setattr(sys, "argv", [
+        "compare_lora_resume", "--continuous-split", str(paths[0]),
+        "--continuous-final", str(paths[1]), "--resumed-split", str(paths[2]),
+        "--resumed-final", str(paths[3]), "--split-step", "2", "--final-step", "4",
+        "--microbatches-per-step", "10", "--expected-groups", "1",
+        "--expected-steps", "600", "--output", str(output),
+    ])
+    compare_lora_resume.main()
+    assert json.loads(output.read_text(encoding="utf-8"))["status"] == "pass"
+
+
 def test_small_fp32_difference_is_reported_separately(tmp_path):
     result = compare(*_four(tmp_path, resumed_value=0.0001001, resumed_moment=0.0010001),
                      expected_groups=1, microbatches_per_step=1)

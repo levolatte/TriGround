@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 
 import torch
+import torch.nn.functional as F
 
 
 LANGUAGE_TARGETS = ("q_proj", "k_proj", "v_proj", "o_proj")
@@ -23,6 +24,61 @@ COMPOSITE_TARGET_REGEX = (
 )
 VISUAL_RANK_PATTERN = r"visual\.(?:merger|deepstack_merger_list\.[0-2])\.linear_fc[12]"
 _LORA_PARAMETER = re.compile(r"^(.*)\.lora_([AB])\.default\.weight$")
+
+
+def sample_mean_causal_lm_loss(logits: torch.Tensor, labels: torch.Tensor) -> torch.Tensor:
+    """Mean answer-token CE per sample, then mean over samples in this microbatch."""
+    shifted_labels = labels[:, 1:].contiguous()
+    token_losses = F.cross_entropy(
+        logits[:, :-1, :].float().reshape(-1, logits.shape[-1]),
+        shifted_labels.reshape(-1),
+        ignore_index=-100,
+        reduction="none",
+    ).reshape_as(shifted_labels)
+    valid_tokens = shifted_labels.ne(-100).sum(dim=1)
+    if bool((valid_tokens == 0).any().item()):
+        raise ValueError("sample_mean requires at least one supervised answer token per sample")
+    return (token_losses.sum(dim=1) / valid_tokens).mean()
+
+
+def assert_complete_answer_supervision(supervised_text: str, expected_answer: str,
+                                       *, sample_index: int) -> None:
+    """Audit full assistant text without assuming an answer contains a bbox."""
+    if not expected_answer or expected_answer not in supervised_text:
+        raise RuntimeError(
+            f"sample {sample_index} assistant answer supervision is absent or truncated: "
+            f"expected={expected_answer!r}, decoded={supervised_text!r}"
+        )
+
+
+def consumed_sample_count(checkpoint_step: int, dataset_size: int,
+                          accumulation_steps: int) -> int:
+    """Count traced microbatches at an optimizer step, including short epoch tails."""
+    updates_per_epoch = math.ceil(dataset_size / accumulation_steps)
+    full_epochs, updates_in_epoch = divmod(checkpoint_step, updates_per_epoch)
+    return full_epochs * dataset_size + min(updates_in_epoch * accumulation_steps, dataset_size)
+
+
+def answer_type_audit_indices(rows: list[dict], first_count: int) -> list[int]:
+    """Select first metadata occurrence of each answer shape for token-level audit."""
+    indices = list(range(first_count))
+    seen = set()
+    for index, row in enumerate(rows):
+        answer = row["expected_answer"]
+        if isinstance(answer, dict) and answer.get("action") in {"keep", "replace"}:
+            category = "revision_" + answer["action"]
+        elif isinstance(answer, dict) and "bbox_2d" in answer:
+            category = ("IRnull" if answer["bbox_2d"] is None else
+                        "IRbox" if row["task_type"] == "ir_bbox" else "RGBbox")
+        elif isinstance(answer, str) and answer in {"A_nearer", "B_nearer", "unknown"}:
+            category = answer
+        else:
+            raise ValueError(f"unexpected T/M expected_answer at sample {index}: {answer!r}")
+        if category not in seen:
+            seen.add(category)
+            if index not in indices:
+                indices.append(index)
+    return indices
 
 
 def expected_modules(scope: str, language_layers: int = 36) -> set[str]:

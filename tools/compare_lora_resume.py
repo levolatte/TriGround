@@ -1,4 +1,4 @@
-"""CPU-only checkpoint audit: continuous 32 steps versus 16-to-32 resume.
+"""CPU-only checkpoint audit: continuous run versus split-step resume.
 
 Reads PEFT adapter, Trainer optimizer/scheduler/state, and consumed sample IDs.
 It never loads a base model. Exact equality is preferred; a bounded FP32
@@ -269,17 +269,19 @@ def _compare_optimizer16(first: dict[str, Any], second: dict[str, Any]) -> dict[
 def compare(
     continuous16: Path, continuous32: Path, resumed16: Path, resumed32: Path,
     *, expected_groups: int | None = None, expected_steps: int = 600,
-    microbatches_per_step: int = 8,
+    microbatches_per_step: int = 8, split_step: int = 16, final_step: int = 32,
 ) -> dict[str, Any]:
     if microbatches_per_step <= 0:
         raise ValueError("microbatches_per_step must be positive")
     if expected_steps not in (400, 600):
         raise ValueError("expected_steps must be 400 or 600")
+    if not 0 < split_step < final_step < expected_steps:
+        raise ValueError("split_step and final_step must increase below expected_steps")
     checkpoints = {
-        "continuous16": _read_checkpoint(continuous16, 16),
-        "continuous32": _read_checkpoint(continuous32, 32),
-        "resumed16": _read_checkpoint(resumed16, 16),
-        "resumed32": _read_checkpoint(resumed32, 32),
+        "continuous16": _read_checkpoint(continuous16, split_step),
+        "continuous32": _read_checkpoint(continuous32, final_step),
+        "resumed16": _read_checkpoint(resumed16, split_step),
+        "resumed32": _read_checkpoint(resumed32, final_step),
     }
     reference_config = checkpoints["continuous16"]["adapter_config"]
     reference_count = checkpoints["continuous16"]["module_counts"]
@@ -309,8 +311,8 @@ def compare(
     )
     rng16 = _compare_rng_states(checkpoints["continuous16"], checkpoints["resumed16"])
     rng32 = _compare_rng_states(checkpoints["continuous32"], checkpoints["resumed32"])
-    trace_continuous = _trace(continuous32, 32, microbatches_per_step)
-    trace_resumed = _trace(resumed32, 32, microbatches_per_step)
+    trace_continuous = _trace(continuous32, final_step, microbatches_per_step)
+    trace_resumed = _trace(resumed32, final_step, microbatches_per_step)
     traces_equal = trace_continuous == trace_resumed
     scheduler_equal = checkpoints["continuous32"]["scheduler"] == checkpoints["resumed32"]["scheduler"]
     scheduler16_equal = checkpoints["continuous16"]["scheduler"] == checkpoints["resumed16"]["scheduler"]
@@ -332,7 +334,8 @@ def compare(
               and rng16["equal"] and rng32["equal"])
     return {
         "status": "pass" if passed else "fail",
-        "criteria": "16 adapter/optimizer/RNG exact; 32 adapter/optimizer exact preferred, otherwise max_abs<=1e-6 AND L2 difference<=1% of 16-to-32 update; 32 RNG exact",
+        "split_step": split_step, "final_step": final_step,
+        "criteria": f"{split_step} adapter/optimizer/RNG exact; {final_step} adapter/optimizer exact preferred, otherwise max_abs<=1e-6 AND L2 difference<=1% of {split_step}-to-{final_step} update; {final_step} RNG exact",
         "checkpoints": {label: {"path": value["path"], "step": value["trainer_state"]["global_step"],
                                 "module_counts": value["module_counts"], "optimizer": audits[label]}
                         for label, value in checkpoints.items()},
@@ -358,19 +361,22 @@ def compare(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--continuous16", type=Path, required=True)
-    parser.add_argument("--continuous32", type=Path, required=True)
-    parser.add_argument("--resumed16", type=Path, required=True)
-    parser.add_argument("--resumed32", type=Path, required=True)
+    parser.add_argument("--continuous16", "--continuous-split", type=Path, required=True)
+    parser.add_argument("--continuous32", "--continuous-final", type=Path, required=True)
+    parser.add_argument("--resumed16", "--resumed-split", type=Path, required=True)
+    parser.add_argument("--resumed32", "--resumed-final", type=Path, required=True)
     parser.add_argument("--expected-groups", type=int)
     parser.add_argument("--expected-steps", type=int, choices=(400, 600), default=600)
     parser.add_argument("--microbatches-per-step", type=int, default=8)
+    parser.add_argument("--split-step", type=int, default=16)
+    parser.add_argument("--final-step", type=int, default=32)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = compare(
         args.continuous16, args.continuous32, args.resumed16, args.resumed32,
         expected_groups=args.expected_groups, expected_steps=args.expected_steps,
         microbatches_per_step=args.microbatches_per_step,
+        split_step=args.split_step, final_step=args.final_step,
     )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -1,0 +1,17 @@
+﻿id,scene_id,category,comparison,change,left_iou,right_iou
+city_000011_002_00000085_003,city:000011_002_00000085,old_city,R vs A,harm,0.2509335029512865,0.5781621823395416
+city_000011_002_00000085_003,city:000011_002_00000085,old_city,S+G vs S,rescue,0.5999977842417099,0.28636268727729547
+city_001029_005,city:001029,old_city,R vs A,rescue,0.6654625193252044,0.0
+city_001029_005,city:001029,old_city,S+G vs S,harm,0.0,0.6751903009979532
+city_001685_010,city:001685,old_city,S vs R,rescue,0.6513295902189767,0.0
+city_001685_010,city:001685,old_city,S+G vs S,harm,0.0,0.6513295902189767
+city_hehe_224_000002_041_00000197_005,city:hehe_224_000002_041_00000197,old_city,S vs R,rescue,0.8514187916181273,0.0
+city_hehe_224_000002_041_00000197_005,city:hehe_224_000002_041_00000197,old_city,S+G vs S,harm,0.0,0.8514187916181273
+tm:diag:rgbt_flir_train_003925:diag_ir,flir:FLIR_03926,diag_ir,S+G vs S,harm,0.499845156785276,0.7770971233747087
+tm:diag:rgbt_flir_train_003925:diag_ir,flir:FLIR_03926,diag_ir,S+G vs A,harm,0.499845156785276,0.5086783474748968
+tm:diag:rgbt_flir_train_002574:reserve_ir,flir:FLIR_03029,reserve_ir,R vs A,rescue,0.595518082982028,0.0
+tm:diag:rgbt_flir_train_002574:reserve_ir,flir:FLIR_03029,reserve_ir,S+G vs S,harm,0.0,0.9187864048019637
+tm:diag:rgbt_mfad_train_004981:ir_complement,mfad:cali_l_2023_10_17_19_16_36_298,ir_complement,R vs A,rescue,0.7396978862856204,0.0
+tm:diag:rgbt_mfad_train_004981:ir_complement,mfad:cali_l_2023_10_17_19_16_36_298,ir_complement,S+G vs S,harm,0.0,0.8908654706093698
+rgb-ir-control:rgbt_mfad_train_001861:diag_ir:repair1,mfad:cali_l_0322201309-716,rgb_sufficient_ir,S vs R,rescue,0.8468888627373871,0.027354206511860216
+rgb-ir-control:rgbt_mfad_train_001861:diag_ir:repair1,mfad:cali_l_0322201309-716,rgb_sufficient_ir,S+G vs S,harm,0.02777422277194743,0.8468888627373871

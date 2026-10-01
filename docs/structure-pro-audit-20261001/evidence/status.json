@@ -1,0 +1,28 @@
+{
+  "status": "stopped_no_clear_benefit",
+  "primary_complete": true,
+  "horizon": 400,
+  "pipeline_stopped": true,
+  "second_seed_status": "stopped_without_evaluation",
+  "spent_seconds": 16521.18381166458,
+  "gpu_limit_seconds": 43200,
+  "city_correct": {
+    "A": 296,
+    "R": 296,
+    "S": 298,
+    "S+G": 296
+  },
+  "diagnostic_correct": {
+    "A": 100,
+    "R": 102,
+    "S": 103,
+    "S+G": 99
+  },
+  "official_submission": false,
+  "reason": "User requested stop if no clear gain; S City +2 has confidence interval crossing zero.",
+  "automation_status": "PAUSED",
+  "final_stop_guard_cpu_checks": {
+    "status": "pass",
+    "tests": 5
+  }
+}

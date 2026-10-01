@@ -1,0 +1,141 @@
+{
+  "A": {
+    "city412": {
+      "denominator": 412,
+      "correct": 296,
+      "miou": 0.617789726705067,
+      "rescue": 0,
+      "harm": 0
+    },
+    "diagnostic119": {
+      "denominator": 119,
+      "correct": 100,
+      "miou": 0.7446387333506378,
+      "rescue": 0,
+      "harm": 0
+    },
+    "modality_effect": {
+      "ir": {
+        "pairs": 87,
+        "normal_correct": 75,
+        "blank_correct": 75,
+        "net": 0
+      },
+      "depth": {
+        "pairs": 55,
+        "normal_correct": 45,
+        "blank_correct": 45,
+        "net": 0
+      }
+    }
+  },
+  "R": {
+    "city412": {
+      "denominator": 412,
+      "correct": 296,
+      "miou": 0.616615861069995,
+      "rescue": 1,
+      "harm": 1
+    },
+    "diagnostic119": {
+      "denominator": 119,
+      "correct": 102,
+      "miou": 0.7580603529118005,
+      "rescue": 2,
+      "harm": 0
+    },
+    "modality_effect": {
+      "ir": {
+        "pairs": 87,
+        "normal_correct": 77,
+        "blank_correct": 76,
+        "net": 1
+      },
+      "depth": {
+        "pairs": 55,
+        "normal_correct": 45,
+        "blank_correct": 45,
+        "net": 0
+      }
+    }
+  },
+  "S": {
+    "city412": {
+      "denominator": 412,
+      "correct": 298,
+      "miou": 0.6214825069577824,
+      "rescue": 3,
+      "harm": 1
+    },
+    "diagnostic119": {
+      "denominator": 119,
+      "correct": 103,
+      "miou": 0.7704670723652782,
+      "rescue": 3,
+      "harm": 0
+    },
+    "modality_effect": {
+      "ir": {
+        "pairs": 87,
+        "normal_correct": 78,
+        "blank_correct": 75,
+        "net": 3
+      },
+      "depth": {
+        "pairs": 55,
+        "normal_correct": 45,
+        "blank_correct": 45,
+        "net": 0
+      }
+    }
+  },
+  "S+G": {
+    "city412": {
+      "denominator": 412,
+      "correct": 296,
+      "miou": 0.6178332727628075,
+      "rescue": 0,
+      "harm": 0
+    },
+    "diagnostic119": {
+      "denominator": 119,
+      "correct": 99,
+      "miou": 0.7447153207060307,
+      "rescue": 0,
+      "harm": 1
+    },
+    "modality_effect": {
+      "ir": {
+        "pairs": 87,
+        "normal_correct": 74,
+        "blank_correct": 75,
+        "net": -1
+      },
+      "depth": {
+        "pairs": 55,
+        "normal_correct": 45,
+        "blank_correct": 45,
+        "net": 0
+      }
+    }
+  },
+  "checks": {
+    "conditions": 673,
+    "normal_city": 412,
+    "normal_diagnostic": 119,
+    "train_conditions": 1045,
+    "train_mothers": 955,
+    "train_scenes": 744,
+    "R_S_actual_schedule_exact": true,
+    "A_historical_raw_tokens_grid_exact_rows": 412,
+    "new_train_eval_scene_overlap": 0,
+    "gpu_seconds": 16521.18381166458,
+    "budget_stages": 26,
+    "second_seed_complete_evaluation": false,
+    "cloud_no_gpu_and_no_training": true
+  },
+  "S_minus_A_City_scene_bootstrap_95": [
+    -0.004662550564189908,
+    0.014989561027837255
+  ]
+}

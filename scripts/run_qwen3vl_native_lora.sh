@@ -23,6 +23,9 @@ STOP_AFTER_STEP="${STOP_AFTER_STEP:-}"
 PRESERVE_MANIFEST_ORDER="${PRESERVE_MANIFEST_ORDER:-0}"
 SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-2}"
 AUDIT_SAMPLE_COUNT="${AUDIT_SAMPLE_COUNT:-1}"
+GRADIENT_ACCUMULATION_STEPS="${GRADIENT_ACCUMULATION_STEPS:-8}"
+LOSS_REDUCTION="${LOSS_REDUCTION:-existing}"
+CHECKPOINT_STEPS="${CHECKPOINT_STEPS:-}"
 CODE_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 if [[ "${LORA_SCOPE}" != "language" && "${LORA_SCOPE}" != "language_merger" ]]; then
   echo "LORA_SCOPE must be language or language_merger" >&2
@@ -48,6 +51,18 @@ if ! [[ "${AUDIT_SAMPLE_COUNT}" =~ ^[1-9][0-9]*$ ]]; then
   echo "AUDIT_SAMPLE_COUNT must be a positive integer" >&2
   exit 2
 fi
+if ! [[ "${GRADIENT_ACCUMULATION_STEPS}" =~ ^[1-9][0-9]*$ ]]; then
+  echo "GRADIENT_ACCUMULATION_STEPS must be a positive integer" >&2
+  exit 2
+fi
+if [[ "${LOSS_REDUCTION}" != "existing" && "${LOSS_REDUCTION}" != "sample_mean" ]]; then
+  echo "LOSS_REDUCTION must be existing or sample_mean" >&2
+  exit 2
+fi
+if [[ -n "${CHECKPOINT_STEPS}" && ! "${CHECKPOINT_STEPS}" =~ ^[1-9][0-9]*(,[1-9][0-9]*)*$ ]]; then
+  echo "CHECKPOINT_STEPS must be comma-separated positive integers" >&2
+  exit 2
+fi
 
 if [[ -n "${INIT_ADAPTER}" && -n "${RESUME_FROM_CHECKPOINT}" ]]; then
   echo "INIT_ADAPTER and RESUME_FROM_CHECKPOINT are mutually exclusive" >&2
@@ -58,8 +73,8 @@ if [[ -n "${SAVE_STEPS}" ]] && ! [[ "${SAVE_STEPS}" =~ ^[1-9][0-9]*$ ]]; then
   exit 2
 fi
 if [[ -n "${STOP_AFTER_STEP}" ]]; then
-  if ! [[ "${STOP_AFTER_STEP}" =~ ^[1-9][0-9]*$ ]] || [[ -z "${SAVE_STEPS}" ]] || (( STOP_AFTER_STEP % SAVE_STEPS != 0 )); then
-    echo "STOP_AFTER_STEP must be a positive multiple of SAVE_STEPS" >&2
+  if ! [[ "${STOP_AFTER_STEP}" =~ ^[1-9][0-9]*$ ]] || [[ -z "${SAVE_STEPS}" ]]; then
+    echo "STOP_AFTER_STEP must be positive and requires SAVE_STEPS" >&2
     exit 2
   fi
   if [[ "${MAX_STEPS}" == "-1" ]] || (( STOP_AFTER_STEP >= MAX_STEPS )); then
@@ -109,6 +124,9 @@ export CITY_STOP_AFTER_STEP="${STOP_AFTER_STEP}"
 export CITY_PRESERVE_MANIFEST_ORDER="${PRESERVE_MANIFEST_ORDER}"
 export CITY_SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT}"
 export CITY_AUDIT_SAMPLE_COUNT="${AUDIT_SAMPLE_COUNT}"
+export CITY_GRADIENT_ACCUMULATION_STEPS="${GRADIENT_ACCUMULATION_STEPS}"
+export CITY_LOSS_REDUCTION="${LOSS_REDUCTION}"
+export CITY_CHECKPOINT_STEPS="${CHECKPOINT_STEPS}"
 cd "${QWEN_FINETUNE_DIR}"
 
 args=(
@@ -135,7 +153,7 @@ args=(
   --warmup_ratio 0.0
   --max_grad_norm 1.0
   --per_device_train_batch_size 1
-  --gradient_accumulation_steps 8
+  --gradient_accumulation_steps "${GRADIENT_ACCUMULATION_STEPS}"
   --num_train_epochs "${EPOCHS}"
   --seed "${SEED}"
   --data_seed "${SEED}"
@@ -234,6 +252,9 @@ if visual_lora_lr <= 0:
     raise ValueError("VISUAL_LORA_LR must be positive")
 preserve_manifest_order = os.environ["CITY_PRESERVE_MANIFEST_ORDER"] == "1"
 save_total_limit = int(os.environ["CITY_SAVE_TOTAL_LIMIT"])
+gradient_accumulation_steps = int(os.environ["CITY_GRADIENT_ACCUMULATION_STEPS"])
+loss_reduction = os.environ["CITY_LOSS_REDUCTION"]
+checkpoint_steps = tuple(int(step) for step in os.environ["CITY_CHECKPOINT_STEPS"].split(",") if step)
 config_path = output_dir / "native_train_config.json"
 resume_config_path = (
     Path(resume_from_checkpoint).expanduser().parent / "native_train_config.json"
@@ -275,6 +296,9 @@ resolved_config = {
         if lora_scope == "language_merger" else None,
     },
     "max_steps": os.environ.get("CITY_MAX_STEPS", "-1"),
+    "gradient_accumulation_steps": gradient_accumulation_steps,
+    "loss_reduction": loss_reduction,
+    "checkpoint_steps": list(checkpoint_steps),
     "init_adapter": stage_init_adapter or None,
     "save_strategy": "steps" if save_steps else "epoch",
     "save_steps": int(save_steps) if save_steps else None,
@@ -331,13 +355,15 @@ comparison_keys = (
     "learning_rate",
     "lora",
     "max_steps",
+    "gradient_accumulation_steps",
+    "loss_reduction",
     "preserve_manifest_order",
     "dataloader_num_workers",
     "save_total_limit",
     "init_adapter",
     "optimizer",
     "numerics",
-)
+) + (("save_steps", "checkpoint_steps") if loss_reduction == "sample_mean" else ())
 
 
 def check_existing_config(path):
@@ -515,6 +541,13 @@ class FiniteTrainingCallback(transformers.TrainerCallback):
         self._first_step_probes = None
         return control
 
+    def on_step_end(self, args, state, control, **kwargs):
+        if state.global_step in checkpoint_steps or (stop_after_step and state.global_step == int(stop_after_step)):
+            # A short preflight keeps the formal save_steps=100 policy while
+            # preserving a complete checkpoint at its planned stop step.
+            control.should_save = True
+        return control
+
     def on_save(self, args, state, control, **kwargs):
         checkpoint = output_dir / f"checkpoint-{state.global_step}"
         count = check_adapter_checkpoint(kwargs["model"], checkpoint)
@@ -564,6 +597,10 @@ original_trainer_init = transformers.Trainer.__init__
 
 def audited_trainer_init(self, *args, **kwargs):
     original_trainer_init(self, *args, **kwargs)
+    if loss_reduction == "sample_mean":
+        # Trainer must divide each microbatch loss once by the current
+        # accumulation-window length. Do not count answer tokens across samples.
+        self.model_accepts_loss_kwargs = False
     self.add_callback(FiniteTrainingCallback(self.model))
     print(
         "=== finite-value audit enabled: "
@@ -573,6 +610,16 @@ def audited_trainer_init(self, *args, **kwargs):
 
 
 transformers.Trainer.__init__ = audited_trainer_init
+
+if loss_reduction == "sample_mean":
+    def sample_mean_compute_loss(self, model, inputs, return_outputs=False,
+                                 num_items_in_batch=None):
+        labels = inputs["labels"]
+        outputs = model(**{key: value for key, value in inputs.items() if key != "labels"})
+        loss = native_lora.sample_mean_causal_lm_loss(outputs.logits, labels)
+        return (loss, outputs) if return_outputs else loss
+
+    transformers.Trainer.compute_loss = sample_mean_compute_loss
 
 def audited_create_optimizer(self):
     if self.optimizer is None:
@@ -691,7 +738,13 @@ def audited_make_data_module(processor, data_args):
 
     patch_size = int(processor.image_processor.patch_size)
     merge_size = int(processor.image_processor.merge_size)
-    for index in range(int(os.environ["CITY_AUDIT_SAMPLE_COUNT"])):
+    audit_indices = (
+        native_lora.answer_type_audit_indices(
+            dataset.list_data_dict, int(os.environ["CITY_AUDIT_SAMPLE_COUNT"])
+        ) if loss_reduction == "sample_mean"
+        else list(range(int(os.environ["CITY_AUDIT_SAMPLE_COUNT"])))
+    )
+    for index in audit_indices:
         first_sample = dataset[index]
         first_batch = data_module["data_collator"]([first_sample])
         input_tokens = int(first_batch["input_ids"].shape[-1])
@@ -706,6 +759,7 @@ def audited_make_data_module(processor, data_args):
         expected_images = len(image_field) if isinstance(image_field, list) else 1
         audit = {
             "id": dataset.list_data_dict[index]["id"],
+            "task_type": dataset.list_data_dict[index].get("task_type"),
             "input_tokens": input_tokens,
             "model_max_length": processor.tokenizer.model_max_length,
             "grid": grid,
@@ -724,11 +778,11 @@ def audited_make_data_module(processor, data_args):
             raise RuntimeError(f"sample {index} expected {expected_images} image grids, got {len(grid)}")
         if any(pixels > max_pixels for pixels in resized_pixels):
             raise RuntimeError(f"sample {index} image pixel bound not applied: {resized_pixels} > {max_pixels}")
-        if supervised_ids.numel() == 0 or expected_answer not in supervised_text:
-            raise RuntimeError(
-                f"sample {index} assistant bbox supervision is absent or truncated: "
-                f"expected={expected_answer!r}, decoded={supervised_text!r}"
-            )
+        if supervised_ids.numel() == 0:
+            raise RuntimeError(f"sample {index} has no supervised answer tokens")
+        native_lora.assert_complete_answer_supervision(
+            supervised_text, expected_answer, sample_index=index
+        )
     if preserve_manifest_order:
         sample_ids = [str(row["id"]) for row in dataset.list_data_dict]
         if len(sample_ids) != len(set(sample_ids)):
@@ -738,7 +792,9 @@ def audited_make_data_module(processor, data_args):
             checkpoint_step = json.loads(
                 (Path(resume_from_checkpoint) / "trainer_state.json").read_text(encoding="utf-8")
             )["global_step"]
-            expected_count = checkpoint_step * 8
+            expected_count = native_lora.consumed_sample_count(
+                checkpoint_step, len(dataset), gradient_accumulation_steps
+            )
             recorded = trace_path.read_text(encoding="utf-8").splitlines()
             if len(recorded) < expected_count:
                 raise RuntimeError(

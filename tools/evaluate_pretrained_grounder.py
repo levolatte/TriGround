@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 import sys
 import time
@@ -28,6 +29,8 @@ NATIVE_PROMPT = (
 )
 NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 FOUR_NUMBERS = rf"({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})"
+IR_FIRST_TOKENS = 64
+IR_FINAL_TOKENS = 128
 
 
 def parse_generated_bbox(text: str) -> list[float] | None:
@@ -83,6 +86,7 @@ def extract_query(user_text: str) -> str:
         r"Locate the object described by this referring expression:\s*[\"“](.+?)[\"”]\."
         r"\s*Return",
         r"Locate\s+(.+?),\s*output its bbox coordinates using JSON format\s*$",
+        r"Locate the object described by this query:\s*(.+?)(?:\nReturn|$)",
     )
     for pattern in patterns:
         match = re.search(pattern, text, flags=re.IGNORECASE | re.DOTALL)
@@ -118,6 +122,21 @@ def _image_values(
     if value:
         return [value]
     raise KeyError("record has no RGB image path")
+
+
+def _modalities(record: dict[str, Any], images: list[str]) -> list[str] | None:
+    values = record.get("modalities", record.get("image_order"))
+    if values is None and isinstance(record.get("images"), list):
+        entries = record["images"]
+        if entries and all(isinstance(item, dict) and "modality" in item for item in entries):
+            values = [item["modality"] for item in entries]
+    if values is None:
+        return None
+    if not isinstance(values, list) or len(values) != len(images):
+        raise ValueError("modalities must match image order and count")
+    aliases = {"rgb": "rgb", "visible": "rgb", "ir": "ir", "infrared": "ir", "depth": "depth"}
+    modalities = [aliases[str(value).lower()] for value in values]
+    return modalities
 
 
 def _validated_target(values: Any) -> list[float]:
@@ -156,6 +175,9 @@ def normalize_record(sample_id: str, record: dict[str, Any]) -> dict[str, Any]:
             "prompt_has_image_placeholders": True,
             "images_from_data_root": True,
             "bbox": target,
+            "query": str(record["query"]).strip() if "query" in record else extract_query(prompt),
+            "modalities": _modalities(record, images),
+            "missing_modalities_actual": record.get("missing_modalities_actual", []),
         }
 
     messages = record.get("messages")
@@ -164,13 +186,16 @@ def normalize_record(sample_id: str, record: dict[str, Any]) -> dict[str, Any]:
         query = str(record["query"]).strip()
         if not query:
             raise ValueError("query must not be empty")
+        images = _image_values(record)
         return {
             "id": sample_id,
-            "images": _image_values(record),
+            "images": images,
             "query": query,
             "prompt_has_image_placeholders": False,
             "images_from_data_root": False,
             "bbox": target,
+            "modalities": _modalities(record, images),
+            "missing_modalities_actual": record.get("missing_modalities_actual", []),
         }
 
     if not isinstance(messages, list):
@@ -186,13 +211,16 @@ def normalize_record(sample_id: str, record: dict[str, Any]) -> dict[str, Any]:
     target = parse_generated_bbox(assistant_text)
     if target is None:
         raise ValueError("assistant message has no valid 0--1000 bbox")
+    images = _image_values(record, user_message)
     return {
         "id": sample_id,
-        "images": _image_values(record, user_message),
+        "images": images,
         "query": extract_query(_message_text(user_message)),
         "prompt_has_image_placeholders": False,
         "images_from_data_root": False,
         "bbox": target,
+        "modalities": _modalities(record, images),
+        "missing_modalities_actual": record.get("missing_modalities_actual", []),
     }
 
 
@@ -311,8 +339,10 @@ def build_run_config(
     max_new_tokens: int,
     prompt_style: str,
     limit: int = 0,
+    inference_mode: str = "direct",
+    ir_reader_adapter: Path | None = None,
 ) -> dict[str, Any]:
-    return {
+    config = {
         "model": model,
         "adapter": str(adapter) if adapter is not None else None,
         "manifest": str(manifest),
@@ -329,6 +359,17 @@ def build_run_config(
         "matmul_precision": "highest",
         "torch_float32_matmul_precision": "highest",
     }
+    if inference_mode != "direct":
+        config["inference_mode"] = inference_mode
+        if inference_mode == "ir_then_ground":
+            config["ir_first_max_new_tokens"] = IR_FIRST_TOKENS
+            config["ir_final_max_new_tokens"] = IR_FINAL_TOKENS
+        else:
+            config["revision_max_new_tokens"] = 128
+        if ir_reader_adapter is not None:
+            config["auxiliary_adapter"] = str(ir_reader_adapter)
+            config["grounder_adapter"] = str(adapter)
+    return config
 
 
 def validate_resume_rows(
@@ -380,6 +421,9 @@ def ensure_jsonl_append_separator(path: Path, handle: Any) -> None:
 
 
 def verify_run_config(saved: dict[str, Any], current: dict[str, Any]) -> None:
+    for key, default in (("inference_mode", "direct"), ("auxiliary_adapter", None)):
+        if saved.get(key, default) != current.get(key, default):
+            raise ValueError(f"resume run_config mismatch for {key}")
     for key, expected in current.items():
         if key not in saved:
             raise ValueError(f"resume run_config is missing {key}")
@@ -437,6 +481,110 @@ def build_user_content(
     return content
 
 
+def load_model_images(paths: list[Path]) -> list[Image.Image]:
+    images = []
+    for path in paths:
+        with Image.open(path) as source:
+            images.append(source.convert("RGB").copy())
+    return images
+
+
+def parse_ir_reading(text: str) -> tuple[str, list[float] | None]:
+    """Strict first-call IR output; coordinates remain in the IR 0--1000 frame."""
+    try:
+        answer = json.loads(text)
+    except json.JSONDecodeError:
+        return "reading_parse_failure", None
+    if not isinstance(answer, dict) or set(answer) != {"bbox_2d"}:
+        return "reading_parse_failure", None
+    value = answer["bbox_2d"]
+    if value is None:
+        return "unknown", None
+    if not isinstance(value, list) or len(value) != 4 or any(
+        isinstance(number, bool) or not isinstance(number, (int, float)) for number in value
+    ):
+        return "reading_parse_failure", None
+    box = [float(number) for number in value]
+    if not all(math.isfinite(number) and 0 <= number <= 1000 for number in box):
+        return "reading_parse_failure", None
+    if box[0] >= box[2] or box[1] >= box[3]:
+        return "reading_parse_failure", None
+    return "box", box
+
+
+def build_ir_first_prompt(query: str) -> str:
+    return (
+        "Use only this infrared image. Locate the object described by the complete query: "
+        + query
+        + "\nReturn exactly one JSON object: {\"bbox_2d\":[x1,y1,x2,y2]} "
+        "with coordinates in this infrared image normalized to 0-1000. "
+        "Give a box only if infrared evidence uniquely identifies the object. "
+        "If a necessary color, brand, or other attribute cannot be determined in infrared, "
+        "or the object is ambiguous, return {\"bbox_2d\":null}."
+    )
+
+
+def append_ir_guidance(prompt: str, box_ir: list[float]) -> str:
+    coordinates = json.dumps(box_ir, separators=(",", ":"))
+    return (
+        prompt
+        + "\nIR model prediction may be wrong. Its suggested box in the infrared image "
+        + f"(IR 0-1000 xyxy coordinates) is {coordinates}. "
+        "These are infrared-image coordinates, not RGB coordinates. "
+        "Use all original views and the complete query to return the final box "
+        "in the RGB image, normalized to RGB 0-1000 coordinates."
+    )
+
+
+def ir_image_index(record: dict[str, Any]) -> int | None:
+    modalities = record.get("modalities")
+    missing = record.get("missing_modalities_actual", [])
+    if any(value in {"ir", "infrared"} for value in missing):
+        return None
+    return modalities.index("ir") if modalities is not None and "ir" in modalities else None
+
+
+def ground_with_optional_ir(
+    record: dict[str, Any],
+    prompt: str,
+    images: list[Image.Image],
+    inference_mode: str,
+    generate: Any,
+    direct_max_new_tokens: int,
+    *,
+    read_ir: Any = None,
+) -> dict[str, Any]:
+    """Generate at most once per stage; generate(prompt, images, placeholders, cap)."""
+    if inference_mode == "ir_then_ground" and record.get("modalities") is None and len(images) > 1:
+        raise ValueError("ir_then_ground requires explicit modalities for multi-image records")
+    ir_index = ir_image_index(record) if inference_mode == "ir_then_ground" else None
+    first_raw_text = None
+    first_box_ir = None
+    first_status = "no_ir" if inference_mode == "ir_then_ground" else "not_requested"
+    first = None
+    final_prompt = prompt
+    final_cap = direct_max_new_tokens
+    if ir_index is not None:
+        first = (read_ir or generate)(build_ir_first_prompt(record["query"]), [images[ir_index]], False, IR_FIRST_TOKENS)
+        first_raw_text = first["raw_text"]
+        first_status, first_box_ir = parse_ir_reading(first_raw_text)
+        if first_status == "box":
+            final_prompt = append_ir_guidance(prompt, first_box_ir)
+        final_cap = IR_FINAL_TOKENS
+    final = generate(final_prompt, images, record["prompt_has_image_placeholders"], final_cap)
+    return {
+        "first_raw_text": first_raw_text,
+        "first_box_ir": first_box_ir,
+        "first_status": first_status,
+        "calls": 1 + int(first is not None),
+        "total_latency_seconds": final["latency_seconds"] + (first["latency_seconds"] if first is not None else 0.0),
+        "first_generated_tokens": first["generated_tokens"] if first is not None else 0,
+        "first_generation_cap_hit": first["generation_cap_hit"] if first is not None else False,
+        "final_prompt": final_prompt,
+        "final": final,
+    }
+
+
 def score_prediction(
     prediction: list[float] | None, target: list[float]
 ) -> tuple[float, bool]:
@@ -470,7 +618,7 @@ def summarize_rows(rows: list[dict[str, Any]]) -> dict[str, float | int]:
             hits += score_prediction(row["prediction"], row["target"])[1]
     latencies = [float(row["latency_seconds"]) for row in rows]
     tokens = [int(row["generated_tokens"]) for row in rows]
-    return {
+    summary = {
         "samples": len(rows),
         "parsed": parsed,
         "parse_failures": len(rows) - parsed,
@@ -484,6 +632,122 @@ def summarize_rows(rows: list[dict[str, Any]]) -> dict[str, float | int]:
         "median_generation_seconds": median(latencies),
         "generation_cap_hits": sum(row["generation_cap_hit"] for row in rows),
     }
+    if any("first_status" in row for row in rows):
+        summary.update({
+            "ir_available": sum(row.get("first_status") != "no_ir" for row in rows),
+            "ir_box": sum(row.get("first_status") == "box" for row in rows),
+            "ir_unknown": sum(row.get("first_status") == "unknown" for row in rows),
+            "reading_parse_failures": sum(row.get("first_status") == "reading_parse_failure" for row in rows),
+            "first_generation_cap_hits": sum(bool(row.get("first_generation_cap_hit", False)) for row in rows),
+            "total_calls": sum(int(row.get("calls", 1)) for row in rows),
+            "total_latency_seconds": sum(float(row.get("total_latency_seconds", row["latency_seconds"])) for row in rows),
+            "total_call_generated_tokens": sum(
+                int(row["generated_tokens"]) + int(row.get("first_generated_tokens", 0)) for row in rows
+            ),
+        })
+    if any("revision_action" in row for row in rows):
+        baseline_hits = [score_prediction(row["baseline_prediction"], row["target"])[1] for row in rows]
+        final_hits = [score_prediction(row["prediction"], row["target"])[1] for row in rows]
+        rescued = sum(not old and new for old, new in zip(baseline_hits, final_hits, strict=True))
+        harmed = sum(old and not new for old, new in zip(baseline_hits, final_hits, strict=True))
+        summary.update({
+            "revision_keep": sum(row["revision_action"] == "keep" for row in rows),
+            "revision_replace": sum(row["revision_action"] == "replace" for row in rows),
+            "revision_parse_failures": sum(row["revision_action"] == "parse_failure" for row in rows),
+            "total_calls": sum(row["calls"] for row in rows),
+            "total_latency_seconds": sum(row["total_latency_seconds"] for row in rows),
+            "total_call_generated_tokens": sum(row["generated_tokens"] + row["first_generated_tokens"] for row in rows),
+            "revision_retention": {
+                "samples": len(rows), "baseline_hits": sum(baseline_hits),
+                "final_hits": sum(final_hits), "rescued": rescued, "harmed": harmed,
+                "net_hits": rescued-harmed,
+                "correct_proposals_replaced": sum(hit and row["revision_action"] == "replace"
+                                                  for hit, row in zip(baseline_hits, rows, strict=True)),
+                "wrong_proposals_kept": sum(not hit and row["revision_action"] == "keep"
+                                            for hit, row in zip(baseline_hits, rows, strict=True)),
+            },
+        })
+    return summary
+
+
+def attach_frozen_ir_reader(model: Any, adapter: Path) -> None:
+    """A separate reader LoRA shares only the frozen base with the grounder."""
+    model.load_adapter(str(adapter), adapter_name="ir_reader", is_trainable=False,
+                       autocast_adapter_dtype=False, local_files_only=True)
+    model.set_adapter("default")
+    model.requires_grad_(False)
+    model.eval()
+
+
+def adapter_generator(model: Any, processor: Any, adapter_name: str):
+    def generate(prompt, images, placeholders, cap):
+        # PEFT set_adapter can enable gradients; both inference roles stay frozen.
+        model.set_adapter(adapter_name)
+        model.requires_grad_(False)
+        model.eval()
+        return generate_text(model, processor, prompt, images, placeholders, cap)
+    return generate
+
+
+def load_model_and_processor(model_name: str, adapter: Path | None, min_pixels: int,
+                             max_pixels: int, *, ir_reader_adapter: Path | None = None):
+    if not torch.cuda.is_available():
+        raise RuntimeError("CUDA is required for pretrained grounder evaluation")
+    configure_torch_precision()
+    processor = AutoProcessor.from_pretrained(
+        model_name, min_pixels=min_pixels, max_pixels=max_pixels, local_files_only=True,
+    )
+    model = Qwen3VLForConditionalGeneration.from_pretrained(
+        model_name, dtype=torch.bfloat16, attn_implementation="sdpa", local_files_only=True,
+    )
+    if adapter is not None:
+        from peft import PeftModel
+
+        model = PeftModel.from_pretrained(
+            model, adapter, is_trainable=False, autocast_adapter_dtype=False,
+            local_files_only=True,
+        )
+    if ir_reader_adapter is not None:
+        if adapter is None:
+            raise ValueError("a separate IR reader requires an explicit retained grounder adapter")
+        attach_frozen_ir_reader(model, ir_reader_adapter)
+    model = model.eval().to(device="cuda", dtype=torch.bfloat16)
+    torch.cuda.reset_peak_memory_stats()
+    return model, processor
+
+
+def generate_text(model: Any, processor: Any, prompt: str, images: list[Image.Image],
+                  placeholders: bool, max_new_tokens: int) -> dict[str, Any]:
+    messages = [{"role": "user", "content": build_user_content(
+        prompt, images, prompt_has_image_placeholders=placeholders,
+    )}]
+    inputs = processor.apply_chat_template(
+        messages, tokenize=True, add_generation_prompt=True,
+        return_dict=True, return_tensors="pt",
+    )
+    inputs.pop("token_type_ids", None)
+    inputs = inputs.to("cuda")
+    torch.cuda.synchronize()
+    started = time.perf_counter()
+    generated = model.generate(**inputs, max_new_tokens=max_new_tokens, do_sample=False)
+    torch.cuda.synchronize()
+    latency = time.perf_counter() - started
+    new_tokens = generated[0, inputs["input_ids"].shape[1]:]
+    raw_text = processor.decode(
+        new_tokens, skip_special_tokens=True, clean_up_tokenization_spaces=False,
+    ).strip()
+    eos = processor.tokenizer.eos_token_id
+    eos_ids = set(eos if isinstance(eos, list) else [eos])
+    return {
+        "raw_text": raw_text,
+        "generated_tokens": int(len(new_tokens)),
+        "input_tokens": int(inputs["input_ids"].shape[1]),
+        "image_grid_thw": inputs["image_grid_thw"].detach().cpu().tolist(),
+        "generation_cap_hit": len(new_tokens) >= max_new_tokens and not any(
+            int(token) in eos_ids for token in new_tokens
+        ),
+        "latency_seconds": latency,
+    }
 
 
 def parse_args() -> argparse.Namespace:
@@ -492,6 +756,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--model", default="nvidia/EGM-8B")
     parser.add_argument("--adapter", type=Path, help="Local PEFT adapter directory")
+    parser.add_argument("--aux-adapter", "--ir-reader-adapter", dest="ir_reader_adapter", type=Path,
+                        help="Separate auxiliary LoRA; --adapter remains the retained grounder")
     parser.add_argument("--manifest", type=Path, required=True)
     parser.add_argument(
         "--target-manifest",
@@ -510,6 +776,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-pixels", type=int, default=602112)
     parser.add_argument("--max-new-tokens", type=int, default=4096)
     parser.add_argument("--prompt-style", choices=("egm", "native"), default="egm")
+    parser.add_argument("--inference-mode", choices=("direct", "ir_then_ground", "ground_then_verify"), default="direct")
     return parser.parse_args()
 
 
@@ -528,6 +795,14 @@ def main() -> None:
     )
     data_root = args.data_root.resolve()
     adapter = args.adapter.resolve() if args.adapter is not None else None
+    ir_reader_adapter = args.ir_reader_adapter.resolve() if args.ir_reader_adapter is not None else None
+    if ir_reader_adapter is not None:
+        if args.inference_mode == "direct" or adapter is None:
+            raise ValueError("--aux-adapter requires a two-call mode and an explicit --adapter")
+        if not (ir_reader_adapter / "adapter_config.json").is_file():
+            raise FileNotFoundError(f"IR reader adapter is missing: {ir_reader_adapter}")
+    if args.inference_mode == "ground_then_verify" and ir_reader_adapter is None:
+        raise ValueError("ground_then_verify requires a separate --aux-adapter")
     if adapter is not None and not (adapter / "adapter_config.json").is_file():
         raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter}")
     all_records = load_records(manifest)
@@ -574,6 +849,8 @@ def main() -> None:
         max_new_tokens=args.max_new_tokens,
         prompt_style=prompt_style,
         limit=args.limit,
+        inference_mode=args.inference_mode,
+        ir_reader_adapter=ir_reader_adapter,
     )
 
     existing_by_id: dict[str, dict[str, Any]] = {}
@@ -637,37 +914,13 @@ def main() -> None:
         print("FINAL " + json.dumps(summary, ensure_ascii=False), flush=True)
         return
 
-    if not torch.cuda.is_available():
-        raise RuntimeError("CUDA is required for pretrained grounder evaluation")
-    configure_torch_precision()
-
-    processor = AutoProcessor.from_pretrained(
-        args.model,
-        min_pixels=args.min_pixels,
-        max_pixels=args.max_pixels,
-        local_files_only=True,
+    model, processor = load_model_and_processor(
+        args.model, adapter, args.min_pixels, args.max_pixels,
+        **({"ir_reader_adapter": ir_reader_adapter} if ir_reader_adapter is not None else {}),
     )
-    model = Qwen3VLForConditionalGeneration.from_pretrained(
-        args.model,
-        dtype=torch.bfloat16,
-        attn_implementation="sdpa",
-        local_files_only=True,
-    )
-    if adapter is not None:
-        from peft import PeftModel
-
-        model = PeftModel.from_pretrained(
-            model,
-            adapter,
-            is_trainable=False,
-            autocast_adapter_dtype=False,
-            local_files_only=True,
-        )
-    model = model.eval().to(device="cuda", dtype=torch.bfloat16)
-    torch.cuda.reset_peak_memory_stats()
-
-    eos = processor.tokenizer.eos_token_id
-    eos_ids = set(eos if isinstance(eos, list) else [eos])
+    ground = (adapter_generator(model, processor, "default") if ir_reader_adapter is not None
+              else lambda text, views, placeholders, cap: generate_text(model, processor, text, views, placeholders, cap))
+    reader = adapter_generator(model, processor, "ir_reader") if ir_reader_adapter is not None else None
     rows: list[dict[str, Any]] = list(existing_by_id.values())
     file_mode = "a" if rows_path.exists() else "w"
     with rows_path.open(file_mode, encoding="utf-8") as handle, torch.inference_mode():
@@ -677,53 +930,20 @@ def main() -> None:
             sample_id = str(record["id"])
             if sample_id in existing_by_id:
                 continue
-            images = []
-            for image_path in image_paths:
-                with Image.open(image_path) as source:
-                    images.append(source.convert("RGB").copy())
-            messages = [
-                {
-                    "role": "user",
-                    "content": build_user_content(
-                        prompt,
-                        images,
-                        prompt_has_image_placeholders=record[
-                            "prompt_has_image_placeholders"
-                        ],
-                    ),
-                }
-            ]
-            inputs = processor.apply_chat_template(
-                messages,
-                tokenize=True,
-                add_generation_prompt=True,
-                return_dict=True,
-                return_tensors="pt",
-            )
-            inputs.pop("token_type_ids", None)
-            inputs = inputs.to("cuda")
-
-            torch.cuda.synchronize()
-            started = time.perf_counter()
-            generated = model.generate(
-                **inputs,
-                max_new_tokens=args.max_new_tokens,
-                do_sample=False,
-            )
-            torch.cuda.synchronize()
-            latency = time.perf_counter() - started
-
-            new_tokens = generated[0, inputs["input_ids"].shape[1] :]
-            raw_text = processor.decode(
-                new_tokens,
-                skip_special_tokens=True,
-                clean_up_tokenization_spaces=False,
-            ).strip()
+            images = load_model_images(image_paths)
+            if args.inference_mode == "ground_then_verify":
+                from tools.grounding_revision import ground_then_verify
+                result = ground_then_verify(record, prompt, images, ground, reader,
+                                            parse_generated_bbox, args.max_new_tokens)
+            else:
+                result = ground_with_optional_ir(
+                    record, prompt, images, args.inference_mode,
+                    ground, args.max_new_tokens, read_ir=reader,
+                )
+            final = result["final"]
+            raw_text = final["raw_text"]
             prediction = parse_generated_bbox(raw_text)
             iou, accurate = score_prediction(prediction, record["bbox"])
-            cap_hit = len(new_tokens) >= args.max_new_tokens and not any(
-                int(token) in eos_ids for token in new_tokens
-            )
             row = {
                 "index": index - 1,
                 "id": record["id"],
@@ -742,13 +962,26 @@ def main() -> None:
                 "iou": iou,
                 "acc_0.5": accurate,
                 "hit": accurate,
-                "generated_tokens": int(len(new_tokens)),
-                "input_tokens": int(inputs["input_ids"].shape[1]),
-                "image_grid_thw": inputs["image_grid_thw"].detach().cpu().tolist(),
-                "generation_cap_hit": cap_hit,
-                "latency_seconds": latency,
+                "generated_tokens": final["generated_tokens"],
+                "input_tokens": final["input_tokens"],
+                "image_grid_thw": final["image_grid_thw"],
+                "generation_cap_hit": final["generation_cap_hit"],
+                "latency_seconds": final["latency_seconds"],
                 "raw_text": raw_text,
             }
+            if args.inference_mode == "ir_then_ground":
+                row.update({key: result[key] for key in (
+                    "first_raw_text", "first_box_ir", "first_status", "calls",
+                    "total_latency_seconds", "first_generated_tokens", "first_generation_cap_hit",
+                    "final_prompt",
+                )})
+            elif args.inference_mode == "ground_then_verify":
+                row.update({key: result[key] for key in (
+                    "baseline_raw_text", "baseline_prediction", "revision_raw_text",
+                    "revision_action", "calls", "total_latency_seconds", "first_generated_tokens",
+                    "baseline_input_tokens", "baseline_image_grid_thw", "baseline_generation_cap_hit",
+                    "final_prompt",
+                )})
             rows.append(row)
             existing_by_id[sample_id] = row
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -762,7 +995,7 @@ def main() -> None:
                         "parsed": row["parsed"],
                         "iou": iou,
                         "tokens": row["generated_tokens"],
-                        "seconds": latency,
+                        "seconds": result["total_latency_seconds"],
                     },
                     ensure_ascii=False,
                 ),

@@ -1,0 +1,11 @@
+{
+  "parent_pid": 11852,
+  "child_pid": 17132,
+  "parent_alive": false,
+  "child_alive": false,
+  "stopped_epoch": 1790808577.557387,
+  "interrupted_stage": "seed2031_formal",
+  "charged_seconds": 1446.4407057762146,
+  "total_gpu_seconds": 16521.18381166458,
+  "reason": "User requested stop if no clear gain; S City +2 has confidence interval crossing zero."
+}

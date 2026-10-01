@@ -1,0 +1,261 @@
+{
+  "utc": "2026-10-01T09:50:57.332309+00:00",
+  "purpose": "read-only audit evidence collection; no model loading or training",
+  "gpu_returncode": 0,
+  "gpu_devices": "No devices found.",
+  "gpu_error": "",
+  "active_training": [],
+  "status": {
+    "status": "stopped_no_clear_benefit",
+    "primary_complete": true,
+    "horizon": 400,
+    "pipeline_stopped": true,
+    "second_seed_status": "stopped_without_evaluation",
+    "spent_seconds": 16521.18381166458,
+    "gpu_limit_seconds": 43200,
+    "city_correct": {
+      "A": 296,
+      "R": 296,
+      "S": 298,
+      "S+G": 296
+    },
+    "diagnostic_correct": {
+      "A": 100,
+      "R": 102,
+      "S": 103,
+      "S+G": 99
+    },
+    "official_submission": false,
+    "reason": "User requested stop if no clear gain; S City +2 has confidence interval crossing zero.",
+    "automation_status": "PAUSED",
+    "final_stop_guard_cpu_checks": {
+      "status": "pass",
+      "tests": 5
+    }
+  },
+  "budget": {
+    "limit_seconds": 43200,
+    "spent_seconds": 16521.18381166458,
+    "stages": [
+      {
+        "name": "zero_native_8b",
+        "status": "complete",
+        "elapsed_seconds": 66.15506267547607,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/zero_native_8b.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "cache_A_train",
+        "status": "complete",
+        "elapsed_seconds": 1960.7563171386719,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/cache_A_train.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "cache_A_evaluation",
+        "status": "complete",
+        "elapsed_seconds": 1239.2309393882751,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/cache_A_evaluation.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "A_bf16_historical_probe",
+        "status": "complete",
+        "elapsed_seconds": 42.508625745773315,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/A_bf16_historical_probe.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "zero_native_8b_bf16",
+        "status": "complete",
+        "elapsed_seconds": 63.10566592216492,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/zero_native_8b_bf16.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "cache_A_train_bf16",
+        "status": "complete",
+        "elapsed_seconds": 1825.8846716880798,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/cache_A_train_bf16.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "cache_A_evaluation_bf16",
+        "status": "complete",
+        "elapsed_seconds": 1174.9458951950073,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/cache_A_evaluation_bf16.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_continuous4",
+        "status": "complete",
+        "elapsed_seconds": 51.87695550918579,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_continuous4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_split2",
+        "status": "complete",
+        "elapsed_seconds": 34.19269680976868,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_split2.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_resume4",
+        "status": "complete",
+        "elapsed_seconds": 33.23764371871948,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_resume4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_compare",
+        "status": "failed",
+        "elapsed_seconds": 8.292614698410034,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_compare.log",
+        "gpu": false,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_compare",
+        "status": "complete",
+        "elapsed_seconds": 8.219327926635742,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_compare.log",
+        "gpu": false,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_continuous4",
+        "status": "complete",
+        "elapsed_seconds": 56.4811806678772,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_continuous4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_split2",
+        "status": "complete",
+        "elapsed_seconds": 36.697901487350464,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_split2.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_resume4",
+        "status": "complete",
+        "elapsed_seconds": 36.045597076416016,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_resume4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_compare",
+        "status": "complete",
+        "elapsed_seconds": 8.272684097290039,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_compare.log",
+        "gpu": false,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_formal",
+        "status": "complete",
+        "elapsed_seconds": 3433.663204431534,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_formal.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "R_evaluation",
+        "status": "complete",
+        "elapsed_seconds": 582.7463037967682,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/R_evaluation.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_formal",
+        "status": "complete",
+        "elapsed_seconds": 3677.3576714992523,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_formal.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "S_evaluation",
+        "status": "complete",
+        "elapsed_seconds": 629.7090935707092,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/S_evaluation.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "paired_report",
+        "status": "complete",
+        "elapsed_seconds": 8.235204696655273,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/paired_report.log",
+        "gpu": false,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "seed2031_continuous4",
+        "status": "complete",
+        "elapsed_seconds": 56.14390802383423,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/seed2031_continuous4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "seed2031_split2",
+        "status": "complete",
+        "elapsed_seconds": 37.05048704147339,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/seed2031_split2.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "seed2031_resume4",
+        "status": "complete",
+        "elapsed_seconds": 36.95328450202942,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/seed2031_resume4.log",
+        "gpu": true,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "seed2031_compare",
+        "status": "complete",
+        "elapsed_seconds": 8.290095806121826,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/seed2031_compare.log",
+        "gpu": false,
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930"
+      },
+      {
+        "name": "seed2031_formal",
+        "status": "stopped_user_no_clear_benefit",
+        "elapsed_seconds": 1446.4407057762146,
+        "gpu": true,
+        "log": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930/logs/seed2031_formal.log",
+        "run_dir": "/root/autodl-tmp/rematch_20260922/results/triground_structure_20260930",
+        "reason": "S City +2/412; paired scene confidence interval includes zero; user requested stopping without clear gain"
+      }
+    ]
+  },
+  "runtime_versions_current_after_reboot": {
+    "torch": "2.8.0+cu128",
+    "transformers": "5.14.1",
+    "peft": "0.20.0",
+    "accelerate": "1.14.0",
+    "numpy": "2.3.2",
+    "Pillow": "11.3.0",
+    "pytest": "8.4.2",
+    "python": "Python 3.12.3"
+  }
+}

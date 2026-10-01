@@ -1,0 +1,1482 @@
+{
+  "arms": {
+    "A": {
+      "denominator": 673,
+      "correct": 516,
+      "acc_05": 0.7667161961367014,
+      "miou": 0.6677341622703155,
+      "rescue": 0,
+      "harm": 0,
+      "net": 0,
+      "scene_bootstrap_delta_95": [
+        0.0,
+        0.0
+      ],
+      "parse_failures": 0,
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.617789726705067,
+        "rescue": 0,
+        "harm": 0,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.0
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 100,
+        "acc_05": 0.8403361344537815,
+        "miou": 0.7446387333506378,
+        "rescue": 0,
+        "harm": 0,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.0
+        ],
+        "parse_failures": 0
+      },
+      "groups": {
+        "task_category": {
+          "old_city": {
+            "denominator": 412,
+            "correct": 296,
+            "acc_05": 0.7184466019417476,
+            "miou": 0.617789726705067,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_aux": {
+            "denominator": 32,
+            "correct": 25,
+            "acc_05": 0.78125,
+            "miou": 0.7198848684023941,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_ir": {
+            "denominator": 33,
+            "correct": 27,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.6807848222284382,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_depth": {
+            "denominator": 6,
+            "correct": 6,
+            "acc_05": 1.0,
+            "miou": 0.8857315404996497,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "depth_relation": {
+            "denominator": 17,
+            "correct": 14,
+            "acc_05": 0.8235294117647058,
+            "miou": 0.7389842644989635,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reserve_ir": {
+            "denominator": 2,
+            "correct": 1,
+            "acc_05": 0.5,
+            "miou": 0.4800871929482094,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reliability": {
+            "denominator": 5,
+            "correct": 5,
+            "acc_05": 1.0,
+            "miou": 0.9365652138572671,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "ir_complement": {
+            "denominator": 8,
+            "correct": 7,
+            "acc_05": 0.875,
+            "miou": 0.8124279706616562,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "rgb_sufficient_ir": {
+            "denominator": 16,
+            "correct": 15,
+            "acc_05": 0.9375,
+            "miou": 0.8181405241471592,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        },
+        "condition": {
+          "normal": {
+            "denominator": 531,
+            "correct": 396,
+            "acc_05": 0.7457627118644068,
+            "miou": 0.6462172818666921,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_depth": {
+            "denominator": 55,
+            "correct": 45,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.7407119757966066,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_ir": {
+            "denominator": 87,
+            "correct": 75,
+            "acc_05": 0.8620689655172413,
+            "miou": 0.7529259295160391,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        },
+        "city_subset": {
+          "other365": {
+            "denominator": 365,
+            "correct": 269,
+            "acc_05": 0.736986301369863,
+            "miou": 0.6302543536226279,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "shared47": {
+            "denominator": 47,
+            "correct": 27,
+            "acc_05": 0.574468085106383,
+            "miou": 0.5209899644729457,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        }
+      },
+      "modality_effect": {
+        "ir": {
+          "pairs": 87,
+          "normal_correct": 75,
+          "blank_correct": 75,
+          "benefit": 1,
+          "harm": 1,
+          "net": 0,
+          "groups": {
+            "diag_ir": {
+              "pairs": 33,
+              "normal_correct": 27,
+              "blank_correct": 27,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 13,
+              "net": 1
+            },
+            "reserve_ir": {
+              "pairs": 2,
+              "normal_correct": 1,
+              "blank_correct": 2,
+              "net": -1
+            },
+            "reliability": {
+              "pairs": 5,
+              "normal_correct": 5,
+              "blank_correct": 5,
+              "net": 0
+            },
+            "ir_complement": {
+              "pairs": 8,
+              "normal_correct": 7,
+              "blank_correct": 7,
+              "net": 0
+            },
+            "rgb_sufficient_ir": {
+              "pairs": 16,
+              "normal_correct": 15,
+              "blank_correct": 15,
+              "net": 0
+            }
+          }
+        },
+        "depth": {
+          "pairs": 55,
+          "normal_correct": 45,
+          "blank_correct": 45,
+          "benefit": 0,
+          "harm": 0,
+          "net": 0,
+          "groups": {
+            "diag_aux": {
+              "pairs": 32,
+              "normal_correct": 25,
+              "blank_correct": 25,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 14,
+              "net": 0
+            }
+          }
+        }
+      }
+    },
+    "R": {
+      "denominator": 673,
+      "correct": 519,
+      "acc_05": 0.7711738484398217,
+      "miou": 0.6704483595454007,
+      "rescue": 4,
+      "harm": 1,
+      "net": 3,
+      "scene_bootstrap_delta_95": [
+        -0.0016448045825023844,
+        0.01288273604363052
+      ],
+      "parse_failures": 0,
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.616615861069995,
+        "rescue": 1,
+        "harm": 1,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          -0.007263922518159807,
+          0.007142857142857143
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 102,
+        "acc_05": 0.8571428571428571,
+        "miou": 0.7580603529118004,
+        "rescue": 2,
+        "harm": 0,
+        "net": 2,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.043478260869565216
+        ],
+        "parse_failures": 0
+      },
+      "groups": {
+        "task_category": {
+          "old_city": {
+            "denominator": 412,
+            "correct": 296,
+            "acc_05": 0.7184466019417476,
+            "miou": 0.616615861069995,
+            "rescue": 1,
+            "harm": 1,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              -0.007263922518159807,
+              0.007142857142857143
+            ],
+            "parse_failures": 0
+          },
+          "diag_aux": {
+            "denominator": 32,
+            "correct": 25,
+            "acc_05": 0.78125,
+            "miou": 0.7198848684023941,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_ir": {
+            "denominator": 33,
+            "correct": 27,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.6888940133528411,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_depth": {
+            "denominator": 6,
+            "correct": 6,
+            "acc_05": 1.0,
+            "miou": 0.8857315404996497,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "depth_relation": {
+            "denominator": 17,
+            "correct": 14,
+            "acc_05": 0.8235294117647058,
+            "miou": 0.738652114581635,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reserve_ir": {
+            "denominator": 2,
+            "correct": 2,
+            "acc_05": 1.0,
+            "miou": 0.7778462344392234,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              1.0
+            ],
+            "parse_failures": 0
+          },
+          "reliability": {
+            "denominator": 5,
+            "correct": 5,
+            "acc_05": 1.0,
+            "miou": 0.9365652138572671,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "ir_complement": {
+            "denominator": 8,
+            "correct": 8,
+            "acc_05": 1.0,
+            "miou": 0.9048902064473587,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.375
+            ],
+            "parse_failures": 0
+          },
+          "rgb_sufficient_ir": {
+            "denominator": 16,
+            "correct": 15,
+            "acc_05": 0.9375,
+            "miou": 0.8181405241471592,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        },
+        "condition": {
+          "normal": {
+            "denominator": 531,
+            "correct": 398,
+            "acc_05": 0.7495291902071564,
+            "miou": 0.6483143441757857,
+            "rescue": 3,
+            "harm": 1,
+            "net": 2,
+            "scene_bootstrap_delta_95": [
+              -0.0034725246806039485,
+              0.011820680683201136
+            ],
+            "parse_failures": 0
+          },
+          "without_depth": {
+            "denominator": 55,
+            "correct": 45,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.7406003181173906,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_ir": {
+            "denominator": 87,
+            "correct": 76,
+            "acc_05": 0.8735632183908046,
+            "miou": 0.7611932381638619,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.03614457831325301
+            ],
+            "parse_failures": 0
+          }
+        },
+        "city_subset": {
+          "other365": {
+            "denominator": 365,
+            "correct": 269,
+            "acc_05": 0.736986301369863,
+            "miou": 0.6289293326866013,
+            "rescue": 1,
+            "harm": 1,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              -0.008241758241758242,
+              0.008021390374331552
+            ],
+            "parse_failures": 0
+          },
+          "shared47": {
+            "denominator": 47,
+            "correct": 27,
+            "acc_05": 0.574468085106383,
+            "miou": 0.5209899644729457,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        }
+      },
+      "modality_effect": {
+        "ir": {
+          "pairs": 87,
+          "normal_correct": 77,
+          "blank_correct": 76,
+          "benefit": 1,
+          "harm": 0,
+          "net": 1,
+          "groups": {
+            "diag_ir": {
+              "pairs": 33,
+              "normal_correct": 27,
+              "blank_correct": 27,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 13,
+              "net": 1
+            },
+            "reserve_ir": {
+              "pairs": 2,
+              "normal_correct": 2,
+              "blank_correct": 2,
+              "net": 0
+            },
+            "reliability": {
+              "pairs": 5,
+              "normal_correct": 5,
+              "blank_correct": 5,
+              "net": 0
+            },
+            "ir_complement": {
+              "pairs": 8,
+              "normal_correct": 8,
+              "blank_correct": 8,
+              "net": 0
+            },
+            "rgb_sufficient_ir": {
+              "pairs": 16,
+              "normal_correct": 15,
+              "blank_correct": 15,
+              "net": 0
+            }
+          }
+        },
+        "depth": {
+          "pairs": 55,
+          "normal_correct": 45,
+          "blank_correct": 45,
+          "benefit": 0,
+          "harm": 0,
+          "net": 0,
+          "groups": {
+            "diag_aux": {
+              "pairs": 32,
+              "normal_correct": 25,
+              "blank_correct": 25,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 14,
+              "net": 0
+            }
+          }
+        }
+      }
+    },
+    "S": {
+      "denominator": 673,
+      "correct": 521,
+      "acc_05": 0.774145616641902,
+      "miou": 0.674790077227345,
+      "rescue": 7,
+      "harm": 2,
+      "net": 5,
+      "scene_bootstrap_delta_95": [
+        -0.00150835258574729,
+        0.017883816170501495
+      ],
+      "parse_failures": 0,
+      "city412": {
+        "denominator": 412,
+        "correct": 298,
+        "acc_05": 0.7233009708737864,
+        "miou": 0.6214825069577824,
+        "rescue": 3,
+        "harm": 1,
+        "net": 2,
+        "scene_bootstrap_delta_95": [
+          -0.004662550564189908,
+          0.014989561027837255
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 103,
+        "acc_05": 0.865546218487395,
+        "miou": 0.7704670723652782,
+        "rescue": 3,
+        "harm": 0,
+        "net": 3,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.058333333333333334
+        ],
+        "parse_failures": 0
+      },
+      "groups": {
+        "task_category": {
+          "old_city": {
+            "denominator": 412,
+            "correct": 298,
+            "acc_05": 0.7233009708737864,
+            "miou": 0.6214825069577824,
+            "rescue": 3,
+            "harm": 1,
+            "net": 2,
+            "scene_bootstrap_delta_95": [
+              -0.004662550564189908,
+              0.014989561027837255
+            ],
+            "parse_failures": 0
+          },
+          "diag_aux": {
+            "denominator": 32,
+            "correct": 25,
+            "acc_05": 0.78125,
+            "miou": 0.7198848684023941,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_ir": {
+            "denominator": 33,
+            "correct": 27,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.6944150466368232,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_depth": {
+            "denominator": 6,
+            "correct": 6,
+            "acc_05": 1.0,
+            "miou": 0.8857315404996497,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "depth_relation": {
+            "denominator": 17,
+            "correct": 14,
+            "acc_05": 0.8235294117647058,
+            "miou": 0.7386659354182958,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reserve_ir": {
+            "denominator": 2,
+            "correct": 2,
+            "acc_05": 1.0,
+            "miou": 0.9394803953491913,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              1.0
+            ],
+            "parse_failures": 0
+          },
+          "reliability": {
+            "denominator": 5,
+            "correct": 5,
+            "acc_05": 1.0,
+            "miou": 0.9365652138572671,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "ir_complement": {
+            "denominator": 8,
+            "correct": 8,
+            "acc_05": 1.0,
+            "miou": 0.9237861544878274,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.375
+            ],
+            "parse_failures": 0
+          },
+          "rgb_sufficient_ir": {
+            "denominator": 16,
+            "correct": 16,
+            "acc_05": 1.0,
+            "miou": 0.8693614401612546,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.1875
+            ],
+            "parse_failures": 0
+          }
+        },
+        "condition": {
+          "normal": {
+            "denominator": 531,
+            "correct": 401,
+            "acc_05": 0.7551789077212806,
+            "miou": 0.6548707617289539,
+            "rescue": 6,
+            "harm": 1,
+            "net": 5,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.02007317591534019
+            ],
+            "parse_failures": 0
+          },
+          "without_depth": {
+            "denominator": 55,
+            "correct": 45,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.7405960462224228,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_ir": {
+            "denominator": 87,
+            "correct": 75,
+            "acc_05": 0.8620689655172413,
+            "miou": 0.7547651144102927,
+            "rescue": 1,
+            "harm": 1,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              -0.034482758620689655,
+              0.034482758620689655
+            ],
+            "parse_failures": 0
+          }
+        },
+        "city_subset": {
+          "other365": {
+            "denominator": 365,
+            "correct": 270,
+            "acc_05": 0.7397260273972602,
+            "miou": 0.6320899883418076,
+            "rescue": 2,
+            "harm": 1,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              -0.006135441245870694,
+              0.012345679012345678
+            ],
+            "parse_failures": 0
+          },
+          "shared47": {
+            "denominator": 47,
+            "correct": 28,
+            "acc_05": 0.5957446808510638,
+            "miou": 0.5391052579116292,
+            "rescue": 1,
+            "harm": 0,
+            "net": 1,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.06382978723404255
+            ],
+            "parse_failures": 0
+          }
+        }
+      },
+      "modality_effect": {
+        "ir": {
+          "pairs": 87,
+          "normal_correct": 78,
+          "blank_correct": 75,
+          "benefit": 3,
+          "harm": 0,
+          "net": 3,
+          "groups": {
+            "diag_ir": {
+              "pairs": 33,
+              "normal_correct": 27,
+              "blank_correct": 26,
+              "net": 1
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 13,
+              "net": 1
+            },
+            "reserve_ir": {
+              "pairs": 2,
+              "normal_correct": 2,
+              "blank_correct": 2,
+              "net": 0
+            },
+            "reliability": {
+              "pairs": 5,
+              "normal_correct": 5,
+              "blank_correct": 5,
+              "net": 0
+            },
+            "ir_complement": {
+              "pairs": 8,
+              "normal_correct": 8,
+              "blank_correct": 8,
+              "net": 0
+            },
+            "rgb_sufficient_ir": {
+              "pairs": 16,
+              "normal_correct": 16,
+              "blank_correct": 15,
+              "net": 1
+            }
+          }
+        },
+        "depth": {
+          "pairs": 55,
+          "normal_correct": 45,
+          "blank_correct": 45,
+          "benefit": 0,
+          "harm": 0,
+          "net": 0,
+          "groups": {
+            "diag_aux": {
+              "pairs": 32,
+              "normal_correct": 25,
+              "blank_correct": 25,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 14,
+              "net": 0
+            }
+          }
+        }
+      }
+    },
+    "S+G": {
+      "denominator": 673,
+      "correct": 515,
+      "acc_05": 0.7652303120356612,
+      "miou": 0.6677880681236877,
+      "rescue": 0,
+      "harm": 1,
+      "net": -1,
+      "scene_bootstrap_delta_95": [
+        -0.0048703278428888185,
+        0.0
+      ],
+      "parse_failures": 0,
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.6178332727628075,
+        "rescue": 0,
+        "harm": 0,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.0
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 99,
+        "acc_05": 0.8319327731092437,
+        "miou": 0.7447153207060309,
+        "rescue": 0,
+        "harm": 1,
+        "net": -1,
+        "scene_bootstrap_delta_95": [
+          -0.026321611551001396,
+          0.0
+        ],
+        "parse_failures": 0
+      },
+      "groups": {
+        "task_category": {
+          "old_city": {
+            "denominator": 412,
+            "correct": 296,
+            "acc_05": 0.7184466019417476,
+            "miou": 0.6178332727628075,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_aux": {
+            "denominator": 32,
+            "correct": 25,
+            "acc_05": 0.78125,
+            "miou": 0.7198848684023941,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_ir": {
+            "denominator": 33,
+            "correct": 26,
+            "acc_05": 0.7878787878787878,
+            "miou": 0.6809225724931798,
+            "rescue": 0,
+            "harm": 1,
+            "net": -1,
+            "scene_bootstrap_delta_95": [
+              -0.09090909090909091,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "diag_depth": {
+            "denominator": 6,
+            "correct": 6,
+            "acc_05": 1.0,
+            "miou": 0.8857315404996497,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "depth_relation": {
+            "denominator": 17,
+            "correct": 14,
+            "acc_05": 0.8235294117647058,
+            "miou": 0.739228271575152,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reserve_ir": {
+            "denominator": 2,
+            "correct": 1,
+            "acc_05": 0.5,
+            "miou": 0.4800871929482094,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "reliability": {
+            "denominator": 5,
+            "correct": 5,
+            "acc_05": 1.0,
+            "miou": 0.9365652138572671,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "ir_complement": {
+            "denominator": 8,
+            "correct": 7,
+            "acc_05": 0.875,
+            "miou": 0.8124279706616562,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "rgb_sufficient_ir": {
+            "denominator": 16,
+            "correct": 15,
+            "acc_05": 0.9375,
+            "miou": 0.8181667751634147,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        },
+        "condition": {
+          "normal": {
+            "denominator": 531,
+            "correct": 395,
+            "acc_05": 0.743879472693032,
+            "miou": 0.646268232659688,
+            "rescue": 0,
+            "harm": 1,
+            "net": -1,
+            "scene_bootstrap_delta_95": [
+              -0.006343168015512853,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_depth": {
+            "denominator": 55,
+            "correct": 45,
+            "acc_05": 0.8181818181818182,
+            "miou": 0.7407864557987869,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "without_ir": {
+            "denominator": 87,
+            "correct": 75,
+            "acc_05": 0.8620689655172413,
+            "miou": 0.7529848647817724,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        },
+        "city_subset": {
+          "other365": {
+            "denominator": 365,
+            "correct": 269,
+            "acc_05": 0.736986301369863,
+            "miou": 0.6303035069809542,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          },
+          "shared47": {
+            "denominator": 47,
+            "correct": 27,
+            "acc_05": 0.574468085106383,
+            "miou": 0.5209899644729457,
+            "rescue": 0,
+            "harm": 0,
+            "net": 0,
+            "scene_bootstrap_delta_95": [
+              0.0,
+              0.0
+            ],
+            "parse_failures": 0
+          }
+        }
+      },
+      "modality_effect": {
+        "ir": {
+          "pairs": 87,
+          "normal_correct": 74,
+          "blank_correct": 75,
+          "benefit": 1,
+          "harm": 2,
+          "net": -1,
+          "groups": {
+            "diag_ir": {
+              "pairs": 33,
+              "normal_correct": 26,
+              "blank_correct": 27,
+              "net": -1
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 13,
+              "net": 1
+            },
+            "reserve_ir": {
+              "pairs": 2,
+              "normal_correct": 1,
+              "blank_correct": 2,
+              "net": -1
+            },
+            "reliability": {
+              "pairs": 5,
+              "normal_correct": 5,
+              "blank_correct": 5,
+              "net": 0
+            },
+            "ir_complement": {
+              "pairs": 8,
+              "normal_correct": 7,
+              "blank_correct": 7,
+              "net": 0
+            },
+            "rgb_sufficient_ir": {
+              "pairs": 16,
+              "normal_correct": 15,
+              "blank_correct": 15,
+              "net": 0
+            }
+          }
+        },
+        "depth": {
+          "pairs": 55,
+          "normal_correct": 45,
+          "blank_correct": 45,
+          "benefit": 0,
+          "harm": 0,
+          "net": 0,
+          "groups": {
+            "diag_aux": {
+              "pairs": 32,
+              "normal_correct": 25,
+              "blank_correct": 25,
+              "net": 0
+            },
+            "diag_depth": {
+              "pairs": 6,
+              "normal_correct": 6,
+              "blank_correct": 6,
+              "net": 0
+            },
+            "depth_relation": {
+              "pairs": 17,
+              "normal_correct": 14,
+              "blank_correct": 14,
+              "net": 0
+            }
+          }
+        }
+      }
+    }
+  },
+  "paired": {
+    "R vs A": {
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.616615861069995,
+        "rescue": 1,
+        "harm": 1,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          -0.007263922518159807,
+          0.007142857142857143
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 102,
+        "acc_05": 0.8571428571428571,
+        "miou": 0.7580603529118004,
+        "rescue": 2,
+        "harm": 0,
+        "net": 2,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.043478260869565216
+        ],
+        "parse_failures": 0
+      }
+    },
+    "S vs R": {
+      "city412": {
+        "denominator": 412,
+        "correct": 298,
+        "acc_05": 0.7233009708737864,
+        "miou": 0.6214825069577824,
+        "rescue": 2,
+        "harm": 0,
+        "net": 2,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.012563209127397992
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 103,
+        "acc_05": 0.865546218487395,
+        "miou": 0.7704670723652782,
+        "rescue": 1,
+        "harm": 0,
+        "net": 1,
+        "scene_bootstrap_delta_95": [
+          0.0,
+          0.02631578947368421
+        ],
+        "parse_failures": 0
+      }
+    },
+    "S+G vs S": {
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.6178332727628075,
+        "rescue": 1,
+        "harm": 3,
+        "net": -2,
+        "scene_bootstrap_delta_95": [
+          -0.014989561027837259,
+          0.0046625505641899
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 99,
+        "acc_05": 0.8319327731092437,
+        "miou": 0.7447153207060309,
+        "rescue": 0,
+        "harm": 4,
+        "net": -4,
+        "scene_bootstrap_delta_95": [
+          -0.07017543859649122,
+          -0.008130081300813009
+        ],
+        "parse_failures": 0
+      }
+    },
+    "S+G vs R": {
+      "city412": {
+        "denominator": 412,
+        "correct": 296,
+        "acc_05": 0.7184466019417476,
+        "miou": 0.6178332727628075,
+        "rescue": 1,
+        "harm": 1,
+        "net": 0,
+        "scene_bootstrap_delta_95": [
+          -0.007142857142857143,
+          0.007263922518159807
+        ],
+        "parse_failures": 0
+      },
+      "diagnostic119": {
+        "denominator": 119,
+        "correct": 99,
+        "acc_05": 0.8319327731092437,
+        "miou": 0.7447153207060309,
+        "rescue": 0,
+        "harm": 3,
+        "net": -3,
+        "scene_bootstrap_delta_95": [
+          -0.058823529411764705,
+          0.0
+        ],
+        "parse_failures": 0
+      }
+    }
+  },
+  "modality_increment": {
+    "R vs A": {
+      "ir": {
+        "normal_correct_delta": 2,
+        "blank_correct_delta": 1,
+        "net_dependence_delta": 1
+      },
+      "depth": {
+        "normal_correct_delta": 0,
+        "blank_correct_delta": 0,
+        "net_dependence_delta": 0
+      }
+    },
+    "S vs R": {
+      "ir": {
+        "normal_correct_delta": 1,
+        "blank_correct_delta": -1,
+        "net_dependence_delta": 2
+      },
+      "depth": {
+        "normal_correct_delta": 0,
+        "blank_correct_delta": 0,
+        "net_dependence_delta": 0
+      }
+    },
+    "S+G vs S": {
+      "ir": {
+        "normal_correct_delta": -4,
+        "blank_correct_delta": 0,
+        "net_dependence_delta": -4
+      },
+      "depth": {
+        "normal_correct_delta": 0,
+        "blank_correct_delta": 0,
+        "net_dependence_delta": 0
+      }
+    }
+  },
+  "limits": [
+    "City412 is repeatedly used development data; 47 known reused sequences and other365 are not certified independent.",
+    "Blank-view intervention measures model dependence, not a human proof of modal necessity.",
+    "Increased normal-minus-blank dependence can also result from harming blank inputs; inspect both correct-count deltas.",
+    "The 16 RGB-sufficient IR controls are descriptive; they do not satisfy the old 32-control promotion gate."
+  ]
+}
