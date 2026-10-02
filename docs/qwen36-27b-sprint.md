@@ -150,12 +150,57 @@ Qwen3.6 的 `chat_template.jinja` 有两处关键行为：
 - **训练图组 ∩ 开发集 78 图组 = 0**（防泄漏硬门槛）
 - 跨平台绝对路径判断（Windows 上 `/root/...` 曾被误判为相对路径，已修）
 
-### 3.7 云端 CPU 预检（`scripts/cloud_cpu_precheck.sh`）
-- 数据完整性：759 文件/模态、A 适配器、8B 基座 ✓
-- 清单转换：4800 / 660 / 3 ✓
-- 探针 dry-run：**588 / 1176 / 2025 token 每图 → 1764 / 3528 / 6075 token 每条** ✓
-- ms-swift 已按 `MAX_PIXELS=1204224` 推出 `image_max_token_num: 1176`，与预测一致 ✓
-- 像素覆盖实测生效 ✓（这是项目历史上踩过的坑）
+### 3.7 云端 CPU 预检（`scripts/cloud_cpu_precheck.sh`）——**7/7 全部通过**
+
+| 步 | 检查 | 结果 |
+|---|---|---|
+| 1 | 数据完整性 | `visible/infrared/depth_rgb` **各 759 文件**；A 适配器 122,726,608 B；8B 17G；**27B 53G** |
+| 2 | 清单转换 | `A.json` → **4800 条 / 660 图组 / 每条 3 图** |
+| 3 | 单元测试 | **5 passed, 2 skipped**（含防泄漏零交集断言） |
+| 4 | 部署预检 | `processor_loadable: true`、`processor_class: Qwen3VLProcessor`、**`override_took_effect: true`**；磁盘剩 126.2 GiB |
+| 5 | 探针 dry-run | 三档 token 预算 **1764 / 3528 / 6075**，图像路径全部解析成功 |
+| 6 | **真实模板编码**（8 条样本） | 见下表 |
+| 7 | 训练入口 | `swift sft` 可调用 |
+
+第 4 步的 `override_took_effect: true` 是关键：项目历史上踩过"CLI 传了像素上限但没真正进入
+resize 配置"的坑（transformers 5.x 的 `SizeDict` 分支问题），这里证明新基座上像素控制确实生效。
+
+第 6 步（最重要）实测：
+
+```
+id                                           input_ids supervised images over_max
+abv:old:0000:city_000019_009_00000141_001         3512         28      3    False
+abv:old:0600:city_shuming_656_00000242_002        3514         28      3    False
+abv:old:1200:city_shuming_402_00000053_003        3514         28      3    False
+abv:old:1800:city_002194_003                      3514         28      3    False
+abv:old:2400:city_000005_028_00000001_001         3515         28      3    False
+abv:old:3000:city_shuming_554_00000328_001        3512         28      3    False
+abv:old:3600:city_003515_004                      3516         28      3    False
+abv:old:4200:city_001521_007                      3509         25      3    False
+[LABELS 首条] [-100 * 3484]<think>\n\n</think>\n\n{"bbox_2d":[565,7,595,66]}<|im_end|>\n
+[MAX_LENGTH] 4096      SUPERVISION_OK
+```
+
+四点结论：
+
+1. **长度安全**：`MAX_PIXELS=1204224` 下 `input_ids` 为 **3509–3516**，全部 `< 4096`，`over_max` **全为 False**
+   —— 没有任何样本会被静默截断（截断会切掉答案 token，是最危险的隐性故障）。
+2. **监督完整**：被监督 token **25–28** 个，正好是答案 + think 块 + `<|im_end|>`。
+3. **训练/推理口径一致**：`[LABELS]` 实测为 `<think>\n\n</think>\n\n{"bbox_2d":[...]}`
+   —— **空 think 块**，与推理端 `enable_thinking=False` 的前缀逐字一致（见 3.5.2），不是推断。
+4. **框架已识别我们的约定**：`norm_bbox: norm1000`、`agent_template: qwen3_5`。
+
+### 3.8 权重下载完成（`scripts/fetch_model_parallel.py`）
+
+**29/29 文件、51.77 GiB、15 个分片、0 个 `.part` 残留**，全部通过 ModelScope 官方 **Sha256** 校验。
+其中 `model-00010` 曾出现一次大小不符（3,921,674,240 / 3,921,677,128），被逐文件重试自动重下并在
+第二次通过 —— 说明校验不是装饰。
+
+### 3.9 阶段 A 结论
+
+**无卡阶段可做的全部准备工作已完成**：迁移、环境、权重、代码适配、清单转换、单测、云端预检。
+剩下的只有必须用 GPU 的探针与训练（阶段 B）。
+
 
 ---
 

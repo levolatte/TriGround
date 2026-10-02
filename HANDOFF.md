@@ -1,3 +1,25 @@
+## 2026-10-02 阶段 A（无卡）全部完成，等开 GPU 跑阶段 B
+
+**不挂 GPU 能做的准备已全部做完并验证。** 详细记录见 [`docs/qwen36-27b-sprint.md`](docs/qwen36-27b-sprint.md)；分支 `sprint/qwen36-27b-native-resolution`（8 个提交，已推送）。
+
+**已完成且实测通过**：
+- **迁移**：City 训练图 5.4G（visible/infrared/depth_rgb **各 759 文件**）、`city_val.json`+`city_gt.json`、训练清单 `A.json`、**基线 A 语言 LoRA（122,726,608 B）**、8B 基座 17G。新机**完全复刻旧机目录布局**，manifest 绝对路径零改动。
+- **权重**：`Qwen3.6-27B` **29/29 文件、51.77 GiB、15 分片、0 个 `.part` 残留**，全部通过 ModelScope 官方 **Sha256** 校验（`model-00010` 一次大小不符被自动重下并通过）。
+- **环境**：`transformers 5.16.1` / `ms-swift 4.5.3` / `peft 0.20.0` / `decord 0.6.0` / `qwen_vl_utils 0.0.14`；`torch 2.12.1+cu130` 未被改动。
+- **代码**：动态模型类解析（一份代码兼容 Qwen3-VL/3.5/3.6）、清单转换器、训练启动器、探针套件、部署预检。
+- **云端 CPU 预检 7/7 通过**。最关键的模板编码实测：`MAX_PIXELS=1204224` 下 `input_ids` **3509–3516**（全 `< 4096`，**无截断**）、监督 token **25–28**、`[LABELS]` = `<think>\n\n</think>\n\n{"bbox_2d":[...]}`（**空 think 块，与推理端 `enable_thinking=False` 逐字一致**）；`processor_loadable`/`override_took_effect` 均为 true；`norm_bbox: norm1000`、`agent_template: qwen3_5`。
+- **云端判决管线已用真实数据复现本地结果**：A 296 / C0 292 / B 289 / V 289，`other_instance=30`，A−C0 聚类区间 [−0.767, +2.824] pp，0 无效框。
+
+**修掉的三个会白烧 GPU 的坑**：① 权重曾放在 30GB 系统盘导致写满、下载静默卡死（已移到 200GB 数据盘并留同名符号链接）；② ms-swift 4.5.3 的 LoRA 参数是 **`--tuner_type`** 而非 `--train_type`（已逐字段校验 35 个参数全部存在）；③ shell 版下载器会因陈旧进程并发写同一文件而**产出超过目标大小的分片**且永不修复，已换成带 sha256 校验的 Python 下载器。
+
+**阶段 B（开卡后依次执行，任一步不达标即回 A 交半决赛）**：
+1. `python tools/preflight_new_base.py --model /root/rematch_models/Qwen3.6-27B --pixels 602112 1204224 2073600 --disk-paths /root/autodl-tmp`（确认 `capability=sm_120`）
+2. `bash scripts/run_probe_suite.sh b1` —— 冻结 A(8B) × 三档像素，看 `other_instance` 是否从 30 下降
+3. `bash scripts/run_probe_suite.sh b2` —— 27B 零样本 × 三档，看错误实例题与小目标子集
+4. 训练前 4 步预检：`MAX_STEPS=4 SAVE_STEPS=4 SAVE_TOTAL_LIMIT=1 OUTPUT_DIR=/root/runs/q36_preflight MAX_PIXELS=<胜出档> MAX_LENGTH=<4096|8192> bash scripts/train_qwen36_27b_swift.sh`
+5. 正式训练 600 步（同上，去掉 `MAX_STEPS` 覆盖并换新输出目录）
+6. City412 判决：`tools/verify_acc05_dev.py --compare <新臂>:<A臂> --bootstrap 5000`，**命中 > 296 且区间下界 > 0** 才算成立
+
 ## 2026-10-02 冲刺已开工：新机部署完成（无卡阶段），等开 GPU
 
 用户租了 **RTX PRO 6000 96G**（`ssh -p 47809 root@connect.weste.seetacloud.com`，当前**无卡模式**），授权新分支并提交推送。完整记录见 [`docs/qwen36-27b-sprint.md`](docs/qwen36-27b-sprint.md)；分支 `sprint/qwen36-27b-native-resolution` 已推送（2 个提交）。
