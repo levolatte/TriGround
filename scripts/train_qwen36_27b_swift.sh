@@ -25,6 +25,8 @@ MIN_PIXELS="${MIN_PIXELS:-200704}"
 MAX_LENGTH="${MAX_LENGTH:-4096}"
 
 # 与 A 对齐的超参
+# 注意 --freeze_vit/--freeze_aligner 必须为 true：基线 A 是**语言侧**LoRA（144 模块 / 30.67M 参数），
+# 若新版把视觉塔或 merger 也纳入 LoRA，就同时改了「基座」和「可训练范围」两个变量，结果不可比。
 LORA_RANK="${LORA_RANK:-32}"
 LORA_ALPHA="${LORA_ALPHA:-64}"
 LORA_DROPOUT="${LORA_DROPOUT:-0.05}"
@@ -62,11 +64,13 @@ print("architectures:", config.architectures)
 print("model_type:", config.model_type)
 print("num_hidden_layers:", text.num_hidden_layers)
 print("layer_types 分布:", {t: text.layer_types.count(t) for t in set(text.layer_types)})
+print("hidden_size:", text.hidden_size)
 EOF
 
 "${SWIFT_CLI}" sft \
     --model "${MODEL}" \
-    --train_type lora \
+    --tuner_type lora \
+    --ignore_args_error False \
     --dataset "${DATASET}" \
     --split_dataset_ratio 0 \
     --torch_dtype bfloat16 \
@@ -84,7 +88,11 @@ EOF
     --lora_alpha "${LORA_ALPHA}" \
     --lora_dropout "${LORA_DROPOUT}" \
     --target_modules "${TARGET_MODULES}" \
+    --freeze_vit true \
+    --freeze_aligner true \
+    --freeze_parameters_ratio 0 \
     --max_length "${MAX_LENGTH}" \
+    --max_pixels "${MAX_PIXELS}" \
     --gradient_checkpointing true \
     --save_strategy steps \
     --save_steps "${SAVE_STEPS}" \

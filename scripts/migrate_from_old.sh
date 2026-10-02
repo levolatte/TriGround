@@ -44,9 +44,13 @@ eval ${RSYNC} --exclude 'checkpoint-*' \
   "${ROOT}/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/A/main/"
 
 say "5/6 Qwen3-VL-8B-Instruct 基座（17G，用于第一跳探针与兜底）"
-mkdir -p /root/rematch_models
+# 权重必须放数据盘：系统的 30GB overlay 盘放不下 8B+27B（本项目已踩过这个坑，
+# 系统盘写满会让下载以 "No space left on device" 静默卡死）。
+# /root/rematch_models 保留同名符号链接，使所有既有绝对路径继续可用。
+mkdir -p /root/autodl-tmp/rematch_models
 eval ${RSYNC} "${OLD_USER}@${OLD_HOST}:/root/rematch_models/Qwen3-VL-8B-Instruct/" \
-  "/root/rematch_models/Qwen3-VL-8B-Instruct/"
+  "/root/autodl-tmp/rematch_models/Qwen3-VL-8B-Instruct/"
+ln -sfn /root/autodl-tmp/rematch_models /root/rematch_models
 
 say "6/6 旧训练框架留档（248K）+ 旧 code_snapshot"
 eval ${RSYNC} "${OLD_USER}@${OLD_HOST}:${ROOT}/third_party/" "${ROOT}/third_party/"
@@ -62,7 +66,9 @@ ls -la "${ROOT}/results/triground_abv_20260927/inputs/"
 echo "--- A adapter"
 ls -la "${ROOT}/results/triground_abv_execution_20260928/runs/seed2026_600_deterministic/A/main/" | head -12
 echo "--- 8B 基座"
-du -sh /root/rematch_models/Qwen3-VL-8B-Instruct
+du -sh /root/autodl-tmp/rematch_models/Qwen3-VL-8B-Instruct
+echo "--- 符号链接"
+ls -la /root/rematch_models
 echo "--- 磁盘"
 df -h /root/autodl-tmp | tail -1
 rm -rf /root/autodl-tmp/_speedtest
