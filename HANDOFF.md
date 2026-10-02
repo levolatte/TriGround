@@ -1,3 +1,37 @@
+## 2026-10-02 冲刺方向：换新一代基座 + 停止降采样（含 27B 事实澄清）
+
+用户要求最后做一次大粒度冲刺，并提出换更大模型（"Qwen 27B"）。核实结果与方案见 `F:/AIC/docs/research/2026-10-02-sprint-plan-new-base/README.md`。要点：
+
+- **27B 确实存在，但不在 Qwen3-VL 一代**：Qwen3-VL（2025-10）只有 2B/4B/8B/**32B** dense + 30B-A3B/235B-A22B MoE；**Qwen3.5（2026-02）/ Qwen3.6（2026-04）才有 27B**，且都是官方多模态（`image-text-to-text`）。架构类名 `Qwen3_5ForConditionalGeneration`，`model_type=qwen3_5`，文本侧是混合线性注意力（3×Gated DeltaNet + 1×全注意力），262K 原生上下文，**无 DeepStack**；processor 仍是 `Qwen3VLProcessor`。Qwen3.5-27B 模型卡明确写"outperforms Qwen3-VL models … visual understanding benchmarks"。
+- **MoE 30B-A3B 不适合本次冲刺**：3B 激活只省算力，训练显存仍按 30B 权重算，单卡比 27B dense 更难放。
+- **更大的杠杆是分辨率**：`Qwen3.5-9B` 默认像素预算是 `longest_edge=16777216`（≈16k token/图），而项目固定 `max_pixels=602112`（588 token/图），**只用了默认预算的约 1/28**；且 602112 是 2026-09-18 从 802816 OOM 后的应急降档，不是设计选择。实测：116 个失败题的目标面积中位数只有 **0.88 个视觉 token**，30 个"框住同图另一个实例"的案例中本题与邻居 GT 中心距离中位 **2.31 token**。三档预算：602112→1764 token/条；**1204224→3528（4096 上下文仍够）**；2073600（原生 1920×1080）→6075（需 8192）。
+- **新增两个工具（均已在本地 CPU 验证）**：`tools/preflight_new_base.py`（部署预检：架构类/processor/像素覆盖是否生效/磁盘/GPU/token 预算，fail fast）与 `tools/probe_native_resolution.py`（同权重同 prompt，只改像素与基座，复用 evaluate_pretrained_grounder 的解析与评分，输出与基线同 schema，可交 `verify_acc05_dev.py` 复算；含 `--dry-run` CPU 预检）。两者都做**动态架构解析**，Qwen3-VL / 3.5 / 3.6 通用。
+- **已实测的部署前提**：本地 transformers 4.57.3 **连 config 都读不了**（`KeyError: 'qwen3_5'`），云端必须升级（此前为 5.14.1，需复核）；processor 需要 **torchvision**；Qwen3.5/3.6 **默认开 thinking**，必须传 `chat_template_kwargs={"enable_thinking": False}`。
+- **硬件与磁盘账**：9B BF16≈18GB（24GB 可推理）；27B BF16≈54GB（训练需 80GB）；官方 `Qwen3.5-27B-GPTQ-Int4`≈15GB（24GB 可推理；Qwen3.6-27B 只见到 FP8）。云端实测仅剩 **67GB**，下 27B BF16 会只剩约 13GB。
+- **最大工程风险**：云端训练走 `third_party/Qwen3-VL/qwen-vl-finetune`，很可能不支持 `qwen3_5`（未核实）。因此**第一步只做推理探针**（不依赖训练框架），训练前必须先确认框架或改用 ms-swift / 自写 PEFT 循环（可复用 `tools/native_lora_training.py`）。
+- **执行门**：探针只看"错误实例数（当前 30）"与"小目标子集"，不看总分；训练后只用 78 图组聚类配对区间判，下界≤0 停止；A 全程保留为半决赛兜底提交。**本轮未启动任何训练或部署。**
+- **选卡（用户反馈 PRO 6000 更便宜）**：**选 RTX PRO 6000（96GB Blackwell）**——显存最大且价格更低，无取舍。它让"27B BF16 + 原生 2073600 像素"同时成立，且**不需要任何量化**（可保持项目"不做 QLoRA"的精度原则）。唯一风险是 Blackwell（`sm_120`）软件栈：需 torch cu128+ 与最新 transformers；我们用 **sdpa 而非 flash-attn**，绕开了 Blackwell 最常缺轮子的一环。vGPU-48GB 只用于 D0/D1 推理探针（48GB 放不下 27B BF16 的 54GB 权重）。`preflight_new_base.py` 已增加算力架构（sm_90/sm_120）与"哪些权重放得下"的对照输出。**注意磁盘**：云端仅剩 67GB，27B(54GB)+9B(18GB)=72GB 放不下，需二选一或清理。
+
+## 2026-10-02 接手复验：Baseline 定为 A，瓶颈裁定为"同图同类多实例指代选择"
+
+用户要求接手上任（此前由 gpt 主导），遍历读完全部官方材料与项目证据后，给出基线/真实成绩/已验证与未验证清单、裁定结构性瓶颈并解释长期负优化，同时**保留有效 Baseline、按真实比赛指标验证、更新文档与 Handoff**。本轮**未恢复任何训练、自动化或旧队列**，未提交未推送，未改 `AGENTS.md`。
+
+**有效 Baseline = A 臂**（`Qwen3-VL-8B-Instruct` + 语言 LoRA，接 C 续训 600 步，seed2026，lr 5e-6，三图各 576 visual token，200704–602112 像素，贪心输出 0–1000 `bbox_2d`）。检查点 `runs/seed2026_600_deterministic/A/main/checkpoint-600`。规格见 `F:/AIC/docs/research/2026-10-02-baseline-reverification/baseline_spec.json`。
+
+**真实成绩分层（禁止混用）**：官方复赛 5690 条 C1500 与 M2 **均为 0.7144**（用户回报，本地无官方 GT 不可复算）；初赛历史 2B 路线 0.6404 / 0.6785（README 记录，无排行榜回执）。本地 City412 开发集：**A 296/412 = 71.8447%**（mIoU 0.61779）、C0 292、B/V 289；结构实验 T295/M287、R296/S298/S+G296；工具 Agent 旧/新接口 225/217（纠正 11 / 破坏 86）。
+
+**本次独立复验（新增工具 `code/tools/verify_acc05_dev.py`，只读原始浮点框、不信任已存的 iou/hit 字段）**：四臂 412/412 完整、0 无效框、内嵌 target 与独立 GT 全部一致，重算 hits 与历史报告逐位相同。单臂 SE ≈ 2.22pp ≈ **9.2 题**；A−C0 按 78 图组聚类 bootstrap 5000 次 = +0.97pp，95% 区间 **[−0.77, +2.82]pp 跨 0**——**连"哪个臂最好"都不显著**。C1500 官方提交包独立校验通过（5690 条、0 无效框、字段齐全、zip 仅根目录 `predictions.json` 且与 JSON 一致）。产物：`results/baseline_verification_20261002/`。
+
+**结构性瓶颈（量化）**：A 的 116 个失败里 **30 个框住了同图另一个被标注实例（与他题 GT 的 IoU≥0.5）**，另有 28 个落在 0.25–0.5 之间；边界失败仅 18。失败题目标面积中位数 0.00154 vs 全体 0.00406；最短边 <0.03 的 120 题贡献了 58 个失败（正好一半）；路灯/车/行人贡献 43/58 的错误实例选择。**若存在完美实例选择器，A 可到 354/412 = 85.9%（+58 题），是"只修 0.4–0.5 边界"（+18 题）的 3 倍以上。** 瓶颈在"Query→同图哪一个实例"的判别与绑定，不在框回归、不在模态通道、不在输出格式。
+
+**现有模型族的挑选天花板只有 +8 题（本轮新增复算）**：把本地留存的 11 个臂（S 298、A/R/S+G 296、T 295、C0 292、B/V 289、M 287、B(gu) 287、G* 284）的 City412 预测并成候选池，11 臂全对 273 题，**oracle 并集 306/412 = 74.27%，仅比最好单臂多 8 题**；106 题（25.73%）任何臂都做不对。十余轮训练与四种模态注入方案全部活在 284–298 这 14 题的带子里。脚本 `results/baseline_verification_20261002/arm_pool_ceiling.py`。
+
+**长期负优化的根因**：(1) 评测分辨率不足——单臂 SE≈9.2 题、配对比较区间半宽≈7.4 题，在这个带子里做选择必然退化为随机游走，而本地 C292 与 M2 288 在官方 5690 上同为 0.7144，直接证明本地排序无判别力；(2) 投入层级错位——失败一半是选错实例，投入却全在输入通道（IR/Depth adaptor、DeepStack 私有残差、毫米数值、对象读出）与决策接口（候选 ID、工具循环、8192 上下文）；(3) 辅助监督不带新信息——83 条辅助标签中 81 条用同题 RGB 正确框即可过 0.5，却在固定预算下挤占 11.4% 最终任务呈现；(4) "能跑通"被当作能力提升——Agent 路线纠正 11 / 破坏 86，73 个破坏是"合法地选错对象"；(5) 无真正留出集，City412 反复用于选模与定阈值。
+
+**唯一优先方向**：做成"**实例级候选生成 + 绑定**"这条能力链（不是继续改输入通道，也不是单纯加一个重排器）。补测已定顺序：A 的 116 个失败里**只有 10 个是"别的臂做对过、可靠重排挽回"的，106 个是全部 11 个臂都做不对的**；58 个错误实例题里 54 个连正确实例的框都从未被产出过。而 11 臂并集的 oracle 上限只有 306/412（+8 题 ≈ +2.4pp），**低于本开发集的 MDE，重排类方案在竞赛意义上无法验证**。所以第一步是"召回探针"（测开放词表检测器/Qwen3-VL 单次多候选能否找回那 54 个正确实例，门限 recall@50 ≥ 85~90%），第二步才是按 Query 属性绑对。**止损/验收规则**：以 City412 为裁判的改动必须报告 78 图组聚类配对区间（`tools/verify_acc05_dev.py --compare X:Y --bootstrap 5000`），下界≤0 一律记"未证实"；配对分辨率见 `results/baseline_verification_20261002/pairwise_resolution.py`（历史各臂 MDE 仅 1.0–3.3pp，只有 M 与 G* 的下降越过了 0；真正不同的新方法 MDE 会升到 5–8pp）。文献依据（含 RGBT-Ground 证明辅助模态增益是条件性的、VGent 解释工具循环病理）见 `F:/AIC/docs/research/2026-10-02-baseline-reverification/README.md` 第 7 节。
+
+**半决赛风险（10-10 前开始）**：官方要求代码＋预测文件＋模型文件/下载链接＋PDF 技术报告。10-02 已做一次**只读**云端核查（未启动/未停止/未修改任何东西）：GPU 为 `No devices were found`（无卡模式）、无训练进程；**A 的适配器完好**（`A/main/adapter_model.safetensors` 117 MiB＋tokenizer/processor＋`checkpoint-600` 整目录 363 MB），基座 Qwen3-VL-8B-Instruct 也在，**但本地无备份，属单副本**。仍缺：**技术报告尚未撰写**（只有官方大纲模板）。提交入口已存在且已按官方 queries.json 校验通过。证据 `results/baseline_verification_20261002/cloud_state_20261002.txt`。详见 `F:/AIC/docs/research/2026-10-02-baseline-reverification/README.md`。
+
 ## 2026-10-01 R/S/S+G 网页Pro审计包已交付
 
 用户开启原AIC无卡模式，要求整理审计包，随后要求尽快收尾。新建SSH实际确认无GPU、无结构训练进程，实验仍为stopped_no_clear_benefit；未恢复训练，triground保持暂停。审计包：F:/AIC/docs/research/2026-10-01-structure-pro-audit/R_S_SG_Audit_20261001.zip（70.27 MiB，440文件），提示词AUDIT_REQUEST.md，简报01_AUDIT_BRIEF.md。已取回完整R/S trace、配置/日志、A缓存、源代码和CPU参数统计；附部署前归档与当前源码差异，明确追加种子严格门槛为停止后修订。109个原始视觉文件/65条选定条件覆盖8个正常命中翻转、16条IR阴性对照和部分深度/训练样例，不是全量视觉复核。独立复算全部评分、实际排程、A历史复现、输入配对、场景区间与原账本通过，压缩包回读及排除凭据/AGENTS/官方测试集检查通过。没有模型/Adam全量张量，不能称独立重跑恢复或推理。交付说明见该目录README.md；等待用户带回外部审计意见，不自动恢复本轮。

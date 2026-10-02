@@ -1,6 +1,6 @@
 # TriGround：RGB–红外–深度三模态视觉指代定位
 
-> **2026-09-27 审计快照入口：**请先读 [GPT Pro审计说明](docs/audit-20260927/README.md) 和 [数据集说明](docs/audit-20260927/DATASETS.md)。当前最强验证参考是原生三图Qwen3-VL-8B语言LoRA的C1500（292/412）；新增选择/细化实测v1为273/221，未提分。此分支保存全部当前源码、测试和最近实验的文本证据。下方早期2B、DeepStack及五阶段流程属于历史路线，不代表当前运行状态。原图、权重、凭据和本地AGENTS.md不随Git发布。
+> **2026-10-02 基线复验入口：**请先读 [基线复验与瓶颈裁定](../docs/research/2026-10-02-baseline-reverification/README.md)（含机器可读 [基线规格](../docs/research/2026-10-02-baseline-reverification/baseline_spec.json)）。当前保留基线是原生三图 Qwen3-VL-8B 语言 LoRA 的 **A 臂：City412 296/412 = 71.8447% ACC@0.5**（本次独立复算确认）；官方复赛 5690 上 C1500 与 M2 均为 **0.7144**（用户回报）。A 相对 C0 的 +4 题按 78 图组聚类 95% 区间为 [−0.77, +2.82] 个百分点，跨 0，故本地 412 只能作开发参照，不能作为提分判据。结构性瓶颈是"同图同类多实例的指代选择"，不是模态融合。更早的审计与数据集说明见 [GPT Pro审计说明](docs/audit-20260927/README.md) 和 [数据集说明](docs/audit-20260927/DATASETS.md)。下方早期2B、DeepStack及五阶段流程属于历史路线，不代表当前运行状态。原图、权重、凭据和本地AGENTS.md不随Git发布。
 
 本仓库同时保留已发布的 2B 基线与新的 8B/DeepStack 实验实现；当前推荐复现实验是 Qwen3-VL-8B 五阶段流程。8B 配置见 [升级说明](QWEN3_VL_8B_UPGRADE.md)，集群冒烟测试与完整训练评估见 [Slurm 操作说明](SLURM.md)。下面的比赛分数仍是历史 2B 路线结果，不代表新 8B 实验成绩。
 
