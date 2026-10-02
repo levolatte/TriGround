@@ -38,24 +38,40 @@ echo "=== 5) 探针 dry-run（token 预算）==="
     --manifest "${VAL}" --target-manifest "${GT}" --data-root "${DATA_ROOT}" \
     --output-dir "${OUT}/dryrun" --pixels 602112 1204224 2073600 --model-max-length 16384 2>&1 | tail -30
 
-echo "=== 6) 真实模板编码（1 条样本，验证 <image> 替换与监督完整性）==="
+echo "=== 6) 真实模板编码（多条样本：验证 <image> 替换、监督完整、不超长被截断）==="
 "${PY}" - <<'EOF'
 import json, os
 os.environ.setdefault("MAX_PIXELS", "1204224")
 from swift import get_processor, get_template
 
-row = json.loads(open("/root/sprint_qwen36/a_city_swift.jsonl", encoding="utf-8").readline())
+MAX_LENGTH = int(os.environ.get("MAX_LENGTH", "4096"))
+rows = [json.loads(line) for line in open("/root/sprint_qwen36/a_city_swift.jsonl", encoding="utf-8")]
+# 取等距样本，兼顾不同图组与低分辨率图
+sample = [rows[i] for i in range(0, len(rows), max(1, len(rows)//8))][:8]
+
 processor = get_processor("/root/rematch_models/Qwen3.6-27B")
 template = get_template(processor)
 template.set_mode("train")
-encoded = template.encode(row, return_template_inputs=True)
-inputs = encoded["template_inputs"]
-print("images:", len(getattr(inputs, "images", []) or []))
-print("input_ids:", len(encoded["input_ids"]))
-labels = encoded["labels"]
-print("supervised tokens:", sum(1 for x in labels if x != -100))
-print("[LABELS]", template.safe_decode(labels)[:200])
-print("grid:", getattr(inputs, "image_grid_thw", None))
+
+print(f"{'id':<44} {'input_ids':>9} {'supervised':>10} {'images':>6} {'over_max':>8}")
+bad = []
+for row in sample:
+    encoded = template.encode(row, return_template_inputs=True)
+    inputs = encoded["template_inputs"]
+    n_ids = len(encoded["input_ids"])
+    supervised = sum(1 for x in encoded["labels"] if x != -100)
+    n_images = len(getattr(inputs, "images", []) or [])
+    over = n_ids > MAX_LENGTH
+    if over or supervised == 0 or n_images != 3:
+        bad.append(row["id"])
+    print(f"{row['id'][:44]:<44} {n_ids:9d} {supervised:10d} {n_images:6d} {str(over):>8}")
+
+print("[LABELS 首条]", template.safe_decode(encoded["labels"])[:160].replace("\n", "\\n"))
+grid = getattr(inputs, "image_grid_thw", None)
+print("[GRID]", grid)
+print("[MAX_LENGTH]", MAX_LENGTH)
+assert not bad, f"以下样本有问题（超长/无监督/图像数不对）：{bad}"
+print("SUPERVISION_OK")
 EOF
 
 echo "=== 7) ms-swift 训练入口可用性（只打印帮助，不训练）==="

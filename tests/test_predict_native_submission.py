@@ -67,7 +67,8 @@ def _prepared_run(tmp_path: Path, modality: str = "trimodal") -> tuple[Path, Pat
     output = tmp_path / "run"
     output.mkdir()
     config = build_run_config("local-model", tmp_path / "adapter", queries.resolve(),
-                              tmp_path.resolve(), modality)
+                              tmp_path.resolve(), modality,
+                              MIN_PIXELS, MAX_PIXELS, 4096, False)
     (output / "run_config.json").write_text(json.dumps(config), encoding="utf-8")
     return queries, output, source
 
@@ -90,9 +91,11 @@ def test_prompts_match_native_sft_templates_and_image_positions():
         _trimodal_prompt(query).replace("<image>", "")
     )
     config = build_run_config("model", Path("adapter"), Path("queries"), Path("data"),
-                              "trimodal")
+                              "trimodal", MIN_PIXELS, MAX_PIXELS, 4096, False)
     assert (config["min_pixels"], config["max_pixels"], config["max_new_tokens"]) == (
         MIN_PIXELS, MAX_PIXELS, MAX_NEW_TOKENS) == (200704, 602112, 128)
+    # 新增的分辨率/上下文/思考开关必须进入 run_config，否则无法凭配置复现或安全 resume
+    assert (config["model_max_length"], config["enable_thinking"]) == (4096, True)
     assert config["modalities"] == ["visible", "infrared", "depth"]
     assert config["peft_autocast_adapter_dtype"] is False
     assert config["do_sample"] is False

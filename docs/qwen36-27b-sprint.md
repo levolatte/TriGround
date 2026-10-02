@@ -75,9 +75,24 @@
 **关键自检通过**：`from transformers import Qwen3_5ForConditionalGeneration` → OK。
 `torch 2.12.1+cu130` 前后一致（ms-swift 曾把 transformers 从 5.18.0 收敛到 5.16.1，仍满足 ≥5.2.0）。
 
-### 3.4 权重下载（`scripts/download_qwen36_27b.sh`）
-HF 镜像 `hf-mirror` 实测**卡死**（20 秒零增长，停在 0.27GB），已改走 **ModelScope**
-（同仓库 `Qwen/Qwen3.6-27B`，15 个分片并发，聚合约 18 MB/s，ETA ≈ 1 小时）。
+### 3.4 权重下载（`scripts/fetch_model_modelscope_curl.sh`）
+
+**踩到并修掉的两个部署坑**：
+
+1. **HF 镜像卡死**：`hf-mirror` 跑到 0.27GB 后 20 秒零增长，进程仍在但速率恒为 0。改走 **ModelScope**（同仓库 `Qwen/Qwen3.6-27B`）。
+2. **ModelScope CLI 同样卡死，且根因是磁盘写满**：在约 13.2GB 处停住；查下来是
+   **系统的 30GB overlay 盘 100% 写满** —— `/root/rematch_models` 位于系统盘而非 200GB 数据盘，
+   8B(17G) + 27B 部分(13G) 把它填满，curl 报 `No space left on device` 而下载静默停滞。
+   **修复**：把模型目录整体移到 `/root/autodl-tmp/rematch_models`（200GB 数据盘），
+   并在 `/root/rematch_models` 留**同名符号链接**，使所有既有绝对路径（脚本、manifest）继续可用。
+   修复后：系统盘 2.4G/28G 可用，数据盘 35G/166G 可用。
+
+同时改为**清单式 curl 下载**：官方 API 取文件清单与字节大小 → 把遗留 `*.incomplete` 改回正式名交给
+`curl -C -` 续传 → 多轮扫描直到大小吻合 → 按 `model.safetensors.index.json` 校验分片集合。
+**并加了磁盘守卫**：目标文件系统可用空间小于「模型体积 + 5GiB」时直接退出，不再静默跑一半。
+
+### 3.4.1 下载源与体积
+ModelScope 上 29 个文件、合计 **55.6 GB**（15 个分片各约 3.9GB）。HF 镜像在本机不可用。
 
 ### 3.5 代码适配（已提交）
 - `tools/native_model_loading.py`：按 `config.json` 的 `architectures[0]` 解析模型类，一份代码兼容 Qwen3-VL / 3.5 / 3.6。
