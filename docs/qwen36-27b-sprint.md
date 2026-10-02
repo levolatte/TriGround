@@ -95,11 +95,40 @@
 ModelScope 上 29 个文件、合计 **55.6 GB**（15 个分片各约 3.9GB）。HF 镜像在本机不可用。
 
 ### 3.5 代码适配（已提交）
+
 - `tools/native_model_loading.py`：按 `config.json` 的 `architectures[0]` 解析模型类，一份代码兼容 Qwen3-VL / 3.5 / 3.6。
 - `tools/evaluate_pretrained_grounder.py`、`tools/predict_native_submission.py`：改用解析器；新增
   `--model-max-length`、`--no-thinking`；`verify_run_config` 把新键当作带默认值的可选键，历史 run 仍可 `--package-only`。
 - `tools/convert_manifest_to_swift.py` + `tests/test_convert_manifest_to_swift.py`。
-- `scripts/{migrate_from_old,cloud_setup_qwen36,download_qwen36_27b,train_qwen36_27b_swift,cloud_cpu_precheck}.sh`。
+- `scripts/{migrate_from_old,cloud_setup_qwen36,fetch_model_modelscope_curl,train_qwen36_27b_swift,cloud_cpu_precheck,run_probe_suite}.sh`。
+
+### 3.5.1 ms-swift 参数陷阱（开卡前拦下，避免整轮训练白跑）
+
+`swift sft --help` 是**懒加载**的，只打印 6 行基础参数，不能用来核对参数名；而 ms-swift 又支持
+`--ignore_args_error`。因此逐个查了已安装包的权威字段集
+（`swift.arguments.SftArguments`，**329 个字段**），结论：
+
+| 事实 | 说明 |
+|---|---|
+| LoRA 选择参数是 **`--tuner_type`** | 4.5.3 **没有** `--train_type`（早期版本的名字）。照搬旧写法会直接报错；若平台默认忽略未知参数则会**静默退化成 27B 全量微调并 OOM** |
+| `tuner_type` 默认值 | 已是 `'lora'` |
+| `freeze_vit` / `freeze_aligner` 默认值 | 均为 `True` —— 与基线 A「仅语言侧 LoRA」一致，脚本仍显式写出 |
+| **`max_pixels` 是一等参数** | 不必再依赖 `MAX_PIXELS` 环境变量 |
+| `ignore_args_error` 默认值 | `False`（未知参数会报错，不会静默忽略）——脚本显式再钉一次 |
+
+新增 `scripts/check_swift_args.py`：把训练脚本实际用到的 **35 个参数**逐个对照安装包的字段集校验
+（当前结果：**全部存在**）；`scripts/list_swift_sft_fields.py` 在版本改名时可一键 dump 字段分组。
+
+### 3.5.2 训练/推理的 thinking 前缀天然对齐（已从 chat_template 核实）
+
+Qwen3.6 的 `chat_template.jinja` 有两处关键行为：
+
+- 推理侧：`enable_thinking is false` 时输出前缀 `'<think>\n\n</think>\n\n'`（**空 think 块**），否则输出 `'<think>\n'`。
+- 训练侧：assistant 消息若不含 `<think>`，模板同样会拼成 `<think>\n\n</think>\n\n{答案}`。
+
+也就是说**训练学到的前缀与推理 `enable_thinking=False` 的前缀完全一致**，不需要额外改造；
+但两侧必须同时关闭 thinking，否则分布不一致。预检第 6 步会打印 `[LABELS]` 实证这一点。
+
 
 ### 3.6 清单转换与测试（本地与云端一致）
 `A.json` → ms-swift 格式：**4800 条 / 660 个唯一图组 / 每条 3 图**，保序保重数、文本逐字不变。
