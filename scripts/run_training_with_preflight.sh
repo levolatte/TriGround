@@ -14,12 +14,17 @@ PY=/root/miniconda3/bin/python
 CODE_DIR="${CODE_DIR:-/root/AIC_code}"
 PIXELS="${PIXELS:-1204224}"
 MAX_LEN="${MAX_LEN:-4096}"
-TAG="${TAG:-$(echo "${PIXELS}" | awk '{printf "%dM", $1/1000000}')}"
+# 用像素数本身做标签，不要格式化——曾用 printf "%dM" 把 2073600 截断成 "2M"，
+# 结果连自己都找错目录。
+TAG="${TAG:-${PIXELS}}"
 
 PREFLIGHT_DIR="${PREFLIGHT_DIR:-/root/runs/q36_preflight_${TAG}}"
 PREFLIGHT_LOG="${PREFLIGHT_LOG:-/root/train_preflight_${TAG}.log}"
 TRAIN_DIR="${TRAIN_DIR:-/root/runs/q36_600_${TAG}}"
 TRAIN_LOG="${TRAIN_LOG:-/root/train_q36_${TAG}.log}"
+STEPS_BUDGET="${STEPS_BUDGET:-600}"
+# 单卡 83.6GiB 上 600 步的合理上限。超过就必须先降分辨率或减步数，不能直接开跑。
+MAX_HOURS="${MAX_HOURS:-12}"
 
 say() { echo "[$(date +%H:%M:%S)] $*"; }
 
@@ -32,11 +37,17 @@ OUTPUT_DIR="${PREFLIGHT_DIR}" \
 MAX_PIXELS="${PIXELS}" MAX_LENGTH="${MAX_LEN}" \
   bash scripts/train_qwen36_27b_swift.sh > "${PREFLIGHT_LOG}" 2>&1
 preflight_status=$?
+
+# ms-swift 4.5.3 不打印 trainable params 行，改用预检真正落盘的 adapter 来确认 LoRA 生效
+LATEST_CHECKPOINT="$(find "${PREFLIGHT_DIR}" -maxdepth 1 -type d -name 'v*' | sort | tail -1)"
 say "预检退出码 ${preflight_status}，开始判读"
 
-# 判读只看客观数字：可训练参数、峰值显存、每步耗时、是否 OOM
-"${PY}" scripts/check_training.py "${PREFLIGHT_LOG}" --steps-budget 600
-verdict=$?
+# 判读只看客观数字：可训练参数、峰值显存、**外推总时长**、是否 OOM。
+# --max-hours 是这里最要紧的一道闸：本机实测原生分辨率下 27B 约 180 秒/步，
+# 600 步即 30 小时——这种量级必须在开训前拦住，而不是跑完一天才发现。
+"${PY}" scripts/check_training.py "${PREFLIGHT_LOG}" --steps-budget "${STEPS_BUDGET}" \
+  --max-hours "${MAX_HOURS}" --adapter-dir "${LATEST_CHECKPOINT}" 2>&1 | tee "${PREFLIGHT_LOG%.log}.verdict.txt"
+verdict=${PIPESTATUS[0]}
 
 if [ "${preflight_status}" -ne 0 ] || [ "${verdict}" -ne 0 ]; then
   say "预检未通过，按纪律不启动正式训练"

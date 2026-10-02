@@ -31,6 +31,13 @@ NATIVE_PROMPT = (
 )
 NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 FOUR_NUMBERS = rf"({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})"
+# 解析用的两个模式提为模块级常量，供推理时的"提前停止"判据共用。
+# 这样"可以停"与"可以解析"是同一个条件，绝不可能在还没有可解析答案时就截断生成。
+BBOX_KEYED_PATTERN = re.compile(
+    rf'["\']?bbox_2d["\']?\s*:\s*\[\s*{FOUR_NUMBERS}\s*\]',
+    flags=re.IGNORECASE | re.DOTALL,
+)
+BBOX_ARRAY_PATTERN = re.compile(rf"\[\s*{FOUR_NUMBERS}\s*\]", flags=re.DOTALL)
 IR_FIRST_TOKENS = 64
 IR_FINAL_TOKENS = 128
 # 这些键允许在历史 run_config 中缺失（缺省即视为旧值），避免新增字段后无法再对旧产物做
@@ -45,12 +52,8 @@ RESUME_OPTIONAL_KEYS = {
 
 def parse_generated_bbox(text: str) -> list[float] | None:
     """Parse the final EGM-style 0--1000 xyxy box without repairing invalid output."""
-    keyed = re.findall(
-        rf'["\']?bbox_2d["\']?\s*:\s*\[\s*{FOUR_NUMBERS}\s*\]',
-        text,
-        flags=re.IGNORECASE | re.DOTALL,
-    )
-    arrays = re.findall(rf"\[\s*{FOUR_NUMBERS}\s*\]", text, flags=re.DOTALL)
+    keyed = BBOX_KEYED_PATTERN.findall(text)
+    arrays = BBOX_ARRAY_PATTERN.findall(text)
     candidates = keyed if keyed else arrays
     if not candidates:
         return None

@@ -15,11 +15,12 @@ from typing import Any
 import numpy as np
 import torch
 from PIL import Image
-from transformers import AutoProcessor
+from transformers import AutoProcessor, StoppingCriteria, StoppingCriteriaList
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.evaluate_pretrained_grounder import (  # noqa: E402
+    BBOX_KEYED_PATTERN,
     build_user_content,
     configure_torch_precision,
     ensure_jsonl_append_separator,
@@ -43,6 +44,46 @@ FALLBACK_BOX = [0.0, 0.0, 1.0, 1.0]
 IMAGE_FIELDS = ("visible", "infrared", "depth")
 PROMPTS = {"rgb": _rgb_prompt, "trimodal": _trimodal_prompt}
 DEPTH_POLICY = "uint16_mm_absolute_grayscale_or_uint8_rgb_visualization_v2"
+
+
+class BboxCompleteCriteria(StoppingCriteria):
+    """一旦某条序列生成了**可解析的合法** `bbox_2d` 就停止该序列。
+
+    三个设计要点：
+
+    1. **判据就是解析本身**：用 `parse_generated_bbox` 作为停止条件，而不是只做正则匹配。
+       这一步是测试逼出来的——`{"bbox_2d":[-1.5,...]}` 能匹配正则，但下游 `parse_bbox`
+       会因坐标越界拒绝它。若按"正则命中即停"，模型先吐一个非法框、再吐合法框时就会被
+       提前截断，把本可救回的题变成兜底框。**改成"能解析出合法框才停"后，
+       "允许停止"与"已经有答案"严格等价。**
+    2. **逐序列语义**：transformers 的生成循环按
+       `unfinished_sequences & ~stopping_criteria(input_ids, scores)` 消费返回值，
+       因此返回 `(batch,)` 的 bool 张量即可让已完成的序列停下、其余继续解码。
+    3. **解码参数与落盘一致**（`skip_special_tokens=True`、不清理分词空格），
+       保证判据看到的文本就是解析器将要看到的文本。
+    """
+
+    def __init__(self, tokenizer: Any, prompt_length: int) -> None:
+        self.tokenizer = tokenizer
+        self.prompt_length = prompt_length
+        self.checks = 0
+        self.stopped = 0
+
+    def __call__(self, input_ids: torch.LongTensor, scores: Any, **kwargs: Any) -> torch.BoolTensor:
+        generated = input_ids[:, self.prompt_length:]
+        texts = self.tokenizer.batch_decode(generated, skip_special_tokens=True,
+                                            clean_up_tokenization_spaces=False)
+        self.checks += 1
+        # 两个条件同时成立才允许停：
+        #   (a) 出现 `bbox_2d` 键 —— 这是模型该输出的答案格式，保证我们不是在某个
+        #       顺带出现的裸数组上提前收工（解析器的兜底会取最后一个匹配，裸数组有风险）；
+        #   (b) 能解析出**合法**框 —— 越界/反向坐标会被下游拒绝，此时必须继续生成，
+        #       因为模型后面可能才吐出正确的框。
+        finished = [BBOX_KEYED_PATTERN.search(text) is not None
+                    and parse_generated_bbox(text) is not None
+                    for text in texts]
+        self.stopped += sum(finished)
+        return torch.tensor(finished, device=input_ids.device, dtype=torch.bool)
 
 
 def valid_box(value: object) -> bool:
@@ -233,6 +274,10 @@ def parse_args() -> argparse.Namespace:
                         help="高分辨率档需提高（原生三图约 6075 token）")
     parser.add_argument("--no-thinking", action="store_true",
                         help="对 Qwen3.5/3.6 传 enable_thinking=False，避免输出超长思维链")
+    parser.add_argument("--no-stop-on-bbox", action="store_true",
+                        help="关闭\"完整 bbox 即停止\"。默认开启——零样本 27B 会在 bbox 之后"
+                             "重复输出查询文本作为 label，实测浪费约 45%% 的解码 token。"
+                             "关掉可复现历史行为，用于等价性对照。")
     return parser.parse_args()
 
 
@@ -256,12 +301,13 @@ def main() -> None:
         adapter = args.adapter.resolve() if args.adapter else Path(saved["adapter"])
         modality = args.modality or saved["modality"]
     else:
-        if args.model is None or args.adapter is None or args.modality is None:
-            raise ValueError("inference requires --model, --adapter, and --modality")
+        if args.model is None or args.modality is None:
+            raise ValueError("inference requires --model and --modality")
         model = args.model
-        adapter = args.adapter.resolve()
+        # 适配器可选：零样本（如 B2 的 Qwen3.6-27B 未微调）不带 adapter。
+        adapter = args.adapter.resolve() if args.adapter else None
         modality = args.modality
-        if not (adapter / "adapter_config.json").is_file():
+        if adapter is not None and not (adapter / "adapter_config.json").is_file():
             raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter}")
     config = build_run_config(model, adapter, queries, data_root, modality,
                               args.min_pixels, args.max_pixels, args.model_max_length,
@@ -339,10 +385,16 @@ def main() -> None:
                     return_dict=True, return_tensors="pt", **chat_template_kwargs)
                 inputs.pop("token_type_ids", None)
                 inputs = inputs.to("cuda")
+                stopping = None
+                if not args.no_stop_on_bbox:
+                    # prompt_length 必须在 .to("cuda") 之后、generate 之前取，且与下面切分
+                    # new_tokens 用的是同一个值，保证判据看到的正是新生成的部分。
+                    stopping = StoppingCriteriaList([
+                        BboxCompleteCriteria(processor.tokenizer, inputs["input_ids"].shape[1])])
                 torch.cuda.synchronize()
                 started = time.perf_counter()
                 generated = grounder.generate(**inputs, max_new_tokens=MAX_NEW_TOKENS,
-                                              do_sample=False)
+                                              do_sample=False, stopping_criteria=stopping)
                 torch.cuda.synchronize()
                 latency = time.perf_counter() - started
                 new_tokens = generated[0, inputs["input_ids"].shape[1]:]

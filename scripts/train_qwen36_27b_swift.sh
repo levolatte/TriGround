@@ -34,9 +34,18 @@ LEARNING_RATE="${LEARNING_RATE:-5e-6}"
 MAX_STEPS="${MAX_STEPS:-600}"
 SEED="${SEED:-2026}"
 ACCUM="${ACCUM:-8}"
+# 每个优化步消费的样本数固定为 ACCUM_TARGET（与基线 A 的 1×8 一致）。
+# 把它拆成 PER_DEVICE_BATCH × ACCUM 时**梯度语义不变**（同一批 8 个样本求平均），
+# 但更大的 micro-batch 能让 GPU kernel 更饱满——batch=1 时很多算子利用率很低。
+PER_DEVICE_BATCH="${PER_DEVICE_BATCH:-1}"
 SAVE_STEPS="${SAVE_STEPS:-100}"
 SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-2}"
 TARGET_MODULES="${TARGET_MODULES:-all-linear}"
+# 每条样本要解码 3 张 1920x1080 PNG，是实打实的 CPU 开销。workers=0 会让主进程在步间阻塞
+# 等图像解码；而且 ms-swift 默认 persistent_workers=True，workers=0 会直接抛
+# "persistent_workers option needs num_workers > 0"。
+NUM_WORKERS="${NUM_WORKERS:-4}"
+DATASET_NUM_PROC="${DATASET_NUM_PROC:-4}"
 
 test -f "${MODEL}/config.json"
 test -f "${DATASET}"
@@ -77,7 +86,7 @@ EOF
     --attn_impl sdpa \
     --num_train_epochs 1 \
     --max_steps "${MAX_STEPS}" \
-    --per_device_train_batch_size 1 \
+    --per_device_train_batch_size "${PER_DEVICE_BATCH}" \
     --gradient_accumulation_steps "${ACCUM}" \
     --learning_rate "${LEARNING_RATE}" \
     --lr_scheduler_type linear \
@@ -98,8 +107,9 @@ EOF
     --save_steps "${SAVE_STEPS}" \
     --save_total_limit "${SAVE_TOTAL_LIMIT}" \
     --logging_steps 1 \
-    --dataloader_num_workers 0 \
-    --dataset_num_proc 1 \
+    --dataloader_num_workers "${NUM_WORKERS}" \
+    --dataloader_persistent_workers true \
+    --dataset_num_proc "${DATASET_NUM_PROC}" \
     --seed "${SEED}" \
     --report_to none \
     --output_dir "${OUTPUT_DIR}" \
