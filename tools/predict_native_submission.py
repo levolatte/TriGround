@@ -15,7 +15,7 @@ from typing import Any
 import numpy as np
 import torch
 from PIL import Image
-from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
+from transformers import AutoProcessor
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
@@ -28,6 +28,7 @@ from tools.evaluate_pretrained_grounder import (  # noqa: E402
     resolve_image_path,
     verify_run_config,
 )
+from tools.native_model_loading import resolve_model_class  # noqa: E402
 from tools.prepare_qwen3vl_native_sft import (  # noqa: E402
     _rgb_prompt,
     _trimodal_prompt,
@@ -76,11 +77,12 @@ def image_paths(record: dict[str, Any], data_root: Path, queries: Path) -> dict[
     }
 
 
-def build_run_config(model: str, adapter: Path, queries: Path, data_root: Path,
-                     modality: str) -> dict[str, Any]:
+def build_run_config(model: str, adapter: Path | None, queries: Path, data_root: Path,
+                     modality: str, min_pixels: int, max_pixels: int,
+                     model_max_length: int, no_thinking: bool) -> dict[str, Any]:
     return {
         "model": model,
-        "adapter": str(adapter),
+        "adapter": str(adapter) if adapter is not None else None,
         "queries": str(queries),
         "data_root": str(data_root),
         "modality": modality,
@@ -88,8 +90,10 @@ def build_run_config(model: str, adapter: Path, queries: Path, data_root: Path,
         "prompt_template": PROMPTS[modality]("{query}"),
         "modalities": ["visible"] if modality == "rgb" else list(IMAGE_FIELDS),
         "depth_policy": DEPTH_POLICY if modality == "trimodal" else None,
-        "min_pixels": MIN_PIXELS,
-        "max_pixels": MAX_PIXELS,
+        "min_pixels": min_pixels,
+        "max_pixels": max_pixels,
+        "model_max_length": model_max_length,
+        "enable_thinking": not no_thinking,
         "max_new_tokens": MAX_NEW_TOKENS,
         "model_dtype": "bfloat16",
         "attention_implementation": "sdpa",
@@ -213,7 +217,7 @@ def package_submission(source: dict[str, dict[str, Any]], rows_by_id: dict[str, 
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--model", help="Local Qwen3-VL-8B base model")
+    parser.add_argument("--model", help="Local native grounding base model (Qwen3-VL / Qwen3.5 / Qwen3.6)")
     parser.add_argument("--adapter", type=Path, help="R2 or M2 checkpoint-928 PEFT adapter")
     parser.add_argument("--modality", choices=PROMPTS, help="RGB R2 or three-image M2")
     parser.add_argument("--queries", type=Path, required=True)
@@ -223,6 +227,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=0, help="Infer only the first N IDs; never package")
     parser.add_argument("--package-only", action="store_true", help="Verify and package complete JSONL without CUDA")
     parser.add_argument("--expected-query-count", type=int, default=5690)
+    parser.add_argument("--min-pixels", type=int, default=MIN_PIXELS)
+    parser.add_argument("--max-pixels", type=int, default=MAX_PIXELS)
+    parser.add_argument("--model-max-length", type=int, default=4096,
+                        help="高分辨率档需提高（原生三图约 6075 token）")
+    parser.add_argument("--no-thinking", action="store_true",
+                        help="对 Qwen3.5/3.6 传 enable_thinking=False，避免输出超长思维链")
     return parser.parse_args()
 
 
@@ -253,7 +263,9 @@ def main() -> None:
         modality = args.modality
         if not (adapter / "adapter_config.json").is_file():
             raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter}")
-    config = build_run_config(model, adapter, queries, data_root, modality)
+    config = build_run_config(model, adapter, queries, data_root, modality,
+                              args.min_pixels, args.max_pixels, args.model_max_length,
+                              args.no_thinking)
 
     if args.package_only or args.resume:
         if rows_path.exists() and not config_path.exists():
@@ -295,16 +307,21 @@ def main() -> None:
         if not torch.cuda.is_available():
             raise RuntimeError("CUDA is required for native Qwen3-VL inference")
         configure_torch_precision()
-        processor = AutoProcessor.from_pretrained(model, min_pixels=MIN_PIXELS,
-                                                  max_pixels=MAX_PIXELS, local_files_only=True)
-        grounder = Qwen3VLForConditionalGeneration.from_pretrained(
+        processor = AutoProcessor.from_pretrained(model, min_pixels=args.min_pixels,
+                                                  max_pixels=args.max_pixels, local_files_only=True)
+        processor.tokenizer.model_max_length = args.model_max_length
+        model_class, _ = resolve_model_class(model, local_files_only=True)
+        grounder = model_class.from_pretrained(
             model, dtype=torch.bfloat16, attn_implementation="sdpa", local_files_only=True)
         from peft import PeftModel
 
-        grounder = PeftModel.from_pretrained(
-            grounder, adapter, is_trainable=False, autocast_adapter_dtype=False,
-            local_files_only=True).eval().to(device="cuda", dtype=torch.bfloat16)
+        if adapter is not None:
+            grounder = PeftModel.from_pretrained(
+                grounder, adapter, is_trainable=False, autocast_adapter_dtype=False,
+                local_files_only=True)
+        grounder = grounder.eval().to(device="cuda", dtype=torch.bfloat16)
         torch.cuda.reset_peak_memory_stats()
+        chat_template_kwargs = {"enable_thinking": False} if args.no_thinking else {}
         eos = processor.tokenizer.eos_token_id
         eos_ids = set(eos if isinstance(eos, list) else [eos])
         mode = "a" if rows_path.exists() else "w"
@@ -319,7 +336,7 @@ def main() -> None:
                     prompt, images, prompt_has_image_placeholders=True)}]
                 inputs = processor.apply_chat_template(
                     messages, tokenize=True, add_generation_prompt=True,
-                    return_dict=True, return_tensors="pt")
+                    return_dict=True, return_tensors="pt", **chat_template_kwargs)
                 inputs.pop("token_type_ids", None)
                 inputs = inputs.to("cuda")
                 torch.cuda.synchronize()

@@ -12,13 +12,15 @@ from typing import Any
 
 import torch
 from PIL import Image
-from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
+from transformers import AutoProcessor
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from mm_grounding.boxes import box_iou_aligned
 from mm_grounding.engine import parse_bbox
 from mm_grounding.metrics import grounding_metrics
+
+from tools.native_model_loading import resolve_model_class
 
 
 EGM_PROMPT = "Locate {query}, output its bbox coordinates using JSON format"
@@ -31,6 +33,14 @@ NUMBER = r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?"
 FOUR_NUMBERS = rf"({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})\s*,\s*({NUMBER})"
 IR_FIRST_TOKENS = 64
 IR_FINAL_TOKENS = 128
+# 这些键允许在历史 run_config 中缺失（缺省即视为旧值），避免新增字段后无法再对旧产物做
+# --package-only / --resume；其余键仍严格逐字段比较。
+RESUME_OPTIONAL_KEYS = {
+    "inference_mode": "direct",
+    "auxiliary_adapter": None,
+    "model_max_length": 4096,
+    "enable_thinking": True,
+}
 
 
 def parse_generated_bbox(text: str) -> list[float] | None:
@@ -421,10 +431,12 @@ def ensure_jsonl_append_separator(path: Path, handle: Any) -> None:
 
 
 def verify_run_config(saved: dict[str, Any], current: dict[str, Any]) -> None:
-    for key, default in (("inference_mode", "direct"), ("auxiliary_adapter", None)):
+    for key, default in RESUME_OPTIONAL_KEYS.items():
         if saved.get(key, default) != current.get(key, default):
             raise ValueError(f"resume run_config mismatch for {key}")
     for key, expected in current.items():
+        if key in RESUME_OPTIONAL_KEYS:
+            continue
         if key not in saved:
             raise ValueError(f"resume run_config is missing {key}")
         if saved[key] != expected:
@@ -690,14 +702,18 @@ def adapter_generator(model: Any, processor: Any, adapter_name: str):
 
 
 def load_model_and_processor(model_name: str, adapter: Path | None, min_pixels: int,
-                             max_pixels: int, *, ir_reader_adapter: Path | None = None):
+                             max_pixels: int, *, ir_reader_adapter: Path | None = None,
+                             model_max_length: int | None = None):
     if not torch.cuda.is_available():
         raise RuntimeError("CUDA is required for pretrained grounder evaluation")
     configure_torch_precision()
     processor = AutoProcessor.from_pretrained(
         model_name, min_pixels=min_pixels, max_pixels=max_pixels, local_files_only=True,
     )
-    model = Qwen3VLForConditionalGeneration.from_pretrained(
+    if model_max_length is not None:
+        processor.tokenizer.model_max_length = model_max_length
+    model_class, _ = resolve_model_class(model_name, local_files_only=True)
+    model = model_class.from_pretrained(
         model_name, dtype=torch.bfloat16, attn_implementation="sdpa", local_files_only=True,
     )
     if adapter is not None:
@@ -774,6 +790,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--limit", type=int, default=0, help="0 evaluates the full manifest")
     parser.add_argument("--min-pixels", type=int, default=200704)
     parser.add_argument("--max-pixels", type=int, default=602112)
+    parser.add_argument("--model-max-length", type=int, default=4096,
+                        help="处理器 tokenizer 的最大长度；高分辨率档需相应提高（原生三图约 6075 token）")
     parser.add_argument("--max-new-tokens", type=int, default=4096)
     parser.add_argument("--prompt-style", choices=("egm", "native"), default="egm")
     parser.add_argument("--inference-mode", choices=("direct", "ir_then_ground", "ground_then_verify"), default="direct")
@@ -916,6 +934,7 @@ def main() -> None:
 
     model, processor = load_model_and_processor(
         args.model, adapter, args.min_pixels, args.max_pixels,
+        model_max_length=args.model_max_length,
         **({"ir_reader_adapter": ir_reader_adapter} if ir_reader_adapter is not None else {}),
     )
     ground = (adapter_generator(model, processor, "default") if ir_reader_adapter is not None
