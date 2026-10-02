@@ -116,9 +116,55 @@ def compare(hf_path: Path, other_path: Path) -> int:
     return 0
 
 
+def check_requests(model: str, queries: Path, data_root: Path, limit: int) -> int:
+    """比对**两条代码路径各自渲染出的提示词文本**，堵住闸门 1 原有的盲区。
+
+    原有的 --export 只证明"两侧 processor 一致"，并不能证明"vLLM 请求构造代码写对了"。
+    实际就漏过一次：`chat_template_kwargs={"enable_thinking": False}` 对 tokenizer 无效，
+    thinking 静默保持开启，200 条全部输出思维链、全部解析失败——闸门 2 才发现。
+    这里直接把 `build_requests` 渲染出的文本与 HF processor 的渲染结果逐条比。
+    """
+    from transformers import AutoProcessor
+
+    from tools.predict_submission_vllm import build_requests
+
+    processor = AutoProcessor.from_pretrained(model, min_pixels=MIN_PIXELS, max_pixels=MAX_PIXELS,
+                                              local_files_only=True)
+    items = [(index, sample_id, record)
+             for index, (sample_id, record) in enumerate(selected_items(queries, limit))]
+    requests = build_requests(processor.tokenizer, items, data_root, queries, "trimodal")
+
+    mismatches = []
+    for item in requests:
+        images = load_modal_images(item["image_paths"], "trimodal")
+        messages = [{"role": "user", "content": build_user_content(
+            item["prompt"], images, prompt_has_image_placeholders=True)}]
+        reference = processor.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+        if item["request"]["prompt"] != reference:
+            mismatches.append(item["id"])
+
+    print(f"比对条数: {len(requests)}")
+    print(f"提示词文本不一致: {len(mismatches)}")
+    for sample_id in mismatches[:5]:
+        item = next(entry for entry in requests if entry["id"] == sample_id)
+        print(f"  {sample_id}: 渲染结果与 HF 路径不同")
+        print(f"    vLLM 侧前 160 字: {item['request']['prompt'][:160]!r}")
+    # thinking 必须关闭，否则模型输出思维链而不是 bbox
+    opened = [item["id"] for item in requests if "<think>" in item["request"]["prompt"]
+              and "</think>" not in item["request"]["prompt"]]
+    print(f"thinking 仍处于开启状态的条数: {len(opened)}")
+    if mismatches or opened:
+        print("\nREQUEST_CHECK_FAILED")
+        return 1
+    print("\nREQUEST_CHECK_OK")
+    return 0
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--export", action="store_true")
+    parser.add_argument("--check-requests", action="store_true")
     parser.add_argument("--compare", nargs=2, type=Path)
     parser.add_argument("--model")
     parser.add_argument("--queries", type=Path)
@@ -129,8 +175,10 @@ def main() -> None:
 
     if args.compare:
         sys.exit(compare(*args.compare))
+    if args.check_requests:
+        sys.exit(check_requests(args.model, args.queries, args.data_root, args.limit))
     if not args.export:
-        raise SystemExit("需要 --export 或 --compare")
+        raise SystemExit("需要 --export、--check-requests 或 --compare")
     export(args.model, args.queries, args.data_root, args.limit, args.out)
 
 

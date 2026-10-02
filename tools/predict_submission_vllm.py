@@ -63,6 +63,11 @@ def accept(text: str) -> list[float] | None:
 
 def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
                    modality: str) -> list[dict[str, Any]]:
+    # 注意：对 **tokenizer** 的 apply_chat_template，模板变量要作为**直接关键字参数**传入。
+    # 曾写成 chat_template_kwargs={"enable_thinking": False}（那是 processor / vLLM API 的形式），
+    # 结果 enable_thinking 被静默忽略、thinking 保持开启：200 条全部生成思维链并在 token 上限
+    # 处被截断，一个 bbox 都解析不出来。闸门 2 抓到了它——否则会交出一份全是兜底框的废提交。
+    # 这里的写法与 HF 路径 (predict_native_submission.py 的 **chat_template_kwargs) 完全一致。
     requests = []
     for index, sample_id, record in items:
         paths = image_paths(record, data_root, queries)
@@ -71,8 +76,11 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
         messages = [{"role": "user", "content": build_user_content(
             prompt, images, prompt_has_image_placeholders=True)}]
         text = processor_tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True,
-            chat_template_kwargs={"enable_thinking": False})
+            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+        if not text.rstrip().endswith("</think>"):
+            raise ValueError(
+                f"{sample_id}: 生成的提示词未以 </think> 结尾，thinking 可能没有被关掉；"
+                "这会导致模型输出思维链而不是 bbox")
         requests.append({
             "index": index, "id": sample_id, "query": record["query"],
             "image_paths": paths, "prompt": prompt,
@@ -102,6 +110,16 @@ def main() -> None:
     parser.add_argument("--max-pixels", type=int, default=MAX_PIXELS)
     parser.add_argument("--model-max-length", type=int, default=8192)
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.90)
+    parser.add_argument("--max-num-seqs", type=int, default=256,
+                        help="并发序列上限。Qwen3.6 的线性注意力层每个解码序列要占一个 Mamba "
+                             "cache block，本机可用约 397 块；vLLM 默认 1024 会直接报 "
+                             "'max_num_seqs exceeds available Mamba cache blocks' 而启动失败。")
+    parser.add_argument("--mamba-cache-mode", default="none",
+                        help="混合架构（Qwen3.6 有 48/64 层线性注意力）的前缀缓存需要设为 align 才生效；"
+                             "vLLM 默认是 none，等于把 KV 前缀缓存关掉了。设为 align 后必须做"
+                             "开/关的逐题等价性比对——缓存只能改变速度，不能改变结果。")
+    parser.add_argument("--no-prefix-caching", action="store_true",
+                        help="显式关闭 KV 前缀缓存（vLLM 该版本默认是开启的）")
     parser.add_argument("--limit", type=int, default=0, help="只跑前 N 条；不打包")
     parser.add_argument("--package-only", action="store_true")
     args = parser.parse_args()
@@ -119,6 +137,9 @@ def main() -> None:
     config["engine"] = "vllm"
     config["stage1_max_tokens"] = STAGE1_MAX_TOKENS
     config["max_new_tokens"] = MAX_NEW_TOKENS
+    config["max_num_seqs"] = args.max_num_seqs
+    config["mamba_cache_mode"] = args.mamba_cache_mode
+    config["enable_prefix_caching"] = not args.no_prefix_caching
 
     if args.package_only:
         saved = json.loads(config_path.read_text(encoding="utf-8-sig"))
@@ -146,6 +167,9 @@ def main() -> None:
 
     llm = LLM(model=args.model, dtype="bfloat16", max_model_len=args.model_max_length,
               gpu_memory_utilization=args.gpu_memory_utilization,
+              max_num_seqs=args.max_num_seqs,
+              enable_prefix_caching=not args.no_prefix_caching,
+              mamba_cache_mode=args.mamba_cache_mode,
               limit_mm_per_prompt={"image": len(IMAGE_FIELDS) if args.modality == "trimodal" else 1},
               mm_processor_kwargs={"min_pixels": args.min_pixels, "max_pixels": args.max_pixels})
     tokenizer = llm.get_tokenizer()
