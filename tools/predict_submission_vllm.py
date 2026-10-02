@@ -113,6 +113,13 @@ def main() -> None:
     parser.add_argument("--no-prefix-caching", action="store_true",
                         help="显式关闭 KV 前缀缓存（vLLM 该版本默认是开启的）")
     parser.add_argument("--limit", type=int, default=0, help="只跑前 N 条；不打包")
+    parser.add_argument("--adapter", type=Path,
+                        help="PEFT LoRA 适配器目录。vLLM 离线接口原生支持 LoRA，因此**不需要**"
+                             "先 merge_and_unload 合并——省掉一次 54GB 写盘，也避免合并带来的数值变化。"
+                             "但必须验证 vLLM 确实把适配器应用到了全部目标模块（我们用的是 "
+                             "all-linear，含 48 层线性注意力），否则会静默产出只适配了一部分的结果。")
+    parser.add_argument("--max-lora-rank", type=int, default=32,
+                        help="必须 >= 适配器的 r。默认 r=32；vLLM 的 LoRAConfig 默认只有 16。")
     parser.add_argument("--chunk-size", type=int, default=256,
                         help="每块处理的查询数。分块是必需的：一次性物化全部请求会把"
                              "数万张图读进内存并在生成前耗掉大量时间。")
@@ -135,6 +142,9 @@ def main() -> None:
     config["max_num_seqs"] = args.max_num_seqs
     config["mamba_cache_mode"] = args.mamba_cache_mode
     config["enable_prefix_caching"] = not args.no_prefix_caching
+    config["lora_adapter"] = str(adapter_path) if adapter_path else None
+    config["max_lora_rank"] = args.max_lora_rank
+    config["chunk_size"] = args.chunk_size
 
     if args.package_only:
         saved = json.loads(config_path.read_text(encoding="utf-8-sig"))
@@ -159,15 +169,26 @@ def main() -> None:
     items = [(index, sample_id, record) for index, (sample_id, record) in enumerate(selected)]
 
     from vllm import LLM, SamplingParams
+    from vllm.lora.request import LoRARequest
+
+    adapter_path = args.adapter.resolve() if args.adapter else None
+    if adapter_path is not None and not (adapter_path / "adapter_config.json").is_file():
+        raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter_path}")
 
     llm = LLM(model=args.model, dtype="bfloat16", max_model_len=args.model_max_length,
               gpu_memory_utilization=args.gpu_memory_utilization,
               max_num_seqs=args.max_num_seqs,
               enable_prefix_caching=not args.no_prefix_caching,
               mamba_cache_mode=args.mamba_cache_mode,
+              enable_lora=adapter_path is not None,
+              max_lora_rank=args.max_lora_rank,
               limit_mm_per_prompt={"image": len(IMAGE_FIELDS) if args.modality == "trimodal" else 1},
               mm_processor_kwargs={"min_pixels": args.min_pixels, "max_pixels": args.max_pixels})
     tokenizer = llm.get_tokenizer()
+    lora_request = (LoRARequest("trained", 1, str(adapter_path))
+                    if adapter_path is not None else None)
+    if lora_request is not None:
+        print(f"启用 LoRA 适配器: {adapter_path}（max_lora_rank={args.max_lora_rank}）", flush=True)
 
     # 分块处理：**必须分块**。曾把 5690 条请求（含 17070 张图）一次性物化再调一次
     # llm.generate()，结果引擎初始化完成后 GPU 长时间 0% 占用、系统内存持续上涨——
@@ -201,7 +222,7 @@ def main() -> None:
     for chunk_index, chunk in enumerate(chunks, 1):
         requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
         outputs = llm.generate([item["request"] for item in requests], stage1,
-                               use_tqdm=False)
+                               use_tqdm=False, lora_request=lora_request)
         for item, output in zip(requests, outputs):
             text = output.outputs[0].text.strip()
             prediction = accept(text)
@@ -235,7 +256,7 @@ def main() -> None:
              for start in range(0, len(retry), args.chunk_size)], 1):
         requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
         outputs = llm.generate([item["request"] for item in requests], stage2,
-                               use_tqdm=False)
+                               use_tqdm=False, lora_request=lora_request)
         for item, output in zip(requests, outputs):
             text = output.outputs[0].text.strip()
             prediction = parse_generated_bbox(text)
