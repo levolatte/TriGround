@@ -95,7 +95,15 @@ def score_arm(rows: list, gt: dict) -> dict:
         if sid not in gt:
             missing.append(sid)
             continue
-        pred = row.get("prediction")
+        # 两种字段名都要认：探针与 HF 路径落盘用 `prediction`，而 vLLM 提交路径
+        # (tools/predict_submission_vllm.py 与 predict_native_submission.py 的提交行)
+        # 用 `bbox`。只读一个会让另一条路径的预测**全部被当成空框**、命中数静默变成 0。
+        # 注意不能用 row.get("prediction", row.get("bbox"))：当 prediction 键存在但值为
+        # None（真的没解析出来）时，get 会返回 None 而不是回退到 bbox。
+        if "prediction" in row:
+            pred = row["prediction"]
+        else:
+            pred = row.get("bbox")
         ref = gt[sid]
         embedded = row.get("target")
         if embedded is not None and any(abs(float(a) - float(b)) > 1e-9 for a, b in zip(embedded, ref)):
