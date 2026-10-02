@@ -89,14 +89,6 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
     return requests
 
 
-def run_stage(llm, sampling_params, requests, label: str) -> list[Any]:
-    started = time.perf_counter()
-    outputs = llm.generate([item["request"] for item in requests], sampling_params,
-                           use_tqdm=True)
-    print(f"[{label}] {len(requests)} 条，用时 {time.perf_counter() - started:.1f} 秒", flush=True)
-    return outputs
-
-
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
@@ -121,6 +113,9 @@ def main() -> None:
     parser.add_argument("--no-prefix-caching", action="store_true",
                         help="显式关闭 KV 前缀缓存（vLLM 该版本默认是开启的）")
     parser.add_argument("--limit", type=int, default=0, help="只跑前 N 条；不打包")
+    parser.add_argument("--chunk-size", type=int, default=256,
+                        help="每块处理的查询数。分块是必需的：一次性物化全部请求会把"
+                             "数万张图读进内存并在生成前耗掉大量时间。")
     parser.add_argument("--package-only", action="store_true")
     args = parser.parse_args()
 
@@ -174,41 +169,78 @@ def main() -> None:
               mm_processor_kwargs={"min_pixels": args.min_pixels, "max_pixels": args.max_pixels})
     tokenizer = llm.get_tokenizer()
 
-    requests = build_requests(tokenizer, items, data_root, queries, args.modality)
+    # 分块处理：**必须分块**。曾把 5690 条请求（含 17070 张图）一次性物化再调一次
+    # llm.generate()，结果引擎初始化完成后 GPU 长时间 0% 占用、系统内存持续上涨——
+    # 全部时间花在生成开始前把图像读进内存并预处理。分块后：
+    #   * 峰值内存有界（每块 chunk_size × 3 张图）；
+    #   * 每块结束就落盘并打印进度，出问题能立刻看见；
+    #   * 块与块之间释放图像对象，不再累积。
+    import gc
+
     stage1 = SamplingParams(temperature=0.0, max_tokens=STAGE1_MAX_TOKENS,
                             stop=["]"], include_stop_str_in_output=True,
                             skip_special_tokens=True)
-    outputs = run_stage(llm, stage1, requests, "阶段1 首括号即停")
+    stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
+                            skip_special_tokens=True)
 
     rows_by_id: dict[str, dict[str, Any]] = {}
     retry: list[dict[str, Any]] = []
-    for item, output in zip(requests, outputs):
-        text = output.outputs[0].text.strip()
-        prediction = accept(text)
-        if prediction is None:
-            retry.append(item)
-            continue
-        rows_by_id[item["id"]] = {
-            "index": item["index"], "id": item["id"], "query": item["query"],
-            "image_paths": item["image_paths"], "prompt": item["prompt"],
-            "bbox": prediction, "parsed": True, "fallback": False,
-            "generated_tokens": len(output.outputs[0].token_ids),
-            "input_tokens": len(output.prompt_token_ids),
-            "image_grid_thw": None,
-            "generation_cap_hit": output.outputs[0].finish_reason == "length",
-            "latency_seconds": 0.0, "raw_text": text, "stage": 1,
-        }
+    chunks = [items[start:start + args.chunk_size]
+              for start in range(0, len(items), args.chunk_size)]
+    started = time.perf_counter()
+
+    # 逐块**追加落盘**：块是 items 的连续切片、块内按序处理，因此追加写入天然保持
+    # 官方要求的 QueryID 顺序。这样即使中途挂掉，已完成的部分仍在磁盘上，
+    # 不至于"跑到第 80 分钟全丢"。
+    handle = rows_path.open("w", encoding="utf-8")
+
+    def emit(row: dict[str, Any]) -> None:
+        rows_by_id[row["id"]] = row
+        handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+    for chunk_index, chunk in enumerate(chunks, 1):
+        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
+        outputs = llm.generate([item["request"] for item in requests], stage1,
+                               use_tqdm=False)
+        for item, output in zip(requests, outputs):
+            text = output.outputs[0].text.strip()
+            prediction = accept(text)
+            if prediction is None:
+                retry.append(item)
+                continue
+            emit({
+                "index": item["index"], "id": item["id"], "query": item["query"],
+                "image_paths": item["image_paths"], "prompt": item["prompt"],
+                "bbox": prediction, "parsed": True, "fallback": False,
+                "generated_tokens": len(output.outputs[0].token_ids),
+                "input_tokens": len(output.prompt_token_ids),
+                "image_grid_thw": None,
+                "generation_cap_hit": output.outputs[0].finish_reason == "length",
+                "latency_seconds": 0.0, "raw_text": text, "stage": 1,
+            })
+        handle.flush()
+        done = min(chunk_index * args.chunk_size, len(items))
+        elapsed = time.perf_counter() - started
+        rate = done / elapsed if elapsed else 0
+        remaining = (len(items) - done) / rate / 60 if rate else 0
+        print(f"[阶段1 {chunk_index}/{len(chunks)}] 已完成 {done}/{len(items)} "
+              f"({len(rows_by_id)} 成功)  {elapsed / 60:.1f} 分钟已用  "
+              f"剩余约 {remaining:.0f} 分钟", flush=True)
+        del requests, outputs
+        gc.collect()
 
     print(f"阶段1 直接成功 {len(rows_by_id)}，需重跑 {len(retry)}", flush=True)
-    if retry:
-        stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
-                                skip_special_tokens=True)
-        outputs2 = run_stage(llm, stage2, retry, "阶段2 完整预算重跑")
-        for item, output in zip(retry, outputs2):
+    for chunk_index, chunk in enumerate(
+            [retry[start:start + args.chunk_size]
+             for start in range(0, len(retry), args.chunk_size)], 1):
+        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
+        outputs = llm.generate([item["request"] for item in requests], stage2,
+                               use_tqdm=False)
+        for item, output in zip(requests, outputs):
             text = output.outputs[0].text.strip()
             prediction = parse_generated_bbox(text)
             fallback = prediction is None
-            rows_by_id[item["id"]] = {
+            emit({
                 "index": item["index"], "id": item["id"], "query": item["query"],
                 "image_paths": item["image_paths"], "prompt": item["prompt"],
                 "bbox": FALLBACK_BOX.copy() if fallback else prediction,
@@ -218,12 +250,13 @@ def main() -> None:
                 "image_grid_thw": None,
                 "generation_cap_hit": output.outputs[0].finish_reason == "length",
                 "latency_seconds": 0.0, "raw_text": text, "stage": 2,
-            }
-
-    with rows_path.open("w", encoding="utf-8") as handle:
-        for index, sample_id, _ in items:
-            handle.write(json.dumps(rows_by_id[sample_id], ensure_ascii=False) + "\n")
-    print(f"已写出 {rows_path}", flush=True)
+            })
+        handle.flush()
+        print(f"[阶段2 {chunk_index}] 已完成 {len(rows_by_id)}/{len(items)}", flush=True)
+        del requests, outputs
+        gc.collect()
+    handle.close()
+    print(f"已写出 {rows_path}（逐块追加，无需重写）", flush=True)
 
     ordered = [rows_by_id[sample_id] for _, sample_id, _ in items]
     summary = {**config, **summarize(ordered, len(source), 0, 0),
