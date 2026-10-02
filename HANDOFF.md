@@ -1,3 +1,20 @@
+## 2026-10-02 冲刺已开工：新机部署完成（无卡阶段），等开 GPU
+
+用户租了 **RTX PRO 6000 96G**（`ssh -p 47809 root@connect.weste.seetacloud.com`，当前**无卡模式**），授权新分支并提交推送。完整记录见 [`docs/qwen36-27b-sprint.md`](docs/qwen36-27b-sprint.md)；分支 `sprint/qwen36-27b-native-resolution` 已推送（2 个提交）。
+
+**阶段 A（无卡）已完成**：
+- **云端对传通道**：新机生成一次性 ed25519 传输密钥 → 公钥授权到旧机 → 新机直连旧机验证通过；旧机私钥未离开本机。
+- **迁移 ALL_DONE**（云端对传 ~52MB/s，约 6 分钟）：`data/city/train` **5.4G**（visible/infrared/depth_rgb **各 759 文件**）、`city_val.json`+`city_gt.json`、训练清单 `A.json`、**基线 A 语言 LoRA 122,726,608 B**、`Qwen3-VL-8B-Instruct` 17G。**新机完全复刻旧机目录布局**，因此所有 manifest 里的绝对路径零改动。
+- **环境 SETUP_DONE**：`transformers 5.16.1`、`peft 0.20.0`、`accelerate 1.15.0`、`decord 0.6.0`、`qwen_vl_utils 0.0.14`、**`ms-swift 4.5.3`**；关键自检 `from transformers import Qwen3_5ForConditionalGeneration` **OK**；`torch 2.12.1+cu130` 未被改动（已加护栏）。
+- **27B 权重**：HF 镜像 `hf-mirror` 实测**卡死**，改走 **ModelScope**（同仓库，15 分片并发 ~18MB/s，ETA≈1h，正在下载）。
+- **代码适配**：`tools/native_model_loading.py`（按 `architectures[0]` 动态解析模型类，一份代码兼容 Qwen3-VL/3.5/3.6）＋ `evaluate_pretrained_grounder.py`/`predict_native_submission.py` 改为使用它并新增 `--model-max-length`/`--no-thinking`；`verify_run_config` 把新键降为带默认值的可选键，历史 run 仍可 `--package-only`。
+- **清单转换 + 测试**：`A.json` → ms-swift 格式 **4800 条 / 660 组 / 每条 3 图**，保序保文本；`pytest tests/test_convert_manifest_to_swift.py` **7/7 通过**，含**训练图组 ∩ 开发集 78 组 = 0** 的防泄漏断言。
+- **云端 CPU 预检**：数据 759 文件/模态 ✓、转换 4800/660/3 ✓、探针 dry-run 得 **588/1176/2025 token 每图 → 1764/3528/6075 每条** ✓、ms-swift 按 `MAX_PIXELS=1204224` 推出 `image_max_token_num: 1176` 与预测一致 ✓、像素覆盖实测生效 ✓。
+
+**阶段 B（等开卡）**：B0 预检 → **B1 第一跳探针**（冻结 A × 三档像素，~1h）→ **B2 第二跳探针**（27B 零样本 × 三档）→ B3 四步训练预检 → B4 训练 600 步（`scripts/train_qwen36_27b_swift.sh`，超参与 A 逐项一致）→ B5 City412 聚类配对判决（**命中 > 296 且区间下界 > 0**）→ B6 半决赛包。任一步不达标即回 A 交半决赛。
+
+**要点**：旧机（`westc:46057`）已恢复可达并保留全部历史；新机 `/root/autodl-tmp` 200G；本地 git 推送需**小写** `http_proxy/https_proxy=http://127.0.0.1:7897`（大写变量与代理参数均失败，直连不稳）。
+
 ## 2026-10-02 冲刺方向：换新一代基座 + 停止降采样（含 27B 事实澄清）
 
 用户要求最后做一次大粒度冲刺，并提出换更大模型（"Qwen 27B"）。核实结果与方案见 `F:/AIC/docs/research/2026-10-02-sprint-plan-new-base/README.md`。要点：
