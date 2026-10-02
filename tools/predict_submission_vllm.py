@@ -69,7 +69,17 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
     # 处被截断，一个 bbox 都解析不出来。闸门 2 抓到了它——否则会交出一份全是兜底框的废提交。
     # 这里的写法与 HF 路径 (predict_native_submission.py 的 **chat_template_kwargs) 完全一致。
     requests = []
-    for index, sample_id, record in items:
+    for entry in items:
+        # 前置校验：调用方必须传 (index, sample_id, record) 三元组。
+        # 曾把 build_requests 的返回值（item 字典）当成 items 再传进来（阶段2 重跑），
+        # 结果抛的是 "too many values to unpack (expected 3)" 这种看不出原因的错，
+        # 直到进程崩掉、整轮结果丢失才发现。这里提前给出明确的报错。
+        try:
+            index, sample_id, record = entry
+        except (TypeError, ValueError) as error:
+            raise TypeError(
+                f"build_requests 需要 (index, sample_id, record) 三元组，"
+                f"实际收到 {type(entry).__name__}: {str(entry)[:80]}") from error
         paths = image_paths(record, data_root, queries)
         images = load_modal_images(paths, modality)
         prompt = PROMPTS[modality](record["query"])
@@ -89,10 +99,16 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
     return requests
 
 
-def main() -> None:
+def build_parser() -> argparse.ArgumentParser:
+    """独立出来是为了能被测试直接调用——重复定义选项只会在 argparse 里炸，
+    而"源码里字符串存在"这种检查发现不了。"""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
-    parser.add_argument("--adapter", type=Path, help="可选：vLLM LoRA 适配器；本流程默认用合并后的基座")
+    parser.add_argument("--adapter", type=Path,
+                        help="PEFT LoRA 适配器目录。vLLM 离线接口原生支持 LoRA，因此**不需要**"
+                             "先 merge_and_unload 合并——省掉一次 54GB 写盘，也避免合并带来的数值变化。"
+                             "但必须验证 vLLM 确实把适配器应用到了全部目标模块（我们用的是 "
+                             "all-linear，含 48 层线性注意力），否则会静默产出只适配了一部分的结果。")
     parser.add_argument("--modality", choices=PROMPTS, required=True)
     parser.add_argument("--queries", type=Path, required=True)
     parser.add_argument("--data-root", type=Path, required=True)
@@ -113,18 +129,17 @@ def main() -> None:
     parser.add_argument("--no-prefix-caching", action="store_true",
                         help="显式关闭 KV 前缀缓存（vLLM 该版本默认是开启的）")
     parser.add_argument("--limit", type=int, default=0, help="只跑前 N 条；不打包")
-    parser.add_argument("--adapter", type=Path,
-                        help="PEFT LoRA 适配器目录。vLLM 离线接口原生支持 LoRA，因此**不需要**"
-                             "先 merge_and_unload 合并——省掉一次 54GB 写盘，也避免合并带来的数值变化。"
-                             "但必须验证 vLLM 确实把适配器应用到了全部目标模块（我们用的是 "
-                             "all-linear，含 48 层线性注意力），否则会静默产出只适配了一部分的结果。")
     parser.add_argument("--max-lora-rank", type=int, default=32,
                         help="必须 >= 适配器的 r。默认 r=32；vLLM 的 LoRAConfig 默认只有 16。")
     parser.add_argument("--chunk-size", type=int, default=256,
                         help="每块处理的查询数。分块是必需的：一次性物化全部请求会把"
                              "数万张图读进内存并在生成前耗掉大量时间。")
     parser.add_argument("--package-only", action="store_true")
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> None:
+    args = build_parser().parse_args()
 
     queries = args.queries.resolve()
     data_root = args.data_root.resolve()
@@ -133,6 +148,13 @@ def main() -> None:
     config_path = output_dir / "run_config.json"
     rows_path = output_dir / "predictions.jsonl"
     summary_path = output_dir / "summary.json"
+
+    # 必须在这里就解析适配器路径：run_config 在下面立刻要用到它，而 --package-only
+    # 分支也会走到这里（那条路径不会加载模型）。曾经把它放在推理分支里，导致
+    # UnboundLocalError。
+    adapter_path = args.adapter.resolve() if args.adapter else None
+    if adapter_path is not None and not (adapter_path / "adapter_config.json").is_file():
+        raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter_path}")
 
     config = build_run_config(args.model, args.adapter, queries, data_root, args.modality,
                               args.min_pixels, args.max_pixels, args.model_max_length, True)
@@ -170,10 +192,6 @@ def main() -> None:
 
     from vllm import LLM, SamplingParams
     from vllm.lora.request import LoRARequest
-
-    adapter_path = args.adapter.resolve() if args.adapter else None
-    if adapter_path is not None and not (adapter_path / "adapter_config.json").is_file():
-        raise FileNotFoundError(f"PEFT adapter_config.json not found: {adapter_path}")
 
     llm = LLM(model=args.model, dtype="bfloat16", max_model_len=args.model_max_length,
               gpu_memory_utilization=args.gpu_memory_utilization,
@@ -223,11 +241,14 @@ def main() -> None:
         requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
         outputs = llm.generate([item["request"] for item in requests], stage1,
                                use_tqdm=False, lora_request=lora_request)
-        for item, output in zip(requests, outputs):
+        # 注意：必须用 chunk 里的**原始元组**而不是 requests 里的 item 字典来记录重跑项。
+        # build_requests 期望 (index, sample_id, record) 三元组；曾把 item 字典塞进 retry，
+        # 阶段2 一调用就抛 "too many values to unpack"，进程崩溃、86 分钟结果全丢。
+        for (index, sample_id, record), item, output in zip(chunk, requests, outputs):
             text = output.outputs[0].text.strip()
             prediction = accept(text)
             if prediction is None:
-                retry.append(item)
+                retry.append((index, sample_id, record))
                 continue
             emit({
                 "index": item["index"], "id": item["id"], "query": item["query"],
@@ -277,7 +298,14 @@ def main() -> None:
         del requests, outputs
         gc.collect()
     handle.close()
-    print(f"已写出 {rows_path}（逐块追加，无需重写）", flush=True)
+
+    # 逐块追加保证了**崩溃安全**，但阶段2 的重跑行是追加在末尾的，因此文件顺序会
+    # 偏离官方 QueryID 顺序（阶段1 跳过的那些被挪到最后）。这里按官方顺序重写一次：
+    # 代价极小（几千行小 JSON），换来中间产物与最终提交口径一致。
+    with rows_path.open("w", encoding="utf-8") as reordered:
+        for _, sample_id, _ in items:
+            reordered.write(json.dumps(rows_by_id[sample_id], ensure_ascii=False) + "\n")
+    print(f"已写出 {rows_path}（逐块追加落盘后按官方顺序重排）", flush=True)
 
     ordered = [rows_by_id[sample_id] for _, sample_id, _ in items]
     summary = {**config, **summarize(ordered, len(source), 0, 0),
