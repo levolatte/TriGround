@@ -1,3 +1,40 @@
+## 2026-10-03 实例迁移 + 改跑 Arm 2（当前状态）
+
+**原机失联**：`connect.weste.seetacloud.com:47809` 的 TCP 端口仍开着，但 socket 读 banner 时
+于**恰好 5001ms 后返回 0 字节**——对端主动关闭，不是超时。**端口开着不等于服务活着。**
+用户克隆数据盘后开了新机：**`connect.westd.seetacloud.com:40599`**。
+
+**克隆后三件事必须重建/注意**：
+1. **screen 会话全部消失** → 归档看护与评估链条要在 clone 后重启（已重建）。
+2. 训练死在 **264/600 步**，最后完整检查点是 `checkpoint-200`（含 `optimizer.pt`）。
+3. **`/root/runs` 在 overlay 上（30G，仅剩 5.4G）**，而每检查点 2.7G →
+   `save_total_limit=6` 需约 16G，**放 overlay 会在保存检查点时写满根分区**（不是启动就报错）。
+   已 `cp -a` 搬到数据盘 `/root/autodl-tmp/runs`（保留树内硬链接，归档仍只占一份）。
+
+**续训参数**（读源码确认，非猜测）：`--resume_from_checkpoint`
+（`swift/arguments/sft_args.py:200`、`swift/pipelines/train/sft.py:239`、`tuner.py:389`）。
+已暴露为 `RESUME_FROM_CHECKPOINT` 环境变量。**只有训练器原地保存的检查点能续训**——
+归档看护只链接 adapter 与配置，不含优化器状态。
+
+### 为什么改跑 Arm 2 而不是续训 Arm 1
+
+队内判断 **City 不宜主导训练**：它是另一赛道的测试集，查询由模型生成后经规则校验，
+风格与本赛题未必一致。**Arm 2 的 City 占比本就是 50%**（相对 Arm 1 的 100%），
+所以直接跑 Arm 2 更合理。
+
+### Arm 2 现状
+
+`/root/autodl-tmp/runs/q36_arm2_capability`，数据集 `slices/mixture.jsonl`（6,928 条）。
+
+**速度意外快 2.3 倍**：**36.9 秒/步** vs Arm 1 的 85.5——因为 RGBT 图像只有 640×512，
+视觉 token 远少于 City 的 1920×1080。**600 步约 6 小时**（原以为 14 小时）。
+
+三条自动化：`ckptarch2`（归档）、`arm2chain`（训练完 → 逐检查点扫描 →
+与**零样本 27B** 按失败模式对比 → 判决 → 提交包）。
+副判据基线用零样本 27B（297 命中）而非 Arm 1——Arm 1 未跑完，无可用预测。
+
+**回退**：任何一步不达标 → 直接用已核验的 `submit_b2_zeroshot/submission.zip`（官方 **0.7685**）。
+
 ## 2026-10-03 按失败模式组织的第二轮数据（Arm 2 待训）
 
 **出发点**：City412 上的失分不是均匀分布的。115 个未命中里 **65% 集中在最小的一桶**
