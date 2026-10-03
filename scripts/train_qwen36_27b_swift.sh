@@ -39,7 +39,10 @@ ACCUM="${ACCUM:-8}"
 # 但更大的 micro-batch 能让 GPU kernel 更饱满——batch=1 时很多算子利用率很低。
 PER_DEVICE_BATCH="${PER_DEVICE_BATCH:-1}"
 SAVE_STEPS="${SAVE_STEPS:-100}"
-SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-2}"
+# 默认从 2 提到 6：只留最后两个检查点时，若最佳步数在 300，它会在保存 500 时被删掉，
+# 而小数据 + 大模型恰恰最可能"最佳不在最后"。放宽后配合 evaluate_checkpoints.sh
+# 逐检查点打分，才能选出真正最好的那一个。
+SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-6}"
 TARGET_MODULES="${TARGET_MODULES:-all-linear}"
 # 每条样本要解码 3 张 1920x1080 PNG，是实打实的 CPU 开销。workers=0 会让主进程在步间阻塞
 # 等图像解码；而且 ms-swift 默认 persistent_workers=True，workers=0 会直接抛

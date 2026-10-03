@@ -154,6 +154,72 @@ def test_missing_image_raises_not_silently_skipped(tmp_path: Path) -> None:
         build_rgbt(root, __import__("random").Random(0), sources=("flir",))
 
 
+def test_overlong_generated_description_filtered(tmp_path: Path) -> None:
+    """超过官方长度上限的冗长描述要剔除。
+
+    实测官方查询最长 298 字符、中位 49；而 RGBT-MFAD 里有长达 1766 字符的生成式描述。
+    训练进去等于教模型输出啰嗦文本，对要求精确框的任务有害。
+    """
+    rambling = "a " + "very " * (module.MAX_QUERY_CHARS // 4) + "long description"
+    assert len(rambling) > module.MAX_QUERY_CHARS
+    rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 10, 10],
+                     rambling, 3, "small", 0)]
+    root = make_rgbt_root(tmp_path, rows)
+    result = build_rgbt(root, __import__("random").Random(0), sources=("flir",))
+    assert all(not v for v in result.values()), result
+
+
+def test_query_at_the_official_max_is_kept(tmp_path: Path) -> None:
+    """上限处的样本应保留，避免把过滤写成"宁可错杀"。"""
+    query = "x" * module.MAX_QUERY_CHARS
+    rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 10, 10],
+                     query, 3, "small", 0)]
+    root = make_rgbt_root(tmp_path, rows)
+    result = build_rgbt(root, __import__("random").Random(0), sources=("flir",))
+    assert len(result["small"]) == 1
+
+
+def test_slices_are_disjoint_across_capabilities(tmp_path: Path) -> None:
+    """一条样本只能归入一个能力池。
+
+    若三个切片各自独立抽样，一条"又小又被遮挡又是长查询"的样本会在同一次训练里
+    出现最多三次，把预定配比悄悄放大成 3 倍。这条钉住池间不相交。
+    """
+    query = "y" * (module.LONG_QUERY_CHARS + 5)
+    rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 10, 10],
+                     query, 3, "small", 2)]     # 极小 + 遮挡>0 + 长查询
+    root = make_rgbt_root(tmp_path, rows)
+    slices = build_rgbt(root, __import__("random").Random(0), sources=("flir",))
+    seen = [row["id"] for rows_ in slices.values() for row in rows_]
+    assert len(seen) == len(set(seen)), f"样本跨切片重复: {seen}"
+    # 优先级：极小目标 > 判别 > 长查询
+    assert [row["id"] for row in slices["small"]] == seen
+    assert slices["discriminate"] == [] and slices["longquery"] == []
+
+
+def test_assign_primary_capability_priority() -> None:
+    tiny, long_chars = module.TINY_AREA / 2, module.LONG_QUERY_CHARS + 1
+    big = module.TINY_AREA * 10
+    assert module.assign_primary_capability(tiny, 10, 0) == "small"
+    assert module.assign_primary_capability(tiny, long_chars, 2) == "small"   # 极小优先
+    assert module.assign_primary_capability(big, 10, 1) == "discriminate"
+    assert module.assign_primary_capability(big, long_chars, 1) == "discriminate"
+    assert module.assign_primary_capability(big, long_chars, 0) == "longquery"
+    assert module.assign_primary_capability(big, 10, 0) is None
+
+
+def test_mix_keeps_three_modal_majority() -> None:
+    """计划里的风险缓解：三模态样本必须占多数，否则可能学到"深度常黑 -> 忽略深度"。"""
+    slices = {
+        "city_anchor": [{"id": f"c{i}", "missing_modalities": []} for i in range(10)],
+        "trimodal": [{"id": f"t{i}", "missing_modalities": []} for i in range(10)],
+        "small": [{"id": f"s{i}", "missing_modalities": ["depth"]} for i in range(10)],
+    }
+    mixed = mix(slices, {"city_anchor": 8, "trimodal": 10, "small": 4}, seed=0)
+    three = sum(1 for r in mixed if not r["missing_modalities"])
+    assert three / len(mixed) > 0.5, f"三模态占比 {three}/{len(mixed)} 未过半"
+
+
 def test_make_record_marks_missing_modalities(tmp_path: Path) -> None:
     """两模态来源必须显式标注缺失模态，否则模型以为深度真的存在。"""
     image = tmp_path / "a.png"

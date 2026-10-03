@@ -59,6 +59,12 @@ DEPTH_POLICY_SENSOR = "sensor_linear_20000"
 TINY_AREA = 0.002
 # 官方测试集有 7.5% 的查询超过 100 字符，而 City 训练集一条都没有
 LONG_QUERY_CHARS = 100
+# 官方查询的长度上限。实测官方分布：min 5 / 中位 49 / p75 73 / **max 298**。
+# 超过这个长度的样本基本是 RGBT-MFAD 的冗长生成式描述（实测最长 1766 字符，
+# 形如「...likely a compact car given its size compared to other vehicles visible
+# further ahead along...」），与官方的简洁指代风格相差很远。放进训练等于教模型
+# 输出啰嗦描述——**在 ACC@0.5 这种要求精确框的任务上是有害的**。
+MAX_QUERY_CHARS = 300
 SOURCES = ("flir", "m3fd", "mfad")
 CLASS_NAMES = {
     "flir": {1: "truck", 2: "car", 3: "person", 4: "bicycle"},
@@ -115,9 +121,28 @@ def make_record(sample_id: str, images: list[str], query: str, box: tuple, *,
     return record
 
 
+def assign_primary_capability(area: float, query_chars: int, occlusion: int) -> str | None:
+    """按优先级给一条样本分配**唯一**的能力归属。
+
+    为什么必须唯一：一条 RGBT 样本可能同时是小目标、被遮挡、又是长查询。若三个切片
+    各自独立抽样，它会在同一次训练里出现最多三次，把预定的配比悄悄放大成 3 倍。
+    这里按优先级只归一类，保证池与池不相交、配比可复现。
+
+    优先级：极小目标 > 判别（遮挡） > 长查询。理由是极小目标是我们**最主要的失分桶**
+    （占全部失分的 65%），它的样本供应也最紧张，优先保住。
+    """
+    if area < TINY_AREA:
+        return "small"
+    if occlusion > 0:
+        return "discriminate"
+    if query_chars > LONG_QUERY_CHARS:
+        return "longquery"
+    return None
+
+
 def build_rgbt(root: pathlib.Path, rng: random.Random,
                sources: tuple[str, ...] = SOURCES) -> dict[str, list[dict[str, Any]]]:
-    """RGBT-GroundBench：长查询 + 极小目标 + 遮挡。两模态（RGB+IR），深度置空。
+    """RGBT-GroundBench：极小目标 / 遮挡判别 / 长查询。两模态（RGB+IR），深度置空。
 
     `sources` 可收窄，便于测试；生产上默认三个源都要，缺任何一个都硬失败——
     否则会以为数据用上了，实际少了一个源。
@@ -135,6 +160,9 @@ def build_rgbt(root: pathlib.Path, rng: random.Random,
             class_id, size_class, occlusion = row[4], str(row[5]), int(row[6])
             if any(marker in query for marker in DEGENERATE):
                 continue
+            # 过长的生成式描述与官方简洁风格相差太远，剔除而不是训练进去
+            if len(query) > MAX_QUERY_CHARS:
+                continue
             if class_id not in mapping:
                 continue
             rgb = image_root / source / "rgb" / filename
@@ -151,23 +179,16 @@ def build_rgbt(root: pathlib.Path, rng: random.Random,
             if not (0.0 <= xyxy[0] < xyxy[2] <= 1.0 and 0.0 <= xyxy[1] < xyxy[3] <= 1.0):
                 continue
             area = (xyxy[2] - xyxy[0]) * (xyxy[3] - xyxy[1])
+            capability = assign_primary_capability(area, len(query), occlusion)
+            if capability is None:
+                continue
             sample_id = f"rgbt:{source}:{pathlib.Path(filename).stem}:{index}"
-            common = dict(depth_policy=DEPTH_POLICY_MM, missing=("depth",),
-                          source=f"rgbt_{source}",
-                          extra={"area": round(area, 6), "query_chars": len(query),
-                                 "size_class": size_class, "occlusion": occlusion})
-            images = [str(rgb), str(ir)]
-            # 极小目标：用**真实面积**精筛，而不是只信 small 标签
-            # （实测 small 标签里只有约 47% 真的 <0.2%）
-            if area < TINY_AREA:
-                out["small"].append(make_record(
-                    sample_id, images, query, xyxy, capability="small", **common))
-            if len(query) > LONG_QUERY_CHARS:
-                out["longquery"].append(make_record(
-                    sample_id, images, query, xyxy, capability="longquery", **common))
-            if occlusion > 0:
-                out["discriminate"].append(make_record(
-                    sample_id, images, query, xyxy, capability="discriminate", **common))
+            out[capability].append(make_record(
+                sample_id, [str(rgb), str(ir)], query, xyxy,
+                depth_policy=DEPTH_POLICY_MM, missing=("depth",),
+                capability=capability, source=f"rgbt_{source}",
+                extra={"area": round(area, 6), "query_chars": len(query),
+                       "size_class": size_class, "occlusion": occlusion}))
     rng.shuffle(out["small"])
     return out
 
@@ -237,23 +258,33 @@ def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
 
     计划里的取舍：把 `scene_cap` 从 6 提到 `scene_cap`，而不是取消上限——
     取消会改变训练分布（少数场景权重上升），提高上限则既多用数据又保留防过采样。
+
+    **路径解析**：清单里的图像路径形如 `../visible/x.png`，是相对**清单自身所在目录**
+    （`target_v2/`）的。若拿 `image_root / "../visible/x.png"` 去拼会得到
+    `data/city/visible/...`，那是错的——所以先按清单目录解析，解析不到再退回 image_root。
     """
     records = json.loads(manifest.read_text(encoding="utf-8"))
     if isinstance(records, dict):
         records = list(records.values())
+    base = manifest.parent
     by_scene: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     for row in records:
         scene = pathlib.Path(str(row["visible"])).stem.rsplit("_", 1)[0]
         by_scene[scene].append(row)
+
+    def resolve(value: str) -> pathlib.Path:
+        candidate = (base / value).resolve()
+        return candidate if candidate.is_file() else (image_root / value).resolve()
+
     out: list[dict[str, Any]] = []
     for scene, rows in by_scene.items():
         rng.shuffle(rows)
         for row in rows[:scene_cap]:
-            rgb = (image_root / row["visible"]).resolve()
-            ir = (image_root / row["infrared"]).resolve()
-            depth = (image_root / row["depth"]).resolve()
+            rgb, ir, depth = resolve(row["visible"]), resolve(row["infrared"]), resolve(row["depth"])
             if not rgb.is_file() or not ir.is_file() or not depth.is_file():
-                raise SliceError(f"{row['query'][:40]}: City 图像缺失")
+                raise SliceError(
+                    f"{row['query'][:40]}: City 图像缺失 "
+                    f"(rgb={rgb} ir={ir} depth={depth})")
             x1, y1, x2, y2 = (float(v) for v in row["bbox"])
             out.append(make_record(
                 f"city:{scene}:{len(out)}", [str(rgb), str(ir), str(depth)],
@@ -296,12 +327,18 @@ def main() -> None:
     parser.add_argument("--out-dir", type=pathlib.Path, required=True)
     parser.add_argument("--scene-cap", type=int, default=10)
     parser.add_argument("--seed", type=int, default=2026)
-    # 配额：保持 City 与三模态占多数，避免"深度常黑 -> 忽略深度"的模态捷径
-    parser.add_argument("--quota-city", type=int, default=3000)
-    parser.add_argument("--quota-small", type=int, default=3000)
-    parser.add_argument("--quota-discriminate", type=int, default=2000)
+    # 配额：保持 City 与三模态占多数，避免"深度常黑 -> 忽略深度"的模态捷径。
+    #
+    # 配额是算出来的，不是拍的：City 清单在 scene_cap=10 下最多只能给出 3464 条，
+    # 而计划要求 city_anchor >= 50%（它同时保证三模态也过半，因为 City 是三模态）。
+    # 因此总混合量上限 = 3464 / 0.5 = 6928，扣掉 city 与 trimodal 后，
+    # 两模态能力切片的总预算 = 6928 - 3464 - 181 = 3283。
+    # 按 small:discriminate:longquery ≈ 1500:1200:583 分配。
+    parser.add_argument("--quota-city", type=int, default=3464)
+    parser.add_argument("--quota-small", type=int, default=1500)
+    parser.add_argument("--quota-discriminate", type=int, default=1200)
     parser.add_argument("--quota-trimodal", type=int, default=181)
-    parser.add_argument("--quota-longquery", type=int, default=1500)
+    parser.add_argument("--quota-longquery", type=int, default=583)
     args = parser.parse_args()
 
     rng = random.Random(args.seed)
