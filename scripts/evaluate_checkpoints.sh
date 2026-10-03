@@ -28,6 +28,35 @@ say() { echo "[$(date +%H:%M:%S)] $*"; }
 cd "${CODE_DIR}" || exit 2
 export PATH=/root/vllm_env/bin:$PATH
 
+# 本脚本会**连续启停 vLLM 六次**（每个检查点一次）。只要有一次留下孤儿 EngineCore
+# 占着显存，后续检查点就会 OOM，而 vLLM 只会说"显存不足"，不指出是上一次没退干净。
+# 因此在每一轮开始前都确认 GPU 干净：先等、再清、仍不干净就硬失败——
+# 宁可少评一个检查点，也不要让整轮扫描的结果不可信。
+wait_for_gpu() {
+  local waited=0 pids
+  while [ "${waited}" -lt 180 ]; do
+    pids="$(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null | wc -l)"
+    [ "${pids}" -eq 0 ] && return 0
+    if [ "${waited}" -eq 0 ]; then
+      say "GPU 上有 ${pids} 个进程，等待其退出（可能是上一轮 vLLM 的残留）"
+      nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | sed 's/^/    /'
+    fi
+    sleep 15
+    waited=$((waited + 15))
+  done
+  say "等待 180 秒仍未释放，强制清理残留进程"
+  for pid in $(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null); do
+    kill -9 "${pid}" 2>/dev/null || true
+  done
+  sleep 10
+  pids="$(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null | wc -l)"
+  if [ "${pids}" -ne 0 ]; then
+    say "!! GPU 仍被 ${pids} 个进程占用，停止以免产出不可信的扫描结果"
+    return 1
+  fi
+  return 0
+}
+
 if [ ! -f "${CITY_QUERIES}" ]; then
   say "City412 清单不存在: ${CITY_QUERIES}"; exit 3
 fi
@@ -46,6 +75,7 @@ for checkpoint in "${CHECKPOINTS[@]}"; do
     say "${name} 已有结果，跳过"
     continue
   fi
+  wait_for_gpu || exit 5
   say "评估 ${name}"
   rm -rf "${out}"
   "${VLLM_PY}" -u tools/predict_submission_vllm.py --model "${MODEL}" --adapter "${checkpoint}" \
