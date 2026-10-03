@@ -96,15 +96,27 @@ def to_answer(box_xyxy_norm: tuple[float, float, float, float]) -> str:
     return json.dumps({"bbox_2d": quantized}, separators=(",", ":"))
 
 
-def make_record(sample_id: str, images: list[str], query: str, box: tuple, *,
-                depth_policy: str, missing: tuple[str, ...], capability: str,
+def make_record(sample_id: str, modalities: tuple[str, ...], images: list[str], query: str,
+                box: tuple, *, depth_policy: str, capability: str,
                 source: str, extra: dict[str, Any] | None = None) -> dict[str, Any]:
-    """组装一条 swift SFT 样本，并带上用于事后审计的元数据。"""
+    """组装一条 swift SFT 样本，并带上用于事后审计的元数据。
+
+    **模板必须与真实模态数一致**：`native_prompt` 对 2 视图走 generic 分支
+    （`<image>\\n<image>` + "These are views..."），对三模态走 `_trimodal_prompt`
+    （三个占位符 + "These are **aligned** views..."）。
+    这里曾用"三模态模板 + 缺失说明"来表示只有 2 个视图的样本，结果提示词里有 3 个
+    `<image>` 却只给 2 张图——处理器会错位。收到队内 `structure_noncity` 数据后确认：
+    **既有约定就是"几个视图用几个占位符"**，因此按实际模态构造。
+    """
     for path in images:
         if not pathlib.Path(path).is_file():
             raise SliceError(f"{sample_id}: 图像不存在 {path}")
-    prompt = native_prompt(query, ("rgb", "infrared", "depth"), depth_policy,
-                           missing_modalities=missing)
+    if len(modalities) != len(images):
+        raise SliceError(f"{sample_id}: 模态 {modalities} 与图像数 {len(images)} 不一致")
+    prompt = native_prompt(query, modalities, depth_policy)
+    if prompt.count("<image>") != len(images):
+        raise SliceError(f"{sample_id}: 占位符 {prompt.count('<image>')} 个，"
+                         f"但图像 {len(images)} 张")
     record = {
         "id": sample_id,
         "messages": [
@@ -114,7 +126,8 @@ def make_record(sample_id: str, images: list[str], query: str, box: tuple, *,
         "images": images,
         "capability": capability,
         "source": source,
-        "missing_modalities": list(missing),
+        "modalities": list(modalities),
+        "missing_modalities": [m for m in ("infrared", "depth") if m not in modalities],
     }
     if extra:
         record.update(extra)
@@ -184,8 +197,8 @@ def build_rgbt(root: pathlib.Path, rng: random.Random,
                 continue
             sample_id = f"rgbt:{source}:{pathlib.Path(filename).stem}:{index}"
             out[capability].append(make_record(
-                sample_id, [str(rgb), str(ir)], query, xyxy,
-                depth_policy=DEPTH_POLICY_MM, missing=("depth",),
+                sample_id, ("rgb", "infrared"), [str(rgb), str(ir)], query, xyxy,
+                depth_policy=DEPTH_POLICY_MM,
                 capability=capability, source=f"rgbt_{source}",
                 extra={"area": round(area, 6), "query_chars": len(query),
                        "size_class": size_class, "occlusion": occlusion}))
@@ -213,8 +226,9 @@ def build_roborefit(root: pathlib.Path) -> dict[str, list[dict[str, Any]]]:
             raise SliceError(f"{row['id']}: bbox 越界 {row['bbox']}")
         # RoboRefIt 的 depth 是可视化图（P01-P99 拉伸），物理单位未知
         record = make_record(
-            f"robo:{row['id']}", [str(rgb), str(depth)], row["query"], (x1, y1, x2, y2),
-            depth_policy=DEPTH_POLICY_SENSOR, missing=("infrared",),
+            f"robo:{row['id']}", ("rgb", "depth"), [str(rgb), str(depth)],
+            row["query"], (x1, y1, x2, y2),
+            depth_policy=DEPTH_POLICY_SENSOR,
             capability="discriminate", source="roborefit",
             extra={"area": round((x2 - x1) * (y2 - y1), 6),
                    "query_chars": len(row["query"]), "class_name": row.get("class_name")})
@@ -237,8 +251,11 @@ def build_rgbdt(sft: pathlib.Path, assets: pathlib.Path) -> dict[str, list[dict[
                 raise SliceError(f"{row['id']}: RGBDT500 图像缺失 {path}")
         human = row["conversations"][0]["value"]
         answer = row["conversations"][1]["value"]
-        # 复用其自带的 prompt（含 sensor_linear_20000 的深度说明），
-        # 只替换答案的单位口径，保证与其验收时一致
+        # RGBDT500 自带渲染好的 prompt（含 sensor_linear_20000 的深度说明），
+        # 直接复用，保证与其人工验收时的输入一致
+        if human.count("<image>") != len(images):
+            raise SliceError(f"{row['id']}: 占位符 {human.count('<image>')} 个，"
+                             f"图像 {len(images)} 张")
         record = {
             "id": f"rgbdt:{row['id']}",
             "messages": [{"role": "user", "content": human},
@@ -246,6 +263,7 @@ def build_rgbdt(sft: pathlib.Path, assets: pathlib.Path) -> dict[str, list[dict[
             "images": [str(p) for p in images],
             "capability": "trimodal",
             "source": "rgbdt500",
+            "modalities": ["rgb", "infrared", "depth"],
             "missing_modalities": [],
         }
         out["trimodal"].append(record)
@@ -287,9 +305,9 @@ def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
                     f"(rgb={rgb} ir={ir} depth={depth})")
             x1, y1, x2, y2 = (float(v) for v in row["bbox"])
             out.append(make_record(
-                f"city:{scene}:{len(out)}", [str(rgb), str(ir), str(depth)],
-                row["query"], (x1, y1, x2, y2),
-                depth_policy=DEPTH_POLICY_MM, missing=(),
+                f"city:{scene}:{len(out)}", ("rgb", "infrared", "depth"),
+                [str(rgb), str(ir), str(depth)], row["query"], (x1, y1, x2, y2),
+                depth_policy=DEPTH_POLICY_MM,
                 capability="city_anchor", source="city",
                 extra={"area": round((x2 - x1) * (y2 - y1), 6),
                        "query_chars": len(row["query"]),
@@ -372,7 +390,7 @@ def main() -> None:
 
     by_capability = collections.Counter(row["capability"] for row in mixed)
     by_source = collections.Counter(row["source"] for row in mixed)
-    three_modal = sum(1 for row in mixed if not row["missing_modalities"])
+    three_modal = sum(1 for row in mixed if len(row["modalities"]) == 3)
     summary = {
         "seed": args.seed, "scene_cap": args.scene_cap,
         "mixture_size": len(mixed), "mixture_path": str(mixture_path),

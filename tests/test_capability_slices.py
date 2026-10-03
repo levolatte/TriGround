@@ -220,22 +220,57 @@ def test_mix_keeps_three_modal_majority() -> None:
     assert three / len(mixed) > 0.5, f"三模态占比 {three}/{len(mixed)} 未过半"
 
 
-def test_make_record_marks_missing_modalities(tmp_path: Path) -> None:
-    """两模态来源必须显式标注缺失模态，否则模型以为深度真的存在。"""
-    image = tmp_path / "a.png"
-    image.write_bytes(b"x")
-    record = make_record("s1", [str(image)], "a car", (0.1, 0.1, 0.5, 0.5),
-                         depth_policy="millimeter", missing=("depth",),
+def test_two_view_sample_uses_two_placeholders(tmp_path: Path) -> None:
+    """2 个视图就必须是 2 个占位符 + generic 分支。
+
+    曾用"三模态模板 + 缺失说明"表示只有 2 视图的样本，结果提示词里 3 个 <image>
+    却只给 2 张图——处理器会错位。队内 structure_noncity 数据确认既有约定是
+    "几个视图用几个占位符"。
+    """
+    images = []
+    for name in ("a.png", "b.png"):
+        path = tmp_path / name
+        path.write_bytes(b"x")
+        images.append(str(path))
+    record = make_record("s1", ("rgb", "infrared"), images, "a car",
+                         (0.1, 0.1, 0.5, 0.5), depth_policy="millimeter",
                          capability="small", source="rgbt_flir")
+    prompt = record["messages"][0]["content"]
+    assert prompt.count("<image>") == 2 == len(record["images"])
+    assert "These are views" in prompt
     assert record["missing_modalities"] == ["depth"]
-    assert "unavailable" in record["messages"][0]["content"]
-    assert record["messages"][0]["content"].count("<image>") == 3
+    assert record["modalities"] == ["rgb", "infrared"]
+
+
+def test_three_view_sample_uses_trimodal_template(tmp_path: Path) -> None:
+    images = []
+    for name in ("a.png", "b.png", "c.png"):
+        path = tmp_path / name
+        path.write_bytes(b"x")
+        images.append(str(path))
+    record = make_record("s1", ("rgb", "infrared", "depth"), images, "a car",
+                         (0.1, 0.1, 0.5, 0.5), depth_policy="millimeter",
+                         capability="city_anchor", source="city")
+    prompt = record["messages"][0]["content"]
+    assert prompt.count("<image>") == 3 == len(record["images"])
+    assert "aligned views" in prompt
+    assert record["missing_modalities"] == []
+
+
+def test_make_record_rejects_modality_image_mismatch(tmp_path: Path) -> None:
+    path = tmp_path / "a.png"
+    path.write_bytes(b"x")
+    with pytest.raises(SliceError, match="不一致"):
+        make_record("s1", ("rgb", "infrared"), [str(path)], "q",
+                    (0.1, 0.1, 0.5, 0.5), depth_policy="millimeter",
+                    capability="small", source="x")
 
 
 def test_make_record_raises_on_missing_image(tmp_path: Path) -> None:
     with pytest.raises(SliceError, match="图像不存在"):
-        make_record("s1", [str(tmp_path / "nope.png")], "q", (0.1, 0.1, 0.5, 0.5),
-                    depth_policy="millimeter", missing=(), capability="small", source="x")
+        make_record("s1", ("rgb",), [str(tmp_path / "nope.png")], "q",
+                    (0.1, 0.1, 0.5, 0.5), depth_policy="millimeter",
+                    capability="small", source="x")
 
 
 def test_mix_respects_quotas_and_warns(monkeypatch, capsys) -> None:
