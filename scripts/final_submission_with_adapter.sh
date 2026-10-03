@@ -29,8 +29,43 @@ say() { echo "[$(date +%H:%M:%S)] $*"; }
 cd "${CODE_DIR}" || exit 2
 export PATH=/root/vllm_env/bin:$PATH
 
+# 每次起 vLLM 前确认 GPU 干净。逐检查点扫描会反复启停引擎，任何一次留下孤儿
+# EngineCore 都会让后续推理 OOM——而 vLLM 的失败信息往往只说"显存不足"，
+# 不指出是上一次没退干净。这里先等、再清、最后硬失败，避免把问题带到提交阶段。
+wait_for_gpu() {
+  local waited=0
+  while [ "${waited}" -lt 180 ]; do
+    local pids
+    pids="$(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null | wc -l)"
+    if [ "${pids}" -eq 0 ]; then
+      return 0
+    fi
+    if [ "${waited}" -eq 0 ]; then
+      say "GPU 上有 ${pids} 个进程，等待其退出（可能是上一次 vLLM 的残留）"
+      nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | sed 's/^/    /'
+    fi
+    sleep 15
+    waited=$((waited + 15))
+  done
+  # 等待无效再清一次；仍不清就硬失败，绝不带着不干净的显存去跑正式推理
+  say "等待 180 秒仍未释放，强制清理残留进程"
+  for pid in $(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null); do
+    kill -9 "${pid}" 2>/dev/null || true
+  done
+  sleep 10
+  local left
+  left="$(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null | wc -l)"
+  if [ "${left}" -ne 0 ]; then
+    say "!! GPU 仍被 ${left} 个进程占用，停止以免 OOM"
+    return 1
+  fi
+  return 0
+}
+
 [ -f "${ADAPTER}/adapter_config.json" ] || { echo "适配器不存在: ${ADAPTER}" >&2; exit 3; }
 [ -f "${CITY_QUERIES}" ] || { echo "City412 官方格式清单不存在: ${CITY_QUERIES}" >&2; exit 3; }
+
+wait_for_gpu || exit 4
 
 say "1/4 用训练后适配器跑 City412"
 rm -rf "${DEV_OUT}_trained"
@@ -77,6 +112,8 @@ if [ "${verdict_line}" != "VERDICT_PASS" ]; then
 fi
 
 say "3/4 跑官方 5690 条"
+# 上一步的 vLLM 若没退干净，这里会 OOM；正式提交推理绝不能带着残留显存开跑
+wait_for_gpu || exit 4
 rm -rf "${FINAL_OUT}"
 "${VLLM_PY}" -u tools/predict_submission_vllm.py --model "${MODEL}" --adapter "${ADAPTER}" \
   --modality trimodal --queries "${OFFICIAL}/queries/queries.json" --data-root "${OFFICIAL}" \
