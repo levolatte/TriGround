@@ -345,12 +345,13 @@ def main() -> None:
     parser.add_argument("--out-dir", type=pathlib.Path, required=True)
     parser.add_argument("--scene-cap", type=int, default=10)
     parser.add_argument("--seed", type=int, default=2026)
-    # 配额：保持 City 与三模态占多数，避免"深度常黑 -> 忽略深度"的模态捷径。
+    # 配额。City 占 50%，相对 Arm 1 的 100% 已大幅降低——这正是 Arm 2 相对 Arm 1 的意义：
+    # 在 City 质量存疑的前提下，把一半的训练信号让给真实采集的能力数据。
     #
     # 配额是算出来的，不是拍的：City 清单在 scene_cap=10 下最多只能给出 3464 条，
-    # 而计划要求 city_anchor >= 50%（它同时保证三模态也过半，因为 City 是三模态）。
-    # 因此总混合量上限 = 3464 / 0.5 = 6928，扣掉 city 与 trimodal 后，
-    # 两模态能力切片的总预算 = 6928 - 3464 - 181 = 3283。
+    # 因此总混合量上限 = 3464 / 0.5 = 6928（City 占 50%，同时保证三模态过半，
+    # 降低"深度常黑 -> 忽略深度"的模态捷径风险）。
+    # 扣掉 city 与 trimodal 后，两模态能力切片总预算 = 6928 - 3464 - 181 = 3283，
     # 按 small:discriminate:longquery ≈ 1500:1200:583 分配。
     parser.add_argument("--quota-city", type=int, default=3464)
     parser.add_argument("--quota-small", type=int, default=1500)

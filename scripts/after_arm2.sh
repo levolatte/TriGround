@@ -11,14 +11,15 @@ set -uo pipefail
 
 PY=/root/miniconda3/bin/python
 CODE_DIR="${CODE_DIR:-/root/AIC_code}"
-RUN_DIR="${RUN_DIR:-/root/runs/q36_arm2_capability}"
+RUN_DIR="${RUN_DIR:-/root/autodl-tmp/runs/q36_arm2_capability}"
 ARCHIVE_DIR="${ARCHIVE_DIR:-${RUN_DIR}/archived}"
 SWEEP_OUT="${SWEEP_OUT:-/root/sprint_qwen36/ckpt_sweep_arm2}"
-ARM1_SWEEP="${ARM1_SWEEP:-/root/sprint_qwen36/ckpt_sweep/sweep.json}"
-ARM1_PRED="${ARM1_PRED:-/root/sprint_qwen36/ckpt_sweep}"
+# 对比基线用**零样本 27B**，而不是原计划的 Arm 1：Arm 1（City-only）因实例迁移未跑完，
+# 没有可用的预测。零样本 27B 在 City412 上是 297 命中，正是本轮要超越的对象。
+BASE_PRED="${BASE_PRED:-/root/sprint_qwen36/probes/q36_27b_zeroshot/pixels_2073600/predictions.jsonl}"
 GT="${GT:-/root/sprint_qwen36/baseline_preds/city412_gt.json}"
 LOG="${LOG:-/root/after_arm2.log}"
-MAX_WAIT_HOURS="${MAX_WAIT_HOURS:-16}"
+MAX_WAIT_HOURS="${MAX_WAIT_HOURS:-12}"
 
 exec > >(tee -a "${LOG}") 2>&1
 say() { echo "[$(date '+%F %T')] $*"; }
@@ -73,16 +74,12 @@ PYEOF
 fi
 say "最佳 ${BEST}（最后一个是 ${LAST}）"
 
-# ---- 副判据：与 Arm 1 按失败模式对比 ----------------------------------------
-say "按失败模式对比（Arm 1 vs Arm 2）"
-ARM1_BEST_PRED=""
-if [ -d "${ARM1_PRED}" ]; then
-  ARM1_BEST_PRED="$(ls -d "${ARM1_PRED}"/checkpoint-*/predictions.jsonl 2>/dev/null | sort -t- -k2 -n | tail -1)"
-fi
+# ---- 副判据：与零样本 27B 按失败模式对比 ------------------------------------
+say "按失败模式对比（零样本 27B vs Arm 2）"
 ARM2_BEST_PRED="${SWEEP_OUT}/${BEST}/predictions.jsonl"
-if [ -n "${ARM1_BEST_PRED}" ] && [ -f "${ARM2_BEST_PRED}" ]; then
+if [ -f "${BASE_PRED}" ] && [ -f "${ARM2_BEST_PRED}" ]; then
   "${PY}" tools/report_failure_modes.py --gt "${GT}" \
-    --arm arm1="${ARM1_BEST_PRED}" --arm arm2="${ARM2_BEST_PRED}" \
+    --arm zeroshot="${BASE_PRED}" --arm arm2="${ARM2_BEST_PRED}" \
     --out-json "${SWEEP_OUT}/failure_modes.json" || say "失败模式报告出错"
   TINY_REGRESSED="$("${PY}" - <<PYEOF
 import json, pathlib
@@ -90,18 +87,18 @@ p = pathlib.Path("${SWEEP_OUT}/failure_modes.json")
 if not p.is_file():
     print("unknown"); raise SystemExit
 d = json.loads(p.read_text(encoding="utf-8"))["buckets"]
-tiny = d["arm1"].get("极小 <0.2%", {}).get("命中", 0) - d["arm2"].get("极小 <0.2%", {}).get("命中", 0)
+tiny = d["zeroshot"].get("极小 <0.2%", {}).get("命中", 0) - d["arm2"].get("极小 <0.2%", {}).get("命中", 0)
 print("yes" if tiny > 0 else "no")
 PYEOF
 )"
   say "极小目标桶是否退化: ${TINY_REGRESSED}"
   if [ "${TINY_REGRESSED}" = "yes" ]; then
-    say "⚠️ 极小目标桶相对 Arm 1 退化 —— 按计划这属于'用易题换难题'。"
+    say "⚠️ 极小目标桶相对零样本退化 —— 按计划这属于'用易题换难题'。"
     say "   仍然会生成候选提交包（本地与官方的映射关系很弱，官方才是真裁判），"
     say "   但**不要默认提交它**，请先看下面的分桶对比再决定。"
   fi
 else
-  say "缺少 Arm 1 的预测（${ARM1_PRED}），跳过副判据"
+  say "缺少零样本基线预测（${BASE_PRED}），跳过副判据"
   TINY_REGRESSED="unknown"
 fi
 

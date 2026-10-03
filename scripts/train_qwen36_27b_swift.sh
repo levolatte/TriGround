@@ -49,9 +49,24 @@ TARGET_MODULES="${TARGET_MODULES:-all-linear}"
 # "persistent_workers option needs num_workers > 0"。
 NUM_WORKERS="${NUM_WORKERS:-4}"
 DATASET_NUM_PROC="${DATASET_NUM_PROC:-4}"
+# 续训：指向含 optimizer.pt / scheduler.pt / trainer_state.json 的检查点目录。
+# 参数名经查 ms-swift 源码确认（swift/arguments/sft_args.py:200、pipelines/train/sft.py:239），
+# 不是猜的。留空则从头训练。**只有训练器原地保存的检查点能续训**——归档看护为了省空间
+# 只链接了 adapter 与配置，不含优化器状态。
+RESUME_FROM_CHECKPOINT="${RESUME_FROM_CHECKPOINT:-}"
 
 test -f "${MODEL}/config.json"
 test -f "${DATASET}"
+
+# 用数组传可选参数：`set -u` 下拼空字符串会出问题，数组最稳。
+RESUME_ARGS=()
+if [ -n "${RESUME_FROM_CHECKPOINT}" ]; then
+  test -f "${RESUME_FROM_CHECKPOINT}/trainer_state.json" || {
+    echo "续训检查点缺少 trainer_state.json: ${RESUME_FROM_CHECKPOINT}" >&2; exit 3; }
+  RESUME_ARGS=(--resume_from_checkpoint "${RESUME_FROM_CHECKPOINT}")
+  echo "resume_from_checkpoint=${RESUME_FROM_CHECKPOINT}"
+  grep -o '"global_step":[0-9]*' "${RESUME_FROM_CHECKPOINT}/trainer_state.json" | head -1
+fi
 
 # 训练时图像会按该上限缩放（ms-swift 读 MAX_PIXELS/MIN_PIXELS 环境变量）
 export MAX_PIXELS MIN_PIXELS
@@ -115,6 +130,7 @@ EOF
     --dataset_num_proc "${DATASET_NUM_PROC}" \
     --seed "${SEED}" \
     --report_to none \
+    "${RESUME_ARGS[@]}" \
     --output_dir "${OUTPUT_DIR}" \
     2>&1 | tee "${OUTPUT_DIR}/train.log"
 
