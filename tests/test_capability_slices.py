@@ -24,6 +24,8 @@ from tools.build_capability_slices import (  # noqa: E402
     SliceError,
     build_city,
     build_rgbt,
+    drop_excluded,
+    frame_key_of,
     make_record,
     mix,
     read_pth,
@@ -288,24 +290,94 @@ def test_mix_raises_on_empty_slice() -> None:
 
 
 def test_city_scene_cap_limits_per_scene(tmp_path: Path) -> None:
-    """scene_cap 的取舍：提高上限多用数据，但不取消上限（取消会改变分布）。"""
+    """scene_cap 的取舍：提高上限多用数据，但不取消上限（取消会改变分布）。
+
+    注意 fixture 必须建**预渲染深度目录**：`build_city` 现在只接受
+    `target_v2/qwen3vl_native_sft/depth_rgb/` 下的图，不再接受原始 `I;16`。
+    这是有意的契约——原始位深直转 RGB 后 64~72% 像素饱和为白，深度模态等于噪声。
+    """
     image_root = tmp_path / "city"
     for sub in ("visible", "infrared", "depth"):
         (image_root / sub).mkdir(parents=True, exist_ok=True)
+    rendered_root = manifest_dir = tmp_path / "target_v2"
+    (rendered_root / "qwen3vl_native_sft" / "depth_rgb").mkdir(parents=True, exist_ok=True)
     records = {}
     for scene in ("s1", "s2"):
         for i in range(5):
             name = f"{scene}_0000000{i}.png"
             for sub in ("visible", "infrared", "depth"):
                 (image_root / sub / name).write_bytes(b"x")
+            (rendered_root / "qwen3vl_native_sft" / "depth_rgb" / name).write_bytes(b"rendered")
             records[f"{scene}_{i}"] = {
                 "visible": f"visible/{name}", "infrared": f"infrared/{name}",
-                "depth": f"depth/{name}", "query": f"q{i}",
+                "depth": f"../depth/{name}", "query": f"q{i}",
                 "bbox": [0.1, 0.1, 0.5, 0.5], "class_name": "car"}
-    manifest = tmp_path / "m.json"
+    manifest = manifest_dir / "m.json"
     manifest.write_text(json.dumps(records), encoding="utf-8")
     rows = build_city(manifest, image_root, scene_cap=2,
                       rng=__import__("random").Random(0))
     assert len(rows) == 4, "2 个场景 × 上限 2 = 4 条"
     assert all(r["capability"] == "city_anchor" for r in rows)
     assert all(r["missing_modalities"] == [] for r in rows)
+    # 深度必须指向预渲染目录，而不是原始位深
+    for row in rows:
+        depth_path = row["images"][row["modalities"].index("depth")]
+        assert "depth_rgb" in depth_path, f"深度未指向预渲染目录: {depth_path}"
+
+
+def test_city_raises_when_rendered_depth_missing(tmp_path: Path) -> None:
+    """预渲染深度缺失时必须硬失败，不能悄悄退回原始位深。
+
+    静默退回正是 Arm 2 那个缺陷的成因（55.6% 样本喂了未渲染的原始 uint16），
+    所以这里刻意断言它抛错而不是容错。
+    """
+    image_root = tmp_path / "city"
+    for sub in ("visible", "infrared", "depth"):
+        (image_root / sub).mkdir(parents=True, exist_ok=True)
+    name = "s1_00000000.png"
+    for sub in ("visible", "infrared", "depth"):
+        (image_root / sub / name).write_bytes(b"x")
+    manifest_dir = tmp_path / "target_v2"
+    manifest_dir.mkdir(parents=True, exist_ok=True)
+    manifest = manifest_dir / "m.json"
+    manifest.write_text(json.dumps({"a": {
+        "visible": f"visible/{name}", "infrared": f"infrared/{name}",
+        "depth": f"../depth/{name}", "query": "q",
+        "bbox": [0.1, 0.1, 0.5, 0.5], "class_name": "car"}}), encoding="utf-8")
+    with pytest.raises(SliceError, match="预渲染深度目录"):
+        build_city(manifest, image_root, scene_cap=1,
+                   rng=__import__("random").Random(0))
+
+
+def test_mix_skips_zero_quota() -> None:
+    """配额 0 表示整体弃用该切片（Arm 3 弃用 City），必须跳过而不是报"切片为空"。"""
+    slices = {"keep": [{"id": f"k{i}"} for i in range(4)], "drop": [{"id": "d0"}]}
+    mixed = mix(slices, {"keep": 2, "drop": 0}, seed=1)
+    assert len(mixed) == 2
+    assert all(r["id"].startswith("k") for r in mixed)
+
+
+def test_mix_skips_zero_quota_even_when_slice_absent() -> None:
+    """配额 0 且切片根本不存在时也不能报错——Arm 3 就不构建 city_anchor 切片。"""
+    mixed = mix({"keep": [{"id": "k0"}]}, {"keep": 1, "city_anchor": 0}, seed=1)
+    assert len(mixed) == 1
+
+
+def test_frame_key_matches_audit_tool() -> None:
+    """帧键必须与 audit_test_overlap 的规则一致，否则剔除会漏掉渲染副本。"""
+    assert frame_key_of("/x/depth/003353.png") == "003353"
+    assert frame_key_of("/x/depth_rgb/003353.png") == "003353"
+    assert frame_key_of("/x/visible/train_001_00000020_color.png") == "train_001_00000020"
+    assert frame_key_of("/x/depth/train_001_00000020_depth.png") == "train_001_00000020"
+
+
+def test_drop_excluded_removes_whole_frame(tmp_path: Path) -> None:
+    """按帧剔除：同帧的渲染副本必须一起删，哪怕它的哈希与污染图不同。"""
+    rows = [
+        {"images": ["/a/visible/0001.png", "/a/depth_rgb/0001.png"]},
+        {"images": ["/a/visible/0002.png", "/a/depth_rgb/0002.png"]},
+    ]
+    kept, dropped = drop_excluded(rows, {"0001"})
+    assert dropped == 1
+    assert len(kept) == 1
+    assert "0002" in kept[0]["images"][0]

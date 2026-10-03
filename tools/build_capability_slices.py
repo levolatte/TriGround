@@ -48,9 +48,15 @@ import sys
 import zipfile
 from typing import Any
 
+import numpy as np
+from PIL import Image
+
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
-from tools.prepare_qwen3vl_native_sft import native_prompt  # noqa: E402
+from tools.prepare_qwen3vl_native_sft import (  # noqa: E402
+    depth_mm_to_grayscale_rgb,
+    native_prompt,
+)
 
 NORMALIZE = 1000.0
 DEPTH_POLICY_MM = "millimeter"
@@ -128,6 +134,10 @@ def make_record(sample_id: str, modalities: tuple[str, ...], images: list[str], 
         "source": source,
         "modalities": list(modalities),
         "missing_modalities": [m for m in ("infrared", "depth") if m not in modalities],
+        # 把深度策略落进记录：出厂验收闸门要靠它选阈值。
+        # 不同策略的合法白色占比差别很大（毫米映射 0%，百分位拉伸可到 37%），
+        # 一刀切的阈值要么放过坏图，要么误杀好图。
+        "depth_policy": depth_policy,
     }
     if extra:
         record.update(extra)
@@ -207,12 +217,40 @@ def build_rgbt(root: pathlib.Path, rng: random.Random,
 
 
 def build_roborefit(root: pathlib.Path) -> dict[str, list[dict[str, Any]]]:
-    """RoboRefIt：真实 RGB-D、66 类、同类多实例歧义。两模态（RGB+Depth），红外置空。"""
+    """RoboRefIt：真实 RGB-D、66 类、同类多实例歧义。两模态（RGB+Depth），红外置空。
+
+    ## 深度图必须用可视化版，不能用原始版
+
+    本函数原先读 `converted/train.jsonl`，其 `depth` 指向 `final_dataset/train/depth/`，
+    那是**原始 `I;16`**（conversion_report 实测 200 张全是 uint16，max 65535）。
+    把这种图直接交给图像处理器转 RGB，**值 >255 会被截断**——实测白色像素占比 71~80%，
+    深度模态等于噪声。（原注释写的是"depth 是可视化图（P01-P99 拉伸）"，
+    说明意图如此，只是路径取错了。）
+
+    正解是 `converted/train_depth_visual_fixed_p01_p99.jsonl`，其 `depth` 指向
+    `depth_visual_fixed_p01_p99/`，2000 张全是 RGB 可视化图。
+
+    ## 提示词策略不能照抄清单里的 `depth_policy`
+
+    清单里 `depth_policy: "visual"` 说的是**文件格式**（"这个文件已经是可视化图"），
+    而 `native_prompt` 的 `depth_policy` 参数说的是**该给模型哪条亮度说明**——
+    两者同名但语义不同。实测把 `"visual"` 透传过去，`native_prompt` 会**一条深度说明都不加**
+    （其分支是 `elif ... and depth_policy != "visual"` 才报错，等于 `"visual"` 静默跳过），
+    模型无从知道那个亮度代表什么。
+
+    清单里的 `depth_visualization: "fixed_raw_p01_p99_v1"` 与 `depth_unit: "unknown"`
+    正好对应 `DEPTH_POLICY_SENSOR` 那条说明（"fixed inverse mapping of the raw sensor
+    values… physical distance unit is not established"），因此**用该策略**，
+    并**断言来源格式**——将来清单换成别的渲染方式时会明确失败，而不是悄悄用错说明。
+    """
     out: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
-    manifest = root / "subset" / "converted" / "train.jsonl"
+    manifest = root / "subset" / "converted" / "train_depth_visual_fixed_p01_p99.jsonl"
     if not manifest.is_file():
-        raise SliceError(f"缺少 RoboRefIt 转换产物: {manifest}")
+        raise SliceError(
+            f"缺少 RoboRefIt 的可视化深度清单: {manifest}\n"
+            f"（不能用 converted/train.jsonl —— 它指向原始 I;16 深度，会被截断成白图）")
     base = manifest.parent
+    expected_visualization = "fixed_raw_p01_p99_v1"
     for line in manifest.read_text(encoding="utf-8").splitlines():
         if not line.strip():
             continue
@@ -221,10 +259,14 @@ def build_roborefit(root: pathlib.Path) -> dict[str, list[dict[str, Any]]]:
         depth = (base / row["depth"]).resolve()
         if not rgb.is_file() or not depth.is_file():
             raise SliceError(f"{row['id']}: RoboRefIt 图像缺失 {rgb} / {depth}")
+        if row.get("depth_visualization") != expected_visualization:
+            raise SliceError(
+                f"{row['id']}: 深度可视化方式变了（{row.get('depth_visualization')!r} "
+                f"≠ {expected_visualization!r}），"
+                f"提示词里的亮度说明需要重新核对，不能沿用 DEPTH_POLICY_SENSOR")
         x1, y1, x2, y2 = (float(v) for v in row["bbox"])
         if not (0.0 <= x1 < x2 <= 1.0 and 0.0 <= y1 < y2 <= 1.0):
             raise SliceError(f"{row['id']}: bbox 越界 {row['bbox']}")
-        # RoboRefIt 的 depth 是可视化图（P01-P99 拉伸），物理单位未知
         record = make_record(
             f"robo:{row['id']}", ("rgb", "depth"), [str(rgb), str(depth)],
             row["query"], (x1, y1, x2, y2),
@@ -233,6 +275,8 @@ def build_roborefit(root: pathlib.Path) -> dict[str, list[dict[str, Any]]]:
             extra={"area": round((x2 - x1) * (y2 - y1), 6),
                    "query_chars": len(row["query"]), "class_name": row.get("class_name")})
         out["discriminate"].append(record)
+    print(f"  RoboRefIt: {len(out['discriminate'])} 条，"
+          f"深度可视化={expected_visualization}，提示词策略={DEPTH_POLICY_SENSOR}")
     return out
 
 
@@ -270,6 +314,83 @@ def build_rgbdt(sft: pathlib.Path, assets: pathlib.Path) -> dict[str, list[dict[
     return out
 
 
+def build_rgbdt_prepared(prepared_root: pathlib.Path, rendered_dir: pathlib.Path,
+                         rng: random.Random) -> dict[str, list[dict[str, Any]]]:
+    """队友新传的 RGBDT500_prepared：992 条真三模态，121 类，唯一同源于测试集的来源。
+
+    ## 为什么值得用
+
+    * **每条都是完整三模态**（visible/infrared/depth 三路径齐全，已逐条校验 992/992）。
+    * **深度是 `I;16` uint16 max 19999、1920×1080——与官方测试集格式完全一致**
+      （实测官方测试集 depth 也是 `I;16` max 19999 1920×1080）。
+    * 赛题 PDF 参考资源 [1] 即 RGBDT500 论文，正当性最强。
+    * 121 类，远多于当前混合集的 72 类。
+
+    ## 两处必须处理的缺陷
+
+    1. **深度是原始位深**，直接交给处理器转 RGB 会截断成白图（同 City/RoboRefIt 的坑）。
+       这里用**推理时的同一个函数** `depth_mm_to_grayscale_rgb` 现场渲染，
+       保证 train/inference 逐像素一致。
+    2. **`weak_label: true`**——查询由 Qwen API 生成 + **同模型自审**（非独立验证）。
+       这靠配比稀释，不在本函数过滤；但查询长度仍按官方上限截断。
+
+    ## 关于与测试集重叠
+
+    实测 161/992 样本与官方测试集逐字节相同。官方已确认外部数据集合规，
+    剔除与否是**测量决策**（让官方分数可反映泛化），由 `--exclude-frame-keys` 统一处理，
+    本函数不内嵌这份清单。
+    """
+    manifest = prepared_root / "grounding_final_train.json"
+    if not manifest.is_file():
+        raise SliceError(f"缺少 RGBDT500_prepared 标注: {manifest}")
+    records = json.loads(manifest.read_text(encoding="utf-8"))
+    if not isinstance(records, dict):
+        raise SliceError(f"预期 {manifest} 是 id -> 记录 的字典")
+
+    out: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
+    rendered_dir.mkdir(parents=True, exist_ok=True)
+    rendered = 0
+    for sample_id, row in records.items():
+        query = str(row["query"]).strip()
+        if not query or len(query) > MAX_QUERY_CHARS:
+            continue
+        rgb = (prepared_root / row["visible"]).resolve()
+        ir = (prepared_root / row["infrared"]).resolve()
+        raw_depth = (prepared_root / row["depth"]).resolve()
+        for path in (rgb, ir, raw_depth):
+            if not path.is_file():
+                raise SliceError(f"{sample_id}: RGBDT500_prepared 图像缺失 {path}")
+        x1, y1, x2, y2 = (float(v) for v in row["bbox"])
+        if not (0.0 <= x1 < x2 <= 1.0 and 0.0 <= y1 < y2 <= 1.0):
+            raise SliceError(f"{sample_id}: bbox 越界 {row['bbox']}")
+
+        # 深度现场渲染。产物按样本 id 命名，重跑时直接复用，避免每次重建都重渲 7G。
+        depth_path = rendered_dir / f"{sample_id}.png"
+        if not depth_path.is_file():
+            with Image.open(raw_depth) as image:
+                raw = np.asarray(image)
+            visual = depth_mm_to_grayscale_rgb(raw)
+            Image.fromarray(visual).save(depth_path)
+            rendered += 1
+
+        area = (x2 - x1) * (y2 - y1)
+        capability = assign_primary_capability(area, len(query), 0)
+        # 归入 trimodal 池：它同时是"三模态协同"的能力信号，也是本轮的分布锚点
+        target = capability if capability in ("small",) else "trimodal"
+        out[target].append(make_record(
+            f"rgbdt500p:{sample_id}", ("rgb", "infrared", "depth"),
+            [str(rgb), str(ir), str(depth_path)], query, (x1, y1, x2, y2),
+            depth_policy=DEPTH_POLICY_MM,
+            capability=target, source="rgbdt500_prepared",
+            extra={"area": round(area, 6), "query_chars": len(query),
+                   "class_name": row.get("class_name"),
+                   "sequence_id": row.get("sequence_id"),
+                   "weak_label": bool(row.get("weak_label"))}))
+    print(f"  RGBDT500_prepared: 三模态 {len(out['trimodal'])} 条 / "
+          f"极小目标 {len(out['small'])} 条（本次新渲染 {rendered} 张深度）")
+    return out
+
+
 def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
                rng: random.Random) -> list[dict[str, Any]]:
     """City 锚点：按每场景上限抽样，保持目标域主导。
@@ -280,11 +401,24 @@ def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
     **路径解析**：清单里的图像路径形如 `../visible/x.png`，是相对**清单自身所在目录**
     （`target_v2/`）的。若拿 `image_root / "../visible/x.png"` 去拼会得到
     `data/city/visible/...`，那是错的——所以先按清单目录解析，解析不到再退回 image_root。
+
+    ## 深度图必须用预渲染版
+
+    清单的 `depth` 指向 `../depth/x.png` → `city/train/depth/`，那是**原始 `I;16`**
+    （max 19999）。实测直接交给图像处理器转 RGB 后**白色像素占 64~72%**，
+    深度模态等于噪声——而推理侧 `predict_native_submission.py` 是用
+    `depth_mm_to_grayscale_rgb()` 正确渲染的，两边不一致。
+
+    预渲染版就在 `target_v2/qwen3vl_native_sft/depth_rgb/`（759 张 RGB），
+    实测与现场渲染 `depth_mm_to_grayscale_rgb()` **逐像素完全一致**，因此直接指向它。
     """
     records = json.loads(manifest.read_text(encoding="utf-8"))
     if isinstance(records, dict):
         records = list(records.values())
     base = manifest.parent
+    rendered_root = base / "qwen3vl_native_sft" / "depth_rgb"
+    if not rendered_root.is_dir():
+        raise SliceError(f"缺少 City 预渲染深度目录: {rendered_root}")
     by_scene: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
     for row in records:
         scene = pathlib.Path(str(row["visible"])).stem.rsplit("_", 1)[0]
@@ -294,15 +428,22 @@ def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
         candidate = (base / value).resolve()
         return candidate if candidate.is_file() else (image_root / value).resolve()
 
+    def resolve_depth(value: str) -> pathlib.Path:
+        """原始深度路径 -> 预渲染路径（同名）。查不到就硬失败，不退回原始图。"""
+        rendered = rendered_root / pathlib.Path(value).name
+        if not rendered.is_file():
+            raise SliceError(f"City 预渲染深度缺失: {rendered}（原始路径 {value}）")
+        return rendered
+
     out: list[dict[str, Any]] = []
     for scene, rows in by_scene.items():
         rng.shuffle(rows)
         for row in rows[:scene_cap]:
-            rgb, ir, depth = resolve(row["visible"]), resolve(row["infrared"]), resolve(row["depth"])
-            if not rgb.is_file() or not ir.is_file() or not depth.is_file():
+            rgb, ir = resolve(row["visible"]), resolve(row["infrared"])
+            depth = resolve_depth(row["depth"])
+            if not rgb.is_file() or not ir.is_file():
                 raise SliceError(
-                    f"{row['query'][:40]}: City 图像缺失 "
-                    f"(rgb={rgb} ir={ir} depth={depth})")
+                    f"{row['query'][:40]}: City 图像缺失 (rgb={rgb} ir={ir})")
             x1, y1, x2, y2 = (float(v) for v in row["bbox"])
             out.append(make_record(
                 f"city:{scene}:{len(out)}", ("rgb", "infrared", "depth"),
@@ -318,10 +459,17 @@ def build_city(manifest: pathlib.Path, image_root: pathlib.Path, scene_cap: int,
 
 def mix(slices: dict[str, list[dict[str, Any]]], quotas: dict[str, int],
         seed: int) -> list[dict[str, Any]]:
-    """按配额预混合。配额是"使用多少条"，超出则无放回抽样，不足则全用并告警。"""
+    """按配额预混合。配额是"使用多少条"，超出则无放回抽样，不足则全用并告警。
+
+    配额为 0 表示**该切片整体不用**（例如 Arm 3 弃用 City）。此时必须跳过而不是
+    照样构建——否则会白读一遍 City 清单，还会因空池触发下面的硬失败。
+    """
     rng = random.Random(seed)
     mixed: list[dict[str, Any]] = []
     for name, quota in quotas.items():
+        if quota <= 0:
+            print(f"  {name}: 配额 0，跳过")
+            continue
         pool = list(slices.get(name, []))
         if not pool:
             raise SliceError(f"配额要求 {name}={quota}，但该切片为空")
@@ -334,42 +482,103 @@ def mix(slices: dict[str, list[dict[str, Any]]], quotas: dict[str, int],
     return mixed
 
 
+def frame_key_of(path: str) -> str:
+    """把一张图的路径映射到帧键，与 `audit_test_overlap.frame_key` 保持同一规则。
+
+    同一帧的原始图与渲染图 stem 相同（`depth/003353.png` vs `depth_rgb/003353.png`），
+    因此天然归到同一键——这正是剔除要的粒度：任一模态被污染，整帧剔除。
+    """
+    stem = pathlib.Path(path).stem
+    for suffix in ("_color", "_depth", "_infrared", "_nir", "_ir", "_rgb", "_visible"):
+        if stem.endswith(suffix):
+            return stem[: -len(suffix)]
+    return stem
+
+
+def drop_excluded(rows: list[dict[str, Any]], excluded: set[str]) -> tuple[list, int]:
+    """剔除引用了污染帧的样本。
+
+    按**帧**而非按文件剔除：只删被查出的那个文件，同帧的渲染副本会漏网。
+    """
+    if not excluded:
+        return rows, 0
+    kept = [row for row in rows
+            if not any(frame_key_of(image) in excluded for image in row["images"])]
+    return kept, len(rows) - len(kept)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--rgbt-root", type=pathlib.Path, required=True)
     parser.add_argument("--roborefit-root", type=pathlib.Path, required=True)
     parser.add_argument("--rgbdt-sft", type=pathlib.Path, required=True)
     parser.add_argument("--rgbdt-assets", type=pathlib.Path, required=True)
+    # 队友新传的 RGBDT500_prepared。可选：不传则完全不参与，便于复现 Arm 2。
+    parser.add_argument("--rgbdt-prepared", type=pathlib.Path, default=None,
+                        help="RGBDT500_prepared/train 目录（含 grounding_final_train.json）")
+    parser.add_argument("--rgbdt-rendered-dir", type=pathlib.Path, default=None,
+                        help="渲染后深度的缓存目录（默认 out-dir/rgbdt_depth_rgb）")
     parser.add_argument("--city-manifest", type=pathlib.Path, required=True)
     parser.add_argument("--city-image-root", type=pathlib.Path, required=True)
     parser.add_argument("--out-dir", type=pathlib.Path, required=True)
+    # 污染剔除清单，由 tools/audit_test_overlap.py 产出
+    parser.add_argument("--exclude-json", type=pathlib.Path, default=None,
+                        help="audit_test_overlap.py 的输出，按帧剔除与测试集重叠的样本")
     parser.add_argument("--scene-cap", type=int, default=10)
     parser.add_argument("--seed", type=int, default=2026)
-    # 配额。City 占 50%，相对 Arm 1 的 100% 已大幅降低——这正是 Arm 2 相对 Arm 1 的意义：
-    # 在 City 质量存疑的前提下，把一半的训练信号让给真实采集的能力数据。
+    # Arm 3 配额：**用满全部可用数据**，而不是按固定数字抽样。
     #
-    # 配额是算出来的，不是拍的：City 清单在 scene_cap=10 下最多只能给出 3464 条，
-    # 因此总混合量上限 = 3464 / 0.5 = 6928（City 占 50%，同时保证三模态过半，
-    # 降低"深度常黑 -> 忽略深度"的模态捷径风险）。
-    # 扣掉 city 与 trimodal 后，两模态能力切片总预算 = 6928 - 3464 - 181 = 3283，
-    # 按 small:discriminate:longquery ≈ 1500:1200:583 分配。
-    parser.add_argument("--quota-city", type=int, default=3464)
-    parser.add_argument("--quota-small", type=int, default=1500)
-    parser.add_argument("--quota-discriminate", type=int, default=1200)
-    parser.add_argument("--quota-trimodal", type=int, default=181)
-    parser.add_argument("--quota-longquery", type=int, default=583)
+    # 相对 Arm 2 的三点变化：
+    #   1. **City 配额 0**（弃用）——RGBDT500_prepared 是更好的锚点：同源于测试集、
+    #      格式一致（uint16 max 19999 / 1920x1080）、121 类、深度已按推理口径渲染。
+    #   2. **外部数据用满**——Arm 2 只用了 RGBT 的 11%、RoboRefIt 的 6.5%。
+    #      实测可用总量 16,442 条（small 6,609 / discriminate 6,149 / longquery 2,767
+    #      / trimodal 917），是 Arm 2 的 2.4 倍。
+    #   3. **真三模态从 181 提到 917**（RGBDT500_prepared 全部干净样本 + 旧 RGBDT500）。
+    #
+    # 配额写成略高于实测可用量：`mix()` 会在池不足时告警并按实际数量使用，
+    # 这样"有多少用多少"，且可用量变化时会显式告警而不是静默缩水。
+    parser.add_argument("--quota-city", type=int, default=0)
+    parser.add_argument("--quota-small", type=int, default=7000)
+    parser.add_argument("--quota-discriminate", type=int, default=6500)
+    parser.add_argument("--quota-trimodal", type=int, default=1000)
+    parser.add_argument("--quota-longquery", type=int, default=3000)
     args = parser.parse_args()
 
     rng = random.Random(args.seed)
+    excluded: set[str] = set()
+    if args.exclude_json is not None:
+        excluded = set(json.loads(
+            args.exclude_json.read_text(encoding="utf-8"))["excluded_frame_keys"])
+        print(f"污染剔除清单: {len(excluded)} 个帧键（来自 {args.exclude_json}）")
+
     print("构建各切片…")
     slices: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
-    for partial in (build_rgbt(args.rgbt_root, rng),
-                    build_roborefit(args.roborefit_root),
-                    build_rgbdt(args.rgbdt_sft, args.rgbdt_assets)):
+    builders = [build_rgbt(args.rgbt_root, rng), build_roborefit(args.roborefit_root),
+                build_rgbdt(args.rgbdt_sft, args.rgbdt_assets)]
+    if args.rgbdt_prepared is not None:
+        builders.append(build_rgbdt_prepared(
+            args.rgbdt_prepared,
+            args.rgbdt_rendered_dir or (args.out_dir / "rgbdt_depth_rgb"),
+            rng))
+    for partial in builders:
         for key, value in partial.items():
             slices[key].extend(value)
-    slices["city_anchor"] = build_city(args.city_manifest, args.city_image_root,
-                                       args.scene_cap, rng)
+    if args.quota_city > 0:
+        slices["city_anchor"] = build_city(args.city_manifest, args.city_image_root,
+                                           args.scene_cap, rng)
+    else:
+        print("  City: 配额 0，不构建（Arm 3 弃用 City）")
+
+    total_dropped = 0
+    if excluded:
+        print("\n按帧剔除污染样本：")
+        for name in list(slices):
+            slices[name], dropped = drop_excluded(slices[name], excluded)
+            total_dropped += dropped
+            if dropped:
+                print(f"  {name}: 剔除 {dropped} 条")
+        print(f"  合计剔除 {total_dropped} 条")
 
     args.out_dir.mkdir(parents=True, exist_ok=True)
     for name, rows in slices.items():
@@ -401,6 +610,8 @@ def main() -> None:
             sum(1 for row in mixed if row.get("area", 1) < TINY_AREA) / len(mixed), 4),
         "slice_sizes": {name: len(rows) for name, rows in slices.items()},
         "quotas": quotas,
+        "excluded_frame_keys": len(excluded),
+        "dropped_for_contamination": total_dropped,
     }
     (args.out_dir / "summary.json").write_text(
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
