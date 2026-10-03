@@ -114,12 +114,16 @@ if [ "${status}" -ne 0 ]; then
   say "判决工具失败（退出码 ${status}），见 ${OUT_ROOT}/sweep.txt"; exit "${status}"
 fi
 
-"${PY}" - <<'PYEOF'
+# 汇总表：路径必须用 ${OUT_ROOT}，**不能硬编码**。
+# 这里曾经写死 `/root/sprint_qwen36/ckpt_sweep/sweep.json`（那是默认值目录），
+# 于是换成 Arm 3 的 `ckpt_sweep_arm3` 后，`sweep.json` 明明写对了（见上一行），
+# 这段汇总却去读一个不存在的文件而抛 FileNotFoundError——日志里就只剩 traceback，
+# 看不到各检查点分数。没有 `set -e` 所以不至于中断，但等于把最该看的输出弄丢了。
+"${PY}" - <<PYEOF
 import json
 import pathlib
 
-sweep = json.loads(pathlib.Path("/root/sprint_qwen36/ckpt_sweep/sweep.json")
-                   .read_text(encoding="utf-8"))
+sweep = json.loads(pathlib.Path("${OUT_ROOT}/sweep.json").read_text(encoding="utf-8"))
 arms = {name: data["hits_0.5"] for name, data in sweep["arms"].items()}
 rows = sorted(arms.items(), key=lambda item: -item[1])
 print(f"\n{'检查点':>16s} {'命中':>6s} {'ACC':>8s}")
@@ -129,8 +133,8 @@ for name, hits in rows:
 best_name, best_hits = rows[0]
 last_name = max(arms, key=lambda n: int(n.split("-")[1]))
 print(f"\n最佳: {best_name}  命中 {best_hits}/412")
-print(f"目录: /root/sprint_qwen36/ckpt_sweep/{best_name}")
-print("提交时用最佳检查点，但判据仍按预登记口径（命中>293 且聚类配对区间下界>0）。")
+print(f"目录: ${OUT_ROOT}/{best_name}")
+print("提交时用扫描最佳检查点（注意：按本地分数挑 = 在开发集上做选择，本地数字偏乐观）。")
 if last_name != best_name:
     print(f"⚠️ 最佳**不是**最后一步（最后是 {last_name}，命中 {arms[last_name]}）——"
           "只看最后一步会漏掉更好的模型，这正是补可观测性的意义。")

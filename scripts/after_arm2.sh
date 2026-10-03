@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Arm 2 收尾链条：等训练结束 → 逐检查点扫描 → **按失败模式对比 Arm 1** → 判决 → 提交。
+# 收尾链条（各臂通用，用环境变量区分）：等训练结束 → 逐检查点扫描 → 失败模式对比 → 出包 → 格式闸门。
 #
 # 与 Arm 1 链条（`after_arm1_then_arm2.sh`）的区别只有两点，但都很关键：
 #
@@ -38,7 +38,7 @@ while [ ! -d "${RUN_DIR}" ]; do
   fi
   sleep 60
 done
-say "Arm 2 运行目录已出现，等待训练结束"
+say "运行目录已出现，等待训练结束"
 deadline=$(( $(date +%s) + MAX_WAIT_HOURS * 3600 ))
 while pgrep -f "swift sft" > /dev/null; do
   if [ "$(date +%s)" -gt "${deadline}" ]; then
@@ -74,12 +74,15 @@ PYEOF
 fi
 say "最佳 ${BEST}（最后一个是 ${LAST}）"
 
-# ---- 副判据：与零样本 27B 按失败模式对比 ------------------------------------
-say "按失败模式对比（零样本 27B vs Arm 2）"
-ARM2_BEST_PRED="${SWEEP_OUT}/${BEST}/predictions.jsonl"
-if [ -f "${BASE_PRED}" ] && [ -f "${ARM2_BEST_PRED}" ]; then
+# ---- 副判据：与对比基线按失败模式对比 ----------------------------------------
+# 臂名用 `base` / `arm3` 而不是 `zeroshot` / `arm2`：`BASE_PRED` 现在指向的是
+# **Arm 2 的最佳检查点**（本地 314），不是零样本（297）。名字与实际不符会让
+# 读 `failure_modes.json` 的人误判对照对象——比较逻辑本身是对的，只是标签错了。
+say "按失败模式对比（对比基线 vs 本轮）"
+ARM3_BEST_PRED="${SWEEP_OUT}/${BEST}/predictions.jsonl"
+if [ -f "${BASE_PRED}" ] && [ -f "${ARM3_BEST_PRED}" ]; then
   "${PY}" tools/report_failure_modes.py --gt "${GT}" \
-    --arm zeroshot="${BASE_PRED}" --arm arm2="${ARM2_BEST_PRED}" \
+    --arm base="${BASE_PRED}" --arm arm3="${ARM3_BEST_PRED}" \
     --out-json "${SWEEP_OUT}/failure_modes.json" || say "失败模式报告出错"
   TINY_REGRESSED="$("${PY}" - <<PYEOF
 import json, pathlib
@@ -87,18 +90,18 @@ p = pathlib.Path("${SWEEP_OUT}/failure_modes.json")
 if not p.is_file():
     print("unknown"); raise SystemExit
 d = json.loads(p.read_text(encoding="utf-8"))["buckets"]
-tiny = d["zeroshot"].get("极小 <0.2%", {}).get("命中", 0) - d["arm2"].get("极小 <0.2%", {}).get("命中", 0)
+tiny = d["base"].get("极小 <0.2%", {}).get("命中", 0) - d["arm3"].get("极小 <0.2%", {}).get("命中", 0)
 print("yes" if tiny > 0 else "no")
 PYEOF
 )"
   say "极小目标桶是否退化: ${TINY_REGRESSED}"
   if [ "${TINY_REGRESSED}" = "yes" ]; then
-    say "⚠️ 极小目标桶相对零样本退化 —— 按计划这属于'用易题换难题'。"
+    say "⚠️ 极小目标桶相对对比基线退化 —— 按计划这属于'用易题换难题'。"
     say "   仍然会生成候选提交包（本地与官方的映射关系很弱，官方才是真裁判），"
     say "   但**不要默认提交它**，请先看下面的分桶对比再决定。"
   fi
 else
-  say "缺少零样本基线预测（${BASE_PRED}），跳过副判据"
+  say "缺少对比基线预测（${BASE_PRED}），跳过副判据"
   TINY_REGRESSED="unknown"
 fi
 
