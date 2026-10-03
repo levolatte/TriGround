@@ -103,31 +103,32 @@ else
 fi
 
 # ---- 主判据 + 提交 ----------------------------------------------------------
-run_verdict() {
-  local checkpoint="$1"
-  say "用 ${checkpoint} 跑判决"
-  ADAPTER="${ARCHIVE_DIR}/${checkpoint}" DEV_OUT="${SWEEP_OUT}/verdict_${checkpoint}" \
-    bash scripts/final_submission_with_adapter.sh
-  return $?
-}
-
-status=0
-run_verdict "${LAST}" || status=$?
-if [ "${status}" -ne 0 ] && [ "${LAST}" != "${BEST}" ]; then
-  say "⚠️ 最后一个未通过，改用扫描最佳 ${BEST}（存在选择偏差，报告须标注）"
-  run_verdict "${BEST}" || status=$?
-fi
+#
+# 只用**扫描最佳**跑提交，不再"先试最后一个、失败再试最佳"。
+#
+# 原因：出包这一步现在不因区间被判失败（见 final_submission_with_adapter.sh 的说明），
+# 所以"先试最后一个"会**为最后一个检查点白跑一次 5690**（约 1.6 小时），
+# 而且它本地分数更低。直接对最佳检查点出包既省时又是我们真正想提交的那个。
+#
+# 代价要写明：**按本地分数挑检查点是在开发集上做选择**，本地数字会偏乐观。
+# 这是有意的权衡——官方才是真裁判，而 Arm 2 已证明本地确实能选出比"最后一个"更好的
+# （ck500 本地 314 > ck600 的 311，官方 0.7870）。
+say "用扫描最佳 ${BEST} 出提交包"
+ADAPTER="${ARCHIVE_DIR}/${BEST}" DEV_OUT="${SWEEP_OUT}/verdict_${BEST}" \
+  bash scripts/final_submission_with_adapter.sh
+status=$?
 
 if [ "${status}" -ne 0 ]; then
-  say "Arm 2 未通过判据 —— 回退到 B2 零样本包（官方 0.7685）"
+  say "⚠️ 出包流程返回 ${status} —— 请看上面的日志定位是推理、闸门还是显存问题"
+  say "   回退包仍在：/root/sprint_qwen36/submit_b2_zeroshot/submission.zip（官方 0.7685）"
   exit "${status}"
 fi
 
 if [ "${TINY_REGRESSED}" = "yes" ]; then
-  say "⚠️⚠️ 总体达标但**极小目标桶退化** —— 按计划判为'用易题换难题'，需人工决定是否提交"
-  say "   两臂的 submission.zip 都已生成，请对比后再决定提交哪个"
+  say "⚠️⚠️ 总体达标但**极小目标桶退化** —— 按计划这属于'用易题换难题'"
+  say "   包已生成，但**不要默认提交它**，请先看失败模式对比再决定"
   exit 5
 fi
 
-say "✅ Arm 2 通过（总体达标且极小桶未退化）"
-say "提交包见上面的最终提交段落"
+say "✅ 出包完成；极小目标桶未退化"
+say "对照基线：零样本 297 / Arm 2 ck500 314（官方 0.7870）"
