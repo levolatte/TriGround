@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+# Arm 2 收尾链条：等训练结束 → 逐检查点扫描 → **按失败模式对比 Arm 1** → 判决 → 提交。
+#
+# 与 Arm 1 链条（`after_arm1_then_arm2.sh`）的区别只有两点，但都很关键：
+#
+# 1. **多一道副判据**：计划规定"小目标桶命中数不得下降"。总体涨而极小桶跌，
+#    等于用易题换难题——只看总数看不出来。因此这里显式跑 `report_failure_modes.py`
+#    把 Arm 1 与 Arm 2 的分桶结果对照。
+# 2. **不启动下一臂**：Arm 2 之后没有排队的训练，GPU 释放出来供人工决策。
+set -uo pipefail
+
+PY=/root/miniconda3/bin/python
+CODE_DIR="${CODE_DIR:-/root/AIC_code}"
+RUN_DIR="${RUN_DIR:-/root/runs/q36_arm2_capability}"
+ARCHIVE_DIR="${ARCHIVE_DIR:-${RUN_DIR}/archived}"
+SWEEP_OUT="${SWEEP_OUT:-/root/sprint_qwen36/ckpt_sweep_arm2}"
+ARM1_SWEEP="${ARM1_SWEEP:-/root/sprint_qwen36/ckpt_sweep/sweep.json}"
+ARM1_PRED="${ARM1_PRED:-/root/sprint_qwen36/ckpt_sweep}"
+GT="${GT:-/root/sprint_qwen36/baseline_preds/city412_gt.json}"
+LOG="${LOG:-/root/after_arm2.log}"
+MAX_WAIT_HOURS="${MAX_WAIT_HOURS:-16}"
+
+exec > >(tee -a "${LOG}") 2>&1
+say() { echo "[$(date '+%F %T')] $*"; }
+cd "${CODE_DIR}" || exit 2
+export PATH=/root/vllm_env/bin:$PATH
+
+say "等待 Arm 2 训练开始（目录 ${RUN_DIR} 出现）"
+#
+# 两道等待缺一不可：只等 `swift sft` 退出的话，**Arm 1 结束就会误触发**
+# （那时 Arm 2 还没开始）。所以先等 Arm 2 的运行目录出现，再等训练进程退出。
+start_deadline=$(( $(date +%s) + MAX_WAIT_HOURS * 3600 ))
+while [ ! -d "${RUN_DIR}" ]; do
+  if [ "$(date +%s)" -gt "${start_deadline}" ]; then
+    say "等待 ${MAX_WAIT_HOURS} 小时仍未见 ${RUN_DIR} —— Arm 2 可能未启动，退出"
+    exit 2
+  fi
+  sleep 60
+done
+say "Arm 2 运行目录已出现，等待训练结束"
+deadline=$(( $(date +%s) + MAX_WAIT_HOURS * 3600 ))
+while pgrep -f "swift sft" > /dev/null; do
+  if [ "$(date +%s)" -gt "${deadline}" ]; then
+    say "等待超过 ${MAX_WAIT_HOURS} 小时，退出（训练可能卡住）"; exit 2
+  fi
+  sleep 60
+done
+say "训练结束，等 120 秒让最后的检查点落盘并被归档"
+sleep 120
+
+mapfile -t CHECKPOINTS < <(ls -d "${ARCHIVE_DIR}"/checkpoint-* 2>/dev/null | sort -t- -k2 -n)
+if [ "${#CHECKPOINTS[@]}" -eq 0 ]; then
+  say "没有已归档的检查点 —— 不评测半成品"
+  say "回退：/root/sprint_qwen36/submit_b2_zeroshot/submission.zip（官方 0.7685）"
+  exit 3
+fi
+say "已归档 ${#CHECKPOINTS[@]} 个：$(basename -a "${CHECKPOINTS[@]}" | tr '\n' ' ')"
+
+say "逐检查点在 City412 上扫描"
+ARCHIVE_DIR="${ARCHIVE_DIR}" OUT_ROOT="${SWEEP_OUT}" \
+  bash scripts/evaluate_checkpoints.sh || say "扫描失败，稍后用最后一个检查点"
+
+LAST="$(basename "$(printf '%s\n' "${CHECKPOINTS[@]}" | tail -1)")"
+BEST="${LAST}"
+if [ -f "${SWEEP_OUT}/sweep.json" ]; then
+  BEST="$("${PY}" - <<PYEOF
+import json, pathlib
+sweep = json.loads(pathlib.Path("${SWEEP_OUT}/sweep.json").read_text(encoding="utf-8"))
+arms = {n: d["hits_0.5"] for n, d in sweep["arms"].items()}
+print(max(arms, key=lambda n: arms[n]))
+PYEOF
+)"
+fi
+say "最佳 ${BEST}（最后一个是 ${LAST}）"
+
+# ---- 副判据：与 Arm 1 按失败模式对比 ----------------------------------------
+say "按失败模式对比（Arm 1 vs Arm 2）"
+ARM1_BEST_PRED=""
+if [ -d "${ARM1_PRED}" ]; then
+  ARM1_BEST_PRED="$(ls -d "${ARM1_PRED}"/checkpoint-*/predictions.jsonl 2>/dev/null | sort -t- -k2 -n | tail -1)"
+fi
+ARM2_BEST_PRED="${SWEEP_OUT}/${BEST}/predictions.jsonl"
+if [ -n "${ARM1_BEST_PRED}" ] && [ -f "${ARM2_BEST_PRED}" ]; then
+  "${PY}" tools/report_failure_modes.py --gt "${GT}" \
+    --arm arm1="${ARM1_BEST_PRED}" --arm arm2="${ARM2_BEST_PRED}" \
+    --out-json "${SWEEP_OUT}/failure_modes.json" || say "失败模式报告出错"
+  TINY_REGRESSED="$("${PY}" - <<PYEOF
+import json, pathlib
+p = pathlib.Path("${SWEEP_OUT}/failure_modes.json")
+if not p.is_file():
+    print("unknown"); raise SystemExit
+d = json.loads(p.read_text(encoding="utf-8"))["buckets"]
+tiny = d["arm1"].get("极小 <0.2%", {}).get("命中", 0) - d["arm2"].get("极小 <0.2%", {}).get("命中", 0)
+print("yes" if tiny > 0 else "no")
+PYEOF
+)"
+  say "极小目标桶是否退化: ${TINY_REGRESSED}"
+  if [ "${TINY_REGRESSED}" = "yes" ]; then
+    say "⚠️ 极小目标桶相对 Arm 1 退化 —— 按计划这属于'用易题换难题'。"
+    say "   仍然会生成候选提交包（本地与官方的映射关系很弱，官方才是真裁判），"
+    say "   但**不要默认提交它**，请先看下面的分桶对比再决定。"
+  fi
+else
+  say "缺少 Arm 1 的预测（${ARM1_PRED}），跳过副判据"
+  TINY_REGRESSED="unknown"
+fi
+
+# ---- 主判据 + 提交 ----------------------------------------------------------
+run_verdict() {
+  local checkpoint="$1"
+  say "用 ${checkpoint} 跑判决"
+  ADAPTER="${ARCHIVE_DIR}/${checkpoint}" DEV_OUT="${SWEEP_OUT}/verdict_${checkpoint}" \
+    bash scripts/final_submission_with_adapter.sh
+  return $?
+}
+
+status=0
+run_verdict "${LAST}" || status=$?
+if [ "${status}" -ne 0 ] && [ "${LAST}" != "${BEST}" ]; then
+  say "⚠️ 最后一个未通过，改用扫描最佳 ${BEST}（存在选择偏差，报告须标注）"
+  run_verdict "${BEST}" || status=$?
+fi
+
+if [ "${status}" -ne 0 ]; then
+  say "Arm 2 未通过判据 —— 回退到 B2 零样本包（官方 0.7685）"
+  exit "${status}"
+fi
+
+if [ "${TINY_REGRESSED}" = "yes" ]; then
+  say "⚠️⚠️ 总体达标但**极小目标桶退化** —— 按计划判为'用易题换难题'，需人工决定是否提交"
+  say "   两臂的 submission.zip 都已生成，请对比后再决定提交哪个"
+  exit 5
+fi
+
+say "✅ Arm 2 通过（总体达标且极小桶未退化）"
+say "提交包见上面的最终提交段落"
