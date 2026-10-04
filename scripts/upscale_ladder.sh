@@ -33,6 +33,9 @@
 set -uo pipefail
 
 PY=/root/miniconda3/bin/python
+# vLLM 装在独立环境里，**不能**用 miniconda3 跑推理——那里没有 vllm 模块。
+# （首次运行就是踩了这个：ModuleNotFoundError: No module named 'vllm'。）
+VLLM_PY=/root/vllm_env/bin/python
 CODE_DIR="${CODE_DIR:-/root/AIC_code}"
 MODEL="${MODEL:-/root/rematch_models/Qwen3.6-27B}"
 ADAPTER="${ADAPTER:?必须指定 ADAPTER（Arm 2 的最佳检查点）}"
@@ -104,7 +107,7 @@ for row in "${LADDER[@]}"; do
   else
     wait_for_gpu || exit 5
     rm -rf "${out}"
-    "${PY}" -u tools/predict_submission_vllm.py --model "${MODEL}" --adapter "${ADAPTER}" \
+    "${VLLM_PY}" -u tools/predict_submission_vllm.py --model "${MODEL}" --adapter "${ADAPTER}" \
       --modality trimodal --queries "${CITY_QUERIES}" --data-root "${CITY_ROOT}" \
       --expected-query-count 412 --min-pixels 200704 --max-pixels "${max_pixels}" \
       --model-max-length "${max_length}" --max-num-seqs "${max_seqs}" \
