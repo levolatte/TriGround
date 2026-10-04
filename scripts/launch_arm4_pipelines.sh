@@ -9,8 +9,9 @@
 #
 # ## 与推理侧的分工
 #
-# **只有一个 GPU**。推理侧（放大阶梯）需要约 35 分钟显存，本脚本因此先**等 GPU 空闲**
-# 再开训，不去抢占；训练一旦开始会持续约 7 小时，推理侧应在那之后再跑。
+# 两条线**各用一台云实例并行**，不共享 GPU，所以本脚本不需要为对方让路。
+# 保留"等 GPU 空闲"纯粹是**安全检查**：若卡上已有进程（例如上一次没退干净的
+# vLLM 残留，或我自己的探针忘了停），直接开训会抢显存 OOM。
 #
 # ## 为什么输出必须在数据盘
 #
@@ -43,14 +44,14 @@ for required in "${DATASET}" /root/rematch_models/Qwen3.6-27B/config.json \
 done
 say "前置检查通过（数据集 $(wc -l < "${DATASET}") 条）"
 
-# ---- 等 GPU：推理侧可能正在跑放大阶梯，不抢 ----
+# ---- 等 GPU：安全检查，防止残留进程抢显存 ----
 say "等待 GPU 空闲（最多 ${WAIT_GPU_SECONDS} 秒）"
 waited=0
 while [ "${waited}" -lt "${WAIT_GPU_SECONDS}" ]; do
   busy="$(nvidia-smi --query-compute-apps=pid --format=csv,noheader 2>/dev/null | wc -l)"
   [ "${busy}" -eq 0 ] && break
   if [ "${waited}" -eq 0 ]; then
-    say "GPU 上有 ${busy} 个进程（可能是推理侧的放大阶梯），等待其结束"
+    say "GPU 上有 ${busy} 个进程（可能是未退干净的残留），等待其结束"
     nvidia-smi --query-compute-apps=pid,used_memory --format=csv,noheader | sed 's/^/    /'
   fi
   sleep 30
