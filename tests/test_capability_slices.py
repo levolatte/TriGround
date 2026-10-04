@@ -117,17 +117,24 @@ def test_normal_label_never_enters_tiny_slice(tmp_path: Path) -> None:
     assert slices["small"] == []
 
 
-def test_long_query_and_occlusion_slices(tmp_path: Path) -> None:
-    long_q = "x" * (module.LONG_QUERY_CHARS + 5)
+def test_occlusion_slice_and_long_query_is_dropped(tmp_path: Path) -> None:
+    """遮挡样本进判别池；长查询样本**被丢弃**（不再有 longquery 池）。
+
+    `longquery` 池的内容就是 RGBT 的冗长生成式描述——Arm 3 把它放大到占全量 56%，
+    直接把整体查询长度中位从 55 拉到 84（官方 49），是退步的主因。故取消该池。
+    """
+    long_q = "x" * (module.RGBT_MAX_QUERY_CHARS + 5)
     rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 300, 300],
                      long_q, 3, "normal", 0),
             rgbt_row("B.jpg", {"height": 1000, "width": 1000}, [0, 0, 300, 300],
                      "short query", 3, "normal", 2)]
     root = make_rgbt_root(tmp_path, rows)
     slices = build_rgbt(root, __import__("random").Random(0), sources=("flir",))
-    assert len(slices["longquery"]) == 1
+    assert "longquery" not in slices or not slices["longquery"]
     assert len(slices["discriminate"]) == 1          # occlusion > 0
-    assert slices["longquery"][0]["query_chars"] > module.LONG_QUERY_CHARS
+    # 长查询那条既不是极小也不遮挡，应当整条被丢弃
+    ids = [row["id"] for rows_ in slices.values() for row in rows_]
+    assert len(ids) == 1, f"长查询样本未被丢弃: {ids}"
 
 
 def test_degenerate_query_filtered(tmp_path: Path) -> None:
@@ -171,9 +178,9 @@ def test_overlong_generated_description_filtered(tmp_path: Path) -> None:
     assert all(not v for v in result.values()), result
 
 
-def test_query_at_the_official_max_is_kept(tmp_path: Path) -> None:
+def test_query_at_the_rgbt_limit_is_kept(tmp_path: Path) -> None:
     """上限处的样本应保留，避免把过滤写成"宁可错杀"。"""
-    query = "x" * module.MAX_QUERY_CHARS
+    query = "x" * module.RGBT_MAX_QUERY_CHARS
     rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 10, 10],
                      query, 3, "small", 0)]
     root = make_rgbt_root(tmp_path, rows)
@@ -181,33 +188,39 @@ def test_query_at_the_official_max_is_kept(tmp_path: Path) -> None:
     assert len(result["small"]) == 1
 
 
+def test_rgbt_limit_is_tighter_than_the_global_one() -> None:
+    """RGBT 的上限必须比通用上限更严——它只该提供极小目标，不该主导查询风格。"""
+    assert module.RGBT_MAX_QUERY_CHARS < module.MAX_QUERY_CHARS
+
+
 def test_slices_are_disjoint_across_capabilities(tmp_path: Path) -> None:
     """一条样本只能归入一个能力池。
 
-    若三个切片各自独立抽样，一条"又小又被遮挡又是长查询"的样本会在同一次训练里
-    出现最多三次，把预定配比悄悄放大成 3 倍。这条钉住池间不相交。
+    若各切片各自独立抽样，一条"又小又被遮挡"的样本会在同一次训练里出现多次，
+    把预定配比悄悄放大。这条钉住池间不相交，并确认优先级是"极小 > 判别"。
     """
-    query = "y" * (module.LONG_QUERY_CHARS + 5)
     rows = [rgbt_row("A.jpg", {"height": 1000, "width": 1000}, [0, 0, 10, 10],
-                     query, 3, "small", 2)]     # 极小 + 遮挡>0 + 长查询
+                     "a tiny occluded thing", 3, "small", 2)]   # 极小 + 遮挡>0
     root = make_rgbt_root(tmp_path, rows)
     slices = build_rgbt(root, __import__("random").Random(0), sources=("flir",))
     seen = [row["id"] for rows_ in slices.values() for row in rows_]
     assert len(seen) == len(set(seen)), f"样本跨切片重复: {seen}"
-    # 优先级：极小目标 > 判别 > 长查询
+    # 优先级：极小目标 > 判别
     assert [row["id"] for row in slices["small"]] == seen
-    assert slices["discriminate"] == [] and slices["longquery"] == []
+    assert slices["discriminate"] == []
 
 
 def test_assign_primary_capability_priority() -> None:
-    tiny, long_chars = module.TINY_AREA / 2, module.LONG_QUERY_CHARS + 1
+    """优先级：极小 > 判别；两者都不满足则丢弃（不再有 longquery 兜底）。"""
+    tiny = module.TINY_AREA / 2
     big = module.TINY_AREA * 10
     assert module.assign_primary_capability(tiny, 10, 0) == "small"
-    assert module.assign_primary_capability(tiny, long_chars, 2) == "small"   # 极小优先
+    assert module.assign_primary_capability(tiny, 500, 2) == "small"    # 极小优先
     assert module.assign_primary_capability(big, 10, 1) == "discriminate"
-    assert module.assign_primary_capability(big, long_chars, 1) == "discriminate"
-    assert module.assign_primary_capability(big, long_chars, 0) == "longquery"
+    assert module.assign_primary_capability(big, 500, 1) == "discriminate"
+    # 既不极小、也不遮挡 -> 丢弃（长查询不再单独成池）
     assert module.assign_primary_capability(big, 10, 0) is None
+    assert module.assign_primary_capability(big, 500, 0) is None
 
 
 def test_mix_keeps_three_modal_majority() -> None:

@@ -44,6 +44,16 @@ SAVE_STEPS="${SAVE_STEPS:-100}"
 # 逐检查点打分，才能选出真正最好的那一个。
 SAVE_TOTAL_LIMIT="${SAVE_TOTAL_LIMIT:-6}"
 TARGET_MODULES="${TARGET_MODULES:-all-linear}"
+# 视觉侧是否冻结。**这不是"无关紧要的开关"**：ms-swift 的文档写明，
+# 在 `target_modules=['all-linear']` 下这两个标志为 True 时会**主动阻止给
+# ViT / aligner 加 LoRA 模块**——实测 992 个 LoRA 张量全部落在
+# `base_model.language_model`，视觉塔一个参数都没训。
+#
+# 后果：红外与深度渲染成三通道后走同一个**只见过 RGB 的冻结 ViT**，
+# 跨模态融合只能发生在 LLM 注意力层。这个方向此前从未试过。
+# 默认保持 true 以复现既有基线；置 false 即让 LoRA 覆盖视觉侧。
+FREEZE_VIT="${FREEZE_VIT:-true}"
+FREEZE_ALIGNER="${FREEZE_ALIGNER:-true}"
 # 每条样本要解码 3 张 1920x1080 PNG，是实打实的 CPU 开销。workers=0 会让主进程在步间阻塞
 # 等图像解码；而且 ms-swift 默认 persistent_workers=True，workers=0 会直接抛
 # "persistent_workers option needs num_workers > 0"。
@@ -115,8 +125,8 @@ EOF
     --lora_alpha "${LORA_ALPHA}" \
     --lora_dropout "${LORA_DROPOUT}" \
     --target_modules "${TARGET_MODULES}" \
-    --freeze_vit true \
-    --freeze_aligner true \
+    --freeze_vit "${FREEZE_VIT}" \
+    --freeze_aligner "${FREEZE_ALIGNER}" \
     --freeze_parameters_ratio 0 \
     --max_length "${MAX_LENGTH}" \
     --max_pixels "${MAX_PIXELS}" \

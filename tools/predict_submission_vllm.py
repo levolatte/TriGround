@@ -26,6 +26,8 @@ import time
 from pathlib import Path
 from typing import Any
 
+from PIL import Image
+
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from tools.evaluate_pretrained_grounder import (  # noqa: E402
@@ -52,6 +54,64 @@ from tools.predict_native_submission import (  # noqa: E402
 )
 
 STAGE1_MAX_TOKENS = 64
+
+# 官方测试集可见光图的原生分辨率 1920×1080，恰好等于现役 `--max-pixels`。
+# 超原生放大实验以此为基准计算应有的 max_pixels。
+NATIVE_PIXELS = 1920 * 1080
+
+# `--max-pixels` 与 `--upscale` 允许的相对偏差。处理器把尺寸对齐到 32 的倍数，
+# 所以实际像素不会精确等于 `NATIVE_PIXELS × k²`，留 5% 容差。
+UPSCALE_PIXELS_TOLERANCE = 0.05
+
+
+def upscale_images(images: list[Image.Image], factor: float) -> list[Image.Image]:
+    """把输入图等比放大。`factor == 1.0` 时**原样返回同一批对象**。
+
+    为什么必须放大：Qwen VL 处理器只在图像**低于 `min_pixels`** 时才上采样，
+    在 `[min_pixels, max_pixels]` 区间内**不动**。我们的图正好是 1920×1080 = 2073600
+    = `max_pixels`，所以"调大 `--max-pixels`"本身不会产生任何放大——
+    **放大必须在这里显式做**。
+
+    放大是等比缩放，而模型输出的是**归一化到 0-1000 的坐标**，因此
+    **不需要任何坐标反变换**。
+
+    用 LANCZOS 而非最近邻：极小目标放大后要靠插值保持边缘可辨。
+    """
+    if factor == 1.0:
+        return images
+    if factor <= 0:
+        raise ValueError(f"upscale 必须为正数，收到 {factor}")
+    scaled = []
+    for image in images:
+        width, height = image.size
+        scaled.append(image.resize(
+            (round(width * factor), round(height * factor)), Image.LANCZOS))
+    return scaled
+
+
+def check_upscale_consistency(upscale: float, max_pixels: int) -> None:
+    """断言 `--max-pixels` 随 `--upscale` 一起提高。
+
+    ## 为什么这是一条硬断言而不是提示
+
+    处理器在图像**超出 `max_pixels` 时会下采样**。若只加 `--upscale 1.5`
+    而 `--max-pixels` 仍是 2073600，我们放大出来的 2880×1620 会被原样缩回去——
+    **模型收到的还是原尺寸，实验静默地什么都没测**，而日志、耗时、显存全都正常。
+
+    这与本项目已经踩过的坑同类（深度图未渲染、CRLF 破坏 heredoc）：**错了不报错**。
+    所以这里 fail fast。
+    """
+    if upscale == 1.0:
+        return
+    expected = NATIVE_PIXELS * upscale * upscale
+    low = expected * (1 - UPSCALE_PIXELS_TOLERANCE)
+    if max_pixels < low:
+        raise ValueError(
+            f"--upscale {upscale} 要求 --max-pixels 至少约 {int(low)}"
+            f"（≈ {NATIVE_PIXELS} × {upscale}²），实际是 {max_pixels}。\n"
+            f"处理器会把超出 max_pixels 的图**缩回**去，"
+            f"等于放大没生效——必须同步提高 --max-pixels。")
+
 
 
 def accept(text: str) -> list[float] | None:

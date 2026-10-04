@@ -63,14 +63,20 @@ DEPTH_POLICY_MM = "millimeter"
 DEPTH_POLICY_SENSOR = "sensor_linear_20000"
 # 极小目标阈值（归一化面积）。与 City412 分析口径一致。
 TINY_AREA = 0.002
-# 官方测试集有 7.5% 的查询超过 100 字符，而 City 训练集一条都没有
-LONG_QUERY_CHARS = 100
-# 官方查询的长度上限。实测官方分布：min 5 / 中位 49 / p75 73 / **max 298**。
-# 超过这个长度的样本基本是 RGBT-MFAD 的冗长生成式描述（实测最长 1766 字符，
-# 形如「...likely a compact car given its size compared to other vehicles visible
-# further ahead along...」），与官方的简洁指代风格相差很远。放进训练等于教模型
-# 输出啰嗦描述——**在 ACC@0.5 这种要求精确框的任务上是有害的**。
+# 官方查询的长度上限。实测官方分布：min 5 / **中位 49** / p75 73 / p90 93 / **max 298**。
+#
+# ⚠️ 这个常量曾经只是"上限"，而 Arm 3 的实测证明**它必须同时是配比约束**：
+# Arm 3 里 rgbdt_mfad 占到 56%（9,221 条），其查询**中位 102 字符、54% 超 100 字符**，
+# 把整体查询长度中位从官方风格的 55 拉到 **84**（官方 49）。
+# 结果是 City412 轨迹从 Arm 2 的单调上升变成 **288→270→持平**——越训越差。
+#
+# 讽刺的是这条判断本来就写在这里：超过这个长度的样本是 RGBT-MFAD 的冗长生成式描述，
+# 与官方简洁指代风格相差很远，**放进训练是有害的**。Arm 3 却把它放大了 4.7 倍。
 MAX_QUERY_CHARS = 300
+# RGBT 专用长度上限。官方 p90 = 93，因此取 100 让 RGBT 贴合官方主体分布。
+# **RGBT 是两模态数据，本来就不该主导训练分布**；它在这里的唯一职责是提供极小目标样本
+# （官方失分的 65% 集中在最小的一桶），所以只留风格接近官方的那部分。
+RGBT_MAX_QUERY_CHARS = 100
 SOURCES = ("flir", "m3fd", "mfad")
 CLASS_NAMES = {
     "flir": {1: "truck", 2: "car", 3: "person", 4: "bicycle"},
@@ -151,15 +157,22 @@ def assign_primary_capability(area: float, query_chars: int, occlusion: int) -> 
     各自独立抽样，它会在同一次训练里出现最多三次，把预定的配比悄悄放大成 3 倍。
     这里按优先级只归一类，保证池与池不相交、配比可复现。
 
-    优先级：极小目标 > 判别（遮挡） > 长查询。理由是极小目标是我们**最主要的失分桶**
+    优先级：极小目标 > 判别（遮挡）。理由是极小目标是我们**最主要的失分桶**
     （占全部失分的 65%），它的样本供应也最紧张，优先保住。
+
+    ## 为什么取消了 `longquery` 池
+
+    该池的定义是"RGBT 里 >100 字符的查询"——**它曾经唯一的内容就是冗长生成式描述**，
+    正是 Arm 3 退步的主因（见 `RGBT_MAX_QUERY_CHARS` 处的说明）。
+    实测按 ≤100 字符过滤后该池**为空**，所以它不是"暂时没数据"，而是**本就不该存在**。
+
+    官方那 7.3% 的长查询由 City 的自然分布覆盖（City 查询 p90 = 116），
+    不需要专门造一个由异质文本构成的池去模拟。
     """
     if area < TINY_AREA:
         return "small"
     if occlusion > 0:
         return "discriminate"
-    if query_chars > LONG_QUERY_CHARS:
-        return "longquery"
     return None
 
 
@@ -183,8 +196,11 @@ def build_rgbt(root: pathlib.Path, rng: random.Random,
             class_id, size_class, occlusion = row[4], str(row[5]), int(row[6])
             if any(marker in query for marker in DEGENERATE):
                 continue
-            # 过长的生成式描述与官方简洁风格相差太远，剔除而不是训练进去
-            if len(query) > MAX_QUERY_CHARS:
+            # 过长的生成式描述与官方简洁风格相差太远，剔除而不是训练进去。
+            # 这里用 RGBT 专用上限（100）而不是通用上限（300）：Arm 3 把这类长查询
+            # 放大到占全量的 56%，直接把整体查询长度中位从 55 拉到 84（官方 49），
+            # 是退步的主因。RGBT 只负责提供极小目标样本，不该主导查询风格。
+            if len(query) > RGBT_MAX_QUERY_CHARS:
                 continue
             if class_id not in mapping:
                 continue
@@ -511,6 +527,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--rgbt-root", type=pathlib.Path, required=True)
     parser.add_argument("--roborefit-root", type=pathlib.Path, required=True)
+    parser.add_argument("--include-roborefit", action="store_true",
+                        help="纳入 RoboRefIt（默认排除：65 类与官方场景重合度为 0）")
     parser.add_argument("--rgbdt-sft", type=pathlib.Path, required=True)
     parser.add_argument("--rgbdt-assets", type=pathlib.Path, required=True)
     # 队友新传的 RGBDT500_prepared。可选：不传则完全不参与，便于复现 Arm 2。
@@ -526,23 +544,26 @@ def main() -> None:
                         help="audit_test_overlap.py 的输出，按帧剔除与测试集重叠的样本")
     parser.add_argument("--scene-cap", type=int, default=10)
     parser.add_argument("--seed", type=int, default=2026)
-    # Arm 3 配额：**用满全部可用数据**，而不是按固定数字抽样。
+    # Arm 4 配额：**按官方分布对齐**，而不是"有多少用多少"。
     #
-    # 相对 Arm 2 的三点变化：
-    #   1. **City 配额 0**（弃用）——RGBDT500_prepared 是更好的锚点：同源于测试集、
-    #      格式一致（uint16 max 19999 / 1920x1080）、121 类、深度已按推理口径渲染。
-    #   2. **外部数据用满**——Arm 2 只用了 RGBT 的 11%、RoboRefIt 的 6.5%。
-    #      实测可用总量 16,442 条（small 6,609 / discriminate 6,149 / longquery 2,767
-    #      / trimodal 917），是 Arm 2 的 2.4 倍。
-    #   3. **真三模态从 181 提到 917**（RGBDT500_prepared 全部干净样本 + 旧 RGBDT500）。
+    # Arm 3 的教训（实测归因，非推测）：把可用数据全部塞进去，会让训练分布严重偏离官方——
+    #   三模态 52.6% -> 6.2%（官方 100%）
+    #   查询长度中位 55 -> 84（官方 49）
+    #   >100 字符占比 19% -> 35.5%（官方 7.3%）
+    #   类别数 72 -> 181（RoboRefIt 的 65 类与官方场景重合度为 0）
+    # 结果是 City412 从"单调上升到 314"变成"288 -> 270 -> 持平"。
     #
-    # 配额写成略高于实测可用量：`mix()` 会在池不足时告警并按实际数量使用，
-    # 这样"有多少用多少"，且可用量变化时会显式告警而不是静默缩水。
-    parser.add_argument("--quota-city", type=int, default=0)
-    parser.add_argument("--quota-small", type=int, default=7000)
-    parser.add_argument("--quota-discriminate", type=int, default=6500)
-    parser.add_argument("--quota-trimodal", type=int, default=1000)
-    parser.add_argument("--quota-longquery", type=int, default=3000)
+    # Arm 4 的规则：
+    #   1. **City 回到 Arm 2 的权重**（~3,464）——唯一被验证有效的域锚点，
+    #      且是三模态的主要来源（官方 100% 三模态，而 RGBT/RoboRefIt 都没有深度/红外三件套）。
+    #   2. **RGBT 只作极小目标补充**，且已按 ≤100 字符过滤（见 RGBT_MAX_QUERY_CHARS）。
+    #      它是两模态数据，不该主导分布。
+    #   3. **删除 longquery 池**——它的内容就是有害的冗长文本。
+    #   4. **RoboRefIt 配额 0**——65 类全部与官方场景无关。
+    parser.add_argument("--quota-city", type=int, default=3600)
+    parser.add_argument("--quota-small", type=int, default=1800)
+    parser.add_argument("--quota-discriminate", type=int, default=900)
+    parser.add_argument("--quota-trimodal", type=int, default=1100)
     args = parser.parse_args()
 
     rng = random.Random(args.seed)
@@ -554,8 +575,16 @@ def main() -> None:
 
     print("构建各切片…")
     slices: dict[str, list[dict[str, Any]]] = collections.defaultdict(list)
-    builders = [build_rgbt(args.rgbt_root, rng), build_roborefit(args.roborefit_root),
+    builders = [build_rgbt(args.rgbt_root, rng),
                 build_rgbdt(args.rgbdt_sft, args.rgbdt_assets)]
+    # RoboRefIt：**默认排除**。它的 65 个类别与 City（官方同域代理）实测重合度为 0，
+    # 全是 apple / avocado / body lotion / camel / chimpanzee 一类室内日用品与食物。
+    # Arm 3 把它全部纳入后，类别数从 72 涨到 181，模型把容量花在与官方无关的判别上。
+    # 保留开关是为了让"是否该用它"能被实验回答，而不是被永久删掉。
+    if args.include_roborefit:
+        builders.append(build_roborefit(args.roborefit_root))
+    else:
+        print("  RoboRefIt: 默认排除（65 类与官方场景重合度为 0）")
     if args.rgbdt_prepared is not None:
         builders.append(build_rgbdt_prepared(
             args.rgbdt_prepared,
@@ -568,7 +597,7 @@ def main() -> None:
         slices["city_anchor"] = build_city(args.city_manifest, args.city_image_root,
                                            args.scene_cap, rng)
     else:
-        print("  City: 配额 0，不构建（Arm 3 弃用 City）")
+        print("  City: 配额 0，不构建")
 
     total_dropped = 0
     if excluded:
@@ -589,8 +618,7 @@ def main() -> None:
         print(f"  slice_{name}.jsonl  {len(rows)} 条")
 
     quotas = {"city_anchor": args.quota_city, "small": args.quota_small,
-              "discriminate": args.quota_discriminate, "trimodal": args.quota_trimodal,
-              "longquery": args.quota_longquery}
+              "discriminate": args.quota_discriminate, "trimodal": args.quota_trimodal}
     print("\n预混合（配额）:", quotas)
     mixed = mix(slices, quotas, args.seed)
     mixture_path = args.out_dir / "mixture.jsonl"

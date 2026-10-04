@@ -57,6 +57,35 @@ DEFAULT_WHITE_SHARE_LIMIT = 0.10
 MIN_STD = 3.0
 MIN_UNIQUE = 8
 
+# ---- 分布匹配闸门 -----------------------------------------------------------
+#
+# ## 为什么需要它（Arm 3 的直接教训）
+#
+# Arm 3 把可用数据"有多少用多少"地全塞进训练，结果训练分布严重偏离官方：
+#   三模态 52.6% -> 6.2%（官方 100%）
+#   查询长度中位 55 -> 84（官方 49）
+#   >100 字符占比 19% -> 35.5%（官方 7.3%）
+#   类别数 72 -> 181（RoboRefIt 的 65 类与官方场景重合度为 0）
+# 后果是 City412 从 Arm 2 的"单调上升到 314"变成"288 -> 270 -> 持平"——**越训越差**。
+#
+# **这个偏离在训练前就完全可测**，但当时没有任何闸门去看它。所以补上：
+# 构建完混合集先量它像不像官方，不像就**拒绝开训**，而不是等 7 小时后再发现。
+#
+# 阈值是"允许的偏离幅度"而非精确匹配——训练数据本就不该与官方逐项相同。
+TRI_MODAL_MIN = 0.45              # 官方 100% 三模态；RGBT 无三模态，故取 45% 为下限
+# 查询长度中位的容忍度**故意不对称**：
+#   * **上界 1.25×**——Arm 3 的实证：中位 84（官方 49）时 City412 越训越差。
+#     过长的生成式描述会把模型往"啰嗦风格"上拉，这是有证据的危害，必须硬拦。
+#   * **下界 0.5×**——只用宽松兜底。比官方更简洁**没有实证危害**（官方本身也有
+#     "A squatting person" 这种短查询），设宽是避免把正常数据误杀。
+QUERY_MEDIAN_TOLERANCE_HIGH = 0.25
+QUERY_MEDIAN_TOLERANCE_LOW = 0.50
+# >100 字符占比**只设上界，不设下界**。
+# 实证只支持上界：Arm 3 是长查询过多（35.5% vs 官方 7.3%）而退步。
+# 若强行要求下界，等于逼我们把刚删掉的有害长查询加回来——那是本末倒置。
+# 官方那 7.3% 的长查询由 City 的自然分布覆盖（City 查询 p90 = 116，本身约一成超过 100）。
+OVER100_TOLERANCE_HIGH = 0.60
+
 
 def md5_file(path: pathlib.Path, chunk: int = 1 << 20) -> str:
     digest = hashlib.md5()
@@ -159,11 +188,65 @@ def gate_contamination(rows: list[dict], test_root: pathlib.Path) -> list[str]:
     return problems
 
 
+def query_of(prompt: str) -> str:
+    """从训练提示词里抠出原始 query（用于统计长度分布）。"""
+    if "this query: " in prompt:
+        return prompt.split("this query: ", 1)[1].split("\n", 1)[0].strip()
+    return prompt
+
+
+def official_query_stats(queries_path: pathlib.Path) -> dict[str, float]:
+    """从官方 queries.json 现算基准分布——**不硬编码**，避免官方换榜后阈值失效。"""
+    raw = json.loads(queries_path.read_text(encoding="utf-8"))
+    records = list(raw.values()) if isinstance(raw, dict) else raw
+    texts = [str(r.get("query") or r.get("text") or "") for r in records]
+    lengths = sorted(len(t) for t in texts)
+    return {
+        "count": len(texts),
+        "median": lengths[len(lengths) // 2],
+        "over100": sum(1 for t in texts if len(t) > 100) / len(texts),
+    }
+
+
+def gate_distribution(rows: list[dict], official: dict[str, float]) -> list[str]:
+    """把混合集的分布与官方对照——Arm 3 就是死在这一步没做。"""
+    problems: list[str] = []
+    lengths = sorted(len(query_of(r["messages"][0]["content"])) for r in rows)
+    median = lengths[len(lengths) // 2]
+    over100 = sum(1 for r in rows
+                  if len(query_of(r["messages"][0]["content"])) > 100) / len(rows)
+    three_modal = sum(1 for r in rows if len(r["modalities"]) == 3) / len(rows)
+
+    lo = official["median"] * (1 - QUERY_MEDIAN_TOLERANCE_LOW)
+    hi = official["median"] * (1 + QUERY_MEDIAN_TOLERANCE_HIGH)
+    print(f"  查询长度中位 {median:.0f}  允许 [{lo:.0f}, {hi:.0f}]（官方 {official['median']:.0f}）")
+    if not (lo <= median <= hi):
+        problems.append(
+            f"查询长度中位 {median:.0f} 超出 [{lo:.0f}, {hi:.0f}]（官方 "
+            f"{official['median']:.0f}）—— 检查是否混入了冗长的生成式描述")
+
+    o_hi = official["over100"] * (1 + OVER100_TOLERANCE_HIGH)
+    print(f"  >100 字符占比 {over100:.1%}  上限 {o_hi:.1%}（官方 {official['over100']:.1%}；无下界）")
+    if over100 > o_hi:
+        problems.append(
+            f">100 字符占比 {over100:.1%} 超过上限 {o_hi:.1%}（官方 {official['over100']:.1%}）"
+            f" —— 这正是 Arm 3 退步的直接特征")
+
+    print(f"  三模态占比 {three_modal:.1%}  下限 {TRI_MODAL_MIN:.0%}（官方 100%）")
+    if three_modal < TRI_MODAL_MIN:
+        problems.append(
+            f"三模态占比 {three_modal:.1%} 低于下限 {TRI_MODAL_MIN:.0%} —— "
+            f"官方测试集是 100% 三模态，占比过低会让模型少见三视图提示词")
+    return problems
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--mixture", type=pathlib.Path, required=True)
     parser.add_argument("--test-root", type=pathlib.Path, required=True)
+    parser.add_argument("--official-queries", type=pathlib.Path, default=None,
+                        help="官方 queries.json；给了就做分布匹配检查（强烈建议给）")
     parser.add_argument("--depth-sample", type=int, default=None,
                         help="深度图抽查张数，默认全查")
     parser.add_argument("--skip-contamination", action="store_true",
@@ -175,24 +258,35 @@ def main() -> None:
     print(f"混合集 {args.mixture}: {len(rows)} 条")
 
     failures: dict[str, list[str]] = {}
-    print("\n[1/4] 图像存在性")
+    print("\n[1/5] 图像存在性")
     failures["existence"] = gate_existence(rows)
     print(f"  {'通过' if not failures['existence'] else str(len(failures['existence'])) + ' 个问题'}")
 
-    print("\n[2/4] 占位符与模态一致性")
+    print("\n[2/5] 占位符与模态一致性")
     failures["placeholder"] = gate_placeholder(rows)
     print(f"  {'通过' if not failures['placeholder'] else str(len(failures['placeholder'])) + ' 个问题'}")
 
-    print("\n[3/4] 深度图健康（必须是渲染后的 8 位 RGB）")
+    print("\n[3/5] 深度图健康（必须是渲染后的 8 位 RGB）")
     failures["depth"] = gate_depth(rows, args.depth_sample)
     print(f"  {'通过' if not failures['depth'] else str(len(failures['depth'])) + ' 个问题'}")
 
     if args.skip_contamination:
-        print("\n[4/4] 污染比对 —— 已跳过")
+        print("\n[4/5] 污染比对 —— 已跳过")
     else:
-        print("\n[4/4] 与官方测试集的污染比对")
+        print("\n[4/5] 与官方测试集的污染比对")
         failures["contamination"] = gate_contamination(rows, args.test_root)
         print(f"  {'通过' if not failures['contamination'] else str(len(failures['contamination'])) + ' 个问题'}")
+
+    if args.official_queries is None:
+        print("\n[5/5] 分布匹配 —— 未提供 --official-queries，**跳过**")
+        print("  ⚠️ 这一步正是 Arm 3 缺失的检查；不给官方清单就无法防同类退步。")
+    else:
+        print("\n[5/5] 分布匹配（训练分布 vs 官方分布）")
+        official = official_query_stats(args.official_queries)
+        print(f"  官方基准：{official['count']} 条，中位 {official['median']:.0f} 字符，"
+              f">100 字符 {official['over100']:.1%}")
+        failures["distribution"] = gate_distribution(rows, official)
+        print(f"  {'通过' if not failures['distribution'] else str(len(failures['distribution'])) + ' 个问题'}")
 
     total = sum(len(v) for v in failures.values())
     print("\n" + "=" * 60)
