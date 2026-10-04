@@ -122,7 +122,7 @@ def accept(text: str) -> list[float] | None:
 
 
 def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
-                   modality: str) -> list[dict[str, Any]]:
+                   modality: str, upscale: float = 1.0) -> list[dict[str, Any]]:
     # 注意：对 **tokenizer** 的 apply_chat_template，模板变量要作为**直接关键字参数**传入。
     # 曾写成 chat_template_kwargs={"enable_thinking": False}（那是 processor / vLLM API 的形式），
     # 结果 enable_thinking 被静默忽略、thinking 保持开启：200 条全部生成思维链并在 token 上限
@@ -141,7 +141,7 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
                 f"build_requests 需要 (index, sample_id, record) 三元组，"
                 f"实际收到 {type(entry).__name__}: {str(entry)[:80]}") from error
         paths = image_paths(record, data_root, queries)
-        images = load_modal_images(paths, modality)
+        images = upscale_images(load_modal_images(paths, modality), upscale)
         prompt = PROMPTS[modality](record["query"])
         messages = [{"role": "user", "content": build_user_content(
             prompt, images, prompt_has_image_placeholders=True)}]
@@ -195,11 +195,22 @@ def build_parser() -> argparse.ArgumentParser:
                         help="每块处理的查询数。分块是必需的：一次性物化全部请求会把"
                              "数万张图读进内存并在生成前耗掉大量时间。")
     parser.add_argument("--package-only", action="store_true")
+    parser.add_argument("--upscale", type=float, default=1.0,
+                        help="把输入图等比放大后再送模型（默认 1.0 = 原样，现役行为）。"
+                             "**放大时必须同步提高 --max-pixels**，否则处理器会把图缩回去、"
+                             "实验静默失效——两者的一致性由 check_upscale_consistency 断言。"
+                             "放大倍数与所需 max_pixels / model_max_length 的对应："
+                             "1.1→2509056/8192；1.25→3240000/12288；"
+                             "1.5→4665600/16384；2.0→8294400/32768。")
     return parser
 
 
 def main() -> None:
     args = build_parser().parse_args()
+
+    # 提前 fail fast：放大与 max_pixels 不一致会让实验静默失效（图被处理器缩回去），
+    # 而日志、耗时、显存全都正常，事后极难发现。
+    check_upscale_consistency(args.upscale, args.max_pixels)
 
     queries = args.queries.resolve()
     data_root = args.data_root.resolve()
@@ -227,6 +238,8 @@ def main() -> None:
     config["lora_adapter"] = str(adapter_path) if adapter_path else None
     config["max_lora_rank"] = args.max_lora_rank
     config["chunk_size"] = args.chunk_size
+    # 记录放大倍数：它是本轮实验的自变量，必须进 run_config 才能事后复现与归因。
+    config["upscale"] = args.upscale
 
     if args.package_only:
         saved = json.loads(config_path.read_text(encoding="utf-8-sig"))
@@ -298,7 +311,8 @@ def main() -> None:
         handle.write(json.dumps(row, ensure_ascii=False) + "\n")
 
     for chunk_index, chunk in enumerate(chunks, 1):
-        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
+        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
+                                     args.upscale)
         outputs = llm.generate([item["request"] for item in requests], stage1,
                                use_tqdm=False, lora_request=lora_request)
         # 注意：必须用 chunk 里的**原始元组**而不是 requests 里的 item 字典来记录重跑项。
@@ -335,7 +349,8 @@ def main() -> None:
     for chunk_index, chunk in enumerate(
             [retry[start:start + args.chunk_size]
              for start in range(0, len(retry), args.chunk_size)], 1):
-        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality)
+        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
+                                     args.upscale)
         outputs = llm.generate([item["request"] for item in requests], stage2,
                                use_tqdm=False, lora_request=lora_request)
         for item, output in zip(requests, outputs):

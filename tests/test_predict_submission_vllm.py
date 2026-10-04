@@ -217,7 +217,7 @@ def test_main_package_only_round_trip(tmp_path: Path, monkeypatch) -> None:
     config.update({"engine": "vllm", "stage1_max_tokens": 64, "max_new_tokens": 128,
                    "max_num_seqs": 256, "mamba_cache_mode": "none",
                    "enable_prefix_caching": True, "lora_adapter": None,
-                   "max_lora_rank": 32, "chunk_size": 256})
+                   "max_lora_rank": 32, "chunk_size": 256, "upscale": 1.0})
     (out_dir / "run_config.json").write_text(json.dumps(config), encoding="utf-8")
     from tools.predict_native_submission import PROMPTS, image_paths
     with (out_dir / "predictions.jsonl").open("w", encoding="utf-8") as handle:
@@ -250,3 +250,63 @@ def test_main_package_only_round_trip(tmp_path: Path, monkeypatch) -> None:
     assert args.max_lora_rank == 32
     assert args.chunk_size == 256
     assert args.adapter is None
+
+
+# ---- 超原生放大（Arm 2 之后的新实验）-----------------------------------------
+
+def test_upscale_factor_one_returns_same_objects() -> None:
+    """1.0 必须**原样返回同一批对象**——现役提交路径要逐像素不变。
+
+    若这里悄悄复制或重采样，基线 314 就不可复现了，而实验会以"基线变了"这种
+    最难排查的方式失败。
+    """
+    images = [Image.new("RGB", (64, 48), (10, 20, 30))]
+    assert module.upscale_images(images, 1.0) is images
+
+
+def test_upscale_doubles_size_and_keeps_order() -> None:
+    images = [Image.new("RGB", (100, 50)), Image.new("RGB", (30, 70))]
+    scaled = module.upscale_images(images, 2.0)
+    assert [im.size for im in scaled] == [(200, 100), (60, 140)]
+    assert len(scaled) == len(images)
+
+
+def test_upscale_rejects_non_positive() -> None:
+    with pytest.raises(ValueError, match="必须为正数"):
+        module.upscale_images([Image.new("RGB", (10, 10))], 0.0)
+
+
+def test_upscale_without_raising_max_pixels_is_rejected() -> None:
+    """这是本实验最容易踩的陷阱，必须有回归测试锁住。
+
+    处理器在图像超出 `max_pixels` 时会**下采样**。只放大而不提高 max_pixels，
+    放大出来的图会被原样缩回去——模型收到的还是原尺寸，而日志、耗时、显存全正常。
+    """
+    with pytest.raises(ValueError, match="max-pixels"):
+        module.check_upscale_consistency(1.5, 2073600)
+
+
+def test_upscale_with_raised_max_pixels_passes() -> None:
+    # 1.5² × 2073600 = 4665600
+    module.check_upscale_consistency(1.5, 4665600)
+    # 1.0 时不做检查（现役行为，max_pixels 保持原生即可）
+    module.check_upscale_consistency(1.0, 2073600)
+
+
+def test_upscale_tolerance_allows_processor_alignment() -> None:
+    """处理器把尺寸对齐到 32 的倍数，实际像素不会精确等于 NATIVE × k²，需要容差。"""
+    # 1.25² × 2073600 = 3240000；给略低一点的值，仍在 5% 容差内
+    module.check_upscale_consistency(1.25, int(3240000 * 0.97))
+
+
+def test_parser_accepts_upscale_and_defaults_to_one() -> None:
+    """让 argparse 真的注册一遍 —— 重复或冲突的选项只有这时才会暴露。"""
+    parser = module.build_parser()
+    args = parser.parse_args(["--model", "m", "--modality", "trimodal",
+                              "--queries", "q.json", "--data-root", "d",
+                              "--output-dir", "out"])
+    assert args.upscale == 1.0
+    args = parser.parse_args(["--model", "m", "--modality", "trimodal",
+                              "--queries", "q.json", "--data-root", "d",
+                              "--output-dir", "out", "--upscale", "1.5"])
+    assert args.upscale == 1.5
