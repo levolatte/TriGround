@@ -36,7 +36,7 @@ export PATH=/root/vllm_env/bin:$PATH
 
 say "等待阶梯实验结束（screen 会话 ladder 消失）"
 waited=0
-while screen -ls 2>/dev/null | grep -q '\.ladder'; do
+while screen -ls 2>/dev/null | grep -E '\.ladder' | grep -qE '(Attached|Detached)'; do
   [ "${waited}" -ge 7200 ] && { say "等待超过 2 小时，阶梯可能卡住，退出"; exit 2; }
   sleep 60
   waited=$((waited + 60))

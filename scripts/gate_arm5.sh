@@ -21,7 +21,7 @@ say() { echo "[$(date '+%F %T')] $*"; }
 
 say "等待训练机的 arm5sub 结束"
 w=0
-while screen -ls 2>/dev/null | grep -q '\.arm5sub'; do
+while screen -ls 2>/dev/null | grep -E '\.arm5sub' | grep -qE '(Attached|Detached)'; do
   [ "${w}" -ge 25200 ] && { say "等待超过 7 小时，退出"; exit 2; }
   sleep 60; w=$((w + 60))
 done

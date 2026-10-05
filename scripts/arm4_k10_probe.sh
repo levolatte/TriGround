@@ -37,7 +37,7 @@ CITY_ROOT=/root/autodl-tmp/rematch_20260922/data/city/train
 
 say "等待 Arm 4 的 5690 出包链结束（screen 会话 arm4sub 消失）"
 waited=0
-while screen -ls 2>/dev/null | grep -q '\.arm4sub'; do
+while screen -ls 2>/dev/null | grep -E '\.arm4sub' | grep -qE '(Attached|Detached)'; do
   [ "${waited}" -ge 28800 ] && { say "等待超过 8 小时，退出"; exit 2; }
   sleep 60
   waited=$((waited + 60))

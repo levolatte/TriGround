@@ -82,7 +82,7 @@ run_city() {
 # ---- 1. 等 Arm 4 的 5690 结束 ---------------------------------------------
 say "等待 Arm 4 的 5690 出包链结束（screen arm4sub 消失）"
 w=0
-while screen -ls 2>/dev/null | grep -q '\.arm4sub'; do
+while screen -ls 2>/dev/null | grep -E '\.arm4sub' | grep -qE '(Attached|Detached)'; do
   [ "${w}" -ge 28800 ] && { say "等待超过 8 小时，退出"; exit 2; }
   sleep 60; w=$((w + 60))
 done

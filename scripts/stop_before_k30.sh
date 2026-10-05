@@ -22,7 +22,7 @@ while true; do
   n=$(wc -l < "${K25}" 2>/dev/null || echo 0)
   [ "${n}" -ge 412 ] && break
   # 若 k2.5 的 screen 已经消失且条数不够，说明阶梯异常结束
-  if ! screen -ls 2>/dev/null | grep -q '\.ladder2'; then
+  if ! screen -ls 2>/dev/null | grep -E '\.ladder2' | grep -qE '(Attached|Detached)'; then
     say "阶梯会话已消失，而 k2.5 只有 ${n} 条 —— 不再等待，直接收尾"
     break
   fi

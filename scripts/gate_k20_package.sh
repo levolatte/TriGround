@@ -26,7 +26,7 @@ cd /root/AIC_code || exit 2
 
 say "等待 k2.0 链结束（screen 会话 k20 消失）"
 waited=0
-while screen -ls 2>/dev/null | grep -q '\.k20'; do
+while screen -ls 2>/dev/null | grep -E '\.k20' | grep -qE '(Attached|Detached)'; do
   [ "${waited}" -ge 43200 ] && { say "等待超过 12 小时，退出"; exit 2; }
   sleep 60
   waited=$((waited + 60))

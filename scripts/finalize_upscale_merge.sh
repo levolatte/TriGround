@@ -53,7 +53,7 @@ wait_for_gpu() {
 # ---- 1. 等 k=1.25 出包完成 -------------------------------------------------
 say "等待 k=1.25 官方出包结束（screen 会话 submitsub 消失）"
 waited=0
-while screen -ls 2>/dev/null | grep -q '\.submitsub'; do
+while screen -ls 2>/dev/null | grep -E '\.submitsub' | grep -qE '(Attached|Detached)'; do
   [ "${waited}" -ge 14400 ] && { say "等待超过 4 小时，k1.25 可能卡住，退出"; exit 2; }
   sleep 60
   waited=$((waited + 60))
