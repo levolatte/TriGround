@@ -1,16 +1,12 @@
 # TriGround：RGB–红外–深度三模态视觉指代定位
 
-> **2026-10-02 基线复验入口：**请先读 [基线复验与瓶颈裁定](../docs/research/2026-10-02-baseline-reverification/README.md)（含机器可读 [基线规格](../docs/research/2026-10-02-baseline-reverification/baseline_spec.json)）。当前保留基线是原生三图 Qwen3-VL-8B 语言 LoRA 的 **A 臂：City412 296/412 = 71.8447% ACC@0.5**（本次独立复算确认）；官方复赛 5690 上 C1500 与 M2 均为 **0.7144**（用户回报）。A 相对 C0 的 +4 题按 78 图组聚类 95% 区间为 [−0.77, +2.82] 个百分点，跨 0，故本地 412 只能作开发参照，不能作为提分判据。结构性瓶颈是"同图同类多实例的指代选择"，不是模态融合。更早的审计与数据集说明见 [GPT Pro审计说明](docs/audit-20260927/README.md) 和 [数据集说明](docs/audit-20260927/DATASETS.md)。下方早期2B、DeepStack及五阶段流程属于历史路线，不代表当前运行状态。原图、权重、凭据和本地AGENTS.md不随Git发布。
+> **2026-10-22 接手入口：**当前主线为 **Qwen3.6-27B 原生三图输入 + 语言 LoRA + vLLM**。记录的复赛最高分 **0.8012** 对应 **Arm 2 checkpoint-500、2 倍图像放大**。完整配置、源码图谱、历史改进与待解决问题见[接手报告](docs/research/2026-10-22-takeover/README.md)和[交接文件](HANDOFF.md)。官方分数是既有反馈记录，本地没有官方真值可独立复算。
 
-本仓库同时保留已发布的 2B 基线与新的 8B/DeepStack 实验实现；当前推荐复现实验是 Qwen3-VL-8B 五阶段流程。8B 配置见 [升级说明](QWEN3_VL_8B_UPGRADE.md)，集群冒烟测试与完整训练评估见 [Slurm 操作说明](SLURM.md)。下面的比赛分数仍是历史 2B 路线结果，不代表新 8B 实验成绩。
+当前训练入口为 `scripts/train_qwen36_27b_swift.sh`，推理入口为 `tools/predict_submission_vllm.py`。最高分推理参数：`--upscale 2.0 --max-pixels 8294400 --model-max-length 32768 --max-num-seqs 32 --chunk-size 256`。模型内部输出0–1000坐标，提交时转换为RGB图上0–1的归一化边界框。
 
-TriGround 面向 RGB（可见光）、IR（红外）和 Depth（深度）三模态视觉指代定位任务，同时支持历史 `Qwen3-VL-2B-Instruct` 路线和当前 `Qwen3-VL-8B-Instruct` 实验路线。模型接收对齐的三模态图像和文本查询，输出查询目标在可见光图像中的归一化边界框 `[x1, y1, x2, y2]`。
+**安装须区分版本：**下方2B/8B安装说明、`pyproject.toml`和`requirements-experiment.txt`仍服务历史实现；不能直接作为27B环境。27B历史训练采用ms-swift4.5.3/Transformers5.16.1，推理采用vLLM0.30.0/Transformers5.18.0，具体依赖见接手报告。工作目录中的作品材料代码副本还缺少`src/mm_grounding`，独立运行前需补齐。
 
-
-本仓库实现并比较了两条主要技术路线：
-
-- **方案一：弱监督早期融合。** 使用大量目标域弱监督数据，直接训练早期融合模块，使 RGB、IR 和 Depth 特征在较早阶段交互。该路线实现简单、能充分利用低成本数据，但容易受到错误方位描述、噪声框和数据偏差影响。
-- **方案二：独立 adaptor 预训练后融合。** 先在其他具有明确模态监督的数据集上分别训练 IR adaptor 和 Depth adaptor，使两个分支先获得独立的模态表征能力；随后在目标任务上进行联合校准，并通过查询条件融合模块整合 RGB、IR 和 Depth 信息。
+本仓库保留2B融合、8B原生LoRA、结构化修正及多步Agent的历史实现。以下比赛结果、架构和五阶段流程属于历史路线，不代表当前最高分模型。8B资料见[升级说明](QWEN3_VL_8B_UPGRADE.md)和[Slurm说明](SLURM.md)，更早证据见[审计说明](docs/audit-20260927/README.md)。
 
 ## 比赛测试结果
 
