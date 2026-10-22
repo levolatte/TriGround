@@ -1,0 +1,109 @@
+{
+  "purpose": "只读预测分歧与量化诊断；没有官方真值，不是精度/集成收益评估",
+  "input_files": {
+    "arm2_k1": "results/submission_ck500_arm2_20261004/predictions.json",
+    "arm2_k2": "results/submission_k20_20261004/predictions.json",
+    "arm4_k2": "results/submission_arm4_ck600_k20_20261005/predictions.json",
+    "arm5_k2": "results/submission_arm5_ck700_k20_20261005/predictions.json"
+  },
+  "query_count": 5690,
+  "image_triples": 1295,
+  "queries_per_triple_histogram": {
+    "1": 64,
+    "2": 30,
+    "3": 621,
+    "4": 30,
+    "5": 327,
+    "6": 42,
+    "7": 37,
+    "8": 31,
+    "9": 32,
+    "10": 29,
+    "11": 27,
+    "12": 15,
+    "13": 6,
+    "14": 4
+  },
+  "queries_in_multi_query_triples": 5626,
+  "pairs": {
+    "arm2_k1__arm2_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.852586704220754,
+      "median_prediction_iou": 0.9582425337218726,
+      "prediction_iou_lt_0.5": 531,
+      "prediction_iou_zero": 301,
+      "identical_boxes": 402
+    },
+    "arm2_k1__arm4_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.8206401583172489,
+      "median_prediction_iou": 0.9290196133528157,
+      "prediction_iou_lt_0.5": 614,
+      "prediction_iou_zero": 354,
+      "identical_boxes": 73
+    },
+    "arm2_k1__arm5_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.8275771182781387,
+      "median_prediction_iou": 0.9309167603352133,
+      "prediction_iou_lt_0.5": 576,
+      "prediction_iou_zero": 324,
+      "identical_boxes": 74
+    },
+    "arm2_k2__arm4_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.8807308313373267,
+      "median_prediction_iou": 0.9476877012882456,
+      "prediction_iou_lt_0.5": 313,
+      "prediction_iou_zero": 193,
+      "identical_boxes": 185
+    },
+    "arm2_k2__arm5_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.8930957515210209,
+      "median_prediction_iou": 0.9512951909163057,
+      "prediction_iou_lt_0.5": 263,
+      "prediction_iou_zero": 152,
+      "identical_boxes": 214
+    },
+    "arm4_k2__arm5_k2": {
+      "prediction_pairs": 5690,
+      "mean_prediction_iou": 0.9215772939868397,
+      "median_prediction_iou": 0.9891304347826088,
+      "prediction_iou_lt_0.5": 312,
+      "prediction_iou_zero": 222,
+      "identical_boxes": 1606
+    }
+  },
+  "city412_gt_quantization_only": {
+    "gt_file": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+    "records": 412,
+    "collapsed_after_quantization": 0,
+    "iou_lt_0.5_after_quantization": 0,
+    "minimum_iou": 0.8533242235444087,
+    "median_iou": 0.9836611398850386,
+    "meaning": "假定已知真框时0-1000离散网格的损失，不衡量模型生成数字的能力"
+  },
+  "synthetic_mean_box_example": {
+    "candidate_1": [
+      0.1,
+      0.2,
+      0.2,
+      0.4
+    ],
+    "candidate_2": [
+      0.5,
+      0.2,
+      0.6,
+      0.4
+    ],
+    "coordinate_mean": [
+      0.3,
+      0.2,
+      0.4,
+      0.4
+    ],
+    "mean_iou_to_candidate_1": 0.0,
+    "mean_iou_to_candidate_2": 0.0
+  }
+}

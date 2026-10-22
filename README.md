@@ -1,5 +1,7 @@
 # TriGround：RGB–红外–深度三模态视觉指代定位
 
+> **2026-10-23 半决赛研究：**保留27B原生三图直接框，研究同图竞争实例的判别辅助目标，并优先筛选新基座与非对称分辨率。论文、源码结论、可复用接口与实验顺序见[半决赛研究报告](docs/research/2026-10-22-semifinal/README.md)。这些是待验证方案，未产生新的比赛成绩。
+
 > **2026-10-22 接手入口：**当前主线为 **Qwen3.6-27B 原生三图输入 + 语言 LoRA + vLLM**。记录的复赛最高分 **0.8012** 对应 **Arm 2 checkpoint-500、2 倍图像放大**。完整配置、源码图谱、历史改进与待解决问题见[接手报告](docs/research/2026-10-22-takeover/README.md)和[交接文件](HANDOFF.md)。官方分数是既有反馈记录，本地没有官方真值可独立复算。
 
 当前训练入口为 `scripts/train_qwen36_27b_swift.sh`，推理入口为 `tools/predict_submission_vllm.py`。最高分推理参数：`--upscale 2.0 --max-pixels 8294400 --model-max-length 32768 --max-num-seqs 32 --chunk-size 256`。模型内部输出0–1000坐标，提交时转换为RGB图上0–1的归一化边界框。
