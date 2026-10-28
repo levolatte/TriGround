@@ -10,7 +10,7 @@ import time
 import zipfile
 from pathlib import Path
 from statistics import median
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 import torch
@@ -148,7 +148,7 @@ def build_run_config(model: str, adapter: Path | None, queries: Path, data_root:
 
 def validate_rows(
     rows: list[dict[str, Any]], source: dict[str, dict[str, Any]], data_root: Path,
-    queries: Path, modality: str
+    queries: Path, modality: str, *, prompt_builder: Callable[[str], str] | None = None
 ) -> dict[str, dict[str, Any]]:
     indexed: dict[str, dict[str, Any]] = {}
     for line_number, row in enumerate(rows, 1):
@@ -161,7 +161,8 @@ def validate_rows(
         expected = {
             "query": record["query"],
             "image_paths": image_paths(record, data_root, queries),
-            "prompt": PROMPTS[modality](record["query"]),
+            "prompt": (prompt_builder(record["query"]) if prompt_builder is not None
+                       else PROMPTS[modality](record["query"])),
         }
         for key, value in expected.items():
             if row.get(key) != value:

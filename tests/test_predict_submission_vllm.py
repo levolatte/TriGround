@@ -70,6 +70,31 @@ def test_build_requests_accepts_triples(tmp_path: Path) -> None:
     assert all(len(item["request"]["multi_modal_data"]["image"]) == 3 for item in requests)
 
 
+def test_sensor_linear_depth_prompt_uses_unknown_units_without_label_leak(tmp_path: Path) -> None:
+    query_path, root = make_dataset(tmp_path, 1)
+    source = json.loads(query_path.read_text(encoding="utf-8"))
+    record = source["q0000"]
+    record["bbox"] = [0.11, 0.22, 0.33, 0.44]
+    record["evidence"] = "EVIDENCE_SECRET"
+    source["q0000"] = record
+    query_path.write_text(json.dumps(source), encoding="utf-8")
+    items = [(0, "q0000", record)]
+
+    current_prompt = build_requests(FakeTokenizer(), items, root, query_path, "trimodal")[0]["prompt"]
+    sensor_prompt = build_requests(
+        FakeTokenizer(), items, root, query_path, "trimodal",
+        depth_policy="sensor_linear_20000",
+    )[0]["prompt"]
+
+    assert "brighter valid pixels are nearer" in current_prompt
+    assert "physical distance unit is not established" not in current_prompt
+    assert "fixed inverse mapping" in sensor_prompt
+    assert "physical distance unit is not established" in sensor_prompt
+    assert "object number 0" in sensor_prompt
+    assert "EVIDENCE_SECRET" not in sensor_prompt
+    assert str(record["bbox"]) not in sensor_prompt
+
+
 def test_build_requests_rejects_item_dicts(tmp_path: Path) -> None:
     """把 build_requests 的返回值再传回去，必须给出**明确**报错而不是 unpack 崩溃。"""
     query_path, root = make_dataset(tmp_path, 2)
@@ -137,13 +162,19 @@ class FakeOutput:
 class FakeLLM:
     """按 prompt 里是否含特定标记决定输出，用来同时覆盖阶段1 成功与失败两条支路。"""
 
+    instances = []
+
     def __init__(self, **kwargs):
         self.kwargs = kwargs
+        self.calls = []
+        self.instances.append(self)
 
     def get_tokenizer(self):
         return FakeTokenizer()
 
     def generate(self, requests, sampling_params, **_kwargs):
+        self.calls.append({"request_count": len(requests),
+                           "sampling_params": sampling_params.kwargs})
         outputs = []
         for request in requests:
             text = request["prompt"]
@@ -199,6 +230,53 @@ def test_main_end_to_end_writes_ordered_rows(tmp_path: Path, monkeypatch) -> Non
     assert (out_dir / "submission.zip").exists()
 
 
+def test_main_single_pass_generates_once_and_records_legal_fallback(
+        tmp_path: Path, monkeypatch) -> None:
+    query_path, root = make_dataset(tmp_path, 3)
+    out_dir = tmp_path / "single-pass"
+    FakeLLM.instances.clear()
+    install_fake_vllm(monkeypatch)
+    original_generate = FakeLLM.generate
+
+    def generate_with_bare_box(self, requests, sampling_params, **kwargs):
+        outputs = original_generate(self, requests, sampling_params, **kwargs)
+        outputs[2] = FakeOutput('[100,200,300,400]', [1, 2, 3], [0])
+        return outputs
+
+    monkeypatch.setattr(FakeLLM, 'generate', generate_with_bare_box)
+    monkeypatch.setattr(sys, "argv", [
+        "predict_submission_vllm", "--model", "fake", "--modality", "trimodal",
+        "--queries", str(query_path), "--data-root", str(root),
+        "--expected-query-count", "3", "--chunk-size", "3", "--max-num-seqs", "4",
+        "--output-dir", str(out_dir), "--single-pass"])
+
+    module.main()
+
+    rows = [json.loads(line) for line in
+            (out_dir / "predictions.jsonl").read_text(encoding="utf-8").splitlines()]
+    llm = FakeLLM.instances[-1]
+    assert len(llm.calls) == 1
+    assert llm.calls[0]["request_count"] == 3
+    assert llm.calls[0]["sampling_params"] == {
+        "temperature": 0.0, "max_tokens": module.MAX_NEW_TOKENS,
+        "skip_special_tokens": True,
+    }
+    assert [row["stage"] for row in rows] == ["single_pass"] * 3
+    failed = next(row for row in rows if row["id"] == "q0001")
+    assert failed["parsed"] is False and failed["fallback"] is True
+    assert failed["bbox"] == module.FALLBACK_BOX
+    bare = next(row for row in rows if row["id"] == "q0002")
+    assert bare["parsed"] is True and bare["fallback"] is False
+    assert bare["bbox"] == [0.1, 0.2, 0.3, 0.4]
+    summary = json.loads((out_dir / "summary.json").read_text(encoding="utf-8"))
+    assert summary["generation_mode"] == "single_pass"
+    assert summary["single_pass_fallbacks"] == 1
+    assert "stage2_retries" not in summary
+    monkeypatch.setattr(sys, "argv", sys.argv + ["--package-only"])
+    module.main()
+    assert len(llm.calls) == 1
+
+
 def test_main_package_only_round_trip(tmp_path: Path, monkeypatch) -> None:
     """--package-only 不加载模型，但同样要能读到 config（曾因 adapter_path 未赋值而崩）。"""
     query_path, root = make_dataset(tmp_path, 3)
@@ -235,6 +313,35 @@ def test_main_package_only_round_trip(tmp_path: Path, monkeypatch) -> None:
         "predict_submission_vllm", "--model", "fake", "--modality", "trimodal",
         "--queries", str(query_path), "--data-root", str(root),
         "--expected-query-count", "3", "--output-dir", str(out_dir), "--package-only"])
+    module.main()
+    assert (out_dir / "submission.zip").exists()
+
+
+def test_depth_policy_package_only_round_trip(tmp_path: Path, monkeypatch) -> None:
+    """自定义深度提示词既用于新生成，也用于已有行的 package-only 校验。"""
+    query_path, root = make_dataset(tmp_path, 2)
+    out_dir = tmp_path / "sensor-linear"
+    install_fake_vllm(monkeypatch)
+    common = [
+        "predict_submission_vllm", "--model", "fake", "--modality", "trimodal",
+        "--depth-policy", "sensor_linear_20000", "--queries", str(query_path),
+        "--data-root", str(root), "--expected-query-count", "2", "--chunk-size", "2",
+        "--max-num-seqs", "4", "--output-dir", str(out_dir), "--single-pass",
+    ]
+    monkeypatch.setattr(sys, "argv", common)
+    module.main()
+
+    rows_path = out_dir / "predictions.jsonl"
+    rows = [json.loads(line) for line in rows_path.read_text(encoding="utf-8").splitlines()]
+    source = json.loads(query_path.read_text(encoding="utf-8"))
+    assert rows[0]["prompt"] == module.prompt_for_query(
+        source[rows[0]["id"]]["query"], "trimodal", "sensor_linear_20000")
+    assert "physical distance unit is not established" in rows[0]["prompt"]
+    config = json.loads((out_dir / "run_config.json").read_text(encoding="utf-8"))
+    assert config["prompt_template"] == module.prompt_for_query(
+        "{query}", "trimodal", "sensor_linear_20000")
+
+    monkeypatch.setattr(sys, "argv", common + ["--package-only"])
     module.main()
     assert (out_dir / "submission.zip").exists()
     """真正构造一次 parser：重复定义选项会在 argparse 里抛 ArgumentError。
@@ -306,7 +413,13 @@ def test_parser_accepts_upscale_and_defaults_to_one() -> None:
                               "--queries", "q.json", "--data-root", "d",
                               "--output-dir", "out"])
     assert args.upscale == 1.0
+    assert args.depth_policy is None
     args = parser.parse_args(["--model", "m", "--modality", "trimodal",
                               "--queries", "q.json", "--data-root", "d",
                               "--output-dir", "out", "--upscale", "1.5"])
     assert args.upscale == 1.5
+    args = parser.parse_args(["--model", "m", "--modality", "trimodal",
+                              "--queries", "q.json", "--data-root", "d",
+                              "--output-dir", "out", "--depth-policy",
+                              "sensor_linear_20000"])
+    assert args.depth_policy == "sensor_linear_20000"

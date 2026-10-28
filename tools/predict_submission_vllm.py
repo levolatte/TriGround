@@ -52,6 +52,7 @@ from tools.predict_native_submission import (  # noqa: E402
     summarize,
     validate_rows,
 )
+from tools.prepare_qwen3vl_native_sft import native_prompt  # noqa: E402
 
 STAGE1_MAX_TOKENS = 64
 
@@ -62,6 +63,14 @@ NATIVE_PIXELS = 1920 * 1080
 # `--max-pixels` 与 `--upscale` 允许的相对偏差。处理器把尺寸对齐到 32 的倍数，
 # 所以实际像素不会精确等于 `NATIVE_PIXELS × k²`，留 5% 容差。
 UPSCALE_PIXELS_TOLERANCE = 0.05
+
+
+def prompt_for_query(query: str, modality: str, depth_policy: str | None = None) -> str:
+    if depth_policy is None:
+        return PROMPTS[modality](query)
+    if modality != "trimodal":
+        raise ValueError("--depth-policy is only valid with --modality trimodal")
+    return native_prompt(query, ("rgb", "infrared", "depth"), depth_policy)
 
 
 def upscale_images(images: list[Image.Image], factor: float) -> list[Image.Image]:
@@ -122,7 +131,8 @@ def accept(text: str) -> list[float] | None:
 
 
 def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
-                   modality: str, upscale: float = 1.0) -> list[dict[str, Any]]:
+                   modality: str, upscale: float = 1.0,
+                   depth_policy: str | None = None) -> list[dict[str, Any]]:
     # 注意：对 **tokenizer** 的 apply_chat_template，模板变量要作为**直接关键字参数**传入。
     # 曾写成 chat_template_kwargs={"enable_thinking": False}（那是 processor / vLLM API 的形式），
     # 结果 enable_thinking 被静默忽略、thinking 保持开启：200 条全部生成思维链并在 token 上限
@@ -142,7 +152,7 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
                 f"实际收到 {type(entry).__name__}: {str(entry)[:80]}") from error
         paths = image_paths(record, data_root, queries)
         images = upscale_images(load_modal_images(paths, modality), upscale)
-        prompt = PROMPTS[modality](record["query"])
+        prompt = prompt_for_query(record["query"], modality, depth_policy)
         messages = [{"role": "user", "content": build_user_content(
             prompt, images, prompt_has_image_placeholders=True)}]
         text = processor_tokenizer.apply_chat_template(
@@ -170,6 +180,9 @@ def build_parser() -> argparse.ArgumentParser:
                              "但必须验证 vLLM 确实把适配器应用到了全部目标模块（我们用的是 "
                              "all-linear，含 48 层线性注意力），否则会静默产出只适配了一部分的结果。")
     parser.add_argument("--modality", choices=PROMPTS, required=True)
+    parser.add_argument("--depth-policy", choices=("millimeter", "sensor_linear_20000", "visual"),
+                        help="用 native_prompt 替换现役提示词；外部 8-bit depth_visual 可选 "
+                             "sensor_linear_20000，默认保留现役 City 提示词")
     parser.add_argument("--queries", type=Path, required=True)
     parser.add_argument("--data-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
@@ -189,6 +202,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--no-prefix-caching", action="store_true",
                         help="显式关闭 KV 前缀缓存（vLLM 该版本默认是开启的）")
     parser.add_argument("--limit", type=int, default=0, help="只跑前 N 条；不打包")
+    parser.add_argument("--single-pass", action="store_true",
+                        help="每条只做一次确定性完整预算生成；无合法框时记录标准兜底框。")
     parser.add_argument("--max-lora-rank", type=int, default=32,
                         help="必须 >= 适配器的 r。默认 r=32；vLLM 的 LoRAConfig 默认只有 16。")
     parser.add_argument("--chunk-size", type=int, default=256,
@@ -232,6 +247,9 @@ def main() -> None:
     config["engine"] = "vllm"
     config["stage1_max_tokens"] = STAGE1_MAX_TOKENS
     config["max_new_tokens"] = MAX_NEW_TOKENS
+    if args.single_pass:
+        config["generation_mode"] = "single_pass"
+        config["stage1_max_tokens"] = None
     config["max_num_seqs"] = args.max_num_seqs
     config["mamba_cache_mode"] = args.mamba_cache_mode
     config["enable_prefix_caching"] = not args.no_prefix_caching
@@ -240,12 +258,18 @@ def main() -> None:
     config["chunk_size"] = args.chunk_size
     # 记录放大倍数：它是本轮实验的自变量，必须进 run_config 才能事后复现与归因。
     config["upscale"] = args.upscale
+    if args.depth_policy is not None:
+        config["depth_policy"] = args.depth_policy
+        config["prompt_source"] = f"prepare_qwen3vl_native_sft.native_prompt:{args.depth_policy}"
+        config["prompt_template"] = prompt_for_query("{query}", args.modality, args.depth_policy)
 
     if args.package_only:
         saved = json.loads(config_path.read_text(encoding="utf-8-sig"))
         verify_run_config(saved, config)
         rows_by_id = validate_rows(load_prediction_rows(rows_path), source, data_root,
-                                   queries, args.modality)
+                                   queries, args.modality,
+                                   prompt_builder=lambda query: prompt_for_query(
+                                       query, args.modality, args.depth_policy))
         json_path, zip_path = package_submission(source, rows_by_id, output_dir)
         ordered = [rows_by_id[sample_id] for sample_id in source]
         previous = json.loads(summary_path.read_text(encoding="utf-8-sig")) if summary_path.exists() else {}
@@ -289,11 +313,15 @@ def main() -> None:
     #   * 块与块之间释放图像对象，不再累积。
     import gc
 
-    stage1 = SamplingParams(temperature=0.0, max_tokens=STAGE1_MAX_TOKENS,
-                            stop=["]"], include_stop_str_in_output=True,
-                            skip_special_tokens=True)
-    stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
-                            skip_special_tokens=True)
+    if args.single_pass:
+        stage1 = stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
+                                         skip_special_tokens=True)
+    else:
+        stage1 = SamplingParams(temperature=0.0, max_tokens=STAGE1_MAX_TOKENS,
+                                stop=["]"], include_stop_str_in_output=True,
+                                skip_special_tokens=True)
+        stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
+                                skip_special_tokens=True)
 
     rows_by_id: dict[str, dict[str, Any]] = {}
     retry: list[dict[str, Any]] = []
@@ -312,27 +340,30 @@ def main() -> None:
 
     for chunk_index, chunk in enumerate(chunks, 1):
         requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
-                                     args.upscale)
-        outputs = llm.generate([item["request"] for item in requests], stage1,
+                                     args.upscale, args.depth_policy)
+        outputs = llm.generate([item["request"] for item in requests], stage2 if args.single_pass else stage1,
                                use_tqdm=False, lora_request=lora_request)
         # 注意：必须用 chunk 里的**原始元组**而不是 requests 里的 item 字典来记录重跑项。
         # build_requests 期望 (index, sample_id, record) 三元组；曾把 item 字典塞进 retry，
         # 阶段2 一调用就抛 "too many values to unpack"，进程崩溃、86 分钟结果全丢。
         for (index, sample_id, record), item, output in zip(chunk, requests, outputs):
             text = output.outputs[0].text.strip()
-            prediction = accept(text)
-            if prediction is None:
+            prediction = parse_generated_bbox(text) if args.single_pass else accept(text)
+            if prediction is None and not args.single_pass:
                 retry.append((index, sample_id, record))
                 continue
+            fallback = prediction is None
             emit({
                 "index": item["index"], "id": item["id"], "query": item["query"],
                 "image_paths": item["image_paths"], "prompt": item["prompt"],
-                "bbox": prediction, "parsed": True, "fallback": False,
+                "bbox": FALLBACK_BOX.copy() if fallback else prediction,
+                "parsed": not fallback, "fallback": fallback,
                 "generated_tokens": len(output.outputs[0].token_ids),
                 "input_tokens": len(output.prompt_token_ids),
                 "image_grid_thw": None,
                 "generation_cap_hit": output.outputs[0].finish_reason == "length",
-                "latency_seconds": 0.0, "raw_text": text, "stage": 1,
+                "latency_seconds": 0.0, "raw_text": text,
+                "stage": "single_pass" if args.single_pass else 1,
             })
         handle.flush()
         done = min(chunk_index * args.chunk_size, len(items))
@@ -345,33 +376,34 @@ def main() -> None:
         del requests, outputs
         gc.collect()
 
-    print(f"阶段1 直接成功 {len(rows_by_id)}，需重跑 {len(retry)}", flush=True)
-    for chunk_index, chunk in enumerate(
-            [retry[start:start + args.chunk_size]
-             for start in range(0, len(retry), args.chunk_size)], 1):
-        requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
-                                     args.upscale)
-        outputs = llm.generate([item["request"] for item in requests], stage2,
-                               use_tqdm=False, lora_request=lora_request)
-        for item, output in zip(requests, outputs):
-            text = output.outputs[0].text.strip()
-            prediction = parse_generated_bbox(text)
-            fallback = prediction is None
-            emit({
-                "index": item["index"], "id": item["id"], "query": item["query"],
-                "image_paths": item["image_paths"], "prompt": item["prompt"],
-                "bbox": FALLBACK_BOX.copy() if fallback else prediction,
-                "parsed": not fallback, "fallback": fallback,
-                "generated_tokens": len(output.outputs[0].token_ids),
-                "input_tokens": len(output.prompt_token_ids),
-                "image_grid_thw": None,
-                "generation_cap_hit": output.outputs[0].finish_reason == "length",
-                "latency_seconds": 0.0, "raw_text": text, "stage": 2,
-            })
-        handle.flush()
-        print(f"[阶段2 {chunk_index}] 已完成 {len(rows_by_id)}/{len(items)}", flush=True)
-        del requests, outputs
-        gc.collect()
+    if not args.single_pass:
+        print(f"阶段1 直接成功 {len(rows_by_id)}，需重跑 {len(retry)}", flush=True)
+        for chunk_index, chunk in enumerate(
+                [retry[start:start + args.chunk_size]
+                 for start in range(0, len(retry), args.chunk_size)], 1):
+            requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
+                                         args.upscale, args.depth_policy)
+            outputs = llm.generate([item["request"] for item in requests], stage2,
+                                   use_tqdm=False, lora_request=lora_request)
+            for item, output in zip(requests, outputs):
+                text = output.outputs[0].text.strip()
+                prediction = parse_generated_bbox(text)
+                fallback = prediction is None
+                emit({
+                    "index": item["index"], "id": item["id"], "query": item["query"],
+                    "image_paths": item["image_paths"], "prompt": item["prompt"],
+                    "bbox": FALLBACK_BOX.copy() if fallback else prediction,
+                    "parsed": not fallback, "fallback": fallback,
+                    "generated_tokens": len(output.outputs[0].token_ids),
+                    "input_tokens": len(output.prompt_token_ids),
+                    "image_grid_thw": None,
+                    "generation_cap_hit": output.outputs[0].finish_reason == "length",
+                    "latency_seconds": 0.0, "raw_text": text, "stage": 2,
+                })
+            handle.flush()
+            print(f"[阶段2 {chunk_index}] 已完成 {len(rows_by_id)}/{len(items)}", flush=True)
+            del requests, outputs
+            gc.collect()
     handle.close()
 
     # 逐块追加保证了**崩溃安全**，但阶段2 的重跑行是追加在末尾的，因此文件顺序会
@@ -384,9 +416,13 @@ def main() -> None:
 
     ordered = [rows_by_id[sample_id] for _, sample_id, _ in items]
     summary = {**config, **summarize(ordered, len(source), 0, 0),
-               "limit": args.limit, "predictions_jsonl": str(rows_path),
-               "stage1_success": sum(1 for row in ordered if row["stage"] == 1),
-               "stage2_retries": sum(1 for row in ordered if row["stage"] == 2)}
+               "limit": args.limit, "predictions_jsonl": str(rows_path)}
+    if args.single_pass:
+        summary["single_pass_predictions"] = len(ordered)
+        summary["single_pass_fallbacks"] = sum(row["fallback"] for row in ordered)
+    else:
+        summary["stage1_success"] = sum(1 for row in ordered if row["stage"] == 1)
+        summary["stage2_retries"] = sum(1 for row in ordered if row["stage"] == 2)
     if not args.limit and len(rows_by_id) == len(source):
         json_path, zip_path = package_submission(source, rows_by_id, output_dir)
         summary.update(predictions_json=str(json_path), submission_zip=str(zip_path))

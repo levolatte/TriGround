@@ -1,0 +1,14 @@
+# Linux CUDA 13.0 training environment, separate from vLLM inference.
+# Install torch first from https://download.pytorch.org/whl/cu130.
+torch==2.12.1
+transformers==5.16.1
+ms-swift==4.5.3
+trl==0.29.1
+msgspec==0.21.1
+peft==0.20.0
+bitsandbytes==0.50.2
+# Match the restored training environment; audit actual dispatched kernels.
+flash-linear-attention==0.5.2
+Pillow
+numpy
+pytest

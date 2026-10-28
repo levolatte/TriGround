@@ -64,12 +64,39 @@ DATASET_NUM_PROC="${DATASET_NUM_PROC:-4}"
 # 不是猜的。留空则从头训练。**只有训练器原地保存的检查点能续训**——归档看护为了省空间
 # 只链接了 adapter 与配置，不含优化器状态。
 RESUME_FROM_CHECKPOINT="${RESUME_FROM_CHECKPOINT:-}"
+ADAPTER="${ADAPTER:-}"
+EXTERNAL_PLUGINS="${EXTERNAL_PLUGINS:-}"
+LOSS_TYPE="${LOSS_TYPE:-}"
+DATA_SEED="${DATA_SEED:-}"
+DATASET_SHUFFLE="${DATASET_SHUFFLE:-}"
+TRAIN_DATALOADER_SHUFFLE="${TRAIN_DATALOADER_SHUFFLE:-}"
+GROUP_BY_LENGTH="${GROUP_BY_LENGTH:-}"
+PACKING="${PACKING:-}"
+PADDING_FREE="${PADDING_FREE:-}"
+LOSS_SCALE="${LOSS_SCALE:-}"
 
 test -f "${MODEL}/config.json"
-test -f "${DATASET}"
+test -f "${DATASET%%#*}"
+if [ -n "${ADAPTER}" ] && [ -n "${RESUME_FROM_CHECKPOINT}" ]; then
+  echo "ADAPTER and RESUME_FROM_CHECKPOINT are mutually exclusive" >&2; exit 3
+fi
 
 # 用数组传可选参数：`set -u` 下拼空字符串会出问题，数组最稳。
 RESUME_ARGS=()
+EXTRA_ARGS=()
+if [ -n "${ADAPTER}" ]; then
+  test -f "${ADAPTER}/adapter_config.json"
+  EXTRA_ARGS+=(--adapters "${ADAPTER}")
+fi
+if [ -n "${EXTERNAL_PLUGINS}" ]; then EXTRA_ARGS+=(--external_plugins "${EXTERNAL_PLUGINS}"); fi
+if [ -n "${LOSS_TYPE}" ]; then EXTRA_ARGS+=(--loss_type "${LOSS_TYPE}"); fi
+if [ -n "${DATA_SEED}" ]; then EXTRA_ARGS+=(--data_seed "${DATA_SEED}"); fi
+if [ -n "${DATASET_SHUFFLE}" ]; then EXTRA_ARGS+=(--dataset_shuffle "${DATASET_SHUFFLE}"); fi
+if [ -n "${TRAIN_DATALOADER_SHUFFLE}" ]; then EXTRA_ARGS+=(--train_dataloader_shuffle "${TRAIN_DATALOADER_SHUFFLE}"); fi
+if [ -n "${GROUP_BY_LENGTH}" ]; then EXTRA_ARGS+=(--group_by_length "${GROUP_BY_LENGTH}"); fi
+if [ -n "${PACKING}" ]; then EXTRA_ARGS+=(--packing "${PACKING}"); fi
+if [ -n "${PADDING_FREE}" ]; then EXTRA_ARGS+=(--padding_free "${PADDING_FREE}"); fi
+if [ -n "${LOSS_SCALE}" ]; then EXTRA_ARGS+=(--loss_scale "${LOSS_SCALE}"); fi
 if [ -n "${RESUME_FROM_CHECKPOINT}" ]; then
   test -f "${RESUME_FROM_CHECKPOINT}/trainer_state.json" || {
     echo "续训检查点缺少 trainer_state.json: ${RESUME_FROM_CHECKPOINT}" >&2; exit 3; }
@@ -140,6 +167,7 @@ EOF
     --dataset_num_proc "${DATASET_NUM_PROC}" \
     --seed "${SEED}" \
     --report_to none \
+    "${EXTRA_ARGS[@]}" \
     "${RESUME_ARGS[@]}" \
     --output_dir "${OUTPUT_DIR}" \
     2>&1 | tee "${OUTPUT_DIR}/train.log"
