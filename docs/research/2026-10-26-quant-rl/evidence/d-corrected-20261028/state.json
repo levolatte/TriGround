@@ -1,0 +1,32 @@
+{
+  "status": "failed",
+  "started_at": "2026-10-27T19:17:54.135184+00:00",
+  "completed_stages": [
+    "prepare_configs",
+    "baseline256_from_first_rollout",
+    "baseline1024",
+    "select_thinking_budget"
+  ],
+  "hour_cutoff": null,
+  "instance_power_action": "none",
+  "stage": "probe1024",
+  "stage_started_at": "2026-10-27T20:09:30.742829+00:00",
+  "stage_status": "failed",
+  "probe256_no_learning_signal": true,
+  "selected_thought_limit": 1024,
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/code/tools/run_quant_d_repair_gate.py",
+    "train-one",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/config1024.json",
+    "--dataset",
+    "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/train4.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922/data",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/probe1024"
+  ],
+  "error": "probe1024 exited 1; inspect probe1024.log",
+  "ended_at": "2026-10-27T20:55:06.014143+00:00"
+}

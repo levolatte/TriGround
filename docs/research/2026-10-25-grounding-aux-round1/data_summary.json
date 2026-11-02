@@ -1,0 +1,62 @@
+{
+  "seed": 2026,
+  "steps": 240,
+  "batch_size": 8,
+  "arm_a": {
+    "rows": 1920,
+    "box": 1920,
+    "aux": 0
+  },
+  "arm_b": {
+    "rows": 1920,
+    "box": 1440,
+    "aux": 480
+  },
+  "pools": {
+    "rgbdt500/wrong_object": {
+      "available_reviewed_pairs": 74,
+      "selected_distinct_pairs": 74,
+      "unique_images": 37,
+      "unique_sequences": 37,
+      "presentations": 160,
+      "repeated_presentations": 86,
+      "swapped_presentations": 80
+    },
+    "roborefit/wrong_object": {
+      "available_reviewed_pairs": 78,
+      "selected_distinct_pairs": 78,
+      "unique_images": 78,
+      "unique_sequences": 78,
+      "presentations": 160,
+      "repeated_presentations": 82,
+      "swapped_presentations": 80
+    },
+    "rgbdt500/extent": {
+      "available_reviewed_pairs": 74,
+      "selected_distinct_pairs": 74,
+      "unique_images": 74,
+      "unique_sequences": 74,
+      "presentations": 160,
+      "repeated_presentations": 86,
+      "swapped_presentations": 80
+    }
+  },
+  "eval_pairs": 40,
+  "eval_choices": {
+    "B": 18,
+    "A": 22
+  },
+  "ordering": "shuffled four-row units; B=[box,box,box,aux]; two units per eight-row step; DataLoader shuffle=false",
+  "train_unique_images": 157,
+  "train_unique_sequences": 157,
+  "eval_unique_images": 39,
+  "eval_unique_sequences": 20,
+  "media_files": 537,
+  "media_bytes": 772765143,
+  "rejected_pairs": 4,
+  "external_queries": 94,
+  "external_images": 48,
+  "external_sequences": 24,
+  "external_corrected": 12,
+  "external_excluded": 1
+}

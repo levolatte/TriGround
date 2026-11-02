@@ -1,0 +1,35 @@
+{
+  "python": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+  "code_root": "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029",
+  "old_root": "/root/autodl-tmp/quant_rl_20261026",
+  "b_state": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/state.json",
+  "diagnostic_state": "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/operator-2/state.json",
+  "base_train_config": {
+    "correction": "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+    "sft": "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/sft.json"
+  },
+  "city_dataset": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/city400_dev.jsonl",
+  "external_dataset": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/external94_dev.jsonl",
+  "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+  "media_root": "/root/autodl-tmp/rematch_20260922/data",
+  "smoke_command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke"
+  ],
+  "smoke_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke/report.json",
+  "poll_seconds": 60,
+  "comparisons": {
+    "C550": {
+      "city378": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/C550/city378",
+      "external88": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/C550/external88"
+    },
+    "B59": {
+      "city378": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/city378",
+      "external88": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/external88"
+    }
+  }
+}

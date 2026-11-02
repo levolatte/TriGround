@@ -1,0 +1,206 @@
+{
+  "correction\\comparisons\\presentations-1600.json": {
+    "C550": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 303,
+        "current_hits": 313,
+        "baseline_acc05": 0.8015873015873016,
+        "current_acc05": 0.828042328042328,
+        "rescue": 14,
+        "regression": 4,
+        "net_hits": 10
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 0,
+        "regression": 1,
+        "net_hits": -1
+      }
+    },
+    "B100": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 313,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.828042328042328,
+        "rescue": 17,
+        "regression": 6,
+        "net_hits": 11
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 1,
+        "regression": 2,
+        "net_hits": -1
+      }
+    },
+    "Bbest": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 313,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.828042328042328,
+        "rescue": 17,
+        "regression": 6,
+        "net_hits": 11
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 1,
+        "regression": 2,
+        "net_hits": -1
+      }
+    }
+  },
+  "correction\\comparisons\\presentations-800.json": {
+    "C550": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 303,
+        "current_hits": 309,
+        "baseline_acc05": 0.8015873015873016,
+        "current_acc05": 0.8174603174603174,
+        "rescue": 11,
+        "regression": 5,
+        "net_hits": 6
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 83,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9431818181818182,
+        "rescue": 0,
+        "regression": 2,
+        "net_hits": -2
+      }
+    },
+    "B100": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 309,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.8174603174603174,
+        "rescue": 14,
+        "regression": 7,
+        "net_hits": 7
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 83,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9431818181818182,
+        "rescue": 1,
+        "regression": 3,
+        "net_hits": -2
+      }
+    },
+    "Bbest": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 309,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.8174603174603174,
+        "rescue": 14,
+        "regression": 7,
+        "net_hits": 7
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 83,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9431818181818182,
+        "rescue": 1,
+        "regression": 3,
+        "net_hits": -2
+      }
+    }
+  },
+  "sft\\comparisons\\presentations-800.json": {
+    "C550": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 303,
+        "current_hits": 306,
+        "baseline_acc05": 0.8015873015873016,
+        "current_acc05": 0.8095238095238095,
+        "rescue": 10,
+        "regression": 7,
+        "net_hits": 3
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 0,
+        "regression": 1,
+        "net_hits": -1
+      }
+    },
+    "B100": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 306,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.8095238095238095,
+        "rescue": 16,
+        "regression": 12,
+        "net_hits": 4
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 1,
+        "regression": 2,
+        "net_hits": -1
+      }
+    },
+    "Bbest": {
+      "city378": {
+        "queries": 378,
+        "baseline_hits": 302,
+        "current_hits": 306,
+        "baseline_acc05": 0.798941798941799,
+        "current_acc05": 0.8095238095238095,
+        "rescue": 16,
+        "regression": 12,
+        "net_hits": 4
+      },
+      "external88": {
+        "queries": 88,
+        "baseline_hits": 85,
+        "current_hits": 84,
+        "baseline_acc05": 0.9659090909090909,
+        "current_acc05": 0.9545454545454546,
+        "rescue": 1,
+        "regression": 2,
+        "net_hits": -1
+      }
+    }
+  }
+}

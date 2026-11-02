@@ -1,0 +1,32 @@
+{
+  "checked_hk": "2026-10-29T03:20:19.651554+08:00",
+  "queue_pid": 257429,
+  "training_pid": 257776,
+  "queue_parent": 1,
+  "stdin": "/dev/null",
+  "status": "running",
+  "current_job": "correction_train_to_800",
+  "presentations": 240,
+  "updates": 56,
+  "recent_batch_seconds_mean": 52.100745299489546,
+  "all_batch_seconds_mean": 47.901391097825645,
+  "checkpoint_bytes": 934182899,
+  "checkpoint_files": {
+    "README.md": 5240,
+    "adapter_model.safetensors": 933974032,
+    "adapter_config.json": 1214,
+    "optimizer.pt": 4281,
+    "rng.pt": 14533,
+    "loop_state.json": 183599
+  },
+  "smoke_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke-2/report.json",
+  "cloud_outputs": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029",
+  "targets": [
+    800,
+    1600,
+    2400,
+    3200,
+    4000,
+    4400
+  ]
+}

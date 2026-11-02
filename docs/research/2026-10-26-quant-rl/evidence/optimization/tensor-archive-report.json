@@ -1,0 +1,128 @@
+{
+  "started_at": 1793007787.1713388,
+  "files": [
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/baseline/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\baseline\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 176.23500000000058,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/baseline/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\baseline\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 181.18799999999464,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/baseline_repeat/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\baseline_repeat\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 175.96799999999348,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/baseline_repeat/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\baseline_repeat\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 182.06200000000536,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/audit/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\audit\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 187.75,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/audit/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\audit\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 184.26600000000326,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/mb2/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\mb2\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 187.90699999999197,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/runs/mb2/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_fixed\\mb2\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 2121.407,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/baseline/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\baseline\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 1418.344,
+      "size_verified": true,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/baseline/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\baseline\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 515.109,
+      "size_verified": true,
+      "resume_offset": 615415808,
+      "bytes_downloaded": 318770623,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/baseline_repeat/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\baseline_repeat\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 1840.859,
+      "size_verified": true,
+      "resume_offset": 0,
+      "bytes_downloaded": 934189003,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/baseline_repeat/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\baseline_repeat\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 28.85899999999998,
+      "size_verified": true,
+      "resume_offset": 805306368,
+      "bytes_downloaded": 128880063,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/audit_conv/gradients.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\audit_conv\\gradients.pt",
+      "bytes": 934189003,
+      "seconds": 194.094,
+      "size_verified": true,
+      "resume_offset": 0,
+      "bytes_downloaded": 934189003,
+      "remote_copy_removed": true
+    },
+    {
+      "remote": "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs/audit_conv/updates.pt",
+      "local": "F:\\AIC\\.work\\quant_rl\\optimization_tensor_archives\\optimization_deterministic\\audit_conv\\updates.pt",
+      "bytes": 934186431,
+      "seconds": 192.25,
+      "size_verified": true,
+      "resume_offset": 0,
+      "bytes_downloaded": 934186431,
+      "remote_copy_removed": true
+    }
+  ],
+  "completed": true
+}

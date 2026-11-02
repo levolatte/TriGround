@@ -1,0 +1,51 @@
+{
+  "pid": 180935,
+  "started_at": "2026-10-26T00:52:08.282394+00:00",
+  "run_root": "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026",
+  "log": "/root/autodl-tmp/quant_rl_20261026/initial_arms.log",
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/run_initial_arms.py",
+    "--python",
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "--code",
+    "/root/autodl-tmp/quant_rl_20261026/code",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922/data",
+    "--dataset-dir",
+    "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal",
+    "--model",
+    "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "--run-root",
+    "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026",
+    "--ledger",
+    "/root/autodl-tmp/quant_rl_20261026/runs/budget.json",
+    "--adapter",
+    "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+    "--train-hours",
+    "7",
+    "--d-train-hours",
+    "3",
+    "--arm-hours",
+    "8",
+    "--hf-max-batch-size",
+    "2",
+    "--train-hf-max-batch-size",
+    "2"
+  ],
+  "train_outer_hours": {
+    "A": 7,
+    "B": 7,
+    "C": 7,
+    "D": 3
+  },
+  "eval_reserve_hours": {
+    "A": 1,
+    "B": 1,
+    "C": 1,
+    "D": 5
+  },
+  "preparation_gpu_hours": 5.804725925677895,
+  "D_eval_seconds_per_query": 31.46414129063487,
+  "D_eval_projection_hours": 4.072858289287736
+}

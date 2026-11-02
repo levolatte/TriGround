@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "dataset": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028/train4.jsonl",
+  "output_dir": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028/probe256",
+  "first_rollout_path": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028/probe256/first_rollout.jsonl",
+  "first_rollout_groups": 1,
+  "error": "rollout/recomputed policy logprob gap 0.301941 exceeds 0.05; inspect actual HF processors"
+}

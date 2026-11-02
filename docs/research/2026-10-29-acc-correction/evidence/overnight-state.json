@@ -1,0 +1,198 @@
+{
+  "status": "running",
+  "started_at": "2026-10-28T18:05:05.587819+00:00",
+  "jobs": [
+    {
+      "label": "native_gpu_smoke",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+        "--output-dir",
+        "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke"
+      ],
+      "log": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/logs/smoke.log",
+      "started_at": "2026-10-28T18:15:56.541916+00:00",
+      "status": "failed",
+      "exit_code": 1,
+      "ended_at": "2026-10-28T18:17:42.694082+00:00",
+      "wall_seconds": 106.15191070176661
+    },
+    {
+      "label": "native_gpu_smoke",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+        "--output-dir",
+        "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke-2",
+        "--deterministic"
+      ],
+      "log": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/logs/smoke.log",
+      "started_at": "2026-10-28T18:26:33.928011+00:00",
+      "status": "completed",
+      "exit_code": 0,
+      "ended_at": "2026-10-28T18:30:34.143695+00:00",
+      "wall_seconds": 240.21547587029636
+    },
+    {
+      "label": "correction_train_to_800",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/train_quant_grounding.py",
+        "--mode",
+        "correction",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/configs/to_800.json",
+        "--output-dir",
+        "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train"
+      ],
+      "log": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/logs/train_to_800.log",
+      "started_at": "2026-10-28T18:30:34.145358+00:00",
+      "status": "running",
+      "pid": 257776
+    }
+  ],
+  "results": {
+    "correction": {
+      "800": {}
+    },
+    "sft": {}
+  },
+  "baselines": {
+    "C550": {
+      "name": "C550",
+      "presentations": 0,
+      "updates": 0,
+      "training_seconds": 0.0,
+      "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-550",
+      "city378": {
+        "hits": 303,
+        "queries": 378,
+        "acc05": 0.8015873015873016,
+        "seconds": 1531.4408374726772,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/city378",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/city378/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/city378/predictions.jsonl"
+      },
+      "external88": {
+        "hits": 85,
+        "queries": 88,
+        "acc05": 0.9659090909090909,
+        "seconds": 356.50273537263274,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/external88",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/external88/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/C550/external88/predictions.jsonl"
+      }
+    },
+    "B100": {
+      "name": "B100",
+      "presentations": 0,
+      "updates": 0,
+      "training_seconds": 0.0,
+      "city378": {
+        "hits": 302,
+        "queries": 378,
+        "acc05": 0.798941798941799,
+        "seconds": 1519.3772506285459,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/city378",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/city378/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/city378/predictions.jsonl"
+      },
+      "external88": {
+        "hits": 85,
+        "queries": 88,
+        "acc05": 0.9659090909090909,
+        "seconds": 362.9032646520063,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/external88",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/external88/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/B100/external88/predictions.jsonl"
+      }
+    },
+    "Bbest": {
+      "name": "Bbest",
+      "presentations": 0,
+      "updates": 0,
+      "training_seconds": 0.0,
+      "legacy_step": 100,
+      "selection": "City378 hits, external88 hits; exact ties keep the earlier checkpoint",
+      "selection_candidates": [
+        {
+          "legacy_step": 59,
+          "city378": {
+            "hits": 300,
+            "queries": 378,
+            "acc05": 0.7936507936507936,
+            "seconds": 1526.868486955762,
+            "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/city378",
+            "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/city378/summary.json",
+            "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/city378/predictions.jsonl"
+          },
+          "external88": {
+            "hits": 85,
+            "queries": 88,
+            "acc05": 0.9659090909090909,
+            "seconds": 365.32960368320346,
+            "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/external88",
+            "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/external88/summary.json",
+            "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/input_baselines/B59/external88/predictions.jsonl"
+          }
+        },
+        {
+          "legacy_step": 100,
+          "city378": {
+            "hits": 302,
+            "queries": 378,
+            "acc05": 0.798941798941799,
+            "seconds": 1519.3772506285459,
+            "output": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/city378/attempt-1",
+            "summary": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/city378/attempt-1/summary.json",
+            "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/city378/attempt-1/predictions.jsonl"
+          },
+          "external88": {
+            "hits": 85,
+            "queries": 88,
+            "acc05": 0.9659090909090909,
+            "seconds": 362.9032646520063,
+            "output": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/external88/attempt-1",
+            "summary": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/external88/attempt-1/summary.json",
+            "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/external88/attempt-1/predictions.jsonl"
+          }
+        }
+      ],
+      "city378": {
+        "hits": 302,
+        "queries": 378,
+        "acc05": 0.798941798941799,
+        "seconds": 1519.3772506285459,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/city378",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/city378/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/city378/predictions.jsonl"
+      },
+      "external88": {
+        "hits": 85,
+        "queries": 88,
+        "acc05": 0.9659090909090909,
+        "seconds": 362.9032646520063,
+        "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/external88",
+        "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/external88/summary.json",
+        "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/baselines/Bbest/external88/predictions.jsonl"
+      }
+    }
+  },
+  "baseline_unavailable": {},
+  "selection": "City378 hits, external88 hits; exact ties keep the earlier checkpoint",
+  "current_job": "correction_train_to_800",
+  "gate_checked_at": "2026-10-28T18:26:33.853867+00:00",
+  "existing_b_status": "paused_by_user",
+  "diagnostic_status": "paused_by_user",
+  "error": "RuntimeError: native_gpu_smoke exited 1; see /root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/logs/smoke.log",
+  "ended_at": "2026-10-28T18:17:42.694886+00:00",
+  "smoke": {
+    "status": "completed",
+    "report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/smoke-2/report.json",
+    "seconds": 240.21547587029636
+  }
+}

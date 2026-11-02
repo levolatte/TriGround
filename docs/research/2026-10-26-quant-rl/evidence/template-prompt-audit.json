@@ -1,0 +1,46 @@
+{
+  "False": {
+    "tail": "<|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|vision_end|>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which person is seated near the left side of the frame?\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+    "tokens": 3501,
+    "grid": [
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ]
+    ],
+    "hf_tail": "the left side of the frame?\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+  },
+  "True": {
+    "tail": "<|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|image_pad|><|vision_end|>\nThese are views of the same scene in this order: RGB, infrared, depth. This depth visualization uses a fixed inverse mapping of the raw sensor values: smaller positive stored values are brighter and zero is black. Its physical distance unit is not established. Locate the object described by this query: Which person is seated near the left side of the frame?\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}<|im_end|>\n<|im_start|>assistant\n<think>\n",
+    "tokens": 3499,
+    "grid": [
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ]
+    ],
+    "hf_tail": "eated near the left side of the frame?\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}<|im_end|>\n<|im_start|>assistant\n<think>\n"
+  }
+}

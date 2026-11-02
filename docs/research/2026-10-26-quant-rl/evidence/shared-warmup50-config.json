@@ -1,0 +1,27 @@
+{
+  "arm": "C",
+  "precision": "nf4",
+  "model": "Qwen/Qwen3.6-27B",
+  "dataset": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/inputs/warmup800.jsonl",
+  "data_root": "/root/autodl-tmp/rematch_20260922/data",
+  "output_dir": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training",
+  "seed": 2026,
+  "max_gpu_hours": 8,
+  "save_hours": [
+    2,
+    4,
+    8
+  ],
+  "max_steps": 50,
+  "save_steps": 50,
+  "save_total_limit": 2,
+  "hf_max_batch_size": 1,
+  "max_pixels": 1204224,
+  "min_pixels": 200704,
+  "max_length": 8192,
+  "max_completion_length": 64,
+  "learning_rate": 2e-06,
+  "dataloader_num_workers": 4,
+  "dataset_num_proc": 4,
+  "sft_accum": 8
+}

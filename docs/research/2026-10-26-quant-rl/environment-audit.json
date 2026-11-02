@@ -1,0 +1,93 @@
+{
+  "checked_at": "2026-10-26T04:42:31+08:00",
+  "scope": "User confirmed clone completion; independent NF4 environment installed; full 27B G8 two-query inference completed",
+  "packages": {
+    "torch": "2.12.1+cu130",
+    "transformers": "5.16.1",
+    "peft": "0.20.0",
+    "ms-swift": "4.5.3",
+    "bitsandbytes": "0.50.2",
+    "flash-linear-attention": "0.5.2",
+    "fla-core": "0.5.2",
+    "causal-conv1d": null,
+    "triton": "3.7.1",
+    "kernels": null,
+    "accelerate": "1.15.0",
+    "datasets": "4.8.4",
+    "torchvision": "0.27.1+cu130",
+    "qwen-vl-utils": "0.0.14",
+    "trl": "0.29.1",
+    "msgspec": "0.21.1"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090, 49140 MiB, 0 MiB, 0 %, 580.105.08",
+  "disk": {
+    "/": {
+      "total": 32212254720,
+      "used": 22645772288,
+      "free": 9566482432
+    },
+    "/root/autodl-tmp": {
+      "total": 214748364800,
+      "used": 167640084480,
+      "free": 47108280320
+    }
+  },
+  "kernel_dispatch": {
+    "torch_chunk_gated_delta_rule": [
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": true,
+        "implementation_module": "fla.ops.gated_delta_rule.chunk"
+      },
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": null,
+        "implementation_module": null
+      }
+    ],
+    "torch_recurrent_gated_delta_rule": [
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": true,
+        "implementation_module": "fla.ops.gated_delta_rule.fused_recurrent"
+      },
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": null,
+        "implementation_module": null
+      }
+    ],
+    "causal_conv1d_fn": [
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": false,
+        "implementation_module": "transformers.models.qwen3_5.modeling_qwen3_5"
+      },
+      {
+        "wrapper_module": "transformers.models.qwen3_5.modeling_qwen3_5",
+        "is_new_implementation": null,
+        "implementation_module": null
+      }
+    ]
+  },
+  "exclusion_count": 114,
+  "bf16_small_cuda_matmul": true,
+  "full_27b_training_test": true,
+  "inference_environment": {
+    "path": "/root/vllm_env",
+    "torch": "2.13.0",
+    "transformers": "5.18.0",
+    "vllm": "0.30.0",
+    "ms-swift": null,
+    "peft": null
+  },
+  "clone_complete_confirmed_by": "user",
+  "training_environment": "/root/autodl-tmp/quant_rl_20261026/train_env",
+  "nf4_small_forward_backward": true,
+  "full_27b_nf4_inference_test": true,
+  "training_test_scope": "NF4 C SFT and A GRPO both completed two steps, full checkpoint reload and third step; A had finite nonzero LoRA gradients and zero frozen gradients",
+  "full_27b_grpo_checkpoint_reload_test": true,
+  "grpo_verified_at": "2026-10-26T08:13:12+08:00",
+  "grpo_import_after_msgspec_install": true,
+  "grpo_import_note": "Real remote Swift GRPO import succeeded without shims; full NF4 A rollout/backward/checkpoint reload subsequently completed."
+}

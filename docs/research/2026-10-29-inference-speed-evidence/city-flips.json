@@ -1,0 +1,212 @@
+[
+  {
+    "id": "city_000066_002",
+    "kind": "regression",
+    "query": "The person in the dark top on the right kayak",
+    "images": [
+      "city/train/visible/000066.png",
+      "city/train/infrared/000066.png",
+      "quant_grounding_20261026_formal/depth_rgb/000066.png"
+    ],
+    "gt": [
+      0.559896,
+      0.449074,
+      0.577604,
+      0.50926
+    ],
+    "hf_box": [
+      0.554,
+      0.446,
+      0.574,
+      0.504
+    ],
+    "vllm_box": [
+      0.554,
+      0.446,
+      0.573,
+      0.502
+    ],
+    "hf_iou": 0.5338554893294477,
+    "vllm_iou": 0.4828903697038284
+  },
+  {
+    "id": "city_000081_001",
+    "kind": "regression",
+    "query": "The person on the left side of the distant small boat",
+    "images": [
+      "city/train/visible/000081.png",
+      "city/train/infrared/000081.png",
+      "quant_grounding_20261026_formal/depth_rgb/000081.png"
+    ],
+    "gt": [
+      0.522917,
+      0.337963,
+      0.530209,
+      0.351851
+    ],
+    "hf_box": [
+      0.52,
+      0.338,
+      0.53,
+      0.354
+    ],
+    "vllm_box": [
+      0.534,
+      0.338,
+      0.542,
+      0.356
+    ],
+    "hf_iou": 0.6012737758052482,
+    "vllm_iou": 0.0
+  },
+  {
+    "id": "city_000190_006",
+    "kind": "regression",
+    "query": "The blue garbage can on the sidewalk near the center",
+    "images": [
+      "city/train/visible/000190.png",
+      "city/train/infrared/000190.png",
+      "quant_grounding_20261026_formal/depth_rgb/000190.png"
+    ],
+    "gt": [
+      0.586979,
+      0.615741,
+      0.604167,
+      0.656481
+    ],
+    "hf_box": [
+      0.591,
+      0.62,
+      0.603,
+      0.652
+    ],
+    "vllm_box": [
+      0.591,
+      0.623,
+      0.603,
+      0.651
+    ],
+    "hf_iou": 0.548384100562678,
+    "vllm_iou": 0.47983608799234323
+  },
+  {
+    "id": "city_000693_013",
+    "kind": "regression",
+    "query": "The street light pole supporting the blue sign",
+    "images": [
+      "city/train/visible/000693.png",
+      "city/train/infrared/000693.png",
+      "quant_grounding_20261026_formal/depth_rgb/000693.png"
+    ],
+    "gt": [
+      0.567708,
+      0.256481,
+      0.636458,
+      0.564814
+    ],
+    "hf_box": [
+      0.568,
+      0.261,
+      0.64,
+      0.567
+    ],
+    "vllm_box": [
+      0.628,
+      0.366,
+      0.64,
+      0.566
+    ],
+    "hf_iou": 0.9272048782292276,
+    "vllm_iou": 0.0767267695088959
+  },
+  {
+    "id": "city_001685_002",
+    "kind": "regression",
+    "query": "The ceiling light on the far left edge",
+    "images": [
+      "city/train/visible/001685.png",
+      "city/train/infrared/001685.png",
+      "quant_grounding_20261026_formal/depth_rgb/001685.png"
+    ],
+    "gt": [
+      0.0,
+      0.103704,
+      0.055208,
+      0.181482
+    ],
+    "hf_box": [
+      0.0,
+      0.113,
+      0.05,
+      0.157
+    ],
+    "vllm_box": [
+      0.0,
+      0.114,
+      0.048,
+      0.156
+    ],
+    "hf_iou": 0.5123466430520697,
+    "vllm_iou": 0.4694958329058966
+  },
+  {
+    "id": "city_002576_010",
+    "kind": "regression",
+    "query": "The street light on the far right side of the bridge",
+    "images": [
+      "city/train/visible/002576.png",
+      "city/train/infrared/002576.png",
+      "quant_grounding_20261026_formal/depth_rgb/002576.png"
+    ],
+    "gt": [
+      0.751042,
+      0.162963,
+      0.772917,
+      0.208333
+    ],
+    "hf_box": [
+      0.76,
+      0.163,
+      0.772,
+      0.216
+    ],
+    "vllm_box": [
+      0.76,
+      0.163,
+      0.772,
+      0.217
+    ],
+    "hf_iou": 0.5016225626692793,
+    "vllm_iou": 0.49613271282847726
+  },
+  {
+    "id": "city_002940_002",
+    "kind": "rescue",
+    "query": "The person in white pants in the middle",
+    "images": [
+      "city/train/visible/002940.png",
+      "city/train/infrared/002940.png",
+      "quant_grounding_20261026_formal/depth_rgb/002940.png"
+    ],
+    "gt": [
+      0.557813,
+      0.275,
+      0.566667,
+      0.335186
+    ],
+    "hf_box": [
+      0.646,
+      0.253,
+      0.667,
+      0.338
+    ],
+    "vllm_box": [
+      0.558,
+      0.27,
+      0.566,
+      0.312
+    ],
+    "hf_iou": 0.0,
+    "vllm_iou": 0.5166814408466247
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "variant": "mb2",
+  "precision": "nf4",
+  "adapter": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+  "global_step": 1,
+  "answer_count": 32,
+  "loss_microbatch_values": [
+    0.04987044632434845,
+    -0.016015945002436638,
+    -0.016493022441864014,
+    -0.016381938010454178,
+    0.05631372332572937,
+    -0.01929369382560253,
+    -0.09386707842350006,
+    0.05822107195854187,
+    0.00038386863889172673,
+    -0.00018996704602614045,
+    -5.490945477504283e-05,
+    -0.0001363905903417617,
+    6.29186274636595e-07,
+    6.105446459514496e-07,
+    1.183042172669957e-06,
+    2.1516429171697382e-07
+  ],
+  "loss_sum": 0.0023588033898960248,
+  "loss_effective": 0.00014742521186850155,
+  "grad_norm": 0.028319223021684076,
+  "gradient_snapshot_stage": "after_backward_before_clip_grad_norm",
+  "postclip_grad_norm": 0.0283192228525877,
+  "timing": {
+    "rollout_score_seconds": 150.70750185847282,
+    "training_step_seconds": 375.9164970703125,
+    "step_wall_seconds_before_snapshot": 385.7119789086282,
+    "step_wall_excluding_grad_snapshot": 376.1470024101436,
+    "gradient_snapshot_seconds": 9.564976498484612,
+    "run_wall_seconds_including_model_load": 441.9892232827842
+  },
+  "native_logp_deviation": {
+    "old_max_abs": 0.24789047241210938,
+    "ref_max_abs": 0.24789047241210938
+  },
+  "memory": {
+    "peak_allocated_bytes": 32215806464,
+    "peak_reserved_bytes": 36251369472,
+    "device_total_bytes": 50864390144,
+    "device_free_after_step_bytes": 13887209472,
+    "non_pytorch_device_bytes_at_start": 478347264,
+    "estimated_whole_gpu_peak_headroom_bytes": 14134673408
+  }
+}

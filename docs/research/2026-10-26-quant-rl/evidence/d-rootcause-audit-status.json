@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-27T05:39:52.564812+00:00",
+  "queue_status": "paused",
+  "active_budget_jobs": 0,
+  "settled_gpu_hours": 34.59969018566584,
+  "D_gpu_hours": 5.364435023303072,
+  "rootcause_idle_hours": 0.2059093188888889,
+  "instance_powered_on": true,
+  "later_idle_occupancy_requires_accounting": true
+}

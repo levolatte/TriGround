@@ -1,0 +1,400 @@
+{
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "base_model": {
+    "model_type": "qwen3_5",
+    "source_quantization_config": null
+  },
+  "kernel_implementations": {
+    "torch_chunk_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.chunk",
+      "name": "chunk_gated_delta_rule"
+    },
+    "torch_recurrent_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.fused_recurrent",
+      "name": "fused_recurrent_gated_delta_rule"
+    },
+    "causal_conv1d_fn": {
+      "module": "transformers.models.qwen3_5.modeling_qwen3_5",
+      "name": "causal_conv1d_fn"
+    }
+  },
+  "model": {
+    "precision": "nf4",
+    "linear4_count": 800,
+    "visual_linear_count": 110,
+    "visual_linear_dtypes": [
+      "torch.bfloat16"
+    ],
+    "gate_count": 96,
+    "gate_dtypes": [
+      "torch.bfloat16"
+    ],
+    "head_dtype": "torch.bfloat16",
+    "embedding_dtypes": [
+      "torch.bfloat16"
+    ],
+    "trainable_count": 992,
+    "trainable_examples": [
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_B.default.weight"
+    ],
+    "parameter_storage_bytes": 20090657248,
+    "trainable_parameter_storage_bytes": 933822464,
+    "parameter_storage_note": "PyTorch parameter storage only; excludes bitsandbytes quant_state storage"
+  },
+  "runtime_optimization": false,
+  "deterministic_training": false,
+  "determinism": {
+    "torch_deterministic_algorithms": false,
+    "cudnn_deterministic": false,
+    "cudnn_benchmark": false,
+    "cublas_workspace_config": null
+  },
+  "model_accepts_loss_kwargs": false,
+  "training_batch": {
+    "train_micro_batch_size": 1,
+    "gradient_accumulation_steps": 32,
+    "answers_per_optimizer_step": 32
+  },
+  "gradient_checkpointing": {
+    "every_n_layers": 1,
+    "language_layer_count": 64,
+    "enabled_layer_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "mask_applied": false,
+    "reenable_calls": 0
+  },
+  "dataset_rows": {
+    "prepared": 4,
+    "encoded": 4
+  },
+  "effective_sampling": {
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "do_sample": true
+  },
+  "hf_max_batch_size": 2,
+  "num_generations": 8,
+  "generation_batch_size": 8,
+  "gradient_accumulation_steps": 32,
+  "ref_model_is_none": true,
+  "logits_to_keep_supported": true,
+  "grpo_loss_normalizer": {
+    "applied": false,
+    "factor": 1,
+    "arm": "D"
+  },
+  "bounded_thinking": {
+    "generated": 32,
+    "natural_boundaries": 2,
+    "forced_boundaries": 30,
+    "answer_truncated": 1,
+    "masked_forced_tokens": 31,
+    "collated_responses": 32,
+    "effective_forced_positions": 31,
+    "newly_masked_positions": 0,
+    "local_action_tokens": 8937,
+    "global_action_tokens": [
+      2175.0,
+      2266.0,
+      2247.0,
+      2249.0
+    ],
+    "effective_dapo_denominator": [
+      2175.0,
+      2266.0,
+      2247.0,
+      2249.0
+    ],
+    "thought_limit": 256,
+    "answer_limit": 64,
+    "sampling_replay": {
+      "status": "passed",
+      "token_limit": 64,
+      "atol": 0.05,
+      "tokens": 2,
+      "max_abs_gap": 0.0,
+      "mean_abs_gap": 0.0,
+      "max_gap_location": {
+        "row": 0,
+        "response_position": 0,
+        "token_id": 760,
+        "sampled_logprob": -0.019109725952148438,
+        "replayed_logprob": -0.019109725952148438
+      },
+      "context": {
+        "batch_size": 2,
+        "prompt_width": 3557,
+        "model_training": false,
+        "cuda_autocast": false,
+        "use_cache": null,
+        "cache_implementation": null,
+        "generation_kwarg_keys": [
+          "attention_mask",
+          "generation_config",
+          "image_grid_thw",
+          "input_ids",
+          "logits_processor",
+          "mm_token_type_ids",
+          "pixel_values",
+          "position_ids",
+          "stopping_criteria"
+        ],
+        "processors": [
+          "ThinkingBudgetProcessor"
+        ]
+      }
+    },
+    "generation_amp": {
+      "status": "passed",
+      "scope": "language_model_and_lm_head",
+      "observations": {
+        "visual_autocast": false,
+        "language_body_autocast": true,
+        "language_body_autocast_dtype": "torch.bfloat16",
+        "gdn_internal_autocast": true,
+        "linear4bit_internal_autocast": true,
+        "head_body_autocast": true,
+        "head_body_autocast_dtype": "torch.bfloat16"
+      },
+      "device_type": "cuda",
+      "autocast_dtype": "torch.bfloat16"
+    },
+    "logprob_audit": {
+      "comparison": "local_old_vs_behavior",
+      "fatal_tolerance": null,
+      "answers": 32,
+      "tokens": 8937,
+      "max_abs_gap": 0.4542865753173828,
+      "mean_abs_gap": 0.01739516102975549,
+      "max_gap_location": {
+        "checked_answer": 25,
+        "microbatch": 1,
+        "row": 0,
+        "response_position": 75,
+        "token_id": 56,
+        "sampled_logprob": -1.8732051849365234,
+        "recomputed_logprob": -1.4189186096191406
+      },
+      "generation_processors": [
+        "ThinkingBudgetProcessor"
+      ]
+    },
+    "rollout_importance_sampling": {
+      "mode": "token_truncate",
+      "threshold": 2.0,
+      "action_tokens": 8937,
+      "native_disabled_before_hf_override": true,
+      "native_disabled_after_hf_override": false,
+      "raw_weight_mean": 0.99967692591735,
+      "raw_weight_min": 0.65437159878864,
+      "raw_weight_max": 1.5750493030593273,
+      "corrected_weight_mean": 0.999676930306808,
+      "truncated_tokens": 0,
+      "truncated_fraction": 0.0
+    }
+  },
+  "optimizer": {
+    "optimizer_type": "AcceleratedOptimizer",
+    "optimizer_group_count": 1,
+    "optimizer_parameter_count": 992,
+    "frozen_parameter_count": 2176,
+    "frozen_grad_count": 0
+  },
+  "prompt_observations": {
+    "count": 32,
+    "first": {
+      "tokens": 3557,
+      "completion_budget": 322,
+      "image_count": 6,
+      "batch_size": 2,
+      "image_grid_thw_shape": [
+        6,
+        3
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ]
+      ],
+      "pixel_values_shape": [
+        27000,
+        1536
+      ]
+    },
+    "maximum": {
+      "tokens": 3573,
+      "completion_budget": 322,
+      "image_count": 6,
+      "batch_size": 2,
+      "image_grid_thw_shape": [
+        6,
+        3
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ]
+      ],
+      "pixel_values_shape": [
+        27000,
+        1536
+      ]
+    }
+  },
+  "sft_input_observations": {
+    "count": 0,
+    "first": null,
+    "maximum": null
+  },
+  "phase_timing_note": "Legacy timing synchronizes and uses wall time before and after each measured phase. encoding_wall_seconds uses CPU wall time for template.encode and overlaps generation.",
+  "selected_logits_forward": {
+    "calls": 96,
+    "first": 278,
+    "minimum": 207,
+    "maximum": 323,
+    "hook_target": "peft_outer"
+  },
+  "selected_logits_forward_note": "PEFT outer hook counts every call it observes; grpo_logps_forward records only Swift's local logps method.",
+  "grpo_logps_forward": {
+    "with_grad": {
+      "calls": 0,
+      "first": null,
+      "minimum": null,
+      "maximum": null,
+      "output_lengths_match": true
+    },
+    "without_grad": {
+      "calls": 0,
+      "first": null,
+      "minimum": null,
+      "maximum": null,
+      "output_lengths_match": true
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "status": "vllm_validation_rejected",
+  "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+  "adapter": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-1600",
+  "options": {
+    "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "dtype": "bfloat16",
+    "max_model_len": 8192,
+    "max_num_seqs": 8,
+    "max_num_batched_tokens": 8192,
+    "gpu_memory_utilization": 0.9,
+    "enable_lora": true,
+    "max_lora_rank": 32,
+    "enable_prefix_caching": false,
+    "mamba_cache_mode": "none",
+    "enforce_eager": true,
+    "limit_mm_per_prompt": {
+      "image": 3
+    },
+    "seed": 2026,
+    "mm_processor_kwargs": {
+      "min_pixels": 200704,
+      "max_pixels": 1204224
+    },
+    "quantization": "bitsandbytes",
+    "load_format": "bitsandbytes",
+    "hf_overrides": {
+      "quantization_config": {
+        "quant_method": "bitsandbytes",
+        "load_in_4bit": true,
+        "load_in_8bit": false,
+        "bnb_4bit_compute_dtype": "bfloat16",
+        "bnb_4bit_quant_type": "nf4",
+        "bnb_4bit_use_double_quant": true,
+        "llm_int8_skip_modules": [
+          "visual",
+          "lm_head",
+          "in_proj_ba"
+        ]
+      }
+    }
+  },
+  "results": {
+    "city378": {
+      "queries": 378,
+      "hits": 308,
+      "resource": {
+        "completed_queries": 378,
+        "resumed_queries": 0,
+        "new_queries": 378,
+        "generation_seconds": 743.3239887878299,
+        "preparation_seconds": 43.55251814983785,
+        "wall_seconds": 787.1270959544927,
+        "new_generated_tokens": 8579,
+        "sample_seconds_semantics": "generate call wall time divided equally among its queries"
+      },
+      "output_dir": "/root/autodl-tmp/quant_rl_20261026/runs/semifinal_correction1600_20261029/vllm_validation/city378"
+    },
+    "external88": {
+      "queries": 88,
+      "hits": 84,
+      "resource": {
+        "completed_queries": 88,
+        "resumed_queries": 0,
+        "new_queries": 88,
+        "generation_seconds": 178.91956381779164,
+        "preparation_seconds": 10.646844781935215,
+        "wall_seconds": 189.6281186658889,
+        "new_generated_tokens": 2019,
+        "sample_seconds_semantics": "generate call wall time divided equally among its queries"
+      },
+      "output_dir": "/root/autodl-tmp/quant_rl_20261026/runs/semifinal_correction1600_20261029/vllm_validation/external88"
+    }
+  },
+  "loading_seconds": 46.854052131064236,
+  "decision": {
+    "accepted": false,
+    "complete": true,
+    "hits_pass": false,
+    "speed_pass": true,
+    "minimum_hits": {
+      "city378": 313,
+      "external88": 84
+    },
+    "hits": {
+      "city378": 308,
+      "external88": 84
+    },
+    "development_queries": 466,
+    "development_wall_seconds": 976.7552146203816,
+    "seconds_per_query": 2.0960412330909475,
+    "max_seconds_per_query": 3.6,
+    "baseline_seconds_per_query": 4.0,
+    "min_time_reduction": 0.1,
+    "speed_measurement": "request preparation plus complete generate calls; model loading excluded"
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "overall": {
+    "queries": 2,
+    "samples": 16,
+    "acc05_first": 0.0,
+    "acc05_all_samples": 0.0,
+    "format_valid": 0,
+    "valid": 0,
+    "invalid": 16,
+    "truncated": 16,
+    "all_wrong_groups": 2,
+    "mixed_groups": 0,
+    "all_hit_groups": 0,
+    "all_same_reward_groups": 2,
+    "zero_advantage_groups": 2,
+    "generated_tokens": 1024,
+    "timed_seconds": 157.89749824255705,
+    "mean_tokens": 64.0,
+    "mean_seconds": 9.868593640159816
+  },
+  "by_source": {
+    "rgbdt": {
+      "queries": 2,
+      "samples": 16,
+      "acc05_first": 0.0,
+      "acc05_all_samples": 0.0,
+      "format_valid": 0,
+      "valid": 0,
+      "invalid": 16,
+      "truncated": 16,
+      "all_wrong_groups": 2,
+      "mixed_groups": 0,
+      "all_hit_groups": 0,
+      "all_same_reward_groups": 2,
+      "zero_advantage_groups": 2,
+      "generated_tokens": 1024,
+      "timed_seconds": 157.89749824255705,
+      "mean_tokens": 64.0,
+      "mean_seconds": 9.868593640159816
+    }
+  },
+  "by_negative_kind": {
+    "extent": {
+      "queries": 1,
+      "samples": 8,
+      "acc05_first": 0.0,
+      "acc05_all_samples": 0.0,
+      "format_valid": 0,
+      "valid": 0,
+      "invalid": 8,
+      "truncated": 8,
+      "all_wrong_groups": 1,
+      "mixed_groups": 0,
+      "all_hit_groups": 0,
+      "all_same_reward_groups": 1,
+      "zero_advantage_groups": 1,
+      "generated_tokens": 512,
+      "timed_seconds": 60.860800463706255,
+      "mean_tokens": 64.0,
+      "mean_seconds": 7.607600057963282
+    },
+    "none": {
+      "queries": 1,
+      "samples": 8,
+      "acc05_first": 0.0,
+      "acc05_all_samples": 0.0,
+      "format_valid": 0,
+      "valid": 0,
+      "invalid": 8,
+      "truncated": 8,
+      "all_wrong_groups": 1,
+      "mixed_groups": 0,
+      "all_hit_groups": 0,
+      "all_same_reward_groups": 1,
+      "zero_advantage_groups": 1,
+      "generated_tokens": 512,
+      "timed_seconds": 97.0366977788508,
+      "mean_tokens": 64.0,
+      "mean_seconds": 12.12958722235635
+    }
+  },
+  "answer_mode": "short",
+  "reward_mode": "contrast",
+  "samples_per_query": 8,
+  "resource": {
+    "generation_seconds": 157.90220582857728,
+    "max_observed_device_used_bytes": 20847984640,
+    "torch_peak_allocated_bytes": 19928180736,
+    "torch_peak_reserved_bytes": 20346568704,
+    "adapter_audit": null
+  }
+}

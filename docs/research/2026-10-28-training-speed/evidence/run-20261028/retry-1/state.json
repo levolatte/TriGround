@@ -1,0 +1,42 @@
+{
+  "parent_pid": 132174,
+  "child_pid": 181747,
+  "jobs": [
+    {
+      "name": "fixed_g1",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028/tools/benchmark_shared_prefix.py",
+        "run",
+        "--bundle",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_bundle",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/arm_config.json",
+        "--adapter",
+        "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+        "--model",
+        "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+        "--precision",
+        "nf4",
+        "--groups",
+        "1",
+        "--repeats",
+        "1",
+        "--output",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/retry-1/fixed_g1"
+      ],
+      "started_at": "2026-10-28T10:03:18.151950+00:00",
+      "exit_code": 0,
+      "seconds": 276.15068544168025
+    }
+  ],
+  "code": "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028",
+  "original_queue_resumed": true,
+  "status": "failed",
+  "current_job": "fixed_g1",
+  "parent_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python -u /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py ",
+  "child_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python /root/autodl-tmp/quant_rl_20261026/code/tools/eval_quant_grounding.py --dataset /root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/external94_dev.jsonl --data-root /root/autodl-tmp/rematch_20260922/data --model /root/autodl-tmp/rematch_models/Qwen3.6-27B --adapter /root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/train/checkpoint-100 --engine hf --precision nf4 --answer-mode short --reward-mode contrast --format-policy punctuation --samples-per-query 1 --hf-max-batch-size 2 --seed 2026 --max-tokens 64 --max-length 8192 --min-pixels 200704 --max-pixels 1204224 --output-dir /root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/eval/step-100/external88/attempt-1 ",
+  "updated_at": "2026-10-28T10:07:54.307066+00:00",
+  "reused_preparation": "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028",
+  "error": "RuntimeError: fixed_g1: numerical differences require investigation before online training"
+}

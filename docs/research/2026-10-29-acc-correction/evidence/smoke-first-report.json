@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "smoke_only": true,
+  "error_type": "AssertionError",
+  "error": "cache.grad.base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py\", line 436, in main\n    report = run_smoke(config, args.output_dir)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py\", line 357, in run_smoke\n    cache = _cache_equivalence(runtime, first_rows[0], real_first[\"completions\"][0][\"token_ids\"])\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py\", line 273, in _cache_equivalence\n    _assert_exact(parameter.grad, cached_grads[name], f\"cache.grad.{name}\")\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/smoke_quant_correction.py\", line 47, in _assert_exact\n    torch.testing.assert_close(actual.cpu(), expected.cpu(), rtol=0, atol=0, msg=path)\n  File \"/root/miniconda3/lib/python3.12/site-packages/torch/testing/_comparison.py\", line 1631, in assert_close\n    raise error_metas[0].to_error(msg)\nAssertionError: cache.grad.base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight\n"
+}

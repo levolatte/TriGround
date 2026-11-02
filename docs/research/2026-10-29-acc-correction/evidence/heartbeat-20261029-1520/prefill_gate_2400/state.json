@@ -1,0 +1,59 @@
+{
+  "status": "completed",
+  "started_at": "2026-10-29T04:02:10.665596+00:00",
+  "parent_pid": 257429,
+  "child_pid": 468790,
+  "target": 2400,
+  "accepted": true,
+  "original_queue_resumed": true,
+  "parent_identity": {
+    "pid": 257429,
+    "state": "S",
+    "ppid": 1,
+    "start_ticks": "772735124",
+    "command": [
+      "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+      "-u",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/scripts/run_acc_correction.py",
+      "--config",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/queue.json",
+      "--output-dir",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029"
+    ]
+  },
+  "child_identity": {
+    "pid": 468790,
+    "state": "R",
+    "ppid": 257429,
+    "start_ticks": "776188163",
+    "command": [
+      "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/train_quant_grounding.py",
+      "--mode",
+      "correction",
+      "--config",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/configs/to_2400.json",
+      "--output-dir",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train",
+      "--resume",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-1600"
+    ]
+  },
+  "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-2400",
+  "boundary_completed_at": "2026-10-29T06:45:26.329464+00:00",
+  "benchmark_command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/benchmark_quant_prefill.py",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+    "--adapter",
+    "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-2400",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_2400/benchmark"
+  ],
+  "benchmark_pid": 473044,
+  "benchmark_exit_code": 0,
+  "benchmark_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_2400/benchmark/report.json",
+  "benchmark_reason": "all correctness checks passed and steady full batch improved at least 3%",
+  "ended_at": "2026-10-29T06:58:42.142463+00:00"
+}

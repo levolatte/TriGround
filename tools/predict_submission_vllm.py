@@ -1,5 +1,10 @@
 """用 vLLM 离线批处理跑官方提交，输出与 `predict_native_submission.py` 完全同构。
 
+**与 `predict_vllm_quant_submission.py` 的分叉**：本文件是复赛（BF16）提交工具，包含
+`check_upscale_consistency` 断言；量化版是半决赛 NF4 用的。2026-10-30 审计发现量化版
+缺少放大与像素上限的配套校验，导致 `--upscale 2.0` 配小 `--max-pixels` 时放大静默失效，
+现已补齐。**两边改动请同步，不要再让护栏只存在于一侧。**
+
 为什么需要它：HF 逐条 `generate` 在 27B + 原生分辨率下约 6.3 秒/条（预填充 3.67 s +
 解码 2.59 s），5690 条要 10 小时。解码是显存带宽受限的，vLLM 的连续批处理能让一次权重
 读取服务多条序列，同时它的 Gated DeltaNet kernel 比 transformers 的兜底实现快得多。
@@ -130,9 +135,33 @@ def accept(text: str) -> list[float] | None:
     return parse_generated_bbox(text)
 
 
+def collect_samples(output, single_pass: bool) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
+    """把一次生成返回的 k 个样本逐个解析，返回（样本列表, 代表样本）。
+
+    **代表样本 = 第一个可解析的样本。** 顶层 `raw_text` 必须是它的文本、`bbox` 必须是它的框——
+    `predict_native_submission.validate_rows` 会校验 `raw_text` 能解析出与 `bbox` 完全相同的框，
+    拿别的样本来当代表会直接抛 "bbox differs from raw text"。
+
+    k=1 时行为与旧版一致；k>1 且全部不可解析时返回 (samples, None)，由调用方决定重跑。
+    """
+    samples: list[dict[str, Any]] = []
+    chosen: dict[str, Any] | None = None
+    for answer in output.outputs:
+        text = answer.text.strip()
+        box = parse_generated_bbox(text) if single_pass else accept(text)
+        record = {"text": text, "bbox": box, "parsed": box is not None,
+                  "tokens": len(answer.token_ids),
+                  "finish_reason": answer.finish_reason}
+        samples.append(record)
+        if chosen is None and box is not None:
+            chosen = record
+    return samples, chosen
+
+
 def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
                    modality: str, upscale: float = 1.0,
-                   depth_policy: str | None = None) -> list[dict[str, Any]]:
+                   depth_policy: str | None = None,
+                   enable_thinking: bool = False) -> list[dict[str, Any]]:
     # 注意：对 **tokenizer** 的 apply_chat_template，模板变量要作为**直接关键字参数**传入。
     # 曾写成 chat_template_kwargs={"enable_thinking": False}（那是 processor / vLLM API 的形式），
     # 结果 enable_thinking 被静默忽略、thinking 保持开启：200 条全部生成思维链并在 token 上限
@@ -156,8 +185,12 @@ def build_requests(processor_tokenizer, items, data_root: Path, queries: Path,
         messages = [{"role": "user", "content": build_user_content(
             prompt, images, prompt_has_image_placeholders=True)}]
         text = processor_tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True, enable_thinking=False)
-        if not text.rstrip().endswith("</think>"):
+            messages, tokenize=False, add_generation_prompt=True,
+            enable_thinking=enable_thinking)
+        # 关思考时提示词必须以 </think> 结尾：这是上次 200 条全废事故留下的护栏
+        # （enable_thinking 传错位置被静默忽略，全部输出思维链、一个 bbox 都解不出来）。
+        # 开思考时**不适用**这条断言——那时提示词本来就该停在 <think>，等模型自己收尾。
+        if not enable_thinking and not text.rstrip().endswith("</think>"):
             raise ValueError(
                 f"{sample_id}: 生成的提示词未以 </think> 结尾，thinking 可能没有被关掉；"
                 "这会导致模型输出思维链而不是 bbox")
@@ -217,6 +250,19 @@ def build_parser() -> argparse.ArgumentParser:
                              "放大倍数与所需 max_pixels / model_max_length 的对应："
                              "1.1→2509056/8192；1.25→3240000/12288；"
                              "1.5→4665600/16384；2.0→8294400/32768。")
+    parser.add_argument("--enable-thinking", action="store_true",
+                        help="打开模型的原生思考。**这是分布外实验**：模型训练时的响应前缀是"
+                             "空 think 块（`<think>\\n\\n</think>\\n\\n`），它没学过在块里推理。"
+                             "必须与 --single-pass 同用：阶段1 的 stop=[\"]\"] 会在推理文字里"
+                             "的方括号处提前截断。解析仍走 `accept()`，它在整段文本里找最后一个"
+                             "bbox 数组，因此能容忍推理前缀。")
+    parser.add_argument("--samples", type=int, default=1,
+                        help="每题采样数。>1 时用于自一致性采样投票：vLLM 用一次预填充产 k 个样本，"
+                             "增量成本只有 k×解码（官方题输入中位 24,236 token、输出中位 22 token）。"
+                             "每题的**第一个可解析样本**作为该题代表写入顶层 bbox/raw_text，"
+                             "全部样本另存于 samples 键。k=1 时行为与旧版一致（只多一个 samples 键）。")
+    parser.add_argument("--temperature", type=float, default=None,
+                        help="生成温度；不给则 k=1 用 0、k>1 用 1（与两个评测工具同口径）。")
     return parser
 
 
@@ -226,6 +272,26 @@ def main() -> None:
     # 提前 fail fast：放大与 max_pixels 不一致会让实验静默失效（图被处理器缩回去），
     # 而日志、耗时、显存全都正常，事后极难发现。
     check_upscale_consistency(args.upscale, args.max_pixels)
+
+    # 思考模式必须配 --single-pass：阶段1 的 stop=["]"] 会在推理文字里的方括号处提前截断，
+    # 拿到半截推理、一个框都解析不出来。这两者的耦合不是偏好，是正确性要求。
+    if args.enable_thinking and not args.single_pass:
+        raise ValueError("--enable-thinking requires --single-pass; the stage-1 stop token "
+                         "would truncate inside the reasoning text")
+
+    # 温度与采样数的耦合。温度 0 采 k 个样本只会得到 k 份相同结果，聚合等于没做；
+    # 而单样本配非零温度不可复现，不能进正式提交。
+    if args.samples < 1:
+        raise ValueError("--samples must be positive")
+    if args.temperature is not None and not 0 <= args.temperature <= 2:
+        raise ValueError("--temperature must be within [0, 2]")
+    effective_temperature = (0.0 if args.samples == 1 else 1.0) \
+        if args.temperature is None else args.temperature
+    if args.samples > 1 and effective_temperature == 0:
+        raise ValueError("--samples > 1 requires --temperature > 0; "
+                         "identical samples make consensus aggregation meaningless")
+    if args.samples == 1 and effective_temperature > 0:
+        raise ValueError("--temperature > 0 with --samples 1 is not reproducible submission output")
 
     queries = args.queries.resolve()
     data_root = args.data_root.resolve()
@@ -247,6 +313,9 @@ def main() -> None:
     config["engine"] = "vllm"
     config["stage1_max_tokens"] = STAGE1_MAX_TOKENS
     config["max_new_tokens"] = MAX_NEW_TOKENS
+    # 采样数与生效温度都要进 run_config，否则事后无法从配置复现「到底采了几个、多热」。
+    config["samples"] = args.samples
+    config["temperature"] = effective_temperature
     if args.single_pass:
         config["generation_mode"] = "single_pass"
         config["stage1_max_tokens"] = None
@@ -313,15 +382,19 @@ def main() -> None:
     #   * 块与块之间释放图像对象，不再累积。
     import gc
 
+    # 单样本时**不传 n**：这样 SamplingParams 与旧版逐字相同，历史配置的可比性不受影响。
+    # 多样本才传 n，且温度必须 > 0（已在 main 开头校验）。
+    extra_sampling = {"n": args.samples} if args.samples > 1 else {}
     if args.single_pass:
-        stage1 = stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
-                                         skip_special_tokens=True)
+        stage1 = stage2 = SamplingParams(temperature=effective_temperature,
+                                         max_tokens=MAX_NEW_TOKENS, skip_special_tokens=True,
+                                         **extra_sampling)
     else:
-        stage1 = SamplingParams(temperature=0.0, max_tokens=STAGE1_MAX_TOKENS,
+        stage1 = SamplingParams(temperature=effective_temperature, max_tokens=STAGE1_MAX_TOKENS,
                                 stop=["]"], include_stop_str_in_output=True,
-                                skip_special_tokens=True)
-        stage2 = SamplingParams(temperature=0.0, max_tokens=MAX_NEW_TOKENS,
-                                skip_special_tokens=True)
+                                skip_special_tokens=True, **extra_sampling)
+        stage2 = SamplingParams(temperature=effective_temperature, max_tokens=MAX_NEW_TOKENS,
+                                skip_special_tokens=True, **extra_sampling)
 
     rows_by_id: dict[str, dict[str, Any]] = {}
     retry: list[dict[str, Any]] = []
@@ -340,29 +413,34 @@ def main() -> None:
 
     for chunk_index, chunk in enumerate(chunks, 1):
         requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
-                                     args.upscale, args.depth_policy)
+                                     args.upscale, args.depth_policy, args.enable_thinking)
         outputs = llm.generate([item["request"] for item in requests], stage2 if args.single_pass else stage1,
                                use_tqdm=False, lora_request=lora_request)
         # 注意：必须用 chunk 里的**原始元组**而不是 requests 里的 item 字典来记录重跑项。
         # build_requests 期望 (index, sample_id, record) 三元组；曾把 item 字典塞进 retry，
         # 阶段2 一调用就抛 "too many values to unpack"，进程崩溃、86 分钟结果全丢。
         for (index, sample_id, record), item, output in zip(chunk, requests, outputs):
-            text = output.outputs[0].text.strip()
-            prediction = parse_generated_bbox(text) if args.single_pass else accept(text)
-            if prediction is None and not args.single_pass:
+            samples, chosen = collect_samples(output, args.single_pass)
+            if chosen is None and not args.single_pass:
+                # k 个样本**全部**不可解析才重跑（不是"第一个不可解析就重跑"）。
+                # 这正是自一致性带来的额外好处：只要有一个样本解出来，这题就不必再花
+                # 一次完整预算重跑，阶段2 的重跑量反而比单样本时更低。
                 retry.append((index, sample_id, record))
                 continue
-            fallback = prediction is None
+            fallback = chosen is None
             emit({
                 "index": item["index"], "id": item["id"], "query": item["query"],
                 "image_paths": item["image_paths"], "prompt": item["prompt"],
-                "bbox": FALLBACK_BOX.copy() if fallback else prediction,
+                "bbox": FALLBACK_BOX.copy() if fallback else chosen["bbox"],
                 "parsed": not fallback, "fallback": fallback,
-                "generated_tokens": len(output.outputs[0].token_ids),
+                "generated_tokens": sum(sample["tokens"] for sample in samples),
                 "input_tokens": len(output.prompt_token_ids),
                 "image_grid_thw": None,
-                "generation_cap_hit": output.outputs[0].finish_reason == "length",
-                "latency_seconds": 0.0, "raw_text": text,
+                "generation_cap_hit": any(sample["finish_reason"] == "length" for sample in samples),
+                "latency_seconds": 0.0,
+                "raw_text": "" if fallback else chosen["text"],
+                "samples": [{key: sample[key] for key in ("text", "bbox", "parsed", "tokens")}
+                            for sample in samples],
                 "stage": "single_pass" if args.single_pass else 1,
             })
         handle.flush()
@@ -382,23 +460,27 @@ def main() -> None:
                 [retry[start:start + args.chunk_size]
                  for start in range(0, len(retry), args.chunk_size)], 1):
             requests = build_requests(tokenizer, chunk, data_root, queries, args.modality,
-                                         args.upscale, args.depth_policy)
+                                         args.upscale, args.depth_policy, args.enable_thinking)
             outputs = llm.generate([item["request"] for item in requests], stage2,
                                    use_tqdm=False, lora_request=lora_request)
             for item, output in zip(requests, outputs):
-                text = output.outputs[0].text.strip()
-                prediction = parse_generated_bbox(text)
-                fallback = prediction is None
+                samples, chosen = collect_samples(output, single_pass=False)
+                fallback = chosen is None
                 emit({
                     "index": item["index"], "id": item["id"], "query": item["query"],
                     "image_paths": item["image_paths"], "prompt": item["prompt"],
-                    "bbox": FALLBACK_BOX.copy() if fallback else prediction,
+                    "bbox": FALLBACK_BOX.copy() if fallback else chosen["bbox"],
                     "parsed": not fallback, "fallback": fallback,
-                    "generated_tokens": len(output.outputs[0].token_ids),
+                    "generated_tokens": sum(sample["tokens"] for sample in samples),
                     "input_tokens": len(output.prompt_token_ids),
                     "image_grid_thw": None,
-                    "generation_cap_hit": output.outputs[0].finish_reason == "length",
-                    "latency_seconds": 0.0, "raw_text": text, "stage": 2,
+                    "generation_cap_hit": any(sample["finish_reason"] == "length"
+                                              for sample in samples),
+                    "latency_seconds": 0.0,
+                    "raw_text": "" if fallback else chosen["text"],
+                    "samples": [{key: sample[key] for key in ("text", "bbox", "parsed", "tokens")}
+                                for sample in samples],
+                    "stage": 2,
                 })
             handle.flush()
             print(f"[阶段2 {chunk_index}] 已完成 {len(rows_by_id)}/{len(items)}", flush=True)

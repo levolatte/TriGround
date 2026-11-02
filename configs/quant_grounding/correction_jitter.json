@@ -1,0 +1,20 @@
+{
+  "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+  "init_adapter": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-550",
+  "train_index": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/train_index.jsonl",
+  "media_root": "/root/autodl-tmp/rematch_20260922/data",
+  "seed": 2026,
+  "learning_rate": 2e-06,
+  "beta": 0.01,
+  "keep_probability": 0.2,
+  "min_pixels": 200704,
+  "max_pixels": 1204224,
+  "max_length": 8192,
+  "gradient_checkpointing": true,
+  "stop_presentations": 2400,
+  "checkpoint_every": 400,
+  "generation_prefill_reuse": false,
+  "jitter_min_iou": 0.6,
+  "jitter_scale_low": 1.0,
+  "jitter_scale_high": 1.3
+}

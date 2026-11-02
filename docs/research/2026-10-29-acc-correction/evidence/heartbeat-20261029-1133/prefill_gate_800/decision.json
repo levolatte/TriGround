@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "accepted": false,
+  "benchmark_reason": "AttributeError: 'NoneType' object has no attribute 'detach'",
+  "error": null,
+  "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-800",
+  "benchmark_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_800/benchmark/report.json",
+  "original_queue_resumed": true,
+  "ended_at": "2026-10-28T21:14:02.078084+00:00"
+}

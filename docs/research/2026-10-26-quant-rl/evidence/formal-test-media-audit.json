@@ -1,0 +1,20 @@
+{
+  "index_dir": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal",
+  "data_root": "/root/autodl-tmp/rematch_20260922/data",
+  "test_root": "/root/autodl-tmp/rematch_20260922/data/official_test_rematch_20260924/Images",
+  "method": "file-size candidates followed by direct byte comparison; no image transformation",
+  "index_rows": {
+    "train_index": 4905,
+    "holdout": 519,
+    "city400_dev": 378,
+    "external94_dev": 88
+  },
+  "unique_index_media": 6543,
+  "test_media": 6005,
+  "candidate_pairs_compared": 7,
+  "exact_match_media": 0,
+  "affected_groups_count": 0,
+  "affected_rows_count": 0,
+  "media_matches": [],
+  "affected_groups": []
+}

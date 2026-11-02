@@ -1,0 +1,46 @@
+{
+  "model_dir": "F:\\AIC\\.work\\grounding_aux_round1\\Qwen3.6-27B-metadata",
+  "template": "qwen3_5",
+  "max_pixels": 2073600,
+  "min_pixels": 200704,
+  "max_length": 8192,
+  "unique_encoded": 581,
+  "elapsed_sec": 79.08,
+  "arms": {
+    "A": {
+      "rows": 1920,
+      "length_min": 706,
+      "length_median": 6091.0,
+      "length_max": 6101,
+      "image_tokens_min": 600,
+      "image_tokens_median": 5940.0,
+      "image_tokens_max": 5940,
+      "answer_tokens_min": 22,
+      "answer_tokens_median": 24.0,
+      "answer_tokens_max": 26
+    },
+    "B": {
+      "rows": 1920,
+      "length_min": 706,
+      "length_median": 6092.0,
+      "length_max": 6173,
+      "image_tokens_min": 600,
+      "image_tokens_median": 5940.0,
+      "image_tokens_max": 5940,
+      "answer_tokens_min": 12,
+      "answer_tokens_median": 24.0,
+      "answer_tokens_max": 26
+    }
+  },
+  "status": "passed",
+  "checks": {
+    "truncated_rows": 0,
+    "final_label_supervised": true,
+    "model_weights_loaded": false,
+    "first_label_masked": true,
+    "empty_supervision_rows": 0,
+    "dropped_rows": 0,
+    "total_rows": 3840
+  },
+  "dataset_messages_priority": "ms-swift 4.5.3 AutoPreprocessor._get_preprocessor selects MessagesPreprocessor when messages is present, ahead of ResponsePreprocessor/query; source inspection core.py:693-700 and 640-664."
+}

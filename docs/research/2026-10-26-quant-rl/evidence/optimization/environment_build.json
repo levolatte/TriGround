@@ -1,0 +1,18 @@
+{
+  "started_at": "2026-10-26T07:26:35.235039+00:00",
+  "status": "built_pending_gpu_checks",
+  "causal_conv1d_version": "1.7.0",
+  "build_limit_seconds": 1200,
+  "build_exit_code": 0,
+  "build_seconds": 642.3254972025752,
+  "packages": {
+    "torch": "2.12.1+cu130",
+    "transformers": "5.16.1",
+    "peft": "0.20.0",
+    "ms-swift": "4.5.3",
+    "bitsandbytes": "0.50.2",
+    "flash-linear-attention": "0.5.2"
+  },
+  "packages_match_baseline": true,
+  "ended_at": "2026-10-26T07:42:32.251904+00:00"
+}

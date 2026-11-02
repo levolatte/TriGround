@@ -1,0 +1,129 @@
+{
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "base_model": {
+    "model_type": "qwen3_5",
+    "source_quantization_config": null
+  },
+  "kernel_implementations": {
+    "torch_chunk_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.chunk",
+      "name": "chunk_gated_delta_rule"
+    },
+    "torch_recurrent_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.fused_recurrent",
+      "name": "fused_recurrent_gated_delta_rule"
+    },
+    "causal_conv1d_fn": {
+      "module": "transformers.models.qwen3_5.modeling_qwen3_5",
+      "name": "causal_conv1d_fn"
+    }
+  },
+  "model": {
+    "precision": "nf4",
+    "linear4_count": 800,
+    "visual_linear_count": 110,
+    "visual_linear_dtypes": [
+      "torch.bfloat16"
+    ],
+    "gate_count": 96,
+    "gate_dtypes": [
+      "torch.bfloat16"
+    ],
+    "head_dtype": "torch.bfloat16",
+    "embedding_dtypes": [
+      "torch.bfloat16"
+    ],
+    "trainable_count": 992,
+    "trainable_examples": [
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_B.default.weight"
+    ],
+    "parameter_storage_bytes": 19156834784,
+    "trainable_parameter_storage_bytes": 933822464,
+    "parameter_storage_note": "PyTorch parameter storage only; excludes bitsandbytes quant_state storage"
+  },
+  "dataset_rows": {
+    "prepared": 800,
+    "encoded": 800
+  },
+  "optimizer": {
+    "optimizer_type": "AcceleratedOptimizer",
+    "optimizer_group_count": 1,
+    "optimizer_parameter_count": 992,
+    "frozen_parameter_count": 1184,
+    "frozen_grad_count": 0
+  },
+  "prompt_observations": {
+    "count": 0,
+    "first": null,
+    "maximum": null
+  },
+  "sft_input_observations": {
+    "count": 400,
+    "first": {
+      "tokens": 3516,
+      "selected_logits_tokens": 26,
+      "image_grid_thw_shape": [
+        3,
+        3
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ]
+      ],
+      "pixel_values_shape": [
+        13500,
+        1536
+      ]
+    },
+    "maximum": {
+      "tokens": 3536,
+      "selected_logits_tokens": 25,
+      "image_grid_thw_shape": [
+        3,
+        3
+      ],
+      "image_grid_thw": [
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ],
+        [
+          1,
+          50,
+          90
+        ]
+      ],
+      "pixel_values_shape": [
+        13500,
+        1536
+      ]
+    }
+  },
+  "phase_timing_note": "CUDA-synchronized wall time: generation includes encoding/inference/postprocess; reference covers null_ref_context body; training covers compute_loss plus accelerator.backward. step_seconds also includes old-policy forward, encoding, optimizer and bookkeeping."
+}

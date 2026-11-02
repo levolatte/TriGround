@@ -1,0 +1,30 @@
+{
+  "precision": "nf4",
+  "linear4_count": 800,
+  "visual_linear_count": 110,
+  "visual_linear_dtypes": [
+    "torch.bfloat16"
+  ],
+  "gate_count": 96,
+  "gate_dtypes": [
+    "torch.bfloat16"
+  ],
+  "head_dtype": "torch.bfloat16",
+  "embedding_dtypes": [
+    "torch.bfloat16"
+  ],
+  "trainable_count": 992,
+  "trainable_examples": [
+    "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_B.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_A.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_B.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_A.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_B.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_A.default.weight",
+    "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_B.default.weight"
+  ],
+  "parameter_storage_bytes": 20090657248,
+  "trainable_parameter_storage_bytes": 933822464,
+  "parameter_storage_note": "PyTorch parameter storage only; excludes bitsandbytes quant_state storage"
+}

@@ -1,0 +1,57 @@
+{
+  "status": "completed",
+  "started_at": "2026-10-28T19:36:46.911903+00:00",
+  "parent_pid": 257429,
+  "child_pid": 257776,
+  "target": 800,
+  "accepted": false,
+  "original_queue_resumed": true,
+  "parent_identity": {
+    "pid": 257429,
+    "state": "S",
+    "ppid": 1,
+    "start_ticks": "772735124",
+    "command": [
+      "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+      "-u",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/scripts/run_acc_correction.py",
+      "--config",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/queue.json",
+      "--output-dir",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029"
+    ]
+  },
+  "child_identity": {
+    "pid": 257776,
+    "state": "R",
+    "ppid": 257429,
+    "start_ticks": "772759157",
+    "command": [
+      "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/train_quant_grounding.py",
+      "--mode",
+      "correction",
+      "--config",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/configs/to_800.json",
+      "--output-dir",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train"
+    ]
+  },
+  "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-800",
+  "boundary_completed_at": "2026-10-28T21:13:02.299842+00:00",
+  "benchmark_command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/benchmark_quant_prefill.py",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+    "--adapter",
+    "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-800",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_800/benchmark"
+  ],
+  "benchmark_pid": 262075,
+  "benchmark_exit_code": 1,
+  "benchmark_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_800/benchmark/report.json",
+  "benchmark_reason": "AttributeError: 'NoneType' object has no attribute 'detach'",
+  "ended_at": "2026-10-28T21:14:02.078084+00:00"
+}

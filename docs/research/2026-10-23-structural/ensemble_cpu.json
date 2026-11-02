@@ -1,0 +1,217 @@
+{
+  "purpose": "旧Qwen3-VL-8B四训练臂固定参数CPU聚合实验；非当前27B、非官方成绩、未调参",
+  "members": [
+    {
+      "name": "A",
+      "path": "../../audit-20260929/evidence/evaluation/A/city412/predictions.jsonl",
+      "family": "A",
+      "weight": 1
+    },
+    {
+      "name": "C0",
+      "path": "../../audit-20260929/evidence/evaluation/C0/city412/predictions.jsonl",
+      "family": "C0",
+      "weight": 1
+    },
+    {
+      "name": "B",
+      "path": "../../audit-20260929/evidence/evaluation/B/city412/predictions.jsonl",
+      "family": "B",
+      "weight": 1
+    },
+    {
+      "name": "V",
+      "path": "../../audit-20260929/evidence/evaluation/V/city412/predictions.jsonl",
+      "family": "V",
+      "weight": 1
+    }
+  ],
+  "path_convention": "members.path 相对本JSON；gt/outputs相对仓库根目录code，源文件原位于工作区F:/AIC/code",
+  "gt": "docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/scoring/city412_gt.json",
+  "threshold": 0.55,
+  "priority": "A,C0,B,V；A为历史已知最好单臂，平局固定优先，不由本轮评分动态决定",
+  "family_definition": "此实验将不同训练臂视为四个family；未来同一权重的不同尺度/采样必须共享family",
+  "groups": {
+    "scene_proxy_count": 46,
+    "definition": "city ID 的第二段地点字段",
+    "image_group_count": 78,
+    "bootstrap_rounds": 2000,
+    "seed": 20261023
+  },
+  "packages": {
+    "numpy": "1.26.4",
+    "ensemble-boxes": "1.0.9",
+    "numba": "0.61.2",
+    "pandas": "2.3.3"
+  },
+  "evaluation": {
+    "baseline": "A",
+    "individual_first_valid_candidate": {
+      "A": {
+        "denominator": 412,
+        "hits": 296,
+        "acc_0.5": 0.7184466019417476,
+        "mean_iou": 0.617789726705067,
+        "invalid_ids": []
+      },
+      "C0": {
+        "denominator": 412,
+        "hits": 292,
+        "acc_0.5": 0.7087378640776699,
+        "mean_iou": 0.6136284094129536,
+        "invalid_ids": []
+      },
+      "B": {
+        "denominator": 412,
+        "hits": 289,
+        "acc_0.5": 0.7014563106796117,
+        "mean_iou": 0.6054973618884666,
+        "invalid_ids": []
+      },
+      "V": {
+        "denominator": 412,
+        "hits": 289,
+        "acc_0.5": 0.7014563106796117,
+        "mean_iou": 0.6073786349176243,
+        "invalid_ids": []
+      }
+    },
+    "methods": {
+      "mean": {
+        "denominator": 412,
+        "hits": 290,
+        "acc_0.5": 0.7038834951456311,
+        "mean_iou": 0.6109716742269934,
+        "invalid_ids": [],
+        "rescued": 1,
+        "damaged": 7,
+        "net_hits": -6,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.033950617283950615,
+          0.0
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      },
+      "median": {
+        "denominator": 412,
+        "hits": 294,
+        "acc_0.5": 0.7135922330097088,
+        "mean_iou": 0.6132663668603759,
+        "invalid_ids": [],
+        "rescued": 3,
+        "damaged": 5,
+        "net_hits": -2,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.023752969121140142,
+          0.00851063829787234
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      },
+      "medoid": {
+        "denominator": 412,
+        "hits": 290,
+        "acc_0.5": 0.7038834951456311,
+        "mean_iou": 0.6128856005213907,
+        "invalid_ids": [],
+        "rescued": 2,
+        "damaged": 8,
+        "net_hits": -6,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.03713527851458886,
+          0.0
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      },
+      "consensus": {
+        "denominator": 412,
+        "hits": 290,
+        "acc_0.5": 0.7038834951456311,
+        "mean_iou": 0.6129397922190997,
+        "invalid_ids": [],
+        "rescued": 2,
+        "damaged": 8,
+        "net_hits": -6,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.03713527851458886,
+          0.0
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      },
+      "cluster_medoid": {
+        "denominator": 412,
+        "hits": 291,
+        "acc_0.5": 0.7063106796116505,
+        "mean_iou": 0.6146878563157194,
+        "invalid_ids": [],
+        "rescued": 2,
+        "damaged": 7,
+        "net_hits": -5,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.03367003367003367,
+          0.002369668246445498
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      },
+      "wbf": {
+        "denominator": 412,
+        "hits": 295,
+        "acc_0.5": 0.7160194174757282,
+        "mean_iou": 0.6166142111656997,
+        "invalid_ids": [],
+        "rescued": 2,
+        "damaged": 3,
+        "net_hits": -1,
+        "scene_bootstrap_delta_acc_95pct": [
+          -0.018796992481203006,
+          0.008771929824561403
+        ],
+        "newly_correct_beyond_original_oracle": 0
+      }
+    },
+    "original_candidate_oracle_hits": 302,
+    "original_candidate_oracle_acc": 0.7330097087378641,
+    "oracle_note": "仅为选择原框的上限，几何融合生成的新框可能超过它"
+  },
+  "pairs": {
+    "A+C0": {
+      "both": 288,
+      "first_only": 8,
+      "second_only": 4,
+      "union": 300
+    },
+    "A+B": {
+      "both": 286,
+      "first_only": 10,
+      "second_only": 3,
+      "union": 299
+    },
+    "A+V": {
+      "both": 286,
+      "first_only": 10,
+      "second_only": 3,
+      "union": 299
+    },
+    "C0+B": {
+      "both": 283,
+      "first_only": 9,
+      "second_only": 6,
+      "union": 298
+    },
+    "C0+V": {
+      "both": 285,
+      "first_only": 7,
+      "second_only": 4,
+      "union": 296
+    },
+    "B+V": {
+      "both": 285,
+      "first_only": 4,
+      "second_only": 4,
+      "union": 293
+    }
+  },
+  "reproduce": "python tools/ensemble_grounding.py --config docs/research/2026-10-23-structural/ensemble_cpu.json --compare-all --iou-threshold 0.55 --gt docs/audit-20260927/evidence/aux_selection_refine_20260927/manifests/scoring/city412_gt.json --baseline A --out-dir ../tmp/structural_20261023/ensemble_cpu_rerun",
+  "reproduce_with_scene_bootstrap": "python docs/research/2026-10-23-structural/run_ensemble_cpu.py",
+  "outputs": "../tmp/structural_20261023/ensemble_cpu",
+  "interpretation": "City412已反复选模；场景重采样仅描述本集配对差，不恢复独立泛化。原框oracle不限制融合新框。"
+}

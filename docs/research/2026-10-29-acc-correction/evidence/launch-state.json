@@ -1,0 +1,16 @@
+{
+  "status": "waiting_for_b550",
+  "started_at": "2026-10-28T18:05:05.587819+00:00",
+  "jobs": [],
+  "results": {
+    "correction": {},
+    "sft": {}
+  },
+  "baselines": {},
+  "baseline_unavailable": {},
+  "selection": "City378 hits, external88 hits; exact ties keep the earlier checkpoint",
+  "current_job": null,
+  "gate_checked_at": "2026-10-28T18:05:05.588137+00:00",
+  "existing_b_status": "running",
+  "diagnostic_status": "waiting_for_boundary"
+}

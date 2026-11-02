@@ -1,0 +1,2210 @@
+{
+  "city378": {
+    "counts": {
+      "warmup50": {
+        "hit": 291,
+        "overlap_below_0.25": 12,
+        "0.25_to_0.4": 20,
+        "zero_overlap": 32,
+        "0.4_to_0.5": 23
+      },
+      "B59": {
+        "hit": 300,
+        "0.25_to_0.4": 19,
+        "zero_overlap": 31,
+        "0.4_to_0.5": 17,
+        "overlap_below_0.25": 11
+      },
+      "C550": {
+        "hit": 303,
+        "overlap_below_0.25": 12,
+        "0.25_to_0.4": 17,
+        "zero_overlap": 28,
+        "0.4_to_0.5": 18
+      },
+      "A100": {
+        "hit": 297,
+        "0.25_to_0.4": 18,
+        "zero_overlap": 29,
+        "0.4_to_0.5": 22,
+        "overlap_below_0.25": 12
+      },
+      "B100": {
+        "hit": 302,
+        "0.25_to_0.4": 17,
+        "zero_overlap": 29,
+        "0.4_to_0.5": 18,
+        "overlap_below_0.25": 12
+      }
+    },
+    "transitions": {
+      "warmup50": {
+        "miss->hit": {
+          "count": 13,
+          "before_bands": {
+            "overlap_below_0.25": 1,
+            "0.4_to_0.5": 8,
+            "0.25_to_0.4": 2,
+            "zero_overlap": 2
+          },
+          "after_bands": {
+            "hit": 13
+          },
+          "items": [
+            {
+              "id": "city_000004_012_00000001_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000004_018_00000341_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000006_011_00000307_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000019_038_00000205_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001879_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001897_005",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001927_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002022_003",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002037_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002037_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002576_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_hehe_52_00000107_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_shuming_1062_00000100_001",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "miss->miss": {
+          "count": 74,
+          "before_bands": {
+            "0.25_to_0.4": 18,
+            "zero_overlap": 30,
+            "0.4_to_0.5": 15,
+            "overlap_below_0.25": 11
+          },
+          "after_bands": {
+            "0.25_to_0.4": 17,
+            "zero_overlap": 29,
+            "0.4_to_0.5": 16,
+            "overlap_below_0.25": 12
+          },
+          "items": [
+            {
+              "id": "city_000004_018_00000341_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000004_018_00000341_011",
+              "before_band": "zero_overlap",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000007_011_00000501_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000008_042_00000273_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000012_022_00000090_001",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000019_038_00000205_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000019_038_00000205_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000021_004_00000065_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000066_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000066_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000081_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000140_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000693_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000696_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001029_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_011",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001229_014",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001685_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001685_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001782_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001782_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001785_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001785_003",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001879_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001879_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_008",
+              "before_band": "zero_overlap",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_010",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_011",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001927_008",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_009",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_010",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002022_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002022_012",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_002",
+              "before_band": "overlap_below_0.25",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_002576_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002842_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002940_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_178_000002_025_00000079_008",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_009",
+              "before_band": "zero_overlap",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_298_000002_074_00000223_003",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_002",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_215_00000189_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_shuming_39_00000018_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 2,
+          "before_bands": {
+            "hit": 2
+          },
+          "after_bands": {
+            "0.4_to_0.5": 2
+          },
+          "items": [
+            {
+              "id": "city_002576_010",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002940_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            }
+          ]
+        }
+      },
+      "B59": {
+        "miss->miss": {
+          "count": 71,
+          "before_bands": {
+            "0.25_to_0.4": 17,
+            "zero_overlap": 29,
+            "0.4_to_0.5": 14,
+            "overlap_below_0.25": 11
+          },
+          "after_bands": {
+            "0.25_to_0.4": 17,
+            "zero_overlap": 29,
+            "0.4_to_0.5": 13,
+            "overlap_below_0.25": 12
+          },
+          "items": [
+            {
+              "id": "city_000004_018_00000341_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000004_018_00000341_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000007_011_00000501_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000008_042_00000273_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000012_022_00000090_001",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000019_038_00000205_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000021_004_00000065_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000066_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000066_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000081_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000693_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000696_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001029_001",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001229_014",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001685_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001685_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001782_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001782_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001785_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001785_003",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001879_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001879_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_010",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_011",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001927_008",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_009",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_010",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002022_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002022_012",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_002576_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002576_011",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002842_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002940_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_178_000002_025_00000079_008",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_298_000002_074_00000223_003",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_002",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_215_00000189_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_shuming_39_00000018_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            }
+          ]
+        },
+        "miss->hit": {
+          "count": 7,
+          "before_bands": {
+            "0.25_to_0.4": 2,
+            "zero_overlap": 2,
+            "0.4_to_0.5": 3
+          },
+          "after_bands": {
+            "hit": 7
+          },
+          "items": [
+            {
+              "id": "city_000006_011_00000307_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000019_038_00000205_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001229_001",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001897_014",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002022_003",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002037_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002576_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 5,
+          "before_bands": {
+            "hit": 5
+          },
+          "after_bands": {
+            "0.4_to_0.5": 5
+          },
+          "items": [
+            {
+              "id": "city_000019_038_00000205_010",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000140_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_004",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_006",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002940_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            }
+          ]
+        }
+      },
+      "A100": {
+        "miss->miss": {
+          "count": 73,
+          "before_bands": {
+            "0.25_to_0.4": 16,
+            "zero_overlap": 28,
+            "0.4_to_0.5": 17,
+            "overlap_below_0.25": 12
+          },
+          "after_bands": {
+            "0.25_to_0.4": 17,
+            "zero_overlap": 27,
+            "0.4_to_0.5": 17,
+            "overlap_below_0.25": 12
+          },
+          "items": [
+            {
+              "id": "city_000004_018_00000341_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000004_018_00000341_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000007_011_00000501_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000008_042_00000273_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000012_022_00000090_001",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000019_038_00000205_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000021_004_00000065_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000066_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000066_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000081_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000140_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000693_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000696_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001029_001",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_011",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001229_014",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001685_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001685_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001782_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001782_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001785_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001785_003",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001879_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001879_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_010",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_011",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001927_008",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_009",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_010",
+              "before_band": "zero_overlap",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002022_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002022_012",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_002576_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002576_011",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002842_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002940_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002940_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_178_000002_025_00000079_008",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_shuming_1062_00000100_002",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_215_00000189_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_shuming_39_00000018_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            }
+          ]
+        },
+        "miss->hit": {
+          "count": 8,
+          "before_bands": {
+            "0.25_to_0.4": 2,
+            "0.4_to_0.5": 5,
+            "zero_overlap": 1
+          },
+          "after_bands": {
+            "hit": 8
+          },
+          "items": [
+            {
+              "id": "city_000006_011_00000307_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000019_038_00000205_006",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000066_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000206_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001229_001",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001685_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001879_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002037_006",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 3,
+          "before_bands": {
+            "hit": 3
+          },
+          "after_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 1
+          },
+          "items": [
+            {
+              "id": "city_000019_038_00000205_007",
+              "before_band": "hit",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001229_004",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_298_000002_074_00000223_003",
+              "before_band": "hit",
+              "after_band": "zero_overlap"
+            }
+          ]
+        }
+      },
+      "C550": {
+        "miss->hit": {
+          "count": 9,
+          "before_bands": {
+            "overlap_below_0.25": 1,
+            "zero_overlap": 1,
+            "0.4_to_0.5": 4,
+            "0.25_to_0.4": 3
+          },
+          "after_bands": {
+            "hit": 9
+          },
+          "items": [
+            {
+              "id": "city_000004_012_00000001_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000006_011_00000307_005",
+              "before_band": "zero_overlap",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_000066_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_001229_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002037_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_002576_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_003595_003",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_hehe_224_000002_041_00000197_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            },
+            {
+              "id": "city_shuming_728_00000270_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "miss->miss": {
+          "count": 66,
+          "before_bands": {
+            "0.25_to_0.4": 14,
+            "zero_overlap": 27,
+            "0.4_to_0.5": 14,
+            "overlap_below_0.25": 11
+          },
+          "after_bands": {
+            "0.25_to_0.4": 16,
+            "zero_overlap": 27,
+            "0.4_to_0.5": 12,
+            "overlap_below_0.25": 11
+          },
+          "items": [
+            {
+              "id": "city_000004_018_00000341_004",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000004_018_00000341_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000004_018_00000341_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000004_018_00000341_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000007_011_00000501_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000008_042_00000273_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000012_022_00000090_001",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000019_038_00000205_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000019_038_00000205_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000021_004_00000065_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000066_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_000066_005",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000081_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000140_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000190_005",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_000693_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000696_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001029_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_011",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001229_014",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001685_002",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001685_005",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001685_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001782_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001782_003",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001785_001",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001785_003",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001879_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_001897_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_010",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_011",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_001897_012",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001927_008",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_009",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_001927_010",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002022_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002022_012",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_002",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002576_003",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_002576_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_006",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_008",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_009",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002576_010",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002576_011",
+              "before_band": "0.25_to_0.4",
+              "after_band": "0.25_to_0.4"
+            },
+            {
+              "id": "city_002842_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002940_001",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_178_000002_025_00000079_008",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_007",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_008",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_009",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_hehe_298_000002_074_00000223_003",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_002",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_1062_00000100_003",
+              "before_band": "zero_overlap",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_004",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_shuming_1132_00000385_005",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_shuming_215_00000189_006",
+              "before_band": "overlap_below_0.25",
+              "after_band": "overlap_below_0.25"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 10,
+          "before_bands": {
+            "hit": 10
+          },
+          "after_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 6,
+            "overlap_below_0.25": 1,
+            "0.25_to_0.4": 1
+          },
+          "items": [
+            {
+              "id": "city_000004_018_00000341_007",
+              "before_band": "hit",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_000019_038_00000205_010",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_000140_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001229_004",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_001879_001",
+              "before_band": "hit",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "city_002022_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002022_006",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_002940_002",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "city_hehe_230_000002_043_00000061_006",
+              "before_band": "hit",
+              "after_band": "overlap_below_0.25"
+            },
+            {
+              "id": "city_shuming_39_00000018_002",
+              "before_band": "hit",
+              "after_band": "0.25_to_0.4"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "external88": {
+    "counts": {
+      "warmup50": {
+        "hit": 85,
+        "overlap_below_0.25": 1,
+        "zero_overlap": 2
+      },
+      "B59": {
+        "hit": 85,
+        "zero_overlap": 2,
+        "0.4_to_0.5": 1
+      },
+      "C550": {
+        "hit": 85,
+        "overlap_below_0.25": 1,
+        "zero_overlap": 2
+      },
+      "A100": {
+        "hit": 85,
+        "zero_overlap": 2,
+        "0.4_to_0.5": 1
+      },
+      "B100": {
+        "hit": 85,
+        "zero_overlap": 2,
+        "0.4_to_0.5": 1
+      }
+    },
+    "transitions": {
+      "warmup50": {
+        "miss->hit": {
+          "count": 1,
+          "before_bands": {
+            "overlap_below_0.25": 1
+          },
+          "after_bands": {
+            "hit": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_137_00000168_q02",
+              "before_band": "overlap_below_0.25",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "miss->miss": {
+          "count": 2,
+          "before_bands": {
+            "zero_overlap": 2
+          },
+          "after_bands": {
+            "zero_overlap": 2
+          },
+          "items": [
+            {
+              "id": "rgbdt500_260_00000028_q02",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "rgbdt500_394_00000219_q01",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 1,
+          "before_bands": {
+            "hit": 1
+          },
+          "after_bands": {
+            "0.4_to_0.5": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_381_00000315_q01",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            }
+          ]
+        }
+      },
+      "B59": {
+        "miss->miss": {
+          "count": 3,
+          "before_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 1
+          },
+          "after_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_260_00000028_q02",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "rgbdt500_381_00000315_q01",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "rgbdt500_394_00000219_q01",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            }
+          ]
+        }
+      },
+      "A100": {
+        "miss->miss": {
+          "count": 3,
+          "before_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 1
+          },
+          "after_bands": {
+            "zero_overlap": 2,
+            "0.4_to_0.5": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_260_00000028_q02",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "rgbdt500_381_00000315_q01",
+              "before_band": "0.4_to_0.5",
+              "after_band": "0.4_to_0.5"
+            },
+            {
+              "id": "rgbdt500_394_00000219_q01",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            }
+          ]
+        }
+      },
+      "C550": {
+        "miss->hit": {
+          "count": 1,
+          "before_bands": {
+            "overlap_below_0.25": 1
+          },
+          "after_bands": {
+            "hit": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_137_00000168_q02",
+              "before_band": "overlap_below_0.25",
+              "after_band": "hit"
+            }
+          ]
+        },
+        "miss->miss": {
+          "count": 2,
+          "before_bands": {
+            "zero_overlap": 2
+          },
+          "after_bands": {
+            "zero_overlap": 2
+          },
+          "items": [
+            {
+              "id": "rgbdt500_260_00000028_q02",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            },
+            {
+              "id": "rgbdt500_394_00000219_q01",
+              "before_band": "zero_overlap",
+              "after_band": "zero_overlap"
+            }
+          ]
+        },
+        "hit->miss": {
+          "count": 1,
+          "before_bands": {
+            "hit": 1
+          },
+          "after_bands": {
+            "0.4_to_0.5": 1
+          },
+          "items": [
+            {
+              "id": "rgbdt500_381_00000315_q01",
+              "before_band": "hit",
+              "after_band": "0.4_to_0.5"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "training_60_100": {
+    "all": {
+      "groups": 164,
+      "answers": 1312,
+      "hit_answers": 1145,
+      "hit_count_histogram": {
+        "0": 11,
+        "1": 4,
+        "2": 1,
+        "3": 1,
+        "4": 2,
+        "5": 4,
+        "6": 6,
+        "7": 8,
+        "8": 127
+      },
+      "mixed_G8": 26,
+      "any_hit_G8": 153,
+      "expected_mixed_G2_subsets": 9.821428571428571,
+      "expected_any_hit_G2_subsets": 148.03571428571428,
+      "mixed_groups_per_100_answers_G8": 1.9817073170731707,
+      "mixed_groups_per_100_answers_G2": 2.9943379790940767
+    },
+    "by_source": {
+      "city": {
+        "groups": 70,
+        "answers": 560,
+        "hit_answers": 434,
+        "hit_count_histogram": {
+          "0": 9,
+          "1": 3,
+          "3": 1,
+          "4": 2,
+          "5": 2,
+          "6": 4,
+          "7": 6,
+          "8": 43
+        },
+        "mixed_G8": 18,
+        "any_hit_G8": 61,
+        "expected_mixed_G2_subsets": 6.7142857142857135,
+        "expected_any_hit_G2_subsets": 57.607142857142854,
+        "mixed_groups_per_100_answers_G8": 3.2142857142857144,
+        "mixed_groups_per_100_answers_G2": 4.795918367346938
+      },
+      "rgbdt": {
+        "groups": 56,
+        "answers": 448,
+        "hit_answers": 445,
+        "hit_count_histogram": {
+          "5": 1,
+          "8": 55
+        },
+        "mixed_G8": 1,
+        "any_hit_G8": 56,
+        "expected_mixed_G2_subsets": 0.5357142857142857,
+        "expected_any_hit_G2_subsets": 55.892857142857146,
+        "mixed_groups_per_100_answers_G8": 0.22321428571428573,
+        "mixed_groups_per_100_answers_G2": 0.47831632653061223
+      },
+      "robo": {
+        "groups": 38,
+        "answers": 304,
+        "hit_answers": 266,
+        "hit_count_histogram": {
+          "0": 2,
+          "1": 1,
+          "2": 1,
+          "5": 1,
+          "6": 2,
+          "7": 2,
+          "8": 29
+        },
+        "mixed_G8": 7,
+        "any_hit_G8": 36,
+        "expected_mixed_G2_subsets": 2.571428571428571,
+        "expected_any_hit_G2_subsets": 34.53571428571429,
+        "mixed_groups_per_100_answers_G8": 2.3026315789473686,
+        "mixed_groups_per_100_answers_G2": 3.383458646616541
+      }
+    },
+    "limits": "G2 is exact subset enumeration of existing G8 answers, not a new training result; training sample hit rates are not development ACC."
+  }
+}

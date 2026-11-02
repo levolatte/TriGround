@@ -1,0 +1,100 @@
+{
+  "overall": {
+    "queries": 378,
+    "samples": 378,
+    "acc05_first": 0.7698412698412699,
+    "acc05_all_samples": 0.7698412698412699,
+    "format_valid": 378,
+    "format_repaired": 0,
+    "valid": 378,
+    "invalid": 0,
+    "truncated": 0,
+    "all_wrong_groups": 87,
+    "mixed_groups": 0,
+    "all_hit_groups": 291,
+    "all_same_reward_groups": 378,
+    "zero_advantage_groups": 378,
+    "generated_tokens": 8569,
+    "timed_seconds": 1519.124900055118,
+    "mean_tokens": 22.66931216931217,
+    "mean_seconds": 4.018848941944756
+  },
+  "by_source": {
+    "city": {
+      "queries": 378,
+      "samples": 378,
+      "acc05_first": 0.7698412698412699,
+      "acc05_all_samples": 0.7698412698412699,
+      "format_valid": 378,
+      "format_repaired": 0,
+      "valid": 378,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 87,
+      "mixed_groups": 0,
+      "all_hit_groups": 291,
+      "all_same_reward_groups": 378,
+      "zero_advantage_groups": 378,
+      "generated_tokens": 8569,
+      "timed_seconds": 1519.124900055118,
+      "mean_tokens": 22.66931216931217,
+      "mean_seconds": 4.018848941944756
+    }
+  },
+  "by_negative_kind": {
+    "none": {
+      "queries": 378,
+      "samples": 378,
+      "acc05_first": 0.7698412698412699,
+      "acc05_all_samples": 0.7698412698412699,
+      "format_valid": 378,
+      "format_repaired": 0,
+      "valid": 378,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 87,
+      "mixed_groups": 0,
+      "all_hit_groups": 291,
+      "all_same_reward_groups": 378,
+      "zero_advantage_groups": 378,
+      "generated_tokens": 8569,
+      "timed_seconds": 1519.124900055118,
+      "mean_tokens": 22.66931216931217,
+      "mean_seconds": 4.018848941944756
+    }
+  },
+  "answer_mode": "short",
+  "reward_mode": "contrast",
+  "format_policy": "punctuation",
+  "samples_per_query": 1,
+  "resource": {
+    "rescore_only": true,
+    "new_generations": 0
+  },
+  "input_files": {
+    "scored": "docs\\research\\2026-10-26-quant-rl\\evidence\\warmup50-city378-scored.jsonl",
+    "raw": "docs\\research\\2026-10-26-quant-rl\\evidence\\warmup50-city378-raw.jsonl",
+    "summary": "docs\\research\\2026-10-26-quant-rl\\evidence\\warmup50-city378-summary.json"
+  },
+  "strict_overall": {
+    "queries": 378,
+    "samples": 378,
+    "acc05_first": 0.7698412698412699,
+    "acc05_all_samples": 0.7698412698412699,
+    "format_valid": 378,
+    "format_repaired": 0,
+    "valid": 378,
+    "invalid": 0,
+    "truncated": 0,
+    "all_wrong_groups": 87,
+    "mixed_groups": 0,
+    "all_hit_groups": 291,
+    "all_same_reward_groups": 378,
+    "zero_advantage_groups": 378,
+    "generated_tokens": 8569,
+    "timed_seconds": 1519.124900055118,
+    "mean_tokens": 22.66931216931217,
+    "mean_seconds": 4.018848941944756
+  },
+  "repairs": []
+}

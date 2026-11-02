@@ -1,0 +1,1391 @@
+{
+  "gpu_hours": 3.0000015637661432,
+  "answer_mode": "thinking",
+  "overall": {
+    "groups": 32,
+    "unique_queries": 32,
+    "observed_answers": 256,
+    "expected_answer_slots": 256,
+    "unobserved_answer_slots": 0,
+    "complete_groups": 32,
+    "incomplete_groups": 0,
+    "outcomes": {
+      "allhit": 0,
+      "allwrong": 32,
+      "mixed": 0
+    },
+    "all_same_reward_groups": 32,
+    "differing_reward_groups": 0,
+    "invalid_answers": 256,
+    "truncated_answers": 230,
+    "differing_reward_groups_per_gpu_hour": 0.0,
+    "expected_answers_per_group": 8
+  },
+  "by_source": {
+    "city": {
+      "groups": 11,
+      "unique_queries": 11,
+      "observed_answers": 88,
+      "expected_answer_slots": 88,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 11,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 11,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 11,
+      "differing_reward_groups": 0,
+      "invalid_answers": 88,
+      "truncated_answers": 83
+    },
+    "rgbdt": {
+      "groups": 15,
+      "unique_queries": 15,
+      "observed_answers": 120,
+      "expected_answer_slots": 120,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 15,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 15,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 15,
+      "differing_reward_groups": 0,
+      "invalid_answers": 120,
+      "truncated_answers": 119
+    },
+    "robo": {
+      "groups": 6,
+      "unique_queries": 6,
+      "observed_answers": 48,
+      "expected_answer_slots": 48,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 6,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 6,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 6,
+      "differing_reward_groups": 0,
+      "invalid_answers": 48,
+      "truncated_answers": 28
+    }
+  },
+  "by_negative_kind": {
+    "extent": {
+      "groups": 12,
+      "unique_queries": 12,
+      "observed_answers": 96,
+      "expected_answer_slots": 96,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 12,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 12,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 12,
+      "differing_reward_groups": 0,
+      "invalid_answers": 96,
+      "truncated_answers": 95
+    },
+    "none": {
+      "groups": 13,
+      "unique_queries": 13,
+      "observed_answers": 104,
+      "expected_answer_slots": 104,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 13,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 13,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 13,
+      "differing_reward_groups": 0,
+      "invalid_answers": 104,
+      "truncated_answers": 89
+    },
+    "wrong_object": {
+      "groups": 7,
+      "unique_queries": 7,
+      "observed_answers": 56,
+      "expected_answer_slots": 56,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 7,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 7,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 7,
+      "differing_reward_groups": 0,
+      "invalid_answers": 56,
+      "truncated_answers": 46
+    }
+  },
+  "by_sampling_pool": {
+    "extent": {
+      "groups": 10,
+      "unique_queries": 10,
+      "observed_answers": 80,
+      "expected_answer_slots": 80,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 10,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 10,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 10,
+      "differing_reward_groups": 0,
+      "invalid_answers": 80,
+      "truncated_answers": 79
+    },
+    "regular_city": {
+      "groups": 11,
+      "unique_queries": 11,
+      "observed_answers": 88,
+      "expected_answer_slots": 88,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 11,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 11,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 11,
+      "differing_reward_groups": 0,
+      "invalid_answers": 88,
+      "truncated_answers": 83
+    },
+    "regular_rgbdt": {
+      "groups": 3,
+      "unique_queries": 3,
+      "observed_answers": 24,
+      "expected_answer_slots": 24,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 3,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 3,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 3,
+      "differing_reward_groups": 0,
+      "invalid_answers": 24,
+      "truncated_answers": 24
+    },
+    "regular_robo": {
+      "groups": 2,
+      "unique_queries": 2,
+      "observed_answers": 16,
+      "expected_answer_slots": 16,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 2,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 2,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 2,
+      "differing_reward_groups": 0,
+      "invalid_answers": 16,
+      "truncated_answers": 6
+    },
+    "wrong_object": {
+      "groups": 6,
+      "unique_queries": 6,
+      "observed_answers": 48,
+      "expected_answer_slots": 48,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 6,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 6,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 6,
+      "differing_reward_groups": 0,
+      "invalid_answers": 48,
+      "truncated_answers": 38
+    }
+  },
+  "answer_diversity": {
+    "status": "unavailable",
+    "reason": "no_matched_parsed_bbox",
+    "raw_completions_provided": false,
+    "raw_sample_count": 256,
+    "groups_with_raw_samples": 32,
+    "groups_with_parsed_bbox": 0,
+    "groups_with_bbox_variation": null,
+    "groups_with_variation_assessable": 0,
+    "mean_unique_parsed_bboxes_per_group": null
+  },
+  "d_failure_categories": {
+    "status": "available",
+    "counts": {
+      "unfinished_thinking": 230,
+      "token_limit_after_thinking": 0,
+      "invalid_final_json": 26,
+      "valid_bbox_wrong_target": 0,
+      "unknown_raw_text": 0,
+      "unknown_target_result": 0
+    }
+  },
+  "kl": {
+    "status": "available",
+    "steps": [
+      {
+        "step": 1,
+        "kl": 0.0
+      },
+      {
+        "step": 2,
+        "kl": 0.0
+      },
+      {
+        "step": 3,
+        "kl": 0.0
+      },
+      {
+        "step": 4,
+        "kl": 0.0
+      },
+      {
+        "step": 5,
+        "kl": 0.0
+      },
+      {
+        "step": 6,
+        "kl": 0.0
+      },
+      {
+        "step": 7,
+        "kl": 0.0
+      },
+      {
+        "step": 8,
+        "kl": 0.0
+      }
+    ],
+    "count": 8,
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "first": 0.0,
+    "last": 0.0
+  },
+  "resources": {
+    "status": "available",
+    "steps": 8,
+    "rollout_groups_reported": 32,
+    "unique_occurrence_ids": 32,
+    "rollout_answers_reported": 256,
+    "last_elapsed_seconds": 9686.849067620933
+  },
+  "groups_detail": [
+    {
+      "group_index": 0,
+      "metrics_record": 0,
+      "key_field": "occurrence_id",
+      "key": "presentation:000000",
+      "id": "city_001763_002",
+      "occurrence_id": "presentation:000000",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 1,
+      "metrics_record": 1,
+      "key_field": "occurrence_id",
+      "key": "presentation:000001",
+      "id": "rgbdt500_072_00000064::q01",
+      "occurrence_id": "presentation:000001",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 2,
+      "metrics_record": 2,
+      "key_field": "occurrence_id",
+      "key": "presentation:000002",
+      "id": "roborefit_wo_0000059_296",
+      "occurrence_id": "presentation:000002",
+      "source": "robo",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 7,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 3,
+      "metrics_record": 3,
+      "key_field": "occurrence_id",
+      "key": "presentation:000003",
+      "id": "city_000012_025_00000313_001",
+      "occurrence_id": "presentation:000003",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 4,
+      "metrics_record": 4,
+      "key_field": "occurrence_id",
+      "key": "presentation:000004",
+      "id": "city_002041_001",
+      "occurrence_id": "presentation:000004",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 5,
+      "metrics_record": 5,
+      "key_field": "occurrence_id",
+      "key": "presentation:000005",
+      "id": "rgbdt500_355_00000254::q01::extent_01",
+      "occurrence_id": "presentation:000005",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 6,
+      "metrics_record": 6,
+      "key_field": "occurrence_id",
+      "key": "presentation:000006",
+      "id": "rgbdt500_083_00000299::q01",
+      "occurrence_id": "presentation:000006",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 7,
+      "metrics_record": 7,
+      "key_field": "occurrence_id",
+      "key": "presentation:000007",
+      "id": "city_000239_002",
+      "occurrence_id": "presentation:000007",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 8,
+      "metrics_record": 8,
+      "key_field": "occurrence_id",
+      "key": "presentation:000008",
+      "id": "city_001582_001",
+      "occurrence_id": "presentation:000008",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 6,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 9,
+      "metrics_record": 9,
+      "key_field": "occurrence_id",
+      "key": "presentation:000009",
+      "id": "roborefit_train_001730",
+      "occurrence_id": "presentation:000009",
+      "source": "robo",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 6,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json"
+      ]
+    },
+    {
+      "group_index": 10,
+      "metrics_record": 10,
+      "key_field": "occurrence_id",
+      "key": "presentation:000010",
+      "id": "rgbdt500_018_00000064::q01",
+      "occurrence_id": "presentation:000010",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 11,
+      "metrics_record": 11,
+      "key_field": "occurrence_id",
+      "key": "presentation:000011",
+      "id": "rgbdt500_110_00000078::q01",
+      "occurrence_id": "presentation:000011",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "regular_rgbdt",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 12,
+      "metrics_record": 12,
+      "key_field": "occurrence_id",
+      "key": "presentation:000012",
+      "id": "city_hehe_10_00000044_009",
+      "occurrence_id": "presentation:000012",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 7,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json"
+      ]
+    },
+    {
+      "group_index": 13,
+      "metrics_record": 13,
+      "key_field": "occurrence_id",
+      "key": "presentation:000013",
+      "id": "rgbdt_wrong_048_b",
+      "occurrence_id": "presentation:000013",
+      "source": "rgbdt",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "regular_rgbdt",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 14,
+      "metrics_record": 14,
+      "key_field": "occurrence_id",
+      "key": "presentation:000014",
+      "id": "city_shuming_838_00000381_003",
+      "occurrence_id": "presentation:000014",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 15,
+      "metrics_record": 15,
+      "key_field": "occurrence_id",
+      "key": "presentation:000015",
+      "id": "city_003678_004",
+      "occurrence_id": "presentation:000015",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 7,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 16,
+      "metrics_record": 16,
+      "key_field": "occurrence_id",
+      "key": "presentation:000016",
+      "id": "roborefit_wo_0007162_33679",
+      "occurrence_id": "presentation:000016",
+      "source": "robo",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 4,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "invalid_final_json",
+        "invalid_final_json",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 17,
+      "metrics_record": 17,
+      "key_field": "occurrence_id",
+      "key": "presentation:000017",
+      "id": "rgbdt500_032_00000191::q01",
+      "occurrence_id": "presentation:000017",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 18,
+      "metrics_record": 18,
+      "key_field": "occurrence_id",
+      "key": "presentation:000018",
+      "id": "city_000014_022_suppl_00000340_002",
+      "occurrence_id": "presentation:000018",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 7,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json"
+      ]
+    },
+    {
+      "group_index": 19,
+      "metrics_record": 19,
+      "key_field": "occurrence_id",
+      "key": "presentation:000019",
+      "id": "rgbdt_wrong_224_b",
+      "occurrence_id": "presentation:000019",
+      "source": "rgbdt",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 20,
+      "metrics_record": 20,
+      "key_field": "occurrence_id",
+      "key": "presentation:000020",
+      "id": "city_001979_004",
+      "occurrence_id": "presentation:000020",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 21,
+      "metrics_record": 21,
+      "key_field": "occurrence_id",
+      "key": "presentation:000021",
+      "id": "roborefit_train_000111",
+      "occurrence_id": "presentation:000021",
+      "source": "robo",
+      "negative_kind": "none",
+      "sampling_pool": "regular_robo",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 3,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "invalid_final_json"
+      ]
+    },
+    {
+      "group_index": 22,
+      "metrics_record": 22,
+      "key_field": "occurrence_id",
+      "key": "presentation:000022",
+      "id": "rgbdt_wrong_078_a",
+      "occurrence_id": "presentation:000022",
+      "source": "rgbdt",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 23,
+      "metrics_record": 23,
+      "key_field": "occurrence_id",
+      "key": "presentation:000023",
+      "id": "roborefit_wo_0003112_15383",
+      "occurrence_id": "presentation:000023",
+      "source": "robo",
+      "negative_kind": "wrong_object",
+      "sampling_pool": "wrong_object",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 5,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "invalid_final_json",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 24,
+      "metrics_record": 24,
+      "key_field": "occurrence_id",
+      "key": "presentation:000024",
+      "id": "rgbdt500_093_00000114::q01",
+      "occurrence_id": "presentation:000024",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 25,
+      "metrics_record": 25,
+      "key_field": "occurrence_id",
+      "key": "presentation:000025",
+      "id": "roborefit_train_000919",
+      "occurrence_id": "presentation:000025",
+      "source": "robo",
+      "negative_kind": "none",
+      "sampling_pool": "regular_robo",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 3,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "invalid_final_json",
+        "invalid_final_json",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 26,
+      "metrics_record": 26,
+      "key_field": "occurrence_id",
+      "key": "presentation:000026",
+      "id": "rgbdt500_064_00000334::q01",
+      "occurrence_id": "presentation:000026",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "regular_rgbdt",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 27,
+      "metrics_record": 27,
+      "key_field": "occurrence_id",
+      "key": "presentation:000027",
+      "id": "rgbdt500_353_00000566::q01",
+      "occurrence_id": "presentation:000027",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 28,
+      "metrics_record": 28,
+      "key_field": "occurrence_id",
+      "key": "presentation:000028",
+      "id": "rgbdt500_323_00000118::q01",
+      "occurrence_id": "presentation:000028",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 7,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "invalid_final_json",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 29,
+      "metrics_record": 29,
+      "key_field": "occurrence_id",
+      "key": "presentation:000029",
+      "id": "city_shuming_78_00000046_010",
+      "occurrence_id": "presentation:000029",
+      "source": "city",
+      "negative_kind": "none",
+      "sampling_pool": "regular_city",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 30,
+      "metrics_record": 30,
+      "key_field": "occurrence_id",
+      "key": "presentation:000030",
+      "id": "rgbdt500_346_00000131::q01",
+      "occurrence_id": "presentation:000030",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    },
+    {
+      "group_index": 31,
+      "metrics_record": 31,
+      "key_field": "occurrence_id",
+      "key": "presentation:000031",
+      "id": "rgbdt500_348_00000247::q01",
+      "occurrence_id": "presentation:000031",
+      "source": "rgbdt",
+      "negative_kind": "extent",
+      "sampling_pool": "extent",
+      "answer_count": 8,
+      "complete": true,
+      "outcome": "allwrong",
+      "all_same_reward": true,
+      "invalid_answers": 8,
+      "truncated_answers": 8,
+      "answer_diversity": {
+        "status": "unavailable",
+        "reason": "no_parsed_bbox",
+        "parsed_bbox_count": 0,
+        "unique_parsed_bbox_count": null,
+        "parsed_bbox_variation": null
+      },
+      "d_failure_categories": [
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking",
+        "unfinished_thinking"
+      ]
+    }
+  ]
+}

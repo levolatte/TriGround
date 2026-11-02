@@ -1,0 +1,133 @@
+{
+  "checked_at": "2026-10-27T05:21:18.002933+00:00",
+  "queue_status": "running",
+  "arm": "D",
+  "stage": "final_eval_city378",
+  "completed_arms": [
+    "B",
+    "C"
+  ],
+  "queue_results": {
+    "B": {
+      "final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/checkpoint-59",
+      "final_step": 59,
+      "final_query_exposures": 236,
+      "final_evaluation": {
+        "city378": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/city378/summary.json",
+        "external88": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/external88/summary.json"
+      },
+      "matched_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/matched-exposure-checkpoint-59"
+    },
+    "C": {
+      "final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-550",
+      "final_step": 550,
+      "final_query_exposures": 4400,
+      "final_evaluation": {
+        "city378": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/city378/summary.json",
+        "external88": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/external88/summary.json"
+      },
+      "matched_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/matched-exposure-checkpoint-29"
+    },
+    "D": {
+      "training": {
+        "status": "budget_exhausted",
+        "recovery_status": "recovered_checkpoint"
+      },
+      "executed_training_step": 8,
+      "executed_query_exposures": 32,
+      "final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_D_seed2026/train/checkpoint-6",
+      "final_step": 6,
+      "final_query_exposures": 24,
+      "final_evaluation": {}
+    }
+  },
+  "optimization_phase": "BCD_queue_running",
+  "active_budget_jobs": 1,
+  "settled_gpu_hours": 32.339649542517805,
+  "running_gpu_hours_estimate": 1.9504404972222222,
+  "total_gpu_hours_estimate": 34.29009003974003,
+  "overall_cap_gpu_hours": 72,
+  "disk_free_gib": 10.423900604248047,
+  "completed_updates": 8,
+  "completed_query_exposures": 32,
+  "last_resource": {
+    "step": 8,
+    "step_seconds": 1275.847680553794,
+    "elapsed_seconds": 9686.849067620933,
+    "allocated_peak_bytes": 29543957504,
+    "reserved_peak_bytes": 32069648384,
+    "nonzero_finite_lora_gradient_seen": false,
+    "generation_seconds": 880.5267985090613,
+    "old_policy_forward_seconds": 69.89469138532877,
+    "ref_forward_seconds": 69.89808681979775,
+    "training_forward_backward_seconds": 231.9120168685913,
+    "gradient_audit_seconds": 0.09724147245287895,
+    "optimizer_seconds": 0.012016039341688156,
+    "encoding_wall_seconds": 16.848577097058296,
+    "rollout_groups": 4,
+    "rollout_answers": 32,
+    "rollout_occurrence_ids": [
+      "presentation:000028",
+      "presentation:000029",
+      "presentation:000030",
+      "presentation:000031"
+    ],
+    "prompt_count": 32,
+    "prompt_tokens_step_max": 3504,
+    "first_prompt_tokens": 3489,
+    "max_prompt_tokens": 3509
+  },
+  "last_metrics": {
+    "step": 8,
+    "elapsed_seconds": 9686.85081967339,
+    "metrics": {
+      "loss": 0.0,
+      "grad_norm": 0.0,
+      "learning_rate": 2e-06,
+      "completions/mean_length": 381.4375,
+      "completions/min_length": 363.5,
+      "completions/max_length": 384.0,
+      "completions/clipped_ratio": 0.96875,
+      "reward": -0.2,
+      "reward_std": 0.0,
+      "frac_reward_zero_std": 1.0,
+      "rewards/QuantBBoxContrastThinkingReward/mean": -0.2,
+      "rewards/QuantBBoxContrastThinkingReward/std": 0.0,
+      "kl": 0.0,
+      "clip_ratio/low_mean": 0.0,
+      "clip_ratio/low_min": 0.0,
+      "clip_ratio/high_mean": 0.0,
+      "clip_ratio/high_max": 0.0,
+      "clip_ratio/region_mean": 0.0,
+      "step_time": 1275.64230444,
+      "epoch": 0.00166667,
+      "global_step/max_steps": "8/1000000",
+      "elapsed_time": "2h 40m 38s",
+      "remaining_time": "13943d 20h 27m 35s",
+      "memory(GiB)": 29.87,
+      "train_speed(s/it)": 1204.758493
+    }
+  },
+  "checkpoints": [
+    "checkpoint-6",
+    "last-checkpoint"
+  ],
+  "any_nonzero_gradient": false,
+  "all_recorded_gradients_finite": true,
+  "completed_answers": 256,
+  "completed_groups_same_reward": 32,
+  "completed_groups_different_reward": 0,
+  "completed_invalid_answers": 256,
+  "completed_truncated_answers": 230,
+  "evaluation_progress": {
+    "city378": {
+      "expected_queries": 378,
+      "raw_answers_written": 258
+    },
+    "external88": {
+      "expected_queries": 88,
+      "raw_answers_written": 0
+    }
+  },
+  "gpu": "23779 MiB, 49140 MiB, 38 %"
+}

@@ -1,0 +1,66 @@
+{
+  "correction": {
+    "segment_seconds": 9348.824302843772,
+    "name": "correction",
+    "presentations": 1600,
+    "updates": 374,
+    "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-1600",
+    "training_seconds": 19156.756824274547,
+    "city378": {
+      "hits": 313,
+      "queries": 378,
+      "acc05": 0.828042328042328,
+      "seconds": 1493.9780813176185,
+      "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/city378/attempt-1",
+      "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/city378/attempt-1/summary.json",
+      "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/city378/attempt-1/predictions.jsonl",
+      "status": "completed"
+    },
+    "external88": {
+      "hits": 84,
+      "queries": 88,
+      "acc05": 0.9545454545454546,
+      "seconds": 348.5693106697872,
+      "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/external88/attempt-1",
+      "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/external88/attempt-1/summary.json",
+      "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/eval/presentations-1600/external88/attempt-1/predictions.jsonl",
+      "status": "completed"
+    },
+    "status": "completed",
+    "completed_at": "2026-10-29T02:27:55.306944+00:00",
+    "comparisons": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/comparisons/presentations-1600.json",
+    "selection": "City378 hits, external88 hits; exact ties keep the earlier checkpoint"
+  },
+  "sft": {
+    "segment_seconds": 3740.8017416978255,
+    "name": "sft",
+    "presentations": 1600,
+    "updates": 400,
+    "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/train/checkpoint-1600",
+    "training_seconds": 7511.107089665718,
+    "city378": {
+      "hits": 308,
+      "queries": 378,
+      "acc05": 0.8148148148148148,
+      "seconds": 1498.7621013233438,
+      "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/city378/attempt-1",
+      "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/city378/attempt-1/summary.json",
+      "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/city378/attempt-1/predictions.jsonl",
+      "status": "completed"
+    },
+    "external88": {
+      "hits": 84,
+      "queries": 88,
+      "acc05": 0.9545454545454546,
+      "seconds": 348.86657569464296,
+      "output": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/external88/attempt-1",
+      "summary": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/external88/attempt-1/summary.json",
+      "predictions": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/eval/presentations-1600/external88/attempt-1/predictions.jsonl",
+      "status": "completed"
+    },
+    "status": "completed",
+    "completed_at": "2026-10-29T04:02:04.146151+00:00",
+    "comparisons": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/sft/comparisons/presentations-1600.json",
+    "selection": "City378 hits, external88 hits; exact ties keep the earlier checkpoint"
+  }
+}

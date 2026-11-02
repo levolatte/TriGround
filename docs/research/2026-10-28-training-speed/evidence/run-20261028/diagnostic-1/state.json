@@ -1,0 +1,67 @@
+{
+  "parent_pid": 132174,
+  "child_pid": 191775,
+  "jobs": [
+    {
+      "name": "forward_diagnostic",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028/tools/benchmark_shared_prefix.py",
+        "diagnose",
+        "--bundle",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_bundle",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/arm_config.json",
+        "--adapter",
+        "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+        "--model",
+        "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+        "--precision",
+        "nf4",
+        "--output",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/diagnostic-1/forward_diagnostic"
+      ],
+      "started_at": "2026-10-28T14:48:58.655416+00:00",
+      "exit_code": 0,
+      "seconds": 139.56369653716683
+    },
+    {
+      "name": "forward_layer_0",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028/tools/benchmark_shared_prefix.py",
+        "diagnose",
+        "--bundle",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_bundle",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/arm_config.json",
+        "--adapter",
+        "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+        "--model",
+        "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+        "--precision",
+        "nf4",
+        "--trace-layer",
+        "0",
+        "--output",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/diagnostic-1/forward_layer_0"
+      ],
+      "started_at": "2026-10-28T14:51:18.244007+00:00",
+      "exit_code": 0,
+      "seconds": 128.12012428976595
+    }
+  ],
+  "code": "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028",
+  "original_queue_resumed": true,
+  "status": "completed",
+  "current_job": null,
+  "parent_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python -u /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py ",
+  "child_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py --code /root/autodl-tmp/quant_rl_20261026/code --train-segment /root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/configs/to_100.json ",
+  "updated_at": "2026-10-28T14:53:26.390153+00:00",
+  "boundary_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/train/checkpoint-100",
+  "boundary_step": 100,
+  "reused_preparation": "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028",
+  "diagnostic_output": "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/diagnostic-1/forward_diagnostic",
+  "detail_output": "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/diagnostic-1/forward_layer_0",
+  "note": "Forward diagnosis only; inspect first divergence before changing or adopting shared prefix"
+}

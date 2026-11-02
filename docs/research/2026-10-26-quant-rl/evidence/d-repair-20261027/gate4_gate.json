@@ -1,0 +1,43 @@
+{
+  "passed": false,
+  "queries": 4,
+  "answers": 32,
+  "valid": 31,
+  "valid_rate": 0.96875,
+  "truncated": 0,
+  "truncated_rate": 0.0,
+  "min_valid_rate": 0.0,
+  "max_truncated_rate": 1.0,
+  "min_geometry_groups": 2,
+  "geometry_reward_groups": 0,
+  "groups": [
+    {
+      "id": "city_001763_002",
+      "valid": 7,
+      "reward_difference": 1.3,
+      "geometry_reward_pairs": 0,
+      "geometry_reward_signal": false
+    },
+    {
+      "id": "rgbdt500_072_00000064::q01",
+      "valid": 8,
+      "reward_difference": 0.0,
+      "geometry_reward_pairs": 0,
+      "geometry_reward_signal": false
+    },
+    {
+      "id": "roborefit_wo_0000059_296",
+      "valid": 8,
+      "reward_difference": 0.0,
+      "geometry_reward_pairs": 0,
+      "geometry_reward_signal": false
+    },
+    {
+      "id": "city_000012_025_00000313_001",
+      "valid": 8,
+      "reward_difference": 0.0,
+      "geometry_reward_pairs": 0,
+      "geometry_reward_signal": false
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "global_step": 100,
+  "adapter": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/best_adapter",
+  "score": [
+    0.798941798941799,
+    0.9659090909090909,
+    0.6706171191622368,
+    0.874681064322064
+  ],
+  "selection": "city378 ACC@0.5, external88 ACC@0.5, city378 mean IoU, external88 mean IoU",
+  "summaries": {
+    "city378": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/city378/attempt-1/summary.json",
+    "external88": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/B/eval/step-100/external88/attempt-1/summary.json"
+  }
+}

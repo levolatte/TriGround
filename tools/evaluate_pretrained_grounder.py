@@ -47,6 +47,11 @@ RESUME_OPTIONAL_KEYS = {
     "auxiliary_adapter": None,
     "model_max_length": 4096,
     "enable_thinking": True,
+    # 自一致性采样投票引入的两个键。历史 run（包括产出 0.8267 的那次）的 run_config 里
+    # 没有它们，默认值必须等价于旧行为（1 个样本、贪心），否则那些 run 就再也不能
+    # --package-only 重新打包了。
+    "samples": 1,
+    "temperature": 0.0,
 }
 
 

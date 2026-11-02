@@ -287,6 +287,7 @@ class MappingEngine:
 @pytest.mark.parametrize("cap,expected_calls", [
     (1, [["a"], ["b"], ["c"]]),
     (2, [["a", "b"], ["c"]]),
+    (4, [["a", "b", "c"]]),
 ])
 def test_hf_g1_batches_distinct_queries_without_response_mix(
     tmp_path, monkeypatch, fake_generation_modules, cap, expected_calls
@@ -310,6 +311,55 @@ def test_hf_g1_flushes_completed_batch_before_later_failure(tmp_path, monkeypatc
         ev.generate_rows(args, fake_rows(tmp_path))
     assert engine.calls == [["a", "b"], ["c"]]
     assert [item["id"] for item in ev.read_jsonl(args.output_dir / "predictions_raw.jsonl")] == ["a", "b"]
+
+
+def test_hf_resume_appends_only_remaining_ids_and_returns_all_rows(tmp_path, monkeypatch, fake_generation_modules):
+    args = fake_args(tmp_path, cap=2)
+    dataset = fake_rows(tmp_path)
+    raw_path = args.output_dir / "predictions_raw.jsonl"
+    saved = pred("a", GOOD)
+    ev.write_jsonl(raw_path, [saved])
+    original = raw_path.read_bytes()
+    args.resume = True
+    engine = MappingEngine(2)
+    monkeypatch.setattr(ev, "create_engine", lambda args: pytest.fail("loaded engine should be reused"))
+    generated, resource = ev.generate_rows(args, dataset, engine=engine)
+    assert engine.calls == [["b", "c"]]
+    assert generated[0] == saved
+    assert [item["id"] for item in generated] == ["a", "b", "c"]
+    assert raw_path.read_bytes().startswith(original)
+    assert ev.read_jsonl(raw_path) == generated
+    assert (resource["resumed_queries"], resource["new_queries"]) == (1, 2)
+
+
+@pytest.mark.parametrize("ids", [["b"], ["a", "a"], ["a", "b", "c", "d"]])
+def test_resume_rejects_nonprefix_ids_before_model_loading(tmp_path, monkeypatch, ids):
+    args = fake_args(tmp_path)
+    args.resume = True
+    raw_path = args.output_dir / "predictions_raw.jsonl"
+    ev.write_jsonl(raw_path, [pred(sample_id, GOOD) for sample_id in ids])
+    original = raw_path.read_bytes()
+    monkeypatch.setattr(ev, "create_engine", lambda args: pytest.fail("must reject before loading"))
+    with pytest.raises(ValueError, match="exact dataset prefix"):
+        ev.generate_rows(args, fake_rows(tmp_path))
+    assert raw_path.read_bytes() == original
+
+
+def test_completed_resume_does_not_import_gpu_engine(tmp_path, monkeypatch):
+    args = fake_args(tmp_path)
+    args.resume = True
+    dataset = fake_rows(tmp_path)
+    saved = [pred(item["id"], GOOD) for item in dataset]
+    ev.write_jsonl(args.output_dir / "predictions_raw.jsonl", saved)
+    monkeypatch.setattr(ev, "create_engine", lambda args: pytest.fail("completed run needs no model"))
+    generated, resource = ev.generate_rows(args, dataset)
+    assert generated == saved and resource["new_queries"] == 0
+
+
+@pytest.mark.parametrize("value", ["0", "-1"])
+def test_eval_rejects_nonpositive_hf_batch_size(value):
+    with pytest.raises(SystemExit):
+        ev.build_parser().parse_args(["--dataset", "data", "--output-dir", "out", "--hf-max-batch-size", value])
 
 
 def test_hf_g8_keeps_one_query_per_infer_and_n1(tmp_path, monkeypatch, fake_generation_modules):

@@ -1,0 +1,1909 @@
+{
+  "metric": "per-query first-answer hit at IoU >= 0.5; punctuation rescore",
+  "inputs": {
+    "punctuation_root": "docs/research/2026-10-26-quant-rl/evidence/punctuation",
+    "c_raw_scored": [
+      "docs/research/2026-10-26-quant-rl/evidence/c-final-city378-scored.jsonl",
+      "docs/research/2026-10-26-quant-rl/evidence/c-final-external88-scored.jsonl"
+    ]
+  },
+  "validation": {
+    "checks": [
+      {
+        "model": "A",
+        "split": "city378",
+        "rows": 378,
+        "unique_ids": 378,
+        "single_answer": true,
+        "hits": 295,
+        "format_repaired": 0,
+        "source_counts": {
+          "city": 378
+        },
+        "summary_consistent": true
+      },
+      {
+        "model": "A",
+        "split": "external88",
+        "rows": 88,
+        "unique_ids": 88,
+        "single_answer": true,
+        "hits": 85,
+        "format_repaired": 0,
+        "source_counts": {
+          "rgbdt": 88
+        },
+        "summary_consistent": true
+      },
+      {
+        "model": "B",
+        "split": "city378",
+        "rows": 378,
+        "unique_ids": 378,
+        "single_answer": true,
+        "hits": 300,
+        "format_repaired": 0,
+        "source_counts": {
+          "city": 378
+        },
+        "summary_consistent": true
+      },
+      {
+        "model": "B",
+        "split": "external88",
+        "rows": 88,
+        "unique_ids": 88,
+        "single_answer": true,
+        "hits": 85,
+        "format_repaired": 1,
+        "source_counts": {
+          "rgbdt": 88
+        },
+        "summary_consistent": true
+      },
+      {
+        "model": "C",
+        "split": "city378",
+        "rows": 378,
+        "unique_ids": 378,
+        "single_answer": true,
+        "hits": 303,
+        "format_repaired": 0,
+        "source_counts": {
+          "city": 378
+        },
+        "summary_consistent": true
+      },
+      {
+        "model": "C",
+        "split": "external88",
+        "rows": 88,
+        "unique_ids": 88,
+        "single_answer": true,
+        "hits": 85,
+        "format_repaired": 0,
+        "source_counts": {
+          "rgbdt": 88
+        },
+        "summary_consistent": true
+      }
+    ],
+    "identical_id_sets_by_split": true,
+    "city_external_id_disjoint": true,
+    "source_group_solution_negative_kind_match_by_id": true,
+    "c_punctuation_matches_original_scored": true,
+    "c_normalized_text_matches_original": true,
+    "c_format_repairs": 0
+  },
+  "comparisons": {
+    "C_vs_A": {
+      "overall": {
+        "queries": 466,
+        "previous_hits": 380,
+        "c_hits": 388,
+        "rescued": 17,
+        "regressed": 9,
+        "both_hit": 371,
+        "both_miss": 69,
+        "net_gain": 8
+      },
+      "by_source": {
+        "city": {
+          "rescued": 16,
+          "regressed": 8,
+          "both_hit": 287,
+          "both_miss": 67,
+          "queries": 378,
+          "previous_hits": 295,
+          "c_hits": 303,
+          "net_gain": 8
+        },
+        "rgbdt": {
+          "rescued": 1,
+          "regressed": 1,
+          "both_hit": 84,
+          "both_miss": 2,
+          "queries": 88,
+          "previous_hits": 85,
+          "c_hits": 85,
+          "net_gain": 0
+        }
+      },
+      "changed": [
+        {
+          "id": "city_000004_012_00000001_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000004_012_00000001",
+          "solution": [
+            0.410417,
+            0.353704,
+            0.476042,
+            0.491667
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[409,356,478,491]}",
+            "bbox": [
+              0.409,
+              0.356,
+              0.478,
+              0.491
+            ],
+            "iou": 0.9316393599391134,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[409,356,478,944]}",
+            "bbox": [
+              0.409,
+              0.356,
+              0.478,
+              0.944
+            ],
+            "iou": 0.21862873386878462,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_000004_018_00000341_007",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000004_018_00000341",
+          "solution": [
+            0.326563,
+            0.090741,
+            0.339583,
+            0.138889
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[779,88,790,153]}",
+            "bbox": [
+              0.779,
+              0.088,
+              0.79,
+              0.153
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[323,97,338,144]}",
+            "bbox": [
+              0.323,
+              0.097,
+              0.338,
+              0.144
+            ],
+            "iou": 0.5617766265209466,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000006_011_00000307_005",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000006_011_00000307",
+          "solution": [
+            0.760417,
+            0.340741,
+            0.770313,
+            0.362963
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[759,335,772,367]}",
+            "bbox": [
+              0.759,
+              0.335,
+              0.772,
+              0.367
+            ],
+            "iou": 0.5286271923076923,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[889,327,900,354]}",
+            "bbox": [
+              0.889,
+              0.327,
+              0.9,
+              0.354
+            ],
+            "iou": 0.0,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_000006_011_00000307_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000006_011_00000307",
+          "solution": [
+            0.645833,
+            0.348148,
+            0.657813,
+            0.369444
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[644,350,658,411]}",
+            "bbox": [
+              0.644,
+              0.35,
+              0.658,
+              0.411
+            ],
+            "iou": 0.26585549732445224,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[646,350,658,370]}",
+            "bbox": [
+              0.646,
+              0.35,
+              0.658,
+              0.37
+            ],
+            "iou": 0.865344599948696,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000019_038_00000205_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000019_038_00000205",
+          "solution": [
+            0.803646,
+            0.207407,
+            0.846875,
+            0.412963
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[821,200,877,438]}",
+            "bbox": [
+              0.821,
+              0.2,
+              0.877,
+              0.438
+            ],
+            "iou": 0.3148086778517842,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[803,206,840,404]}",
+            "bbox": [
+              0.803,
+              0.206,
+              0.84,
+              0.404
+            ],
+            "iou": 0.788407241653073,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000066_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000066",
+          "solution": [
+            0.559896,
+            0.449074,
+            0.577604,
+            0.50926
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[553,446,575,504]}",
+            "bbox": [
+              0.553,
+              0.446,
+              0.575,
+              0.504
+            ],
+            "iou": 0.5486165872320209,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[555,446,573,500]}",
+            "bbox": [
+              0.555,
+              0.446,
+              0.573,
+              0.5
+            ],
+            "iou": 0.4869491579059882,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_000140_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000140",
+          "solution": [
+            0.370312,
+            0.310185,
+            0.382292,
+            0.336111
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[369,314,379,333]}",
+            "bbox": [
+              0.369,
+              0.314,
+              0.379,
+              0.333
+            ],
+            "iou": 0.49198638489553714,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[369,314,379,334]}",
+            "bbox": [
+              0.369,
+              0.314,
+              0.379,
+              0.334
+            ],
+            "iou": 0.5158632093223045,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000206_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000206",
+          "solution": [
+            0.169271,
+            0.515741,
+            0.190625,
+            0.660185
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[168,512,209,663]}",
+            "bbox": [
+              0.168,
+              0.512,
+              0.209,
+              0.663
+            ],
+            "iou": 0.49821631012760437,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[164,510,200,664]}",
+            "bbox": [
+              0.164,
+              0.51,
+              0.2,
+              0.664
+            ],
+            "iou": 0.5563595194805191,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001229_001",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001229",
+          "solution": [
+            0.0,
+            0.099074,
+            0.051562,
+            0.147222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[153,0,254,52]}",
+            "bbox": [
+              0.153,
+              0.0,
+              0.254,
+              0.052
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,100,43,141]}",
+            "bbox": [
+              0.0,
+              0.1,
+              0.043,
+              0.141
+            ],
+            "iou": 0.7101405397693893,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001879_001",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001879",
+          "solution": [
+            0.0,
+            0.101852,
+            0.059375,
+            0.14537
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[153,0,254,52]}",
+            "bbox": [
+              0.153,
+              0.0,
+              0.254,
+              0.052
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,100,43,142]}",
+            "bbox": [
+              0.0,
+              0.1,
+              0.043,
+              0.142
+            ],
+            "iou": 0.6481519877522849,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001879_012",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001879",
+          "solution": [
+            0.29427,
+            0.647223,
+            0.322396,
+            0.686111
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[293,645,343,682]}",
+            "bbox": [
+              0.293,
+              0.645,
+              0.343,
+              0.682
+            ],
+            "iou": 0.49762157651898353,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[293,644,343,684]}",
+            "bbox": [
+              0.293,
+              0.644,
+              0.343,
+              0.684
+            ],
+            "iou": 0.5022836595159367,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001897_014",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001897",
+          "solution": [
+            0.29375,
+            0.660185,
+            0.321354,
+            0.697222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[290,659,343,698]}",
+            "bbox": [
+              0.29,
+              0.659,
+              0.343,
+              0.698
+            ],
+            "iou": 0.4946150691823896,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[289,659,320,698]}",
+            "bbox": [
+              0.289,
+              0.659,
+              0.32,
+              0.698
+            ],
+            "iou": 0.7721262110027041,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002022_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002022",
+          "solution": [
+            0.103646,
+            0.17963,
+            0.182812,
+            0.244444
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[96,193,179,226]}",
+            "bbox": [
+              0.096,
+              0.193,
+              0.179,
+              0.226
+            ],
+            "iou": 0.4619180806422575,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[95,190,180,227]}",
+            "bbox": [
+              0.095,
+              0.19,
+              0.18,
+              0.227
+            ],
+            "iou": 0.5182746356259258,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002022_003",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002022",
+          "solution": [
+            0.276042,
+            0.07037,
+            0.379688,
+            0.14537
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[319,191,391,224]}",
+            "bbox": [
+              0.319,
+              0.191,
+              0.391,
+              0.224
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[278,79,373,131]}",
+            "bbox": [
+              0.278,
+              0.079,
+              0.373,
+              0.131
+            ],
+            "iou": 0.6354964655333215,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002037_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002037",
+          "solution": [
+            0.138542,
+            0.092592,
+            0.226042,
+            0.152778
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[138,105,220,138]}",
+            "bbox": [
+              0.138,
+              0.105,
+              0.22,
+              0.138
+            ],
+            "iou": 0.5087116005738663,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[138,106,220,138]}",
+            "bbox": [
+              0.138,
+              0.106,
+              0.22,
+              0.138
+            ],
+            "iou": 0.4933467004339264,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_002037_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002037",
+          "solution": [
+            0.354688,
+            0.089815,
+            0.436458,
+            0.144445
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[358,100,430,131]}",
+            "bbox": [
+              0.358,
+              0.1,
+              0.43,
+              0.131
+            ],
+            "iou": 0.49965356681123707,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[358,98,430,131]}",
+            "bbox": [
+              0.358,
+              0.098,
+              0.43,
+              0.131
+            ],
+            "iou": 0.5318892807990591,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002576_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002576",
+          "solution": [
+            0.49375,
+            0.194444,
+            0.502084,
+            0.222222
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[491,196,503,221]}",
+            "bbox": [
+              0.491,
+              0.196,
+              0.503,
+              0.221
+            ],
+            "iou": 0.6447433264284641,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[493,196,511,221]}",
+            "bbox": [
+              0.493,
+              0.196,
+              0.511,
+              0.221
+            ],
+            "iou": 0.4403448895303039,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_002576_012",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002576",
+          "solution": [
+            0.182292,
+            0.247222,
+            0.190104,
+            0.268518
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[179,243,192,270]}",
+            "bbox": [
+              0.179,
+              0.243,
+              0.192,
+              0.27
+            ],
+            "iou": 0.4739725128205107,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[180,244,191,269]}",
+            "bbox": [
+              0.18,
+              0.244,
+              0.191,
+              0.269
+            ],
+            "iou": 0.6049612799999973,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_003595_003",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:003595",
+          "solution": [
+            0.928751,
+            0.488616,
+            0.978042,
+            0.586394
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[929,534,977,586]}",
+            "bbox": [
+              0.929,
+              0.534,
+              0.977,
+              0.586
+            ],
+            "iou": 0.5178879452816053,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[929,534,966,586]}",
+            "bbox": [
+              0.929,
+              0.534,
+              0.966,
+              0.586
+            ],
+            "iou": 0.39920529115457054,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_hehe_224_000002_041_00000197_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:hehe_224_000002_041_00000197",
+          "solution": [
+            0.0,
+            0.910186,
+            0.113021,
+            1.0
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[0,911,113,1000]}",
+            "bbox": [
+              0.0,
+              0.911,
+              0.113,
+              1.0
+            ],
+            "iou": 0.9907527028101683,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,925,50,1000]}",
+            "bbox": [
+              0.0,
+              0.925,
+              0.05,
+              1.0
+            ],
+            "iou": 0.36942653231959144,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_hehe_230_000002_043_00000061_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:hehe_230_000002_043_00000061",
+          "solution": [
+            0.233333,
+            0.437964,
+            0.273437,
+            0.570371
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[259,332,335,570]}",
+            "bbox": [
+              0.259,
+              0.332,
+              0.335,
+              0.57
+            ],
+            "iou": 0.08869427405808739,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[235,450,273,570]}",
+            "bbox": [
+              0.235,
+              0.45,
+              0.273,
+              0.57
+            ],
+            "iou": 0.8587489229537123,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_1062_00000100_001",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:shuming_1062_00000100",
+          "solution": [
+            0.536979,
+            0.50463,
+            0.555729,
+            0.55463
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[673,541,733,607]}",
+            "bbox": [
+              0.673,
+              0.541,
+              0.733,
+              0.607
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[536,504,558,546]}",
+            "bbox": [
+              0.536,
+              0.504,
+              0.558,
+              0.546
+            ],
+            "iou": 0.7143843895700241,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_39_00000018_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:shuming_39_00000018",
+          "solution": [
+            0.673438,
+            0.714815,
+            0.725,
+            0.824074
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[679,687,798,822]}",
+            "bbox": [
+              0.679,
+              0.687,
+              0.798,
+              0.822
+            ],
+            "iou": 0.2940410212154663,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[679,714,723,824]}",
+            "bbox": [
+              0.679,
+              0.714,
+              0.723,
+              0.824
+            ],
+            "iou": 0.8473698304123607,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_728_00000270_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:shuming_728_00000270",
+          "solution": [
+            0.289063,
+            0.066667,
+            0.616667,
+            0.369445
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[288,68,544,282]}",
+            "bbox": [
+              0.288,
+              0.068,
+              0.544,
+              0.282
+            ],
+            "iou": 0.5487547295476431,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[288,67,464,256]}",
+            "bbox": [
+              0.288,
+              0.067,
+              0.464,
+              0.256
+            ],
+            "iou": 0.33265282409634633,
+            "hit": false
+          }
+        },
+        {
+          "id": "rgbdt500_137_00000168_q02",
+          "split": "external88",
+          "source": "rgbdt",
+          "group_id": "rgbdt:137",
+          "solution": [
+            0.36822916666666666,
+            0.7833333333333333,
+            0.44375,
+            0.9990740740740741
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[367,782,445,1000]}",
+            "bbox": [
+              0.367,
+              0.782,
+              0.445,
+              1.0
+            ],
+            "iou": 0.9581816351853303,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[409,569,485,808]}",
+            "bbox": [
+              0.409,
+              0.569,
+              0.485,
+              0.808
+            ],
+            "iou": 0.025511099583902155,
+            "hit": false
+          }
+        },
+        {
+          "id": "rgbdt500_381_00000315_q01",
+          "split": "external88",
+          "source": "rgbdt",
+          "group_id": "rgbdt:381",
+          "solution": [
+            0.8755208333333333,
+            0.4666666666666667,
+            0.9666666666666667,
+            0.5972222222222222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[862,457,943,571]}",
+            "bbox": [
+              0.862,
+              0.457,
+              0.943,
+              0.571
+            ],
+            "iou": 0.4995524196277047,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[871,462,944,563]}",
+            "bbox": [
+              0.871,
+              0.462,
+              0.944,
+              0.563
+            ],
+            "iou": 0.5204281207290371,
+            "hit": true
+          }
+        }
+      ]
+    },
+    "C_vs_B": {
+      "overall": {
+        "queries": 466,
+        "previous_hits": 385,
+        "c_hits": 388,
+        "rescued": 13,
+        "regressed": 10,
+        "both_hit": 375,
+        "both_miss": 68,
+        "net_gain": 3
+      },
+      "by_source": {
+        "city": {
+          "rescued": 12,
+          "regressed": 9,
+          "both_hit": 291,
+          "both_miss": 66,
+          "queries": 378,
+          "previous_hits": 300,
+          "c_hits": 303,
+          "net_gain": 3
+        },
+        "rgbdt": {
+          "rescued": 1,
+          "regressed": 1,
+          "both_hit": 84,
+          "both_miss": 2,
+          "queries": 88,
+          "previous_hits": 85,
+          "c_hits": 85,
+          "net_gain": 0
+        }
+      },
+      "changed": [
+        {
+          "id": "city_000004_012_00000001_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000004_012_00000001",
+          "solution": [
+            0.410417,
+            0.353704,
+            0.476042,
+            0.491667
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[409,356,478,491]}",
+            "bbox": [
+              0.409,
+              0.356,
+              0.478,
+              0.491
+            ],
+            "iou": 0.9316393599391134,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[409,356,478,944]}",
+            "bbox": [
+              0.409,
+              0.356,
+              0.478,
+              0.944
+            ],
+            "iou": 0.21862873386878462,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_000004_018_00000341_007",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000004_018_00000341",
+          "solution": [
+            0.326563,
+            0.090741,
+            0.339583,
+            0.138889
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[779,88,790,152]}",
+            "bbox": [
+              0.779,
+              0.088,
+              0.79,
+              0.152
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[323,97,338,144]}",
+            "bbox": [
+              0.323,
+              0.097,
+              0.338,
+              0.144
+            ],
+            "iou": 0.5617766265209466,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000006_011_00000307_005",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000006_011_00000307",
+          "solution": [
+            0.760417,
+            0.340741,
+            0.770313,
+            0.362963
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[760,335,772,366]}",
+            "bbox": [
+              0.76,
+              0.335,
+              0.772,
+              0.366
+            ],
+            "iou": 0.5911529892473119,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[889,327,900,354]}",
+            "bbox": [
+              0.889,
+              0.327,
+              0.9,
+              0.354
+            ],
+            "iou": 0.0,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_000006_011_00000307_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000006_011_00000307",
+          "solution": [
+            0.645833,
+            0.348148,
+            0.657813,
+            0.369444
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[644,350,658,413]}",
+            "bbox": [
+              0.644,
+              0.35,
+              0.658,
+              0.413
+            ],
+            "iou": 0.2576227376692094,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[646,350,658,370]}",
+            "bbox": [
+              0.646,
+              0.35,
+              0.658,
+              0.37
+            ],
+            "iou": 0.865344599948696,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000019_038_00000205_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000019_038_00000205",
+          "solution": [
+            0.803646,
+            0.207407,
+            0.846875,
+            0.412963
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[821,200,877,438]}",
+            "bbox": [
+              0.821,
+              0.2,
+              0.877,
+              0.438
+            ],
+            "iou": 0.3148086778517842,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[803,206,840,404]}",
+            "bbox": [
+              0.803,
+              0.206,
+              0.84,
+              0.404
+            ],
+            "iou": 0.788407241653073,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000066_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:000066",
+          "solution": [
+            0.559896,
+            0.449074,
+            0.577604,
+            0.50926
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[553,446,575,502]}",
+            "bbox": [
+              0.553,
+              0.446,
+              0.575,
+              0.502
+            ],
+            "iou": 0.5335059415099384,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[555,446,573,500]}",
+            "bbox": [
+              0.555,
+              0.446,
+              0.573,
+              0.5
+            ],
+            "iou": 0.4869491579059882,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_001229_001",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001229",
+          "solution": [
+            0.0,
+            0.099074,
+            0.051562,
+            0.147222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[153,0,254,52]}",
+            "bbox": [
+              0.153,
+              0.0,
+              0.254,
+              0.052
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,100,43,141]}",
+            "bbox": [
+              0.0,
+              0.1,
+              0.043,
+              0.141
+            ],
+            "iou": 0.7101405397693893,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001229_012",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001229",
+          "solution": [
+            0.317708,
+            0.643519,
+            0.34375,
+            0.681481
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[319,643,365,682]}",
+            "bbox": [
+              0.319,
+              0.643,
+              0.365,
+              0.682
+            ],
+            "iou": 0.5097859951154017,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[316,641,365,684]}",
+            "bbox": [
+              0.316,
+              0.641,
+              0.365,
+              0.684
+            ],
+            "iou": 0.46920095111533044,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_001879_001",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001879",
+          "solution": [
+            0.0,
+            0.101852,
+            0.059375,
+            0.14537
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[153,0,254,52]}",
+            "bbox": [
+              0.153,
+              0.0,
+              0.254,
+              0.052
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,100,43,142]}",
+            "bbox": [
+              0.0,
+              0.1,
+              0.043,
+              0.142
+            ],
+            "iou": 0.6481519877522849,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001897_014",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:001897",
+          "solution": [
+            0.29375,
+            0.660185,
+            0.321354,
+            0.697222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[290,659,343,698]}",
+            "bbox": [
+              0.29,
+              0.659,
+              0.343,
+              0.698
+            ],
+            "iou": 0.4946150691823896,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[289,659,320,698]}",
+            "bbox": [
+              0.289,
+              0.659,
+              0.32,
+              0.698
+            ],
+            "iou": 0.7721262110027041,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002022_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002022",
+          "solution": [
+            0.103646,
+            0.17963,
+            0.182812,
+            0.244444
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[97,193,179,226]}",
+            "bbox": [
+              0.097,
+              0.193,
+              0.179,
+              0.226
+            ],
+            "iou": 0.4647670909482332,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[95,190,180,227]}",
+            "bbox": [
+              0.095,
+              0.19,
+              0.18,
+              0.227
+            ],
+            "iou": 0.5182746356259258,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002022_003",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002022",
+          "solution": [
+            0.276042,
+            0.07037,
+            0.379688,
+            0.14537
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[319,191,391,224]}",
+            "bbox": [
+              0.319,
+              0.191,
+              0.391,
+              0.224
+            ],
+            "iou": 0.0,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[278,79,373,131]}",
+            "bbox": [
+              0.278,
+              0.079,
+              0.373,
+              0.131
+            ],
+            "iou": 0.6354964655333215,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002037_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002037",
+          "solution": [
+            0.138542,
+            0.092592,
+            0.226042,
+            0.152778
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[138,105,220,138]}",
+            "bbox": [
+              0.138,
+              0.105,
+              0.22,
+              0.138
+            ],
+            "iou": 0.5087116005738663,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[138,106,220,138]}",
+            "bbox": [
+              0.138,
+              0.106,
+              0.22,
+              0.138
+            ],
+            "iou": 0.4933467004339264,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_002037_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002037",
+          "solution": [
+            0.354688,
+            0.089815,
+            0.436458,
+            0.144445
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[358,100,430,131]}",
+            "bbox": [
+              0.358,
+              0.1,
+              0.43,
+              0.131
+            ],
+            "iou": 0.49965356681123707,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[358,98,430,131]}",
+            "bbox": [
+              0.358,
+              0.098,
+              0.43,
+              0.131
+            ],
+            "iou": 0.5318892807990591,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_002576_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002576",
+          "solution": [
+            0.49375,
+            0.194444,
+            0.502084,
+            0.222222
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[491,196,504,222]}",
+            "bbox": [
+              0.491,
+              0.196,
+              0.504,
+              0.222
+            ],
+            "iou": 0.6141525967909317,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[493,196,511,221]}",
+            "bbox": [
+              0.493,
+              0.196,
+              0.511,
+              0.221
+            ],
+            "iou": 0.4403448895303039,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_002576_012",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:002576",
+          "solution": [
+            0.182292,
+            0.247222,
+            0.190104,
+            0.268518
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[179,243,192,270]}",
+            "bbox": [
+              0.179,
+              0.243,
+              0.192,
+              0.27
+            ],
+            "iou": 0.4739725128205107,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[180,244,191,269]}",
+            "bbox": [
+              0.18,
+              0.244,
+              0.191,
+              0.269
+            ],
+            "iou": 0.6049612799999973,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_003595_003",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:003595",
+          "solution": [
+            0.928751,
+            0.488616,
+            0.978042,
+            0.586394
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[929,534,977,586]}",
+            "bbox": [
+              0.929,
+              0.534,
+              0.977,
+              0.586
+            ],
+            "iou": 0.5178879452816053,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[929,534,966,586]}",
+            "bbox": [
+              0.929,
+              0.534,
+              0.966,
+              0.586
+            ],
+            "iou": 0.39920529115457054,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_hehe_224_000002_041_00000197_004",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:hehe_224_000002_041_00000197",
+          "solution": [
+            0.0,
+            0.910186,
+            0.113021,
+            1.0
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[0,912,113,1000]}",
+            "bbox": [
+              0.0,
+              0.912,
+              0.113,
+              1.0
+            ],
+            "iou": 0.9796206499696046,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[0,925,50,1000]}",
+            "bbox": [
+              0.0,
+              0.925,
+              0.05,
+              1.0
+            ],
+            "iou": 0.36942653231959144,
+            "hit": false
+          }
+        },
+        {
+          "id": "city_hehe_230_000002_043_00000061_006",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:hehe_230_000002_043_00000061",
+          "solution": [
+            0.233333,
+            0.437964,
+            0.273437,
+            0.570371
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[259,332,335,573]}",
+            "bbox": [
+              0.259,
+              0.332,
+              0.335,
+              0.573
+            ],
+            "iou": 0.08803153183488113,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[235,450,273,570]}",
+            "bbox": [
+              0.235,
+              0.45,
+              0.273,
+              0.57
+            ],
+            "iou": 0.8587489229537123,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_39_00000018_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:shuming_39_00000018",
+          "solution": [
+            0.673438,
+            0.714815,
+            0.725,
+            0.824074
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[679,687,798,822]}",
+            "bbox": [
+              0.679,
+              0.687,
+              0.798,
+              0.822
+            ],
+            "iou": 0.2940410212154663,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[679,714,723,824]}",
+            "bbox": [
+              0.679,
+              0.714,
+              0.723,
+              0.824
+            ],
+            "iou": 0.8473698304123607,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_728_00000270_002",
+          "split": "city378",
+          "source": "city",
+          "group_id": "city:shuming_728_00000270",
+          "solution": [
+            0.289063,
+            0.066667,
+            0.616667,
+            0.369445
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[288,68,544,282]}",
+            "bbox": [
+              0.288,
+              0.068,
+              0.544,
+              0.282
+            ],
+            "iou": 0.5487547295476431,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[288,67,464,256]}",
+            "bbox": [
+              0.288,
+              0.067,
+              0.464,
+              0.256
+            ],
+            "iou": 0.33265282409634633,
+            "hit": false
+          }
+        },
+        {
+          "id": "rgbdt500_137_00000168_q02",
+          "split": "external88",
+          "source": "rgbdt",
+          "group_id": "rgbdt:137",
+          "solution": [
+            0.36822916666666666,
+            0.7833333333333333,
+            0.44375,
+            0.9990740740740741
+          ],
+          "change": "regressed",
+          "previous": {
+            "text": "{\"bbox_2d\":[367,782,445,1000]}",
+            "bbox": [
+              0.367,
+              0.782,
+              0.445,
+              1.0
+            ],
+            "iou": 0.9581816351853303,
+            "hit": true
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[409,569,485,808]}",
+            "bbox": [
+              0.409,
+              0.569,
+              0.485,
+              0.808
+            ],
+            "iou": 0.025511099583902155,
+            "hit": false
+          }
+        },
+        {
+          "id": "rgbdt500_381_00000315_q01",
+          "split": "external88",
+          "source": "rgbdt",
+          "group_id": "rgbdt:381",
+          "solution": [
+            0.8755208333333333,
+            0.4666666666666667,
+            0.9666666666666667,
+            0.5972222222222222
+          ],
+          "change": "rescued",
+          "previous": {
+            "text": "{\"bbox_2d\":[863,453,943,571]}",
+            "bbox": [
+              0.863,
+              0.453,
+              0.943,
+              0.571
+            ],
+            "iou": 0.4923557019557458,
+            "hit": false
+          },
+          "c": {
+            "text": "{\"bbox_2d\":[871,462,944,563]}",
+            "bbox": [
+              0.871,
+              0.462,
+              0.944,
+              0.563
+            ],
+            "iou": 0.5204281207290371,
+            "hit": true
+          }
+        }
+      ]
+    }
+  },
+  "interpretation_limits": {
+    "training_exposure": {
+      "A": {
+        "steps": 59,
+        "presentations": 236
+      },
+      "B": {
+        "steps": 59,
+        "presentations": 236
+      },
+      "C": {
+        "steps": 550,
+        "presentations": 4400
+      }
+    },
+    "c_checkpoint29_full_evaluation_pending_after_D_queue": {
+      "steps": 29,
+      "presentations": 232
+    },
+    "warmup50_full_baseline_missing": true,
+    "causal_or_significance_claim": false
+  }
+}

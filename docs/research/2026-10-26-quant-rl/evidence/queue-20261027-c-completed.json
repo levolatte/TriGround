@@ -1,0 +1,213 @@
+{
+  "status": "running",
+  "stage": "training",
+  "completed_arms": [
+    "B",
+    "C"
+  ],
+  "a_final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/train/checkpoint-59",
+  "a_query_exposures": 236,
+  "matched_query_exposures": {
+    "B": 236,
+    "C": 232
+  },
+  "selection": {
+    "status": "fallback",
+    "decided_at": "2026-10-26T09:39:12.356200+00:00",
+    "selected_config": {
+      "train_micro_batch_size": 1,
+      "gradient_checkpointing_every_n_layers": 1,
+      "runtime_optimization": false,
+      "hf_max_batch_size": 2
+    },
+    "python": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "code": "/root/autodl-tmp/quant_rl_20261026/code",
+    "adopted_acceleration_changes": [],
+    "optimization_gpu_hours": 1.3770971085249777,
+    "reason": "No candidate completed all fixed-answer numerical, memory and live speed/reload gates within the approved optimization budget. Thresholds were retained.",
+    "original_fixed_comparisons": {
+      "baseline_repeat": {
+        "gradient": {
+          "cosine": 0.9998912836254491,
+          "relative_l2": 0.014763489825758884,
+          "reference_l2": 0.03543651630790743,
+          "candidate_l2": 0.03540663054994166
+        },
+        "update": {
+          "cosine": 0.997366339595021,
+          "relative_l2": 0.07258669287657545,
+          "reference_l2": 0.023982916442336345,
+          "candidate_l2": 0.02398944176636552
+        },
+        "loss_relative": 0.0,
+        "numeric_pass": false,
+        "gpu_training_speed_ratio": 1.0066514741159134,
+        "step_wall_speed_ratio": 1.0065045066491645
+      },
+      "audit": {
+        "gradient": {
+          "cosine": 0.9998980987042421,
+          "relative_l2": 0.01452675739040628,
+          "reference_l2": 0.03543651630790743,
+          "candidate_l2": 0.035528218790289806
+        },
+        "update": {
+          "cosine": 0.9975730776243169,
+          "relative_l2": 0.0696761069930719,
+          "reference_l2": 0.023982916442336345,
+          "candidate_l2": 0.023987274946671702
+        },
+        "loss_relative": 0.0,
+        "numeric_pass": false,
+        "gpu_training_speed_ratio": 1.029551458570976,
+        "step_wall_speed_ratio": 1.0296789166527847
+      },
+      "mb2": {
+        "gradient": {
+          "cosine": 0.775352126665866,
+          "relative_l2": 0.6319775268412394,
+          "reference_l2": 0.03543651630790743,
+          "candidate_l2": 0.028319223021684083
+        },
+        "update": {
+          "cosine": 0.670445835212896,
+          "relative_l2": 0.8072293766147348,
+          "reference_l2": 0.023982916442336345,
+          "candidate_l2": 0.023705545547800203
+        },
+        "loss_relative": 0.8784846712168735,
+        "numeric_pass": false,
+        "gpu_training_speed_ratio": 0.985001924710086,
+        "step_wall_speed_ratio": 0.9851182751780468
+      }
+    },
+    "deterministic_reference_repeat": {
+      "gradient": {
+        "cosine": 1.0,
+        "relative_l2": 0.0,
+        "reference_l2": 0.035449476799090524,
+        "candidate_l2": 0.035449476799090524
+      },
+      "update": {
+        "cosine": 1.0,
+        "relative_l2": 0.0,
+        "reference_l2": 0.023986114450431067,
+        "candidate_l2": 0.023986114450431067
+      },
+      "loss_relative": 0.0,
+      "numeric_pass": true,
+      "gpu_training_speed_ratio": 0.9990582302226364,
+      "step_wall_speed_ratio": 0.9992261974577958
+    },
+    "deterministic_fixed_comparisons": {
+      "baseline_repeat": {
+        "gradient": {
+          "cosine": 1.0,
+          "relative_l2": 0.0,
+          "reference_l2": 0.035449476799090524,
+          "candidate_l2": 0.035449476799090524
+        },
+        "update": {
+          "cosine": 1.0,
+          "relative_l2": 0.0,
+          "reference_l2": 0.023986114450431067,
+          "candidate_l2": 0.023986114450431067
+        },
+        "loss_relative": 0.0,
+        "numeric_pass": true,
+        "gpu_training_speed_ratio": 0.9990582302226364,
+        "step_wall_speed_ratio": 0.9992261974577958
+      },
+      "audit_conv": {
+        "gradient": {
+          "cosine": 0.7095622065960325,
+          "relative_l2": 0.7494099544390804,
+          "reference_l2": 0.035449476799090524,
+          "candidate_l2": 0.03419800684001601
+        },
+        "update": {
+          "cosine": 0.7271800463320321,
+          "relative_l2": 0.7382698887007082,
+          "reference_l2": 0.023986114450431067,
+          "candidate_l2": 0.02395979659808998
+        },
+        "loss_relative": 0.16201584374359324,
+        "numeric_pass": false,
+        "gpu_training_speed_ratio": 1.047842462706161,
+        "step_wall_speed_ratio": 1.0480457127197973
+      }
+    },
+    "live_qualification": null,
+    "unqualified_items": {
+      "aggregated_gradient_audit": "Failed numerical gate; fixed step only 2.88 percent shorter, not a full generation speed measurement.",
+      "micro_batch_2": "Failed numerical gate and fixed step slower; exact numerical source unresolved.",
+      "partial_language_checkpointing": "Actual deterministic fixed-answer run exhausted the 48GB GPU; 45.74GiB allocated at failure, so the required 6GiB headroom was not available.",
+      "causal_conv1d": "Standalone BF16 kernel and dispatch check passed; see deterministic fixed-answer and live qualification records for full 27B outcome."
+    },
+    "full_live_candidate_checks": "Not run because no fixed-answer candidate qualified.",
+    "a_query_exposures": 236,
+    "matched_query_exposures": {
+      "B": 236,
+      "C": 232
+    },
+    "deterministic_settings_adopted": false
+  },
+  "budget_ledger": "/root/autodl-tmp/quant_rl_20261026/runs/budget.json",
+  "results": {
+    "B": {
+      "final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/checkpoint-59",
+      "final_step": 59,
+      "final_query_exposures": 236,
+      "final_evaluation": {
+        "city378": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/city378/summary.json",
+        "external88": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/external88/summary.json"
+      },
+      "matched_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/matched-exposure-checkpoint-59"
+    },
+    "C": {
+      "final_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-550",
+      "final_step": 550,
+      "final_query_exposures": 4400,
+      "final_evaluation": {
+        "city378": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/city378/summary.json",
+        "external88": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/external88/summary.json"
+      },
+      "matched_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/matched-exposure-checkpoint-29"
+    }
+  },
+  "updated_at": "2026-10-27T00:18:00.470652+00:00",
+  "current_arm": "D",
+  "budget_stage": "initial",
+  "label": "optimized_D_seed2026",
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/code/tools/run_quant_budget.py",
+    "--ledger",
+    "/root/autodl-tmp/quant_rl_20261026/runs/budget.json",
+    "--stage",
+    "initial",
+    "--label",
+    "optimized_D_seed2026",
+    "--gpu-model",
+    "RTX4090-48GB",
+    "--max-hours",
+    "3.0",
+    "--",
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/code/tools/train_quant_grounding.py",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimized_D_seed2026/arm_config.json",
+    "--model",
+    "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "--dataset",
+    "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/schedule.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922/data",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimized_D_seed2026/train",
+    "--max-gpu-hours",
+    "2.75"
+  ],
+  "pid": 378166,
+  "exit_code": null
+}

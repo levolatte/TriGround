@@ -1,0 +1,54 @@
+{
+  "status": "failed",
+  "dataset": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/train4.jsonl",
+  "output_dir": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/probe1024",
+  "first_rollout_path": "/root/autodl-tmp/quant_rl_20261026/runs/d_repair_20261028_corrected2/probe1024/first_rollout.jsonl",
+  "first_rollout_groups": 4,
+  "train_gate": {
+    "passed": false,
+    "queries": 4,
+    "answers": 32,
+    "valid": 30,
+    "valid_rate": 0.9375,
+    "truncated": 1,
+    "truncated_rate": 0.03125,
+    "min_valid_rate": 0.95,
+    "max_truncated_rate": 0.0,
+    "min_geometry_groups": 2,
+    "geometry_reward_groups": 3,
+    "groups": [
+      {
+        "id": "city_002041_001",
+        "valid": 7,
+        "reward_difference": 1.3,
+        "geometry_reward_pairs": 15,
+        "geometry_reward_signal": true
+      },
+      {
+        "id": "roborefit_train_000919",
+        "valid": 8,
+        "reward_difference": 0.0,
+        "geometry_reward_pairs": 0,
+        "geometry_reward_signal": false
+      },
+      {
+        "id": "rgbdt500_323_00000118::q01",
+        "valid": 7,
+        "reward_difference": 1.4000000000000001,
+        "geometry_reward_pairs": 15,
+        "geometry_reward_signal": true
+      },
+      {
+        "id": "city_shuming_78_00000046_010",
+        "valid": 8,
+        "reward_difference": 1.051701743350689,
+        "geometry_reward_pairs": 13,
+        "geometry_reward_signal": true
+      }
+    ]
+  },
+  "active_tokens": 27825,
+  "nonzero_advantages": 19586,
+  "max_old_ref_logp_gap": 0.0,
+  "error": "actual train rollout lacks geometry-dependent policy signal"
+}

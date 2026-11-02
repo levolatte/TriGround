@@ -1,0 +1,35 @@
+{
+  "purpose": "conditional shared format SFT warmup preparation",
+  "source_mode": "formal",
+  "source_summary": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/summary.json",
+  "source_schedule": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/schedule.jsonl",
+  "selected_input": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/inputs/warmup800.jsonl",
+  "selected_rows": 800,
+  "distinct_ids": 800,
+  "rows_read_through_selection": 1325,
+  "selection": "fixed presentation order, retaining the first complete row for each id",
+  "plan_gate": "Use only if the separate 128-query G8 diagnostic format-valid rate is below 95%; this preparation does not decide the trigger.",
+  "limit": "at most 100 optimizer updates and at most one 800-row pass",
+  "warmup50": {
+    "config": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/warmup50.json",
+    "max_steps": 50,
+    "sft_accum": 8,
+    "save_steps": 50,
+    "learning_rate": 2e-06
+  },
+  "warmup100": {
+    "config": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/warmup100.json",
+    "max_steps": 100,
+    "resume_from_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+    "continues_warmup50": true
+  },
+  "same_training_output_for_resume": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training",
+  "candidate_shared_adapters": [
+    "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+    "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-100"
+  ],
+  "shared_adapter_for_all_arms": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+  "all_arms_use_same_initialization": true,
+  "dev_or_holdout_read": false,
+  "chosen_warmup_steps": 50
+}

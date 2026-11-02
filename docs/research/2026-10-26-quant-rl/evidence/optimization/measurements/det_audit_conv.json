@@ -1,0 +1,282 @@
+{
+  "label": "det_audit_conv",
+  "exit_code": 1,
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env_opt/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/deterministic_fixed_benchmark.py",
+    "run",
+    "--bundle",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimization_fixed/bundle",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/code/configs/quant_grounding/arm_a.json",
+    "--adapter",
+    "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+    "--model",
+    "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "--variant",
+    "audit_conv",
+    "--output",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimization_deterministic/runs"
+  ],
+  "peak_device_used_mib": 21113,
+  "minimum_device_headroom_mib": 28027,
+  "device_total_mib": 49140,
+  "memory_sample_interval_seconds": 1,
+  "samples": [
+    {
+      "time": "2026-10-26T09:25:51.007973+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:52.075724+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:53.167247+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:54.237616+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:55.331819+00:00",
+      "used_mib": 3,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:56.381928+00:00",
+      "used_mib": 3,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:57.468661+00:00",
+      "used_mib": 3,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:58.535700+00:00",
+      "used_mib": 395,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:25:59.608135+00:00",
+      "used_mib": 17837,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:00.679974+00:00",
+      "used_mib": 17849,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:01.775971+00:00",
+      "used_mib": 17867,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:02.840811+00:00",
+      "used_mib": 17889,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:03.912409+00:00",
+      "used_mib": 17909,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:05.008145+00:00",
+      "used_mib": 17927,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:06.102010+00:00",
+      "used_mib": 17949,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:07.164574+00:00",
+      "used_mib": 17969,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:08.214580+00:00",
+      "used_mib": 17991,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:09.311731+00:00",
+      "used_mib": 18335,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:10.356392+00:00",
+      "used_mib": 18335,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:11.444077+00:00",
+      "used_mib": 18335,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:12.494479+00:00",
+      "used_mib": 18335,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:13.697449+00:00",
+      "used_mib": 18345,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:14.891874+00:00",
+      "used_mib": 18359,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:16.082864+00:00",
+      "used_mib": 18373,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:17.198707+00:00",
+      "used_mib": 18387,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:18.399539+00:00",
+      "used_mib": 18403,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:19.499003+00:00",
+      "used_mib": 18415,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:20.600580+00:00",
+      "used_mib": 18431,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:21.877944+00:00",
+      "used_mib": 18499,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:23.177955+00:00",
+      "used_mib": 18549,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:24.298883+00:00",
+      "used_mib": 18599,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:25.496609+00:00",
+      "used_mib": 18647,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:26.599398+00:00",
+      "used_mib": 18691,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:27.898437+00:00",
+      "used_mib": 19599,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:29.097076+00:00",
+      "used_mib": 20113,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:30.200728+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:31.396401+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:32.590960+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:33.797039+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:34.998349+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:36.195604+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:37.398217+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:38.579404+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:39.699137+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:40.796507+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:41.997405+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:43.095631+00:00",
+      "used_mib": 20181,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:44.200498+00:00",
+      "used_mib": 20643,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:45.304913+00:00",
+      "used_mib": 21103,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:46.368436+00:00",
+      "used_mib": 21113,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T09:26:47.413346+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    }
+  ]
+}

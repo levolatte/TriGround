@@ -1,0 +1,100 @@
+{
+  "overall": {
+    "queries": 378,
+    "samples": 378,
+    "acc05_first": 0.8015873015873016,
+    "acc05_all_samples": 0.8015873015873016,
+    "format_valid": 378,
+    "format_repaired": 0,
+    "valid": 378,
+    "invalid": 0,
+    "truncated": 0,
+    "all_wrong_groups": 75,
+    "mixed_groups": 0,
+    "all_hit_groups": 303,
+    "all_same_reward_groups": 378,
+    "zero_advantage_groups": 378,
+    "generated_tokens": 8566,
+    "timed_seconds": 1531.4408374726772,
+    "mean_tokens": 22.66137566137566,
+    "mean_seconds": 4.051430786964755
+  },
+  "by_source": {
+    "city": {
+      "queries": 378,
+      "samples": 378,
+      "acc05_first": 0.8015873015873016,
+      "acc05_all_samples": 0.8015873015873016,
+      "format_valid": 378,
+      "format_repaired": 0,
+      "valid": 378,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 75,
+      "mixed_groups": 0,
+      "all_hit_groups": 303,
+      "all_same_reward_groups": 378,
+      "zero_advantage_groups": 378,
+      "generated_tokens": 8566,
+      "timed_seconds": 1531.4408374726772,
+      "mean_tokens": 22.66137566137566,
+      "mean_seconds": 4.051430786964755
+    }
+  },
+  "by_negative_kind": {
+    "none": {
+      "queries": 378,
+      "samples": 378,
+      "acc05_first": 0.8015873015873016,
+      "acc05_all_samples": 0.8015873015873016,
+      "format_valid": 378,
+      "format_repaired": 0,
+      "valid": 378,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 75,
+      "mixed_groups": 0,
+      "all_hit_groups": 303,
+      "all_same_reward_groups": 378,
+      "zero_advantage_groups": 378,
+      "generated_tokens": 8566,
+      "timed_seconds": 1531.4408374726772,
+      "mean_tokens": 22.66137566137566,
+      "mean_seconds": 4.051430786964755
+    }
+  },
+  "answer_mode": "short",
+  "reward_mode": "contrast",
+  "format_policy": "punctuation",
+  "samples_per_query": 1,
+  "resource": {
+    "rescore_only": true,
+    "new_generations": 0
+  },
+  "input_files": {
+    "scored": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\evidence\\c-final-city378-scored.jsonl",
+    "raw": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\evidence\\c-final-city378-raw.jsonl",
+    "summary": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\evidence\\c-final-city378-summary.json"
+  },
+  "strict_overall": {
+    "queries": 378,
+    "samples": 378,
+    "acc05_first": 0.8015873015873016,
+    "acc05_all_samples": 0.8015873015873016,
+    "format_valid": 378,
+    "format_repaired": 0,
+    "valid": 378,
+    "invalid": 0,
+    "truncated": 0,
+    "all_wrong_groups": 75,
+    "mixed_groups": 0,
+    "all_hit_groups": 303,
+    "all_same_reward_groups": 378,
+    "zero_advantage_groups": 378,
+    "generated_tokens": 8566,
+    "timed_seconds": 1531.4408374726772,
+    "mean_tokens": 22.66137566137566,
+    "mean_seconds": 4.051430786964755
+  },
+  "repairs": []
+}

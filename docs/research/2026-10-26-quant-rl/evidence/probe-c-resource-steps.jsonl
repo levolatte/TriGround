@@ -1,0 +1,3 @@
+{"step": 1, "step_seconds": 159.555983196944, "elapsed_seconds": 159.5562396645546, "allocated_peak_bytes": 26280271360, "reserved_peak_bytes": 28775022592, "nonzero_finite_lora_gradient_seen": true}
+{"step": 2, "step_seconds": 58.58423962816596, "elapsed_seconds": 218.14053646102548, "allocated_peak_bytes": 28166405632, "reserved_peak_bytes": 29750198272, "nonzero_finite_lora_gradient_seen": true}
+{"step": 3, "step_seconds": 89.06445344537497, "elapsed_seconds": 311.7026740424335, "allocated_peak_bytes": 28157526016, "reserved_peak_bytes": 30284972032, "nonzero_finite_lora_gradient_seen": true}

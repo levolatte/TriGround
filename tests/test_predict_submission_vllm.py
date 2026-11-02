@@ -423,3 +423,75 @@ def test_parser_accepts_upscale_and_defaults_to_one() -> None:
                               "--output-dir", "out", "--depth-policy",
                               "sensor_linear_20000"])
     assert args.depth_policy == "sensor_linear_20000"
+
+# ---------------------------------------------------------------------------
+# 自一致性采样投票：一题 k 个样本的收集与代表选取
+# ---------------------------------------------------------------------------
+
+def _fake_output(texts, finish_reasons=None):
+    """构造一个与 vLLM 返回同形的对象：outputs 里 k 个候选。"""
+    from types import SimpleNamespace
+
+    reasons = finish_reasons or ["stop"] * len(texts)
+    return SimpleNamespace(
+        prompt_token_ids=[1, 2, 3],
+        outputs=[SimpleNamespace(text=text, token_ids=list(range(3)), finish_reason=reason)
+                 for text, reason in zip(texts, reasons)])
+
+
+def test_collect_samples_picks_first_parseable_as_representative():
+    """代表样本必须是**第一个可解析**的那个：validate_rows 会校验 raw_text 与 bbox 一致。"""
+    good_a = '{"bbox_2d":[100,200,300,400]}'
+    good_b = '{"bbox_2d":[110,210,310,410]}'
+    output = _fake_output(["garbage", good_a, good_b])
+    samples, chosen = module.collect_samples(output, single_pass=False)
+
+    assert len(samples) == 3
+    assert [sample["parsed"] for sample in samples] == [False, True, True]
+    assert samples[0]["bbox"] is None
+    assert chosen is not None and chosen["text"] == good_a
+    # 顶层 bbox 必须由 chosen 的文本解析得出，两者不能错配
+    assert module.parse_generated_bbox(chosen["text"]) == chosen["bbox"]
+
+
+def test_collect_samples_returns_none_when_every_sample_fails():
+    """k 个样本全部不可解析时返回 (samples, None)，由调用方决定重跑。"""
+    output = _fake_output(["nope", "still nope"])
+    samples, chosen = module.collect_samples(output, single_pass=False)
+
+    assert len(samples) == 2
+    assert chosen is None
+    assert all(not sample["parsed"] for sample in samples)
+
+
+def test_collect_samples_uses_single_parse_when_single_pass():
+    """single_pass 与两阶段的接受判据不同，这条路径也要能收集。"""
+    output = _fake_output(['{"bbox_2d":[1,2,3,4]}'])
+    samples, chosen = module.collect_samples(output, single_pass=True)
+    assert chosen is not None
+    assert samples[0]["bbox"] == [0.001, 0.002, 0.003, 0.004]
+
+
+def test_multi_sample_cli_requires_nonzero_temperature():
+    parser = module.build_parser()
+    base = ["--model", "m", "--modality", "trimodal", "--queries", "q", "--data-root", "d",
+            "--output-dir", "o"]
+    args = parser.parse_args(base + ["--samples", "5", "--temperature", "0.5"])
+    assert args.samples == 5 and args.temperature == 0.5
+    # 不传温度时沿用旧默认（k>1 用 1），由 main 推导，解析层保持 None
+    assert parser.parse_args(base + ["--samples", "5"]).temperature is None
+    assert parser.parse_args(base).samples == 1
+
+
+def test_single_sample_does_not_add_n_to_sampling_params():
+    """k=1 时 SamplingParams 必须与旧版逐字相同，否则历史 run 的可比性受影响。"""
+    parser = module.build_parser()
+    base = ["--model", "m", "--modality", "trimodal", "--queries", "q", "--data-root", "d",
+            "--output-dir", "o"]
+    args = parser.parse_args(base)
+    extra = {"n": args.samples} if args.samples > 1 else {}
+    assert extra == {}
+
+    args_multi = parser.parse_args(base + ["--samples", "5", "--temperature", "0.5"])
+    extra_multi = {"n": args_multi.samples} if args_multi.samples > 1 else {}
+    assert extra_multi == {"n": 5}

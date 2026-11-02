@@ -1,0 +1,32 @@
+{
+  "rows_per_arm": 1920,
+  "optimization_steps": 240,
+  "b_every_step": {
+    "box": 6,
+    "aux": 2
+  },
+  "aux_presentations": {
+    "roborefit/wrong_object": 160,
+    "rgbdt500/extent": 160,
+    "rgbdt500/wrong_object": 160
+  },
+  "train_aux_choices": {
+    "A": 238,
+    "B": 242
+  },
+  "extent_reason_counts": {
+    "missing_visible_part": 59,
+    "includes_other_object": 15
+  },
+  "eval_rows": 40,
+  "eval_categories": {
+    "wrong_object": 20,
+    "extent": 20
+  },
+  "eval_choices": {
+    "B": 18,
+    "A": 22
+  },
+  "paired_slots_and_private_metadata": "passed",
+  "issues": []
+}

@@ -1,0 +1,17 @@
+{
+  "host": "connect.westd.seetacloud.com",
+  "port": 41799,
+  "local_package_verified": true,
+  "requested_at": "2026-10-28T09:29:19.261662+08:00",
+  "pre_shutdown": "autodl-container-mbdykw3825-fcf7f826\n",
+  "command": "/usr/bin/shutdown",
+  "stdout": "SHUTDOWN_COMMAND_EXIT=0\n",
+  "stderr": "",
+  "ssh_exit_code": 0,
+  "post_shutdown": {
+    "checked_at": "2026-10-28T09:33:23.833941+08:00",
+    "ssh_banner": "",
+    "tcp_connected": true
+  },
+  "billing_status": "not checked in cloud console"
+}

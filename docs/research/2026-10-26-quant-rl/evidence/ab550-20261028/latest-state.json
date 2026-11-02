@@ -1,0 +1,34 @@
+{
+  "status": "running",
+  "started_at": "2026-10-28T04:46:11.976291+00:00",
+  "hour_cutoff": null,
+  "initial_checkpoints": {
+    "A": "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/train/checkpoint-59",
+    "B": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/checkpoint-59"
+  },
+  "reference_adapter": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+  "jobs": [
+    {
+      "label": "A_train_to_100",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py",
+        "--code",
+        "/root/autodl-tmp/quant_rl_20261026/code",
+        "--train-segment",
+        "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/configs/to_100.json"
+      ],
+      "log": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/logs/train_to_100.log",
+      "started_at": "2026-10-28T04:46:11.977898+00:00",
+      "status": "running",
+      "pid": 132175
+    }
+  ],
+  "results": {
+    "A": {
+      "100": {}
+    },
+    "B": {}
+  },
+  "current_job": "A_train_to_100"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/matched-exposure-checkpoint-29",
+  "global_step": 29,
+  "datasets": {
+    "city378": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/matched_exposure/city378/summary.json",
+    "external88": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/matched_exposure/external88/summary.json"
+  },
+  "completed_at": "2026-10-27T18:36:11.281720+00:00"
+}

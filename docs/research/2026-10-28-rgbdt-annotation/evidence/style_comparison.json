@@ -1,0 +1,727 @@
+{
+  "method": {
+    "word_regex": "[A-Za-z]+(?:'[A-Za-z]+)?",
+    "patterns": {
+      "color_brightness": "\\b(?:white|black|red|green|blue|yellow|orange|brown|gray|grey|pink|purple|teal|beige|dark|light|bright)\\b",
+      "left_right": "\\b(?:left|right|leftmost|rightmost)\\b",
+      "ordinal_extreme": "\\b(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|leftmost|rightmost|nearest|farthest|furthest|closest)\\b",
+      "ordinal_only": "\\b(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth)\\b",
+      "spatial_relation": "\\b(?:near|beside|next to|in front of|behind|between|above|below|under|over|foreground|background|back)\\b",
+      "depth_distance": "\\b(?:depth|nearer|closer|farther|further|nearest|closest|farthest|furthest)\\b",
+      "infrared_thermal": "\\b(?:infrared|thermal|temperature|temperatures|hot|heat|hotter|hottest|warm|warmer|warmest|cold|colder|coldest)\\b",
+      "part_words": "\\b(?:head|face|arm|leg|tail|canopy|wheel|handle|roof|door|window|sign|panel|board|lamp|light|hat)\\b"
+    },
+    "limitation": "Overlapping lexical proxies only, not hand-reviewed capability, correctness or modality-necessity labels. Teammate subset misses 73 historical records."
+  },
+  "fine98": {
+    "n": 98,
+    "unique_queries": 98,
+    "words": {
+      "min": 6,
+      "median": 11.0,
+      "mean": 11.510204081632653,
+      "p90_nearest_rank": 15,
+      "max": 20
+    },
+    "no_english_words": [],
+    "starts": {
+      "where": 47,
+      "the": 32,
+      "locate": 9,
+      "which": 8,
+      "find": 2
+    },
+    "lexical": {
+      "color_brightness": 18,
+      "left_right": 23,
+      "ordinal_extreme": 1,
+      "ordinal_only": 0,
+      "spatial_relation": 59,
+      "depth_distance": 1,
+      "infrared_thermal": 0,
+      "part_words": 8
+    }
+  },
+  "teammate919": {
+    "n": 919,
+    "unique_queries": 884,
+    "words": {
+      "min": 6,
+      "median": 10,
+      "mean": 10.052230685527748,
+      "p90_nearest_rank": 13,
+      "max": 18
+    },
+    "no_english_words": [],
+    "starts": {
+      "the": 918,
+      "a": 1
+    },
+    "lexical": {
+      "color_brightness": 632,
+      "left_right": 223,
+      "ordinal_extreme": 17,
+      "ordinal_only": 2,
+      "spatial_relation": 352,
+      "depth_distance": 8,
+      "infrared_thermal": 0,
+      "part_words": 131
+    }
+  },
+  "auxiliary148": {
+    "n": 148,
+    "unique_queries": 144,
+    "words": {
+      "min": 6,
+      "median": 13.0,
+      "mean": 12.885135135135135,
+      "p90_nearest_rank": 17,
+      "max": 20
+    },
+    "no_english_words": [],
+    "starts": {
+      "the": 103,
+      "where": 34,
+      "locate": 6,
+      "which": 5
+    },
+    "lexical": {
+      "color_brightness": 74,
+      "left_right": 55,
+      "ordinal_extreme": 4,
+      "ordinal_only": 0,
+      "spatial_relation": 91,
+      "depth_distance": 7,
+      "infrared_thermal": 0,
+      "part_words": 20
+    }
+  },
+  "semifinal5691": {
+    "n": 5691,
+    "unique_queries": 5235,
+    "words": {
+      "min": 0,
+      "median": 9,
+      "mean": 10.121946933755051,
+      "p90_nearest_rank": 16,
+      "max": 51
+    },
+    "no_english_words": [
+      {
+        "id": "016481_003",
+        "query": "地面上的黄色虚线"
+      }
+    ],
+    "starts": {
+      "the": 4783,
+      "a": 567,
+      "person": 28,
+      "an": 25,
+      "white": 20,
+      "two": 19,
+      "count": 16,
+      "second": 14,
+      "first": 11,
+      "blue": 9,
+      "sika": 8,
+      "from": 7,
+      "orange": 7,
+      "brown": 7,
+      "light": 7,
+      "ring": 7,
+      "third": 7,
+      "black": 6,
+      "bengal": 6,
+      "red": 4,
+      "metal": 4,
+      "peacock": 4,
+      "wooden": 4,
+      "green": 4,
+      "small": 4,
+      "spotted": 4,
+      "dark": 4,
+      "three": 4,
+      "fourth": 4,
+      "in": 3,
+      "tree": 3,
+      "trash": 3,
+      "deer": 3,
+      "man": 3,
+      "tiger": 3,
+      "monkey": 2,
+      "house": 2,
+      "bright": 2,
+      "yellow": 2,
+      "closed": 2,
+      "leftmost": 2,
+      "wheeled": 2,
+      "woman": 2,
+      "rocks": 2,
+      "number": 2,
+      "fifth": 2,
+      "street": 2,
+      "grey": 2,
+      "glass": 1,
+      "pink": 1,
+      "right": 1,
+      "this": 1,
+      "hay": 1,
+      "iron": 1,
+      "shallow": 1,
+      "sun": 1,
+      "approach": 1,
+      "bottom": 1,
+      "weathered": 1,
+      "thick": 1,
+      "cartoon": 1,
+      "rowboat": 1,
+      "thatched": 1,
+      "zebra": 1,
+      "pile": 1,
+      "main": 1,
+      "auxiliary": 1,
+      "one": 1,
+      "tall": 1,
+      "partially": 1,
+      "short": 1,
+      "robot": 1,
+      "crouching": 1,
+      "computer": 1,
+      "standing": 1,
+      "large": 1,
+      "farthest": 1,
+      "non": 1,
+      "branches": 1,
+      "several": 1,
+      "that": 1,
+      "young": 1,
+      "vertical": 1,
+      "child": 1,
+      "air": 1,
+      "mop": 1,
+      "traffic": 1,
+      "worker": 1,
+      "lifting": 1,
+      "shoes": 1,
+      "charging": 1,
+      "people": 1,
+      "mobile": 1,
+      "park": 1,
+      "canvas": 1,
+      "plastic": 1,
+      "manhole": 1,
+      "stroller": 1,
+      "drainage": 1,
+      "toy": 1,
+      "<no english word>": 1
+    },
+    "lexical": {
+      "color_brightness": 2408,
+      "left_right": 2914,
+      "ordinal_extreme": 1943,
+      "ordinal_only": 1160,
+      "spatial_relation": 1195,
+      "depth_distance": 684,
+      "infrared_thermal": 180,
+      "part_words": 987
+    }
+  },
+  "semifinal_image_groups": 1290,
+  "overlap": {
+    "fine_sequences": 98,
+    "teammate_sequences": 355,
+    "shared_sequences": 95,
+    "shared_frames": 18,
+    "auxiliary_sequences": 79,
+    "auxiliary_subset_of_fine": true,
+    "combined_fine_teammate_sequences": 358,
+    "team_reserved_overlap": [
+      "025",
+      "029",
+      "034",
+      "049",
+      "051",
+      "052",
+      "054",
+      "057",
+      "063",
+      "066",
+      "069",
+      "077",
+      "112",
+      "117",
+      "137",
+      "139",
+      "144",
+      "151",
+      "162",
+      "163",
+      "177",
+      "180",
+      "190",
+      "223",
+      "226",
+      "227",
+      "237",
+      "242",
+      "244",
+      "276",
+      "283",
+      "295",
+      "296",
+      "297",
+      "302",
+      "306",
+      "309",
+      "311",
+      "313",
+      "326",
+      "332",
+      "337",
+      "347",
+      "352",
+      "359",
+      "367",
+      "376",
+      "377",
+      "381",
+      "386",
+      "393",
+      "394"
+    ],
+    "team_known_risk_overlap": [
+      "059",
+      "085",
+      "121",
+      "153",
+      "155",
+      "157",
+      "195",
+      "274",
+      "333",
+      "378",
+      "380"
+    ],
+    "not_in_fine_team_reserved_risk": [
+      "108",
+      "125",
+      "127",
+      "138",
+      "146",
+      "147",
+      "148",
+      "149",
+      "165",
+      "167",
+      "169",
+      "171",
+      "172",
+      "173",
+      "174",
+      "178",
+      "181",
+      "182",
+      "186",
+      "188",
+      "193",
+      "199",
+      "200",
+      "201",
+      "202",
+      "203",
+      "207",
+      "208",
+      "209",
+      "210",
+      "218",
+      "233",
+      "235",
+      "243"
+    ],
+    "train_eligible_upper_bound_before_new_test_scene_audit": 329
+  },
+  "same_frame_queries": [
+    {
+      "sequence": "014",
+      "frame": "00000152",
+      "fine_query": "Where is the person bending over next to the riverside railing?",
+      "teammate_query": "The person in a white shirt sweeping near the railing"
+    },
+    {
+      "sequence": "024",
+      "frame": "00000303",
+      "fine_query": "Which small flying device is near the curved streetlight?",
+      "teammate_query": "The small drone flying near the curved street lamp."
+    },
+    {
+      "sequence": "042",
+      "frame": "00000175",
+      "fine_query": "Where is the bear walking beside the enclosure fence?",
+      "teammate_query": "The brown bear walking across the grassy enclosure."
+    },
+    {
+      "sequence": "064",
+      "frame": "00000334",
+      "fine_query": "Where is the large shaggy animal feeding beside the fence?",
+      "teammate_query": "The shaggy white and grey yak grazing near the fence"
+    },
+    {
+      "sequence": "110",
+      "frame": "00000078",
+      "fine_query": "Where is the person sitting on the bank beside the water?",
+      "teammate_query": "The person fishing by the water"
+    },
+    {
+      "sequence": "145",
+      "frame": "00000001",
+      "fine_query": "The flamingo at the far right with its neck lowered.",
+      "teammate_query": "The flamingo on the far right bending its neck down."
+    },
+    {
+      "sequence": "156",
+      "frame": "00000312",
+      "fine_query": "The antlered deer facing the camera in the middle of the courtyard.",
+      "teammate_query": "The deer with antlers standing on the right side facing forward"
+    },
+    {
+      "sequence": "214",
+      "frame": "00000186",
+      "fine_query": "Where is the saddled horse standing beside the wall?",
+      "teammate_query": "The saddled brown horse standing near the wooden fence."
+    },
+    {
+      "sequence": "216",
+      "frame": "00000044",
+      "fine_query": "The large bird in the foreground walking across the grass.",
+      "teammate_query": "The ostrich standing on the grass in front of the right shelter."
+    },
+    {
+      "sequence": "240",
+      "frame": "00000001",
+      "fine_query": "Where is the monkey sitting among the rocks?",
+      "teammate_query": "The monkey sitting on the rock ledge at the upper left."
+    },
+    {
+      "sequence": "259",
+      "frame": "00000203",
+      "fine_query": "Which large rounded boulder sits on the right side of the frame?",
+      "teammate_query": "The large rock with red characters sitting on the leaves."
+    },
+    {
+      "sequence": "271",
+      "frame": "00000039",
+      "fine_query": "The runner in the middle of the three closely grouped foreground runners.",
+      "teammate_query": "The runner in the blue shirt between the orange and pink shirts"
+    },
+    {
+      "sequence": "282",
+      "frame": "00000371",
+      "fine_query": "Where is the shorter child standing beside a taller adult?",
+      "teammate_query": "The small child in a white top and dark skirt."
+    },
+    {
+      "sequence": "289",
+      "frame": "00000329",
+      "fine_query": "Which person is seated near the left side of the frame?",
+      "teammate_query": "The person in the pink jacket sitting on the far left, partially obscured."
+    },
+    {
+      "sequence": "310",
+      "frame": "00000337",
+      "fine_query": "Where is the umbrella canopy over the outdoor seating area?",
+      "teammate_query": "The open red patio umbrella over the outdoor seating area."
+    },
+    {
+      "sequence": "344",
+      "frame": "00000042",
+      "fine_query": "Where is the white delivery truck stopped along the roadside?",
+      "teammate_query": "The white delivery truck driving on the road."
+    },
+    {
+      "sequence": "355",
+      "frame": "00000254",
+      "fine_query": "Which animal stands near the center of the brick courtyard?",
+      "teammate_query": "The white deer walking away in the middle ground"
+    },
+    {
+      "sequence": "365",
+      "frame": "00000312",
+      "fine_query": "Where is the larger antlered deer standing in the foreground on the left?",
+      "teammate_query": "The large deer standing in the center"
+    }
+  ],
+  "semifinal_examples": {
+    "color_brightness": [
+      {
+        "id": "000003_001",
+        "query": "A woman in a white T-shirt across the paved plaza"
+      },
+      {
+        "id": "000003_003",
+        "query": "The first leafy green sapling in a cylindrical black planter from left to right"
+      },
+      {
+        "id": "000003_006",
+        "query": "A white street lamp at the foreground of the stone staircase"
+      },
+      {
+        "id": "000017_003",
+        "query": "A toddler in a dark vest taking a step forward, supported by a woman's hands"
+      },
+      {
+        "id": "000017_005",
+        "query": "A gray tarp covering equipment under one of the event tents"
+      },
+      {
+        "id": "000031_001",
+        "query": "A man in a white jacket sitting on a stone ledge"
+      },
+      {
+        "id": "000031_002",
+        "query": "A flower bed with pink blossoms along the base of the academic building"
+      },
+      {
+        "id": "000031_004",
+        "query": "A green bicycle parked near the walking pedestrians"
+      }
+    ],
+    "left_right": [
+      {
+        "id": "000003_003",
+        "query": "The first leafy green sapling in a cylindrical black planter from left to right"
+      },
+      {
+        "id": "000031_003",
+        "query": "A metal skateboard rail on the left edge of the paved plaza"
+      },
+      {
+        "id": "000031_005",
+        "query": "A person crouching on the left edge of the plaza, holding a camera."
+      },
+      {
+        "id": "000038_002",
+        "query": "A person in a light blue shirt standing on the right upper plaza path near the trees."
+      },
+      {
+        "id": "000038_004",
+        "query": "A red traffic cone standing on the upper plaza path near the right trees."
+      },
+      {
+        "id": "000038_005",
+        "query": "A white lamppost positioned on the upper plaza path near the right trees."
+      },
+      {
+        "id": "000045_001",
+        "query": "A woman in a white shirt and blue jeans riding a bicycle on the left upper plaza path."
+      },
+      {
+        "id": "000045_002",
+        "query": " A man in a dark jacket riding a bicycle on the leftmost upper plaza path.."
+      }
+    ],
+    "ordinal_extreme": [
+      {
+        "id": "000003_003",
+        "query": "The first leafy green sapling in a cylindrical black planter from left to right"
+      },
+      {
+        "id": "000045_002",
+        "query": " A man in a dark jacket riding a bicycle on the leftmost upper plaza path.."
+      },
+      {
+        "id": "000108_001",
+        "query": "The first silver light bulb inside the bubble house from right to left"
+      },
+      {
+        "id": "000199_003",
+        "query": "The bright white light on the leftmost street lamp head"
+      },
+      {
+        "id": "000269_001",
+        "query": "The top left corner of the animal's head closest to the camera"
+      },
+      {
+        "id": "000283_001",
+        "query": "From left to right, the first tree trunk"
+      },
+      {
+        "id": "000283_002",
+        "query": "From left to right, the second trunk"
+      },
+      {
+        "id": "000283_003",
+        "query": "From left to right, the third trunk"
+      }
+    ],
+    "ordinal_only": [
+      {
+        "id": "000003_003",
+        "query": "The first leafy green sapling in a cylindrical black planter from left to right"
+      },
+      {
+        "id": "000108_001",
+        "query": "The first silver light bulb inside the bubble house from right to left"
+      },
+      {
+        "id": "000283_001",
+        "query": "From left to right, the first tree trunk"
+      },
+      {
+        "id": "000283_002",
+        "query": "From left to right, the second trunk"
+      },
+      {
+        "id": "000283_003",
+        "query": "From left to right, the third trunk"
+      },
+      {
+        "id": "000283_004",
+        "query": "From left to right, the fourth trunk"
+      },
+      {
+        "id": "000332_006",
+        "query": "The second red sun umbrella from left to right"
+      },
+      {
+        "id": "000402_005",
+        "query": "The first section of iron fence from left to right radiating heat in the camera foreground"
+      }
+    ],
+    "spatial_relation": [
+      {
+        "id": "000003_005",
+        "query": "The shaded area near the building entrance."
+      },
+      {
+        "id": "000003_006",
+        "query": "A white street lamp at the foreground of the stone staircase"
+      },
+      {
+        "id": "000017_004",
+        "query": "A person in a striped shirt bends over a table under one of the event tents."
+      },
+      {
+        "id": "000017_005",
+        "query": "A gray tarp covering equipment under one of the event tents"
+      },
+      {
+        "id": "000031_004",
+        "query": "A green bicycle parked near the walking pedestrians"
+      },
+      {
+        "id": "000038_001",
+        "query": "A person in a beige hoodie walking on the upper square path near the flower bed."
+      },
+      {
+        "id": "000038_002",
+        "query": "A person in a light blue shirt standing on the right upper plaza path near the trees."
+      },
+      {
+        "id": "000038_004",
+        "query": "A red traffic cone standing on the upper plaza path near the right trees."
+      }
+    ],
+    "depth_distance": [
+      {
+        "id": "000269_001",
+        "query": "The top left corner of the animal's head closest to the camera"
+      },
+      {
+        "id": "000381_005",
+        "query": "The deer farthest from the camera in the sunlight"
+      },
+      {
+        "id": "000437_003",
+        "query": "The white crane lowering its head to peck closest to the camera"
+      },
+      {
+        "id": "000437_004",
+        "query": "The large rock closest to the camera"
+      },
+      {
+        "id": "000444_005",
+        "query": "The white crane to the right of the middle tree trunk farthest from the camera"
+      },
+      {
+        "id": "000444_007",
+        "query": "The white crane standing closest to the camera looking left"
+      },
+      {
+        "id": "000451_001",
+        "query": "The white crane closest to the screen"
+      },
+      {
+        "id": "000451_002",
+        "query": "The white crane second closest to the screen"
+      }
+    ],
+    "infrared_thermal": [
+      {
+        "id": "000402_005",
+        "query": "The first section of iron fence from left to right radiating heat in the camera foreground"
+      },
+      {
+        "id": "000402_006",
+        "query": "The second section of iron fence from left to right radiating heat in the camera foreground"
+      },
+      {
+        "id": "000402_007",
+        "query": "The first section of iron fence from right to left radiating heat in the camera foreground"
+      },
+      {
+        "id": "000430_008",
+        "query": "The living creature with the highest heat"
+      },
+      {
+        "id": "000437_005",
+        "query": "The large rock on the far left radiating heat"
+      },
+      {
+        "id": "000451_006",
+        "query": "The stone on the leftmost radiating thermal information"
+      },
+      {
+        "id": "000451_008",
+        "query": "The stone closest to the camera radiating thermal information"
+      },
+      {
+        "id": "000458_003",
+        "query": "The stone with thermal radiation information closest to the white crane nearest to the camera"
+      }
+    ],
+    "part_words": [
+      {
+        "id": "000003_006",
+        "query": "A white street lamp at the foreground of the stone staircase"
+      },
+      {
+        "id": "000017_002",
+        "query": "The rubber band on the head of an adult woman"
+      },
+      {
+        "id": "000038_002",
+        "query": "A person in a light blue shirt standing on the right upper plaza path near the trees."
+      },
+      {
+        "id": "000052_004",
+        "query": "A blue information board standing on the left upper plaza path near the trees."
+      },
+      {
+        "id": "000108_001",
+        "query": "The first silver light bulb inside the bubble house from right to left"
+      },
+      {
+        "id": "000108_002",
+        "query": "Glass mesh roof at the top of the building"
+      },
+      {
+        "id": "000115_001",
+        "query": "A man in a white shirt and hat sweeps the tiled plaza with a red broom and dustpan."
+      },
+      {
+        "id": "000115_006",
+        "query": "A white lamp post with a spherical top standing on the right side of the plaza."
+      }
+    ]
+  }
+}

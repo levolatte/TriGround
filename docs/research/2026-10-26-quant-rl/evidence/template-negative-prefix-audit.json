@@ -1,0 +1,30 @@
+{
+  "keys": [
+    "input_ids",
+    "labels",
+    "pixel_values",
+    "image_grid_thw",
+    "mm_token_type_ids"
+  ],
+  "input_tokens": 3491,
+  "grid": [
+    [
+      1,
+      50,
+      90
+    ],
+    [
+      1,
+      50,
+      90
+    ],
+    [
+      1,
+      50,
+      90
+    ]
+  ],
+  "negative_boxes_preserved": [],
+  "negative_kind_preserved": [],
+  "original_error": "negative_* prefix was parsed as contrastive inputs missing negative_messages"
+}

@@ -1,0 +1,196 @@
+{
+  "status": "interrupted_before_optimizer_update",
+  "would_be_step": 9,
+  "occurrence_ids": [
+    "presentation:000032",
+    "presentation:000033",
+    "presentation:000034"
+  ],
+  "completed_optimizer_updates_from_these_groups": 0,
+  "groups": {
+    "groups": 3,
+    "unique_queries": 3,
+    "observed_answers": 24,
+    "expected_answer_slots": 24,
+    "unobserved_answer_slots": 0,
+    "complete_groups": 3,
+    "incomplete_groups": 0,
+    "outcomes": {
+      "allhit": 0,
+      "allwrong": 3,
+      "mixed": 0
+    },
+    "all_same_reward_groups": 3,
+    "differing_reward_groups": 0,
+    "invalid_answers": 24,
+    "truncated_answers": 23
+  },
+  "by_source": {
+    "city": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 8
+    },
+    "rgbdt": {
+      "groups": 2,
+      "unique_queries": 2,
+      "observed_answers": 16,
+      "expected_answer_slots": 16,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 2,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 2,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 2,
+      "differing_reward_groups": 0,
+      "invalid_answers": 16,
+      "truncated_answers": 15
+    }
+  },
+  "by_negative_kind": {
+    "extent": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 8
+    },
+    "none": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 8
+    },
+    "wrong_object": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 7
+    }
+  },
+  "by_sampling_pool": {
+    "extent": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 8
+    },
+    "regular_city": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 8
+    },
+    "wrong_object": {
+      "groups": 1,
+      "unique_queries": 1,
+      "observed_answers": 8,
+      "expected_answer_slots": 8,
+      "unobserved_answer_slots": 0,
+      "complete_groups": 1,
+      "incomplete_groups": 0,
+      "outcomes": {
+        "allhit": 0,
+        "allwrong": 1,
+        "mixed": 0
+      },
+      "all_same_reward_groups": 1,
+      "differing_reward_groups": 0,
+      "invalid_answers": 8,
+      "truncated_answers": 7
+    }
+  },
+  "d_failure_categories": {
+    "unfinished_thinking": 23,
+    "invalid_final_json": 1
+  },
+  "finish_reasons": {
+    "length": 23,
+    "stop": 1
+  },
+  "raw_text_available": 24,
+  "unique_raw_texts": 24,
+  "unique_raw_texts_per_group": [
+    8,
+    8,
+    8
+  ],
+  "thinking_ended_answers": 1,
+  "strictly_parsed_bbox_answers": 0,
+  "note": "These three generated and rewarded G8 groups were interrupted before step 9 finished; do not include in completed-update counts or attach GPU-hours per group."
+}

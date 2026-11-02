@@ -39,6 +39,27 @@ def write_jsonl(path: Path, rows: list[dict]) -> None:
             target.write(json.dumps(row, ensure_ascii=False) + "\n")
 
 
+def positive_int(value: str) -> int:
+    result = int(value)
+    if result <= 0:
+        raise argparse.ArgumentTypeError("must be a positive integer")
+    return result
+
+
+def completed_prediction_prefix(path: Path, dataset: list[dict]) -> list[dict]:
+    """Only resume flushed, complete records in the original Query order."""
+    completed = read_jsonl(path)
+    if [row["id"] for row in completed] != [row["id"] for row in dataset[:len(completed)]]:
+        raise ValueError("raw prediction IDs must be an exact dataset prefix")
+    if path.stat().st_size and not path.read_bytes().endswith(b"\n"):
+        raise ValueError("raw predictions must end with a complete newline before resume")
+    for row in completed:
+        samples = row["samples"]
+        if len(samples) != 1 or not isinstance(samples[0]["text"], str) or not isinstance(samples[0]["finish_reason"], str):
+            raise ValueError(f"{row['id']}: resume requires one complete raw answer")
+    return completed
+
+
 def independent_iou(a: list[float], b: list[float]) -> float:
     """独立于奖励实现的面积计算，最终 ACC 只使用本函数。"""
     width = max(0.0, min(a[2], b[2]) - max(a[0], b[0]))
@@ -324,7 +345,16 @@ def create_engine(args):
     return engine
 
 
-def generate_rows(args, dataset: list[dict]) -> tuple[list[dict], dict]:
+def generate_rows(args, dataset: list[dict], *, engine=None) -> tuple[list[dict], dict]:
+    raw_path = args.output_dir / "predictions_raw.jsonl"
+    resume = getattr(args, "resume", False)
+    if resume and (args.engine != "hf" or args.samples_per_query != 1):
+        raise ValueError("resume requires greedy single-answer HF inference")
+    generated = completed_prediction_prefix(raw_path, dataset) if resume else []
+    completed_count = len(generated)
+    if resume and completed_count == len(dataset):
+        return generated, {"generation_seconds": 0.0, "resumed_queries": completed_count,
+                           "new_queries": 0, "hf_max_batch_size": args.hf_max_batch_size}
     import torch
     from swift.infer_engine import InferRequest, RequestConfig
     if not torch.cuda.is_available():
@@ -339,7 +369,8 @@ def generate_rows(args, dataset: list[dict]) -> tuple[list[dict], dict]:
         adapter_audit = None
     os.environ["MIN_PIXELS"] = str(args.min_pixels)
     os.environ["MAX_PIXELS"] = str(args.max_pixels)
-    engine = create_engine(args)
+    if engine is None:
+        engine = create_engine(args)
     thinking_hook = None
     if getattr(args, "bounded_thinking", False):
         from tools.quant_grounding_thinking import BoundedHFGenerationHook
@@ -354,9 +385,13 @@ def generate_rows(args, dataset: list[dict]) -> tuple[list[dict], dict]:
         if loaded_lora != adapter_audit["module_count"]:
             raise RuntimeError(f"HF adapter module coverage mismatch: saved={adapter_audit['module_count']}, "
                                f"loaded={loaded_lora}")
+    # 用 getattr 取温度：调用方可以直接构造 argparse.Namespace（测试就这么做），
+    # 那种对象上没有 --temperature 属性，直接属性访问会 AttributeError。
+    explicit_temperature = getattr(args, "temperature", None)
     request_config = RequestConfig(
         max_tokens=args.max_tokens, n=1 if args.engine == "hf" else args.samples_per_query,
-        temperature=0 if args.samples_per_query == 1 else 1,
+        temperature=(0 if args.samples_per_query == 1 else 1)
+        if explicit_temperature is None else explicit_temperature,
         top_p=1, top_k=-1, seed=args.seed, stop=[], return_details=True,
     )
     if args.engine == "hf":
@@ -365,15 +400,13 @@ def generate_rows(args, dataset: list[dict]) -> tuple[list[dict], dict]:
         effective = engine._prepare_generation_config(request_config)
         effective_sampling = {"temperature": effective.temperature, "top_p": effective.top_p,
                               "top_k": effective.top_k, "do_sample": effective.temperature > 0}
-    generated = []
     wall_start = time.monotonic()
     max_observed_device_used = 0
-    raw_path = args.output_dir / "predictions_raw.jsonl"
     # Only greedy HF evaluation shares an infer call across different Queries.
     # G8 keeps eight n=1 requests for one Query; vLLM keeps its existing path.
     batch_size = args.hf_max_batch_size if args.engine == "hf" and args.samples_per_query == 1 else 1
-    with raw_path.open("x", encoding="utf-8") as raw_out:
-      for offset in range(0, len(dataset), batch_size):
+    with raw_path.open("a" if resume else "x", encoding="utf-8") as raw_out:
+      for offset in range(completed_count, len(dataset), batch_size):
         batch = dataset[offset:offset + batch_size]
         requests = []
         for row in batch:
@@ -442,6 +475,7 @@ def generate_rows(args, dataset: list[dict]) -> tuple[list[dict], dict]:
     if thinking_hook is not None:
         thinking_hook.restore()
     return generated, {"generation_seconds": time.monotonic() - wall_start,
+                       "resumed_queries": completed_count, "new_queries": len(generated) - completed_count,
                        "effective_sampling": effective_sampling,
                        "sample_seconds_semantics": "infer call wall time divided equally among its samples",
                        "hf_max_batch_size": engine.max_batch_size if args.engine == "hf" else None,
@@ -471,14 +505,19 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--thought-limit", type=int, default=256)
     parser.add_argument("--answer-limit", type=int, default=64)
     parser.add_argument("--samples-per-query", type=int, default=1)
+    # 采样温度。默认 None 表示沿用旧行为（k=1 用 0 贪心；k>1 用 1），保证历史实验可复现。
+    # 自一致性采样投票需要显式降温：T=1 对本任务过烫，候选会散落到无关物体上，
+    # 聚合器拿到的是噪声而不是「两个相似实例之间的犹豫」。
+    parser.add_argument("--temperature", type=float, default=None,
+                        help="生成温度；不给则 k=1 用 0、k>1 用 1（旧行为）")
     parser.add_argument("--limit", type=int, default=0)
     parser.add_argument("--min-pixels", type=int, default=200704)
     parser.add_argument("--max-pixels", type=int, default=1204224)
     parser.add_argument("--max-length", type=int, default=8192)
     parser.add_argument("--max-tokens", type=int, default=0)
     parser.add_argument("--max-num-seqs", type=int, default=32)
-    parser.add_argument("--hf-max-batch-size", type=int, choices=[1, 2], default=1,
-                        help="HF concurrent requests; 2 is for measured memory/throughput comparison")
+    parser.add_argument("--hf-max-batch-size", type=positive_int, default=1,
+                         help="HF concurrent requests; choose using a measured memory/throughput comparison")
     parser.add_argument("--gpu-memory-utilization", type=float, default=0.9)
     parser.add_argument("--seed", type=int, default=2026)
     return parser
@@ -490,6 +529,17 @@ def main(argv: list[str] | None = None) -> dict:
         raise ValueError("bounded-thinking requires HF and thinking answer mode")
     if args.samples_per_query < 1 or args.limit < 0:
         raise ValueError("samples-per-query must be positive and limit must be nonnegative")
+    explicit_temperature = getattr(args, "temperature", None)
+    if explicit_temperature is not None:
+        if not 0 <= explicit_temperature <= 2:
+            raise ValueError("temperature must be within [0, 2]")
+        # 温度 0 采 k 个样本只会得到 k 份相同结果，聚合等于没做：直接拒绝，别静默浪费机器。
+        if explicit_temperature == 0 and args.samples_per_query > 1:
+            raise ValueError("k>1 with temperature 0 produces identical samples; "
+                             "set --temperature > 0 for self-consistency")
+        if explicit_temperature > 0 and args.samples_per_query == 1:
+            raise ValueError("temperature > 0 with k=1 is not reproducible evaluation; "
+                             "use k>1 or temperature 0")
     if args.engine == "hf" and args.precision == "fp8":
         raise ValueError("FP8 deployment comparison uses vLLM only")
     if args.engine == "vllm" and args.precision == "nf4":

@@ -1,0 +1,57 @@
+{
+  "transformers": "5.16.1",
+  "torch": "2.8.0+cpu",
+  "same_repeated_distribution_updates": [
+    {
+      "G": 8,
+      "microbatch": 1,
+      "gradient_accumulation_steps": 32,
+      "loss": 5.66731426610706e-05,
+      "gradient": -0.12461934963319109
+    },
+    {
+      "G": 8,
+      "microbatch": 2,
+      "gradient_accumulation_steps": 16,
+      "loss": 5.66731426610706e-05,
+      "gradient": -0.12461934963319109
+    },
+    {
+      "G": 8,
+      "microbatch": 8,
+      "gradient_accumulation_steps": 4,
+      "loss": 5.66731426610706e-05,
+      "gradient": -0.12461934963319107
+    },
+    {
+      "G": 2,
+      "microbatch": 1,
+      "gradient_accumulation_steps": 8,
+      "loss": 0.0002266925706442824,
+      "gradient": -0.49847739853276424
+    },
+    {
+      "G": 2,
+      "microbatch": 2,
+      "gradient_accumulation_steps": 4,
+      "loss": 0.0002266925706442824,
+      "gradient": -0.4984773985327643
+    }
+  ],
+  "exact_bernoulli_enumeration": [
+    {
+      "G": 2,
+      "true_pg": 0.21000000000000002,
+      "mean_centered_pg": 0.10500000000000001,
+      "rloo_pg": 0.21000000000000002,
+      "native_extra_G_scaling_pg": 0.052500000000000005
+    },
+    {
+      "G": 8,
+      "true_pg": 0.21000000000000002,
+      "mean_centered_pg": 0.18375000000000027,
+      "rloo_pg": 0.21000000000000033,
+      "native_extra_G_scaling_pg": 0.022968750000000034
+    }
+  ]
+}

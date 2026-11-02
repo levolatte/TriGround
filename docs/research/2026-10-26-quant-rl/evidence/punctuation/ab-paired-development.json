@@ -1,0 +1,60 @@
+{
+  "format_policy": "punctuation",
+  "partitions": {
+    "city378": {
+      "queries": 378,
+      "A_hit": 295,
+      "B_hit": 300,
+      "counts": {
+        "rescued": 5,
+        "regressed": 0,
+        "both_hit": 295,
+        "both_miss": 78
+      },
+      "flips": [
+        {
+          "id": "city_000140_002",
+          "change": "rescued",
+          "A_iou": 0.49198638489553714,
+          "B_iou": 0.5158632093223045
+        },
+        {
+          "id": "city_000206_002",
+          "change": "rescued",
+          "A_iou": 0.49821631012760437,
+          "B_iou": 0.5032956030388344
+        },
+        {
+          "id": "city_001229_012",
+          "change": "rescued",
+          "A_iou": 0.4782807953555883,
+          "B_iou": 0.5097859951154017
+        },
+        {
+          "id": "city_001879_012",
+          "change": "rescued",
+          "A_iou": 0.49762157651898353,
+          "B_iou": 0.5147821705700144
+        },
+        {
+          "id": "city_shuming_1062_00000100_001",
+          "change": "rescued",
+          "A_iou": 0.0,
+          "B_iou": 0.6866959285606192
+        }
+      ]
+    },
+    "external88": {
+      "queries": 88,
+      "A_hit": 85,
+      "B_hit": 85,
+      "counts": {
+        "rescued": 0,
+        "regressed": 0,
+        "both_hit": 85,
+        "both_miss": 3
+      },
+      "flips": []
+    }
+  }
+}

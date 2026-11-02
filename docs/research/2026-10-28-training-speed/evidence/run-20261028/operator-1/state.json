@@ -1,0 +1,13 @@
+{
+  "parent_pid": 132174,
+  "child_pid": 251120,
+  "jobs": [],
+  "code": "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028",
+  "original_queue_resumed": false,
+  "status": "cancelled_by_user",
+  "current_job": null,
+  "parent_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python -u /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py ",
+  "child_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py --code /root/autodl-tmp/quant_rl_20261026/code --train-segment /root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/configs/to_150.json ",
+  "updated_at": "2026-10-28T15:42:03.163254+00:00",
+  "note": "A continuation cancelled; original parent retired, not resumed. Operator diagnosis will move to B150 boundary."
+}

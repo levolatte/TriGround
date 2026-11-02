@@ -1,0 +1,79 @@
+{
+  "status": "completed",
+  "quantization": "bitsandbytes",
+  "sample_ids": [
+    "000003_001",
+    "000766_003",
+    "001214_001",
+    "001480_007",
+    "001816_001",
+    "002243_005",
+    "002845_002",
+    "003503_002",
+    "004028_003",
+    "012883_001",
+    "013380_001",
+    "014045_004",
+    "014710_002",
+    "015557_002",
+    "016425_001",
+    "019072_003"
+  ],
+  "max_num_seqs": 8,
+  "options": {
+    "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "dtype": "bfloat16",
+    "max_model_len": 8192,
+    "max_num_seqs": 8,
+    "max_num_batched_tokens": 8192,
+    "gpu_memory_utilization": 0.9,
+    "enable_lora": true,
+    "max_lora_rank": 32,
+    "enable_prefix_caching": false,
+    "mamba_cache_mode": "none",
+    "enforce_eager": true,
+    "limit_mm_per_prompt": {
+      "image": 3
+    },
+    "seed": 2026,
+    "mm_processor_kwargs": {
+      "min_pixels": 200704,
+      "max_pixels": 1204224
+    },
+    "quantization": "bitsandbytes",
+    "load_format": "bitsandbytes",
+    "hf_overrides": {
+      "quantization_config": {
+        "quant_method": "bitsandbytes",
+        "load_in_4bit": true,
+        "load_in_8bit": false,
+        "bnb_4bit_compute_dtype": "bfloat16",
+        "bnb_4bit_quant_type": "nf4",
+        "bnb_4bit_use_double_quant": true,
+        "llm_int8_skip_modules": [
+          "visual",
+          "lm_head",
+          "in_proj_ba"
+        ]
+      }
+    }
+  },
+  "loading_seconds": 182.09015710279346,
+  "generation_seconds": 33.08838982600719,
+  "seconds_per_query": 2.068024364125449,
+  "valid_boxes": 16,
+  "text_equal": false,
+  "boxes_equal": false,
+  "changed_ids": [
+    "000003_001",
+    "001480_007",
+    "001816_001",
+    "002243_005",
+    "002845_002",
+    "003503_002",
+    "012883_001",
+    "013380_001",
+    "016425_001",
+    "019072_003"
+  ]
+}

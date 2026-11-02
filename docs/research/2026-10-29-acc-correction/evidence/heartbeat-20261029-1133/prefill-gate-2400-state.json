@@ -1,0 +1,23 @@
+{
+  "status": "waiting_for_correction_child",
+  "target": 2400,
+  "parent_pid": 257429,
+  "parent_identity": {
+    "pid": 257429,
+    "state": "S",
+    "ppid": 1,
+    "start_ticks": "772735124",
+    "command": [
+      "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+      "-u",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/scripts/run_acc_correction.py",
+      "--config",
+      "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/queue.json",
+      "--output-dir",
+      "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029"
+    ]
+  },
+  "started_at": "2026-10-29T03:36:40.508238+00:00",
+  "accepted": false,
+  "parent_paused": false
+}

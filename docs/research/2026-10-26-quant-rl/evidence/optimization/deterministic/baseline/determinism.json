@@ -1,0 +1,6 @@
+{
+  "torch_deterministic_algorithms": true,
+  "cudnn_deterministic": true,
+  "cudnn_benchmark": false,
+  "cublas_workspace_config": ":4096:8"
+}

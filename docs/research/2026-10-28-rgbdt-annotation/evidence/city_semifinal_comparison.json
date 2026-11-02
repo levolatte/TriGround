@@ -1,0 +1,2411 @@
+{
+  "method": {
+    "patterns": {
+      "color_brightness": "\\b(?:white|black|red|green|blue|yellow|orange|brown|gray|grey|pink|purple|teal|beige|dark|light|bright)\\b",
+      "left_right": "\\b(?:left|right|leftmost|rightmost)\\b",
+      "ordinal_extreme": "\\b(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|\\d+(?:st|nd|rd|th)|leftmost|rightmost|nearest|farthest|furthest|closest)\\b",
+      "ordinal_only": "\\b(?:first|second|third|fourth|fifth|sixth|seventh|eighth|ninth|tenth|\\d+(?:st|nd|rd|th))\\b",
+      "spatial_relation": "\\b(?:near|beside|next to|in front of|behind|between|above|below|under|over|foreground|background|back)\\b",
+      "depth_distance": "\\b(?:depth|nearer|closer|farther|further|nearest|closest|farthest|furthest)\\b",
+      "infrared_thermal": "\\b(?:infrared|thermal|temperature|temperatures|hot|heat|hotter|hottest|warm|warmer|warmest|cold|colder|coldest)\\b",
+      "part_words": "\\b(?:head|face|arm|leg|tail|canopy|wheel|handle|roof|door|window|sign|panel|board|lamp|light|hat)\\b"
+    },
+    "note": "Numeric ordinals such as 4th added for all datasets; keyword rates are proxies, not semantic ground truth. City clean uses previous exclusions, not a completed latest semifinal overlap audit."
+  },
+  "datasets": {
+    "fine98": {
+      "n": 98,
+      "unique_queries": 98,
+      "words": {
+        "min": 6,
+        "median": 11.0,
+        "mean": 11.510204081632653,
+        "p90_nearest_rank": 15,
+        "max": 20
+      },
+      "no_english_words": [],
+      "starts": {
+        "where": 47,
+        "the": 32,
+        "locate": 9,
+        "which": 8,
+        "find": 2
+      },
+      "lexical": {
+        "color_brightness": 18,
+        "left_right": 23,
+        "ordinal_extreme": 1,
+        "ordinal_only": 0,
+        "spatial_relation": 59,
+        "depth_distance": 1,
+        "infrared_thermal": 0,
+        "part_words": 8
+      }
+    },
+    "teammate919": {
+      "n": 919,
+      "unique_queries": 884,
+      "words": {
+        "min": 6,
+        "median": 10,
+        "mean": 10.052230685527748,
+        "p90_nearest_rank": 13,
+        "max": 18
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 918,
+        "a": 1
+      },
+      "lexical": {
+        "color_brightness": 632,
+        "left_right": 223,
+        "ordinal_extreme": 17,
+        "ordinal_only": 2,
+        "spatial_relation": 352,
+        "depth_distance": 8,
+        "infrared_thermal": 0,
+        "part_words": 131
+      }
+    },
+    "city_train3707": {
+      "n": 3707,
+      "unique_queries": 3144,
+      "words": {
+        "min": 5,
+        "median": 9,
+        "mean": 8.907742109522525,
+        "p90_nearest_rank": 11,
+        "max": 18
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 3707
+      },
+      "lexical": {
+        "color_brightness": 2575,
+        "left_right": 1925,
+        "ordinal_extreme": 508,
+        "ordinal_only": 163,
+        "spatial_relation": 1467,
+        "depth_distance": 32,
+        "infrared_thermal": 0,
+        "part_words": 1032
+      }
+    },
+    "city_clean3178": {
+      "n": 3178,
+      "unique_queries": 2705,
+      "words": {
+        "min": 5,
+        "median": 9.0,
+        "mean": 8.8980490874764,
+        "p90_nearest_rank": 11,
+        "max": 18
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 3178
+      },
+      "lexical": {
+        "color_brightness": 2185,
+        "left_right": 1680,
+        "ordinal_extreme": 456,
+        "ordinal_only": 142,
+        "spatial_relation": 1263,
+        "depth_distance": 25,
+        "infrared_thermal": 0,
+        "part_words": 903
+      }
+    },
+    "city_original_expression": {
+      "n": 3707,
+      "unique_queries": 570,
+      "words": {
+        "min": 6,
+        "median": 11,
+        "mean": 11.123819800377664,
+        "p90_nearest_rank": 14,
+        "max": 15
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 3707
+      },
+      "lexical": {
+        "color_brightness": 691,
+        "left_right": 3383,
+        "ordinal_extreme": 3054,
+        "ordinal_only": 1496,
+        "spatial_relation": 1009,
+        "depth_distance": 0,
+        "infrared_thermal": 0,
+        "part_words": 981
+      }
+    },
+    "city_val412_original": {
+      "n": 412,
+      "unique_queries": 398,
+      "words": {
+        "min": 5,
+        "median": 9.0,
+        "mean": 8.798543689320388,
+        "p90_nearest_rank": 11,
+        "max": 14
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 412
+      },
+      "lexical": {
+        "color_brightness": 283,
+        "left_right": 213,
+        "ordinal_extreme": 64,
+        "ordinal_only": 21,
+        "spatial_relation": 149,
+        "depth_distance": 3,
+        "infrared_thermal": 0,
+        "part_words": 114
+      }
+    },
+    "city_dev378_corrected": {
+      "n": 378,
+      "unique_queries": 364,
+      "words": {
+        "min": 5,
+        "median": 9.0,
+        "mean": 9.193121693121693,
+        "p90_nearest_rank": 11,
+        "max": 23
+      },
+      "no_english_words": [],
+      "starts": {
+        "the": 378
+      },
+      "lexical": {
+        "color_brightness": 260,
+        "left_right": 201,
+        "ordinal_extreme": 65,
+        "ordinal_only": 21,
+        "spatial_relation": 140,
+        "depth_distance": 1,
+        "infrared_thermal": 0,
+        "part_words": 107
+      }
+    },
+    "semifinal5691": {
+      "n": 5691,
+      "unique_queries": 5235,
+      "words": {
+        "min": 0,
+        "median": 9,
+        "mean": 10.121946933755051,
+        "p90_nearest_rank": 16,
+        "max": 51
+      },
+      "no_english_words": [
+        {
+          "id": "016481_003",
+          "query": "地面上的黄色虚线"
+        }
+      ],
+      "starts": {
+        "the": 4783,
+        "a": 567,
+        "person": 28,
+        "an": 25,
+        "white": 20,
+        "two": 19,
+        "count": 16,
+        "second": 14,
+        "first": 11,
+        "blue": 9,
+        "sika": 8,
+        "from": 7,
+        "orange": 7,
+        "brown": 7,
+        "light": 7,
+        "ring": 7,
+        "third": 7,
+        "black": 6,
+        "bengal": 6,
+        "red": 4,
+        "metal": 4,
+        "peacock": 4,
+        "wooden": 4,
+        "green": 4,
+        "small": 4,
+        "spotted": 4,
+        "dark": 4,
+        "three": 4,
+        "fourth": 4,
+        "in": 3,
+        "tree": 3,
+        "trash": 3,
+        "deer": 3,
+        "man": 3,
+        "tiger": 3,
+        "monkey": 2,
+        "house": 2,
+        "bright": 2,
+        "yellow": 2,
+        "closed": 2,
+        "leftmost": 2,
+        "wheeled": 2,
+        "woman": 2,
+        "rocks": 2,
+        "number": 2,
+        "fifth": 2,
+        "street": 2,
+        "grey": 2,
+        "glass": 1,
+        "pink": 1,
+        "right": 1,
+        "this": 1,
+        "hay": 1,
+        "iron": 1,
+        "shallow": 1,
+        "sun": 1,
+        "approach": 1,
+        "bottom": 1,
+        "weathered": 1,
+        "thick": 1,
+        "cartoon": 1,
+        "rowboat": 1,
+        "thatched": 1,
+        "zebra": 1,
+        "pile": 1,
+        "main": 1,
+        "auxiliary": 1,
+        "one": 1,
+        "tall": 1,
+        "partially": 1,
+        "short": 1,
+        "robot": 1,
+        "crouching": 1,
+        "computer": 1,
+        "standing": 1,
+        "large": 1,
+        "farthest": 1,
+        "non": 1,
+        "branches": 1,
+        "several": 1,
+        "that": 1,
+        "young": 1,
+        "vertical": 1,
+        "child": 1,
+        "air": 1,
+        "mop": 1,
+        "traffic": 1,
+        "worker": 1,
+        "lifting": 1,
+        "shoes": 1,
+        "charging": 1,
+        "people": 1,
+        "mobile": 1,
+        "park": 1,
+        "canvas": 1,
+        "plastic": 1,
+        "manhole": 1,
+        "stroller": 1,
+        "drainage": 1,
+        "toy": 1,
+        "<no english word>": 1
+      },
+      "lexical": {
+        "color_brightness": 2408,
+        "left_right": 2914,
+        "ordinal_extreme": 1943,
+        "ordinal_only": 1164,
+        "spatial_relation": 1195,
+        "depth_distance": 684,
+        "infrared_thermal": 180,
+        "part_words": 987
+      }
+    }
+  },
+  "city_groups": {
+    "city_train3707": 681,
+    "city_clean3178": 571,
+    "city_original_expression": 681,
+    "city_val412_original": 78,
+    "city_dev378_corrected": 74
+  },
+  "city_decisions": {
+    "query_corrected": 3707
+  },
+  "city_query_changes": 3707,
+  "city_reports": {
+    "qwen_generation_split_report.json": {
+      "source_manifest": "D:\\AIC\\city_detection_prepared\\train\\target_v2\\qwen_generation_reviewed.json",
+      "seed": 5843,
+      "group_key": null,
+      "validation_fraction": 0.1,
+      "input": 4119,
+      "validation": 412,
+      "train": {
+        "100": 3707
+      }
+    },
+    "qwen_generation_overlap_report.json": {
+      "train_manifests": [
+        "..\\city_detection_prepared\\train\\target_v2\\qwen_generation_train_100.json"
+      ],
+      "train_samples": 3707,
+      "test_samples": 412,
+      "exact_id_overlap_count": 0,
+      "exact_id_overlap_examples": [],
+      "exact_image_overlap_count": 0,
+      "exact_image_overlap_examples": [],
+      "shared_sequence_count": 0,
+      "affected_test_samples": 0,
+      "shared_sequence_examples": [],
+      "affected_test_examples": []
+    }
+  },
+  "queries_per_image": {
+    "city_train": {
+      "groups": 681,
+      "median": 4,
+      "mean": 5.443465491923642,
+      "max": 15
+    },
+    "semifinal": {
+      "groups": 1290,
+      "median": 3.0,
+      "mean": 4.411627906976745,
+      "max": 14
+    }
+  },
+  "semifinal_systematic_media_sample": [
+    {
+      "image": "Images/visible/000003.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.24083622685185185,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/000269.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.2037837577160494,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/000493.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.7890870949074074,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/000640.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.23288917824074074,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/000787.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.4408555169753086,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/000962.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5880271026234568,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/001102.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.39098717206790123,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/001242.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.039649884259259256,
+        "min": 0,
+        "max": 10224
+      }
+    },
+    {
+      "image": "Images/visible/001382.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.015590277777777778,
+        "min": 0,
+        "max": 15481
+      }
+    },
+    {
+      "image": "Images/visible/001522.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.28998070987654323,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/001662.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.07288724922839507,
+        "min": 0,
+        "max": 10082
+      }
+    },
+    {
+      "image": "Images/visible/001802.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.08423804012345679,
+        "min": 0,
+        "max": 13513
+      }
+    },
+    {
+      "image": "Images/visible/001942.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.12237413194444445,
+        "min": 0,
+        "max": 10832
+      }
+    },
+    {
+      "image": "Images/visible/002103.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5284215856481481,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/002264.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.24541184413580247,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/002467.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.11450761959876543,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/002614.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.04890673225308642,
+        "min": 0,
+        "max": 18159
+      }
+    },
+    {
+      "image": "Images/visible/002768.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.45511574074074074,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/002964.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.48733555169753084,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003118.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.1261863425925926,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003279.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.6004166666666667,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003419.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.3776012731481482,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003573.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.19517939814814814,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003713.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.0435546875,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003853.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.029186921296296298,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/003993.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5105685763888889,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/004133.jpg",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "channels_equal": true
+      },
+      "depth": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "zero_fraction": 0.7719053819444445,
+        "min": 0,
+        "max": 255
+      }
+    },
+    {
+      "image": "Images/visible/004273.jpg",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "channels_equal": true
+      },
+      "depth": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "zero_fraction": 0.8198654513888889,
+        "min": 0,
+        "max": 255
+      }
+    },
+    {
+      "image": "Images/visible/004413.jpg",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "channels_equal": true
+      },
+      "depth": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "zero_fraction": 1.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    {
+      "image": "Images/visible/004553.jpg",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "RGB",
+        "size": [
+          640,
+          360
+        ],
+        "dtype": "uint8",
+        "zero_fraction": 0.8478240740740741,
+        "min": 0,
+        "max": 255
+      }
+    },
+    {
+      "image": "Images/visible/012477.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.8183622685185186,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/012617.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.44927613811728395,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/012757.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.8167650462962963,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/012897.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.3045833333333333,
+        "min": 0,
+        "max": 19978
+      }
+    },
+    {
+      "image": "Images/visible/013037.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.2737495177469136,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/013177.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.18278983410493826,
+        "min": 0,
+        "max": 18544
+      }
+    },
+    {
+      "image": "Images/visible/013317.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.12836516203703704,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/013457.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.1384399112654321,
+        "min": 0,
+        "max": 16307
+      }
+    },
+    {
+      "image": "Images/visible/013597.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.1266825810185185,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/013737.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.22129243827160494,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/013877.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.10841290509259259,
+        "min": 0,
+        "max": 19997
+      }
+    },
+    {
+      "image": "Images/visible/014017.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.054207658179012345,
+        "min": 0,
+        "max": 15455
+      }
+    },
+    {
+      "image": "Images/visible/014157.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.19124131944444445,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/014297.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.05777247299382716,
+        "min": 0,
+        "max": 19996
+      }
+    },
+    {
+      "image": "Images/visible/014437.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.3726374421296296,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/014577.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.23603298611111112,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/014717.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.34802758487654323,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/014857.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.3088324652777778,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015004.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.0850950038580247,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015144.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.7117790316358025,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015284.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.548840663580247,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015424.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.08054542824074074,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015564.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.14104600694444444,
+        "min": 0,
+        "max": 17633
+      }
+    },
+    {
+      "image": "Images/visible/015704.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.41940779320987653,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015844.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5394343171296296,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/015984.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.260733024691358,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016124.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.1539867862654321,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016264.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.35832417052469134,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016404.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.28432291666666665,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016544.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5182913773148148,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016684.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.24877893518518518,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016824.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5065297067901234,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/016964.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.02092206790123457,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/017104.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5423591820987654,
+        "min": 0,
+        "max": 19999
+      }
+    },
+    {
+      "image": "Images/visible/017244.png",
+      "visible": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8"
+      },
+      "infrared": {
+        "mode": "RGB",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint8",
+        "channels_equal": false
+      },
+      "depth": {
+        "mode": "I;16",
+        "size": [
+          1920,
+          1080
+        ],
+        "dtype": "uint16",
+        "zero_fraction": 0.5090692515432099,
+        "min": 0,
+        "max": 19999
+      }
+    }
+  ],
+  "depth_sample_summary": {
+    "n": 61,
+    "scope": "only sampled uint16 single-channel depth; zero fraction over whole image, not target ROI",
+    "zero_fraction_median": 0.24877893518518518,
+    "zero_fraction_over_half": 14,
+    "zero_fraction_range": [
+      0.015590277777777778,
+      0.8183622685185186
+    ]
+  },
+  "semifinal_all_image_formats": {
+    "visible:(1920, 1080)/RGB/PNG; infrared:(1920, 1080)/RGB/PNG; depth:(1920, 1080)/I;16/PNG": 1193,
+    "visible:(640, 360)/RGB/JPEG; infrared:(640, 360)/RGB/JPEG; depth:(640, 360)/RGB/JPEG": 97
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "scope": "bundle accepted training pairs, auxiliary evaluation, and external94 evaluation; all bundle media files",
+  "media": {
+    "referenced_unique_files": 537,
+    "bundle_files": 537,
+    "unreferenced_bundle_files": [],
+    "referenced_missing_files": [],
+    "source_file_counts": {
+      "rgbdt500": 381,
+      "roborefit": 156
+    },
+    "mode_counts": {
+      "RGB": 537
+    },
+    "shape_counts": {
+      "(1920, 1080)": 381,
+      "(640, 480)": 156
+    },
+    "distinct_image_groups": 205,
+    "duplicate_modality_groups": [],
+    "flat_modality_files": [],
+    "rgbdt_depth_raw_uint16_visual_exact_groups": 127,
+    "robo_depth_raw_uint16_visual_exact_groups": 78,
+    "rgbdt_depth_mapping": "raw=0 -> RGB(0,0,0); valid raw clipped at 19999; round(255-(raw-1)*254/19998); raw physical unit unestablished",
+    "robo_depth_mapping": "raw=0 -> RGB(0,0,0); valid raw clipped to [359,3662]; round(1+(raw-359)*254/3303); larger raw brighter; depth_unit=unknown"
+  },
+  "splits": {
+    "train_rgbdt_pairs": 148,
+    "train_rgbdt_images": 79,
+    "train_rgbdt_sequences": 79,
+    "aux_eval_images": 39,
+    "aux_eval_sequences": 20,
+    "aux_eval_pairs": 40,
+    "external_eval_queries": 94,
+    "external_eval_images": 48,
+    "external_eval_sequences": 24,
+    "rgbdt_train_vs_reserved_sequences": [],
+    "rgbdt_train_vs_known_risk_sequences": [],
+    "rgbdt_train_vs_aux_eval_sequences": [],
+    "rgbdt_train_vs_external_eval_sequences": [],
+    "rgbdt_aux_eval_vs_external_eval_images": 39,
+    "rgbdt_reserved_sequence_count": 60,
+    "external_bundle_vs_final_groups_symmetric_difference": [],
+    "train_robo_pairs": 78,
+    "train_robo_images": 78,
+    "train_robo_scenes": 78,
+    "robo_eval200_images": 200,
+    "robo_train_vs_eval200_images": [],
+    "robo_train_scene_id_matches_image_level": true,
+    "robo_train_manifest_policy_counts": {
+      "visual/fixed_raw_p01_p99_v1/unknown": 78
+    }
+  },
+  "limitations": [
+    "RoboRefIt scene_id is an image path, so the checked isolation is at image level; no independent physical-scene identity is available.",
+    "RoboRefIt raw depth unit is unknown. Its fixed visual mapping is ascending brightness, unlike RGBDT500 inverse mapping."
+  ],
+  "issues": []
+}

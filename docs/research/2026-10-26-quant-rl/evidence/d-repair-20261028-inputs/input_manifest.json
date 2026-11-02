@@ -1,0 +1,86 @@
+{
+  "train4": [
+    {
+      "id": "city_002041_001",
+      "source": "city",
+      "group_id": "city:002041"
+    },
+    {
+      "id": "roborefit_train_000919",
+      "source": "robo",
+      "group_id": "robo:roborefit:train:final_dataset/train/image/0002370.png"
+    },
+    {
+      "id": "rgbdt500_323_00000118::q01",
+      "source": "rgbdt",
+      "group_id": "rgbdt:323"
+    },
+    {
+      "id": "city_shuming_78_00000046_010",
+      "source": "city",
+      "group_id": "city:shuming_78_00000046"
+    }
+  ],
+  "train12": [
+    {
+      "id": "city_001763_002",
+      "source": "city",
+      "group_id": "city:001763"
+    },
+    {
+      "id": "rgbdt500_072_00000064::q01",
+      "source": "rgbdt",
+      "group_id": "rgbdt:072"
+    },
+    {
+      "id": "roborefit_wo_0000059_296",
+      "source": "robo",
+      "group_id": "robo:roborefit:train:final_dataset/train/image/0000059.png"
+    },
+    {
+      "id": "city_000012_025_00000313_001",
+      "source": "city",
+      "group_id": "city:000012_025_00000313"
+    },
+    {
+      "id": "rgbdt500_355_00000254::q01::extent_01",
+      "source": "rgbdt",
+      "group_id": "rgbdt:355"
+    },
+    {
+      "id": "rgbdt500_083_00000299::q01",
+      "source": "rgbdt",
+      "group_id": "rgbdt:083"
+    },
+    {
+      "id": "city_000239_002",
+      "source": "city",
+      "group_id": "city:000239"
+    },
+    {
+      "id": "city_001582_001",
+      "source": "city",
+      "group_id": "city:001582"
+    },
+    {
+      "id": "roborefit_train_001730",
+      "source": "robo",
+      "group_id": "robo:roborefit:train:final_dataset/train/image/0006942.png"
+    },
+    {
+      "id": "city_hehe_10_00000044_009",
+      "source": "city",
+      "group_id": "city:hehe_10_00000044"
+    },
+    {
+      "id": "city_shuming_838_00000381_003",
+      "source": "city",
+      "group_id": "city:shuming_838_00000381"
+    },
+    {
+      "id": "roborefit_wo_0007162_33679",
+      "source": "robo",
+      "group_id": "robo:roborefit:train:final_dataset/train/image/0007162.png"
+    }
+  ]
+}

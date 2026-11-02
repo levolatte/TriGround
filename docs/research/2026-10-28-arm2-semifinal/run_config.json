@@ -1,0 +1,41 @@
+{
+  "model": "/root/rematch_models/Qwen3.6-27B",
+  "adapter": "/root/autodl-tmp/runs/q36_arm2_capability/archived/checkpoint-500",
+  "queries": "/root/autodl-tmp/semifinal_20261028/queries/queries.json",
+  "data_root": "/root/autodl-tmp/semifinal_20261028",
+  "modality": "trimodal",
+  "prompt_source": "prepare_qwen3vl_native_sft._trimodal_prompt",
+  "prompt_template": "<image>\n<image>\n<image>\nThese are aligned views of the same scene in this order: RGB, infrared, depth. In the depth image, brighter valid pixels are nearer, darker valid pixels are farther, and black pixels are invalid. Locate the object described by this query: {query}\nReturn only JSON in this exact form with coordinates normalized to 0-1000: {\"bbox_2d\":[x1,y1,x2,y2]}",
+  "modalities": [
+    "visible",
+    "infrared",
+    "depth"
+  ],
+  "depth_policy": "uint16_mm_absolute_grayscale_or_uint8_rgb_visualization_v2",
+  "min_pixels": 200704,
+  "max_pixels": 8294400,
+  "model_max_length": 32768,
+  "enable_thinking": false,
+  "max_new_tokens": 128,
+  "model_dtype": "bfloat16",
+  "attention_implementation": "sdpa",
+  "peft_autocast_adapter_dtype": false,
+  "do_sample": false,
+  "tf32": false,
+  "matmul_precision": "highest",
+  "fallback_box": [
+    0.0,
+    0.0,
+    1.0,
+    1.0
+  ],
+  "engine": "vllm",
+  "stage1_max_tokens": 64,
+  "max_num_seqs": 32,
+  "mamba_cache_mode": "none",
+  "enable_prefix_caching": true,
+  "lora_adapter": "/root/autodl-tmp/runs/q36_arm2_capability/archived/checkpoint-500",
+  "max_lora_rank": 32,
+  "chunk_size": 256,
+  "upscale": 2.0
+}

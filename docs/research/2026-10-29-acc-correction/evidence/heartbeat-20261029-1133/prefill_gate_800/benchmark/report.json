@@ -1,0 +1,82 @@
+{
+  "schema": "native-prefill-reuse-benchmark-v1",
+  "status": "failed",
+  "accepted": false,
+  "reason": "AttributeError: 'NoneType' object has no attribute 'detach'",
+  "config": {
+    "model": "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "model_type": "qwen3_5",
+    "model_revision": null,
+    "seed": 2026,
+    "learning_rate": 2e-06,
+    "beta": 0.01,
+    "keep_probability": 0.2,
+    "min_pixels": 200704,
+    "max_pixels": 1204224,
+    "max_length": 8192,
+    "gradient_checkpointing": true,
+    "stop_presentations": 4400,
+    "checkpoint_every": 400,
+    "generation_prefill_reuse": false,
+    "init_adapter": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-550",
+    "train_index": "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/train_index.jsonl",
+    "media_root": "/root/autodl-tmp/rematch_20260922/data"
+  },
+  "adapter": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-800",
+  "seeds": [
+    2026,
+    2027
+  ],
+  "timing_repeats": 3,
+  "max_seconds": 1500,
+  "correctness": {
+    "passed": false,
+    "generation_cases": []
+  },
+  "timing": {
+    "pairs": []
+  },
+  "questions": [
+    {
+      "id": "roborefit_train_000278",
+      "image_count": 2
+    },
+    {
+      "id": "roborefit_train_000740",
+      "image_count": 2
+    },
+    {
+      "id": "city_hehe_247_000002_047_00000245_001",
+      "image_count": 3
+    },
+    {
+      "id": "city_hehe_289_000002_071_00000001_012",
+      "image_count": 3
+    }
+  ],
+  "checkpoint": {
+    "schema": "acc-correction-v1",
+    "mode": "correction",
+    "presentations": 800,
+    "updates": 190
+  },
+  "phase": "complete",
+  "elapsed_seconds": 56.90463415812701,
+  "environment": {
+    "torch": "2.12.1+cu130",
+    "cuda": "13.0",
+    "gpu": "NVIDIA GeForce RTX 4090"
+  },
+  "optimizer": {
+    "class": "AdamW",
+    "restored_from_checkpoint": true,
+    "learning_rates": [
+      2e-06
+    ]
+  },
+  "error": {
+    "type": "AttributeError",
+    "message": "'NoneType' object has no attribute 'detach'",
+    "traceback": "Traceback (most recent call last):\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/benchmark_quant_prefill.py\", line 346, in benchmark\n    baseline = capture_generation(runtime, row, seed, False, False, initial[\"native\"])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/benchmark_quant_prefill.py\", line 139, in capture_generation\n    completions = question.generate(greedy=greedy, record_generation_diagnostics=True)\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/quant_correction_runtime.py\", line 233, in generate\n    return self._generate(count, generation_config, record_generation_diagnostics)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/tools/quant_correction_runtime.py\", line 278, in _generate\n    \"rope_deltas\": self.runtime.multimodal.rope_deltas.detach().cpu().clone(),\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'detach'\n"
+  }
+}

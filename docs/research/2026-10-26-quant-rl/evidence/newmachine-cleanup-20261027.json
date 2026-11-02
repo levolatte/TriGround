@@ -1,0 +1,73 @@
+{
+  "started_at": "2026-10-27T14:54:22.234621+00:00",
+  "disk_before": {
+    "total": 214748364800,
+    "used": 203552841728,
+    "free": 11195523072
+  },
+  "removed": [
+    {
+      "path": "/root/autodl-tmp/runs/q36_arm2_capability",
+      "allocated_bytes_before_removal": 16816701440
+    },
+    {
+      "path": "/root/autodl-tmp/runs/q36_arm4_matched",
+      "allocated_bytes_before_removal": 5988696064
+    },
+    {
+      "path": "/root/autodl-tmp/runs/q36_arm5_corrected",
+      "allocated_bytes_before_removal": 21963632640
+    },
+    {
+      "path": "/root/autodl-tmp/rematch_models/Qwen3-VL-8B-Instruct",
+      "allocated_bytes_before_removal": 17545953280
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/train_env_opt",
+      "allocated_bytes_before_removal": 398397440
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/code_before_optimization",
+      "allocated_bytes_before_removal": 299008
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/checkpoint-18",
+      "allocated_bytes_before_removal": 2802577408
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/checkpoint-36",
+      "allocated_bytes_before_removal": 2802593792
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_B_seed2026/train/matched-exposure-checkpoint-59",
+      "allocated_bytes_before_removal": 2802610176
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-29",
+      "allocated_bytes_before_removal": 2802556928
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-162",
+      "allocated_bytes_before_removal": 2802585600
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train/checkpoint-325",
+      "allocated_bytes_before_removal": 2802618368
+    },
+    {
+      "path": "/root/autodl-tmp/quant_rl_20261026/runs/optimized_D_seed2026/train/checkpoint-6",
+      "allocated_bytes_before_removal": 2802569216
+    }
+  ],
+  "retained_legacy": [
+    "/root/autodl-tmp/runs/retained_baselines/q36_arm4_matched_checkpoint-600",
+    "/root/autodl-tmp/runs/retained_baselines/q36_arm5_corrected_checkpoint-700"
+  ],
+  "disk_after": {
+    "total": 214748364800,
+    "used": 122219835392,
+    "free": 92528529408
+  },
+  "freed_bytes": 81333006336,
+  "ended_at": "2026-10-27T14:54:26.564144+00:00"
+}

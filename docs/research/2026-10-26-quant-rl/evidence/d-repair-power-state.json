@@ -1,0 +1,8 @@
+{
+  "state": "shutdown_requested",
+  "requested_at": "2026-10-27T05:46:44.061061+00:00",
+  "reason": "User requested no idle cloud; coding and CPU checks continue locally",
+  "exclude_powered_off_interval_from_gpu_hours": true,
+  "instance_uuid": "wtcnbd3acn-d78fcd9c",
+  "total_hours": 34.713985620665845
+}

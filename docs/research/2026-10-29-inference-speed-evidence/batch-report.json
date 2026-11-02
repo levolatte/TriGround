@@ -1,0 +1,239 @@
+{
+  "status": "completed",
+  "sample_ids": [
+    "000003_001",
+    "000766_003",
+    "001214_001",
+    "001480_007",
+    "001816_001",
+    "002243_005",
+    "002845_002",
+    "003503_002",
+    "004028_003",
+    "012883_001",
+    "013380_001",
+    "014045_004",
+    "014710_002",
+    "015557_002",
+    "016425_001",
+    "019072_003"
+  ],
+  "sizes": [
+    2,
+    4,
+    8
+  ],
+  "trials": [
+    {
+      "label": "warmup",
+      "batch_size": 2,
+      "queries": 2,
+      "seconds": 9.178148514591157,
+      "seconds_per_query": 4.589074257295579,
+      "peak_reserved_bytes": 23876075520,
+      "valid_boxes": 2,
+      "resource": {
+        "generation_seconds": 9.16193827521056,
+        "resumed_queries": 0,
+        "new_queries": 2,
+        "effective_sampling": {
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "top_k": 50,
+          "do_sample": false
+        },
+        "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+        "hf_max_batch_size": 2,
+        "max_observed_device_used_bytes": 24376377344,
+        "torch_peak_allocated_bytes": 22650622464,
+        "torch_peak_reserved_bytes": 23876075520,
+        "bounded_thinking_amp": null,
+        "adapter_audit": {
+          "rank": 32,
+          "module_count": 496,
+          "tensor_count": 992,
+          "target_leaf_names": [
+            "down_proj",
+            "gate_proj",
+            "in_proj_a",
+            "in_proj_b",
+            "in_proj_qkv",
+            "in_proj_z",
+            "k_proj",
+            "o_proj",
+            "out_proj",
+            "q_proj",
+            "up_proj",
+            "v_proj"
+          ]
+        }
+      }
+    },
+    {
+      "label": "batch2",
+      "batch_size": 2,
+      "queries": 16,
+      "seconds": 63.44599127583206,
+      "seconds_per_query": 3.9653744547395036,
+      "peak_reserved_bytes": 24029167616,
+      "valid_boxes": 16,
+      "resource": {
+        "generation_seconds": 63.43153887242079,
+        "resumed_queries": 0,
+        "new_queries": 16,
+        "effective_sampling": {
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "top_k": 50,
+          "do_sample": false
+        },
+        "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+        "hf_max_batch_size": 2,
+        "max_observed_device_used_bytes": 24529469440,
+        "torch_peak_allocated_bytes": 22661772800,
+        "torch_peak_reserved_bytes": 24029167616,
+        "bounded_thinking_amp": null,
+        "adapter_audit": {
+          "rank": 32,
+          "module_count": 496,
+          "tensor_count": 992,
+          "target_leaf_names": [
+            "down_proj",
+            "gate_proj",
+            "in_proj_a",
+            "in_proj_b",
+            "in_proj_qkv",
+            "in_proj_z",
+            "k_proj",
+            "o_proj",
+            "out_proj",
+            "q_proj",
+            "up_proj",
+            "v_proj"
+          ]
+        }
+      },
+      "text_equal": true,
+      "boxes_equal": true,
+      "changed_ids": []
+    },
+    {
+      "label": "batch4",
+      "batch_size": 4,
+      "queries": 16,
+      "seconds": 61.42851452808827,
+      "seconds_per_query": 3.839282158005517,
+      "peak_reserved_bytes": 29064429568,
+      "valid_boxes": 16,
+      "resource": {
+        "generation_seconds": 61.41567925736308,
+        "resumed_queries": 0,
+        "new_queries": 16,
+        "effective_sampling": {
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "top_k": 50,
+          "do_sample": false
+        },
+        "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+        "hf_max_batch_size": 4,
+        "max_observed_device_used_bytes": 29564731392,
+        "torch_peak_allocated_bytes": 25704479232,
+        "torch_peak_reserved_bytes": 29064429568,
+        "bounded_thinking_amp": null,
+        "adapter_audit": {
+          "rank": 32,
+          "module_count": 496,
+          "tensor_count": 992,
+          "target_leaf_names": [
+            "down_proj",
+            "gate_proj",
+            "in_proj_a",
+            "in_proj_b",
+            "in_proj_qkv",
+            "in_proj_z",
+            "k_proj",
+            "o_proj",
+            "out_proj",
+            "q_proj",
+            "up_proj",
+            "v_proj"
+          ]
+        }
+      },
+      "text_equal": false,
+      "boxes_equal": false,
+      "changed_ids": [
+        "000003_001",
+        "001480_007",
+        "001816_001",
+        "002243_005",
+        "002845_002",
+        "003503_002",
+        "004028_003",
+        "012883_001",
+        "013380_001",
+        "014710_002",
+        "016425_001",
+        "019072_003"
+      ]
+    },
+    {
+      "label": "batch8",
+      "batch_size": 8,
+      "queries": 16,
+      "seconds": 57.203181989490986,
+      "seconds_per_query": 3.5751988743431866,
+      "peak_reserved_bytes": 36373004288,
+      "valid_boxes": 16,
+      "resource": {
+        "generation_seconds": 57.18671484384686,
+        "resumed_queries": 0,
+        "new_queries": 16,
+        "effective_sampling": {
+          "temperature": 1.0,
+          "top_p": 1.0,
+          "top_k": 50,
+          "do_sample": false
+        },
+        "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+        "hf_max_batch_size": 8,
+        "max_observed_device_used_bytes": 36875403264,
+        "torch_peak_allocated_bytes": 31803642368,
+        "torch_peak_reserved_bytes": 36373004288,
+        "bounded_thinking_amp": null,
+        "adapter_audit": {
+          "rank": 32,
+          "module_count": 496,
+          "tensor_count": 992,
+          "target_leaf_names": [
+            "down_proj",
+            "gate_proj",
+            "in_proj_a",
+            "in_proj_b",
+            "in_proj_qkv",
+            "in_proj_z",
+            "k_proj",
+            "o_proj",
+            "out_proj",
+            "q_proj",
+            "up_proj",
+            "v_proj"
+          ]
+        }
+      },
+      "text_equal": false,
+      "boxes_equal": false,
+      "changed_ids": [
+        "002845_002",
+        "003503_002",
+        "012883_001",
+        "013380_001",
+        "014710_002",
+        "016425_001",
+        "019072_003"
+      ]
+    }
+  ],
+  "selected_batch_size": 2
+}

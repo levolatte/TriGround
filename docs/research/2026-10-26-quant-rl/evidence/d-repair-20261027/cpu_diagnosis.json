@@ -1,0 +1,89 @@
+{
+  "queries": 4,
+  "answers": 32,
+  "valid": 31,
+  "all_valid_boxes_hit": true,
+  "forced_boundaries": 32,
+  "groups": [
+    {
+      "id": "city_001763_002",
+      "valid": 7,
+      "valid_iou_min": 0.6103116274591411,
+      "valid_iou_max": 0.7476179356820758,
+      "valid_rewards": [
+        1.1
+      ],
+      "valid_contrasts": [
+        0.0
+      ],
+      "all_valid_boxes_hit": true,
+      "invalid": [
+        {
+          "sample_index": 7,
+          "closing_delimiters": 2,
+          "final_only": "{\"bbox_2d\":[165, 150, 315, 995]}",
+          "final_only_score": {
+            "valid": true,
+            "format_valid": true,
+            "truncated": false,
+            "invalid_reason": null,
+            "iou": 0.7000633373796034,
+            "hit": true,
+            "geometric_hit": true,
+            "max_negative_iou": null,
+            "contrast": 0.0,
+            "hit_reward": 1.0,
+            "iou_reward": 0.1,
+            "contrast_reward": 0.0,
+            "reward": 1.1
+          },
+          "counterfactual_only": true
+        }
+      ]
+    },
+    {
+      "id": "rgbdt500_072_00000064::q01",
+      "valid": 8,
+      "valid_iou_min": 0.8808151941954758,
+      "valid_iou_max": 0.9547767753874625,
+      "valid_rewards": [
+        1.2000000000000002
+      ],
+      "valid_contrasts": [
+        1.0
+      ],
+      "all_valid_boxes_hit": true,
+      "invalid": []
+    },
+    {
+      "id": "roborefit_wo_0000059_296",
+      "valid": 8,
+      "valid_iou_min": 0.8380004646089204,
+      "valid_iou_max": 0.9266471135274341,
+      "valid_rewards": [
+        1.2000000000000002
+      ],
+      "valid_contrasts": [
+        1.0
+      ],
+      "all_valid_boxes_hit": true,
+      "invalid": []
+    },
+    {
+      "id": "city_000012_025_00000313_001",
+      "valid": 8,
+      "valid_iou_min": 0.8167301130434779,
+      "valid_iou_max": 0.9697435901157444,
+      "valid_rewards": [
+        1.1
+      ],
+      "valid_contrasts": [
+        0.0
+      ],
+      "all_valid_boxes_hit": true,
+      "invalid": []
+    }
+  ],
+  "actual_optimizer_updates": 0,
+  "conclusion": "Format/completion recovery observed; geometry-reward gate failed because valid outputs saturate the original reward."
+}

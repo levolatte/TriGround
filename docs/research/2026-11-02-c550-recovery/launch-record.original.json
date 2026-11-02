@@ -1,0 +1,30 @@
+{
+  "stage": "initial",
+  "label": "optimized_C_seed2026",
+  "gpu_model": "RTX4090-48GB",
+  "gpu_count": 1,
+  "price_per_gpu_hour": null,
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/code/tools/train_quant_grounding.py",
+    "--config",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/arm_config.json",
+    "--model",
+    "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+    "--dataset",
+    "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/schedule.jsonl",
+    "--data-root",
+    "/root/autodl-tmp/rematch_20260922/data",
+    "--output-dir",
+    "/root/autodl-tmp/quant_rl_20261026/runs/optimized_C_seed2026/train",
+    "--max-gpu-hours",
+    "6.75"
+  ],
+  "started_at": "2026-10-26T16:59:31.567804+00:00",
+  "status": "completed",
+  "gpu_hours": 6.760201891751753,
+  "exit_code": 0,
+  "ended_at": "2026-10-26T23:45:08.296016+00:00",
+  "wall_seconds": 24336.72681030631,
+  "cost": null
+}

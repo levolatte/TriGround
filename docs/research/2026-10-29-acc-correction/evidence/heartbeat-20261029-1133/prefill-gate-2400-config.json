@@ -1,0 +1,10 @@
+{
+  "parent_pid": 257429,
+  "target": 2400,
+  "python": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+  "code_root": "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029",
+  "run_root": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029",
+  "train_config": "/root/autodl-tmp/quant_rl_20261026/acc_code_20261029/configs/quant_grounding/correction.json",
+  "poll_seconds": 15,
+  "benchmark_timeout_seconds": 1800
+}

@@ -1,0 +1,74 @@
+{
+  "parent_pid": 132174,
+  "child_pid": 132175,
+  "jobs": [
+    {
+      "name": "cuda_small_fla",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "-m",
+        "pytest",
+        "-s",
+        "-q",
+        "tests/test_qwen35_shared_prefix.py",
+        "-k",
+        "cuda_fla_long"
+      ],
+      "started_at": "2026-10-28T09:28:09.850333+00:00",
+      "exit_code": 0,
+      "seconds": 100.39104824140668
+    },
+    {
+      "name": "prepare_fixed",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028/tools/benchmark_shared_prefix.py",
+        "prepare",
+        "--formal",
+        "/root/autodl-tmp/rematch_20260922/data/quant_grounding_20261026_formal/schedule.jsonl",
+        "--data-root",
+        "/root/autodl-tmp/rematch_20260922/data",
+        "--output",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_bundle"
+      ],
+      "started_at": "2026-10-28T09:29:50.340750+00:00",
+      "exit_code": 0,
+      "seconds": 0.37016870360821486
+    },
+    {
+      "name": "fixed_g1",
+      "command": [
+        "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python",
+        "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028/tools/benchmark_shared_prefix.py",
+        "run",
+        "--bundle",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_bundle",
+        "--config",
+        "/root/autodl-tmp/quant_rl_20261026/runs/initial_seed2026/A_seed2026/arm_config.json",
+        "--adapter",
+        "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+        "--model",
+        "/root/autodl-tmp/rematch_models/Qwen3.6-27B",
+        "--precision",
+        "nf4",
+        "--groups",
+        "1",
+        "--repeats",
+        "1",
+        "--output",
+        "/root/autodl-tmp/quant_rl_20261026/runs/structural_speed_20261028/fixed_g1"
+      ],
+      "started_at": "2026-10-28T09:29:50.715147+00:00",
+      "exit_code": 1,
+      "seconds": 59.204284930601716
+    }
+  ],
+  "code": "/root/autodl-tmp/quant_rl_20261026/speed_code_20261028",
+  "original_queue_resumed": true,
+  "status": "failed",
+  "current_job": "fixed_g1",
+  "parent_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python -u /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py ",
+  "child_command": "/root/autodl-tmp/quant_rl_20261026/train_env/bin/python /root/autodl-tmp/quant_rl_20261026/scripts/run_ab_to550.py --code /root/autodl-tmp/quant_rl_20261026/code --train-segment /root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/configs/to_100.json ",
+  "updated_at": "2026-10-28T09:30:49.921253+00:00",
+  "error": "RuntimeError: fixed_g1 exited 1; see fixed_g1.log"
+}

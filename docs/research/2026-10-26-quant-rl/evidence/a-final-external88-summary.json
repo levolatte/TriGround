@@ -1,0 +1,99 @@
+{
+  "overall": {
+    "queries": 88,
+    "samples": 88,
+    "acc05_first": 0.9659090909090909,
+    "acc05_all_samples": 0.9659090909090909,
+    "format_valid": 88,
+    "valid": 88,
+    "invalid": 0,
+    "truncated": 0,
+    "all_wrong_groups": 3,
+    "mixed_groups": 0,
+    "all_hit_groups": 85,
+    "all_same_reward_groups": 88,
+    "zero_advantage_groups": 88,
+    "generated_tokens": 2020,
+    "timed_seconds": 364.0839673578739,
+    "mean_tokens": 22.954545454545453,
+    "mean_seconds": 4.137317810884931
+  },
+  "by_source": {
+    "rgbdt": {
+      "queries": 88,
+      "samples": 88,
+      "acc05_first": 0.9659090909090909,
+      "acc05_all_samples": 0.9659090909090909,
+      "format_valid": 88,
+      "valid": 88,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 3,
+      "mixed_groups": 0,
+      "all_hit_groups": 85,
+      "all_same_reward_groups": 88,
+      "zero_advantage_groups": 88,
+      "generated_tokens": 2020,
+      "timed_seconds": 364.0839673578739,
+      "mean_tokens": 22.954545454545453,
+      "mean_seconds": 4.137317810884931
+    }
+  },
+  "by_negative_kind": {
+    "none": {
+      "queries": 88,
+      "samples": 88,
+      "acc05_first": 0.9659090909090909,
+      "acc05_all_samples": 0.9659090909090909,
+      "format_valid": 88,
+      "valid": 88,
+      "invalid": 0,
+      "truncated": 0,
+      "all_wrong_groups": 3,
+      "mixed_groups": 0,
+      "all_hit_groups": 85,
+      "all_same_reward_groups": 88,
+      "zero_advantage_groups": 88,
+      "generated_tokens": 2020,
+      "timed_seconds": 364.0839673578739,
+      "mean_tokens": 22.954545454545453,
+      "mean_seconds": 4.137317810884931
+    }
+  },
+  "answer_mode": "short",
+  "reward_mode": "contrast",
+  "samples_per_query": 1,
+  "resource": {
+    "generation_seconds": 364.142062664032,
+    "effective_sampling": {
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "top_k": 50,
+      "do_sample": false
+    },
+    "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+    "hf_max_batch_size": 2,
+    "max_observed_device_used_bytes": 24941625344,
+    "torch_peak_allocated_bytes": 22669453824,
+    "torch_peak_reserved_bytes": 24442306560,
+    "adapter_audit": {
+      "rank": 32,
+      "module_count": 496,
+      "tensor_count": 992,
+      "target_leaf_names": [
+        "down_proj",
+        "gate_proj",
+        "in_proj_a",
+        "in_proj_b",
+        "in_proj_qkv",
+        "in_proj_z",
+        "k_proj",
+        "o_proj",
+        "out_proj",
+        "q_proj",
+        "up_proj",
+        "v_proj"
+      ]
+    }
+  }
+}

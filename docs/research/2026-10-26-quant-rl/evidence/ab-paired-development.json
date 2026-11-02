@@ -1,0 +1,171 @@
+{
+  "method": "Strict existing scored samples; one greedy answer per id; hit uses samples[0].hit at IoU >= 0.5. No reparsing or credit for invalid responses.",
+  "inputs": {
+    "city378": {
+      "A": "a-final-city378-scored.jsonl",
+      "B": "b-final-city378-scored.jsonl"
+    },
+    "external88": {
+      "A": "a-final-external88-scored.jsonl",
+      "B": "b-final-external88-scored.jsonl"
+    }
+  },
+  "partitions": {
+    "city378": {
+      "queries": 378,
+      "A_hit": 295,
+      "B_hit": 300,
+      "counts": {
+        "rescued": 5,
+        "regressed": 0,
+        "both_hit": 295,
+        "both_miss": 78
+      },
+      "flips": [
+        {
+          "id": "city_000140_002",
+          "source": "city",
+          "group_id": "city:000140",
+          "change": "rescued",
+          "A": {
+            "iou": 0.49198638489553714,
+            "valid": true,
+            "hit": false
+          },
+          "B": {
+            "iou": 0.5158632093223045,
+            "valid": true,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_000206_002",
+          "source": "city",
+          "group_id": "city:000206",
+          "change": "rescued",
+          "A": {
+            "iou": 0.49821631012760437,
+            "valid": true,
+            "hit": false
+          },
+          "B": {
+            "iou": 0.5032956030388344,
+            "valid": true,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001229_012",
+          "source": "city",
+          "group_id": "city:001229",
+          "change": "rescued",
+          "A": {
+            "iou": 0.4782807953555883,
+            "valid": true,
+            "hit": false
+          },
+          "B": {
+            "iou": 0.5097859951154017,
+            "valid": true,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_001879_012",
+          "source": "city",
+          "group_id": "city:001879",
+          "change": "rescued",
+          "A": {
+            "iou": 0.49762157651898353,
+            "valid": true,
+            "hit": false
+          },
+          "B": {
+            "iou": 0.5147821705700144,
+            "valid": true,
+            "hit": true
+          }
+        },
+        {
+          "id": "city_shuming_1062_00000100_001",
+          "source": "city",
+          "group_id": "city:shuming_1062_00000100",
+          "change": "rescued",
+          "A": {
+            "iou": 0.0,
+            "valid": true,
+            "hit": false
+          },
+          "B": {
+            "iou": 0.6866959285606192,
+            "valid": true,
+            "hit": true
+          }
+        }
+      ],
+      "invalid": {
+        "A": [],
+        "B": []
+      }
+    },
+    "external88": {
+      "queries": 88,
+      "A_hit": 85,
+      "B_hit": 84,
+      "counts": {
+        "rescued": 0,
+        "regressed": 1,
+        "both_hit": 84,
+        "both_miss": 3
+      },
+      "flips": [
+        {
+          "id": "rgbdt500_025_00000051_q02",
+          "source": "rgbdt",
+          "group_id": "rgbdt:025",
+          "change": "regressed",
+          "A": {
+            "iou": 0.8713436447811433,
+            "valid": true,
+            "hit": true
+          },
+          "B": {
+            "iou": null,
+            "valid": false,
+            "hit": false
+          }
+        }
+      ],
+      "invalid": {
+        "A": [],
+        "B": [
+          {
+            "id": "rgbdt500_025_00000051_q02",
+            "source": "rgbdt",
+            "group_id": "rgbdt:025",
+            "text": "{\"bbox_2d\":[593,362),(670,416]}",
+            "finish_reason": "stop",
+            "invalid_reason": "format",
+            "truncated": false,
+            "bbox": null,
+            "iou": null,
+            "hit": false,
+            "other_arm_hit": true,
+            "other_arm_iou": 0.8713436447811433
+          }
+        ]
+      }
+    }
+  },
+  "overall": {
+    "queries": 466,
+    "A_hit": 380,
+    "B_hit": 384,
+    "counts": {
+      "rescued": 5,
+      "regressed": 1,
+      "both_hit": 379,
+      "both_miss": 81
+    }
+  }
+}

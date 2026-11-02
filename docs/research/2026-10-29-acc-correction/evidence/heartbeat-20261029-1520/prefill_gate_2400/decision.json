@@ -1,0 +1,10 @@
+{
+  "status": "completed",
+  "accepted": true,
+  "benchmark_reason": "all correctness checks passed and steady full batch improved at least 3%",
+  "error": null,
+  "checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/correction/train/checkpoint-2400",
+  "benchmark_report": "/root/autodl-tmp/quant_rl_20261026/runs/acc_correction_20261029/prefill_gate_2400/benchmark/report.json",
+  "original_queue_resumed": true,
+  "ended_at": "2026-10-29T06:58:42.142463+00:00"
+}

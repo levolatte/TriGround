@@ -1,0 +1,10 @@
+{
+  "resumed_step": 100,
+  "target_step": 150,
+  "resume_from_checkpoint": "/root/autodl-tmp/quant_rl_20261026/runs/ab550_20261028/A/train/checkpoint-100",
+  "reference_adapter": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+  "load_args": false,
+  "resume_only_model": false,
+  "ignore_data_skip": false,
+  "checked_at": "2026-10-28T15:26:49.733677+00:00"
+}

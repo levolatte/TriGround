@@ -1,0 +1,21 @@
+{
+  "accepted": false,
+  "complete": true,
+  "hits_pass": false,
+  "speed_pass": true,
+  "minimum_hits": {
+    "city378": 313,
+    "external88": 84
+  },
+  "hits": {
+    "city378": 308,
+    "external88": 84
+  },
+  "development_queries": 466,
+  "development_wall_seconds": 976.7552146203816,
+  "seconds_per_query": 2.0960412330909475,
+  "max_seconds_per_query": 3.6,
+  "baseline_seconds_per_query": 4.0,
+  "min_time_reduction": 0.1,
+  "speed_measurement": "request preparation plus complete generate calls; model loading excluded"
+}

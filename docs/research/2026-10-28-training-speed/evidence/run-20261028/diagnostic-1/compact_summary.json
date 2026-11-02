@@ -1,0 +1,809 @@
+{
+  "input_comparison": {
+    "all_equal": true,
+    "checked_elements": {
+      "input_ids": 28184,
+      "attention_mask": 28184,
+      "position_ids": 84552,
+      "pixel_values": 165888000,
+      "image_grid_thw": 72
+    },
+    "padding": "left; compare all effective tokens and explicit effective masks",
+    "pixels_shape": [
+      13500,
+      1536
+    ],
+    "image_grid_thw": [
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ],
+      [
+        1,
+        50,
+        90
+      ]
+    ],
+    "prefix_length": 3501,
+    "answer_count": 8
+  },
+  "native_call_metadata": {
+    "native_serial_1": {
+      "argument_keys": [
+        "attention_mask",
+        "cu_seq_lens_k",
+        "cu_seq_lens_q",
+        "input_ids",
+        "inputs_embeds",
+        "max_length_k",
+        "max_length_q",
+        "output_attentions",
+        "output_hidden_states",
+        "past_key_values",
+        "position_ids"
+      ],
+      "sequence_metadata": {
+        "cu_seq_lens_q": [
+          0,
+          3523
+        ],
+        "cu_seq_lens_k": [
+          0,
+          3523
+        ],
+        "max_length_q": 3523,
+        "max_length_k": 3523
+      }
+    },
+    "native_serial_2": {
+      "argument_keys": [
+        "attention_mask",
+        "cu_seq_lens_k",
+        "cu_seq_lens_q",
+        "input_ids",
+        "inputs_embeds",
+        "max_length_k",
+        "max_length_q",
+        "output_attentions",
+        "output_hidden_states",
+        "past_key_values",
+        "position_ids"
+      ],
+      "sequence_metadata": {
+        "cu_seq_lens_q": [
+          0,
+          3523
+        ],
+        "cu_seq_lens_k": [
+          0,
+          3523
+        ],
+        "max_length_q": 3523,
+        "max_length_k": 3523
+      }
+    },
+    "native_batch2": {
+      "argument_keys": [
+        "attention_mask",
+        "inputs_embeds",
+        "position_ids",
+        "use_cache"
+      ],
+      "sequence_metadata": {
+        "use_cache": false
+      }
+    }
+  },
+  "trace_limit": "only sampled rows; first observed divergence does not prove all earlier rows equal",
+  "probes": {
+    "native_serial_1": {
+      "logp_comparison": {
+        "cosine": 1.0,
+        "relative_l2": 0.0,
+        "reference_l2": 14.766377913386625,
+        "candidate_l2": 14.766377913386625,
+        "max_abs": 0.0,
+        "elements": 176,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": null,
+      "candidate_only_events": [],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": null
+    },
+    "native_serial_2": {
+      "logp_comparison": {
+        "cosine": 1.0,
+        "relative_l2": 0.0,
+        "reference_l2": 14.766377913386625,
+        "candidate_l2": 14.766377913386625,
+        "max_abs": 0.0,
+        "elements": 176,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": null,
+      "candidate_only_events": [],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": null
+    },
+    "shared_1": {
+      "logp_comparison": {
+        "cosine": 0.9996696834429899,
+        "relative_l2": 0.0257023570460165,
+        "reference_l2": 14.766377913386625,
+        "candidate_l2": 14.76585961134511,
+        "max_abs": 0.120574951171875,
+        "elements": 176,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": "layers.0.linear_attn.core",
+      "candidate_only_events": [
+        "layers.0.linear_attn.conv"
+      ],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 2.1864631013587774e-06,
+          "max_abs": 6.103515625e-05,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 4.420713814362577e-05,
+          "max_abs": 0.0009765625,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 4.1126703908902336e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 4.1126703908902336e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 4.18924293183605e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.0004280227932704538,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.00048685245514981846,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.00012503318831069875,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": {
+        "layer": 0,
+        "block_type": "linear_attention",
+        "comparison": {
+          "cosine": 0.9999999999908742,
+          "relative_l2": 4.272161053868936e-06,
+          "reference_l2": 1951.4883999207466,
+          "candidate_l2": 1951.4884001303321,
+          "max_abs": 0.0009765625,
+          "elements": 18826240,
+          "sign_change_fraction": 6.374082132172967e-07,
+          "finite": true
+        },
+        "scope": "all compact rows; native mb1 sequence kernels",
+        "sequence_metadata": "each answer's captured native cu_seq_lens/max_length kwargs"
+      }
+    },
+    "shared_2": {
+      "logp_comparison": {
+        "cosine": 1.0,
+        "relative_l2": 0.0,
+        "reference_l2": 14.76585961134511,
+        "candidate_l2": 14.76585961134511,
+        "max_abs": 0.0,
+        "elements": 176,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": null,
+      "candidate_only_events": [],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.conv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": null
+    },
+    "native_batch2": {
+      "logp_comparison": {
+        "cosine": 0.999560759824345,
+        "relative_l2": 0.0329276173905314,
+        "reference_l2": 7.32217360332082,
+        "candidate_l2": 7.213879609833912,
+        "max_abs": 0.19486045837402344,
+        "elements": 44,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": "layers.0.linear_attn.in_proj_qkv",
+      "candidate_only_events": [],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 3.370097743970995e-06,
+          "max_abs": 0.00390625,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 1.0997464480875796e-06,
+          "max_abs": 0.0009765625,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0027825116569932303,
+          "max_abs": 0.03125,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0009032786964660556,
+          "max_abs": 0.00390625,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0030164276967057837,
+          "max_abs": 0.125,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0009001013289930941,
+          "max_abs": 0.021099090576171875,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 0.0017188098600121327,
+          "max_abs": 0.015625,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 0.0006585557137398202,
+          "max_abs": 0.00390625,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 0.0008644866134140077,
+          "max_abs": 0.0625,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 0.0008644866134140077,
+          "max_abs": 0.0625,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 0.0007928598573922406,
+          "max_abs": 0.0625,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.003073709123751623,
+          "max_abs": 0.0078125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.0014477207729906678,
+          "max_abs": 0.00390625,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.0008405591042879822,
+          "max_abs": 0.0625,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": null
+    },
+    "shared_native_gqa": {
+      "logp_comparison": {
+        "cosine": 0.9996696834429899,
+        "relative_l2": 0.0257023570460165,
+        "reference_l2": 14.766377913386625,
+        "candidate_l2": 14.76585961134511,
+        "max_abs": 0.120574951171875,
+        "elements": 176,
+        "sign_change_fraction": 0.0,
+        "finite": true
+      },
+      "first_observed_nonzero_event": "layers.0.linear_attn.core",
+      "candidate_only_events": [
+        "layers.0.linear_attn.conv"
+      ],
+      "layer0": {
+        "layers.0.input": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.input_layernorm": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_qkv": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 286720,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_z": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_b": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.beta": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.in_proj_a": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.g": {
+          "relative_l2": 0.0,
+          "max_abs": 0.0,
+          "elements": 1344,
+          "finite": true
+        },
+        "layers.0.linear_attn.core": {
+          "relative_l2": 2.1864631013587774e-06,
+          "max_abs": 6.103515625e-05,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.norm": {
+          "relative_l2": 4.420713814362577e-05,
+          "max_abs": 0.0009765625,
+          "elements": 172032,
+          "finite": true
+        },
+        "layers.0.linear_attn.out_proj": {
+          "relative_l2": 4.1126703908902336e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mixer": {
+          "relative_l2": 4.1126703908902336e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.after_mixer": {
+          "relative_l2": 4.18924293183605e-05,
+          "max_abs": 0.00048828125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.post_attention_layernorm": {
+          "relative_l2": 0.0004280227932704538,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.mlp": {
+          "relative_l2": 0.00048685245514981846,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        },
+        "layers.0.output": {
+          "relative_l2": 0.00012503318831069875,
+          "max_abs": 0.001953125,
+          "elements": 143360,
+          "finite": true
+        }
+      },
+      "same_input_native_mixer_replay": null
+    }
+  }
+}

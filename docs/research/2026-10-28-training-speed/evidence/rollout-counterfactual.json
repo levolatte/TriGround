@@ -1,0 +1,48 @@
+{
+  "source": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\evidence\\b-final-reward-metrics.jsonl",
+  "groups": 236,
+  "answers": 1888,
+  "unique_queries": 227,
+  "unique_texts_within_group": 1882,
+  "exact_text_duplicate_fraction": 0.0031779661016949623,
+  "groups_with_duplicate_text": 5,
+  "mean_generated_tokens": 22.878177966101696,
+  "all_hit_groups": 183,
+  "all_wrong_groups": 9,
+  "subsampling": [
+    {
+      "g": 2,
+      "original_expected_signal_groups": 24.60714285714286,
+      "original_signal_group_probability": 0.10426755447941889,
+      "original_signal_groups_per_100_answers": 5.213377723970945,
+      "smooth_expected_signal_groups": 227.49999999999997,
+      "smooth_signal_group_probability": 0.9639830508474576
+    },
+    {
+      "g": 4,
+      "original_expected_signal_groups": 37.8142857142857,
+      "original_signal_group_probability": 0.16023002421307506,
+      "original_signal_groups_per_100_answers": 4.0057506053268765,
+      "smooth_expected_signal_groups": 230.85714285714286,
+      "smooth_signal_group_probability": 0.9782082324455206
+    },
+    {
+      "g": 8,
+      "original_expected_signal_groups": 49.0,
+      "original_signal_group_probability": 0.2076271186440678,
+      "original_signal_groups_per_100_answers": 2.5953389830508473,
+      "smooth_expected_signal_groups": 232.0,
+      "smooth_signal_group_probability": 0.9830508474576272
+    }
+  ],
+  "adaptive_2_4_8_expected_answers": 1687.528571428571,
+  "adaptive_2_4_8_answer_saving_fraction": 0.10618190072639222,
+  "limitations": [
+    "Exact enumeration of subsets of already recorded G8; not new on-policy G2/G4 training.",
+    "Signal means unequal rewards, not measured gradient magnitude, accuracy gain or convergence.",
+    "Smooth reward replaces 0.2*min(IoU,0.5) with 0.2*IoU; it changes the objective.",
+    "Duplicate text is a screening upper bound, not verified identical response token IDs.",
+    "Adaptive stopping changes the estimator; expected sampling savings exclude launch/prefill costs.",
+    "All metrics concern original B59, not the live continuation after step 59."
+  ]
+}

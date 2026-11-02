@@ -1,0 +1,18 @@
+{
+  "chosen_at": "2026-10-25T23:03:26.388678+00:00",
+  "adapter": "/root/autodl-tmp/quant_rl_20261026/runs/shared_format_warmup/training/checkpoint-50",
+  "all_arms": [
+    "A",
+    "B",
+    "C",
+    "D"
+  ],
+  "rl_ref_adapter_same_checkpoint": true,
+  "warmup_steps": 50,
+  "unique_training_queries_seen": 400,
+  "decision_basis": "fixed first-32 training diagnostic: 256/256 strict-valid, 13/32 reward-varying groups; no need to extend format warmup",
+  "diagnostic_summary": "/root/autodl-tmp/quant_rl_20261026/runs/warmup50_diagnostic32_g8/summary.json",
+  "development_performance_claimed": false,
+  "corrected_full_vocabulary_diagnostic": "/root/autodl-tmp/quant_rl_20261026/runs/warmup50_diagnostic32_full_vocab/summary.json",
+  "corrected_format_valid": 256
+}

@@ -1,0 +1,15 @@
+{
+  "validation_session_started_at": "2026-10-27T14:50:02+00:00",
+  "validation_cap_hours": 2,
+  "prior_repair_hours_counted": 0.12,
+  "finalization_reserve_hours": 0.05,
+  "startup_hours": 0.129678975,
+  "instance_power_action": "none",
+  "prior_sessions_hours": 0,
+  "supervised_hours_allowed": 1.700321025,
+  "exit_code": 1,
+  "error": "D repair stopped with worker exit code 1",
+  "ended_at": "2026-10-27T15:08:52.637694+00:00",
+  "session_hours": 0.31407619555555555,
+  "finalized_at": "2026-10-27T15:08:52.674293+00:00"
+}

@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-27T15:14:07.934994+00:00",
+  "total_gpu_hours": 35.719800066318726,
+  "repair_validation_hours": 0.5216477789862161,
+  "remaining_repair_hours": 1.4783522210137838,
+  "gpu_jobs": "",
+  "instance_power_action": "none"
+}

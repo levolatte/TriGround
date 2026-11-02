@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "implementation": "installed ms-swift BaseLoss and per_token_loss_func; no mocked swift modules",
+  "trainer_state": "minimal training/accumulation state; not a full Trainer or 27B run",
+  "per_token_loss_source": "swift.trainers.utils",
+  "torch_version": "2.8.0+cpu",
+  "scenarios": [
+    {
+      "accumulation_samples": 8,
+      "reference_loss": 6.019462585449219,
+      "actual_loss_sum": 6.019463121891022,
+      "max_gradient_abs_error": 2.7755575615628914e-17
+    },
+    {
+      "accumulation_samples": 3,
+      "reference_loss": 5.463584899902344,
+      "actual_loss_sum": 5.463584542274475,
+      "max_gradient_abs_error": 5.551115123125783e-17
+    }
+  ],
+  "compact_labels_eos_and_mask": "passed",
+  "gpu_or_model_weights_loaded": false
+}

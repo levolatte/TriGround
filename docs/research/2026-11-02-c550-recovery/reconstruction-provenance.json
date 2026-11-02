@@ -1,0 +1,19 @@
+{
+  "provenance": "Original launch from budget ledger. Config reconstructed from archived arm_c.json + run_optimized_arms.py + optimization/selection.json; not a downloaded cloud arm_config.json.",
+  "timed_boundaries": [
+    {
+      "step": 162,
+      "elapsed_seconds": 7217.304331902415
+    },
+    {
+      "step": 325,
+      "elapsed_seconds": 14432.72929046303
+    },
+    {
+      "step": 550,
+      "elapsed_seconds": 24300.52142815292
+    }
+  ],
+  "matched_checkpoint_step": 29,
+  "final_step": 550
+}

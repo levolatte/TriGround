@@ -1,0 +1,59 @@
+{
+  "label": "causal_kernel_check",
+  "exit_code": 0,
+  "command": [
+    "/root/autodl-tmp/quant_rl_20261026/train_env_opt/bin/python",
+    "/root/autodl-tmp/quant_rl_20261026/check_causal_conv_kernel.py"
+  ],
+  "peak_device_used_mib": 459,
+  "minimum_device_headroom_mib": 48681,
+  "device_total_mib": 49140,
+  "memory_sample_interval_seconds": 1,
+  "samples": [
+    {
+      "time": "2026-10-26T08:55:42.563615+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:43.611941+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:44.685520+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:45.753352+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:46.820664+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:47.871669+00:00",
+      "used_mib": 3,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:48.964609+00:00",
+      "used_mib": 459,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:50.035340+00:00",
+      "used_mib": 459,
+      "total_mib": 49140
+    },
+    {
+      "time": "2026-10-26T08:55:51.086454+00:00",
+      "used_mib": 0,
+      "total_mib": 49140
+    }
+  ]
+}

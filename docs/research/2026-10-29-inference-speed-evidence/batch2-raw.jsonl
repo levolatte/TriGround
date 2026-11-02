@@ -1,0 +1,16 @@
+{"id": "000003_001", "samples": [{"text": "{\"bbox_2d\":[526,555,564,758]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.998937931843102}]}
+{"id": "000766_003", "samples": [{"text": "{\"bbox_2d\":[881,618,903,654]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.998937931843102}]}
+{"id": "001214_001", "samples": [{"text": "{\"bbox_2d\":[469,253,561,766]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.9887993801385164}]}
+{"id": "001480_007", "samples": [{"text": "{\"bbox_2d\":[541,883,595,942]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.9887993801385164}]}
+{"id": "001816_001", "samples": [{"text": "{\"bbox_2d\":[414,103,700,955]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.055059535428882}]}
+{"id": "002243_005", "samples": [{"text": "{\"bbox_2d\":[439,699,646,968]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.055059535428882}]}
+{"id": "002845_002", "samples": [{"text": "{\"bbox_2d\":[473,193,496,284]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.030624840874225}]}
+{"id": "003503_002", "samples": [{"text": "{\"bbox_2d\":[376,394,650,890]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.030624840874225}]}
+{"id": "004028_003", "samples": [{"text": "{\"bbox_2d\":[0,667,10,708]}", "finish_reason": "stop", "tokens": 20, "seconds": 3.8018936747685075}]}
+{"id": "012883_001", "samples": [{"text": "{\"bbox_2d\":[233,784,546,1000]}", "finish_reason": "stop", "tokens": 24, "seconds": 3.8018936747685075}]}
+{"id": "013380_001", "samples": [{"text": "{\"bbox_2d\":[0,382,204,1000]}", "finish_reason": "stop", "tokens": 22, "seconds": 3.876258379314095}]}
+{"id": "014045_004", "samples": [{"text": "{\"bbox_2d\":[541,0,594,456]}", "finish_reason": "stop", "tokens": 21, "seconds": 3.876258379314095}]}
+{"id": "014710_002", "samples": [{"text": "{\"bbox_2d\":[666,433,711,511]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.9370235558599234}]}
+{"id": "015557_002", "samples": [{"text": "{\"bbox_2d\":[336,548,780,822]}", "finish_reason": "stop", "tokens": 23, "seconds": 3.9370235558599234}]}
+{"id": "016425_001", "samples": [{"text": "{\"bbox_2d\":[690,318,719,384]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.022429630625993}]}
+{"id": "019072_003", "samples": [{"text": "{\"bbox_2d\":[218,422,240,460]}", "finish_reason": "stop", "tokens": 23, "seconds": 4.022429630625993}]}

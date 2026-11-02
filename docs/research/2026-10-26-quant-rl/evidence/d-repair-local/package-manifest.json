@@ -1,0 +1,54 @@
+{
+  "path": "F:\\AIC\\.work\\quant_rl\\d_repair_runtime_20261027.zip",
+  "bytes": 61346,
+  "files": [
+    {
+      "source": "F:\\AIC\\code\\tools\\quant_grounding_config.py",
+      "archive_path": "code/tools/quant_grounding_config.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\quant_grounding_postprocess.py",
+      "archive_path": "code/tools/quant_grounding_postprocess.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\quant_grounding_thinking.py",
+      "archive_path": "code/tools/quant_grounding_thinking.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\swift_quant_grounding_reward.py",
+      "archive_path": "code/tools/swift_quant_grounding_reward.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\train_quant_grounding.py",
+      "archive_path": "code/tools/train_quant_grounding.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\eval_quant_grounding.py",
+      "archive_path": "code/tools/eval_quant_grounding.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\run_quant_d_repair_gate.py",
+      "archive_path": "code/tools/run_quant_d_repair_gate.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\tools\\export_quant_submission.py",
+      "archive_path": "code/tools/export_quant_submission.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\configs\\quant_grounding\\arm_d_repair.json",
+      "archive_path": "code/configs/quant_grounding/arm_d_repair.json"
+    },
+    {
+      "source": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\run-scripts\\run_d_repair_bounded.py",
+      "archive_path": "run_d_repair_bounded.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\run-scripts\\prepare_d_repair_inputs.py",
+      "archive_path": "prepare_d_repair_inputs.py"
+    },
+    {
+      "source": "F:\\AIC\\code\\docs\\research\\2026-10-26-quant-rl\\evidence\\d-rootcause-formal-diagnostic128.jsonl",
+      "archive_path": "d_repair_diagnostic128.jsonl"
+    }
+  ]
+}

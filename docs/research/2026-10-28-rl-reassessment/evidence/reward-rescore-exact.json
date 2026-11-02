@@ -1,0 +1,14 @@
+{
+  "A": {
+    "answers_rescored": 1312,
+    "mismatches": 0,
+    "max_absolute_difference": 0.0,
+    "examples": []
+  },
+  "B": {
+    "answers_rescored": 1312,
+    "mismatches": 0,
+    "max_absolute_difference": 0.0,
+    "examples": []
+  }
+}

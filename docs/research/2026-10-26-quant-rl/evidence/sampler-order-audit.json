@@ -1,0 +1,76 @@
+{
+  "scope": "CPU 小样本真实 Swift/TRL DataLoader 与 accelerate.skip_first_batches；未加载模型、未执行前向或更新",
+  "versions": {
+    "torch": "2.8.0+cpu",
+    "trl": "0.27.0",
+    "transformers": "5.16.1",
+    "swift_source": "ms-swift-4.5.3-source"
+  },
+  "cpu_import_note": "CPU审计使用本地临时目录 .work/quant_runtime_probe_deps 中真实msgspec包，并在进程内把TRL的is_weave_available设为False跳过缺失的可选weave集成；未替换Torch、Swift或TRL实现。远端TRL为0.29.1，需以其独立审计为准。",
+  "grpo": {
+    "mro": [
+      "swift.rlhf_trainers.grpo_trainer.GRPOTrainer",
+      "swift.rlhf_trainers.rollout_mixin.RolloutTrainerMixin",
+      "swift.rlhf_trainers.base_rollout_mixin.BaseRolloutTrainerMixin",
+      "swift.rlhf_trainers.rlhf_mixin.RLHFTrainerMixin",
+      "swift.trainers.mixin.SwiftMixin",
+      "trl.trainer.grpo_trainer.GRPOTrainer",
+      "trl.trainer.base_trainer.BaseTrainer",
+      "transformers.trainer.Trainer",
+      "builtins.object"
+    ],
+    "get_train_dataloader": "RLHFTrainerMixin.get_train_dataloader",
+    "get_train_sampler": "GRPOTrainer._get_train_sampler",
+    "sampler_type": "RepeatSampler",
+    "dataset_rows": 16,
+    "num_generations": 8,
+    "generation_batch_size": 8,
+    "steps_per_generation": 8,
+    "gradient_accumulation_steps": 32,
+    "shuffle_dataset": false,
+    "dataloader_batch_size": 8,
+    "first_40_microbatches_grouped": [
+      {
+        "occurrence_id": "presentation:000000",
+        "microbatches": 8
+      },
+      {
+        "occurrence_id": "presentation:000001",
+        "microbatches": 8
+      },
+      {
+        "occurrence_id": "presentation:000002",
+        "microbatches": 8
+      },
+      {
+        "occurrence_id": "presentation:000003",
+        "microbatches": 8
+      },
+      {
+        "occurrence_id": "presentation:000004",
+        "microbatches": 8
+      }
+    ],
+    "after_skipping_32_microbatches": "presentation:000004"
+  },
+  "sft": {
+    "get_train_dataloader": "DataLoaderMixin.get_train_dataloader",
+    "dataset_rows": 800,
+    "gradient_accumulation_steps": 8,
+    "train_dataloader_shuffle": false,
+    "first_10_microbatches": [
+      "presentation:000000",
+      "presentation:000001",
+      "presentation:000002",
+      "presentation:000003",
+      "presentation:000004",
+      "presentation:000005",
+      "presentation:000006",
+      "presentation:000007",
+      "presentation:000008",
+      "presentation:000009"
+    ],
+    "after_skipping_400_microbatches": "presentation:000400"
+  },
+  "note": "恢复对应关系仅验证微批跳过；未执行完整 checkpoint 保存/加载。"
+}

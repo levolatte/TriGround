@@ -1,0 +1,10 @@
+{
+  "device": "cpu",
+  "warmup": "runs/shared_format_warmup/training/checkpoint-50/adapter_model.safetensors",
+  "checkpoint": "runs/optimized_D_seed2026/train/checkpoint-6/adapter_model.safetensors",
+  "tensor_count": 992,
+  "parameter_count": 233455616,
+  "identical_tensor_count": 992,
+  "changed_tensors": [],
+  "all_adapter_tensors_exactly_equal": true
+}

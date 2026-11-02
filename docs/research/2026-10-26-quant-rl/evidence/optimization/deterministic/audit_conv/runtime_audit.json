@@ -1,0 +1,208 @@
+{
+  "device_name": "NVIDIA GeForce RTX 4090",
+  "base_model": {
+    "model_type": "qwen3_5",
+    "source_quantization_config": null
+  },
+  "kernel_implementations": {
+    "torch_chunk_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.chunk",
+      "name": "chunk_gated_delta_rule"
+    },
+    "torch_recurrent_gated_delta_rule": {
+      "module": "fla.ops.gated_delta_rule.fused_recurrent",
+      "name": "fused_recurrent_gated_delta_rule"
+    },
+    "causal_conv1d_fn": {
+      "module": "causal_conv1d.causal_conv1d_interface",
+      "name": "causal_conv1d_fn"
+    }
+  },
+  "model": {
+    "precision": "nf4",
+    "linear4_count": 800,
+    "visual_linear_count": 110,
+    "visual_linear_dtypes": [
+      "torch.bfloat16"
+    ],
+    "gate_count": 96,
+    "gate_dtypes": [
+      "torch.bfloat16"
+    ],
+    "head_dtype": "torch.bfloat16",
+    "embedding_dtypes": [
+      "torch.bfloat16"
+    ],
+    "trainable_count": 992,
+    "trainable_examples": [
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.out_proj.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_qkv.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_z.lora_B.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_A.default.weight",
+      "base_model.model.model.language_model.layers.0.linear_attn.in_proj_b.lora_B.default.weight"
+    ],
+    "parameter_storage_bytes": 20090657248,
+    "trainable_parameter_storage_bytes": 933822464,
+    "parameter_storage_note": "PyTorch parameter storage only; excludes bitsandbytes quant_state storage"
+  },
+  "runtime_optimization": true,
+  "deterministic_training": false,
+  "determinism": {
+    "torch_deterministic_algorithms": true,
+    "cudnn_deterministic": true,
+    "cudnn_benchmark": false,
+    "cublas_workspace_config": ":4096:8"
+  },
+  "model_accepts_loss_kwargs": false,
+  "training_batch": {
+    "train_micro_batch_size": 1,
+    "gradient_accumulation_steps": 32,
+    "answers_per_optimizer_step": 32
+  },
+  "gradient_checkpointing": {
+    "every_n_layers": 1,
+    "language_layer_count": 64,
+    "enabled_layer_indices": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63
+    ],
+    "mask_applied": true,
+    "reenable_calls": 65
+  },
+  "dataset_rows": {
+    "prepared": 4,
+    "encoded": 4
+  },
+  "effective_sampling": {
+    "temperature": 1.0,
+    "top_p": 1.0,
+    "top_k": 0,
+    "do_sample": true
+  },
+  "hf_max_batch_size": 1,
+  "num_generations": 8,
+  "generation_batch_size": 8,
+  "gradient_accumulation_steps": 32,
+  "ref_model_is_none": true,
+  "logits_to_keep_supported": true,
+  "grpo_loss_normalizer": {
+    "applied": false,
+    "factor": 1,
+    "arm": "A"
+  },
+  "optimizer": {
+    "optimizer_type": "AcceleratedOptimizer",
+    "optimizer_group_count": 1,
+    "optimizer_parameter_count": 992,
+    "frozen_parameter_count": 2176,
+    "frozen_grad_count": 0
+  },
+  "prompt_observations": {
+    "count": 0,
+    "first": null,
+    "maximum": null
+  },
+  "sft_input_observations": {
+    "count": 0,
+    "first": null,
+    "maximum": null
+  },
+  "phase_timing_note": "CUDA events with one synchronization per optimizer step; generation includes HF encoding and postprocessing. encoding_wall_seconds uses CPU wall time for template.encode and overlaps generation. Old-policy forward remains an independent Swift forward.",
+  "selected_logits_forward": {
+    "calls": 96,
+    "first": 23,
+    "minimum": 23,
+    "maximum": 24,
+    "hook_target": "peft_outer"
+  },
+  "selected_logits_forward_note": "PEFT outer hook counts every call it observes; grpo_logps_forward records only Swift's local logps method.",
+  "grpo_logps_forward": {
+    "with_grad": {
+      "calls": 32,
+      "first": {
+        "input_tokens": 3523,
+        "requested_logits_tokens": 23,
+        "output_logits_tokens": 23
+      },
+      "minimum": 23,
+      "maximum": 24,
+      "output_lengths_match": true
+    },
+    "without_grad": {
+      "calls": 64,
+      "first": {
+        "input_tokens": 3523,
+        "requested_logits_tokens": 23,
+        "output_logits_tokens": 23
+      },
+      "minimum": 23,
+      "maximum": 24,
+      "output_lengths_match": true
+    }
+  }
+}

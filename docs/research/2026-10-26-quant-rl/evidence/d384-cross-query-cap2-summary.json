@@ -1,0 +1,99 @@
+{
+  "overall": {
+    "queries": 8,
+    "samples": 8,
+    "acc05_first": 0.0,
+    "acc05_all_samples": 0.0,
+    "format_valid": 0,
+    "valid": 0,
+    "invalid": 8,
+    "truncated": 7,
+    "all_wrong_groups": 8,
+    "mixed_groups": 0,
+    "all_hit_groups": 0,
+    "all_same_reward_groups": 8,
+    "zero_advantage_groups": 8,
+    "generated_tokens": 2935,
+    "timed_seconds": 251.71313032507896,
+    "mean_tokens": 366.875,
+    "mean_seconds": 31.46414129063487
+  },
+  "by_source": {
+    "city": {
+      "queries": 8,
+      "samples": 8,
+      "acc05_first": 0.0,
+      "acc05_all_samples": 0.0,
+      "format_valid": 0,
+      "valid": 0,
+      "invalid": 8,
+      "truncated": 7,
+      "all_wrong_groups": 8,
+      "mixed_groups": 0,
+      "all_hit_groups": 0,
+      "all_same_reward_groups": 8,
+      "zero_advantage_groups": 8,
+      "generated_tokens": 2935,
+      "timed_seconds": 251.71313032507896,
+      "mean_tokens": 366.875,
+      "mean_seconds": 31.46414129063487
+    }
+  },
+  "by_negative_kind": {
+    "none": {
+      "queries": 8,
+      "samples": 8,
+      "acc05_first": 0.0,
+      "acc05_all_samples": 0.0,
+      "format_valid": 0,
+      "valid": 0,
+      "invalid": 8,
+      "truncated": 7,
+      "all_wrong_groups": 8,
+      "mixed_groups": 0,
+      "all_hit_groups": 0,
+      "all_same_reward_groups": 8,
+      "zero_advantage_groups": 8,
+      "generated_tokens": 2935,
+      "timed_seconds": 251.71313032507896,
+      "mean_tokens": 366.875,
+      "mean_seconds": 31.46414129063487
+    }
+  },
+  "answer_mode": "thinking",
+  "reward_mode": "contrast",
+  "samples_per_query": 1,
+  "resource": {
+    "generation_seconds": 251.72019815072417,
+    "effective_sampling": {
+      "temperature": 1.0,
+      "top_p": 1.0,
+      "top_k": 50,
+      "do_sample": false
+    },
+    "sample_seconds_semantics": "infer call wall time divided equally among its samples",
+    "hf_max_batch_size": 2,
+    "max_observed_device_used_bytes": 24444600320,
+    "torch_peak_allocated_bytes": 22659361792,
+    "torch_peak_reserved_bytes": 23945281536,
+    "adapter_audit": {
+      "rank": 32,
+      "module_count": 496,
+      "tensor_count": 992,
+      "target_leaf_names": [
+        "down_proj",
+        "gate_proj",
+        "in_proj_a",
+        "in_proj_b",
+        "in_proj_qkv",
+        "in_proj_z",
+        "k_proj",
+        "o_proj",
+        "out_proj",
+        "q_proj",
+        "up_proj",
+        "v_proj"
+      ]
+    }
+  }
+}
